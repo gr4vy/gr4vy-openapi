@@ -30,9 +30,12 @@ paths:
                 description: |-
                   The credit card details to create an authorization for.
                 required: 
-                  - currency
+                  - number
+                  - expiration_date
+                  - security_code
                 properties:
-                  -
+                  number: 
+                    type: string
               amount:
                 type: integer
                 format: int64
