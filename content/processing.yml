@@ -26,10 +26,10 @@ paths:
           schema:
             type: object
             required:
-              - properties
               - amount
               - currency
             properties:
+
               credit_card:
                 type: object
                 description: |-
