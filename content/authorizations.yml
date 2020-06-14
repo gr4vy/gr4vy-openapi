@@ -38,6 +38,15 @@ paths:
                 $ref: '#/components/schemas/Error'
 
 components:
+  requestBodies:
+    Authorization:
+      description: |-
+        The request to create an authorization
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Pet'
+
   schemas:
     Authorization:
       type: object
