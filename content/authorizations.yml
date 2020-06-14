@@ -24,6 +24,9 @@ paths:
       operationId: createAuthorization
       description: Formerly `/auth`
 
+      tags:
+        - Authorization
+
       requestBody:
         application/json:
           schema:
