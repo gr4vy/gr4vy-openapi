@@ -13,18 +13,16 @@ servers:
 
 paths:
   /buyer:
-     post:
+    post:
       summary: Create an new buyer
-      operationId: createAuthorization
+      operationId: createBuyer
+      description: Formerly `/new`
       
   /authorizations:
     post:
       summary: Create an authorization
       operationId: createAuthorization
       description: Formerly `/auth`
-
-      tags:
-        - Authorization
 
       requestBody:
         application/json:
