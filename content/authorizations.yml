@@ -33,6 +33,7 @@ components:
       required:
         - id
         - type
+        - status
       properties:
         id:
           type: string
@@ -49,6 +50,8 @@ components:
           example: authorization
           enum:
             - authorization
+
+
 
     Error:
       type: object
