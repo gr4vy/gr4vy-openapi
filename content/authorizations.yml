@@ -40,12 +40,12 @@ paths:
 components:
   requestBodies:
     Authorization:
-      description: |-
-        The request to create an authorization
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Pet'
+            type: object
+            description: |-
+              The request to create an authorization.
 
   schemas:
     Authorization:
