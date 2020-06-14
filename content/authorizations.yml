@@ -6,7 +6,6 @@ info:
 
 servers:
   - url: 'https://{{cluster}}'
-  var
 paths:
   /authorizations:
     post:
