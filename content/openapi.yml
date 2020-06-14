@@ -12,18 +12,15 @@ paths:
       
       responses:
         '200':
-          description: 'Sample response: Details about a user by ID'
-          headers:
-            x-next:
-              description: A link to the next page of responses
-              schema:
-                type: string
+          description: |-
+            Returns a new authorization 
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
         default:
-          description: Unexpected error
+          description: |-
+            An unexpected error
           content:
             application/json:
               schema:
