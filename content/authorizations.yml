@@ -25,6 +25,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+                
 components:
   schemas:
     Authorization:
@@ -43,6 +44,10 @@ components:
         
         type:
           type: string
+          description: "The type of this object"
+          example: authorization
+          enum:
+            - authorization
 
     Error:
       type: object
