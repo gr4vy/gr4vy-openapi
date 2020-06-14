@@ -56,7 +56,7 @@ components:
         - status
         - code
         - message
-        - help_url
+        - documentation_url
       properties:
         status: 
           type: int32
@@ -71,4 +71,9 @@ components:
           type: string
           description: |-
             A human readable error to help a developer discover the cause if the error.
-          example: Invalid token received
+          example: Invalid token received.
+        documentation_url:
+          type: string
+          format: url
+          description: 
+          
