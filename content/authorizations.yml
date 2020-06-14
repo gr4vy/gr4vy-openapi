@@ -36,7 +36,7 @@ paths:
                   number: 
                     type: string
                     description: |-
-                      The 15-16 digit number for this credit card.
+                      The 15-16 digit number for this credit card as it can be found on the front of the card.
               amount:
                 type: integer
                 format: int64
