@@ -20,6 +20,8 @@ paths:
         application/json:
           schema:
             type: object
+            required:
+              - card
             properties:
               card:
                 type: object
