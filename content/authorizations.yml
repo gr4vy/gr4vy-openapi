@@ -6,6 +6,15 @@ info:
 
 servers:
   - url: 'https://{{cluster}}'
+    cluster:
+      cluster:
+        default: api.gr4vy.com
+        description: The custom domain for the customer's cluster.
+      port:
+        enum:
+          - '443'
+          - '8443'
+        default: '443'
 
 paths:
   /authorizations:
@@ -50,7 +59,7 @@ paths:
                     description: |-
                       The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
                     example: "1234"
-                    
+
               amount:
                 type: integer
                 format: int64
