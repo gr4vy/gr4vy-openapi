@@ -65,6 +65,7 @@ components:
           type: string
           description: |-
             A unique error code to help further define the error within the HTTP status code
+          example: invalid_token
         message:
           type: string
           description
