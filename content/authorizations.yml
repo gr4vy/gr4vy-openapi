@@ -37,6 +37,7 @@ paths:
                   for the given currency, for example 129 cents to create an autorization for $1.29.
                 minimum: 50
                 maximum: 99999999
+                example: 129
               currency:
                 type: string
                 format: int64
