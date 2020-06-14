@@ -35,12 +35,16 @@ paths:
                   - type: object
                     description: |-
                       A token representing a previously tokenized payment method.
-                    type: 
-                      type: string
-                      description: Describes the type of this payment method as a token
-                      example: token
-                      enum:
-                        - token
+                    required:
+                      - type
+                      - token 
+                    properties:
+                      type: 
+                        type: string
+                        description: Describes the type of this payment method as a token
+                        example: token
+                        enum:
+                          - token
                   - type: object
                     description: |-
                       The credit card details to create an authorization for.
