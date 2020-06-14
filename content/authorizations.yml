@@ -37,7 +37,7 @@ paths:
                     type: string
                     description: |-
                       The 15-16 digit number for this credit card as it can be found on the front of the card.
-                    example:
+                    example: "4111111111111111"
                     minLength: 14
                     maxLength: 16
               amount:
