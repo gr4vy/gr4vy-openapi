@@ -32,30 +32,33 @@ paths:
             properties:
               payment_method:
                 oneOf:
-                    - type: object
-                      description: |-
-                        The credit card details to create an authorization for.
-                      required: 
-                        - number
-                        - expiration_date
-                        - security_code
-                      properties:
-                        number: 
-                          type: string
-                          description: |-
-                            The 15-16 digit number for this credit card as it can be found on the front of the card.
-                          example: "4111111111111111"
-                          minLength: 14
-                          maxLength: 16
-                        expiration_date:
-                          type: string
-                          description: The expiration date of the card, formatted `MM/YYYY`.
-                          example: "11/2021"
-                        security_code:
-                          type: string
-                          description: |-
-                            The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
-                          example: "1234"
+                  - type: object
+                    
+                  - type: object
+                    description: |-
+                      The credit card details to create an authorization for.
+                    required: 
+                      - type
+                      - number
+                      - expiration_date
+                      - security_code
+                    properties:
+                      number: 
+                        type: string
+                        description: |-
+                          The 15-16 digit number for this credit card as it can be found on the front of the card.
+                        example: "4111111111111111"
+                        minLength: 14
+                        maxLength: 16
+                      expiration_date:
+                        type: string
+                        description: The expiration date of the card, formatted `MM/YYYY`.
+                        example: "11/2021"
+                      security_code:
+                        type: string
+                        description: |-
+                          The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
+                        example: "1234"
 
               amount:
                 type: integer
