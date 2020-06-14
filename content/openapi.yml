@@ -3,22 +3,13 @@ info:
   version: 1.0.0
   title: Test
 servers:
-  - url: 'http://localhost:3000'
+  - url: 'https://{{cluster}}'
 paths:
   /user:
     get:
       summary: 'Sample endpoint: Returns details about a particular user'
       operationId: listUser
-      tags:
-        - user
-      parameters:
-        - name: id
-          in: query
-          description: ID of the user
-          required: true
-          schema:
-            type: integer
-            format: int32
+      
       responses:
         '200':
           description: 'Sample response: Details about a user by ID'
