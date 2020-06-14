@@ -11,8 +11,15 @@ servers:
         default: api.gr4vy.com
         description: The custom domain for the customer's cluster.
 
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+
 paths:
-  /processing/authorizations:
+  /authorizations:
     post:
       summary: Create an authorization
       operationId: createAuthorization
