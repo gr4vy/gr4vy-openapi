@@ -34,6 +34,15 @@ paths:
                 oneOf:
                   - type: object
                     description: |-
+                      A token representing an existing tokenized payment method.
+                    type: 
+                      type: string
+                      description: Describes the type of this payment method as a credit card
+                      example: credit_card
+                      enum:
+                        - credit_card
+                  - type: object
+                    description: |-
                       The credit card details to create an authorization for.
                     required: 
                       - type
