@@ -33,8 +33,6 @@ paths:
               payment_method:
                 oneOf:
                   - type: object
-                    
-                  - type: object
                     description: |-
                       The credit card details to create an authorization for.
                     required: 
