@@ -30,7 +30,7 @@ paths:
                 description: |-
                   The credit card details to create an authorization for.
                 required: 
-                  - 
+                  - currency
                 properties:
                   -
               amount:
