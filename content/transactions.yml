@@ -45,6 +45,10 @@ paths:
                         example: token
                         enum:
                           - token
+                      token:
+                        type: string
+                        description: The token to create an authorization for.
+                        example: "abc123............."
                   - type: object
                     description: |-
                       The credit card details to create an authorization for.
