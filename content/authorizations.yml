@@ -52,12 +52,19 @@ components:
     Error:
       type: object
       required:
+        - status
         - code
         - message
+        - help_url
       properties:
+        status: 
+          type: int32
+          description: The HTTP status code for this error
+          example: 401
         code:
           type: string
           description: |-
             A unique error code to help further define the error within the HTTP status code
         message:
           type: string
+          description
