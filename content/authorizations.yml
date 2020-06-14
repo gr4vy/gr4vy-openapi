@@ -1,0 +1,55 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Authorizations
+servers:
+  - url: 'https://{{cluster}}'
+paths:
+  /authorizations:
+    post:
+      summary: Create an authorization
+      operationId: createAuthorization
+      
+      responses:
+        '200':
+          description: |-
+            Returns a mini representation of a new authorization resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Authorization--Mini'
+        default:
+          description: |-
+            An unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Authorization:
+      type: object
+      required:
+        - id
+        - type
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: |-
+            The unique ID that will be used to create a new authorization
+        name:
+          type: string
+        tag:
+          type: string
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
