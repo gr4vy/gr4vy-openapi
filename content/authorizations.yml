@@ -34,7 +34,10 @@ paths:
                   - expiration_date
                   - security_code
                 properties:
-                  -
+                  number: 
+                    type: string
+                    description: |-
+                      The 15-16 digit number for this credit card.
               amount:
                 type: integer
                 format: int64
