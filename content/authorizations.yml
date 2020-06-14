@@ -106,7 +106,7 @@ paths:
   /capture:
     post:   
       summary: Capture an authorized payment
-      operationId: createTransaction
+      operationId: createCapture
 
       security:
         - bearerAuth: []
