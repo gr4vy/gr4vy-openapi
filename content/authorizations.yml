@@ -6,6 +6,7 @@ info:
 
 servers:
   - url: 'https://{{cluster}}'
+
 paths:
   /authorizations:
     post:
@@ -44,6 +45,10 @@ paths:
                     type: string
                     description: The expiration date of the card, formatted `MM/YYYY`.
                     example: "11/2021"
+                  security_code:
+                    type: string
+                    description: |-
+                      The 3 or 4 digit security code of the card and is often referred to as the CVV or CVD.
               amount:
                 type: integer
                 format: int64
