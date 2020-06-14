@@ -15,14 +15,16 @@ paths:
   /buyer:
      post:
       summary: Create an new buyer
-      operationId: createBuyer
-      description: Formerly `/new`
+      operationId: createAuthorization
       
   /authorizations:
     post:
       summary: Create an authorization
       operationId: createAuthorization
       description: Formerly `/auth`
+
+      tags:
+        - Authorization
 
       requestBody:
         application/json:
