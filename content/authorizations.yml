@@ -22,12 +22,15 @@ paths:
             type: object
             required:
               - card
+              - amount
+              - currency
             properties:
               card:
                 type: object
                 description: |-
                   The credit card details to create an authorization for.
-
+              amount:
+              currency:
 
       responses:
         '200':
