@@ -34,7 +34,7 @@ paths:
                 oneOf:
                   - type: object
                     description: |-
-                      A token representing an existing tokenized payment method.
+                      A token representing a previously tokenized payment method.
                     type: 
                       type: string
                       description: Describes the type of this payment method as a token
