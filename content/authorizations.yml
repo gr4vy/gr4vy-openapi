@@ -12,7 +12,7 @@ servers:
         description: The custom domain for the customer's cluster.
 
 paths:
-  /authorizations:
+  /processing/authorizations:
     post:
       summary: Create an authorization
       operationId: createAuthorization
@@ -90,6 +90,8 @@ paths:
       operationId: createBuyer
       description: Formerly `/new`
       
+  /capture
+
 components:
   schemas:
     Authorization:
