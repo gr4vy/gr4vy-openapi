@@ -40,11 +40,14 @@ components:
             The unique ID that will be used to create a new authorization
           example: |-
             8724fd24-5489-4a5d-90fd-0604df7d3b83
-
+        
         type:
           type: string
-        tag:
-          type: string
+          description: "The type of this object"
+          example: authorization
+          enum:
+            - authorization
+
     Error:
       type: object
       required:
