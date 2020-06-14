@@ -34,8 +34,7 @@ paths:
                   - expiration_date
                   - security_code
                 properties:
-                  number: 
-                    type: string
+                  -
               amount:
                 type: integer
                 format: int64
