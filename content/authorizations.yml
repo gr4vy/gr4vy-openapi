@@ -48,7 +48,7 @@ paths:
                   security_code:
                     type: string
                     description: |-
-                      The 3 or 4 digit security code of the card and is often referred to as the CVV or CVD.
+                      The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
                     example: "1234"
               amount:
                 type: integer
