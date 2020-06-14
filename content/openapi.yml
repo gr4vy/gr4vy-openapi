@@ -27,7 +27,7 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    User:
+    Authorization:
       type: object
       required:
         - id
