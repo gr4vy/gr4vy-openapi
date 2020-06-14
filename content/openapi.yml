@@ -7,8 +7,8 @@ servers:
 paths:
   /authorizations:
     post:
-      summary: 'Sample endpoint: Returns details about a particular user'
-      operationId: listUser
+      summary: Create an authorization
+      operationId: createAuthorization
       
       responses:
         '200':
