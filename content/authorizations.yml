@@ -71,3 +71,4 @@ components:
           type: string
           description: |-
             A human readable error to help a developer discover the cause if the error.
+          example: Invalid token received
