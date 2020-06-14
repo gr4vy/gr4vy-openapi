@@ -35,6 +35,8 @@ paths:
                 description: |-
                   The monitary amount to create an authorization for
               currency:
+                type: string
+                format: int64
 
       responses:
         '200':
