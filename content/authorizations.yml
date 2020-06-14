@@ -12,12 +12,6 @@ servers:
         description: The custom domain for the customer's cluster.
 
 paths:
-  /buyer:
-    post:
-      summary: Create an new buyer
-      operationId: createBuyer
-      description: Formerly `/new`
-      
   /authorizations:
     post:
       summary: Create an authorization
@@ -90,6 +84,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
+  /buyer:
+    post:
+      summary: Create an new buyer
+      operationId: createBuyer
+      description: Formerly `/new`
+      
 components:
   schemas:
     Authorization:
