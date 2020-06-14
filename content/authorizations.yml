@@ -25,7 +25,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
-                
+
 components:
   schemas:
     Authorization:
@@ -56,7 +56,8 @@ components:
         - message
       properties:
         code:
-          type: integer
-          format: int32
+          type: string
+          description: |-
+            A unique error code to help further define the error within the HTTP status code
         message:
           type: string
