@@ -5,7 +5,7 @@ info:
   title: Processing APIs
 
 servers:
-  - url: 'https://{{cluster}}'
+  - url: 'https://{cluster}'
     cluster:
       cluster:
         default: api.gr4vy.com
