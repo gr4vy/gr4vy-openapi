@@ -6,7 +6,7 @@ servers:
   - url: 'https://{{cluster}}'
 paths:
   /authorizations:
-    get:
+    post:
       summary: 'Sample endpoint: Returns details about a particular user'
       operationId: listUser
       
