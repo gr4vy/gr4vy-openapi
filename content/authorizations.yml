@@ -33,7 +33,7 @@ paths:
                 type: number
                 format: float
                 description: |-
-                  The amount to authorize the card for.
+                  The monitary amount to create an authorization for
               currency:
 
       responses:
