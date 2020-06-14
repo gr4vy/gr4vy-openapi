@@ -30,10 +30,11 @@ paths:
                 description: |-
                   The credit card details to create an authorization for.
               amount:
-                type: number
-                format: float
+                type: integer
+                format: int64
                 description: |-
-                  The monitary amount to create an authorization for
+                  The monitary amount to create an authorization for, in the smallest currency unit
+                  for the API
               currency:
                 type: string
                 format: int64
