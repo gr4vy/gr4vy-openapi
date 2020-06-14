@@ -12,19 +12,17 @@ servers:
         description: The custom domain for the customer's cluster.
 
 paths:
-  /customer:
+  /buyer:
      post:
       summary: Create an new buyer
-      operationId: createAuthorization
+      operationId: createBuyer
+      description: Buyer
       
   /authorizations:
     post:
       summary: Create an authorization
       operationId: createAuthorization
       description: Formerly `/auth`
-
-      tags:
-        - Authorization
 
       requestBody:
         application/json:
