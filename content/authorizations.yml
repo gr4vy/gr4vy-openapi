@@ -44,7 +44,8 @@ components:
         
         type:
           type: string
-          description: "The type of this object"
+          description: |-
+            The type of this object.
           example: authorization
           enum:
             - authorization
@@ -59,13 +60,14 @@ components:
       properties:
         status: 
           type: int32
-          description: The HTTP status code for this error
+          description: The HTTP status code for this error.
           example: 401
         code:
           type: string
           description: |-
-            A unique error code to help further define the error within the HTTP status code
+            A unique error code to help further define the error within the HTTP status code.
           example: invalid_token
         message:
           type: string
-          description
+          description: |-
+            A human readable error to help a developer discover the cause if the error.
