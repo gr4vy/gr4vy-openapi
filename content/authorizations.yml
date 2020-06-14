@@ -55,8 +55,7 @@ components:
           type: string
           description: |-
             Defines the current status of this authorization. For 
-            this endpoint this will always be `pending`.
-          example:
+            the processing APIs
 
     Error:
       type: object
