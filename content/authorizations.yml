@@ -75,5 +75,6 @@ components:
         documentation_url:
           type: string
           format: url
-          description: 
+          description: |-
+            A link to the user documentation for this object 
           
