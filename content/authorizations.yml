@@ -21,14 +21,18 @@ paths:
           schema:
             type: object
             required:
-              - card
+              - properties
               - amount
               - currency
             properties:
-              card:
+              credit_card:
                 type: object
                 description: |-
                   The credit card details to create an authorization for.
+                required: 
+                  - 
+                properties:
+                  -
               amount:
                 type: integer
                 format: int64
