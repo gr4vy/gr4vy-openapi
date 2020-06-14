@@ -76,5 +76,5 @@ components:
           type: string
           format: url
           description: |-
-            A link to the user documentation for this object 
+            A link to the user documentation for this object .
           
