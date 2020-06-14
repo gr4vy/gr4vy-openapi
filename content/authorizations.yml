@@ -10,11 +10,6 @@ servers:
       cluster:
         default: api.gr4vy.com
         description: The custom domain for the customer's cluster.
-      port:
-        enum:
-          - '443'
-          - '8443'
-        default: '443'
 
 paths:
   /authorizations:
