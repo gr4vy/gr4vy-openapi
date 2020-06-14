@@ -25,6 +25,9 @@ paths:
       operationId: createAuthorization
       description: Formerly `/auth`
 
+      security:
+        - bearerAuth: []
+
       requestBody:
         application/json:
           schema:
