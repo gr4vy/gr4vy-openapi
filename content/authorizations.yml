@@ -44,7 +44,6 @@ components:
         type:
           type: string
           description: "The type of this object"
-          example: authorization
           enum:
             - authorization
 
