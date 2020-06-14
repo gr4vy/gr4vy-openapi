@@ -46,12 +46,19 @@ components:
         type:
           type: string
           description: |-
-            The type of this object.
+            The type of this object. For this resource this is always `authorization`.
           example: authorization
           enum:
             - authorization
 
-
+        status:
+          type: string
+          description: |-
+            Defines the current status of this authorization. For 
+            this endpoint this will always be `pending`.
+          example: pending
+          enum:
+            - pending
 
     Error:
       type: object
