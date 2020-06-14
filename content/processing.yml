@@ -38,7 +38,7 @@ paths:
                     type: 
                       type: string
                       description: Describes the type of this payment method as a token
-                      example: credit_card
+                      example: token
                       enum:
                         - credit_card
                   - type: object
