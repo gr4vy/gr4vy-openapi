@@ -43,6 +43,10 @@ paths:
                       - expiration_date
                       - security_code
                     properties:
+                      type: 
+                        type: string
+                        description: Describes the type of this payment method as a credit card
+                        example: credit_card
                       number: 
                         type: string
                         description: |-
