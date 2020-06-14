@@ -35,6 +35,7 @@ paths:
                 description: |-
                   The monitary amount to create an authorization for, in the smallest currency unit
                   for the given currency, for example 129 cents to create an autorization for $1.29.
+                minimum: 50
               currency:
                 type: string
                 format: int64
