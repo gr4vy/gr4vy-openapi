@@ -38,7 +38,9 @@ components:
           format: uuid
           description: |-
             The unique ID that will be used to create a new authorization
-        name:
+          example:
+            
+        type:
           type: string
         tag:
           type: string
