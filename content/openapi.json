@@ -1,0 +1,201 @@
+openapi: 3.0.0
+
+info:
+  version: 1.0.0
+  title: Processing APIs
+
+servers:
+  - url: 'https://{cluster}'
+    cluster:
+      cluster:
+        default: api.gr4vy.com
+        description: The custom domain for the customer's cluster.
+
+paths:
+  /authorizations:
+    post:
+      summary: Create an authorization
+      operationId: createAuthorization
+      description: Formerly `/auth`
+
+      security:
+        - BearerAuth: []
+
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - amount
+                - currency
+                - payment_method
+              properties:
+                payment_method:
+                  oneOf:
+                    - type: object
+                      description: |-
+                        A token representing a previously tokenized payment method.
+                      required:
+                        - type
+                        - token 
+                      properties:
+                        type: 
+                          type: string
+                          description: Describes the type of this payment method as a token
+                          example: token
+                          enum:
+                            - token
+                        token:
+                          type: string
+                          description: The token to create an authorization for.
+                          example: "abc123............."
+                    - type: object
+                      description: |-
+                        The credit card details to create an authorization for.
+                      required: 
+                        - type
+                        - number
+                        - expiration_date
+                        - security_code
+                      properties:
+                        type: 
+                          type: string
+                          description: Describes the type of this payment method as a credit card
+                          example: credit_card
+                          enum:
+                            - credit_card
+                        number: 
+                          type: string
+                          description: |-
+                            The 15-16 digit number for this credit card as it can be found on the front of the card.
+                          example: "4111111111111111"
+                          minLength: 14
+                          maxLength: 16
+                        expiration_date:
+                          type: string
+                          description: The expiration date of the card, formatted `MM/YYYY`.
+                          example: "11/2021"
+                        security_code:
+                          type: string
+                          description: |-
+                            The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
+                          example: "1234"
+
+                amount:
+                  type: integer
+                  format: int64
+                  description: |-
+                    The monitary amount to create an authorization for, in the smallest currency unit
+                    for the given currency, for example 1299 cents to create an autorization for $12.99.
+                  minimum: 50
+                  maximum: 99999999
+                  example: 1299
+                currency:
+                  type: string
+                  format: int64
+                  description: A supported ISO-4217 currency code.
+                  example: USD
+
+      responses:
+        '200':
+          description: |-
+            Returns a mini representation of a new authorization resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Authorization'
+        default:
+          description: |-
+            An unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # /buyer:
+  #   post:
+  #     summary: Create an new buyer
+  #     operationId: createBuyer
+  #     description: Formerly `/new`
+
+  #     security:
+  #       - bearerAuth: []
+      
+  # /capture:
+  #   post:   
+  #     summary: Capture an authorized payment
+  #     operationId: createCapture
+
+  #     security:
+  #       - bearerAuth: []
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT 
+
+  schemas:
+    Authorization:
+      type: object
+      required:
+        - id
+        - type
+        - status
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: |-
+            The unique ID that will be used to create a new authorization.
+          example: |-
+            8724fd24-5489-4a5d-90fd-0604df7d3b83
+        
+        type:
+          type: string
+          description: |-
+            The type of this object. For this resource this is always `authorization`.
+          example: authorization
+          enum:
+            - authorization
+
+        status:
+          type: string
+          description: |-
+            Defines the current status of this authorization. For 
+            this endpoint this will always be `pending`.
+          example: pending
+          enum:
+            - pending
+
+    Error:
+      type: object
+      required:
+        - status
+        - code
+        - message
+        - documentation_url
+      properties:
+        status: 
+          type: int32
+          description: The HTTP status code for this error.
+          example: 401
+        code:
+          type: string
+          description: |-
+            A unique error code to help further define the error within the HTTP status code.
+          example: invalid_token
+        message:
+          type: string
+          description: |-
+            A human readable error to help a developer discover the cause if the error.
+          example: Invalid token received.
+        documentation_url:
+          type: string
+          format: url
+          description: |-
+            A link to the developer documentation for this error.
+
+          
