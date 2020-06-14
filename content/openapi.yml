@@ -13,7 +13,7 @@ paths:
       responses:
         '200':
           description: |-
-            Returns a new authorization 
+            Returns a mini representation of a new authorization resource.
           content:
             application/json:
               schema:
