@@ -43,7 +43,6 @@ components:
         
         type:
           type: string
-          string: foobar
 
     Error:
       type: object
