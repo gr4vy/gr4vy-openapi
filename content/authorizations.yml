@@ -1,15 +1,26 @@
 openapi: 3.0.0
+
 info:
   version: 1.0.0
   title: Processing APIs
+
 servers:
   - url: 'https://{{cluster}}'
+  var
 paths:
   /authorizations:
     post:
       summary: Create an authorization
       operationId: createAuthorization
-      
+
+      tags:
+        - Authorization
+
+      requestBody:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CreateAuthorizationRequest"
+
       responses:
         '200':
           description: |-
@@ -55,7 +66,10 @@ components:
           type: string
           description: |-
             Defines the current status of this authorization. For 
-            the processing APIs
+            this endpoint this will always be `pending`.
+          example: pending
+          enum:
+            - pending
 
     Error:
       type: object
