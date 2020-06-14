@@ -43,9 +43,7 @@ components:
         
         type:
           type: string
-          description: "The type of this object"
-          enum:
-            - authorization
+          string: foobar
 
     Error:
       type: object
