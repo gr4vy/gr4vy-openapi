@@ -19,7 +19,13 @@ paths:
       requestBody:
         application/json:
           schema:
-            $ref: "#/components/schemas/CreateAuthorizationRequest"
+            type: object
+            properties:
+              card:
+                type: object
+                description: |-
+                  The credit card details for a user.
+
 
       responses:
         '200':
@@ -38,15 +44,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 
 components:
-  requestBodies:
-    Authorization:
-      content:
-        application/json:
-          schema:
-            type: object
-            description: |-
-              The request to create an authorization.
-
   schemas:
     Authorization:
       type: object
