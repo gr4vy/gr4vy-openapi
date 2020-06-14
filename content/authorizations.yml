@@ -56,9 +56,7 @@ components:
           description: |-
             Defines the current status of this authorization. For 
             this endpoint this will always be `pending`.
-          example: pending
-          enum:
-            - pending
+          example:
 
     Error:
       type: object
