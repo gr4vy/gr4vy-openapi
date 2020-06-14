@@ -40,6 +40,9 @@ paths:
                     example: "4111111111111111"
                     minLength: 14
                     maxLength: 16
+                  expiration_date:
+                    type: string
+                    description: The expiration date of the card, formatted `MM/YYYY`.
               amount:
                 type: integer
                 format: int64
