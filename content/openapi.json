@@ -59,7 +59,7 @@ paths:
                       description: |-
                         Ok to store card?
                       example: true
-                      
+
                 amount:
                   type: integer
                   format: int64
@@ -74,6 +74,11 @@ paths:
                   format: int64
                   description: A supported ISO-4217 currency code.
                   example: USD
+
+                capture:
+                  type: boolean
+                  description: Also captures the transaction
+                  example: true
 
       responses:
         '200':
