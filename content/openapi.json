@@ -29,8 +29,9 @@ paths:
               required:
                 - amount
                 - currency
+                - card
               properties:
-                payment_method:
+                card:
                   type: object
                   description: |-
                     The credit card details to create an authorization for.
@@ -53,7 +54,12 @@ paths:
                       description: |-
                         The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
                       example: "1234"
-
+                    store:
+                      type: boolean
+                      description: |-
+                        Ok to store card?
+                      example: true
+                      
                 amount:
                   type: integer
                   format: int64
