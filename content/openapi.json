@@ -29,7 +29,6 @@ paths:
               required:
                 - amount
                 - currency
-                - payment_method
               properties:
                 payment_method:
                   type: object
