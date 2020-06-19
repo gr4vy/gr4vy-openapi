@@ -921,7 +921,7 @@ paths:
 
           For the CSV request, set the `content-type` to `text/csv` and provide the body as a CSV with the first row representing the names of the JSON parameters, for example:
 
-          ```csv
+          ```
           authorization_id, partial_amount, close
           931b9b0c-dc95-4d45-b1fc-64966244ef74, 500, true
           272dee2b-2196-4e4e-acf7-e5983f1fdc61, 1299
