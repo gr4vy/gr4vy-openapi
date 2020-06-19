@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Transactions API
+  title: Gr4vy API
   version: '1.0'
   contact:
     name: Gr4vy Support
@@ -277,4 +277,10 @@ components:
           message: The request body was not valid JSON.
           documentation_url: 'https://developer.gr4vy.com/errors/incorrect-json'
           additional_context: null
-  securitySchemes: {}
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - BearerAuth: []
