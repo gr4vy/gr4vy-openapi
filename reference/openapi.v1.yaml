@@ -340,7 +340,7 @@ paths:
       tags:
         - Cards
       responses:
-        '200':
+        '202':
           description: 'This API returns asynchronously, returning status object with the ID of the pending `Card` resource.'
           content:
             application/json:
@@ -499,6 +499,84 @@ paths:
       operationId: get-cards-id
       description: 'Get an authorization. '
       parameters: []
+  /transactions/capture:
+    post:
+      summary: Capture an authorization
+      tags:
+        - Authorizations
+      responses:
+        '202':
+          description: 'This API returns asynchronously, returning status object with the ID of the pending `Transaction` resource.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+              examples:
+                Request accepted:
+                  value:
+                    type: status
+                    status: pending
+                    resource_type: transaction
+                    resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+        '400':
+          description: 'Returns an error if the request is missing any required fields, or the request body is not valid JSON.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Incorrect JSON:
+                  value:
+                    type: error
+                    code: incorrect_json
+                    status: 400
+                    message: The request body was not valid JSON.
+                    documentation_url: 'https://developer.gr4vy.com/errors/incorrect-json'
+                    additional_context: null
+        '401':
+          description: Returns an error if no valid authentication was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                An unauthorized request:
+                  value:
+                    type: error
+                    code: unauthorized
+                    status: 401
+                    message: No valid API authentication found
+                    documentation_url: 'https://developer.gr4vy.com/errors/unauthorized'
+                    additional_context: null
+      operationId: post-transactions-capture
+      description: Captures a previously authorized transaction.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                authorization_id:
+                  type: string
+                  description: The ID of the authorization to capture
+                  format: uuid
+                  example: 3d1748e5-16fa-468c-82ca-05f31252f515
+                partial_amount:
+                  type: integer
+                  description: |-
+                    The (partial) amount to capture.
+
+                    When left blank, this will capture the entire amount.
+                  minimum: 50
+                  maximum: 99999999
+                  format: int64
+                close:
+                  type:
+                    - string
+                    - boolean
+                  description: 'Wether to close this authorization on capture, even if only a partial amount was captured.'
+              required:
+                - authorization_id
 components:
   schemas:
     Status:
@@ -644,6 +722,7 @@ components:
           enum:
             - created
             - declined
+            - closed
         amount:
           type: integer
           description: 'The monitary amount this authorization is for, in the smallest currency unit for the given currency, for example `1299` cents for `$12.99`.'
