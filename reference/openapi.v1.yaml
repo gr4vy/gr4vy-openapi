@@ -1,0 +1,282 @@
+openapi: 3.0.0
+info:
+  title: Transactions API
+  version: '1.0'
+  contact:
+    name: Gr4vy Support
+    email: support@gr4vy.com
+    url: 'https://gr4vy.com'
+  termsOfService: 'https://gr4vy.com'
+  license:
+    name: MIT
+  description: The Gr4vy API
+servers:
+  - url: 'https://{cluster}'
+    variables:
+      cluster:
+        default: api.gr4vy.com
+        description: "The custom domain for the customer's cluster."
+tags:
+  - name: Authorizations
+paths:
+  /authorizations:
+    post:
+      summary: Create an authorization
+      tags:
+        - Authorizations
+      responses:
+        '202':
+          description: 'This API returns asynchronously, returning status object with the ID of the pending `Authorization` resource.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+              examples:
+                The request for the authorization has been accepted.:
+                  value:
+                    type: status
+                    status: pending
+                    object_type: authorization
+                    object_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+        '400':
+          description: 'Returns an error if the request is missing any required fields, or the request body is not valid JSON.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Incorrect JSON:
+                  value:
+                    type: error
+                    code: incorrect_json
+                    status: 400
+                    message: The request body was not valid JSON.
+                    documentation_url: 'https://developer.gr4vy.com/errors/incorrect-json'
+                    additional_context: null
+        '401':
+          description: Returns an error if no valid authentication was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                An unauthorized request:
+                  value:
+                    type: error
+                    code: unauthorized
+                    status: 401
+                    message: No valid authentication found
+                    documentation_url: 'https://developer.gr4vy.com/errors/unauthorized'
+                    additional_context: null
+      operationId: post-transactions-authorizations
+      description: |-
+        Creates an authorization on a card.
+
+        This API additionally perform a few additional actions at the same time as creating the authorization.
+
+        * `card.store` - Use this method to store the card for furture use
+        * `capture` - Use this method to also perform a capture on the card after it has been authorized.
+
+        This API returns asynchronously, returning a pending `Authorization` object with the ID of the pending authorization.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: integer
+                  format: int64
+                  minimum: 50
+                  exclusiveMinimum: false
+                  maximum: 99999999
+                  example: 1299
+                  description: 'The monitary amount to create an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an autorization for `$12.99`.'
+                currency:
+                  type: string
+                  example: USD
+                  description: A supported ISO-4217 currency code.
+                card:
+                  required:
+                    - number
+                  type: object
+                  properties:
+                    number:
+                      type: string
+                      minLength: 14
+                      maxLength: 16
+                      example: '4111111111111111'
+                      pattern: '^[0-9]{14,16}$'
+                      description: |-
+                        The 15-16 digit number for this credit card as it can be found on the front of the card.
+
+                        If a card has been stored with us previously, this number will represent the unique tokenized card ID provided via our API.
+                    expiration_date:
+                      type: string
+                      description: 'The expiration date of the card, formatted `MM/YYYY`. If a card has been previously stored with us this value is optional.'
+                      example: 11/2015
+                      pattern: "^\\d\\d/\\d\\d\\d\\d$"
+                      minLength: 7
+                      maxLength: 7
+                    security_code:
+                      type: string
+                      description: |-
+                        The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
+
+                        If a card has been previously stored with us this value is optional.
+                      pattern: "^\\d{3,4}$"
+                      minLength: 3
+                      maxLength: 4
+                      example: '123'
+                    store:
+                      type: boolean
+                      description: Wether to also store the card and have it tokenized against your registered processors.
+                      example: true
+                capture:
+                  type: boolean
+                  description: 'Wether a successful authorization should immediately be captured as well, effectively processing the payment directly.'
+                  default: 'false'
+                  example: true
+              required:
+                - amount
+                - currency
+                - card
+            examples:
+              Authorize a new card:
+                value:
+                  amount: '1299'
+                  currency: USD
+                  card:
+                    number: '4111111111111111'
+                    expiration_date: 11/2025
+                    security_code: '123'
+              Authorize a tokenized card:
+                value:
+                  amount: '1299'
+                  currency: USD
+                  card:
+                    number: '01231231231231'
+              Authorized and tokenize a card:
+                value:
+                  amount: '1299'
+                  currency: USD
+                  card:
+                    number: '4111111111111111'
+                    expiration_date: 11/2025
+                    security_code: '123'
+                    store: true
+              'Authorize, capture, and tokenize a card':
+                value:
+                  amount: '1299'
+                  currency: USD
+                  card:
+                    number: '4111111111111111'
+                    expiration_date: 11/2025
+                    security_code: '123'
+                    store: true
+                  capture: true
+        description: ''
+    parameters: []
+components:
+  schemas:
+    Status:
+      title: Status
+      type: object
+      description: 'In many cases the Gr4vy API returns asynchronously, kicking off a job to create an authorization or a transaction, and returning a `Status` object with the ID of the pending object. The ID of this resource can be used to query an objects status, or additionally the client can use Pub/Sub to subscribe to the creation of the pending object.'
+      x-tags:
+        - Authorizations
+      x-examples:
+        A pending authorization:
+          type: status
+          status: pending
+          resource_type: authorization
+          resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+      properties:
+        type:
+          type: string
+          description: The type of this object. This is always `status`.
+          enum:
+            - status
+          example: status
+        status:
+          type: string
+          enum:
+            - pending
+            - success
+            - failure
+          example: pending
+          description: "The status of this resource being created. This can be one of:\n\n* `pending` - The creation has not yet completed\n* `created` - The resource has been created and can now be queried.\n* "
+        object_type:
+          type: string
+          description: |
+            The type of the object that is pending.
+          enum:
+            - authorization
+          example: authorization
+        object_id:
+          type: string
+          format: uuid
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          description: The ID of the object for which this status has been created.
+      required:
+        - type
+        - status
+        - object_type
+        - object_id
+    Error:
+      title: Error
+      type: object
+      description: A generic client error.
+      properties:
+        type:
+          type: string
+          description: The typeof this object. This is always `error`.
+          enum:
+            - error
+          example: error
+          default: error
+        code:
+          type: string
+          description: A custom code to further describe the type of error being returned. This code provides further specification within the HTTP `status` code and can be used by a program to define logic based on the error.
+          enum:
+            - incorrect_json
+            - bad_request
+            - unauthorized
+          example: incorrect_json
+        status:
+          type: integer
+          description: The HTTP status code of this error
+          format: int32
+          default: 0
+          minimum: 200
+          exclusiveMaximum: true
+          maximum: 600
+          example: 499
+        message:
+          type: string
+          description: 'A human readable message that describes the error. The content of this field should not be used to determine any business logic. '
+          example: The request body was not valid JSON.
+        documentation_url:
+          type: string
+          description: A link to the developer documentation for this error.
+          format: uri
+          example: 'https://developer.gr4vy.com/errors/incorrect-json'
+        additional_context:
+          anyOf:
+            - $ref: '#/components/schemas/Status'
+          description: An optional status object that might be returned to showcase why an API can not return a resource (yet).
+      required:
+        - type
+        - code
+        - status
+        - message
+        - documentation_url
+      x-examples:
+        Incorrect JSON:
+          type: error
+          code: incorrect_json
+          status: 400
+          message: The request body was not valid JSON.
+          documentation_url: 'https://developer.gr4vy.com/errors/incorrect-json'
+          additional_context: null
+  securitySchemes: {}
