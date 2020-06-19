@@ -476,7 +476,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
               examples:
-                Authorization not found:
+                Card not found:
                   value:
                     type: error
                     code: not_found
@@ -484,7 +484,7 @@ paths:
                     message: The resource could not be found
                     documentation_url: 'https://developer.gr4vy.com/errors/not-found'
                     additional_context: null
-                Authorization pending:
+                Card creation pending:
                   value:
                     type: error
                     code: status_pending
@@ -494,7 +494,7 @@ paths:
                     additional_context:
                       type: status
                       status: pending
-                      resource_type: transactions.authorization
+                      resource_type: card
                       resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
       operationId: get-cards-id
       description: 'Get an authorization. '
@@ -813,15 +813,19 @@ components:
         type:
           type: string
           description: The type of this resource. Is always `card`
+          example: card
+          enum:
+            - card
         id:
           type: string
           example: fe26475d-ec3e-4884-9553-f7356683f7f9
-          description: 'If a card has been stored with us previously, this number will represent the unique tokenized card ID provided via our API.'
+          description: The internal ID for this card
         status:
           type: string
-          description: Wether this authorization was successfully created or not.
+          description: Wether this card was successfully created or not.
           enum:
             - created
+            - failure
           example: created
     Cards:
       title: Cards
@@ -867,6 +871,120 @@ components:
           next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
           previous_page: null
         An empty list of cards:
+          items: []
+          limit: 100
+          next_page: null
+          previous_page: null
+    Transaction:
+      title: Transaction
+      type: object
+      x-tags:
+        - Transactions
+      properties:
+        type:
+          type: string
+          description: The type of this resource. Is always `transaction`
+          example: transaction
+          enum:
+            - transaction
+        id:
+          type: string
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          description: The internal ID for this transaction
+        status:
+          type: string
+          description: Wether this transaction was successfully created or not.
+          enum:
+            - created
+            - failure
+          example: created
+        amount:
+          type: integer
+          description: The amount captured in this transaction
+          format: int64
+          example: 1299
+          minimum: 50
+          maximum: 99999999
+        currency:
+          type: string
+          example: USD
+          description: The currency code for this transaction
+        authorization:
+          $ref: '#/components/schemas/Authorization'
+      x-examples:
+        Transaction for full amount:
+          type: card
+          id: 18d41625-16d5-40a8-bc92-16f5e1158e55
+          status: created
+          amount: 1299
+          currency: USD
+          authorization:
+            type: transactions.authorizations
+            id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
+            status: closed
+            amount: 1299
+            card:
+              type: card
+              id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+        Transaction for partial amount:
+          type: card
+          id: 18d41625-16d5-40a8-bc92-16f5e1158e55
+          status: created
+          amount: 500
+          currency: USD
+          authorization:
+            type: transactions.authorizations
+            id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
+            status: created
+            amount: 1299
+            card:
+              type: card
+              id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+      description: Captures a transaction.
+    Transactions:
+      title: Transactions
+      x-tags:
+        - Transactions
+      description: A list of transactions
+      type: object
+      properties:
+        items:
+          type: array
+          description: A list of transactions
+          items:
+            $ref: '#/components/schemas/Transaction'
+        limit:
+          type: integer
+          description: 'The limit set to the number of items returned. '
+          format: int32
+          minimum: 0
+          maximum: 1000
+          example: 100
+          default: 100
+        next_marker:
+          type: string
+          description: The marker that represents the next page of results.
+          format: uuid
+          example: 9f944c64-eaf0-4219-90fd-f7e56c7cd214
+        previous_marker:
+          type: string
+          description: The marker that represents the previ page of results.
+          format: uuid
+          example: 9049b2f9-0c67-47c5-af18-e8525f855263
+      required:
+        - items
+        - limit
+        - next_marker
+        - previous_marker
+      x-examples:
+        A list of transactions:
+          items:
+            - type: transaction
+              id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
+          limit: 100
+          next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
+          previous_page: null
+        An empty list of transactions:
           items: []
           limit: 100
           next_page: null
