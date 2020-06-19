@@ -19,7 +19,7 @@ servers:
 tags:
   - name: Authorizations
 paths:
-  /authorizations:
+  /transactions/authorizations:
     post:
       summary: Create an authorization
       tags:
@@ -36,7 +36,7 @@ paths:
                   value:
                     type: status
                     status: pending
-                    object_type: authorization
+                    object_type: transactions.authorization
                     object_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
         '400':
           description: 'Returns an error if the request is missing any required fields, or the request body is not valid JSON.'
@@ -72,7 +72,7 @@ paths:
       description: |-
         Creates an authorization on a card.
 
-        This API additionally perform a few additional actions at the same time as creating the authorization.
+        This API can perform a few additional actions at the same time as creating the authorization.
 
         * `card.store` - Use this method to store the card for furture use
         * `capture` - Use this method to also perform a capture on the card after it has been authorized.
@@ -97,9 +97,9 @@ paths:
                   example: USD
                   description: A supported ISO-4217 currency code.
                 card:
+                  type: object
                   required:
                     - number
-                  type: object
                   properties:
                     number:
                       type: string
@@ -176,7 +176,124 @@ paths:
                     store: true
                   capture: true
         description: ''
+      parameters: []
     parameters: []
+    get:
+      summary: ''
+      operationId: get-transactions-authorizations
+      responses:
+        '200':
+          description: Returns a list of authorizations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Authorizations'
+              examples:
+                A list of authorizations:
+                  value:
+                    items:
+                      - type: transactions.authorizations
+                        id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
+                        approved: true
+                        amount: 1299
+                        card:
+                          type: card
+                          id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+                        status: created
+                    limit: 100
+                    next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
+                    previous_page: null
+        '401':
+          description: Returns an error if no valid authentication was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                An unauthorized request:
+                  value:
+                    type: error
+                    code: unauthorized
+                    status: 401
+                    message: No valid authentication found
+                    documentation_url: 'https://developer.gr4vy.com/errors/unauthorized'
+                    additional_context: null
+      description: Returns a list of authorizations.
+      tags:
+        - Authorizations
+  '/transactions/authorizations/{authorization_id}':
+    parameters:
+      - schema:
+          type: string
+          format: uuid
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+        name: authorization_id
+        in: path
+        required: true
+        description: ''
+    get:
+      summary: Get an authorization
+      tags:
+        - Authorizations
+      responses:
+        '200':
+          description: Returns a created authorization object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Authorization'
+              examples:
+                An approved transaction:
+                  value:
+                    type: transactions.authorizations
+                    id: ''
+                    approved: true
+                    amount: 1299
+        '401':
+          description: Returns an error if no valid authentication was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                An unauthorized request:
+                  value:
+                    type: error
+                    code: unauthorized
+                    status: 401
+                    message: No valid authentication found
+                    documentation_url: 'https://developer.gr4vy.com/errors/unauthorized'
+                    additional_context: null
+        '404':
+          description: Returns an error if the authorization can not be found or has not yet been created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Authorization not found:
+                  value:
+                    type: error
+                    code: not_found
+                    status: 404
+                    message: The resource could not be found
+                    documentation_url: 'https://developer.gr4vy.com/errors/not-found'
+                    additional_context: null
+                Authorization pending:
+                  value:
+                    type: error
+                    code: status_pending
+                    status: 404
+                    message: The resource is still pending
+                    documentation_url: 'https://developer.gr4vy.com/errors/status-pending'
+                    additional_context:
+                      type: status
+                      status: pending
+                      resource_type: transactions.authorization
+                      resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+      operationId: 'get-authorizations-:authorization_id'
+      description: 'Get an authorization. '
+      parameters: []
 components:
   schemas:
     Status:
@@ -187,7 +304,7 @@ components:
         A pending authorization:
           type: status
           status: pending
-          resource_type: authorization
+          resource_type: transactions.authorization
           resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
       properties:
         type:
@@ -203,14 +320,19 @@ components:
             - success
             - failure
           example: pending
-          description: "The status of this resource being created. This can be one of:\n\n* `pending` - The creation has not yet completed\n* `created` - The resource has been created and can now be queried.\n* "
+          description: |-
+            The status of this resource being created. This can be one of:
+
+            * `pending` - The creation has not yet completed
+            * `created` - The resource has been created and can now be queried.
         object_type:
           type: string
           description: |
             The type of the object that is pending.
+          example: transactions.authorization
           enum:
-            - authorization
-          example: authorization
+            - transactions.authorization
+            - card
         object_id:
           type: string
           format: uuid
@@ -225,6 +347,14 @@ components:
       title: Error
       type: object
       description: A generic client error.
+      x-examples:
+        Incorrect JSON:
+          type: error
+          code: incorrect_json
+          status: 400
+          message: The request body was not valid JSON.
+          documentation_url: 'https://developer.gr4vy.com/errors/incorrect-json'
+          additional_context: null
       properties:
         type:
           type: string
@@ -240,6 +370,7 @@ components:
             - incorrect_json
             - bad_request
             - unauthorized
+            - not_found
           example: incorrect_json
         status:
           type: integer
@@ -269,18 +400,150 @@ components:
         - status
         - message
         - documentation_url
+    Authorization:
+      title: Authorization
+      type: object
+      x-tags:
+        - Authorizations
+      description: Represents an authorization for a card. The authorization might have been approved or not.
+      properties:
+        type:
+          type: string
+          description: The type of this resource. Is always `transactions.authorization`
+          example: transactions.authorization
+          enum:
+            - transactions.authorization
+        id:
+          type: string
+          description: The unique ID of this authorization.
+          format: uuid
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+        approved:
+          type: boolean
+          description: Wether this authorization was a success or not.
+          example: true
+        amount:
+          type: integer
+          description: 'The monitary amount this authorization is for, in the smallest currency unit for the given currency, for example `1299` cents for `$12.99`.'
+          format: int64
+          example: 1299
+          minimum: 50
+          maximum: 99999999
+        currency:
+          type: string
+          description: A supported ISO-4217 currency code.
+          example: USD
+        card:
+          $ref: '#/components/schemas/Card'
+        status:
+          type: string
+          description: |+
+            The current state of the authorization.
+
+            This can be one of:
+
+            * `created` - The authorization was created but not yet captured.
+            * `completed` - The authorization has been declined, captured by one or more transactions, or has expired.
+
+
+          enum:
+            - created
+            - completed
+          example: created
+      required:
+        - type
+        - id
+        - approved
+        - card
+        - status
       x-examples:
-        Incorrect JSON:
-          type: error
-          code: incorrect_json
-          status: 400
-          message: The request body was not valid JSON.
-          documentation_url: 'https://developer.gr4vy.com/errors/incorrect-json'
-          additional_context: null
+        An approved authorization:
+          type: transactions.authorizations
+          id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
+          approved: true
+          amount: 1299
+          card:
+            type: card
+            id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+          status: created
+        An declined authorization:
+          type: transactions.authorizations
+          id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
+          approved: false
+          amount: null
+          status: null
+    Authorizations:
+      title: Authorizations
+      x-tags:
+        - Authorizations
+      description: A list of authorizations
+      type: object
+      properties:
+        items:
+          type: array
+          description: A list of authorizations
+          items:
+            $ref: '#/components/schemas/Authorization'
+        limit:
+          type: integer
+          description: 'The limit set to the number of items returned. '
+          format: int32
+          minimum: 0
+          maximum: 1000
+          example: 100
+          default: 100
+        next_marker:
+          type: string
+          description: The marker that represents the next page of results.
+          format: uuid
+          example: 9f944c64-eaf0-4219-90fd-f7e56c7cd214
+        previous_marker:
+          type: string
+          description: The marker that represents the previ page of results.
+          format: uuid
+          example: 9049b2f9-0c67-47c5-af18-e8525f855263
+      required:
+        - items
+        - limit
+        - next_marker
+        - previous_marker
+      x-examples:
+        A list of authorizations:
+          items:
+            - type: transactions.authorizations
+              id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
+              approved: true
+              amount: 1299
+              card:
+                type: card
+                id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+              status: created
+          limit: 100
+          next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
+          previous_page: null
+        An empty list of authorizations:
+          items: []
+          limit: 100
+          next_page: null
+          previous_page: null
+    Card:
+      title: Card
+      type: object
+      x-tags:
+        - Cards
+      properties:
+        type:
+          type: string
+          description: The type of this resource. Is always `card`
+        id:
+          type: string
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          description: 'If a card has been stored with us previously, this number will represent the unique tokenized card ID provided via our API.'
   securitySchemes:
     BearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+      description: ''
 security:
   - BearerAuth: []
