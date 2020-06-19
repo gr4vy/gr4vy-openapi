@@ -96,23 +96,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 
-  # /buyer:
-  #   post:
-  #     summary: Create an new buyer
-  #     operationId: createBuyer
-  #     description: Formerly `/new`
-
-  #     security:
-  #       - bearerAuth: []
-      
-  # /capture:
-  #   post:   
-  #     summary: Capture an authorized payment
-  #     operationId: createCapture
-
-  #     security:
-  #       - bearerAuth: []
-
 components:
   securitySchemes:
     BearerAuth:
