@@ -19,6 +19,7 @@ servers:
 tags:
   - name: Authorizations
   - name: Cards
+  - name: Transactions
 paths:
   /transactions/authorizations:
     post:
@@ -181,6 +182,27 @@ paths:
     get:
       summary: List all authorizations
       operationId: get-transactions-authorizations
+      parameters:
+        - schema:
+            type: integer
+            default: 100
+            example: 1000
+            minimum: 0
+            maximum: 1000
+            format: int32
+          in: query
+          name: limit
+          description: The maximum number of items to return
+        - schema:
+            type: string
+            format: uuid
+            example: 9cd221af-a85e-46ed-8cfe-a1925194af8c
+          in: query
+          name: marker
+          description: |-
+            The marker that identifies the page of results to return.
+
+            For the first page of results, simply omit this parameter. For next pages, simply use the value returned by the API in the `next_marker` field.
       responses:
         '200':
           description: Returns a list of authorizations
@@ -300,6 +322,27 @@ paths:
     get:
       summary: List all cards
       operationId: get-cards
+      parameters:
+        - schema:
+            type: integer
+            default: 100
+            example: 1000
+            minimum: 0
+            maximum: 1000
+            format: int32
+          in: query
+          name: limit
+          description: The maximum number of items to return
+        - schema:
+            type: string
+            format: uuid
+            example: 9cd221af-a85e-46ed-8cfe-a1925194af8c
+          in: query
+          name: marker
+          description: |-
+            The marker that identifies the page of results to return.
+
+            For the first page of results, simply omit this parameter. For next pages, simply use the value returned by the API in the `next_marker` field.
       responses:
         '200':
           description: Returns a list of cards
@@ -571,10 +614,9 @@ paths:
                   maximum: 99999999
                   format: int64
                 close:
-                  type:
-                    - string
-                    - boolean
+                  type: boolean
                   description: 'Wether to close this authorization on capture, even if only a partial amount was captured.'
+                  example: true
               required:
                 - authorization_id
             examples:
@@ -586,6 +628,163 @@ paths:
                   authorization_id: 931b9b0c-dc95-4d45-b1fc-64966244ef74
                   partial_amount: 500
                   close: true
+  /transactions:
+    get:
+      summary: List all transactions
+      tags:
+        - Transactions
+      responses:
+        '200':
+          description: Returns a paginated list of transactions for an account.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transactions'
+              examples:
+                A list of transactions:
+                  value:
+                    items:
+                      - type: card
+                        id: 18d41625-16d5-40a8-bc92-16f5e1158e55
+                        status: created
+                        amount: 1299
+                        currency: USD
+                        authorization:
+                          type: transactions.authorizations
+                          id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
+                          status: closed
+                          amount: 1299
+                          card:
+                            type: card
+                            id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+                    limit: 100
+                    next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
+                    previous_page: null
+                An empty list of transactions:
+                  value:
+                    items: []
+                    limit: 100
+                    next_page: null
+                    previous_page: null
+        '401':
+          description: Returns an error if no valid authentication was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                An unauthorized request:
+                  value:
+                    type: error
+                    code: unauthorized
+                    status: 401
+                    message: No valid authentication found
+                    documentation_url: 'https://developer.gr4vy.com/errors/unauthorized'
+                    additional_context: null
+      operationId: get-transactions
+      description: Lists all transactions for an account.
+      parameters:
+        - schema:
+            type: integer
+            default: 100
+            example: 1000
+            minimum: 0
+            maximum: 1000
+            format: int32
+          in: query
+          name: limit
+          description: The maximum number of items to return
+        - schema:
+            type: string
+            format: uuid
+            example: 9cd221af-a85e-46ed-8cfe-a1925194af8c
+          in: query
+          name: marker
+          description: |-
+            The marker that identifies the page of results to return.
+
+            For the first page of results, simply omit this parameter. For next pages, simply use the value returned by the API in the `next_marker` field.
+    parameters: []
+  '/transactions/{transaction_id}':
+    parameters:
+      - schema:
+          type: string
+        name: transaction_id
+        in: path
+        required: true
+        description: The ID for the transaction to get the information for.
+    get:
+      summary: Get a transaction
+      tags:
+        - Transactions
+      responses:
+        '200':
+          description: Returns a transaction resource.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+              examples:
+                A transaction for a full amount:
+                  value:
+                    type: transaction
+                    id: 18d41625-16d5-40a8-bc92-16f5e1158e55
+                    status: created
+                    amount: 1299
+                    currency: USD
+                    authorization:
+                      type: transactions.authorizations
+                      id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
+                      status: closed
+                      amount: 1299
+                      card:
+                        type: card
+                        id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+        '401':
+          description: Returns an error if no valid authentication was provided.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                An unauthorized request:
+                  value:
+                    type: error
+                    code: unauthorized
+                    status: 401
+                    message: No valid authentication found
+                    documentation_url: 'https://developer.gr4vy.com/errors/unauthorized'
+                    additional_context: null
+        '404':
+          description: Returns an error if the transaction can not be found or has not yet been created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                Transaction not found:
+                  value:
+                    type: error
+                    code: not_found
+                    status: 404
+                    message: The resource could not be found
+                    documentation_url: 'https://developer.gr4vy.com/errors/not-found'
+                    additional_context: null
+                Transaction pending:
+                  value:
+                    type: error
+                    code: status_pending
+                    status: 404
+                    message: The resource is still pending
+                    documentation_url: 'https://developer.gr4vy.com/errors/status-pending'
+                    additional_context:
+                      type: status
+                      status: pending
+                      resource_type: transaction
+                      resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+      operationId: get-cards-id
+      description: 'Get a transaction. '
+      parameters: []
 components:
   schemas:
     Status:
@@ -913,7 +1112,7 @@ components:
           $ref: '#/components/schemas/Authorization'
       x-examples:
         Transaction for full amount:
-          type: card
+          type: transaction
           id: 18d41625-16d5-40a8-bc92-16f5e1158e55
           status: created
           amount: 1299
@@ -927,7 +1126,7 @@ components:
               type: card
               id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
         Transaction for partial amount:
-          type: card
+          type: transaction
           id: 18d41625-16d5-40a8-bc92-16f5e1158e55
           status: created
           amount: 500
@@ -980,7 +1179,18 @@ components:
         A list of transactions:
           items:
             - type: transaction
-              id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
+              id: 18d41625-16d5-40a8-bc92-16f5e1158e55
+              status: created
+              amount: 1299
+              currency: USD
+              authorization:
+                type: transactions.authorizations
+                id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
+                status: closed
+                amount: 1299
+                card:
+                  type: card
+                  id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
           limit: 100
           next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
           previous_page: null
