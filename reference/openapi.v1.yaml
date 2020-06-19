@@ -577,6 +577,15 @@ paths:
                   description: 'Wether to close this authorization on capture, even if only a partial amount was captured.'
               required:
                 - authorization_id
+            examples:
+              Capture an authorization:
+                value:
+                  authorization_id: 931b9b0c-dc95-4d45-b1fc-64966244ef74
+              Partially capture and close:
+                value:
+                  authorization_id: 931b9b0c-dc95-4d45-b1fc-64966244ef74
+                  partial_amount: 500
+                  close: true
 components:
   schemas:
     Status:
