@@ -492,7 +492,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Card'
               examples:
-                An approved transaction:
+                A created card:
                   value:
                     type: card
                     id: 6bbc3b97-4183-4145-839e-0f3624c9b7ce
@@ -613,6 +613,7 @@ paths:
                   minimum: 50
                   maximum: 99999999
                   format: int64
+                  example: 1299
                 close:
                   type: boolean
                   description: 'Wether to close this authorization on capture, even if only a partial amount was captured.'
@@ -1193,6 +1194,11 @@ components:
             - created
             - failure
           example: created
+      x-examples:
+        A stored card:
+          type: card
+          id: 87c5de1b-19af-4196-8acf-d31f23c59484
+          status: created
     Cards:
       title: Cards
       x-tags:
