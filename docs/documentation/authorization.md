@@ -37,8 +37,11 @@ To facilitate client-side authentication, a JWT token can be scoped to only be u
 Client-side JWT tokens are scoped to be shorter lived, and only allow access to a subset of the API. The key differences are:
 
 * `exp` - A shorter expiration time 
-* `
+* `??[apis]??` - A list of API endpoints that this JWT token is restricted to.
+* `??[amount/currency]??` - For a Hosted UI that handles auth/capture as well as the tokenization, this claim will restrict the JWT to be used only for a certain amount and a certain currency.
 
 ### Server-side JWT
+
+[TBD]
 
 
