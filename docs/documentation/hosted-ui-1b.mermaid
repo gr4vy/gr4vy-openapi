@@ -1,0 +1,42 @@
+sequenceDiagram
+  participant C as Customer (Browser)
+  participant M as Merchant API (Server)
+  participant H as Hosted UI <iframe>
+  participant G as Gr4vy API (Server)
+
+  C ->> M: Frontend JS requests JWT token
+  M ->> M: Create JWT scoped for client-side API calls
+  M ->> C: Pass JWT to frontend
+   
+  Note over C: Initialize Hosted UI component with JWT
+
+  C ->> H: JS loads <iframe> and passes JWT
+  Note over H: Render card form
+  H ->> C: Display card form to browser
+
+  Note over C: User fills in card details
+  Note over C: JS notifies any listeners when card is filled out
+  Note over C: Front-end renders "Submit" button
+  Note over C: Customer clicks button
+
+  C ->> H: JS notifies <iframe> to tokenize card
+  H ->> G: Tokenize the card details
+  Note over H,G: POST /cards - Authorization: Bearer [JWT]
+  G ->> H: Return Status resource
+  Note over G: Gr4vy processes card tokenization
+  H ->> C: Pass pending card ID to merchant UI
+
+  Note over C: JS notifies any listeners of card ID
+
+  C ->> M: API call including card ID
+  Note over M: Merchant stores checkout details (including card ID)
+  M ->> M: Create JWT scoped for server-side API calls
+  M ->> G: Create (and capture) an authorization
+  Note over M,G: POST /transactions/authorizations - Authorization: Bearer [JWT]
+  G ->> M: Return Status resource
+  Note over M: Waits for Pub/Sub message of authorization/transaction
+  Note over M: Merchant stores authorization/transaction details
+  M ->> C: Transaction details passed to front-end
+  Note over C: Front-end UI updates to show transaction details
+
+  
