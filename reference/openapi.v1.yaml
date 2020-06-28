@@ -88,9 +88,10 @@ paths:
             examples:
               Authorize a new card:
                 value:
-                  amount: '1299'
+                  amount: 1299
                   currency: USD
-                  card:
+                  payment_method_type: card
+                  payment_method:
                     number: '4111111111111111'
                     expiration_date: 11/2025
                     security_code: '123'
@@ -102,23 +103,35 @@ paths:
                     number: '01231231231231'
               Authorized and tokenize a card:
                 value:
-                  amount: '1299'
+                  amount: 1299
                   currency: USD
-                  card:
+                  payment_method_type: card
+                  payment_method:
                     number: '4111111111111111'
                     expiration_date: 11/2025
                     security_code: '123'
                     store: true
               'Authorize, capture, and tokenize a card':
                 value:
-                  amount: '1299'
+                  amount: 1299
                   currency: USD
-                  card:
+                  payment_method_type: card
+                  capture: true
+                  payment_method:
                     number: '4111111111111111'
                     expiration_date: 11/2025
                     security_code: '123'
                     store: true
-                  capture: true
+              Authorize PayPal:
+                value:
+                  amount: 1299
+                  currency: USD
+                  payment_method_type: paypal
+              Authorize BitCoin:
+                value:
+                  amount: 0.00399
+                  currency: USD
+                  payment_method_type: bitcoin
         description: ''
       parameters: []
     get:
@@ -160,11 +173,18 @@ paths:
                         id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
                         status: created
                         amount: 1299
-                        card:
+                        currency: USD
+                        payment_method:
                           type: card
                           id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+                          authorization_url: null
+                        provider_statuses:
+                          - id: stripe
+                            status: created
+                            error_code: null
+                            error_message: null
                     limit: 100
-                    next_page: '1593343179'
+                    next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
                     previous_page: null
         '401':
           description: Returns an error if no valid authentication was provided.
@@ -212,9 +232,16 @@ paths:
                     id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
                     status: created
                     amount: 1299
-                    card:
+                    currency: USD
+                    payment_method:
                       type: card
                       id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+                      authorization_url: null
+                    provider_statuses:
+                      - id: stripe
+                        status: created
+                        error_code: null
+                        error_message: null
         '401':
           description: Returns an error if no valid authentication was provided.
           content:
@@ -540,6 +567,7 @@ paths:
                 value:
                   authorization_id: 931b9b0c-dc95-4d45-b1fc-64966244ef74
                   amount: 1299
+                  currency: USD
           application/xml:
             schema:
               type: object
@@ -560,11 +588,21 @@ paths:
                 A list of transactions:
                   value:
                     items:
-                      - type: card
+                      - type: transaction
                         id: 18d41625-16d5-40a8-bc92-16f5e1158e55
                         status: created
+                        tansaction_status: pending
                         amount: 1299
                         currency: USD
+                        payment_method:
+                          type: card
+                          id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+                          authorization_url: null
+                        provider_statuses:
+                          - id: stripe
+                            status: pending
+                            error_code: null
+                            error_message: null
                     limit: 100
                     next_page: '1593343179'
                     previous_page: null
@@ -634,13 +672,57 @@ paths:
               schema:
                 $ref: '#/components/schemas/Transaction'
               examples:
-                A transaction for a full amount:
+                A card transaction:
                   value:
                     type: transaction
                     id: 18d41625-16d5-40a8-bc92-16f5e1158e55
                     status: created
+                    tansaction_status: pending
                     amount: 1299
                     currency: USD
+                    payment_method:
+                      type: card
+                      id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+                      authorization_url: null
+                    provider_statuses:
+                      - id: stripe
+                        status: pending
+                        error_code: null
+                        error_message: null
+                A PayPal transaction:
+                  value:
+                    type: transaction
+                    id: 18d41625-16d5-40a8-bc92-16f5e1158e55
+                    status: created
+                    tansaction_status: pending
+                    amount: 1299
+                    currency: USD
+                    payment_method:
+                      type: paypal
+                      id: null
+                      authorization_url: null
+                    provider_statuses:
+                      - id: paypal
+                        status: pending
+                        error_code: null
+                        error_message: null
+                A BitCoin transaction:
+                  value:
+                    type: transaction
+                    id: 18d41625-16d5-40a8-bc92-16f5e1158e55
+                    status: created
+                    tansaction_status: pending
+                    amount: 0.039999
+                    currency: USD
+                    payment_method:
+                      type: bitcoin
+                      id: null
+                      authorization_url: null
+                    provider_statuses:
+                      - id: paypal
+                        status: pending
+                        error_code: null
+                        error_message: null
         '401':
           description: Returns an error if no valid authentication was provided.
           content:
@@ -689,8 +771,6 @@ paths:
   /transactions/batch-capture:
     post:
       summary: Batch capture authorizations
-      tags:
-        - Authorizations
       responses:
         '202':
           description: 'Returns a list of status objects, one for each requested capture.'
@@ -699,24 +779,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/Statuses'
               examples:
-                A list of transactions:
+                A list of accepted capture requests:
                   value:
                     items:
-                      - type: transaction
-                        id: 18d41625-16d5-40a8-bc92-16f5e1158e55
-                        status: created
-                        amount: 1299
-                        currency: USD
-                        authorization:
-                          type: transactions.authorizations
-                          id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
-                          status: closed
-                          amount: 1299
-                          card:
-                            type: card
-                            id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+                      - type: status
+                        status: pending
+                        resource_type: transaction
+                        resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+                      - type: status
+                        status: pending
+                        resource_type: transaction
+                        resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+                      - type: status
+                        status: pending
+                        resource_type: transaction
+                        resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
                     limit: 100
-                    next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
+                    next_page: null
                     previous_page: null
         '400':
           description: 'Returns an error if the request is missing any required fields, or the request body is not valid JSON/CSV.'
@@ -756,6 +835,8 @@ paths:
                     message: No valid API authentication found
                     documentation_url: 'https://developer.gr4vy.com/errors/unauthorized'
                     additional_context: null
+        '403':
+          description: Forbidden
       operationId: post-transactions-batch-capture
       description: Takes a JSON or CSV list of authorization IDs and processes them as needed.
       requestBody:
@@ -767,28 +848,7 @@ paths:
                 items:
                   type: array
                   items:
-                    type: object
-                    properties:
-                      authorization_id:
-                        type: string
-                        description: The ID of the authorization to capture
-                        format: uuid
-                        example: 3d1748e5-16fa-468c-82ca-05f31252f515
-                      partial_amount:
-                        type: integer
-                        description: |-
-                          The (partial) amount to capture.
-
-                          When left blank, this will capture the entire amount.
-                        minimum: 50
-                        maximum: 99999999
-                        format: int64
-                      close:
-                        type: boolean
-                        description: 'Wether to close this authorization on capture, even if only a partial amount was captured.'
-                        example: true
-                    required:
-                      - authorization_id
+                    $ref: '#/components/schemas/Capture-Create'
             examples:
               Capture multiple authorizations:
                 value:
@@ -797,13 +857,15 @@ paths:
                       amount: 1299
                       currency: USD
                     - authorization_id: 272dee2b-2196-4e4e-acf7-e5983f1fdc61
-                      amount: 1299
-                      currency: USD
+                      amount: 199
+                      currency: GBP
                     - authorization_id: d3c096cd-33ad-4235-bba9-f2eb0ccb307d
-                      amount: 1299
-                      currency: USD
+                      amount: 0.0003999
+                      currency: BTC
         description: |
           The body of this API takes either a list of items as a JSON object, or a CSV file with each line representing an authorization request, and the headers representing the fields to process.
+      tags:
+        - Transactions
 components:
   schemas:
     Status:
@@ -889,7 +951,6 @@ components:
           status: 400
           message: The request body was not valid JSON.
           documentation_url: 'https://developer.gr4vy.com/errors/incorrect-json'
-          additional_context: null
       properties:
         type:
           type: string
@@ -925,10 +986,6 @@ components:
           description: A link to the developer documentation for this error.
           format: uri
           example: 'https://developer.gr4vy.com/errors/incorrect-json'
-        additional_context:
-          anyOf:
-            - $ref: '#/components/schemas/Status'
-          description: An optional status object that might be returned to showcase why an API can not return a resource (yet).
       required:
         - type
         - code
@@ -938,21 +995,64 @@ components:
     Authorization-Create:
       title: Authorization (Create)
       type: object
+      description: A request to create an authorization
+      x-examples:
+        'Authorize, store, and capture a card':
+          amount: 1299
+          currency: USD
+          payment_method_type: card
+          capture: true
+          payment_method:
+            number: '4111111111111111'
+            expiration_date: 11/2025
+            security_code: '123'
+            store: true
+        Create a PayPal authorization:
+          amount: 1299
+          currency: USD
+          payment_method_type: paypal
+        Create a Bitcoin authorization:
+          amount: 0.0039999
+          currency: BTC
+          payment_method_type: bitcoin
       properties:
         amount:
-          type: integer
-          format: int64
-          minimum: 50
-          exclusiveMinimum: false
-          maximum: 99999999
-          example: 1299
-          description: 'The monitary amount to create an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an autorization for `$12.99`.'
+          description: |-
+            The monitary amount to create an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an autorization for `$12.99`.
+
+            For BitCoin, this value will be a decimal point number, for example `0.0039`.
+          oneOf:
+            - type: number
+              format: double
+            - type: integer
+              format: int64
         currency:
           type: string
           example: USD
           description: A supported ISO-4217 currency code.
-        card:
-          allOf: []
+        payment_method_type:
+          type: string
+          description: The type of payment method to create an authorization for.
+          enum:
+            - card
+            - paypal
+            - bitcoin
+          example: card
+        payment_method:
+          oneOf:
+            - allOf:
+                - $ref: '#/components/schemas/Card-Create'
+                - type: object
+                  properties: {}
+                  children:
+                    - type: boolean
+                      name: store
+                      description: |-
+                        Wether or not to also try and store the card with us so that it can be used again for future use.
+
+                        If the `number` of this card represents a tokenized card, then this value is ignored.
+                      example: 'true'
+          description: The optional payment method details to create an authorization for. This field is required for processing a card.
         capture:
           type: boolean
           description: 'Wether a successful authorization should immediately be captured as well, effectively processing the payment directly.'
@@ -961,6 +1061,7 @@ components:
       required:
         - amount
         - currency
+        - payment_method_type
     Authorization:
       title: Authorization
       type: object
@@ -968,19 +1069,70 @@ components:
         - Authorizations
       description: Represents an authorization for a card. The authorization might have been approved or not.
       x-examples:
-        An approved authorization:
+        A created card authorization:
           type: transactions.authorizations
           id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
           status: created
           amount: 1299
-          card:
+          currency: USD
+          payment_method:
             type: card
             id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
-        An declined authorization:
+            authorization_url: null
+          provider_statuses:
+            - id: stripe
+              status: created
+              error_code: null
+              error_message: null
+        An fully declined card authorization:
           type: transactions.authorizations
           id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
-          status: declined
-          amount: null
+          status: error
+          amount: 1299
+          currency: USD
+          payment_method:
+            type: card
+            id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+            authorization_url: null
+          provider_statuses:
+            - id: stripe
+              status: error
+              error_code: declined
+              error_message: Authorization declined
+            - id: adyen
+              status: error
+              error_code: declined
+              error_message: Authorization declined
+        A created PayPal authorization:
+          type: transactions.authorizations
+          id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
+          status: created
+          amount: 1299
+          currency: USD
+          payment_method:
+            type: paypal
+            id: null
+            authorization_url: 'https://paypal.com....'
+          provider_statuses:
+            - id: paypal
+              status: created
+              error_code: null
+              error_message: null
+        A created Bitcoin authorization:
+          type: transactions.authorizations
+          id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
+          status: created
+          amount: 0.003999
+          currency: BTC
+          payment_method:
+            type: bitcoin
+            id: null
+            authorization_url: 'https://coinbase.com....'
+          provider_statuses:
+            - id: coinbase
+              status: created
+              error_code: null
+              error_message: null
       properties:
         type:
           type: string
@@ -999,8 +1151,7 @@ components:
           example: created
           enum:
             - created
-            - declined
-            - closed
+            - error
         amount:
           type: integer
           description: 'The monitary amount this authorization is for, in the smallest currency unit for the given currency, for example `1299` cents for `$12.99`.'
@@ -1012,13 +1163,21 @@ components:
           type: string
           description: A supported ISO-4217 currency code.
           example: USD
-        card:
-          $ref: '#/components/schemas/Card'
+        payment_method:
+          $ref: '#/components/schemas/PaymentMethod'
+        provider_statuses:
+          type: array
+          description: The status of each of the providers for which an attempt has been made to create this authorization.
+          items:
+            $ref: '#/components/schemas/ProviderStatus'
       required:
         - type
         - id
         - status
-        - card
+        - amount
+        - currency
+        - payment_method
+        - provider_statuses
     Authorizations:
       title: Authorizations
       x-tags:
@@ -1059,12 +1218,18 @@ components:
           items:
             - type: transactions.authorizations
               id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
-              approved: true
+              status: created
               amount: 1299
-              card:
+              currency: USD
+              payment_method:
                 type: card
                 id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
-              status: created
+                authorization_url: null
+              provider_statuses:
+                - id: stripe
+                  status: created
+                  error_code: null
+                  error_message: null
           limit: 100
           next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
           previous_page: null
@@ -1124,7 +1289,7 @@ components:
           example: user-789123
         provider_statuses:
           type: array
-          description: The unique identifiers of the providers where this card has been stored.
+          description: The status of each of the providers for which an attempt has been made to store this card with.
           uniqueItems: true
           items:
             $ref: '#/components/schemas/ProviderStatus'
@@ -1196,8 +1361,6 @@ components:
           previous_page: null
     Card-Create:
       title: Card (Create)
-      x-tags:
-        - Cards
       type: object
       properties:
         number:
@@ -1212,7 +1375,10 @@ components:
             If a card has been stored with us previously, this number will represent the unique tokenized card ID provided via our API.
         expiration_date:
           type: string
-          description: 'The expiration date of the card, formatted `MM/YYYY`. If a card has been previously stored with us this value is optional.'
+          description: |-
+            The expiration date of the card, formatted `MM/YYYY`. If a card has been previously stored with us this value is optional.
+
+            If the `number` of this card represents a tokenized card, then this value is ignored.
           example: 11/2015
           pattern: "^\\d\\d/\\d\\d\\d\\d$"
           minLength: 7
@@ -1222,7 +1388,7 @@ components:
           description: |-
             The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
 
-            If a card has been previously stored with us this value is optional.
+            If the `number` of this card represents a tokenized card, then this value is ignored.
           pattern: "^\\d{3,4}$"
           minLength: 3
           maxLength: 4
@@ -1232,24 +1398,67 @@ components:
           description: An external identifier that can be used by the merchant to match the card against their own records.
       required:
         - number
+      description: A request to store a card.
+      x-examples:
+        Store a new card:
+          number: '4111111111111111'
+          expiration_date: 11/2025
+          security_code: '123'
+          external_identifier: user-789123
     Transaction:
       title: Transaction
       type: object
       x-tags:
         - Transactions
       x-examples:
-        Transaction for full amount:
+        Card transaction:
           type: transaction
           id: 18d41625-16d5-40a8-bc92-16f5e1158e55
           status: created
+          tansaction_status: pending
           amount: 1299
           currency: USD
-        Transaction for partial amount:
+          payment_method:
+            type: card
+            id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+            authorization_url: null
+          provider_statuses:
+            - id: stripe
+              status: pending
+              error_code: null
+              error_message: null
+        PayPal transaction:
           type: transaction
           id: 18d41625-16d5-40a8-bc92-16f5e1158e55
           status: created
-          amount: 500
+          tansaction_status: pending
+          amount: 1299
           currency: USD
+          payment_method:
+            type: paypal
+            id: null
+            authorization_url: null
+          provider_statuses:
+            - id: paypal
+              status: pending
+              error_code: null
+              error_message: null
+        Bitcoin transaction:
+          type: transaction
+          id: 18d41625-16d5-40a8-bc92-16f5e1158e55
+          status: created
+          tansaction_status: pending
+          amount: 0.039999
+          currency: USD
+          payment_method:
+            type: bitcoin
+            id: null
+            authorization_url: null
+          provider_statuses:
+            - id: paypal
+              status: pending
+              error_code: null
+              error_message: null
       description: Captures a transaction.
       properties:
         type:
@@ -1280,6 +1489,18 @@ components:
           type: string
           example: USD
           description: The currency code for this transaction
+        transaction_status:
+          type: string
+          description: The status of the transaction being processed.
+        payment_method:
+          $ref: '#/components/schemas/PaymentMethod'
+        provider_statuses:
+          type: array
+          description: The status of each of the providers for which an attempt has been made to create this authorization.
+          items:
+            $ref: '#/components/schemas/ProviderStatus'
+      required:
+        - transaction_status
     Transactions:
       title: Transactions
       x-tags:
@@ -1321,8 +1542,18 @@ components:
             - type: transaction
               id: 18d41625-16d5-40a8-bc92-16f5e1158e55
               status: created
+              tansaction_status: pending
               amount: 1299
               currency: USD
+              payment_method:
+                type: card
+                id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+                authorization_url: null
+              provider_statuses:
+                - id: stripe
+                  status: pending
+                  error_code: null
+                  error_message: null
           limit: 100
           next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
           previous_page: null
@@ -1352,9 +1583,19 @@ components:
           example: 1299
         currency:
           type: string
+          description: |
+            A supported ISO-4217 currency code.
+          example: USD
       required:
         - authorization_id
         - amount
+        - currency
+      x-examples:
+        Capture a previously created autthorization:
+          authorization_id: 931b9b0c-dc95-4d45-b1fc-64966244ef74
+          amount: 1299
+          currency: USD
+      description: A request to capture a transaction
     ProviderStatus:
       title: Provider (Status)
       type: object
@@ -1389,7 +1630,7 @@ components:
             - created
             - error
           example: created
-        code:
+        error_code:
           type: string
           description: A custom code to further describe the type of error being returned. This code provides further specification within the HTTP `status` code and can be used by a program to define logic based on the error.
           enum:
@@ -1398,13 +1639,51 @@ components:
             - unauthorized
             - not_found
           example: incorrect_json
-        message:
+        error_message:
           type: string
           description: 'A human readable message that describes the error. The content of this field should not be used to determine any business logic. '
           example: The request body was not valid JSON.
       required:
         - id
         - status
+    PaymentMethod:
+      title: PaymentMethod
+      type: object
+      description: A generic object to hold payment method details.
+      x-examples:
+        A card payment method:
+          type: card
+          id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+          authorization_url: null
+        A PayPal payment method:
+          type: paypal
+          id: null
+          authorization_url: 'https://paypal.com.....'
+        A BitCoin payment method:
+          type: bitcoin
+          id: null
+          authorization_url: 'https://coinbase.com.....'
+      properties:
+        type:
+          type: string
+          description: The type of payment method
+          enum:
+            - card
+            - paypal
+            - bitcoin
+          example: card
+        id:
+          type: string
+          description: 'The optional ID of any stored payment method details, for example a stored `card` ID.'
+          format: uuid
+          example: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+        authorization_url:
+          type: string
+          format: uri
+          example: 'https://paypal.com.....'
+          description: The optional URL that needs to be presented to a consumer to allow them to approve the authorization.
+      required:
+        - type
   securitySchemes:
     BearerAuth:
       type: http
