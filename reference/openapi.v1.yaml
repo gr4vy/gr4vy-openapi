@@ -172,6 +172,7 @@ paths:
                       - type: transactions.authorizations
                         id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
                         status: created
+                        authorization_status: approved
                         amount: 1299
                         currency: USD
                         payment_method:
@@ -183,6 +184,8 @@ paths:
                             status: created
                             error_code: null
                             error_message: null
+                        created_at: '2013-07-16T19:23:03.000Z'
+                        updated_at: '2013-07-16T19:23:05.000Z'
                     limit: 100
                     next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
                     previous_page: null
@@ -231,6 +234,7 @@ paths:
                     type: transactions.authorizations
                     id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
                     status: created
+                    authorization_status: approved
                     amount: 1299
                     currency: USD
                     payment_method:
@@ -242,6 +246,8 @@ paths:
                         status: created
                         error_code: null
                         error_message: null
+                    created_at: '2013-07-16T19:23:03.000Z'
+                    updated_at: '2013-07-16T19:23:05.000Z'
         '401':
           description: Returns an error if no valid authentication was provided.
           content:
@@ -603,6 +609,7 @@ paths:
                             status: pending
                             error_code: null
                             error_message: null
+                        created_at: '2013-07-16T19:23:00.000Z'
                     limit: 100
                     next_page: '1593343179'
                     previous_page: null
@@ -689,6 +696,7 @@ paths:
                         status: pending
                         error_code: null
                         error_message: null
+                    created_at: '2013-07-16T19:23:00.000Z'
                 A PayPal transaction:
                   value:
                     type: transaction
@@ -706,6 +714,7 @@ paths:
                         status: pending
                         error_code: null
                         error_message: null
+                    created_at: '2013-07-16T19:23:00.000Z'
                 A BitCoin transaction:
                   value:
                     type: transaction
@@ -723,6 +732,7 @@ paths:
                         status: pending
                         error_code: null
                         error_message: null
+                    created_at: '2013-07-16T19:23:00.000Z'
         '401':
           description: Returns an error if no valid authentication was provided.
           content:
@@ -1015,6 +1025,8 @@ components:
           amount: 0.0039999
           currency: BTC
           payment_method_type: bitcoin
+      x-tags:
+        - Request Bodies
       properties:
         amount:
           description: |-
@@ -1043,15 +1055,14 @@ components:
             - allOf:
                 - $ref: '#/components/schemas/Card-Create'
                 - type: object
-                  properties: {}
-                  children:
-                    - type: boolean
-                      name: store
+                  properties:
+                    store:
+                      type: boolean
                       description: |-
                         Wether or not to also try and store the card with us so that it can be used again for future use.
 
                         If the `number` of this card represents a tokenized card, then this value is ignored.
-                      example: 'true'
+                      example: true
           description: The optional payment method details to create an authorization for. This field is required for processing a card.
         capture:
           type: boolean
@@ -1067,12 +1078,13 @@ components:
       type: object
       x-tags:
         - Authorizations
-      description: Represents an authorization for a card. The authorization might have been approved or not.
+      description: 'Represents an authorization for a payment method, either `card`, `paypal` or `bitcoin`. The  status of the uthorization might change over time.'
       x-examples:
         A created card authorization:
           type: transactions.authorizations
           id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
           status: created
+          authorization_status: approved
           amount: 1299
           currency: USD
           payment_method:
@@ -1084,10 +1096,13 @@ components:
               status: created
               error_code: null
               error_message: null
+          created_at: '2013-07-16T19:23:03.000Z'
+          updated_at: '2013-07-16T19:23:05.000Z'
         An fully declined card authorization:
           type: transactions.authorizations
           id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
           status: error
+          authorization_status: declined
           amount: 1299
           currency: USD
           payment_method:
@@ -1103,10 +1118,13 @@ components:
               status: error
               error_code: declined
               error_message: Authorization declined
+          created_at: '2013-07-16T19:23:03.000Z'
+          updated_at: '2013-07-16T19:23:05.000Z'
         A created PayPal authorization:
           type: transactions.authorizations
           id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
           status: created
+          authorization_status: pending
           amount: 1299
           currency: USD
           payment_method:
@@ -1118,10 +1136,13 @@ components:
               status: created
               error_code: null
               error_message: null
+          created_at: '2013-07-16T19:23:03.000Z'
+          updated_at: '2013-07-16T19:23:05.000Z'
         A created Bitcoin authorization:
           type: transactions.authorizations
           id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
           status: created
+          authorization_status: pending
           amount: 0.003999
           currency: BTC
           payment_method:
@@ -1133,6 +1154,8 @@ components:
               status: created
               error_code: null
               error_message: null
+          created_at: '2013-07-16T19:23:03.000Z'
+          updated_at: '2013-07-16T19:23:05.000Z'
       properties:
         type:
           type: string
@@ -1152,6 +1175,14 @@ components:
           enum:
             - created
             - error
+        authorization_status:
+          type: string
+          description: 'The overal status of this authorization, which might change after it has been created.'
+          example: declined
+          enum:
+            - approved
+            - declined
+            - revoked
         amount:
           type: integer
           description: 'The monitary amount this authorization is for, in the smallest currency unit for the given currency, for example `1299` cents for `$12.99`.'
@@ -1170,6 +1201,16 @@ components:
           description: The status of each of the providers for which an attempt has been made to create this authorization.
           items:
             $ref: '#/components/schemas/ProviderStatus'
+        created_at:
+          type: string
+          description: "The date and time \nwhen this authorization was created in our system."
+          format: date-time
+          example: '2013-07-16T19:23:00.000Z'
+        updated_at:
+          type: string
+          description: "The date and time \nwhen this authorization was last updated in our system."
+          format: date-time
+          example: '2013-07-16T19:23:00.000Z'
       required:
         - type
         - id
@@ -1219,6 +1260,7 @@ components:
             - type: transactions.authorizations
               id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
               status: created
+              authorization_status: approved
               amount: 1299
               currency: USD
               payment_method:
@@ -1230,6 +1272,9 @@ components:
                   status: created
                   error_code: null
                   error_message: null
+                  updated_at: '2013-07-16T19:23:05.000Z'
+              created_at: '2013-07-16T19:23:03.000Z'
+              updated_at: '2013-07-16T19:23:05.000Z'
           limit: 100
           next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
           previous_page: null
@@ -1248,7 +1293,7 @@ components:
           type: card
           id: 87c5de1b-19af-4196-8acf-d31f23c59484
           status: partially_created
-          created_at: '2013-07-16T19:23'
+          created_at: '2013-07-16T19:23:00.000Z'
           external_identifier: user-789123
           provider_statuses:
             - id: stripe
@@ -1282,7 +1327,7 @@ components:
           type: string
           description: "The date and time \nwhen this card was created in our system."
           format: date-time
-          example: '2013-07-16T19:23Z'
+          example: '2013-07-16T19:23:00.000Z'
         external_identifier:
           type: string
           description: An external identifier that can be used by the merchant to match the card against their own records.
@@ -1340,7 +1385,7 @@ components:
             - type: card
               id: 87c5de1b-19af-4196-8acf-d31f23c59484
               status: partially_created
-              created_at: '2013-07-16T19:23'
+              created_at: '2013-07-16T19:23:00.000Z'
               external_identifier: user-789123
               provider_statuses:
                 - id: stripe
@@ -1405,6 +1450,8 @@ components:
           expiration_date: 11/2025
           security_code: '123'
           external_identifier: user-789123
+      x-tags:
+        - Request Bodies
     Transaction:
       title: Transaction
       type: object
@@ -1427,6 +1474,7 @@ components:
               status: pending
               error_code: null
               error_message: null
+          created_at: '2013-07-16T19:23:00.000Z'
         PayPal transaction:
           type: transaction
           id: 18d41625-16d5-40a8-bc92-16f5e1158e55
@@ -1443,6 +1491,7 @@ components:
               status: pending
               error_code: null
               error_message: null
+          created_at: '2013-07-16T19:23:00.000Z'
         Bitcoin transaction:
           type: transaction
           id: 18d41625-16d5-40a8-bc92-16f5e1158e55
@@ -1459,6 +1508,7 @@ components:
               status: pending
               error_code: null
               error_message: null
+          created_at: '2013-07-16T19:23:00.000Z'
       description: Captures a transaction.
       properties:
         type:
@@ -1478,6 +1528,9 @@ components:
             - created
             - failure
           example: created
+        transaction_status:
+          type: string
+          description: The status of the transaction being processed.
         amount:
           type: integer
           description: The amount captured in this transaction
@@ -1489,9 +1542,6 @@ components:
           type: string
           example: USD
           description: The currency code for this transaction
-        transaction_status:
-          type: string
-          description: The status of the transaction being processed.
         payment_method:
           $ref: '#/components/schemas/PaymentMethod'
         provider_statuses:
@@ -1499,8 +1549,21 @@ components:
           description: The status of each of the providers for which an attempt has been made to create this authorization.
           items:
             $ref: '#/components/schemas/ProviderStatus'
+        created_at:
+          type: string
+          description: The date and time when this transaction was created in our system.
+          format: date-time
+          example: '2013-07-16T19:23:00.000Z'
       required:
+        - type
+        - id
+        - status
+        - amount
+        - currency
         - transaction_status
+        - payment_method
+        - provider_statuses
+        - created_at
     Transactions:
       title: Transactions
       x-tags:
@@ -1554,6 +1617,7 @@ components:
                   status: pending
                   error_code: null
                   error_message: null
+              created_at: '2013-07-16T19:23:00.000Z'
           limit: 100
           next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
           previous_page: null
@@ -1596,10 +1660,12 @@ components:
           amount: 1299
           currency: USD
       description: A request to capture a transaction
+      x-tags:
+        - Request Bodies
     ProviderStatus:
       title: Provider (Status)
       type: object
-      description: Represents the status of a record stored with a provider.
+      description: "Represents the status of a record stored with a provider. For example, a `card` resource might have muptiple provider statuses attached to it, representing the status of the card being stored with each provider. \n\nSimilarly, an `authorization` might contain multiple statuses to represent the list of providers that have been attempted too process the authorization before one was successful."
       x-examples:
         A record that has been stored with Stripe:
           id: stripe
