@@ -84,65 +84,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                amount:
-                  type: integer
-                  format: int64
-                  minimum: 50
-                  exclusiveMinimum: false
-                  maximum: 99999999
-                  example: 1299
-                  description: 'The monitary amount to create an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an autorization for `$12.99`.'
-                currency:
-                  type: string
-                  example: USD
-                  description: A supported ISO-4217 currency code.
-                card:
-                  type: object
-                  required:
-                    - number
-                  properties:
-                    number:
-                      type: string
-                      minLength: 14
-                      maxLength: 16
-                      example: '4111111111111111'
-                      pattern: '^[0-9]{14,16}$'
-                      description: |-
-                        The 15-16 digit number for this credit card as it can be found on the front of the card.
-
-                        If a card has been stored with us previously, this number will represent the unique tokenized card ID provided via our API.
-                    expiration_date:
-                      type: string
-                      description: 'The expiration date of the card, formatted `MM/YYYY`. If a card has been previously stored with us this value is optional.'
-                      example: 11/2015
-                      pattern: "^\\d\\d/\\d\\d\\d\\d$"
-                      minLength: 7
-                      maxLength: 7
-                    security_code:
-                      type: string
-                      description: |-
-                        The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
-
-                        If a card has been previously stored with us this value is optional.
-                      pattern: "^\\d{3,4}$"
-                      minLength: 3
-                      maxLength: 4
-                      example: '123'
-                    store:
-                      type: boolean
-                      description: Wether to also store the card and have it tokenized against your registered processors.
-                      example: true
-                capture:
-                  type: boolean
-                  description: 'Wether a successful authorization should immediately be captured as well, effectively processing the payment directly.'
-                  default: 'false'
-                  example: true
-              required:
-                - amount
-                - currency
-                - card
+              $ref: '#/components/schemas/Authorization-Create'
             examples:
               Authorize a new card:
                 value:
@@ -195,8 +137,8 @@ paths:
           description: The maximum number of items to return
         - schema:
             type: string
-            format: uuid
-            example: 9cd221af-a85e-46ed-8cfe-a1925194af8c
+            format: ''
+            example: '1593343179'
           in: query
           name: marker
           description: |-
@@ -222,7 +164,7 @@ paths:
                           type: card
                           id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
                     limit: 100
-                    next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
+                    next_page: '1593343179'
                     previous_page: null
         '401':
           description: Returns an error if no valid authentication was provided.
@@ -335,8 +277,8 @@ paths:
           description: The maximum number of items to return
         - schema:
             type: string
-            format: uuid
-            example: 9cd221af-a85e-46ed-8cfe-a1925194af8c
+            format: ''
+            example: '1593343179'
           in: query
           name: marker
           description: |-
@@ -355,10 +297,21 @@ paths:
                   value:
                     items:
                       - type: card
-                        id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
-                        status: created
+                        id: 87c5de1b-19af-4196-8acf-d31f23c59484
+                        status: partially_created
+                        created_at: '2013-07-16T19:23'
+                        external_identifier: user-789123
+                        provider_statuses:
+                          - id: stripe
+                            status: created
+                            error_code: null
+                            error_message: null
+                          - id: adyen
+                            status: error
+                            error_code: invalid_cvv
+                            error_message: CVV could not be validated
                     limit: 100
-                    next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
+                    next_page: '1593343179'
                     previous_page: null
         '401':
           description: Returns an error if no valid authentication was provided.
@@ -377,7 +330,7 @@ paths:
                     additional_context: null
       description: Returns a list of cards
       tags:
-        - Authorizations
+        - Cards
     post:
       summary: Register a card
       tags:
@@ -435,41 +388,14 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                number:
-                  type: string
-                  minLength: 14
-                  maxLength: 16
-                  example: '4111111111111111'
-                  pattern: '^[0-9]{14,16}$'
-                  description: |-
-                    The 15-16 digit number for this credit card as it can be found on the front of the card.
-
-                    If a card has been stored with us previously, this number will represent the unique tokenized card ID provided via our API.
-                expiration_date:
-                  type: string
-                  description: 'The expiration date of the card, formatted `MM/YYYY`. If a card has been previously stored with us this value is optional.'
-                  example: 11/2015
-                  pattern: "^\\d\\d/\\d\\d\\d\\d$"
-                  minLength: 7
-                  maxLength: 7
-                security_code:
-                  type: string
-                  description: |-
-                    The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
-
-                    If a card has been previously stored with us this value is optional.
-                  pattern: "^\\d{3,4}$"
-                  minLength: 3
-                  maxLength: 4
-                  example: '123'
+              $ref: '#/components/schemas/Card-Create'
             examples:
               Tokenize a card:
                 value:
                   number: '4111111111111111'
                   expiration_date: 11/2025
                   security_code: '123'
+                  external_identifier: user-789123
   '/cards/{card_id}':
     parameters:
       - schema:
@@ -492,11 +418,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/Card'
               examples:
-                A created card:
+                A stored card:
                   value:
                     type: card
-                    id: 6bbc3b97-4183-4145-839e-0f3624c9b7ce
-                    status: created
+                    id: 87c5de1b-19af-4196-8acf-d31f23c59484
+                    status: partially_created
+                    created_at: '2013-07-16T19:23'
+                    external_identifier: user-789123
+                    provider_statuses:
+                      - id: stripe
+                        status: created
+                        error_code: null
+                        error_message: null
+                      - id: adyen
+                        status: error
+                        error_code: invalid_cvv
+                        error_message: CVV could not be validated
         '401':
           description: Returns an error if no valid authentication was provided.
           content:
@@ -597,38 +534,12 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                authorization_id:
-                  type: string
-                  description: The ID of the authorization to capture
-                  format: uuid
-                  example: 3d1748e5-16fa-468c-82ca-05f31252f515
-                partial_amount:
-                  type: integer
-                  description: |-
-                    The (partial) amount to capture.
-
-                    When left blank, this will capture the entire amount.
-                  minimum: 50
-                  maximum: 99999999
-                  format: int64
-                  example: 1299
-                close:
-                  type: boolean
-                  description: 'Wether to close this authorization on capture, even if only a partial amount was captured.'
-                  example: true
-              required:
-                - authorization_id
+              $ref: '#/components/schemas/Capture-Create'
             examples:
               Capture an authorization:
                 value:
                   authorization_id: 931b9b0c-dc95-4d45-b1fc-64966244ef74
-              Partially capture and close:
-                value:
-                  authorization_id: 931b9b0c-dc95-4d45-b1fc-64966244ef74
-                  partial_amount: 500
-                  close: true
+                  amount: 1299
           application/xml:
             schema:
               type: object
@@ -654,16 +565,8 @@ paths:
                         status: created
                         amount: 1299
                         currency: USD
-                        authorization:
-                          type: transactions.authorizations
-                          id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
-                          status: closed
-                          amount: 1299
-                          card:
-                            type: card
-                            id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
                     limit: 100
-                    next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
+                    next_page: '1593343179'
                     previous_page: null
                 An empty list of transactions:
                   value:
@@ -701,14 +604,15 @@ paths:
           description: The maximum number of items to return
         - schema:
             type: string
-            format: uuid
-            example: 9cd221af-a85e-46ed-8cfe-a1925194af8c
+            example: '1593343179'
           in: query
           name: marker
           description: |-
-            The marker that identifies the page of results to return.
+            The marker that identifies the offsett for the page of results to return.
 
             For the first page of results, simply omit this parameter. For next pages, simply use the value returned by the API in the `next_marker` field.
+
+            A marker is an opague string that is only meaningful to ur API. No additional value can be ascribed to this value.
     parameters: []
   '/transactions/{transaction_id}':
     parameters:
@@ -737,14 +641,6 @@ paths:
                     status: created
                     amount: 1299
                     currency: USD
-                    authorization:
-                      type: transactions.authorizations
-                      id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
-                      status: closed
-                      amount: 1299
-                      card:
-                        type: card
-                        id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
         '401':
           description: Returns an error if no valid authentication was provided.
           content:
@@ -898,36 +794,16 @@ paths:
                 value:
                   items:
                     - authorization_id: 931b9b0c-dc95-4d45-b1fc-64966244ef74
-                      partial_amount: 500
-                      close: true
+                      amount: 1299
+                      currency: USD
                     - authorization_id: 272dee2b-2196-4e4e-acf7-e5983f1fdc61
-                      partial_amount: 1299
+                      amount: 1299
+                      currency: USD
                     - authorization_id: d3c096cd-33ad-4235-bba9-f2eb0ccb307d
-          text/csv:
-            schema:
-              type: array
-              description: 'A list of comma seperated values, the first row of which represents the field names for an authrorization.'
-              minItems: 1
-              maxItems: 1000
-              uniqueItems: false
-              items:
-                type: array
-                description: 'A list of comma seperated values, the first row of which represents the field names for an authrorization.'
-                items:
-                  type: string
-                  example: 'authorization_id, partial_amount, close'
-            examples: {}
+                      amount: 1299
+                      currency: USD
         description: |
           The body of this API takes either a list of items as a JSON object, or a CSV file with each line representing an authorization request, and the headers representing the fields to process.
-
-          For the CSV request, set the `content-type` to `text/csv` and provide the body as a CSV with the first row representing the names of the JSON parameters, for example:
-
-          ```
-          authorization_id, partial_amount, close
-          931b9b0c-dc95-4d45-b1fc-64966244ef74, 500, true
-          272dee2b-2196-4e4e-acf7-e5983f1fdc61, 1299
-          d3c096cd-33ad-4235-bba9-f2eb0ccb307d
-          ```
 components:
   schemas:
     Status:
@@ -1059,6 +935,32 @@ components:
         - status
         - message
         - documentation_url
+    Authorization-Create:
+      title: Authorization (Create)
+      type: object
+      properties:
+        amount:
+          type: integer
+          format: int64
+          minimum: 50
+          exclusiveMinimum: false
+          maximum: 99999999
+          example: 1299
+          description: 'The monitary amount to create an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an autorization for `$12.99`.'
+        currency:
+          type: string
+          example: USD
+          description: A supported ISO-4217 currency code.
+        card:
+          allOf: []
+        capture:
+          type: boolean
+          description: 'Wether a successful authorization should immediately be captured as well, effectively processing the payment directly.'
+          default: 'false'
+          example: true
+      required:
+        - amount
+        - currency
     Authorization:
       title: Authorization
       type: object
@@ -1176,6 +1078,22 @@ components:
       type: object
       x-tags:
         - Cards
+      x-examples:
+        A stored card:
+          type: card
+          id: 87c5de1b-19af-4196-8acf-d31f23c59484
+          status: partially_created
+          created_at: '2013-07-16T19:23'
+          external_identifier: user-789123
+          provider_statuses:
+            - id: stripe
+              status: created
+              error_code: null
+              error_message: null
+            - id: adyen
+              status: error
+              error_code: invalid_cvv
+              error_message: CVV could not be validated
       properties:
         type:
           type: string
@@ -1192,13 +1110,30 @@ components:
           description: Wether this card was successfully created or not.
           enum:
             - created
-            - failure
+            - error
+            - partially_created
           example: created
-      x-examples:
-        A stored card:
-          type: card
-          id: 87c5de1b-19af-4196-8acf-d31f23c59484
-          status: created
+        created_at:
+          type: string
+          description: "The date and time \nwhen this card was created in our system."
+          format: date-time
+          example: '2013-07-16T19:23Z'
+        external_identifier:
+          type: string
+          description: An external identifier that can be used by the merchant to match the card against their own records.
+          example: user-789123
+        provider_statuses:
+          type: array
+          description: The unique identifiers of the providers where this card has been stored.
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/ProviderStatus'
+      required:
+        - type
+        - id
+        - status
+        - created_at
+        - provider_statuses
     Cards:
       title: Cards
       x-tags:
@@ -1238,7 +1173,19 @@ components:
         A list of cards:
           items:
             - type: card
-              id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
+              id: 87c5de1b-19af-4196-8acf-d31f23c59484
+              status: partially_created
+              created_at: '2013-07-16T19:23'
+              external_identifier: user-789123
+              provider_statuses:
+                - id: stripe
+                  status: created
+                  error_code: null
+                  error_message: null
+                - id: adyen
+                  status: error
+                  error_code: invalid_cvv
+                  error_message: CVV could not be validated
           limit: 100
           next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
           previous_page: null
@@ -1247,11 +1194,63 @@ components:
           limit: 100
           next_page: null
           previous_page: null
+    Card-Create:
+      title: Card (Create)
+      x-tags:
+        - Cards
+      type: object
+      properties:
+        number:
+          type: string
+          minLength: 14
+          maxLength: 16
+          example: '4111111111111111'
+          pattern: '^[0-9]{14,16}$'
+          description: |-
+            The 15-16 digit number for this credit card as it can be found on the front of the card.
+
+            If a card has been stored with us previously, this number will represent the unique tokenized card ID provided via our API.
+        expiration_date:
+          type: string
+          description: 'The expiration date of the card, formatted `MM/YYYY`. If a card has been previously stored with us this value is optional.'
+          example: 11/2015
+          pattern: "^\\d\\d/\\d\\d\\d\\d$"
+          minLength: 7
+          maxLength: 7
+        security_code:
+          type: string
+          description: |-
+            The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
+
+            If a card has been previously stored with us this value is optional.
+          pattern: "^\\d{3,4}$"
+          minLength: 3
+          maxLength: 4
+          example: '123'
+        external_identifier:
+          type: string
+          description: An external identifier that can be used by the merchant to match the card against their own records.
+      required:
+        - number
     Transaction:
       title: Transaction
       type: object
       x-tags:
         - Transactions
+      x-examples:
+        Transaction for full amount:
+          type: transaction
+          id: 18d41625-16d5-40a8-bc92-16f5e1158e55
+          status: created
+          amount: 1299
+          currency: USD
+        Transaction for partial amount:
+          type: transaction
+          id: 18d41625-16d5-40a8-bc92-16f5e1158e55
+          status: created
+          amount: 500
+          currency: USD
+      description: Captures a transaction.
       properties:
         type:
           type: string
@@ -1281,38 +1280,6 @@ components:
           type: string
           example: USD
           description: The currency code for this transaction
-        authorization:
-          $ref: '#/components/schemas/Authorization'
-      x-examples:
-        Transaction for full amount:
-          type: transaction
-          id: 18d41625-16d5-40a8-bc92-16f5e1158e55
-          status: created
-          amount: 1299
-          currency: USD
-          authorization:
-            type: transactions.authorizations
-            id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
-            status: closed
-            amount: 1299
-            card:
-              type: card
-              id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
-        Transaction for partial amount:
-          type: transaction
-          id: 18d41625-16d5-40a8-bc92-16f5e1158e55
-          status: created
-          amount: 500
-          currency: USD
-          authorization:
-            type: transactions.authorizations
-            id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
-            status: created
-            amount: 1299
-            card:
-              type: card
-              id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
-      description: Captures a transaction.
     Transactions:
       title: Transactions
       x-tags:
@@ -1356,14 +1323,6 @@ components:
               status: created
               amount: 1299
               currency: USD
-              authorization:
-                type: transactions.authorizations
-                id: 589997b2-0d5f-4717-9138-2ff13d62b3c5
-                status: closed
-                amount: 1299
-                card:
-                  type: card
-                  id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
           limit: 100
           next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
           previous_page: null
@@ -1372,6 +1331,80 @@ components:
           limit: 100
           next_page: null
           previous_page: null
+    Capture-Create:
+      title: Capture (Create)
+      type: object
+      properties:
+        authorization_id:
+          type: string
+          description: The ID of the authorization to capture
+          format: uuid
+          example: 3d1748e5-16fa-468c-82ca-05f31252f515
+        amount:
+          type: integer
+          description: |-
+            The (partial) amount to capture.
+
+            When left blank, this will capture the entire amount.
+          minimum: 50
+          maximum: 99999999
+          format: int64
+          example: 1299
+        currency:
+          type: string
+      required:
+        - authorization_id
+        - amount
+    ProviderStatus:
+      title: Provider (Status)
+      type: object
+      description: Represents the status of a record stored with a provider.
+      x-examples:
+        A record that has been stored with Stripe:
+          id: stripe
+          status: created
+          error_code: null
+          error_message: null
+        A record that has not been stored with Adyen:
+          id: adyen
+          status: error
+          error_code: invalid_cvv
+          error_message: CVV could not be validated
+      properties:
+        id:
+          type: string
+          description: |
+            The short name of the provider.
+          enum:
+            - stripe
+            - adyen
+            - worldpay
+            - braintree
+          example: stripe
+        status:
+          type: string
+          description: The status of the record being created with a provider.
+          enum:
+            - pending
+            - created
+            - error
+          example: created
+        code:
+          type: string
+          description: A custom code to further describe the type of error being returned. This code provides further specification within the HTTP `status` code and can be used by a program to define logic based on the error.
+          enum:
+            - incorrect_json
+            - bad_request
+            - unauthorized
+            - not_found
+          example: incorrect_json
+        message:
+          type: string
+          description: 'A human readable message that describes the error. The content of this field should not be used to determine any business logic. '
+          example: The request body was not valid JSON.
+      required:
+        - id
+        - status
   securitySchemes:
     BearerAuth:
       type: http
