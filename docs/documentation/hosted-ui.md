@@ -18,19 +18,19 @@ These are a few proposals on how a Hosted UI could work with the Gr4vy API.
 
 This form tokenizes a card in a Hosted UI, and then passes the card ID back to the page that loaded the Hosted UI. This card ID is then submitted to the merchant server, where the merchant can then process the card and create and capture an authorization. 
 
-![Proposal 1a](../../assets/images/hosted-ui-1a-mermaid.png)
+![Proposal 1a](./hosted-ui-1a-mermaid.png)
 
 ### 1b. Simplified hosted tokenization for React
 
 The following flow is a slightly simplified example of the Hosted UI that assumes a customer uses something like React in their front-end, and treats their own server as an API.
 
-![Proposal 1b](../../assets/images/hosted-ui-1b-mermaid.png)
+![Proposal 1b](./hosted-ui-1b-mermaid.png)
 
 ### 2. Hosted tokenization, authorization, and capture
 
 The following flow is an example where the UI handles both the tokenization, authorization,  and capture. This example requires the least effort on the side of the customer. 
 
-![Proposal 2](../../assets/images/hosted-ui-2-mermaid.png)
+![Proposal 2](./hosted-ui-2-mermaid.png)
 
 In this flow, all the merchant has to do is:
 
