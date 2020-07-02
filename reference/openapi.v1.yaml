@@ -1069,6 +1069,9 @@ components:
           description: 'Wether a successful authorization should immediately be captured as well, effectively processing the payment directly.'
           default: 'false'
           example: true
+        external_identifier:
+          type: string
+          description: An external identifier that can be used by the merchant to match the authorization against their own records.
       required:
         - amount
         - currency
@@ -1211,6 +1214,10 @@ components:
           description: "The date and time \nwhen this authorization was last updated in our system."
           format: date-time
           example: '2013-07-16T19:23:00.000Z'
+        external_identifier:
+          type: string
+          description: An external identifier that can be used by the merchant to match the authorization against their own records.
+          example: user-789123
       required:
         - type
         - id
@@ -1554,6 +1561,10 @@ components:
           description: The date and time when this transaction was created in our system.
           format: date-time
           example: '2013-07-16T19:23:00.000Z'
+        external_identifier:
+          type: string
+          description: An external identifier that can be used by the merchant to match the authorization against their own records.
+          example: user-789123
       required:
         - type
         - id
@@ -1650,6 +1661,9 @@ components:
           description: |
             A supported ISO-4217 currency code.
           example: USD
+        external_identifier:
+          type: string
+          description: An external identifier that can be used by the merchant to match the capture against their own records.
       required:
         - authorization_id
         - amount
