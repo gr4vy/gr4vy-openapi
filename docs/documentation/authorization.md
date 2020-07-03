@@ -72,7 +72,7 @@ A client-side JWT would look something like this, based on the list above.
   "jti": "1FE269211...",
   "transaction": {
     "correlation_id": "D1223FDE...",
-    "amount" 1299,
+    "amount": 1299,
     "currency": "USD" 
   },
   "allowed_endpoints": [
