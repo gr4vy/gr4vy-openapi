@@ -1,4 +1,4 @@
-# Hosted UI integration & API calls
+# Card Form vs Checkout integration details
 
 The following is an example of how the hosted UI will be used by customers.
 
