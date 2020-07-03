@@ -17,7 +17,9 @@ const client = new Gr4vy({
   privateKeyFileName: './private.key' 
 })
 
-const token = client.frontend.token()
+const token = client.frontend.token({
+  permissions: Gr4vy.CARD_FORM_PERMISSIONS
+})
 ```
 
 > These examples are in JS but the same principles apply in other languages.
@@ -30,7 +32,7 @@ Next, the merchant inject this token into their front-end. They then load our ho
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="https://merchant.cdn.gr4vy.com/hosted-ui-v1.0.min.js"></script>
+  <script src="https://merchant.cdn.gr4vy.com/gr4vy-card-form-1.0.min.js"></script>
 </head>
 <body>
   <form action="/process" method="POST">
@@ -59,15 +61,15 @@ This will embed the UI in an `iframe` in a page as follows.
 
 Once the customer fills in the form and submits the form, the following will happen.
 
-1. `hosted-ui-v1.0.min.js` intercepts the form submission and cancels it
-2. `hosted-ui-v1.0.min.js` then notifies the `iframe` of the form submission
+1. `gr4vy-card-form-1.0.min.js` intercepts the form submission and cancels it
+2. `gr4vy-card-form-1.0.min.js` then notifies the `iframe` of the form submission
 3. The `iframe` then gathers all the card details and sends them to the API 
    * `POST /cards` with an authorization header `Authorization: bearer [token]` where `[token]` is the JWT token generated in step `1a.1`
 4. The `iframe` receives a `Status` object with a new `card.id`.
 5. The `iframe` uses websockets or polling to wait for the `card` to be created fully
-6. The `iframe` notifies `hosted-ui-v1.0.min.js` of the new `card.id` once it has been fully created
-7. The `hosted-ui-v1.0.min.js` inserts a the `card.id` into the form as a new hidden `input`
-8. The ``hosted-ui-v1.0.min.js` submits the form and the page redirects to the `form`'s `action` URL.
+6. The `iframe` notifies `gr4vy-card-form-1.0.min.js` of the new `card.id` once it has been fully created
+7. The `gr4vy-card-form-1.0.min.js` inserts a the `card.id` into the form as a new hidden `input`
+8. The ``gr4vy-card-form-1.0.min.js` submits the form and the page redirects to the `form`'s `action` URL.
 
 > Question: does the hosted UI **need** to wait for the card to be created?
 
@@ -116,7 +118,9 @@ const client = new Gr4vy({
 // accessed by their own frontend, for example cookies
 app.get('/token', function (req, res) {
   res.json({
-    token: client.frontend.token()
+    token: client.frontend.token({
+      permissions: Gr4vy.CARD_FORM_PERMISSIONS
+    })
   })
 })
 ```
@@ -235,19 +239,156 @@ app.post('/process', async function (req, res) {
 
 ## 2. Drop-in UI for tokenization, authorization, and capture
 
-[TBD]
+This creates an entire auth/capture in the Hosted UI, and then passes the transaction ID back to the page that loaded the Hosted UI. This transaction ID is then submitted to the merchant server, who can then show the transaction status to the customer.
+
+### 2.1 - Merchant generates JWT (Server)
+
+The merchant generates a front-end specific signed JWT token on their server-side and shares this with the frontend.
+
+```js
+import Gr4vy from 'gr4vy'
+
+const client = new Gr4vy({ 
+  privateKeyFileName: './private.key' 
+})
+
+const token = client.frontend.token({
+  permissions: Gr4vy.CHECKOUT_FORM_PERMISSIONS,
+  amount: 1299,
+  currency: 'USD'
+})
+```
+
+> The amount and currency here are used to limit the token to only allow it to create transactions for those details. This prevents the token from being intercepted and used to create more transactions.
+
+### 2.2 - Merchant uses JWT token to initialize the drop-in UI
+
+Next, the merchant inject this token into their front-end. They then load our hosted UI library and initializes it, This embeds the check out form inside the form.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://merchant.cdn.gr4vy.com/gr4vy-checkout-form-1.0.min.js"></script>
+</head>
+<body>
+  <form action="/process" method="POST">
+    <div id='checkout' />
+  </form>
+  <script>
+    gr4vy.setup({
+      token: <%= token %>,
+      element: 'checkout',
+      amount: 1299,
+      currency: "USD"
+    })
+  </script>
+</body>
+</html>
+```
+
+> The `<%= token %>` here inserts the server-side generated token into the page. This will be different depending on the language used.
+
+This will embed the UI in an `iframe` in the page.
+
+### 2.3 Consumer fills in details and submits form
+
+> This is code implemented by Gr4vy, not the merchant
+
+Once the customer fills in the credit card details submits the form, the following will happen.
+
+1. `gr4vy-checkout-form-1.0.min.js` intercepts the form submission and cancels it
+2. `gr4vy-checkout-form-1.0.min.js` then notifies the `iframe` of the form submission
+3. The `iframe` then gathers all the card details as well as the authorization details and sends them to the API 
+   * `POST /transactions/authorizations` with an authorization header `Authorization: bearer [token]` where `[token]` is the JWT token generated in step `2.1`
+4. The `iframe` receives a `Status` object with a new `transaction.id`.
+5. The `iframe` uses websockets or polling to wait for the `transaction` to be created fully
+6. The `iframe` notifies `gr4vy-checkout-form-1.0.min.js` of the new `transaction.id` once it has been fully created
+7. The `gr4vy-checkout-form-1.0.min.js` inserts a the `transaction.id` into the form as a new hidden `input`
+8. The `gr4vy-checkout-form-1.0.min.js` submits the form and the page redirects to the `form`'s `action` URL.
+
+> Question: does the hosted UI **need** to wait for the card to be created?
+
+### 2.4 Merchant uses card for transaction
+
+The merchant can now use the `transaction.id` to pull up some transaction details if needed.
+
+```js
+app.post('/process', async function (req, res) {
+  const transactions_id = req.body.transactions_id
+
+  // get the transaction status 
+  const transaction = await client.transactions.get({ id: transactions_id })
+
+  if (transaction.status === 'created') {
+    // redirect to the order page
+    res.redirect(...)
+  } else {
+    // redirect to an error page
+    res.redirect(...)
+  }
+
+})
+```
+
+> Obviously all of this can work the React-satyle way as well, or by assigning listeners to the frontend `gr4vy` object.
 
 ## 3. Check-out button
 
-[TBD]
+The following flow is an example where a merchant only has to implement a button on their site, and capturing the card details, authorization, and capture happens on a Gr4vy hosted page.
 
+### 3.1 Merchant renders a page with a checkout link
 
+The merchant simply renders a page that passes details to the checkout page.
 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
+  <a href="https://merchant.app.gr4vy.com/checkout?amount=1299&currency=USD&redirect_url=....">
+    Checkout
+  </a>
+</body>
+</html>
+```
 
+### 3.2 Checkout server creates a Gr4vy 
 
+> This is code implemented by Gr4vy, not the merchant
 
+When the customer clicks on the link, they are redirected to a HTML page hosted on the merchant's Gr4vy cluster. This cluster will create a JWT and render the hosted UI much like we did in `1b`. Because the merchant's private key is only know to them, this JWT will need to be signed by a different key. 
 
+> Not sure what we should call this but it means the API needs to support multiple keys for a JWT.
 
+```js
+import Gr4vy from 'gr4vy'
 
+const client = new Gr4vy({ 
+  privateKeyFileName: './gr4vyMerchantPrivate.key' 
+})
 
+const token = client.frontend.token({
+  permissions: Gr4vy.CHECKOUT_FORM_PERMISSIONS,
+  // these are the query params defined in the button that 
+  // directed to this page
+  amount: req.params.amount,
+  currency: req.params.usd
+})
+```
 
+> Yes, I know we use Python. Read this as pseudo-code please.
+
+### 3.3 Gr4vy renders checkout form
+
+> This is code implemented by Gr4vy, not the merchant
+
+I am not going to show this, as it's probably going to be React based and is not important. 
+
+### 3.4 Consumer fills in details and submits form
+
+> This is code implemented by Gr4vy, not the merchant
+
+Once the customer fills in the credit card details and submits the form, most of the same as in `1b.3` will happen, but instead of the merchant hosting the form, we simply host the same UI on a Gr4vy hosted page.
+
+At the end, the form redirects the user back to the `redirect_url` defined in the original checkout
