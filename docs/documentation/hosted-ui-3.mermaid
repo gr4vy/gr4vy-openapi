@@ -1,0 +1,48 @@
+sequenceDiagram
+  participant C as Customer (Browser)
+  participant S as Merchant
+  participant M as Gr4vy (Checkout)
+  participant H as Gr4vy (Hosted UI)
+  participant G as Gr4vy (API)
+
+  C ->> S: Customer visits merchant
+  S ->> C: Render HTML button
+  Note over C: Button is a simple link
+  Note over C: Button link can set amount, external ID, redirect URL
+  Note over C: Customer clicks button
+  C ->> M: Browser redirects to checkout page
+
+  M ->> M: Create tightly scoped JWT signed by Gr4vy public key
+  Note over M: JWT will only allow exact amount and currency
+  Note over M: JWT will only allow POST to /transactions/authorizations
+  M ->> C: Pass JWT to front-end JS 
+   
+  Note over C: Initialize Hosted UI with JWT
+  Note over C: Config will include redirect URL for after completion
+
+  C ->> H: JS loads <iframe> and passes JWT
+  Note over H: Render transaction/card form 
+  Note over H: Render transaction details (amount, currency) 
+  Note over H: Subscribe to Pub/Sub using JWT
+  H ->> C: Display card form to browser
+
+  Note over C: Customer fills in card details
+  Note over C: Customer checks transaction details
+
+  C ->> H: User clicks submit button in hosted UI
+  H ->> G: Tokenize, authorize, and capture
+  Note over H,G: POST /transactions/authorizations - Authorization: Bearer [JWT]
+  G ->> H: Return Status for pending transaction
+  Note over H: UI waits for Pub/Sub message
+  Note over G: Gr4vy processes auth/capture
+  G ->> H: Pub/Sub notification of transaction details
+  G ->> S: Pub/Sub notification of transaction details
+  Note over S: (Optional) Merchant stores transactiond details
+
+  H ->> C: Pass transaction ID to frontend
+  Note over C: JS redirects to redirect URL page
+  Note over C: Transaction ID is POST'ed as part of redirect
+  C ->> S: Redirect to transaction page
+  Note over S: Merchant shows generic post-transaction page
+  S ->> C: Display transaction details to user
+  

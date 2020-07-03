@@ -40,4 +40,13 @@ In this flow, all the merchant has to do is:
 4. Create a page to redirec to after the transaction is complete 
 
 
+### 3. Check-out button
+
+The following flow is an example where a merchant only has to implement a button on their site, and capturing the card details, authorization, and capture happens on a Gr4vy hosted page.
+
+![Proposal 3](https://youthful-mirzakhani-e4ae8f.netlify.app/hosted-ui-3-mermaid.png)
+
+In this flow, all the merchant has to do is:
+
+1. Put a small piece of HTML on their page that links to their checkout page with an amount.
 
