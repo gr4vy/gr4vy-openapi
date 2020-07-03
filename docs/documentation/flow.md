@@ -212,7 +212,7 @@ const CardFormController = () => {
 export default CardFormController
 ```
 
-### 1b.4 Merchant uses card for transaction
+### 1b.5 Merchant uses card for transaction
 
 The merchant now uses the new `card.id` to create a transaction. They first create the transaction, and immediately return the status to the frontend.
 
