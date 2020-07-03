@@ -14,19 +14,19 @@ A **Hosted UI** is a piece of frontend HTML, CSS, and JS that is loaded into a m
 
 These are a few proposals on how a Hosted UI could work with the Gr4vy API.
 
-### 1a. Hosted tokenization + submission of form
+### 1a. Drop-in UI for tokenization inside a form
 
 This form tokenizes a card in a Hosted UI, and then passes the card ID back to the page that loaded the Hosted UI. This card ID is then submitted to the merchant server, where the merchant can then process the card and create and capture an authorization. 
 
 ![Proposal 1a](https://youthful-mirzakhani-e4ae8f.netlify.app/hosted-ui-1a-mermaid.png)
 
-### 1b. Simplified hosted tokenization for React
+### 1b. Drop-in UI for tokenization with React
 
 The following flow is a slightly simplified example of the Hosted UI that assumes a customer uses something like React in their front-end, and treats their own server as an API.
 
 ![Proposal 1b](https://youthful-mirzakhani-e4ae8f.netlify.app/hosted-ui-1b-mermaid.png)
 
-### 2. Hosted tokenization, authorization, and capture
+### 2. Drop-in UI for tokenization, authorization, and capture
 
 The following flow is an example where the UI handles both the tokenization, authorization,  and capture. This example requires the least effort on the side of the customer. 
 
