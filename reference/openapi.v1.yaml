@@ -40,6 +40,7 @@ paths:
                     status: pending
                     resource_type: transactions.authorization
                     resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+                    external_identifier: user-12345
         '400':
           description: 'Returns an error if the request is missing any required fields, or the request body is not valid JSON.'
           content:
@@ -382,6 +383,7 @@ paths:
                     status: pending
                     resource_type: card
                     resource_id: 42b46d24-8cec-4699-8b84-aca31283367c
+                    external_identifier: user-12345
         '400':
           description: 'Returns an error if the request is missing any required fields, or the request body is not valid JSON.'
           content:
@@ -531,6 +533,7 @@ paths:
                     status: pending
                     resource_type: transaction
                     resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+                    external_identifier: user-12345
         '400':
           description: 'Returns an error if the request is missing any required fields, or the request body is not valid JSON.'
           content:
@@ -796,14 +799,17 @@ paths:
                         status: pending
                         resource_type: transaction
                         resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+                        external_identifier: user-12345
                       - type: status
                         status: pending
                         resource_type: transaction
                         resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+                        external_identifier: user-2345
                       - type: status
                         status: pending
                         resource_type: transaction
                         resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+                        external_identifier: null
                     limit: 100
                     next_page: null
                     previous_page: null
@@ -888,6 +894,13 @@ components:
           status: pending
           resource_type: transactions.authorization
           resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          external_identifier: user-789123
+        A pending authorization without an external identifier:
+          type: status
+          status: pending
+          resource_type: transactions.authorization
+          resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          external_identifier: null
       properties:
         type:
           type: string
@@ -920,6 +933,10 @@ components:
           format: uuid
           example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
           description: The ID of the object for which this status has been created.
+        external_identifier:
+          type: string
+          description: An external identifier that can be used by the merchant to match the card against their own records.
+          example: user-789123
       required:
         - type
         - status
@@ -936,10 +953,12 @@ components:
               status: pending
               resource_type: transaction
               resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+              external_identifier: null
             - type: status
               status: pending
               resource_type: transaction
               resource_id: 2f6a69b4-d053-41f4-99d2-30b58dbabd36
+              external_identifier: user-12345
         An empty list of pending transactions:
           items: []
       properties:
