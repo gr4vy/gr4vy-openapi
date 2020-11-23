@@ -1,0 +1,2247 @@
+swagger: '2.0'
+info:
+  contact:
+    email: support@gr4vy.com
+    name: Gr4vy Support
+    url: 'https://gr4vy.com'
+  description: The Gr4vy API
+  license:
+    name: MIT
+  termsOfService: 'https://gr4vy.com'
+  title: Gr4vy API
+  version: '1.0'
+host: api.gr4vy.com
+basePath: /
+schemes:
+  - https
+paths:
+  /async/cards:
+    parameters: []
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - description: ''
+          in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Card-Create'
+      responses:
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/Status'
+      tags:
+        - Cards
+        - Async APIs
+      description: >-
+        Registers a card with all available processors.
+
+
+        This API returns asynchronously, returning a pending `Status` object
+        with the ID of the pending card resource.
+      operationId: post-async-cards
+      summary: Register a card (Async)
+  /async/transactions:
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - description: ''
+          in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Transaction-Create'
+      responses:
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/Status'
+      tags:
+        - Transactions
+        - Async APIs
+      description: >-
+        Creates an authorization on a card.
+
+
+        This API can perform a few additional actions at the same time as
+        creating the authorization.
+
+
+        * `card.store` - Use this method to store the card for furture use
+
+        * `capture` - Use this method to also perform a capture on the card
+        after it has been authorized.
+
+
+        This API returns asynchronously, returning a pending `Status` object
+        with the ID of the pending authorization.
+      operationId: post-async-transactions
+      summary: Authorize (and optionally capture) a transaction (Async)
+  /async/transactions/batch-capture:
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            properties:
+              items:
+                items:
+                  $ref: '#/definitions/Capture-Create'
+                type: array
+            type: object
+      responses:
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/Statuses'
+      tags:
+        - Async APIs
+        - Transactions
+      description: >-
+        The body of this API takes either a list of items as a JSON object, or a
+        CSV file with each line representing an authorization request, and the
+        headers representing the fields to process.
+
+
+        This API returns asynchronously, returning a list of status objects with
+        the IDs of the pending `Transaction` resources.
+      operationId: post-async-transactions-batch-capture
+      summary: Batch capture authorizations (Async)
+  '/async/transactions/{transaction_id}/capture':
+    parameters:
+      - in: path
+        name: transaction_id
+        required: true
+        type: string
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Capture-Create'
+      responses:
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/Status'
+      tags:
+        - Transactions
+        - Async APIs
+      description: >-
+        Captures a previously authorized transaction.
+
+
+        This API returns asynchronously, returning status object with the ID of
+        the pending `Transaction` resource.
+      operationId: post-async-transactions-transaction_id-capture
+      summary: Capture a previously authorized transaction (Async)
+  /cards:
+    get:
+      produces:
+        - application/json
+      parameters:
+        - default: 100
+          description: The maximum number of items to return
+          format: int32
+          in: query
+          maximum: 1000
+          minimum: 0
+          name: limit
+          type: integer
+        - description: >-
+            The marker that identifies the page of results to return.
+
+
+            For the first page of results, simply omit this parameter. For next
+            pages, simply use the value returned by the API in the `next_page`
+            field.
+          format: ''
+          in: query
+          name: marker
+          type: string
+      responses:
+        '200':
+          description: Returns a list of cards
+          schema:
+            $ref: '#/definitions/Cards'
+        '401':
+          description: Returns an error if no valid authentication was provided.
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Cards
+      description: Returns a list of cards
+      operationId: get-cards
+      summary: List all cards
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Card-Create'
+      responses:
+        '201':
+          description: >-
+            This API returns asynchronously, returning status object with the ID
+            of the pending `Card` resource.
+          schema:
+            $ref: '#/definitions/Card'
+        '400':
+          description: >-
+            Returns an error if the request is missing any required fields, or
+            the request body is not valid JSON.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Returns an error if no valid authentication was provided.
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Cards
+      description: |
+        Registers a card with all available processors.
+      operationId: post-cards
+      summary: Register a card
+  '/cards/{card_id}':
+    parameters:
+      - description: The ID for the card to get the information for.
+        format: uuid
+        in: path
+        name: card_id
+        required: true
+        type: string
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Returns a created card resource.
+          schema:
+            $ref: '#/definitions/Card'
+        '401':
+          description: Returns an error if no valid authentication was provided.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: >-
+            Returns an error if the authorization can not be found or has not
+            yet been created.
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Cards
+      description: 'Get an authorization. '
+      operationId: get-cards-id
+      summary: Get a card
+  '/cards/{card_id}/events':
+    parameters:
+      - in: path
+        name: card_id
+        required: true
+        type: string
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CardEvents'
+      tags:
+        - Cards
+      description: Returns a list of events for a given transaction.
+      operationId: get-cards-card_id-events
+      summary: List the events for a given card
+  /payment-service-definitions:
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PaymentServiceDefinitions'
+      tags:
+        - Definitions
+      description: Returns a list of all available payment service definitions.
+      operationId: get-payment-service-definitions
+      summary: Get all payment service definitions
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PaymentServiceDefinition-Create'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/PaymentServiceDefinition'
+      tags:
+        - Definitions
+      description: Creates a new payment service definition
+      operationId: post-payment-service-definitions
+      summary: Create payment service definition
+  '/payment-service-definitions/{payment_service_definition_id}':
+    parameters:
+      - description: The unique ID of the payment service definition
+        in: path
+        name: payment_service_definition_id
+        required: true
+        type: string
+    delete:
+      parameters: []
+      responses:
+        '204':
+          description: No Content
+      tags:
+        - Discovery
+      description: Removes a payment service definition
+      operationId: delete-payment-services-definitions-id
+      summary: Delete payment service definition
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PaymentServiceDefinition'
+      tags:
+        - Definitions
+      description: Gets the definition for a payment service.
+      operationId: get-payment-service-definitions-id
+      summary: Get payment service definition
+    put:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PaymentServiceDefinition-Update'
+      responses:
+        '202':
+          description: OK
+          schema:
+            $ref: '#/definitions/PaymentServiceDefinition'
+      tags:
+        - Definitions
+      description: Makes an update to a payment service definition
+      operationId: put-payment-services-definitions-id
+      summary: Update payment service definition
+  /payment-services:
+    parameters: []
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PaymentServices'
+      tags:
+        - Payment Services
+      description: >-
+        Lists the currently configured and activated payment services for a for
+        a merchant.
+      operationId: get-payment_services
+      summary: List the active payment services
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - description: ''
+          in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PaymentService-Create'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/PaymentService'
+      tags:
+        - Payment Services
+      description: >-
+        Adds a new payment service by providing a custom name and a value for
+        each of the required fields.
+      operationId: post-payment_services
+      summary: Activate a payment service
+  '/payment-services/{payment_service_id}':
+    parameters:
+      - description: The ID of the payment service
+        format: uuid
+        in: path
+        name: payment_service_id
+        required: true
+        type: string
+    delete:
+      parameters: []
+      responses:
+        '204':
+          description: No Content
+      tags:
+        - Payment Services
+      description: Deletes a specific active payment service.
+      operationId: delete-payment-services-payment_service_id
+      summary: Delete active payment service
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/PaymentService'
+      tags:
+        - Payment Services
+      description: Retrieves the details of a single configured payment service.
+      operationId: get-payment-services-payment_service_id
+      summary: Get info about active payment service
+    put:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/PaymentService-Update'
+      responses:
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/PaymentService'
+      tags:
+        - Payment Services
+      description: >-
+        Updates an existing payment service. Allows all fields to be changed
+        except for the service ID.
+      operationId: put-payment-services-payment_service_id
+      summary: Update active payment service
+  /transactions:
+    parameters: []
+    get:
+      produces:
+        - application/json
+      parameters:
+        - default: 20
+          description: The maximum number of items to return
+          format: int32
+          in: query
+          maximum: 100
+          minimum: 0
+          name: limit
+          type: integer
+        - description: >-
+            The marker that identifies the offsett for the page of results to
+            return.
+
+
+            For the first page of results, simply omit this parameter. For next
+            pages, simply use the value returned by the API in the `next_page`
+            field.
+
+
+            A marker is an opague string that is only meaningful to ur API. No
+            additional value can be ascribed to this value.
+          in: query
+          name: marker
+          type: string
+        - description: >-
+            Filters the results to just the transactions that match this
+            external identifier or transaction ID.
+          in: query
+          name: search
+          type: string
+        - description: >-
+            Filters the results to only transactions last updated before this
+            ISO date-time string.
+          in: query
+          name: before_updated_at
+          type: string
+        - description: >-
+            Filters the results to only transactions last updated after this ISO
+            date-time string.
+          in: query
+          name: after_updated_at
+          type: string
+        - description: >-
+            Filters the results to only transactions created before this ISO
+            date-time string.
+          in: query
+          name: before_created_at
+          type: string
+        - description: >-
+            Filters the results to only transactions created after this ISO
+            date-time string.
+          in: query
+          name: after_created_at
+          type: string
+        - description: >-
+            Filters the results to only transactions with as specific
+            transaction status.
+          in: query
+          name: transaction_status
+          type: string
+      responses:
+        '200':
+          description: Returns a paginated list of transactions for an account.
+          schema:
+            $ref: '#/definitions/Transactions'
+        '401':
+          description: Returns an error if no valid authentication was provided.
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Transactions
+      description: >-
+        Lists all transactions for an account. Sorted by last `updated_at`
+        status.
+      operationId: get-transactions
+      summary: List all transactions
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - description: ''
+          in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Transaction-Create'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: >-
+            Returns an error if the request is missing any required fields, or
+            the request body is not valid JSON.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Returns an error if no valid authentication was provided.
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Transactions
+      description: >-
+        Creates an authorization on a card.
+
+
+        This API can perform a few additional actions at the same time as
+        creating the authorization.
+
+
+        * `card.store` - Use this method to store the card for furture use
+
+        * `capture` - Use this method to also perform a capture on the card
+        after it has been authorized.
+      operationId: post-transactions
+      summary: Authorize (and optionally capture) a transaction
+  /transactions/batch-capture:
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - description: >
+            The body of this API takes either a list of items as a JSON object,
+            or a CSV file with each line representing an authorization request,
+            and the headers representing the fields to process.
+          in: body
+          name: body
+          schema:
+            properties:
+              items:
+                items:
+                  $ref: '#/definitions/Capture-Create'
+                type: array
+            type: object
+      responses:
+        '201':
+          description: 'Returns a list of status objects, one for each requested capture.'
+          schema:
+            $ref: '#/definitions/Transactions'
+        '400':
+          description: >-
+            Returns an error if the request is missing any required fields, or
+            the request body is not valid JSON/CSV.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Returns an error if no valid authentication was provided.
+          schema:
+            $ref: '#/definitions/Error'
+        '403':
+          description: Forbidden
+      tags:
+        - Transactions
+      description: >-
+        Takes a JSON or CSV list of authorization IDs and processes them as
+        needed.
+      operationId: post-transactions-batch-capture
+      summary: Batch capture authorizations
+  '/transactions/{transaction_id}':
+    parameters:
+      - description: The ID for the transaction to get the information for.
+        in: path
+        name: transaction_id
+        required: true
+        type: string
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Returns a transaction resource.
+          schema:
+            $ref: '#/definitions/Transaction'
+        '401':
+          description: Returns an error if no valid authentication was provided.
+          schema:
+            $ref: '#/definitions/Error'
+        '404':
+          description: >-
+            Returns an error if the transaction can not be found or has not yet
+            been created.
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Transactions
+      description: 'Get a transaction. '
+      operationId: get-transaction-id
+      summary: Get a transaction
+  '/transactions/{transaction_id}/capture':
+    parameters:
+      - in: path
+        name: transaction_id
+        required: true
+        type: string
+    post:
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+      parameters:
+        - description: ''
+          in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Capture-Create'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: >-
+            Returns an error if the request is missing any required fields, or
+            the request body is not valid JSON.
+          schema:
+            $ref: '#/definitions/Error'
+        '401':
+          description: Returns an error if no valid authentication was provided.
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Transactions
+      description: Captures a previously authorized transaction.
+      operationId: post-transactions-capture
+      summary: Capture a previously authorized transaction
+  '/transactions/{transaction_id}/events':
+    parameters:
+      - in: path
+        name: transaction_id
+        required: true
+        type: string
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/TransactionEvents'
+      tags:
+        - Transactions
+      description: Returns a list of events for a given transaction.
+      operationId: get-transactions-transaction_id-events
+      summary: List the events for a given transaction
+definitions:
+  Capture-Create:
+    description: A request to capture a transaction
+    properties:
+      amount:
+        description: |-
+          The (partial) amount to capture.
+
+          When left blank, this will capture the entire amount.
+        example: 1299
+        maximum: 99999999
+        minimum: 0.000001
+        type: number
+      authorization_id:
+        description: The ID of the authorization to capture
+        example: 3d1748e5-16fa-468c-82ca-05f31252f515
+        format: uuid
+        type: string
+      currency:
+        description: |
+          A supported ISO-4217 currency code.
+        example: USD
+        type: string
+      external_identifier:
+        description: >-
+          An external identifier that can be used by the merchant to match the
+          capture against their own records.
+        type: string
+    required:
+      - authorization_id
+      - amount
+      - currency
+    title: Capture (Create)
+    type: object
+    x-examples:
+      Capture a previously created authorization:
+        amount: 1299
+        authorization_id: 931b9b0c-dc95-4d45-b1fc-64966244ef74
+        currency: USD
+    x-tags:
+      - Request Bodies
+  Card:
+    properties:
+      created_at:
+        description: |-
+          The date and time 
+          when this card was created in our system.
+        example: '2013-07-16T19:23:00.000Z'
+        format: date-time
+        type: string
+      external_identifier:
+        description: >-
+          An external identifier that can be used by the merchant to match the
+          card against their own records.
+        example: user-789123
+        type: string
+        x-nullable: true
+      id:
+        description: The internal ID for this card
+        example: fe26475d-ec3e-4884-9553-f7356683f7f9
+        type: string
+      status:
+        description: Wether this card was successfully created or not.
+        enum:
+          - created
+          - error
+          - partially_created
+        example: created
+        type: string
+      type:
+        description: The type of this resource. Is always `card`
+        enum:
+          - card
+        example: card
+        type: string
+    required:
+      - type
+      - id
+      - status
+      - created_at
+    title: Card
+    type: object
+    x-examples:
+      A stored card:
+        created_at: '2013-07-16T19:23:00.000Z'
+        external_identifier: user-789123
+        id: 87c5de1b-19af-4196-8acf-d31f23c59484
+        status: partially_created
+        type: card
+    x-tags:
+      - Cards
+  Card-Create:
+    description: A request to store a card.
+    properties:
+      expiration_date:
+        description: >-
+          The expiration date of the card, formatted `MM/YY`. If a card has been
+          previously stored with us this value is optional.
+
+
+          If the `number` of this card represents a tokenized card, then this
+          value is ignored.
+        example: 11/15
+        maxLength: 5
+        minLength: 5
+        pattern: ^\d\d/\d\d$
+        type: string
+      external_identifier:
+        description: >-
+          An external identifier that can be used by the merchant to match the
+          card against their own records.
+        type: string
+        x-nullable: true
+      number:
+        description: >-
+          The 15-16 digit number for this credit card as it can be found on the
+          front of the card.
+
+
+          If a card has been stored with us previously, this number will
+          represent the unique tokenized card ID provided via our API.
+        example: '4111111111111111'
+        maxLength: 16
+        minLength: 14
+        pattern: '^[0-9]{14,16}$'
+        type: string
+      security_code:
+        description: >-
+          The 3 or 4 digit security code often found on the card. This often
+          referred to as the CVV or CVD.
+
+
+          If the `number` of this card represents a tokenized card, then this
+          value is ignored.
+        example: '123'
+        maxLength: 4
+        minLength: 3
+        pattern: '^\d{3,4}$'
+        type: string
+    required:
+      - number
+    title: Card (Create)
+    type: object
+    x-examples:
+      Store a new card:
+        expiration_date: 11/2025
+        external_identifier: user-789123
+        number: '4111111111111111'
+        security_code: '123'
+    x-tags:
+      - Request Bodies
+  CardEvent:
+    description: An event that happened for a transaction.
+    properties:
+      code:
+        description: 'The type of event, in dot-format syntax.'
+        example: transaction.rejected.account_closed
+        type: string
+      created_at:
+        description: |
+          When this event was recorded.
+        format: date-time
+        type: string
+      external_service:
+        description: An optional related resource that triggered this event.
+        properties:
+          display_name:
+            description: The user's name for the resource
+            type: string
+          id:
+            description: |
+              The ID of the resource
+            type: string
+          service_id:
+            description: The ID of the service that this resource is based on.
+            type: string
+          type:
+            description: The type of the resource
+            type: string
+        required:
+          - id
+          - type
+        type: object
+      id:
+        description: The unique ID for this event.
+        format: uuid
+        type: string
+      type:
+        description: The type of this resource. Must always be transaction.event
+        example: transaction.event
+        type: string
+    required:
+      - id
+      - type
+      - created_at
+      - code
+    title: Card Event
+    type: object
+    x-examples:
+      Event related to a service:
+        code: card.rejected
+        created_at: '2020-04-01 14:00:00Z'
+        external_service:
+          display_name: Stripe (Main)
+          id: stripe-card-699c1745-53cf-4b13-b977-fef0ecd4c681
+          service_id: stripe-card
+          type: payment-service
+        id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+        type: card.event
+      Event without resource:
+        code: transactions.server_error
+        created_at: '2020-04-01 14:00:00Z'
+        id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+        resource: null
+        type: transactions.event
+    x-tags:
+      - Cards
+  CardEvents:
+    description: A list of events for a card
+    properties:
+      items:
+        description: A list of card events
+        items:
+          $ref: '#/definitions/CardEvent'
+        type: array
+      limit:
+        default: 100
+        description: 'The limit set to the number of items returned. '
+        example: 100
+        format: int32
+        maximum: 1000
+        minimum: 0
+        type: integer
+      next_page:
+        description: The marker that represents the next page of results.
+        example: 9f944c64-eaf0-4219-90fd-f7e56c7cd214
+        format: uuid
+        type: string
+        x-nullable: true
+      previous_page:
+        description: The marker that represents the previ page of results.
+        example: 9049b2f9-0c67-47c5-af18-e8525f855263
+        format: uuid
+        type: string
+        x-nullable: true
+    required:
+      - items
+      - limit
+      - next_page
+      - previous_page
+    title: Card Events
+    type: object
+    x-examples:
+      A list of card events:
+        items:
+          - code: card.rejected
+            created_at: '2020-04-01 14:00:00Z'
+            external_service:
+              display_name: Stripe (Main)
+              id: stripe-card-699c1745-53cf-4b13-b977-fef0ecd4c681
+              service_id: stripe-card
+              type: payment-service
+            id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+            type: card.event
+        limit: 100
+        next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
+        previous_page: null
+      An empty list of events:
+        items: []
+        limit: 100
+        next_page: null
+        previous_page: null
+    x-tags:
+      - Cards
+  Cards:
+    description: A list of cards
+    properties:
+      items:
+        description: A list of authorizations
+        items:
+          $ref: '#/definitions/Card'
+        type: array
+      limit:
+        default: 100
+        description: 'The limit set to the number of items returned. '
+        example: 100
+        format: int32
+        maximum: 1000
+        minimum: 0
+        type: integer
+      next_page:
+        description: The marker that represents the next page of results.
+        example: 9f944c64-eaf0-4219-90fd-f7e56c7cd214
+        format: uuid
+        type: string
+        x-nullable: true
+      previous_page:
+        description: The marker that represents the previ page of results.
+        example: 9049b2f9-0c67-47c5-af18-e8525f855263
+        format: uuid
+        type: string
+        x-nullable: true
+    required:
+      - items
+      - limit
+      - next_page
+      - previous_page
+    title: Cards
+    type: object
+    x-examples:
+      A list of cards:
+        items:
+          - created_at: '2013-07-16T19:23:00.000Z'
+            external_identifier: user-789123
+            id: 87c5de1b-19af-4196-8acf-d31f23c59484
+            status: partially_created
+            type: card
+        limit: 100
+        next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
+        previous_page: null
+      An empty list of cards:
+        items: []
+        limit: 100
+        next_page: null
+        previous_page: null
+    x-tags:
+      - Cards
+  Error:
+    description: A generic client error.
+    properties:
+      code:
+        description: >-
+          A custom code to further describe the type of error being returned.
+          This code provides further specification within the HTTP `status` code
+          and can be used by a program to define logic based on the error.
+        example: incorrect_json
+        type: string
+      documentation_url:
+        description: A link to the developer documentation for this error.
+        example: 'https://developer.gr4vy.com/errors/incorrect-json'
+        format: uri
+        type: string
+      message:
+        description: >-
+          A human readable message that describes the error. The content of this
+          field should not be used to determine any business logic. 
+        example: The request body was not valid JSON.
+        type: string
+      status:
+        default: 0
+        description: The HTTP status code of this error
+        example: 499
+        exclusiveMaximum: true
+        format: int32
+        maximum: 600
+        minimum: 200
+        type: integer
+      type:
+        default: error
+        description: The typeof this object. This is always `error`.
+        enum:
+          - error
+        example: error
+        type: string
+    required:
+      - type
+      - code
+      - status
+      - message
+      - documentation_url
+    title: Error
+    type: object
+    x-examples:
+      Incorrect JSON:
+        code: incorrect_json
+        documentation_url: 'https://developer.gr4vy.com/errors/incorrect-json'
+        message: The request body was not valid JSON.
+        status: 400
+        type: error
+    x-tags:
+      - Errors
+  PaymentMethod:
+    description: A generic object to hold payment method details.
+    properties:
+      authorization_url:
+        description: >-
+          The optional URL that needs to be presented to a consumer to allow
+          them to approve the authorization.
+        example: 'https://paypal.com.....'
+        format: uri
+        type: string
+        x-nullable: true
+      id:
+        description: >-
+          The optional ID of any stored payment method details, for example a
+          stored `card` ID.
+        example: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+        format: uuid
+        type: string
+      type:
+        description: The type of payment method
+        enum:
+          - card
+          - paypal
+          - bitcoin
+        example: card
+        type: string
+    required:
+      - type
+    title: PaymentMethod
+    type: object
+    x-examples:
+      A BitCoin payment method:
+        authorization_url: 'https://coinbase.com.....'
+        id: null
+        type: bitcoin
+      A PayPal payment method:
+        authorization_url: 'https://paypal.com.....'
+        id: null
+        type: paypal
+      A card payment method:
+        authorization_url: null
+        id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+        type: card
+    x-tags:
+      - Payment Methods
+  PaymentService:
+    description: ''
+    properties:
+      accepted_countries:
+        description: >-
+          A list of countries for which this service is enabled, in ISO
+          two-letter code format.
+        items:
+          minLength: 1
+          type: string
+        type: array
+      accepted_currencies:
+        description: >-
+          A list of currencies for which this service is enabled, in ISO 4217
+          three-letter code format.
+        items:
+          minLength: 1
+          type: string
+        type: array
+      display_name:
+        description: The custom name set for this service
+        example: Stripe (Main)
+        type: string
+      id:
+        description: The ID of this payment service instance
+        example: faaad066-30b4-4997-a438-242b0752d7e1
+        type: string
+      payment_method_id:
+        description: Defines the ID of the payment method that this service handles.
+        type: string
+      payment_service_definition_id:
+        description: |
+          The ID of the payment service used to create this service instance.
+        example: stripe
+        type: string
+      status:
+        description: >
+          The current status of this service. This will start off as pending,
+          move to created, and might eventually move to an error status if and
+          when the credentials are no longer valid.
+        enum:
+          - pending
+          - created
+          - failed
+        type: string
+      type:
+        description: The type of this resource.
+        enum:
+          - payment-service
+        example: payment-service
+        type: string
+      use_test_environment:
+        description: >-
+          Defines if this service should use the test credentials and/or
+          endpoint.
+        type: boolean
+    title: An active payment service
+    type: object
+    x-examples:
+      Stripe:
+        accepted_countries:
+          - US
+          - GB
+          - DE
+        accepted_currencies:
+          - USD
+          - GBP
+          - EUR
+        display_name: Stripe (Main)
+        id: stripe-card-5a303fc4-817b-4073-9b41-a26eff29080a
+        payment_method_id: card
+        payment_service_definition_id: stripe-card
+        status: created
+        type: payment-service
+        use_test_environment: false
+    x-tags:
+      - Payment Services
+  PaymentService-Create:
+    description: Request body for activating a payment service.
+    properties:
+      accepted_countries:
+        description: >-
+          A list of countries that this payment service needs to support in ISO
+          two-letter code format.
+        items:
+          type: string
+        type: array
+      accepted_currencies:
+        description: >-
+          A list of currencies that this payment service needs to support in ISO
+          4217 three-letter code format.
+        items:
+          type: string
+        minItems: 1
+        type: array
+      display_name:
+        description: >-
+          A custom name for the payment service. This will be shown in the Admin
+          UI.
+        type: string
+      payment_service_definition_id:
+        description: The ID of the payment service to use
+        example: stripe
+        type: string
+      required_fields:
+        description: >-
+          A list of fields, each containing a key-value pair for each required
+          field defined by the service for this payment service.
+        items:
+          description: >-
+            A field containing a key-value pair for a required field defined by
+            the service for this payment service.
+          properties:
+            key:
+              description: The key of the field to set a value for.
+              example: private_key
+              type: string
+            value:
+              description: The value of a field to set.
+              example: sk_test_4eC39HqLyjWDarjtT1zdp7dc
+              type: string
+          required:
+            - key
+            - value
+          type: object
+        type: array
+      use_test_environment:
+        description: >-
+          Defines if this payment service uses the service's test or sandbox
+          environment. Defaults to false.
+        type: boolean
+    required:
+      - display_name
+      - payment_service_definition_id
+      - required_fields
+      - accepted_currencies
+      - use_test_environment
+      - accepted_countries
+    title: Payment Service (Create)
+    type: object
+    x-examples:
+      Add card payment via Stripe:
+        accepted_countries:
+          - US
+          - GB
+          - DE
+        accepted_currencies:
+          - USD
+          - GBP
+          - EUR
+        display_name: Card using Stripe (Main)
+        payment_service_definition_id: stripe-card
+        required_fields:
+          - key: private_key
+            value: sk_test_4eC39HqLyjWDarjtT1zdp7dc
+          - key: public_key
+            value: pk_test_arjtT1zdp7dc4eC39HqLyjWD
+        use_test_environment: false
+    x-tags:
+      - Request Bodies
+  PaymentService-Update:
+    description: Request body for updating an active payment service
+    properties:
+      accepted_countries:
+        description: >-
+          A list of countries that this payment service needs to support in ISO
+          two-letter code format.
+        items:
+          type: string
+        type: array
+      accepted_currencies:
+        description: >-
+          A list of currencies that this payment service needs to support in ISO
+          4217 three-letter code format.
+        items:
+          type: string
+        minItems: 1
+        type: array
+      display_name:
+        description: >-
+          A custom name for the payment service. This will be shown in the Admin
+          UI.
+        type: string
+      required_fields:
+        description: >-
+          A list of fields, each containing a key-value pair for each required
+          field defined by the service for this payment service.
+        items:
+          description: >-
+            A field containing a key-value pair for a required field defined by
+            the service for this payment service.
+          properties:
+            key:
+              description: The key of the field to set a value for.
+              example: private_key
+              type: string
+            value:
+              description: The value of a field to set.
+              example: sk_test_4eC39HqLyjWDarjtT1zdp7dc
+              type: string
+          type: object
+        type: array
+      use_test_environment:
+        description: >-
+          Defines if this payment service uses the service's test/sandbox
+          environment.
+        type: boolean
+    title: Payment Service (Update)
+    type: object
+    x-examples:
+      Update Stripe:
+        accepted_countries:
+          - US
+          - GB
+          - DE
+        accepted_currencies:
+          - USD
+          - GBP
+          - EUR
+        display_name: Card using Stripe (Main)
+        required_fields:
+          - key: private_key
+            value: sk_test_4eC39HqLyjWDarjtT1zdp7dc
+          - key: public_key
+            value: pk_test_arjtT1zdp7dc4eC39HqLyjWD
+        use_test_environment: false
+    x-tags:
+      - Request Bodies
+  PaymentServiceDefinition:
+    description: An available payment service
+    properties:
+      display_name:
+        description: The display name of this service
+        example: Stripe
+        type: string
+      help_url:
+        description: A URL that provides more details about this payment service
+        type: string
+      id:
+        description: >-
+          The ID of the payment service. This is the underlying provider
+          followed by a dash followed by the payment method ID.
+        example: stipe-card
+        type: string
+      logo_url:
+        description: The logo for this provider
+        format: uri
+        type: string
+      payment_method_id:
+        description: The ID of the payment method that this services handles
+        example: card
+        type: string
+      required_fields:
+        description: >-
+          A list of fields that need to be submitted when activating the payment
+          service.
+        items:
+          description: >-
+            A single field that needs to be submitted for a payment service when
+            it is created. 
+          properties:
+            display_name:
+              description: The name to display for a field in the cluster UI
+              type: string
+            help_url:
+              description: A URL that provides more details about this field
+              type: string
+            key:
+              description: The key of a field that needs to be submitted
+              type: string
+          type: object
+        minItems: 1
+        type: array
+      supported_countries:
+        description: A list of 2-letter ISO country codes that this service supports
+        items:
+          type: string
+        type: array
+      supported_currencies:
+        description: A list of 3-letter ISO currency codes that this service supports
+        items:
+          type: string
+        type: array
+      type:
+        default: payment-service-definition
+        description: 'The type of this resource. '
+        type: string
+    title: Available Payment Service (Discovery)
+    type: object
+    x-examples:
+      Braintree:
+        display_name: Cards using Braintree
+        help_url: 'https://developer.braintreepayments.com'
+        id: braintree-card
+        logo_url: 'https://braintree.com/braintree.png'
+        payment_method_id: card
+        required_fields:
+          - display_name: Client Token
+            help_url: >-
+              https://developers.braintreepayments.com/guides/authorization/client-token
+            key: client_token
+          - display_name: Tokenization Key
+            help_url: >-
+              https://developers.braintreepayments.com/guides/authorization/tokenization-key/javascript/v3
+            key: tokenization_key
+        supported_countries:
+          - DE
+          - US
+        supported_currencies:
+          - EUR
+          - USD
+        type: payment-service-definition
+      Stripe:
+        display_name: Cards using Stripe
+        help_url: 'https://stripe.com/docs'
+        id: stripe-card
+        logo_url: 'https://stripe.com/stripe.png'
+        payment_method_id: card
+        required_fields:
+          - display_name: Publishable API key
+            help_url: 'https://stripe.com/docs/keys'
+            key: public_key
+          - display_name: Secret API key
+            help_url: 'https://stripe.com/docs/keys'
+            key: private_key
+        supported_countries:
+          - DE
+          - US
+        supported_currencies:
+          - EUR
+          - USD
+        type: payment-service-definition
+    x-tags:
+      - Discovery
+  PaymentServiceDefinition-Create:
+    description: Updates an available payment service
+    properties:
+      available:
+        description: Defines if a service is available to be activated in this cluster.
+        type: boolean
+      display_name:
+        description: The display name of this service
+        example: Stripe
+        type: string
+      help_url:
+        description: A URL that provides more details about this payment service
+        type: string
+      id:
+        type: string
+      payment_method_id:
+        description: The ID of the payment method that this services handles
+        example: card
+        type: string
+      required_fields:
+        description: >-
+          A list of fields that need to be submitted when activating the payment
+          service.
+        items:
+          description: >-
+            A single field that needs to be submitted for a payment service when
+            it is created. 
+          properties:
+            display_name:
+              description: The name to display for a field in the cluster UI
+              type: string
+            help_url:
+              description: A URL that provides more details about this field
+              type: string
+            key:
+              description: The key of a field that needs to be submitted
+              type: string
+          required:
+            - key
+            - display_name
+            - help_url
+          type: object
+        minItems: 1
+        type: array
+      supported_countries:
+        description: A list of 2-letter ISO country codes that this service supports
+        items:
+          type: string
+        type: array
+      supported_currencies:
+        description: A list of 3-letter ISO currency codes that this service supports
+        items:
+          type: string
+        type: array
+    required:
+      - id
+      - required_fields
+      - help_url
+      - available
+      - display_name
+      - supported_currencies
+      - supported_countries
+      - payment_method_id
+    title: Create a payment service definition
+    type: object
+    x-examples:
+      Braintree:
+        display_name: Cards using Braintree
+        help_url: 'https://developer.braintreepayments.com'
+        id: braintree-card
+        logo_url: 'https://braintree.com/braintree.png'
+        payment_method_id: card
+        required_fields:
+          - display_name: Client Token
+            help_url: >-
+              https://developers.braintreepayments.com/guides/authorization/client-token
+            key: client_token
+          - display_name: Tokenization Key
+            help_url: >-
+              https://developers.braintreepayments.com/guides/authorization/tokenization-key/javascript/v3
+            key: tokenization_key
+        supported_countries:
+          - DE
+          - US
+        supported_currencies:
+          - EUR
+          - USD
+      Stripe:
+        display_name: Cards using Stripe
+        help_url: 'https://stripe.com/docs'
+        id: stripe-card
+        logo_url: 'https://stripe.com/stripe.png'
+        payment_method_id: card
+        required_fields:
+          - display_name: Publishable API key
+            help_url: 'https://stripe.com/docs/keys'
+            key: public_key
+          - display_name: Secret API key
+            help_url: 'https://stripe.com/docs/keys'
+            key: private_key
+        supported_countries:
+          - DE
+          - US
+        supported_currencies:
+          - EUR
+          - USD
+    x-tags:
+      - Discovery
+  PaymentServiceDefinition-Update:
+    description: Updates an available payment service
+    properties:
+      available:
+        description: Defines if a service is available to be activated in this cluster.
+        type: boolean
+      display_name:
+        description: The display name of this service
+        example: Stripe
+        type: string
+      help_url:
+        description: A URL that provides more details about this payment service
+        type: string
+      payment_method_id:
+        description: The ID of the payment method that this services handles
+        example: card
+        type: string
+      required_fields:
+        description: >-
+          A list of fields that need to be submitted when activating the payment
+          service.
+        items:
+          description: >-
+            A single field that needs to be submitted for a payment service when
+            it is created. 
+          properties:
+            display_name:
+              description: The name to display for a field in the cluster UI
+              type: string
+            help_url:
+              description: A URL that provides more details about this field
+              type: string
+            key:
+              description: The key of a field that needs to be submitted
+              type: string
+          type: object
+        minItems: 1
+        type: array
+      supported_countries:
+        description: A list of 2-letter ISO country codes that this service supports
+        items:
+          type: string
+        type: array
+      supported_currencies:
+        description: A list of 3-letter ISO currency codes that this service supports
+        items:
+          type: string
+        type: array
+    title: Update an available Payment Service (Discovery)
+    type: object
+    x-examples:
+      Braintree:
+        display_name: Cards using Braintree
+        help_url: 'https://developer.braintreepayments.com'
+        id: braintree-card
+        logo_url: 'https://braintree.com/braintree.png'
+        payment_method_id: card
+        required_fields:
+          - display_name: Client Token
+            help_url: >-
+              https://developers.braintreepayments.com/guides/authorization/client-token
+            key: client_token
+          - display_name: Tokenization Key
+            help_url: >-
+              https://developers.braintreepayments.com/guides/authorization/tokenization-key/javascript/v3
+            key: tokenization_key
+        supported_countries:
+          - DE
+          - US
+        supported_currencies:
+          - EUR
+          - USD
+        type: payment-service-definition
+      Stripe:
+        display_name: Stripe
+    x-tags:
+      - Discovery
+  PaymentServiceDefinitions:
+    description: A list of available payment services definitions.
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/PaymentServiceDefinition'
+        type: array
+    title: Payment service definitions
+    type: object
+    x-examples:
+      A list of payment service definitions:
+        items:
+          - display_name: Cards using Stripe
+            help_url: 'https://stripe.com/docs'
+            id: stripe-card
+            logo_url: 'https://stripe.com/stripe.png'
+            payment_method_id: card
+            required_fields:
+              - display_name: Publishable API Key
+                help_url: 'https://stripe.com/docs/keys'
+                key: public_key
+              - display_name: Secret API Key
+                help_url: 'https://stripe.com/docs/keys'
+                key: private_key
+            supported_countries:
+              - DE
+              - US
+            supported_currencies:
+              - EUR
+              - USD
+            type: payment-service-definition
+          - display_name: Cards using Braintree
+            help_url: 'https://developer.braintreepayments.com'
+            id: braintree-card
+            logo_url: 'https://braintree.com/braintree.png'
+            payment_method_id: card
+            required_fields:
+              - display_name: Client Token
+                help_url: >-
+                  https://developers.braintreepayments.com/guides/authorization/client-token
+                key: client_token
+              - display_name: Tokenization Key
+                help_url: >-
+                  https://developers.braintreepayments.com/guides/authorization/tokenization-key/javascript/v3
+                key: tokenization_key
+            supported_countries:
+              - DE
+              - US
+            supported_currencies:
+              - EUR
+              - USD
+            type: payment-service-definition
+    x-tags:
+      - Discovery
+  PaymentServices:
+    description: ''
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/PaymentService'
+        type: array
+    title: A list of active payment services
+    type: object
+    x-examples:
+      A list of payment services:
+        items:
+          - accepted_countries:
+              - US
+            accepted_currencies:
+              - USD
+            display_name: Stripe (US)
+            id: stripe-card-5a303fc4-817b-4073-9b41-a26eff29080a
+            payment_method_id: card
+            service_id: stripe-card
+            status: created
+            type: payment-service
+            use_test_environment: false
+          - accepted_countries:
+              - GB
+              - DE
+            accepted_currencies:
+              - GBP
+              - EUR
+            display_name: Stripe (Global)
+            id: stripe-card-a26eff29-817b-4073-9b41-5a303fc4080a
+            payment_method_id: card
+            service_id: stripe-card
+            status: created
+            type: payment-service
+            use_test_environment: false
+    x-tags:
+      - Payment Services
+  Status:
+    description: >-
+      In many cases the Gr4vy API returns asynchronously, kicking off a job to
+      create an authorization or a transaction, and returning a `Status` object
+      with the ID of the pending object. The ID of this resource can be used to
+      query an objects status, or additionally the client can use Pub/Sub to
+      subscribe to the creation of the pending object.
+    properties:
+      external_identifier:
+        description: >-
+          An external identifier that can be used by the merchant to match the
+          card against their own records.
+        example: user-789123
+        type: string
+        x-nullable: true
+      resource_id:
+        description: The ID of the object for which this status has been created.
+        example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+        format: uuid
+        type: string
+      resource_type:
+        description: |
+          The type of the object that is pending.
+        enum:
+          - transaction
+          - card
+        example: transaction
+        type: string
+      status:
+        description: |-
+          The status of this resource being created. This can be one of:
+
+          * `pending` - The creation has not yet completed
+          * `created` - The resource has been created and can now be queried.
+        enum:
+          - pending
+          - success
+          - failure
+        example: pending
+        type: string
+      type:
+        description: The type of this object. This is always `status`.
+        enum:
+          - status
+        example: status
+        type: string
+    required:
+      - type
+      - status
+      - resource_type
+      - resource_id
+    title: Status
+    type: object
+    x-examples:
+      A pending authorization:
+        external_identifier: user-789123
+        resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+        resource_type: transactions.authorization
+        status: pending
+        type: status
+      A pending authorization without an external identifier:
+        external_identifier: null
+        resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+        resource_type: transactions.authorization
+        status: pending
+        type: status
+    x-tags:
+      - Statuses
+  Statuses:
+    description: A list of status resources
+    properties:
+      items:
+        description: A list of authorizations
+        items:
+          $ref: '#/definitions/Status'
+        type: array
+    required:
+      - items
+    title: Statuses
+    type: object
+    x-examples:
+      A list of pending transactions:
+        items:
+          - external_identifier: null
+            resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+            resource_type: transaction
+            status: pending
+            type: status
+          - external_identifier: user-12345
+            resource_id: 2f6a69b4-d053-41f4-99d2-30b58dbabd36
+            resource_type: transaction
+            status: pending
+            type: status
+      An empty list of pending transactions:
+        items: []
+    x-tags:
+      - Statuses
+  Transaction:
+    description: Captures a transaction.
+    properties:
+      amount:
+        description: The amount captured in this transaction
+        example: 1299
+        maximum: 99999999
+        minimum: 0.000001
+        type: number
+      created_at:
+        description: The date and time when this transaction was created in our system.
+        example: '2013-07-16T19:23:00.000Z'
+        format: date-time
+        type: string
+      currency:
+        description: The currency code for this transaction
+        example: USD
+        type: string
+      external_identifier:
+        description: >-
+          An external identifier that can be used by the merchant to match the
+          authorization against their own records.
+        example: user-789123
+        type: string
+      id:
+        description: The internal ID for this transaction
+        example: fe26475d-ec3e-4884-9553-f7356683f7f9
+        type: string
+      payment_method:
+        $ref: '#/definitions/PaymentMethod'
+      payment_service_id:
+        type: string
+      status:
+        description: Wether this transaction was successfully created or not.
+        enum:
+          - created
+          - failure
+        example: created
+        type: string
+      transaction_status:
+        description: The status of the transaction being processed.
+        type: string
+      type:
+        description: The type of this resource. Is always `transaction`
+        enum:
+          - transaction
+        example: transaction
+        type: string
+      updated_at:
+        description: 'Defines when the transaction was last updated '
+        format: date-time
+        type: string
+    required:
+      - type
+      - id
+      - status
+      - transaction_status
+      - amount
+      - currency
+      - payment_method
+      - created_at
+      - updated_at
+    title: Transaction
+    type: object
+    x-examples:
+      Bitcoin transaction:
+        amount: 0.039999
+        created_at: '2013-07-16T19:23:00.000Z'
+        currency: USD
+        external_identifier: null
+        id: 18d41625-16d5-40a8-bc92-16f5e1158e55
+        payment_method:
+          authorization_url: null
+          id: null
+          type: bitcoin
+        payment_service_id: stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480
+        status: created
+        tansaction_status: pending
+        type: transaction
+        updated_at: '2013-07-16T19:23:00.000Z'
+      Card transaction:
+        amount: 1299
+        created_at: '2013-07-16T19:23:00.000Z'
+        currency: USD
+        external_identifier: null
+        id: 18d41625-16d5-40a8-bc92-16f5e1158e55
+        payment_method:
+          authorization_url: null
+          id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+          type: card
+        payment_service_id: stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480
+        status: created
+        tansaction_status: pending
+        type: transaction
+        updated_at: '2013-07-16T19:23:00.000Z'
+      PayPal transaction:
+        amount: 1299
+        created_at: '2013-07-16T19:23:00.000Z'
+        currency: USD
+        external_identifier: null
+        id: 18d41625-16d5-40a8-bc92-16f5e1158e55
+        payment_method:
+          authorization_url: null
+          id: null
+          type: paypal
+        payment_service_id: stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480
+        status: created
+        tansaction_status: pending
+        type: transaction
+        updated_at: '2013-07-16T19:23:00.000Z'
+    x-tags:
+      - Transactions
+  Transaction-Create:
+    description: A request to create a transaction
+    properties:
+      amount:
+        description: >-
+          The monitary amount to create an authorization for, in the smallest
+          currency unit for the given currency, for example `1299` cents to
+          create an autorization for `$12.99`.
+
+
+          For BitCoin, this value will be a decimal point number, for example
+          `0.0039`.
+        type: number
+      capture:
+        default: 'false'
+        description: >-
+          Wether a successful authorization should immediately be captured as
+          well, effectively processing the payment directly.
+        example: true
+        type: boolean
+      currency:
+        description: A supported ISO-4217 currency code.
+        example: USD
+        type: string
+      external_identifier:
+        description: >-
+          An external identifier that can be used by the merchant to match the
+          authorization against their own records.
+        type: string
+        x-nullable: true
+      payment_method:
+        description: >-
+          The optional payment method details to create an authorization for.
+          This field is required for processing a card.
+      payment_method_type:
+        description: The type of payment method to create an authorization for.
+        enum:
+          - card
+          - paypal
+          - bitcoin
+        example: card
+        type: string
+      use_test_environment:
+        description: >-
+          Defines if this transaction should run in the payment provider's test
+          environment. Defaults to false.
+        type: boolean
+    required:
+      - amount
+      - currency
+      - payment_method_type
+    title: Transaction (Create)
+    type: object
+    x-examples:
+      A test transaction:
+        amount: 1299
+        capture: true
+        currency: USD
+        external_identifier: string
+        payment_method:
+          expiration_date: 11/15
+          external_identifier: string
+          number: '4111111111111111'
+          security_code: '123'
+          store: true
+        payment_method_type: card
+        use_test_environment: true
+      'Authorize, store, and capture a card':
+        amount: 1299
+        capture: true
+        currency: USD
+        payment_method:
+          expiration_date: 11/2025
+          number: '4111111111111111'
+          security_code: '123'
+          store: true
+        payment_method_type: card
+      Create a Bitcoin authorization:
+        amount: 0.0039999
+        currency: BTC
+        payment_method_type: bitcoin
+      Create a PayPal authorization:
+        amount: 1299
+        currency: USD
+        payment_method_type: paypal
+    x-tags:
+      - Request Bodies
+  TransactionEvent:
+    description: An event that happened for a transaction.
+    properties:
+      code:
+        description: 'The type of event, in dot-format syntax.'
+        example: transaction.rejected.account_closed
+        type: string
+      created_at:
+        description: |
+          When this event was recorded.
+        format: date-time
+        type: string
+      id:
+        description: The unique ID for this event.
+        format: uuid
+        type: string
+      resource:
+        description: An optional related resource that triggered this event.
+        properties:
+          display_name:
+            description: The user's name for the resource
+            type: string
+          id:
+            description: |
+              The ID of the resource
+            type: string
+          service_id:
+            description: The ID of the service that this resource is based on.
+            type: string
+          type:
+            description: The type of the resource
+            type: string
+        required:
+          - id
+          - type
+          - name
+        type: object
+      type:
+        description: The type of this resource. Must always be transaction.event
+        example: transaction.event
+        type: string
+    required:
+      - id
+      - type
+      - created_at
+      - code
+    title: Transaction Event
+    type: object
+    x-examples:
+      Event related to a service:
+        code: transactions.rejected.account_closed
+        created_at: '2020-04-01 14:00:00Z'
+        id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+        resource:
+          display_name: Stripe (Main)
+          id: stripe-card-699c1745-53cf-4b13-b977-fef0ecd4c681
+          service_id: stripe-card
+          type: payment-service
+        type: transactions.event
+      Event without resource:
+        code: transactions.server_error
+        created_at: '2020-04-01 14:00:00Z'
+        id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+        resource: null
+        type: transactions.event
+    x-tags:
+      - Transactions
+  TransactionEvents:
+    description: A list of events for a transaction
+    properties:
+      items:
+        description: A list of transaction events
+        items:
+          $ref: '#/definitions/TransactionEvent'
+        type: array
+      limit:
+        default: 100
+        description: 'The limit set to the number of items returned. '
+        example: 100
+        format: int32
+        maximum: 1000
+        minimum: 0
+        type: integer
+      next_page:
+        description: The marker that represents the next page of results.
+        example: 9f944c64-eaf0-4219-90fd-f7e56c7cd214
+        format: uuid
+        type: string
+        x-nullable: true
+      previous_page:
+        description: The marker that represents the previ page of results.
+        example: 9049b2f9-0c67-47c5-af18-e8525f855263
+        format: uuid
+        type: string
+        x-nullable: true
+    required:
+      - items
+      - limit
+      - next_page
+      - previous_page
+    title: Transaction Events
+    type: object
+    x-examples:
+      A list of transaction events:
+        items:
+          - code: transactions.rejected.account_closed
+            created_at: '2020-04-01 14:00:00Z'
+            id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+            resource:
+              display_name: Stripe (Main)
+              id: stripe-card-699c1745-53cf-4b13-b977-fef0ecd4c681
+              service_id: stripe-card
+              type: payment-service
+            type: transactions.event
+        limit: 100
+        next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
+        previous_page: null
+      An empty list of events:
+        items: []
+        limit: 100
+        next_page: null
+        previous_page: null
+    x-tags:
+      - Transactions
+  Transactions:
+    description: A list of transactions
+    properties:
+      items:
+        description: A list of transactions
+        items:
+          $ref: '#/definitions/Transaction'
+        type: array
+      limit:
+        default: 100
+        description: 'The limit set to the number of items returned. '
+        example: 100
+        format: int32
+        maximum: 1000
+        minimum: 0
+        type: integer
+      next_page:
+        description: The marker that represents the next page of results.
+        example: 9f944c64-eaf0-4219-90fd-f7e56c7cd214
+        format: uuid
+        type: string
+        x-nullable: true
+      previous_page:
+        description: The marker that represents the previ page of results.
+        example: 9049b2f9-0c67-47c5-af18-e8525f855263
+        format: uuid
+        type: string
+        x-nullable: true
+    required:
+      - items
+      - limit
+      - next_page
+      - previous_page
+    title: Transactions
+    type: object
+    x-examples:
+      A list of transactions:
+        items:
+          - amount: 1299
+            created_at: '2013-07-16T19:23:00.000Z'
+            currency: USD
+            external_identifier: null
+            id: 18d41625-16d5-40a8-bc92-16f5e1158e55
+            payment_method:
+              authorization_url: null
+              id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+              type: card
+            payment_service_id: stripe-card-5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
+            status: created
+            tansaction_status: pending
+            type: transaction
+            updated_at: '2013-07-16T19:23:00.000Z'
+        limit: 100
+        next_page: 5159a2ee-f8f9-4669-99e7-e1dc85f98cb9
+        previous_page: null
+      An empty list of transactions:
+        items: []
+        limit: 100
+        next_page: null
+        previous_page: null
+    x-tags:
+      - Transactions
+securityDefinitions:
+  BearerAuth:
+    description: ''
+    in: header
+    name: Authorization
+    type: apiKey
+security:
+  - BearerAuth: []
+tags:
+  - name: Cards
+  - name: Transactions
+  - name: Discovery
+  - name: Payment Services
+  - name: Definitions
+  - name: Async APIs
+x-components: {}
+
