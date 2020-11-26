@@ -351,7 +351,7 @@ paths:
         '204':
           description: No Content
       tags:
-        - Discovery
+        - Payment Services
       description: Removes a payment service definition
       operationId: delete-payment-services-definitions-id
       summary: Delete payment service definition
@@ -2401,7 +2401,6 @@ security:
 tags:
   - name: Cards
   - name: Transactions
-  - name: Discovery
   - name: Payment Services
   - name: Definitions
   - name: Async APIs
