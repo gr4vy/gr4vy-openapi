@@ -64,22 +64,19 @@ paths:
       tags:
         - Transactions
         - Async APIs
-      description: >-
-        Creates an authorization on a card.
+      description: >
+        Attempts to create an authorization for a payment method.
 
 
-        This API can perform a few additional actions at the same time as
-        creating the authorization.
+        This endpoint accepts a few additional fields that allow for
+        simultanious capturing and storage of the payment method.
 
 
-        * `card.store` - Use this method to store the card for furture use
+        * `payment_method.store` - Use this field to store the payment method
+        for furture use. Not all payment methods support this feature.
 
-        * `capture` - Use this method to also perform a capture on the card
-        after it has been authorized.
-
-
-        This API returns asynchronously, returning a pending `Status` object
-        with the ID of the pending authorization.
+        * `capture` - Use this method to also perform a capture of the
+        transaction after it has been authorized.
       operationId: post-async-transactions
       summary: Authorize (and optionally capture) a transaction (Async)
   /async/transactions/batch-capture:
@@ -116,6 +113,46 @@ paths:
         the IDs of the pending `Transaction` resources.
       operationId: post-async-transactions-batch-capture
       summary: Batch capture authorizations (Async)
+  '/async/transactions/{transaction_id}/authorize':
+    parameters:
+      - in: path
+        name: transaction_id
+        required: true
+        type: string
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Authorize-Create'
+      responses:
+        '202':
+          description: Accepted
+          schema:
+            $ref: '#/definitions/Status'
+      tags:
+        - Transactions
+        - Async APIs
+      description: >-
+        Authorize an existing but pending transaction.
+
+
+        This endpoint is used when a transaction was previously created that
+        required additional information, or a redirect, from the buyer. Use this
+        endpoint to post the additional information to trigger the transaction
+        to be properly authorized.
+
+
+        Additionally, this endpoint will capture the transaction and store the
+        payment method if this was previously specified when creating the
+        transaction. We currently do not support overwritting these settings at
+        this point.
+      operationId: post-async-transactions-transaction_id-authorize
+      summary: Authorize pending transaction (Async)
   '/async/transactions/{transaction_id}/capture':
     parameters:
       - in: path
@@ -562,18 +599,22 @@ paths:
             $ref: '#/definitions/Error'
       tags:
         - Transactions
-      description: >-
-        Creates an authorization on a card.
+      description: >
+        Attempts to create an authorization for a payment method. In some cases
+        it is not possible to create the authorization without redirectingt the
+        user for their authorization. In these cases the status is set to
+        `user_authorization_required` and an `authorization_url` is returned.
 
 
-        This API can perform a few additional actions at the same time as
-        creating the authorization.
+        Additionally, this endpoint accepts a few additional fields that allow
+        for simultanious capturing and storage of the payment method.
 
 
-        * `card.store` - Use this method to store the card for furture use
+        * `payment_method.store` - Use this field to store the payment method
+        for furture use. Not all payment methods support this feature.
 
-        * `capture` - Use this method to also perform a capture on the card
-        after it has been authorized.
+        * `capture` - Use this method to also perform a capture of the
+        transaction after it has been authorized.
       operationId: post-transactions
       summary: Authorize (and optionally capture) a transaction
   /transactions/batch-capture:
@@ -593,7 +634,7 @@ paths:
             properties:
               items:
                 items:
-                  $ref: '#/definitions/Capture-Create'
+                  $ref: '#/definitions/BatchCapture-Create'
                 type: array
             type: object
       responses:
@@ -615,9 +656,7 @@ paths:
           description: Forbidden
       tags:
         - Transactions
-      description: >-
-        Takes a JSON or CSV list of authorization IDs and processes them as
-        needed.
+      description: Takes a list of authorization IDs and processes them as needed.
       operationId: post-transactions-batch-capture
       summary: Batch capture authorizations
   '/transactions/{transaction_id}':
@@ -651,6 +690,46 @@ paths:
       description: 'Get a transaction. '
       operationId: get-transaction-id
       summary: Get a transaction
+  '/transactions/{transaction_id}/authorize':
+    parameters:
+      - description: The ID of an existing Gr4vy transaction
+        in: path
+        name: transaction_id
+        required: true
+        type: string
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Authorize-Create'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Transaction'
+      tags:
+        - Transactions
+      description: >-
+        Authorize an existing but pending transaction.
+
+
+        This endpoint is used when a transaction was previously created that
+        required additional information, or a redirect, from the buyer. Use this
+        endpoint to post the additional information to trigger the transaction
+        to be properly authorized.
+
+
+        Additionally, this endpoint will capture the transaction and store the
+        payment method if this was previously specified when creating the
+        transaction. We currently do not support overwritting these settings at
+        this point.
+      operationId: post-transactions-transaction_id-authorize
+      summary: Authorize pending transasction
   '/transactions/{transaction_id}/capture':
     parameters:
       - in: path
@@ -688,7 +767,7 @@ paths:
         - Transactions
       description: Captures a previously authorized transaction.
       operationId: post-transactions-capture
-      summary: Capture a previously authorized transaction
+      summary: Capture previously authorized transaction
   '/transactions/{transaction_id}/events':
     parameters:
       - in: path
@@ -710,6 +789,49 @@ paths:
       operationId: get-transactions-transaction_id-events
       summary: List the events for a given transaction
 definitions:
+  Authorize-Create:
+    description: A request to authorize a transaction
+    properties:
+      amount:
+        description: |-
+          The (partial) amount to capture.
+
+          When left blank, this will capture the entire amount.
+        example: 1299
+        maximum: 99999999
+        minimum: 0.000001
+        type: number
+      currency:
+        description: |
+          A supported ISO-4217 currency code.
+        example: USD
+        type: string
+      external_identifier:
+        description: >-
+          An external identifier that can be used by the merchant to match the
+          authorization against their own records.
+        type: string
+    title: Authorize (Create)
+    type: object
+    x-examples:
+      Authorize with (lower) final amount:
+        amount: 399
+        currency: USD
+      The most basic authorization: {}
+    x-tags:
+      - Request Bodies
+  BatchCapture-Create:
+    allOf:
+      - $ref: '#/definitions/Capture-Create'
+      - properties:
+          transaction_id:
+            description: The ID of the transaction to capture
+            type: string
+        type: object
+    description: A request to capture a transaction as part of a batch capture call.
+    title: Batch Capture (Create)
+    x-tags:
+      - Request Bodies
   Capture-Create:
     description: A request to capture a transaction
     properties:
@@ -722,11 +844,6 @@ definitions:
         maximum: 99999999
         minimum: 0.000001
         type: number
-      authorization_id:
-        description: The ID of the authorization to capture
-        example: 3d1748e5-16fa-468c-82ca-05f31252f515
-        format: uuid
-        type: string
       currency:
         description: |
           A supported ISO-4217 currency code.
@@ -738,7 +855,6 @@ definitions:
           capture against their own records.
         type: string
     required:
-      - authorization_id
       - amount
       - currency
     title: Capture (Create)
@@ -746,7 +862,6 @@ definitions:
     x-examples:
       Capture a previously created authorization:
         amount: 1299
-        authorization_id: 931b9b0c-dc95-4d45-b1fc-64966244ef74
         currency: USD
     x-tags:
       - Request Bodies
@@ -1108,6 +1223,7 @@ definitions:
         example: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
         format: uuid
         type: string
+        x-nullable: true
       type:
         description: The type of payment method
         enum:
@@ -1118,21 +1234,40 @@ definitions:
         type: string
     required:
       - type
+      - id
+      - authorization_url
     title: PaymentMethod
     type: object
     x-examples:
+      A 3D secure needed card (stored):
+        authorization_url: 'https://something.visa.com/'
+        id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+        status: user_authorization_required
+        type: card
       A BitCoin payment method:
         authorization_url: 'https://coinbase.com.....'
         id: null
         type: bitcoin
-      A PayPal payment method:
+      A PayPal payment method that needs user authorization:
         authorization_url: 'https://paypal.com.....'
         id: null
+        status: user_authorization_required
         type: paypal
-      A card payment method:
+      A non-stored card payment method:
+        authorization_url: null
+        id: null
+        status: created
+        type: card
+      A stored card payment method:
         authorization_url: null
         id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+        status: created
         type: card
+      An authorized PayPal payment method:
+        authorization_url: null
+        id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
+        status: captured
+        type: paypal
     x-tags:
       - Payment Methods
   PaymentService:
@@ -1847,7 +1982,7 @@ definitions:
     description: Captures a transaction.
     properties:
       amount:
-        description: The amount captured in this transaction
+        description: The currency amount captured by this transaction.
         example: 1299
         maximum: 99999999
         minimum: 0.000001
@@ -1858,7 +1993,7 @@ definitions:
         format: date-time
         type: string
       currency:
-        description: The currency code for this transaction
+        description: The currency code for this transaction.
         example: USD
         type: string
       external_identifier:
@@ -1867,13 +2002,17 @@ definitions:
           authorization against their own records.
         example: user-789123
         type: string
+        x-nullable: true
       id:
-        description: The internal ID for this transaction
+        description: The unique identifier for this transaction
         example: fe26475d-ec3e-4884-9553-f7356683f7f9
+        format: uuid
         type: string
       payment_method:
         $ref: '#/definitions/PaymentMethod'
       payment_service_id:
+        description: The ID of the payment service that was used for this transaction.
+        example: paypal-paypal-169f5226-4644-4d1e-ac36-14999e73601f
         type: string
       status:
         description: Wether this transaction was successfully created or not.
@@ -1883,7 +2022,18 @@ definitions:
         example: created
         type: string
       transaction_status:
-        description: The status of the transaction being processed.
+        description: >-
+          The status of the transaction being processed. This is different from
+          the `status` field in that it represents the status of the transaction
+          at the payment processor, not the status of the transaction created in
+          Gr4vy.
+        enum:
+          - created
+          - captured
+          - authorized
+          - user_authorization_required
+          - pending
+        example: created
         type: string
       type:
         description: The type of this resource. Is always `transaction`
@@ -1904,10 +2054,27 @@ definitions:
       - currency
       - payment_method
       - created_at
+      - external_identifier
       - updated_at
+      - payment_service_id
     title: Transaction
     type: object
     x-examples:
+      Authorized PayPal transaction:
+        amount: 1299
+        created_at: '2013-07-16T19:23:00.000Z'
+        currency: USD
+        external_identifier: user-789123
+        id: fe26475d-ec3e-4884-9553-f7356683f7f9
+        payment_method:
+          authorization_url: null
+          id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          type: paypal
+        payment_service_id: paypal-paypal-169f5226-4644-4d1e-ac36-14999e73601f
+        status: created
+        transaction_status: authorized
+        type: transaction
+        updated_at: '2019-08-24T14:15:22Z'
       Bitcoin transaction:
         amount: 0.039999
         created_at: '2013-07-16T19:23:00.000Z'
@@ -1938,19 +2105,19 @@ definitions:
         tansaction_status: pending
         type: transaction
         updated_at: '2013-07-16T19:23:00.000Z'
-      PayPal transaction:
+      Pending PayPal transaction:
         amount: 1299
         created_at: '2013-07-16T19:23:00.000Z'
         currency: USD
         external_identifier: null
         id: 18d41625-16d5-40a8-bc92-16f5e1158e55
         payment_method:
-          authorization_url: null
+          authorization_url: 'https://paypal.com....'
           id: null
           type: paypal
-        payment_service_id: stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480
+        payment_service_id: paypal-paypal-111afcdd-fbfd-4558-98be-5d3d28efd480
         status: created
-        tansaction_status: pending
+        tansaction_status: user_authorization_required
         type: transaction
         updated_at: '2013-07-16T19:23:00.000Z'
     x-tags:
