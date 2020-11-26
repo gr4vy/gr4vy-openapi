@@ -34,7 +34,6 @@ paths:
           schema:
             $ref: '#/definitions/Status'
       tags:
-        - Cards
         - Async APIs
       description: >-
         Registers a card with all available processors.
@@ -62,7 +61,6 @@ paths:
           schema:
             $ref: '#/definitions/Status'
       tags:
-        - Transactions
         - Async APIs
       description: >
         Attempts to create an authorization for a payment method.
@@ -102,7 +100,6 @@ paths:
             $ref: '#/definitions/Statuses'
       tags:
         - Async APIs
-        - Transactions
       description: >-
         The body of this API takes either a list of items as a JSON object, or a
         CSV file with each line representing an authorization request, and the
@@ -135,7 +132,6 @@ paths:
           schema:
             $ref: '#/definitions/Status'
       tags:
-        - Transactions
         - Async APIs
       description: >-
         Authorize an existing but pending transaction.
@@ -175,7 +171,6 @@ paths:
           schema:
             $ref: '#/definitions/Status'
       tags:
-        - Transactions
         - Async APIs
       description: >-
         Captures a previously authorized transaction.
