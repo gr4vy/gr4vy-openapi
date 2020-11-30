@@ -281,7 +281,7 @@ paths:
       tags:
         - Cards
       description: 'Get an authorization. '
-      operationId: get-cards-id
+      operationId: get-cards-card_id
       summary: Get a card
   '/cards/{card_id}/events':
     parameters:
@@ -353,7 +353,7 @@ paths:
       tags:
         - Payment Services
       description: Removes a payment service definition
-      operationId: delete-payment-services-definitions-id
+      operationId: delete-payment-services-definitions-payment_service_definition_id
       summary: Delete payment service definition
     get:
       produces:
@@ -367,7 +367,7 @@ paths:
       tags:
         - Definitions
       description: Gets the definition for a payment service.
-      operationId: get-payment-service-definitions-id
+      operationId: get-payment-service-definitions-payment_service_definition_id
       summary: Get payment service definition
     put:
       consumes:
@@ -387,7 +387,7 @@ paths:
       tags:
         - Definitions
       description: Makes an update to a payment service definition
-      operationId: put-payment-services-definitions-id
+      operationId: put-payment-services-definitions-payment_service_definition_id
       summary: Update payment service definition
   /payment-services:
     parameters: []
@@ -683,7 +683,7 @@ paths:
       tags:
         - Transactions
       description: 'Get a transaction. '
-      operationId: get-transaction-id
+      operationId: get-transactions-transaction_id
       summary: Get a transaction
   '/transactions/{transaction_id}/authorize':
     parameters:
@@ -761,7 +761,7 @@ paths:
       tags:
         - Transactions
       description: Captures a previously authorized transaction.
-      operationId: post-transactions-capture
+      operationId: post-transactions-transaction_id-capture
       summary: Capture previously authorized transaction
   '/transactions/{transaction_id}/events':
     parameters:
