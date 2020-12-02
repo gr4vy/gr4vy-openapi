@@ -36,7 +36,7 @@
               "description": "A request to store a card.",
               "properties": {
                 "expiration_date": {
-                  "description": "The expiration date of the card, formatted `MM/YY`. If a card has been previously stored with us this value is optional.\n\nIf the `number` of this card represents a tokenized card, then this value is ignored.",
+                  "description": "The expiration date of the card, formatted `MM/YY`. If a card has been\npreviously stored with us this value is optional.\n\nIf the `number` of this card represents a tokenized card, then this value\nis ignored.",
                   "example": "11/15",
                   "maxLength": 5,
                   "minLength": 5,
@@ -49,7 +49,7 @@
                   "x-nullable": true
                 },
                 "number": {
-                  "description": "The 15-16 digit number for this credit card as it can be found on the front of the card.\n\nIf a card has been stored with us previously, this number will represent the unique tokenized card ID provided via our API.",
+                  "description": "The 15-16 digit number for this credit card as it can be found on the\nfront of the card.\n\nIf a card has been stored with us previously, this number will represent\nthe unique tokenized card ID provided via our API.",
                   "example": "4111111111111111",
                   "maxLength": 16,
                   "minLength": 14,
@@ -57,7 +57,7 @@
                   "type": "string"
                 },
                 "security_code": {
-                  "description": "The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.\n\nIf the `number` of this card represents a tokenized card, then this value is ignored.",
+                  "description": "The 3 or 4 digit security code often found on the card. This often\nreferred to as the CVV or CVD.\n\nIf the `number` of this card represents a tokenized card, then this value\nis ignored.",
                   "example": "123",
                   "maxLength": 4,
                   "minLength": 3,
@@ -185,7 +185,7 @@
               "description": "A request to create a transaction",
               "properties": {
                 "amount": {
-                  "description": "The monitary amount to create an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an autorization for `$12.99`.\n\nFor BitCoin, this value will be a decimal point number, for example `0.0039`.",
+                  "description": "The monitary amount to create an authorization for, in the smallest\ncurrency unit for the given currency, for example `1299` cents to create\nan autorization for `$12.99`.\n\nFor BitCoin, this value will be a decimal point number, for example\n`0.0039`.",
                   "type": "number"
                 },
                 "capture": {
@@ -535,7 +535,7 @@
         "tags": [
           "Async APIs"
         ],
-        "description": "The body of this API takes either a list of items as a JSON object, or a CSV file with each line representing an authorization request, and the headers representing the fields to process.\n\nThis API returns asynchronously, returning a list of status objects with the IDs of the pending `Transaction` resources.",
+        "description": "The body of this API takes either a list of items as a JSON object, or a CSV\nfile with each line representing an authorization request, and the headers\nrepresenting the fields to process.\n\nThis API returns asynchronously, returning a list of status objects with the\nIDs of the pending `Transaction` resources.",
         "operationId": "post-async-transactions-batch-capture",
         "summary": "Batch capture authorizations (Async)"
       }
@@ -683,6 +683,7 @@
     "/async/transactions/{transaction_id}/capture": {
       "parameters": [
         {
+          "description": "The ID for the transaction to get the information for.",
           "in": "path",
           "name": "transaction_id",
           "required": true,
@@ -817,7 +818,7 @@
         "tags": [
           "Async APIs"
         ],
-        "description": "Captures a previously authorized transaction.\n\nThis API returns asynchronously, returning status object with the ID of the pending `Transaction` resource.",
+        "description": "Captures a previously authorized transaction.\n\nThis API returns asynchronously, returning status object with the ID of the\npending `Transaction` resource.",
         "operationId": "post-async-transactions-transaction_id-capture",
         "summary": "Capture a previously authorized transaction (Async)"
       }
@@ -1061,7 +1062,7 @@
               "description": "A request to store a card.",
               "properties": {
                 "expiration_date": {
-                  "description": "The expiration date of the card, formatted `MM/YY`. If a card has been previously stored with us this value is optional.\n\nIf the `number` of this card represents a tokenized card, then this value is ignored.",
+                  "description": "The expiration date of the card, formatted `MM/YY`. If a card has been\npreviously stored with us this value is optional.\n\nIf the `number` of this card represents a tokenized card, then this value\nis ignored.",
                   "example": "11/15",
                   "maxLength": 5,
                   "minLength": 5,
@@ -1074,7 +1075,7 @@
                   "x-nullable": true
                 },
                 "number": {
-                  "description": "The 15-16 digit number for this credit card as it can be found on the front of the card.\n\nIf a card has been stored with us previously, this number will represent the unique tokenized card ID provided via our API.",
+                  "description": "The 15-16 digit number for this credit card as it can be found on the\nfront of the card.\n\nIf a card has been stored with us previously, this number will represent\nthe unique tokenized card ID provided via our API.",
                   "example": "4111111111111111",
                   "maxLength": 16,
                   "minLength": 14,
@@ -1082,7 +1083,7 @@
                   "type": "string"
                 },
                 "security_code": {
-                  "description": "The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.\n\nIf the `number` of this card represents a tokenized card, then this value is ignored.",
+                  "description": "The 3 or 4 digit security code often found on the card. This often\nreferred to as the CVV or CVD.\n\nIf the `number` of this card represents a tokenized card, then this value\nis ignored.",
                   "example": "123",
                   "maxLength": 4,
                   "minLength": 3,
@@ -3818,7 +3819,7 @@
               "description": "A request to create a transaction",
               "properties": {
                 "amount": {
-                  "description": "The monitary amount to create an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an autorization for `$12.99`.\n\nFor BitCoin, this value will be a decimal point number, for example `0.0039`.",
+                  "description": "The monitary amount to create an authorization for, in the smallest\ncurrency unit for the given currency, for example `1299` cents to create\nan autorization for `$12.99`.\n\nFor BitCoin, this value will be a decimal point number, for example\n`0.0039`.",
                   "type": "number"
                 },
                 "capture": {
@@ -6334,11 +6335,11 @@
         "Cards"
       ]
     },
-    "Card-Create": {
+    "CardCreateRequest": {
       "description": "A request to store a card.",
       "properties": {
         "expiration_date": {
-          "description": "The expiration date of the card, formatted `MM/YY`. If a card has been previously stored with us this value is optional.\n\nIf the `number` of this card represents a tokenized card, then this value is ignored.",
+          "description": "The expiration date of the card, formatted `MM/YY`. If a card has been\npreviously stored with us this value is optional.\n\nIf the `number` of this card represents a tokenized card, then this value\nis ignored.",
           "example": "11/15",
           "maxLength": 5,
           "minLength": 5,
@@ -6351,7 +6352,7 @@
           "x-nullable": true
         },
         "number": {
-          "description": "The 15-16 digit number for this credit card as it can be found on the front of the card.\n\nIf a card has been stored with us previously, this number will represent the unique tokenized card ID provided via our API.",
+          "description": "The 15-16 digit number for this credit card as it can be found on the\nfront of the card.\n\nIf a card has been stored with us previously, this number will represent\nthe unique tokenized card ID provided via our API.",
           "example": "4111111111111111",
           "maxLength": 16,
           "minLength": 14,
@@ -6359,7 +6360,7 @@
           "type": "string"
         },
         "security_code": {
-          "description": "The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.\n\nIf the `number` of this card represents a tokenized card, then this value is ignored.",
+          "description": "The 3 or 4 digit security code often found on the card. This often\nreferred to as the CVV or CVD.\n\nIf the `number` of this card represents a tokenized card, then this value\nis ignored.",
           "example": "123",
           "maxLength": 4,
           "minLength": 3,
@@ -8282,11 +8283,11 @@
         "Transactions"
       ]
     },
-    "Transaction-Create": {
+    "TransactionCreateRequest": {
       "description": "A request to create a transaction",
       "properties": {
         "amount": {
-          "description": "The monitary amount to create an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an autorization for `$12.99`.\n\nFor BitCoin, this value will be a decimal point number, for example `0.0039`.",
+          "description": "The monitary amount to create an authorization for, in the smallest\ncurrency unit for the given currency, for example `1299` cents to create\nan autorization for `$12.99`.\n\nFor BitCoin, this value will be a decimal point number, for example\n`0.0039`.",
           "type": "number"
         },
         "capture": {
