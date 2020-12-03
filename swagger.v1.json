@@ -6,7 +6,7 @@
       "name": "Gr4vy Support",
       "url": "https://gr4vy.com"
     },
-    "description": "Welcome to the Gr4vy developer documentation. Our API is still very much a work\nin product and subject to change.\n\nThe Gr4vy API uses a JWT bearer token for authentication, passed into the\n`authorization`-header as follows.\n\n```sh\ncurl -i -X GET \"https://{cluster}/transactions\" \\\n     -H \"authorization: bearer [JWT]\"\n```\n\n<!-- ReDoc-Inject: <security-definitions> -->\n",
+    "description": "Welcome to the Gr4vy developer documentation. Our API is still very much a work\nin product and subject to change.\n\n# Authentication\n\nThe Gr4vy API uses a JWT bearer token for authentication, passed into the\n`authorization`-header as follows.\n\n```sh\ncurl -i -X GET \"https://{cluster}/transactions\" \\\n     -H \"authorization: bearer [JWT]\"\n```\n<!-- ReDoc-Inject: <security-definitions> -->\n",
     "license": {
       "name": "MIT"
     },
