@@ -6,15 +6,19 @@
       "name": "Gr4vy Support",
       "url": "https://gr4vy.com"
     },
-    "description": "The Gr4vy API",
+    "description": "Welcome to the Gr4vy developer documentation. Our API is still very much a work\nin product and subject to change.\n\nThe Gr4vy API uses a JWT bearer token for authentication, passed into the\n`authorization`-header as follows.\n\n```sh\ncurl -i -X GET \"https://{cluster}/transactions\" \\\n     -H \"authorization: bearer [JWT]\"\n```\n\n<!-- ReDoc-Inject: <security-definitions> -->\n",
     "license": {
       "name": "MIT"
     },
     "termsOfService": "https://gr4vy.com",
-    "title": "Gr4vy API",
-    "version": "1.0"
+    "title": "Gr4vy API (Beta)",
+    "version": "1.0",
+    "x-logo": {
+      "altText": "Gr4vy",
+      "url": "https://pbs.twimg.com/profile_images/1286678982713397254/MsTCfC92_400x400.jpg"
+    }
   },
-  "host": "api.gr4vy.com",
+  "host": "merchant_id.api.gr4vy.com",
   "basePath": "/",
   "schemes": [
     "https"
@@ -49,8 +53,8 @@
           "Async APIs"
         ],
         "description": "Registers a card with all available processors.\n\nThis API returns asynchronously, returning a pending `Status` object with the\nID of the pending card resource.",
-        "operationId": "post-async-cards",
-        "summary": "Register a card (Async)"
+        "operationId": "async-add-card",
+        "summary": "Register card"
       }
     },
     "/async/transactions": {
@@ -63,7 +67,6 @@
         ],
         "parameters": [
           {
-            "description": "",
             "in": "body",
             "name": "body",
             "schema": {
@@ -83,8 +86,8 @@
           "Async APIs"
         ],
         "description": "Attempts to create an authorization for a payment method.\n\nThis endpoint accepts a few additional fields that allow for simultanious\ncapturing and storage of the payment method.\n\n* `payment_method.store` - Use this field to store the payment method for\nfuture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
-        "operationId": "post-async-transactions",
-        "summary": "Authorize (and optionally capture) a transaction (Async)"
+        "operationId": "async-create-transaction",
+        "summary": "Create transaction"
       }
     },
     "/async/transactions/batch-capture": {
@@ -123,9 +126,9 @@
         "tags": [
           "Async APIs"
         ],
-        "description": "The body of this API takes either a list of items as a JSON object, or a CSV\nfile with each line representing an authorization request, and the headers\nrepresenting the fields to process.\n\nThis API returns asynchronously, returning a list of status objects with the\nIDs of the pending `Transaction` resources.",
-        "operationId": "post-async-transactions-batch-capture",
-        "summary": "Batch capture authorizations (Async)"
+        "description": "The body of this API takes a list of items as a JSON object.\n\nThis API returns asynchronously, returning a list of status objects with the\nIDs of the pending `Transaction` resources.",
+        "operationId": "async-batch-capture-transactions",
+        "summary": "Batch capture authorizations"
       }
     },
     "/async/transactions/{transaction_id}/authorize": {
@@ -166,8 +169,8 @@
           "Async APIs"
         ],
         "description": "Authorize an existing but pending transaction.\n\nThis endpoint is used when a transaction was previously created that required\nadditional information, or a redirect, from the buyer. Use this endpoint to\npost the additional information to trigger the transaction to be properly\nauthorized.\n\nAdditionally, this endpoint will capture the transaction and store the payment\nmethod if this was previously specified when creating the transaction. We\ncurrently do not support overwritting these settings at this point.",
-        "operationId": "post-async-transactions-transaction_id-authorize",
-        "summary": "Authorize pending transaction (Async)"
+        "operationId": "async-authorize-transaction",
+        "summary": "Authorize pending transaction"
       }
     },
     "/async/transactions/{transaction_id}/capture": {
@@ -208,8 +211,8 @@
           "Async APIs"
         ],
         "description": "Captures a previously authorized transaction.\n\nThis API returns asynchronously, returning status object with the ID of the\npending `Transaction` resource.",
-        "operationId": "post-async-transactions-transaction_id-capture",
-        "summary": "Capture a previously authorized transaction (Async)"
+        "operationId": "async-capture-transaction",
+        "summary": "Capture authorized transaction"
       }
     },
     "/card-rulesets": {
@@ -230,8 +233,8 @@
           "Card Rulesets"
         ],
         "description": "Returns a list of rulesets that can be used for card transactions.",
-        "operationId": "get-cards-rulesets",
-        "summary": "List the rulesets for card transactions"
+        "operationId": "list-cards-rulesets",
+        "summary": "List card rulesets"
       },
       "post": {
         "consumes": [
@@ -267,8 +270,8 @@
           "Card Rulesets"
         ],
         "description": "Creates a new ruleset that can be used for card transactions.",
-        "operationId": "post-cards-rulesets",
-        "summary": "Create a new ruleset for card transactions"
+        "operationId": "add-card-ruleset",
+        "summary": "Create card ruleset"
       }
     },
     "/card-rulesets/{card_ruleset_id}": {
@@ -308,8 +311,8 @@
           "Card Rulesets"
         ],
         "description": "Deletes a specific card ruleset",
-        "operationId": "delete-card-rulesets-card_ruleset_id",
-        "summary": "Delete a card ruleset"
+        "operationId": "delete-card-ruleset",
+        "summary": "Delete card ruleset"
       },
       "get": {
         "produces": [
@@ -334,8 +337,8 @@
           "Card Rulesets"
         ],
         "description": "Returns a rulesets that can be used for card transactions.",
-        "operationId": "get-cards-rulesets-card_ruleset_id",
-        "summary": "Get a ruleset for card transactions"
+        "operationId": "get-card-ruleset",
+        "summary": "Get card ruleset"
       },
       "put": {
         "consumes": [
@@ -377,8 +380,8 @@
           "Card Rulesets"
         ],
         "description": "Updates a ruleset that can be used for card transactions.",
-        "operationId": "put-cards-rulesets-card_ruleset_id",
-        "summary": "Update a ruleset for card transactions"
+        "operationId": "update-card-ruleset",
+        "summary": "Update card ruleset"
       }
     },
     "/card-rulesets/{card_ruleset_id}/activate": {
@@ -421,8 +424,8 @@
           "Card Rulesets"
         ],
         "description": "Activates aa ruleset for card transactions, making it the one\nruleset used by all card transactions.\n\nOnly one ruleset can be active at any time. By activating a ruleset the\nexisting active ruleset will be deactivated.\n\nOnly valid rulesets can be activated.",
-        "operationId": "post-cards-rulesets-card_ruleset_id-activate",
-        "summary": "Activates a ruleset for card transactions"
+        "operationId": "activate-card-ruleset",
+        "summary": "Activate card ruleset"
       }
     },
     "/cards": {
@@ -467,8 +470,8 @@
           "Cards"
         ],
         "description": "Returns a list of cards",
-        "operationId": "get-cards",
-        "summary": "List all cards"
+        "operationId": "list-cards",
+        "summary": "List cards"
       },
       "post": {
         "consumes": [
@@ -510,8 +513,8 @@
           "Cards"
         ],
         "description": "Registers a card with all available processors.\n",
-        "operationId": "post-cards",
-        "summary": "Register a card"
+        "operationId": "add-card",
+        "summary": "Register card"
       }
     },
     "/cards/{card_id}": {
@@ -554,8 +557,8 @@
           "Cards"
         ],
         "description": "Get an authorization. ",
-        "operationId": "get-cards-card_id",
-        "summary": "Get a card"
+        "operationId": "get-card",
+        "summary": "Get card"
       }
     },
     "/cards/{card_id}/events": {
@@ -586,8 +589,8 @@
           "Cards"
         ],
         "description": "Returns a list of events for a given transaction.",
-        "operationId": "get-cards-card_id-events",
-        "summary": "List the events for a given card"
+        "operationId": "list-card-event",
+        "summary": "List card events"
       }
     },
     "/payment-service-definitions": {
@@ -605,11 +608,11 @@
           }
         },
         "tags": [
-          "Definitions"
+          "Payment Service Definitions"
         ],
         "description": "Returns a list of all available payment service definitions.",
-        "operationId": "get-payment-service-definitions",
-        "summary": "Get all payment service definitions"
+        "operationId": "list-payment-service-definitions",
+        "summary": "List payment service definitions"
       },
       "post": {
         "consumes": [
@@ -636,11 +639,11 @@
           }
         },
         "tags": [
-          "Definitions"
+          "Payment Service Definitions"
         ],
         "description": "Creates a new payment service definition",
-        "operationId": "post-payment-service-definitions",
-        "summary": "Create payment service definition"
+        "operationId": "add-payment-service-definition",
+        "summary": "Add payment service definition"
       }
     },
     "/payment-service-definitions/{payment_service_definition_id}": {
@@ -661,10 +664,10 @@
           }
         },
         "tags": [
-          "Payment Services"
+          "Payment Service Definitions"
         ],
         "description": "Removes a payment service definition",
-        "operationId": "delete-payment-services-definitions-payment_service_definition_id",
+        "operationId": "delete-payment-services-definition",
         "summary": "Delete payment service definition"
       },
       "get": {
@@ -681,10 +684,10 @@
           }
         },
         "tags": [
-          "Definitions"
+          "Payment Service Definitions"
         ],
         "description": "Gets the definition for a payment service.",
-        "operationId": "get-payment-service-definitions-payment_service_definition_id",
+        "operationId": "get-payment-service-definition",
         "summary": "Get payment service definition"
       },
       "put": {
@@ -712,10 +715,10 @@
           }
         },
         "tags": [
-          "Definitions"
+          "Payment Service Definitions"
         ],
         "description": "Makes an update to a payment service definition",
-        "operationId": "put-payment-services-definitions-payment_service_definition_id",
+        "operationId": "update-payment-services-definition",
         "summary": "Update payment service definition"
       }
     },
@@ -737,20 +740,18 @@
           "Payment Services"
         ],
         "description": "Lists the currently configured and activated payment services for a for a merchant.",
-        "operationId": "get-payment_services",
-        "summary": "List the active payment services"
+        "operationId": "list-payment-services",
+        "summary": "List payment services"
       },
       "post": {
         "consumes": [
           "application/json"
         ],
         "produces": [
-          "application/json",
-          "application/xml"
+          "application/json"
         ],
         "parameters": [
           {
-            "description": "",
             "in": "body",
             "name": "body",
             "schema": {
@@ -760,7 +761,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "A created response",
             "schema": {
               "$ref": "#/definitions/PaymentService"
             }
@@ -770,8 +771,8 @@
           "Payment Services"
         ],
         "description": "Adds a new payment service by providing a custom name and a value for each of the required fields.",
-        "operationId": "post-payment_services",
-        "summary": "Activate a payment service"
+        "operationId": "add-payment-service",
+        "summary": "Add payment service"
       }
     },
     "/payment-services/{payment_service_id}": {
@@ -796,7 +797,7 @@
           "Payment Services"
         ],
         "description": "Deletes a specific active payment service.",
-        "operationId": "delete-payment-services-payment_service_id",
+        "operationId": "delete-payment-service",
         "summary": "Delete active payment service"
       },
       "get": {
@@ -816,8 +817,8 @@
           "Payment Services"
         ],
         "description": "Retrieves the details of a single configured payment service.",
-        "operationId": "get-payment-services-payment_service_id",
-        "summary": "Get info about active payment service"
+        "operationId": "get-payment-service",
+        "summary": "Get payment service"
       },
       "put": {
         "consumes": [
@@ -836,8 +837,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted",
+          "201": {
+            "description": "The updated payment service",
             "schema": {
               "$ref": "#/definitions/PaymentService"
             }
@@ -847,8 +848,8 @@
           "Payment Services"
         ],
         "description": "Updates an existing payment service. Allows all fields to be changed except for the service ID.",
-        "operationId": "put-payment-services-payment_service_id",
-        "summary": "Update active payment service"
+        "operationId": "update-payment-service",
+        "summary": "Update payment service"
       }
     },
     "/transactions": {
@@ -928,8 +929,8 @@
           "Transactions"
         ],
         "description": "Lists all transactions for an account. Sorted by last `updated_at` status.",
-        "operationId": "get-transactions",
-        "summary": "List all transactions"
+        "operationId": "list-transactions",
+        "summary": "List transactions"
       },
       "post": {
         "consumes": [
@@ -971,8 +972,8 @@
           "Transactions"
         ],
         "description": "Attempts to create an authorization for a payment method. In some cases it is\nnot possible to create the authorization without redirectingt the user for\ntheir authorization. In these cases the status is set to\n`user_authorization_required` and an `authorization_url` is returned.\n\nAdditionally, this endpoint accepts a few additional fields that allow for\nsimultanious capturing and storage of the payment method.\n\n* `payment_method.store` - Use this field to store the payment method for\nfurture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
-        "operationId": "post-transactions",
-        "summary": "Authorize (and optionally capture) a transaction"
+        "operationId": "authorize-new-transaction",
+        "summary": "Create transaction"
       }
     },
     "/transactions/batch-capture": {
@@ -985,7 +986,6 @@
         ],
         "parameters": [
           {
-            "description": "The body of this API takes either a list of items as a JSON object, or a CSV\nfile with each line representing an authorization request, and the headers\nrepresenting the fields to process.\n",
             "in": "body",
             "name": "body",
             "schema": {
@@ -1001,7 +1001,7 @@
             }
           },
           "400": {
-            "description": "Returns an error if the request is missing any required fields, or the request body is not valid JSON/CSV.",
+            "description": "Returns an error if the request is missing any required fields, or the request body is not valid JSON.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1020,7 +1020,7 @@
           "Transactions"
         ],
         "description": "Takes a list of authorization IDs and processes them as needed.",
-        "operationId": "post-transactions-batch-capture",
+        "operationId": "batch-capture-transactions",
         "summary": "Batch capture authorizations"
       }
     },
@@ -1063,8 +1063,8 @@
           "Transactions"
         ],
         "description": "Get information about a transaction",
-        "operationId": "get-transactions-transaction_id",
-        "summary": "Get a transaction"
+        "operationId": "get-transaction",
+        "summary": "Get transaction"
       }
     },
     "/transactions/{transaction_id}/authorize": {
@@ -1105,8 +1105,8 @@
           "Transactions"
         ],
         "description": "Authorize an existing but pending transaction.\n\nThis endpoint is used when a transaction was previously created that required\nadditional information, or a redirect, from the buyer. Use this endpoint to\npost the additional information to trigger the transaction to be properly\nauthorized.\n\nAdditionally, this endpoint will capture the transaction and store the payment\nmethod if this was previously specified when creating the transaction. We\ncurrently do not support overwritting these settings at this point.",
-        "operationId": "post-transactions-transaction_id-authorize",
-        "summary": "Authorize pending transasction"
+        "operationId": "authorize-transaction",
+        "summary": "Authorize pending transaction"
       }
     },
     "/transactions/{transaction_id}/capture": {
@@ -1128,7 +1128,6 @@
         ],
         "parameters": [
           {
-            "description": "",
             "in": "body",
             "name": "body",
             "schema": {
@@ -1138,7 +1137,7 @@
         ],
         "responses": {
           "201": {
-            "description": "",
+            "description": "A transaction",
             "schema": {
               "$ref": "#/definitions/Transaction"
             }
@@ -1160,8 +1159,8 @@
           "Transactions"
         ],
         "description": "Captures a previously authorized transaction.",
-        "operationId": "post-transactions-transaction_id-capture",
-        "summary": "Capture previously authorized transaction"
+        "operationId": "capture-transaction",
+        "summary": "Capture authorized transaction"
       }
     },
     "/transactions/{transaction_id}/events": {
@@ -1191,8 +1190,8 @@
           "Transactions"
         ],
         "description": "Returns a list of events for a given transaction.",
-        "operationId": "get-transactions-transaction_id-events",
-        "summary": "List the events for a given transaction"
+        "operationId": "list-transaction-events",
+        "summary": "List transaction events"
       }
     }
   },
@@ -1237,15 +1236,6 @@
       },
       "title": "Card",
       "type": "object",
-      "x-examples": {
-        "A stored card": {
-          "created_at": "2013-07-16T19:23:00.000Z",
-          "external_identifier": "user-789123",
-          "id": "87c5de1b-19af-4196-8acf-d31f23c59484",
-          "status": "partially_created",
-          "type": "card"
-        }
-      },
       "x-tags": [
         "Cards"
       ]
@@ -1288,14 +1278,6 @@
       ],
       "title": "Card (Create)",
       "type": "object",
-      "x-examples": {
-        "Store a new card": {
-          "expiration_date": "11/2025",
-          "external_identifier": "user-789123",
-          "number": "4111111111111111",
-          "security_code": "123"
-        }
-      },
       "x-tags": [
         "Request Bodies"
       ]
@@ -1318,25 +1300,25 @@
           "properties": {
             "display_name": {
               "description": "The user's name for the resource",
+              "example": "Stripe (Card)",
               "type": "string"
             },
             "id": {
               "description": "The ID of the resource\n",
+              "example": "stripe-card-c4a988a2-cae6-4854-9aa0-a8365da0816d",
               "type": "string"
             },
             "service_id": {
               "description": "The ID of the service that this resource is based on.",
+              "example": "stripe-card",
               "type": "string"
             },
             "type": {
               "description": "The type of the resource",
+              "example": "payment-service",
               "type": "string"
             }
           },
-          "required": [
-            "id",
-            "type"
-          ],
           "type": "object"
         },
         "id": {
@@ -1352,27 +1334,6 @@
       },
       "title": "Card Event",
       "type": "object",
-      "x-examples": {
-        "Event related to a service": {
-          "code": "card.rejected",
-          "created_at": "2020-04-01 14:00:00Z",
-          "external_service": {
-            "display_name": "Stripe (Main)",
-            "id": "stripe-card-699c1745-53cf-4b13-b977-fef0ecd4c681",
-            "service_id": "stripe-card",
-            "type": "payment-service"
-          },
-          "id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-          "type": "card.event"
-        },
-        "Event without resource": {
-          "code": "transactions.server_error",
-          "created_at": "2020-04-01 14:00:00Z",
-          "id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-          "resource": null,
-          "type": "transactions.event"
-        }
-      },
       "x-tags": [
         "Cards"
       ]
@@ -1413,33 +1374,6 @@
       },
       "title": "Card Events",
       "type": "object",
-      "x-examples": {
-        "A list of card events": {
-          "items": [
-            {
-              "code": "card.rejected",
-              "created_at": "2020-04-01 14:00:00Z",
-              "external_service": {
-                "display_name": "Stripe (Main)",
-                "id": "stripe-card-699c1745-53cf-4b13-b977-fef0ecd4c681",
-                "service_id": "stripe-card",
-                "type": "payment-service"
-              },
-              "id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-              "type": "card.event"
-            }
-          ],
-          "limit": 100,
-          "next_page": "5159a2ee-f8f9-4669-99e7-e1dc85f98cb9",
-          "previous_page": null
-        },
-        "An empty list of events": {
-          "items": [],
-          "limit": 100,
-          "next_page": null,
-          "previous_page": null
-        }
-      },
       "x-tags": [
         "Cards"
       ]
@@ -1519,18 +1453,6 @@
       ],
       "title": "Conditional Card Rule",
       "type": "object",
-      "x-examples": {
-        "A conditonal rule": {
-          "condition": ">=",
-          "false_rule_id": "2",
-          "id": "0",
-          "key": "amount",
-          "rule_type": "conditional",
-          "true_rule_id": "1",
-          "type": "card-rule",
-          "value": "200"
-        }
-      },
       "x-tags": [
         "Card Rulesets"
       ]
@@ -1546,7 +1468,7 @@
         "payment_service_ids": {
           "description": "A list of IDs for the payment services to use, in order of priority.\nThe payment services all need to process cards.",
           "example": [
-            "card-stripe-f47db210-8e30-4f74-8123-b834604f2042",
+            "stripe-card-f47db210-8e30-4f74-8123-b834604f2042",
             "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
           ],
           "items": {
@@ -1579,17 +1501,6 @@
       ],
       "title": "Terminal Card Rule",
       "type": "object",
-      "x-examples": {
-        "A terminal rule": {
-          "id": "0",
-          "payment_service_ids": [
-            "card-stripe-f47db210-8e30-4f74-8123-b834604f2042",
-            "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
-          ],
-          "rule_type": "terminal",
-          "type": "card-rule"
-        }
-      },
       "x-tags": [
         "Card Rulesets"
       ]
@@ -1651,46 +1562,6 @@
       },
       "title": "Card Ruleset",
       "type": "object",
-      "x-examples": {
-        "A ruleset": {
-          "active": true,
-          "created_at": "2012-12-12T10:53:43-08:00",
-          "display_name": "Q2 2020 Ruleset",
-          "id": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
-          "root_rule_id": "0",
-          "rules": [
-            {
-              "condition": ">=",
-              "false_rule_id": "2",
-              "id": "0",
-              "key": "amount",
-              "rule_type": "conditional",
-              "true_rule_id": "1",
-              "type": "card-rule",
-              "value": "200"
-            },
-            {
-              "id": "1",
-              "payment_service_ids": [
-                "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
-              ],
-              "rule_type": "terminal",
-              "type": "card-rule"
-            },
-            {
-              "id": "2",
-              "payment_service_ids": [
-                "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
-              ],
-              "rule_type": "terminal",
-              "type": "card-rule"
-            }
-          ],
-          "type": "ruleset",
-          "updated_at": "2012-12-12T10:53:43-08:00",
-          "valid": true
-        }
-      },
       "x-tags": [
         "Card Rulesets"
       ]
@@ -1721,40 +1592,6 @@
       ],
       "title": "Card Ruleset (Create)",
       "type": "object",
-      "x-examples": {
-        "Minimal ruleset": {
-          "display_name": "Q2 2020 Ruleset",
-          "root_rule_id": "0",
-          "rules": [
-            {
-              "condition": ">=",
-              "false_rule_id": "2",
-              "id": "0",
-              "key": "amount",
-              "rule_type": "conditional",
-              "true_rule_id": "1",
-              "type": "card-rule",
-              "value": "200"
-            },
-            {
-              "id": "1",
-              "payment_service_ids": [
-                "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
-              ],
-              "rule_type": "terminal",
-              "type": "card-rule"
-            },
-            {
-              "id": "2",
-              "payment_service_ids": [
-                "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
-              ],
-              "rule_type": "terminal",
-              "type": "card-rule"
-            }
-          ]
-        }
-      },
       "x-tags": [
         "Card Rulesets"
       ]
@@ -1785,40 +1622,6 @@
       ],
       "title": "Card Ruleset (Update)",
       "type": "object",
-      "x-examples": {
-        "Minimal ruleset": {
-          "display_name": "Q2 2020 Ruleset",
-          "root_rule_id": "0",
-          "rules": [
-            {
-              "condition": ">=",
-              "false_rule_id": "2",
-              "id": "0",
-              "key": "amount",
-              "rule_type": "conditional",
-              "true_rule_id": "1",
-              "type": "card-rule",
-              "value": "200"
-            },
-            {
-              "id": "1",
-              "payment_service_ids": [
-                "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
-              ],
-              "rule_type": "terminal",
-              "type": "card-rule"
-            },
-            {
-              "id": "2",
-              "payment_service_ids": [
-                "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
-              ],
-              "rule_type": "terminal",
-              "type": "card-rule"
-            }
-          ]
-        }
-      },
       "x-tags": [
         "Card Rulesets"
       ]
@@ -1836,53 +1639,6 @@
       },
       "title": "Card Rulesets",
       "type": "object",
-      "x-examples": {
-        "A list of card rulesets": {
-          "items": [
-            {
-              "active": true,
-              "created_at": "2012-12-12T10:53:43-08:00",
-              "display_name": "Q2 2020 Ruleset",
-              "id": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
-              "root_rule_id": "0",
-              "rules": [
-                {
-                  "condition": ">=",
-                  "false_rule_id": "2",
-                  "id": "0",
-                  "key": "amount",
-                  "rule_type": "conditional",
-                  "true_rule_id": "1",
-                  "type": "card-rule",
-                  "value": "200"
-                },
-                {
-                  "id": "1",
-                  "payment_service_ids": [
-                    "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
-                  ],
-                  "rule_type": "terminal",
-                  "type": "card-rule"
-                },
-                {
-                  "id": "2",
-                  "payment_service_ids": [
-                    "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
-                  ],
-                  "rule_type": "terminal",
-                  "type": "card-rule"
-                }
-              ],
-              "type": "ruleset",
-              "updated_at": "2012-12-12T10:53:43-08:00",
-              "valid": true
-            }
-          ]
-        },
-        "An empty list of card rulesets": {
-          "items": []
-        }
-      },
       "x-tags": [
         "Card Rulesets"
       ]
@@ -1923,28 +1679,6 @@
       },
       "title": "Cards",
       "type": "object",
-      "x-examples": {
-        "A list of cards": {
-          "items": [
-            {
-              "created_at": "2013-07-16T19:23:00.000Z",
-              "external_identifier": "user-789123",
-              "id": "87c5de1b-19af-4196-8acf-d31f23c59484",
-              "status": "partially_created",
-              "type": "card"
-            }
-          ],
-          "limit": 100,
-          "next_page": "5159a2ee-f8f9-4669-99e7-e1dc85f98cb9",
-          "previous_page": null
-        },
-        "An empty list of cards": {
-          "items": [],
-          "limit": 100,
-          "next_page": null,
-          "previous_page": null
-        }
-      },
       "x-tags": [
         "Cards"
       ]
@@ -1984,14 +1718,6 @@
       },
       "title": "Error",
       "type": "object",
-      "x-examples": {
-        "Incorrect JSON": {
-          "code": "incorrect_json",
-          "message": "The request body was not valid JSON.",
-          "status": 400,
-          "type": "error"
-        }
-      },
       "x-tags": [
         "Errors"
       ]
@@ -2026,43 +1752,6 @@
       },
       "title": "PaymentMethod",
       "type": "object",
-      "x-examples": {
-        "A 3D secure needed card (stored)": {
-          "authorization_url": "https://something.visa.com/",
-          "id": "fa5dc53e-b070-417b-9355-5dc9b80a69e3",
-          "status": "user_authorization_required",
-          "type": "card"
-        },
-        "A BitCoin payment method": {
-          "authorization_url": "https://coinbase.com.....",
-          "id": null,
-          "type": "bitcoin"
-        },
-        "A PayPal payment method that needs user authorization": {
-          "authorization_url": "https://paypal.com.....",
-          "id": null,
-          "status": "user_authorization_required",
-          "type": "paypal"
-        },
-        "A non-stored card payment method": {
-          "authorization_url": null,
-          "id": null,
-          "status": "created",
-          "type": "card"
-        },
-        "A stored card payment method": {
-          "authorization_url": null,
-          "id": "fa5dc53e-b070-417b-9355-5dc9b80a69e3",
-          "status": "created",
-          "type": "card"
-        },
-        "An authorized PayPal payment method": {
-          "authorization_url": null,
-          "id": "fa5dc53e-b070-417b-9355-5dc9b80a69e3",
-          "status": "captured",
-          "type": "paypal"
-        }
-      },
       "x-tags": [
         "Payment Methods"
       ]
@@ -2072,6 +1761,9 @@
       "properties": {
         "accepted_countries": {
           "description": "A list of countries for which this service is enabled, in ISO two-letter code format.",
+          "example": [
+            "DE"
+          ],
           "items": {
             "minLength": 1,
             "type": "string"
@@ -2080,6 +1772,9 @@
         },
         "accepted_currencies": {
           "description": "A list of currencies for which this service is enabled, in ISO 4217 three-letter code format.",
+          "example": [
+            "EUR"
+          ],
           "items": {
             "minLength": 1,
             "type": "string"
@@ -2093,11 +1788,12 @@
         },
         "id": {
           "description": "The ID of this payment service instance",
-          "example": "faaad066-30b4-4997-a438-242b0752d7e1",
+          "example": "stripe-card-faaad066-30b4-4997-a438-242b0752d7e1",
           "type": "string"
         },
         "payment_method_id": {
           "description": "Defines the ID of the payment method that this service handles.",
+          "example": "card",
           "type": "string"
         },
         "payment_service_definition_id": {
@@ -2129,27 +1825,6 @@
       },
       "title": "A payment service",
       "type": "object",
-      "x-examples": {
-        "Stripe": {
-          "accepted_countries": [
-            "US",
-            "GB",
-            "DE"
-          ],
-          "accepted_currencies": [
-            "USD",
-            "GBP",
-            "EUR"
-          ],
-          "display_name": "Stripe (Main)",
-          "id": "stripe-card-5a303fc4-817b-4073-9b41-a26eff29080a",
-          "payment_method_id": "card",
-          "payment_service_definition_id": "stripe-card",
-          "status": "created",
-          "type": "payment-service",
-          "use_test_environment": false
-        }
-      },
       "x-tags": [
         "Payment Services"
       ]
@@ -2159,6 +1834,11 @@
       "properties": {
         "accepted_countries": {
           "description": "A list of countries that this payment service needs to support in ISO two-letter code format.",
+          "example": [
+            "US",
+            "GB",
+            "DE"
+          ],
           "items": {
             "type": "string"
           },
@@ -2166,6 +1846,11 @@
         },
         "accepted_currencies": {
           "description": "A list of currencies that this payment service needs to support in ISO 4217 three-letter code format.",
+          "example": [
+            "EUR",
+            "USD",
+            "GBP"
+          ],
           "items": {
             "type": "string"
           },
@@ -2174,6 +1859,7 @@
         },
         "display_name": {
           "description": "A custom name for the payment service. This will be shown in the Admin UI.",
+          "example": "Stripe (USA)",
           "type": "string"
         },
         "payment_service_definition_id": {
@@ -2207,6 +1893,7 @@
         },
         "use_test_environment": {
           "description": "Defines if this payment service uses the service's test or sandbox environment. Defaults to false.",
+          "example": false,
           "type": "boolean"
         }
       },
@@ -2220,33 +1907,6 @@
       ],
       "title": "Payment Service (Create)",
       "type": "object",
-      "x-examples": {
-        "Add card payment via Stripe": {
-          "accepted_countries": [
-            "US",
-            "GB",
-            "DE"
-          ],
-          "accepted_currencies": [
-            "USD",
-            "GBP",
-            "EUR"
-          ],
-          "display_name": "Card using Stripe (Main)",
-          "payment_service_definition_id": "stripe-card",
-          "required_fields": [
-            {
-              "key": "private_key",
-              "value": "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
-            },
-            {
-              "key": "public_key",
-              "value": "pk_test_arjtT1zdp7dc4eC39HqLyjWD"
-            }
-          ],
-          "use_test_environment": false
-        }
-      },
       "x-tags": [
         "Request Bodies"
       ]
@@ -2254,6 +1914,11 @@
     "PaymentServiceDefinition": {
       "description": "An available payment service that can be configured for this cluster.",
       "properties": {
+        "available": {
+          "description": "Defines if a service is available to be activated in this cluster.",
+          "example": true,
+          "type": "boolean"
+        },
         "display_name": {
           "description": "The display name of this service",
           "example": "Stripe",
@@ -2261,15 +1926,17 @@
         },
         "help_url": {
           "description": "A URL that provides more details about this payment service",
+          "example": "https://stripe.com/docs",
           "type": "string"
         },
         "id": {
           "description": "The ID of the payment service. This is the underlying provider followed by a dash followed by the payment method ID.",
-          "example": "stipe-card",
+          "example": "stripe-card",
           "type": "string"
         },
         "logo_url": {
           "description": "The logo for this provider",
+          "example": "https://cdn.stripe.com/logo.png",
           "format": "uri",
           "type": "string"
         },
@@ -2285,14 +1952,17 @@
             "properties": {
               "display_name": {
                 "description": "The name to display for a field in the cluster UI",
+                "example": "Private API key",
                 "type": "string"
               },
               "help_url": {
                 "description": "A URL that provides more details about this field",
+                "example": "https://stripe.com/docs/private_api_key",
                 "type": "string"
               },
               "key": {
                 "description": "The key of a field that needs to be submitted",
+                "example": "private_api_key",
                 "type": "string"
               }
             },
@@ -2303,6 +1973,11 @@
         },
         "supported_countries": {
           "description": "A list of 2-letter ISO country codes that this service supports",
+          "example": [
+            "US",
+            "GB",
+            "DE"
+          ],
           "items": {
             "type": "string"
           },
@@ -2310,6 +1985,11 @@
         },
         "supported_currencies": {
           "description": "A list of 3-letter ISO currency codes that this service supports",
+          "example": [
+            "USD",
+            "GBP",
+            "EUR"
+          ],
           "items": {
             "type": "string"
           },
@@ -2317,70 +1997,13 @@
         },
         "type": {
           "default": "payment-service-definition",
-          "description": "The type of this resource. ",
+          "description": "`payment-service-definition`",
+          "example": "payment-service-definition",
           "type": "string"
         }
       },
       "title": "Payment Service Definition",
       "type": "object",
-      "x-examples": {
-        "Braintree": {
-          "display_name": "Cards using Braintree",
-          "help_url": "https://developer.braintreepayments.com",
-          "id": "braintree-card",
-          "logo_url": "https://braintree.com/braintree.png",
-          "payment_method_id": "card",
-          "required_fields": [
-            {
-              "display_name": "Client Token",
-              "help_url": "https://developers.braintreepayments.com/guides/authorization/client-token",
-              "key": "client_token"
-            },
-            {
-              "display_name": "Tokenization Key",
-              "help_url": "https://developers.braintreepayments.com/guides/authorization/tokenization-key/javascript/v3",
-              "key": "tokenization_key"
-            }
-          ],
-          "supported_countries": [
-            "DE",
-            "US"
-          ],
-          "supported_currencies": [
-            "EUR",
-            "USD"
-          ],
-          "type": "payment-service-definition"
-        },
-        "Stripe": {
-          "display_name": "Cards using Stripe",
-          "help_url": "https://stripe.com/docs",
-          "id": "stripe-card",
-          "logo_url": "https://stripe.com/stripe.png",
-          "payment_method_id": "card",
-          "required_fields": [
-            {
-              "display_name": "Publishable API key",
-              "help_url": "https://stripe.com/docs/keys",
-              "key": "public_key"
-            },
-            {
-              "display_name": "Secret API key",
-              "help_url": "https://stripe.com/docs/keys",
-              "key": "private_key"
-            }
-          ],
-          "supported_countries": [
-            "DE",
-            "US"
-          ],
-          "supported_currencies": [
-            "EUR",
-            "USD"
-          ],
-          "type": "payment-service-definition"
-        }
-      },
       "x-tags": [
         "Discovery"
       ]
@@ -2390,6 +2013,7 @@
       "properties": {
         "available": {
           "description": "Defines if a service is available to be activated in this cluster.",
+          "example": true,
           "type": "boolean"
         },
         "display_name": {
@@ -2399,9 +2023,18 @@
         },
         "help_url": {
           "description": "A URL that provides more details about this payment service",
+          "example": "https://stripe.com/docs",
           "type": "string"
         },
         "id": {
+          "description": "The ID of the payment service. This is the underlying provider followed by a dash followed by the payment method ID.",
+          "example": "stipe-card",
+          "type": "string"
+        },
+        "logo_url": {
+          "description": "The logo for this provider",
+          "example": "https://cdn.stripe.com/logo.png",
+          "format": "uri",
           "type": "string"
         },
         "payment_method_id": {
@@ -2416,22 +2049,20 @@
             "properties": {
               "display_name": {
                 "description": "The name to display for a field in the cluster UI",
+                "example": "Private API key",
                 "type": "string"
               },
               "help_url": {
                 "description": "A URL that provides more details about this field",
+                "example": "https://stripe.com/docs/private_api_key",
                 "type": "string"
               },
               "key": {
                 "description": "The key of a field that needs to be submitted",
+                "example": "private_api_key",
                 "type": "string"
               }
             },
-            "required": [
-              "key",
-              "display_name",
-              "help_url"
-            ],
             "type": "object"
           },
           "minItems": 1,
@@ -2439,6 +2070,11 @@
         },
         "supported_countries": {
           "description": "A list of 2-letter ISO country codes that this service supports",
+          "example": [
+            "US",
+            "GB",
+            "DE"
+          ],
           "items": {
             "type": "string"
           },
@@ -2446,6 +2082,11 @@
         },
         "supported_currencies": {
           "description": "A list of 3-letter ISO currency codes that this service supports",
+          "example": [
+            "USD",
+            "GBP",
+            "EUR"
+          ],
           "items": {
             "type": "string"
           },
@@ -2460,66 +2101,11 @@
         "display_name",
         "supported_currencies",
         "supported_countries",
-        "payment_method_id"
+        "payment_method_id",
+        "logo_url"
       ],
       "title": "Create a payment service definition",
       "type": "object",
-      "x-examples": {
-        "Braintree": {
-          "display_name": "Cards using Braintree",
-          "help_url": "https://developer.braintreepayments.com",
-          "id": "braintree-card",
-          "logo_url": "https://braintree.com/braintree.png",
-          "payment_method_id": "card",
-          "required_fields": [
-            {
-              "display_name": "Client Token",
-              "help_url": "https://developers.braintreepayments.com/guides/authorization/client-token",
-              "key": "client_token"
-            },
-            {
-              "display_name": "Tokenization Key",
-              "help_url": "https://developers.braintreepayments.com/guides/authorization/tokenization-key/javascript/v3",
-              "key": "tokenization_key"
-            }
-          ],
-          "supported_countries": [
-            "DE",
-            "US"
-          ],
-          "supported_currencies": [
-            "EUR",
-            "USD"
-          ]
-        },
-        "Stripe": {
-          "display_name": "Cards using Stripe",
-          "help_url": "https://stripe.com/docs",
-          "id": "stripe-card",
-          "logo_url": "https://stripe.com/stripe.png",
-          "payment_method_id": "card",
-          "required_fields": [
-            {
-              "display_name": "Publishable API key",
-              "help_url": "https://stripe.com/docs/keys",
-              "key": "public_key"
-            },
-            {
-              "display_name": "Secret API key",
-              "help_url": "https://stripe.com/docs/keys",
-              "key": "private_key"
-            }
-          ],
-          "supported_countries": [
-            "DE",
-            "US"
-          ],
-          "supported_currencies": [
-            "EUR",
-            "USD"
-          ]
-        }
-      },
       "x-tags": [
         "Discovery"
       ]
@@ -2529,6 +2115,7 @@
       "properties": {
         "available": {
           "description": "Defines if a service is available to be activated in this cluster.",
+          "example": true,
           "type": "boolean"
         },
         "display_name": {
@@ -2538,6 +2125,13 @@
         },
         "help_url": {
           "description": "A URL that provides more details about this payment service",
+          "example": "https://stripe.com/docs",
+          "type": "string"
+        },
+        "logo_url": {
+          "description": "The logo for this provider",
+          "example": "https://cdn.stripe.com/logo.png",
+          "format": "uri",
           "type": "string"
         },
         "payment_method_id": {
@@ -2552,14 +2146,17 @@
             "properties": {
               "display_name": {
                 "description": "The name to display for a field in the cluster UI",
+                "example": "Private API key",
                 "type": "string"
               },
               "help_url": {
                 "description": "A URL that provides more details about this field",
+                "example": "https://stripe.com/docs/private_api_key",
                 "type": "string"
               },
               "key": {
                 "description": "The key of a field that needs to be submitted",
+                "example": "private_api_key",
                 "type": "string"
               }
             },
@@ -2570,6 +2167,11 @@
         },
         "supported_countries": {
           "description": "A list of 2-letter ISO country codes that this service supports",
+          "example": [
+            "US",
+            "GB",
+            "DE"
+          ],
           "items": {
             "type": "string"
           },
@@ -2577,6 +2179,11 @@
         },
         "supported_currencies": {
           "description": "A list of 3-letter ISO currency codes that this service supports",
+          "example": [
+            "USD",
+            "GBP",
+            "EUR"
+          ],
           "items": {
             "type": "string"
           },
@@ -2585,39 +2192,6 @@
       },
       "title": "Update an available Payment Service (Discovery)",
       "type": "object",
-      "x-examples": {
-        "Braintree": {
-          "display_name": "Cards using Braintree",
-          "help_url": "https://developer.braintreepayments.com",
-          "id": "braintree-card",
-          "logo_url": "https://braintree.com/braintree.png",
-          "payment_method_id": "card",
-          "required_fields": [
-            {
-              "display_name": "Client Token",
-              "help_url": "https://developers.braintreepayments.com/guides/authorization/client-token",
-              "key": "client_token"
-            },
-            {
-              "display_name": "Tokenization Key",
-              "help_url": "https://developers.braintreepayments.com/guides/authorization/tokenization-key/javascript/v3",
-              "key": "tokenization_key"
-            }
-          ],
-          "supported_countries": [
-            "DE",
-            "US"
-          ],
-          "supported_currencies": [
-            "EUR",
-            "USD"
-          ],
-          "type": "payment-service-definition"
-        },
-        "Stripe": {
-          "display_name": "Stripe"
-        }
-      },
       "x-tags": [
         "Discovery"
       ]
@@ -2634,68 +2208,6 @@
       },
       "title": "Payment service definitions",
       "type": "object",
-      "x-examples": {
-        "A list of payment service definitions": {
-          "items": [
-            {
-              "display_name": "Cards using Stripe",
-              "help_url": "https://stripe.com/docs",
-              "id": "stripe-card",
-              "logo_url": "https://stripe.com/stripe.png",
-              "payment_method_id": "card",
-              "required_fields": [
-                {
-                  "display_name": "Publishable API Key",
-                  "help_url": "https://stripe.com/docs/keys",
-                  "key": "public_key"
-                },
-                {
-                  "display_name": "Secret API Key",
-                  "help_url": "https://stripe.com/docs/keys",
-                  "key": "private_key"
-                }
-              ],
-              "supported_countries": [
-                "DE",
-                "US"
-              ],
-              "supported_currencies": [
-                "EUR",
-                "USD"
-              ],
-              "type": "payment-service-definition"
-            },
-            {
-              "display_name": "Cards using Braintree",
-              "help_url": "https://developer.braintreepayments.com",
-              "id": "braintree-card",
-              "logo_url": "https://braintree.com/braintree.png",
-              "payment_method_id": "card",
-              "required_fields": [
-                {
-                  "display_name": "Client Token",
-                  "help_url": "https://developers.braintreepayments.com/guides/authorization/client-token",
-                  "key": "client_token"
-                },
-                {
-                  "display_name": "Tokenization Key",
-                  "help_url": "https://developers.braintreepayments.com/guides/authorization/tokenization-key/javascript/v3",
-                  "key": "tokenization_key"
-                }
-              ],
-              "supported_countries": [
-                "DE",
-                "US"
-              ],
-              "supported_currencies": [
-                "EUR",
-                "USD"
-              ],
-              "type": "payment-service-definition"
-            }
-          ]
-        }
-      },
       "x-tags": [
         "Discovery"
       ]
@@ -2705,6 +2217,9 @@
       "properties": {
         "accepted_countries": {
           "description": "A list of countries that this payment service needs to support in ISO two-letter code format.",
+          "example": [
+            "USD"
+          ],
           "items": {
             "type": "string"
           },
@@ -2712,6 +2227,9 @@
         },
         "accepted_currencies": {
           "description": "A list of currencies that this payment service needs to support in ISO 4217 three-letter code format.",
+          "example": [
+            "US"
+          ],
           "items": {
             "type": "string"
           },
@@ -2720,6 +2238,7 @@
         },
         "display_name": {
           "description": "A custom name for the payment service. This will be shown in the Admin UI.",
+          "example": "Stripe (Main)",
           "type": "string"
         },
         "required_fields": {
@@ -2744,37 +2263,12 @@
         },
         "use_test_environment": {
           "description": "Defines if this payment service uses the service's test/sandbox environment.",
+          "example": false,
           "type": "boolean"
         }
       },
       "title": "Payment Service (Update)",
       "type": "object",
-      "x-examples": {
-        "Update Stripe": {
-          "accepted_countries": [
-            "US",
-            "GB",
-            "DE"
-          ],
-          "accepted_currencies": [
-            "USD",
-            "GBP",
-            "EUR"
-          ],
-          "display_name": "Card using Stripe (Main)",
-          "required_fields": [
-            {
-              "key": "private_key",
-              "value": "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
-            },
-            {
-              "key": "public_key",
-              "value": "pk_test_arjtT1zdp7dc4eC39HqLyjWD"
-            }
-          ],
-          "use_test_environment": false
-        }
-      },
       "x-tags": [
         "Request Bodies"
       ]
@@ -2791,44 +2285,6 @@
       },
       "title": "A list of active payment services",
       "type": "object",
-      "x-examples": {
-        "A list of payment services": {
-          "items": [
-            {
-              "accepted_countries": [
-                "US"
-              ],
-              "accepted_currencies": [
-                "USD"
-              ],
-              "display_name": "Stripe (US)",
-              "id": "stripe-card-5a303fc4-817b-4073-9b41-a26eff29080a",
-              "payment_method_id": "card",
-              "service_id": "stripe-card",
-              "status": "created",
-              "type": "payment-service",
-              "use_test_environment": false
-            },
-            {
-              "accepted_countries": [
-                "GB",
-                "DE"
-              ],
-              "accepted_currencies": [
-                "GBP",
-                "EUR"
-              ],
-              "display_name": "Stripe (Global)",
-              "id": "stripe-card-a26eff29-817b-4073-9b41-5a303fc4080a",
-              "payment_method_id": "card",
-              "service_id": "stripe-card",
-              "status": "created",
-              "type": "payment-service",
-              "use_test_environment": false
-            }
-          ]
-        }
-      },
       "x-tags": [
         "Payment Services"
       ]
@@ -2878,22 +2334,6 @@
       },
       "title": "Status",
       "type": "object",
-      "x-examples": {
-        "A pending authorization": {
-          "external_identifier": "user-789123",
-          "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-          "resource_type": "transactions.authorization",
-          "status": "pending",
-          "type": "status"
-        },
-        "A pending authorization without an external identifier": {
-          "external_identifier": null,
-          "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-          "resource_type": "transactions.authorization",
-          "status": "pending",
-          "type": "status"
-        }
-      },
       "x-tags": [
         "Statuses"
       ]
@@ -2911,29 +2351,6 @@
       },
       "title": "Statuses",
       "type": "object",
-      "x-examples": {
-        "A list of pending transactions": {
-          "items": [
-            {
-              "external_identifier": null,
-              "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-              "resource_type": "transaction",
-              "status": "pending",
-              "type": "status"
-            },
-            {
-              "external_identifier": "user-12345",
-              "resource_id": "2f6a69b4-d053-41f4-99d2-30b58dbabd36",
-              "resource_type": "transaction",
-              "status": "pending",
-              "type": "status"
-            }
-          ]
-        },
-        "An empty list of pending transactions": {
-          "items": []
-        }
-      },
       "x-tags": [
         "Statuses"
       ]
@@ -3016,76 +2433,6 @@
       },
       "title": "Transaction",
       "type": "object",
-      "x-examples": {
-        "Authorized PayPal transaction": {
-          "amount": 1299,
-          "created_at": "2013-07-16T19:23:00.000Z",
-          "currency": "USD",
-          "external_identifier": "user-789123",
-          "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-          "payment_method": {
-            "authorization_url": null,
-            "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
-            "type": "paypal"
-          },
-          "payment_service_id": "paypal-paypal-169f5226-4644-4d1e-ac36-14999e73601f",
-          "status": "created",
-          "transaction_status": "authorized",
-          "type": "transaction",
-          "updated_at": "2019-08-24T14:15:22Z"
-        },
-        "Bitcoin transaction": {
-          "amount": 0.039999,
-          "created_at": "2013-07-16T19:23:00.000Z",
-          "currency": "USD",
-          "external_identifier": null,
-          "id": "18d41625-16d5-40a8-bc92-16f5e1158e55",
-          "payment_method": {
-            "authorization_url": null,
-            "id": null,
-            "type": "bitcoin"
-          },
-          "payment_service_id": "stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480",
-          "status": "created",
-          "tansaction_status": "pending",
-          "type": "transaction",
-          "updated_at": "2013-07-16T19:23:00.000Z"
-        },
-        "Card transaction": {
-          "amount": 1299,
-          "created_at": "2013-07-16T19:23:00.000Z",
-          "currency": "USD",
-          "external_identifier": null,
-          "id": "18d41625-16d5-40a8-bc92-16f5e1158e55",
-          "payment_method": {
-            "authorization_url": null,
-            "id": "fa5dc53e-b070-417b-9355-5dc9b80a69e3",
-            "type": "card"
-          },
-          "payment_service_id": "stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480",
-          "status": "created",
-          "tansaction_status": "pending",
-          "type": "transaction",
-          "updated_at": "2013-07-16T19:23:00.000Z"
-        },
-        "Pending PayPal transaction": {
-          "amount": 1299,
-          "created_at": "2013-07-16T19:23:00.000Z",
-          "currency": "USD",
-          "external_identifier": null,
-          "id": "18d41625-16d5-40a8-bc92-16f5e1158e55",
-          "payment_method": {
-            "authorization_url": "https://paypal.com....",
-            "id": null,
-            "type": "paypal"
-          },
-          "payment_service_id": "paypal-paypal-111afcdd-fbfd-4558-98be-5d3d28efd480",
-          "status": "created",
-          "tansaction_status": "user_authorization_required",
-          "type": "transaction",
-          "updated_at": "2013-07-16T19:23:00.000Z"
-        }
-      },
       "x-tags": [
         "Transactions"
       ]
@@ -3107,18 +2454,12 @@
         },
         "external_identifier": {
           "description": "An external identifier that can be used by the merchant to match the authorization against their own records.",
+          "example": "user-789123",
           "type": "string"
         }
       },
       "title": "Authorize (Create)",
       "type": "object",
-      "x-examples": {
-        "Authorize with (lower) final amount": {
-          "amount": 399,
-          "currency": "USD"
-        },
-        "The most basic authorization": {}
-      },
       "x-tags": [
         "Request Bodies"
       ]
@@ -3140,6 +2481,7 @@
         },
         "external_identifier": {
           "description": "An external identifier that can be used by the merchant to match the capture against their own records.",
+          "example": "user-789123",
           "type": "string"
         }
       },
@@ -3149,12 +2491,6 @@
       ],
       "title": "Capture a transaction",
       "type": "object",
-      "x-examples": {
-        "Capture a previously created authorization": {
-          "amount": 1299,
-          "currency": "USD"
-        }
-      },
       "x-tags": [
         "Request Bodies"
       ]
@@ -3207,45 +2543,6 @@
       ],
       "title": "Transaction (Create)",
       "type": "object",
-      "x-examples": {
-        "A test transaction": {
-          "amount": 1299,
-          "capture": true,
-          "currency": "USD",
-          "external_identifier": "string",
-          "payment_method": {
-            "expiration_date": "11/15",
-            "external_identifier": "string",
-            "number": "4111111111111111",
-            "security_code": "123",
-            "store": true
-          },
-          "payment_method_type": "card",
-          "use_test_environment": true
-        },
-        "Authorize, store, and capture a card": {
-          "amount": 1299,
-          "capture": true,
-          "currency": "USD",
-          "payment_method": {
-            "expiration_date": "11/2025",
-            "number": "4111111111111111",
-            "security_code": "123",
-            "store": true
-          },
-          "payment_method_type": "card"
-        },
-        "Create a Bitcoin authorization": {
-          "amount": 0.0039999,
-          "currency": "BTC",
-          "payment_method_type": "bitcoin"
-        },
-        "Create a PayPal authorization": {
-          "amount": 1299,
-          "currency": "USD",
-          "payment_method_type": "paypal"
-        }
-      },
       "x-tags": [
         "Request Bodies"
       ]
@@ -3260,11 +2557,13 @@
         },
         "created_at": {
           "description": "When this event was recorded.\n",
+          "example": "2012-12-12T10:53:43-08:00",
           "format": "date-time",
           "type": "string"
         },
         "id": {
           "description": "The unique ID for this event.",
+          "example": "be828248-56de-481e-a580-44b6e1d4df81",
           "format": "uuid",
           "type": "string"
         },
@@ -3273,57 +2572,38 @@
           "properties": {
             "display_name": {
               "description": "The user's name for the resource",
+              "example": "Stripe (Card)",
               "type": "string"
             },
             "id": {
               "description": "The ID of the resource\n",
+              "example": "stripe-card-c4a988a2-cae6-4854-9aa0-a8365da0816d",
               "type": "string"
             },
             "service_id": {
               "description": "The ID of the service that this resource is based on.",
+              "example": "stripe-card",
               "type": "string"
             },
             "type": {
               "description": "The type of the resource",
+              "example": "payment-service",
               "type": "string"
             }
           },
-          "required": [
-            "id",
-            "type",
-            "name"
-          ],
           "type": "object"
         },
         "type": {
-          "description": "The type of this resource. Must always be transaction.event",
+          "description": "`transaction.event`",
+          "enum": [
+            "transaction.event"
+          ],
           "example": "transaction.event",
           "type": "string"
         }
       },
       "title": "Transaction Event",
       "type": "object",
-      "x-examples": {
-        "Event related to a service": {
-          "code": "transactions.rejected.account_closed",
-          "created_at": "2020-04-01 14:00:00Z",
-          "id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-          "resource": {
-            "display_name": "Stripe (Main)",
-            "id": "stripe-card-699c1745-53cf-4b13-b977-fef0ecd4c681",
-            "service_id": "stripe-card",
-            "type": "payment-service"
-          },
-          "type": "transactions.event"
-        },
-        "Event without resource": {
-          "code": "transactions.server_error",
-          "created_at": "2020-04-01 14:00:00Z",
-          "id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-          "resource": null,
-          "type": "transactions.event"
-        }
-      },
       "x-tags": [
         "Transactions"
       ]
@@ -3364,33 +2644,6 @@
       },
       "title": "Transaction Events",
       "type": "object",
-      "x-examples": {
-        "A list of transaction events": {
-          "items": [
-            {
-              "code": "transactions.rejected.account_closed",
-              "created_at": "2020-04-01 14:00:00Z",
-              "id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-              "resource": {
-                "display_name": "Stripe (Main)",
-                "id": "stripe-card-699c1745-53cf-4b13-b977-fef0ecd4c681",
-                "service_id": "stripe-card",
-                "type": "payment-service"
-              },
-              "type": "transactions.event"
-            }
-          ],
-          "limit": 100,
-          "next_page": "5159a2ee-f8f9-4669-99e7-e1dc85f98cb9",
-          "previous_page": null
-        },
-        "An empty list of events": {
-          "items": [],
-          "limit": 100,
-          "next_page": null,
-          "previous_page": null
-        }
-      },
       "x-tags": [
         "Transactions"
       ]
@@ -3431,38 +2684,6 @@
       },
       "title": "Transactions",
       "type": "object",
-      "x-examples": {
-        "A list of transactions": {
-          "items": [
-            {
-              "amount": 1299,
-              "created_at": "2013-07-16T19:23:00.000Z",
-              "currency": "USD",
-              "external_identifier": null,
-              "id": "18d41625-16d5-40a8-bc92-16f5e1158e55",
-              "payment_method": {
-                "authorization_url": null,
-                "id": "fa5dc53e-b070-417b-9355-5dc9b80a69e3",
-                "type": "card"
-              },
-              "payment_service_id": "stripe-card-5159a2ee-f8f9-4669-99e7-e1dc85f98cb9",
-              "status": "created",
-              "tansaction_status": "pending",
-              "type": "transaction",
-              "updated_at": "2013-07-16T19:23:00.000Z"
-            }
-          ],
-          "limit": 100,
-          "next_page": "5159a2ee-f8f9-4669-99e7-e1dc85f98cb9",
-          "previous_page": null
-        },
-        "An empty list of transactions": {
-          "items": [],
-          "limit": 100,
-          "next_page": null,
-          "previous_page": null
-        }
-      },
       "x-tags": [
         "Transactions"
       ]
@@ -3487,6 +2708,7 @@
               }
             ]
           },
+          "minItems": 2,
           "type": "array"
         }
       },
@@ -3499,7 +2721,6 @@
   },
   "securityDefinitions": {
     "BearerAuth": {
-      "description": "",
       "in": "header",
       "name": "Authorization",
       "type": "apiKey"
@@ -3512,22 +2733,22 @@
   ],
   "tags": [
     {
-      "name": "Async APIs"
-    },
-    {
       "name": "Cards"
     },
     {
       "name": "Card Rulesets"
     },
     {
-      "name": "Definitions"
-    },
-    {
       "name": "Payment Services"
     },
     {
+      "name": "Payment Service Definitions"
+    },
+    {
       "name": "Transactions"
+    },
+    {
+      "name": "Async APIs"
     }
   ],
   "x-components": {}
