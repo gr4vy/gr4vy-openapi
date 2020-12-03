@@ -27,22 +27,361 @@
   ],
   "tags": [
     {
+      "name": "Async APIs"
+    },
+    {
       "name": "Cards"
     },
     {
-      "name": "Transactions"
-    },
-    {
-      "name": "Payment Services"
+      "name": "Card Rulesets"
     },
     {
       "name": "Definitions"
     },
     {
-      "name": "Async APIs"
+      "name": "Payment Services"
+    },
+    {
+      "name": "Transactions"
     }
   ],
   "paths": {
+    "/async/cards": {
+      "post": {
+        "operationId": "post-async-cards",
+        "summary": "Register a card (Async)",
+        "description": "Registers a card with all available processors.\n\nThis API returns asynchronously, returning a pending `Status` object with the\nID of the pending card resource.",
+        "tags": [
+          "Async APIs"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CardCreateRequest"
+              },
+              "examples": {
+                "Register a card": {
+                  "value": {
+                    "number": "4111111111111111",
+                    "expiration_date": "11/25",
+                    "security_code": "123",
+                    "external_identifier": "user-789123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                },
+                "examples": {
+                  "Card status": {
+                    "value": {
+                      "type": "status",
+                      "status": "pending",
+                      "resource_type": "card",
+                      "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
+                      "external_identifier": "user-789123"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/async/transactions": {
+      "post": {
+        "operationId": "post-async-transactions",
+        "summary": "Authorize (and optionally capture) a transaction (Async)",
+        "tags": [
+          "Async APIs"
+        ],
+        "description": "Attempts to create an authorization for a payment method.\n\nThis endpoint accepts a few additional fields that allow for simultanious\ncapturing and storage of the payment method.\n\n* `payment_method.store` - Use this field to store the payment method for\nfuture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                },
+                "examples": {
+                  "Pending status": {
+                    "value": {
+                      "type": "status",
+                      "status": "pending",
+                      "resource_type": "transaction",
+                      "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
+                      "external_identifier": "user-789123"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionCreateRequest"
+              },
+              "examples": {
+                "Authorize a new card": {
+                  "value": {
+                    "amount": 1299,
+                    "currency": "USD",
+                    "payment_method_type": "card",
+                    "payment_method": {
+                      "number": "4111111111111111",
+                      "expiration_date": "11/25",
+                      "security_code": "123"
+                    }
+                  }
+                },
+                "Authorized and capture a PayPal payment": {
+                  "value": {
+                    "amount": 1299,
+                    "currency": "USD",
+                    "payment_method_type": "paypal",
+                    "capture": true
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
+    "/async/transactions/{transaction_id}/authorize": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "transaction_id",
+          "in": "path",
+          "required": true,
+          "description": "The ID for the transaction to get the information for."
+        }
+      ],
+      "post": {
+        "operationId": "post-async-transactions-transaction_id-authorize",
+        "summary": "Authorize pending transaction (Async)",
+        "tags": [
+          "Async APIs"
+        ],
+        "description": "Authorize an existing but pending transaction.\n\nThis endpoint is used when a transaction was previously created that required\nadditional information, or a redirect, from the buyer. Use this endpoint to\npost the additional information to trigger the transaction to be properly\nauthorized.\n\nAdditionally, this endpoint will capture the transaction and store the payment\nmethod if this was previously specified when creating the transaction. We\ncurrently do not support overwritting these settings at this point.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionAuthorizeRequest"
+              },
+              "examples": {
+                "A basic authorize request": {
+                  "value": {}
+                },
+                "An authorize request for a lower amount": {
+                  "value": {
+                    "amount": 399,
+                    "currency": "USD"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                },
+                "examples": {
+                  "A status": {
+                    "value": {
+                      "type": "status",
+                      "status": "pending",
+                      "resource_type": "transaction",
+                      "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
+                      "external_identifier": "user-789123"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/async/transactions/{transaction_id}/capture": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "transaction_id",
+          "in": "path",
+          "required": true,
+          "description": "The ID for the transaction to get the information for."
+        }
+      ],
+      "post": {
+        "operationId": "post-async-transactions-transaction_id-capture",
+        "summary": "Capture a previously authorized transaction (Async)",
+        "tags": [
+          "Async APIs"
+        ],
+        "description": "Captures a previously authorized transaction.\n\nThis API returns asynchronously, returning status object with the ID of the\npending `Transaction` resource.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionCaptureRequest"
+              },
+              "examples": {
+                "Capture an authorization": {
+                  "value": {
+                    "amount": 1299,
+                    "currency": "USD"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                },
+                "examples": {
+                  "Pending transaction": {
+                    "value": {
+                      "type": "status",
+                      "status": "pending",
+                      "resource_type": "transaction",
+                      "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
+                      "external_identifier": "user-789123"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/async/transactions/batch-capture": {
+      "post": {
+        "operationId": "post-async-transactions-batch-capture",
+        "summary": "Batch capture authorizations (Async)",
+        "tags": [
+          "Async APIs"
+        ],
+        "description": "The body of this API takes either a list of items as a JSON object, or a CSV\nfile with each line representing an authorization request, and the headers\nrepresenting the fields to process.\n\nThis API returns asynchronously, returning a list of status objects with the\nIDs of the pending `Transaction` resources.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TransactionCaptureRequest"
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Capture multiple transactions": {
+                  "value": {
+                    "items": [
+                      {
+                        "authorization_id": "931b9b0c-dc95-4d45-b1fc-64966244ef74",
+                        "amount": 1299,
+                        "currency": "USD"
+                      },
+                      {
+                        "authorization_id": "272dee2b-2196-4e4e-acf7-e5983f1fdc61",
+                        "amount": 199,
+                        "currency": "GBP"
+                      },
+                      {
+                        "authorization_id": "d3c096cd-33ad-4235-bba9-f2eb0ccb307d",
+                        "amount": 0.0003999,
+                        "currency": "BTC"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Statuses"
+                },
+                "examples": {
+                  "A list of accepted capture requests": {
+                    "value": {
+                      "items": [
+                        {
+                          "type": "status",
+                          "status": "pending",
+                          "resource_type": "transaction",
+                          "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
+                          "external_identifier": "user-12345"
+                        },
+                        {
+                          "type": "status",
+                          "status": "pending",
+                          "resource_type": "transaction",
+                          "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
+                          "external_identifier": "user-2345"
+                        },
+                        {
+                          "type": "status",
+                          "status": "pending",
+                          "resource_type": "transaction",
+                          "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
+                          "external_identifier": null
+                        }
+                      ],
+                      "limit": 100,
+                      "next_page": null,
+                      "previous_page": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/cards": {
       "get": {
         "operationId": "get-cards",
@@ -119,7 +458,6 @@
                       "code": "unauthorized",
                       "status": 401,
                       "message": "No valid authentication found",
-                      "documentation_url": "https://developer.gr4vy.com/errors/unauthorized",
                       "additional_context": null
                     }
                   }
@@ -191,7 +529,6 @@
                       "code": "incorrect_json",
                       "status": 400,
                       "message": "The request body was not valid JSON.",
-                      "documentation_url": "https://developer.gr4vy.com/errors/incorrect-json",
                       "additional_context": null
                     }
                   }
@@ -213,7 +550,6 @@
                       "code": "unauthorized",
                       "status": 401,
                       "message": "No valid API authentication found",
-                      "documentation_url": "https://developer.gr4vy.com/errors/unauthorized",
                       "additional_context": null
                     }
                   }
@@ -235,7 +571,7 @@
           "name": "card_id",
           "in": "path",
           "required": true,
-          "description": "The ID for the card to get the information for."
+          "description": "The unique ID for a card."
         }
       ],
       "get": {
@@ -282,7 +618,6 @@
                       "code": "unauthorized",
                       "status": 401,
                       "message": "No valid authentication found",
-                      "documentation_url": "https://developer.gr4vy.com/errors/unauthorized",
                       "additional_context": null
                     }
                   }
@@ -304,7 +639,6 @@
                       "code": "not_found",
                       "status": 404,
                       "message": "The resource could not be found",
-                      "documentation_url": "https://developer.gr4vy.com/errors/not-found",
                       "additional_context": null
                     }
                   },
@@ -314,7 +648,6 @@
                       "code": "status_pending",
                       "status": 404,
                       "message": "The resource is still pending",
-                      "documentation_url": "https://developer.gr4vy.com/errors/status-pending",
                       "additional_context": {
                         "type": "status",
                         "status": "pending",
@@ -341,7 +674,7 @@
           "name": "card_id",
           "in": "path",
           "required": true,
-          "description": "The ID for the card to get the information for."
+          "description": "The unique ID for a card."
         }
       ],
       "get": {
@@ -351,7 +684,6 @@
         "tags": [
           "Cards"
         ],
-        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -368,858 +700,6 @@
                           "id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
                           "type": "card.event",
                           "code": "card.rejected",
-                          "external_service": {
-                            "id": "stripe-card-699c1745-53cf-4b13-b977-fef0ecd4c681",
-                            "type": "payment-service",
-                            "service_id": "stripe-card",
-                            "display_name": "Stripe (Main)"
-                          },
-                          "created_at": "2020-04-01 14:00:00Z"
-                        }
-                      ],
-                      "limit": 100,
-                      "next_page": "5159a2ee-f8f9-4669-99e7-e1dc85f98cb9",
-                      "previous_page": null
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/transactions": {
-      "get": {
-        "operationId": "get-transactions",
-        "summary": "List all transactions",
-        "description": "Lists all transactions for an account. Sorted by last `updated_at` status.",
-        "tags": [
-          "Transactions"
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns a paginated list of transactions for an account.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Transactions"
-                },
-                "examples": {
-                  "A list of transactions": {
-                    "value": {
-                      "items": [
-                        {
-                          "type": "transaction",
-                          "id": "18d41625-16d5-40a8-bc92-16f5e1158e55",
-                          "status": "created",
-                          "transaction_status": "pending",
-                          "amount": 1299,
-                          "currency": "USD",
-                          "payment_method": {
-                            "type": "card",
-                            "id": "fa5dc53e-b070-417b-9355-5dc9b80a69e3",
-                            "authorization_url": null,
-                            "external_identifier": "my-card-234"
-                          },
-                          "created_at": "2013-07-16T19:23:00.000Z",
-                          "updated_at": "2013-07-16T19:23:00.000Z",
-                          "external_identifier": "my-transaction-123",
-                          "payment_service_id": "stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480"
-                        }
-                      ],
-                      "limit": 100,
-                      "next_page": "2ca870b0-4e73-42c7-8651-86bd2e833608",
-                      "previous_page": null
-                    }
-                  },
-                  "An empty list of transactions": {
-                    "value": {
-                      "items": [],
-                      "limit": 100,
-                      "next_page": null,
-                      "previous_page": null
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "An unauthorized request": {
-                    "value": {
-                      "type": "error",
-                      "code": "unauthorized",
-                      "status": 401,
-                      "message": "No valid authentication found",
-                      "documentation_url": "https://developer.gr4vy.com/errors/unauthorized",
-                      "additional_context": null
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "schema": {
-              "type": "integer",
-              "default": 20,
-              "example": 50,
-              "minimum": 0,
-              "maximum": 100,
-              "format": "int32"
-            },
-            "in": "query",
-            "name": "limit",
-            "description": "The maximum number of items to return"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "example": "1593343179"
-            },
-            "in": "query",
-            "name": "marker",
-            "description": "The marker that identifies the offsett for the page of results to return.\n\nFor the first page of results, simply omit this parameter. For next pages,\nsimply use the value returned by the API in the `next_page` field.\n\nA marker is an opague string that is only meaningful to ur API. No\nadditional value can be ascribed to this value."
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "search",
-            "description": "Filters the results to just the transactions that match this external identifier or transaction ID."
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "before_updated_at",
-            "description": "Filters the results to only transactions last updated before this ISO date-time string."
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "after_updated_at",
-            "description": "Filters the results to only transactions last updated after this ISO date-time string."
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "before_created_at",
-            "description": "Filters the results to only transactions created before this ISO date-time string."
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "after_created_at",
-            "description": "Filters the results to only transactions created after this ISO date-time string."
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "transaction_status",
-            "description": "Filters the results to only transactions with as specific transaction status."
-          }
-        ]
-      },
-      "post": {
-        "summary": "Authorize (and optionally capture) a transaction",
-        "tags": [
-          "Transactions"
-        ],
-        "operationId": "post-transactions",
-        "description": "Attempts to create an authorization for a payment method. In some cases it is\nnot possible to create the authorization without redirectingt the user for\ntheir authorization. In these cases the status is set to\n`user_authorization_required` and an `authorization_url` is returned.\n\nAdditionally, this endpoint accepts a few additional fields that allow for\nsimultanious capturing and storage of the payment method.\n\n* `payment_method.store` - Use this field to store the payment method for\nfurture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TransactionCreateRequest"
-              },
-              "examples": {
-                "Authorize a new card": {
-                  "value": {
-                    "amount": 1299,
-                    "currency": "USD",
-                    "payment_method_type": "card",
-                    "payment_method": {
-                      "number": "4111111111111111",
-                      "expiration_date": "11/25",
-                      "security_code": "123"
-                    }
-                  }
-                },
-                "Authorize a tokenized card": {
-                  "value": {
-                    "amount": 1299,
-                    "currency": "USD",
-                    "payment_method_type": "card",
-                    "payment_method": {
-                      "number": "4111111111111111"
-                    }
-                  }
-                },
-                "Authorized and tokenize a card": {
-                  "value": {
-                    "amount": 1299,
-                    "currency": "USD",
-                    "payment_method_type": "card",
-                    "payment_method": {
-                      "number": "4111111111111111",
-                      "expiration_date": "11/25",
-                      "security_code": "123",
-                      "store": true
-                    }
-                  }
-                },
-                "Authorize, capture, and tokenize a card": {
-                  "value": {
-                    "amount": 1299,
-                    "currency": "USD",
-                    "payment_method_type": "card",
-                    "capture": true,
-                    "payment_method": {
-                      "number": "4111111111111111",
-                      "expiration_date": "11/25",
-                      "security_code": "123",
-                      "store": true
-                    }
-                  }
-                },
-                "Authorize and capture a PayPal transaction": {
-                  "value": {
-                    "amount": 1299,
-                    "currency": "USD",
-                    "payment_method_type": "paypal",
-                    "capture": true
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "A successful transaction",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Transaction"
-                },
-                "examples": {
-                  "Card transaction": {
-                    "value": {
-                      "type": "transaction",
-                      "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-                      "status": "created",
-                      "transaction_status": "created",
-                      "amount": 1299,
-                      "currency": "USD",
-                      "payment_method": {
-                        "type": "card",
-                        "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
-                        "authorization_url": null
-                      },
-                      "created_at": "2013-07-16T19:23:00.000Z",
-                      "external_identifier": "user-789123",
-                      "updated_at": "2019-08-24T14:15:22Z",
-                      "payment_service_id": "card-stripe-169f5226-4644-4d1e-ac36-14999e73601f"
-                    }
-                  },
-                  "Pending PayPal transaction": {
-                    "value": {
-                      "type": "transaction",
-                      "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-                      "status": "created",
-                      "transaction_status": "user_authorization_required",
-                      "amount": 1299,
-                      "currency": "USD",
-                      "payment_method": {
-                        "type": "paypal",
-                        "id": null,
-                        "status": "user_authorization_required",
-                        "authorization_url": "https://paypal.com/..."
-                      },
-                      "created_at": "2013-07-16T19:23:00.000Z",
-                      "external_identifier": "user-12345",
-                      "updated_at": "2019-08-24T14:15:22Z",
-                      "payment_service_id": "paypal-paypal-169f5226-4644-4d1e-ac36-14999e73601f"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Returns an error if the request is missing any required fields, or the request body is not valid JSON.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Incorrect JSON": {
-                    "value": {
-                      "type": "error",
-                      "code": "incorrect_json",
-                      "status": 400,
-                      "message": "The request body was not valid JSON.",
-                      "documentation_url": "https://developer.gr4vy.com/errors/incorrect-json",
-                      "additional_context": null
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "An unauthorized request": {
-                    "value": {
-                      "type": "error",
-                      "code": "unauthorized",
-                      "status": 401,
-                      "message": "No valid API authentication found",
-                      "documentation_url": "https://developer.gr4vy.com/errors/unauthorized",
-                      "additional_context": null
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/transactions/{transaction_id}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "transaction_id",
-          "in": "path",
-          "required": true,
-          "description": "The ID for the transaction to get the information for."
-        }
-      ],
-      "get": {
-        "operationId": "get-transactions-transaction_id",
-        "summary": "Get a transaction",
-        "description": "Get information about a transaction",
-        "tags": [
-          "Transactions"
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns a transaction resource.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Transaction"
-                },
-                "examples": {
-                  "A card transaction": {
-                    "value": {
-                      "type": "transaction",
-                      "id": "18d41625-16d5-40a8-bc92-16f5e1158e55",
-                      "status": "created",
-                      "transaction_status": "pending",
-                      "amount": 1299,
-                      "currency": "USD",
-                      "payment_method": {
-                        "type": "card",
-                        "id": "fa5dc53e-b070-417b-9355-5dc9b80a69e3",
-                        "authorization_url": null
-                      },
-                      "created_at": "2013-07-16T19:23:00.000Z",
-                      "updated_at": "2013-07-16T19:23:00.000Z",
-                      "external_identifier": null,
-                      "payment_service_id": "stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480"
-                    }
-                  },
-                  "A PayPal transaction": {
-                    "value": {
-                      "type": "transaction",
-                      "id": "18d41625-16d5-40a8-bc92-16f5e1158e55",
-                      "status": "created",
-                      "transaction_status": "pending",
-                      "amount": 1299,
-                      "currency": "USD",
-                      "payment_method": {
-                        "type": "paypal",
-                        "id": "2ca870b0-4e73-42c7-8651-86bd2e833608",
-                        "authorization_url": null
-                      },
-                      "created_at": "2013-07-16T19:23:00.000Z",
-                      "updated_at": "2013-07-16T19:23:00.000Z",
-                      "external_identifier": null,
-                      "payment_service_id": "stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480"
-                    }
-                  },
-                  "A BitCoin transaction": {
-                    "value": {
-                      "type": "transaction",
-                      "id": "18d41625-16d5-40a8-bc92-16f5e1158e55",
-                      "status": "created",
-                      "transaction_status": "pending",
-                      "amount": 0.039999,
-                      "currency": "USD",
-                      "payment_method": {
-                        "type": "bitcoin",
-                        "id": "2ca870b0-4e73-42c7-8651-86bd2e833608",
-                        "authorization_url": null
-                      },
-                      "created_at": "2013-07-16T19:23:00.000Z",
-                      "updated_at": "2013-07-16T19:23:00.000Z",
-                      "external_identifier": null,
-                      "payment_service_id": "stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "An unauthorized request": {
-                    "value": {
-                      "type": "error",
-                      "code": "unauthorized",
-                      "status": 401,
-                      "message": "No valid authentication found",
-                      "documentation_url": "https://developer.gr4vy.com/errors/unauthorized",
-                      "additional_context": null
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the transaction can not be found or has not yet been created.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Transaction not found": {
-                    "value": {
-                      "type": "error",
-                      "code": "not_found",
-                      "status": 404,
-                      "message": "The resource could not be found",
-                      "documentation_url": "https://developer.gr4vy.com/errors/not-found",
-                      "additional_context": null
-                    }
-                  },
-                  "Transaction pending": {
-                    "value": {
-                      "type": "error",
-                      "code": "status_pending",
-                      "status": 404,
-                      "message": "The resource is still pending",
-                      "documentation_url": "https://developer.gr4vy.com/errors/status-pending",
-                      "additional_context": {
-                        "type": "status",
-                        "status": "pending",
-                        "resource_type": "transaction",
-                        "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/transactions/{transaction_id}/authorize": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "transaction_id",
-          "in": "path",
-          "required": true,
-          "description": "The ID for the transaction to get the information for."
-        }
-      ],
-      "post": {
-        "operationId": "post-transactions-transaction_id-authorize",
-        "summary": "Authorize pending transasction",
-        "tags": [
-          "Transactions"
-        ],
-        "description": "Authorize an existing but pending transaction.\n\nThis endpoint is used when a transaction was previously created that required\nadditional information, or a redirect, from the buyer. Use this endpoint to\npost the additional information to trigger the transaction to be properly\nauthorized.\n\nAdditionally, this endpoint will capture the transaction and store the payment\nmethod if this was previously specified when creating the transaction. We\ncurrently do not support overwritting these settings at this point.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TransactionAuthorizeRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Transaction"
-                },
-                "examples": {
-                  "An authorized transaction": {
-                    "value": {
-                      "type": "transaction",
-                      "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-                      "status": "created",
-                      "transaction_status": "authorized",
-                      "amount": 1299,
-                      "currency": "USD",
-                      "payment_method": {
-                        "type": "card",
-                        "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
-                        "authorization_url": null
-                      },
-                      "created_at": "2013-07-16T19:23:00.000Z",
-                      "external_identifier": "user-789123",
-                      "updated_at": "2019-08-24T14:15:22Z",
-                      "payment_service_id": "card-stripe-169f5226-4644-4d1e-ac36-14999e73601f"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/transactions/{transaction_id}/capture": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "transaction_id",
-          "in": "path",
-          "required": true,
-          "description": "The ID for the transaction to get the information for."
-        }
-      ],
-      "post": {
-        "operationId": "post-transactions-transaction_id-capture",
-        "summary": "Capture previously authorized transaction",
-        "description": "Captures a previously authorized transaction.",
-        "tags": [
-          "Transactions"
-        ],
-        "requestBody": {
-          "description": "",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TransactionCaptureRequest"
-              },
-              "examples": {
-                "Capture an authorization": {
-                  "value": {
-                    "amount": 1299,
-                    "currency": "USD"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Transaction"
-                },
-                "examples": {
-                  "A transaction": {
-                    "value": {
-                      "type": "transaction",
-                      "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-                      "status": "created",
-                      "transaction_status": "authorized",
-                      "amount": 1299,
-                      "currency": "USD",
-                      "payment_method": {
-                        "type": "card",
-                        "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
-                        "authorization_url": null
-                      },
-                      "created_at": "2013-07-16T19:23:00.000Z",
-                      "external_identifier": "user-789123",
-                      "updated_at": "2019-08-24T14:15:22Z",
-                      "payment_service_id": "stripe-card-169f5226-4644-4d1e-ac36-14999e73601f"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Returns an error if the request is missing any required fields, or the request body is not valid JSON.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Incorrect JSON": {
-                    "value": {
-                      "type": "error",
-                      "code": "incorrect_json",
-                      "status": 400,
-                      "message": "The request body was not valid JSON.",
-                      "documentation_url": "https://developer.gr4vy.com/errors/incorrect-json",
-                      "additional_context": null
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "An unauthorized request": {
-                    "value": {
-                      "type": "error",
-                      "code": "unauthorized",
-                      "status": 401,
-                      "message": "No valid API authentication found",
-                      "documentation_url": "https://developer.gr4vy.com/errors/unauthorized",
-                      "additional_context": null
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/transactions/batch-capture": {
-      "post": {
-        "operationId": "post-transactions-batch-capture",
-        "summary": "Batch capture authorizations",
-        "tags": [
-          "Transactions"
-        ],
-        "description": "Takes a list of authorization IDs and processes them as needed.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TransactionsBatchCaptureRequest"
-              },
-              "examples": {
-                "Capture multiple authorizations": {
-                  "value": {
-                    "items": [
-                      {
-                        "transaction_id": "931b9b0c-dc95-4d45-b1fc-64966244ef74",
-                        "amount": 1299,
-                        "currency": "USD"
-                      },
-                      {
-                        "transaction_id": "272dee2b-2196-4e4e-acf7-e5983f1fdc61",
-                        "amount": 199,
-                        "currency": "GBP"
-                      },
-                      {
-                        "transaction_id": "d3c096cd-33ad-4235-bba9-f2eb0ccb307d",
-                        "amount": 0.0003999,
-                        "currency": "BTC"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          },
-          "description": "The body of this API takes either a list of items as a JSON object, or a CSV\nfile with each line representing an authorization request, and the headers\nrepresenting the fields to process.\n"
-        },
-        "responses": {
-          "201": {
-            "description": "Returns a list of status objects, one for each requested capture.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Transactions"
-                },
-                "examples": {
-                  "A list of transactions": {
-                    "value": {
-                      "items": [
-                        {
-                          "type": "transaction",
-                          "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-                          "status": "created",
-                          "transaction_status": "authorized",
-                          "amount": 1299,
-                          "currency": "USD",
-                          "payment_method": {
-                            "type": "card",
-                            "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
-                            "authorization_url": "https://paypal.com....."
-                          },
-                          "created_at": "2013-07-16T19:23:00.000Z",
-                          "external_identifier": "user-789123",
-                          "updated_at": "2019-08-24T14:15:22Z",
-                          "payment_service_id": "169f5226-4644-4d1e-ac36-14999e73601f"
-                        }
-                      ],
-                      "limit": 100,
-                      "next_page": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
-                      "previous_page": "9049b2f9-0c67-47c5-af18-e8525f855263"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Returns an error if the request is missing any required fields, or the request body is not valid JSON/CSV.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Incorrect JSON": {
-                    "value": {
-                      "type": "error",
-                      "code": "incorrect_json",
-                      "status": 400,
-                      "message": "The request body was not valid JSON.",
-                      "documentation_url": "https://developer.gr4vy.com/errors/incorrect-json",
-                      "additional_context": null
-                    }
-                  },
-                  "Incorrect CSV": {
-                    "value": {
-                      "type": "error",
-                      "code": "incorrect_csv",
-                      "status": 400,
-                      "message": "The request body was not valid CSV.",
-                      "documentation_url": "https://developer.gr4vy.com/errors/incorrect-csv",
-                      "additional_context": null
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "An unauthorized request": {
-                    "value": {
-                      "type": "error",
-                      "code": "unauthorized",
-                      "status": 401,
-                      "message": "No valid API authentication found",
-                      "documentation_url": "https://developer.gr4vy.com/errors/unauthorized",
-                      "additional_context": null
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        }
-      }
-    },
-    "/transactions/{transaction_id}/events": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "transaction_id",
-          "in": "path",
-          "required": true,
-          "description": "The ID for the transaction to get the information for."
-        }
-      ],
-      "get": {
-        "operationId": "get-transactions-transaction_id-events",
-        "summary": "List the events for a given transaction",
-        "description": "Returns a list of events for a given transaction.",
-        "tags": [
-          "Transactions"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TransactionEvents"
-                },
-                "examples": {
-                  "A list of events": {
-                    "value": {
-                      "items": [
-                        {
-                          "id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-                          "type": "transactions.event",
-                          "code": "transactions.rejected.account_closed",
                           "external_service": {
                             "id": "stripe-card-699c1745-53cf-4b13-b977-fef0ecd4c681",
                             "type": "payment-service",
@@ -1699,27 +1179,124 @@
         }
       }
     },
-    "/async/cards": {
-      "post": {
-        "operationId": "post-async-cards",
-        "summary": "Register a card (Async)",
-        "description": "Registers a card with all available processors.\n\nThis API returns asynchronously, returning a pending `Status` object with the\nID of the pending card resource.",
+    "/card-rulesets": {
+      "get": {
+        "operationId": "get-cards-rulesets",
+        "summary": "List the rulesets for card transactions",
+        "description": "Returns a list of rulesets that can be used for card transactions.",
         "tags": [
-          "Async APIs"
+          "Card Rulesets"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of rulesets",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CardRulesets"
+                },
+                "examples": {
+                  "A list of card rulesets": {
+                    "value": {
+                      "items": [
+                        {
+                          "type": "ruleset",
+                          "id": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
+                          "display_name": "Q2 2020 Ruleset",
+                          "active": true,
+                          "valid": true,
+                          "root_rule_id": "0",
+                          "created_at": "2012-12-12T10:53:43-08:00",
+                          "updated_at": "2012-12-12T10:53:43-08:00",
+                          "rules": [
+                            {
+                              "type": "card-rule",
+                              "id": "0",
+                              "rule_type": "conditional",
+                              "key": "amount",
+                              "condition": ">=",
+                              "value": "200",
+                              "true_rule_id": "1",
+                              "false_rule_id": "2"
+                            },
+                            {
+                              "type": "card-rule",
+                              "id": "1",
+                              "rule_type": "terminal",
+                              "payment_service_ids": [
+                                "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
+                              ]
+                            },
+                            {
+                              "type": "card-rule",
+                              "id": "2",
+                              "rule_type": "terminal",
+                              "payment_service_ids": [
+                                "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  "An empty list of card rulesets": {
+                    "value": {
+                      "items": []
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "post-cards-rulesets",
+        "summary": "Create a new ruleset for card transactions",
+        "description": "Creates a new ruleset that can be used for card transactions.",
+        "tags": [
+          "Card Rulesets"
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CardCreateRequest"
+                "$ref": "#/components/schemas/CardRulesetCreateRequest"
               },
               "examples": {
-                "Register a card": {
+                "A minimum valid ruleset": {
                   "value": {
-                    "number": "4111111111111111",
-                    "expiration_date": "11/25",
-                    "security_code": "123",
-                    "external_identifier": "user-789123"
+                    "display_name": "Q2 2020 Ruleset",
+                    "root_rule_id": "0",
+                    "rules": [
+                      {
+                        "type": "card-rule",
+                        "id": "0",
+                        "rule_type": "conditional",
+                        "key": "amount",
+                        "condition": ">=",
+                        "value": "200",
+                        "true_rule_id": "1",
+                        "false_rule_id": "2"
+                      },
+                      {
+                        "type": "card-rule",
+                        "id": "1",
+                        "rule_type": "terminal",
+                        "payment_service_ids": [
+                          "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
+                        ]
+                      },
+                      {
+                        "type": "card-rule",
+                        "id": "2",
+                        "rule_type": "terminal",
+                        "payment_service_ids": [
+                          "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+                        ]
+                      }
+                    ]
                   }
                 }
               }
@@ -1727,21 +1304,73 @@
           }
         },
         "responses": {
-          "202": {
-            "description": "Accepted",
+          "201": {
+            "description": "A newly created ruleset",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Status"
+                  "$ref": "#/components/schemas/CardRuleset"
                 },
                 "examples": {
-                  "Card status": {
+                  "A newly created ruleset": {
                     "value": {
-                      "type": "status",
-                      "status": "pending",
-                      "resource_type": "card",
-                      "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-                      "external_identifier": "user-789123"
+                      "type": "ruleset",
+                      "id": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
+                      "display_name": "Q2 2020 Ruleset",
+                      "active": true,
+                      "valid": true,
+                      "root_rule_id": "0",
+                      "created_at": "2012-12-12T10:53:43-08:00",
+                      "updated_at": "2012-12-12T10:53:43-08:00",
+                      "rules": [
+                        {
+                          "type": "card-rule",
+                          "id": "0",
+                          "rule_type": "conditional",
+                          "key": "amount",
+                          "condition": ">=",
+                          "value": "200",
+                          "true_rule_id": "1",
+                          "false_rule_id": "2"
+                        },
+                        {
+                          "type": "card-rule",
+                          "id": "1",
+                          "rule_type": "terminal",
+                          "payment_service_ids": [
+                            "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
+                          ]
+                        },
+                        {
+                          "type": "card-rule",
+                          "id": "2",
+                          "rule_type": "terminal",
+                          "payment_service_ids": [
+                            "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Returns an error if the ruleset is not valid JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Invalid JSON": {
+                    "value": {
+                      "type": "error",
+                      "code": "invalid_json",
+                      "status": 400,
+                      "message": "Invalid JSON",
+                      "additional_context": null
                     }
                   }
                 }
@@ -1751,30 +1380,498 @@
         }
       }
     },
-    "/async/transactions": {
-      "post": {
-        "operationId": "post-async-transactions",
-        "summary": "Authorize (and optionally capture) a transaction (Async)",
+    "/card-rulesets/{card_ruleset_id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
+          },
+          "name": "card_ruleset_id",
+          "in": "path",
+          "required": true,
+          "description": "The unique ID for a card ruleset."
+        }
+      ],
+      "get": {
+        "operationId": "get-cards-rulesets-card_ruleset_id",
+        "summary": "Get a ruleset for card transactions",
+        "description": "Returns a rulesets that can be used for card transactions.",
         "tags": [
-          "Async APIs"
+          "Card Rulesets"
         ],
-        "description": "Attempts to create an authorization for a payment method.\n\nThis endpoint accepts a few additional fields that allow for simultanious\ncapturing and storage of the payment method.\n\n* `payment_method.store` - Use this field to store the payment method for\nfuture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
         "responses": {
-          "202": {
-            "description": "Accepted",
+          "200": {
+            "description": "A card ruleset",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Status"
+                  "$ref": "#/components/schemas/CardRuleset"
                 },
                 "examples": {
-                  "Pending status": {
+                  "A card ruleset": {
                     "value": {
-                      "type": "status",
-                      "status": "pending",
-                      "resource_type": "transaction",
-                      "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-                      "external_identifier": "user-789123"
+                      "type": "ruleset",
+                      "id": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
+                      "display_name": "Q2 2020 Ruleset",
+                      "active": true,
+                      "valid": true,
+                      "root_rule_id": "0",
+                      "created_at": "2012-12-12T10:53:43-08:00",
+                      "updated_at": "2012-12-12T10:53:43-08:00",
+                      "rules": [
+                        {
+                          "type": "card-rule",
+                          "id": "0",
+                          "rule_type": "conditional",
+                          "key": "amount",
+                          "condition": ">=",
+                          "value": "200",
+                          "true_rule_id": "1",
+                          "false_rule_id": "2"
+                        },
+                        {
+                          "type": "card-rule",
+                          "id": "1",
+                          "rule_type": "terminal",
+                          "payment_service_ids": [
+                            "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
+                          ]
+                        },
+                        {
+                          "type": "card-rule",
+                          "id": "2",
+                          "rule_type": "terminal",
+                          "payment_service_ids": [
+                            "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the ruleset could not be found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Ruleset not found": {
+                    "value": {
+                      "type": "error",
+                      "code": "not_found",
+                      "status": 404,
+                      "message": "The resource could not be found",
+                      "additional_context": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "put-cards-rulesets-card_ruleset_id",
+        "summary": "Update a ruleset for card transactions",
+        "description": "Updates a ruleset that can be used for card transactions.",
+        "tags": [
+          "Card Rulesets"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CardRulesetUpdateRequest"
+              },
+              "examples": {
+                "A valid ruleset": {
+                  "value": {
+                    "display_name": "Q2 2020 Ruleset",
+                    "root_rule_id": "0",
+                    "rules": [
+                      {
+                        "type": "card-rule",
+                        "id": "0",
+                        "rule_type": "conditional",
+                        "key": "amount",
+                        "condition": ">=",
+                        "value": "200",
+                        "true_rule_id": "1",
+                        "false_rule_id": "2"
+                      },
+                      {
+                        "type": "card-rule",
+                        "id": "1",
+                        "rule_type": "terminal",
+                        "payment_service_ids": [
+                          "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
+                        ]
+                      },
+                      {
+                        "type": "card-rule",
+                        "id": "2",
+                        "rule_type": "terminal",
+                        "payment_service_ids": [
+                          "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "An updated ruleset",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CardRuleset"
+                },
+                "examples": {
+                  "A newly created ruleset": {
+                    "value": {
+                      "type": "ruleset",
+                      "id": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
+                      "display_name": "Q2 2020 Ruleset",
+                      "active": true,
+                      "valid": true,
+                      "root_rule_id": "0",
+                      "created_at": "2012-12-12T10:53:43-08:00",
+                      "updated_at": "2012-12-12T10:53:43-08:00",
+                      "rules": [
+                        {
+                          "type": "card-rule",
+                          "id": "0",
+                          "rule_type": "conditional",
+                          "key": "amount",
+                          "condition": ">=",
+                          "value": "200",
+                          "true_rule_id": "1",
+                          "false_rule_id": "2"
+                        },
+                        {
+                          "type": "card-rule",
+                          "id": "1",
+                          "rule_type": "terminal",
+                          "payment_service_ids": [
+                            "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
+                          ]
+                        },
+                        {
+                          "type": "card-rule",
+                          "id": "2",
+                          "rule_type": "terminal",
+                          "payment_service_ids": [
+                            "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Returns an error if the ruleset is not valid JSON",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Invalid JSON": {
+                    "value": {
+                      "type": "error",
+                      "code": "invalid_json",
+                      "status": 400,
+                      "message": "Invalid JSON",
+                      "additional_context": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the ruleset could not be found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Ruleset not found": {
+                    "value": {
+                      "type": "error",
+                      "code": "not_found",
+                      "status": 404,
+                      "message": "The resource could not be found",
+                      "additional_context": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "delete-card-rulesets-card_ruleset_id",
+        "summary": "Delete a card ruleset",
+        "description": "Deletes a specific card ruleset",
+        "tags": [
+          "Card Rulesets"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Returns an error if the ruleset could not be deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Ruleset is active": {
+                    "value": {
+                      "type": "error",
+                      "code": "forbidden",
+                      "status": 403,
+                      "message": "The resource could not be removed as it's currently active",
+                      "additional_context": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the ruleset could not be found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Ruleset not found": {
+                    "value": {
+                      "type": "error",
+                      "code": "not_found",
+                      "status": 404,
+                      "message": "The resource could not be found",
+                      "additional_context": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/card-rulesets/{card_ruleset_id}/activate": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
+          },
+          "name": "card_ruleset_id",
+          "in": "path",
+          "required": true,
+          "description": "The unique ID for a card ruleset."
+        }
+      ],
+      "post": {
+        "operationId": "post-cards-rulesets-card_ruleset_id-activate",
+        "summary": "Activates a ruleset for card transactions",
+        "description": "Activates aa ruleset for card transactions, making it the one\nruleset used by all card transactions.\n\nOnly one ruleset can be active at any time. By activating a ruleset the\nexisting active ruleset will be deactivated.\n\nOnly valid rulesets can be activated.",
+        "tags": [
+          "Card Rulesets"
+        ],
+        "responses": {
+          "201": {
+            "description": "An activated ruleset",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CardRuleset"
+                },
+                "examples": {
+                  "A newly created ruleset": {
+                    "value": {
+                      "type": "ruleset",
+                      "id": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
+                      "display_name": "Q2 2020 Ruleset",
+                      "active": true,
+                      "valid": true,
+                      "root_rule_id": "0",
+                      "created_at": "2012-12-12T10:53:43-08:00",
+                      "updated_at": "2012-12-12T10:53:43-08:00",
+                      "rules": [
+                        {
+                          "type": "card-rule",
+                          "id": "0",
+                          "rule_type": "conditional",
+                          "key": "amount",
+                          "condition": ">=",
+                          "value": "200",
+                          "true_rule_id": "1",
+                          "false_rule_id": "2"
+                        },
+                        {
+                          "type": "card-rule",
+                          "id": "1",
+                          "rule_type": "terminal",
+                          "payment_service_ids": [
+                            "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
+                          ]
+                        },
+                        {
+                          "type": "card-rule",
+                          "id": "2",
+                          "rule_type": "terminal",
+                          "payment_service_ids": [
+                            "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returns an error if the ruleset is not valid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Invalid JSON": {
+                    "value": {
+                      "type": "error",
+                      "code": "invalid_ruleset",
+                      "status": 403,
+                      "message": "Ruleset is not valid. Only valid rulesets can be deployed",
+                      "additional_context": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the ruleset could not be found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Ruleset not found": {
+                    "value": {
+                      "type": "error",
+                      "code": "not_found",
+                      "status": 404,
+                      "message": "The resource could not be found",
+                      "additional_context": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions": {
+      "get": {
+        "operationId": "get-transactions",
+        "summary": "List all transactions",
+        "description": "Lists all transactions for an account. Sorted by last `updated_at` status.",
+        "tags": [
+          "Transactions"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a paginated list of transactions for an account.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transactions"
+                },
+                "examples": {
+                  "A list of transactions": {
+                    "value": {
+                      "items": [
+                        {
+                          "type": "transaction",
+                          "id": "18d41625-16d5-40a8-bc92-16f5e1158e55",
+                          "status": "created",
+                          "transaction_status": "pending",
+                          "amount": 1299,
+                          "currency": "USD",
+                          "payment_method": {
+                            "type": "card",
+                            "id": "fa5dc53e-b070-417b-9355-5dc9b80a69e3",
+                            "authorization_url": null,
+                            "external_identifier": "my-card-234"
+                          },
+                          "created_at": "2013-07-16T19:23:00.000Z",
+                          "updated_at": "2013-07-16T19:23:00.000Z",
+                          "external_identifier": "my-transaction-123",
+                          "payment_service_id": "stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480"
+                        }
+                      ],
+                      "limit": 100,
+                      "next_page": "2ca870b0-4e73-42c7-8651-86bd2e833608",
+                      "previous_page": null
+                    }
+                  },
+                  "An empty list of transactions": {
+                    "value": {
+                      "items": [],
+                      "limit": 100,
+                      "next_page": null,
+                      "previous_page": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "An unauthorized request": {
+                    "value": {
+                      "type": "error",
+                      "code": "unauthorized",
+                      "status": 401,
+                      "message": "No valid authentication found",
+                      "additional_context": null
                     }
                   }
                 }
@@ -1782,6 +1879,86 @@
             }
           }
         },
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "example": 50,
+              "minimum": 0,
+              "maximum": 100,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "The maximum number of items to return"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "1593343179"
+            },
+            "in": "query",
+            "name": "marker",
+            "description": "The marker that identifies the offsett for the page of results to return.\n\nFor the first page of results, simply omit this parameter. For next pages,\nsimply use the value returned by the API in the `next_page` field.\n\nA marker is an opague string that is only meaningful to ur API. No\nadditional value can be ascribed to this value."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "search",
+            "description": "Filters the results to just the transactions that match this external identifier or transaction ID."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "before_updated_at",
+            "description": "Filters the results to only transactions last updated before this ISO date-time string."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "after_updated_at",
+            "description": "Filters the results to only transactions last updated after this ISO date-time string."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "before_created_at",
+            "description": "Filters the results to only transactions created before this ISO date-time string."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "after_created_at",
+            "description": "Filters the results to only transactions created after this ISO date-time string."
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "transaction_status",
+            "description": "Filters the results to only transactions with as specific transaction status."
+          }
+        ]
+      },
+      "post": {
+        "summary": "Authorize (and optionally capture) a transaction",
+        "tags": [
+          "Transactions"
+        ],
+        "operationId": "post-transactions",
+        "description": "Attempts to create an authorization for a payment method. In some cases it is\nnot possible to create the authorization without redirectingt the user for\ntheir authorization. In these cases the status is set to\n`user_authorization_required` and an `authorization_url` is returned.\n\nAdditionally, this endpoint accepts a few additional fields that allow for\nsimultanious capturing and storage of the payment method.\n\n* `payment_method.store` - Use this field to store the payment method for\nfurture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1801,7 +1978,44 @@
                     }
                   }
                 },
-                "Authorized and capture a PayPal payment": {
+                "Authorize a tokenized card": {
+                  "value": {
+                    "amount": 1299,
+                    "currency": "USD",
+                    "payment_method_type": "card",
+                    "payment_method": {
+                      "number": "4111111111111111"
+                    }
+                  }
+                },
+                "Authorized and tokenize a card": {
+                  "value": {
+                    "amount": 1299,
+                    "currency": "USD",
+                    "payment_method_type": "card",
+                    "payment_method": {
+                      "number": "4111111111111111",
+                      "expiration_date": "11/25",
+                      "security_code": "123",
+                      "store": true
+                    }
+                  }
+                },
+                "Authorize, capture, and tokenize a card": {
+                  "value": {
+                    "amount": 1299,
+                    "currency": "USD",
+                    "payment_method_type": "card",
+                    "capture": true,
+                    "payment_method": {
+                      "number": "4111111111111111",
+                      "expiration_date": "11/25",
+                      "security_code": "123",
+                      "store": true
+                    }
+                  }
+                },
+                "Authorize and capture a PayPal transaction": {
                   "value": {
                     "amount": 1299,
                     "currency": "USD",
@@ -1811,66 +2025,96 @@
                 }
               }
             }
-          },
-          "description": ""
-        }
-      }
-    },
-    "/async/transactions/{transaction_id}/authorize": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "transaction_id",
-          "in": "path",
-          "required": true,
-          "description": "The ID for the transaction to get the information for."
-        }
-      ],
-      "post": {
-        "operationId": "post-async-transactions-transaction_id-authorize",
-        "summary": "Authorize pending transaction (Async)",
-        "tags": [
-          "Async APIs"
-        ],
-        "description": "Authorize an existing but pending transaction.\n\nThis endpoint is used when a transaction was previously created that required\nadditional information, or a redirect, from the buyer. Use this endpoint to\npost the additional information to trigger the transaction to be properly\nauthorized.\n\nAdditionally, this endpoint will capture the transaction and store the payment\nmethod if this was previously specified when creating the transaction. We\ncurrently do not support overwritting these settings at this point.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TransactionAuthorizeRequest"
-              },
-              "examples": {
-                "A basic authorize request": {
-                  "value": {}
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "A successful transaction",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transaction"
                 },
-                "An authorize request for a lower amount": {
-                  "value": {
-                    "amount": 399,
-                    "currency": "USD"
+                "examples": {
+                  "Card transaction": {
+                    "value": {
+                      "type": "transaction",
+                      "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+                      "status": "created",
+                      "transaction_status": "created",
+                      "amount": 1299,
+                      "currency": "USD",
+                      "payment_method": {
+                        "type": "card",
+                        "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
+                        "authorization_url": null
+                      },
+                      "created_at": "2013-07-16T19:23:00.000Z",
+                      "external_identifier": "user-789123",
+                      "updated_at": "2019-08-24T14:15:22Z",
+                      "payment_service_id": "card-stripe-169f5226-4644-4d1e-ac36-14999e73601f"
+                    }
+                  },
+                  "Pending PayPal transaction": {
+                    "value": {
+                      "type": "transaction",
+                      "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+                      "status": "created",
+                      "transaction_status": "user_authorization_required",
+                      "amount": 1299,
+                      "currency": "USD",
+                      "payment_method": {
+                        "type": "paypal",
+                        "id": null,
+                        "status": "user_authorization_required",
+                        "authorization_url": "https://paypal.com/..."
+                      },
+                      "created_at": "2013-07-16T19:23:00.000Z",
+                      "external_identifier": "user-12345",
+                      "updated_at": "2019-08-24T14:15:22Z",
+                      "payment_service_id": "paypal-paypal-169f5226-4644-4d1e-ac36-14999e73601f"
+                    }
                   }
                 }
               }
             }
-          }
-        },
-        "responses": {
-          "202": {
-            "description": "Accepted",
+          },
+          "400": {
+            "description": "Returns an error if the request is missing any required fields, or the request body is not valid JSON.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Status"
+                  "$ref": "#/components/schemas/Error"
                 },
                 "examples": {
-                  "A status": {
+                  "Incorrect JSON": {
                     "value": {
-                      "type": "status",
-                      "status": "pending",
-                      "resource_type": "transaction",
-                      "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-                      "external_identifier": "user-789123"
+                      "type": "error",
+                      "code": "incorrect_json",
+                      "status": 400,
+                      "message": "The request body was not valid JSON.",
+                      "additional_context": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "An unauthorized request": {
+                    "value": {
+                      "type": "error",
+                      "code": "unauthorized",
+                      "status": 401,
+                      "message": "No valid API authentication found",
+                      "additional_context": null
                     }
                   }
                 }
@@ -1880,7 +2124,155 @@
         }
       }
     },
-    "/async/transactions/{transaction_id}/capture": {
+    "/transactions/{transaction_id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "transaction_id",
+          "in": "path",
+          "required": true,
+          "description": "The ID for the transaction to get the information for."
+        }
+      ],
+      "get": {
+        "operationId": "get-transactions-transaction_id",
+        "summary": "Get a transaction",
+        "description": "Get information about a transaction",
+        "tags": [
+          "Transactions"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a transaction resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transaction"
+                },
+                "examples": {
+                  "A card transaction": {
+                    "value": {
+                      "type": "transaction",
+                      "id": "18d41625-16d5-40a8-bc92-16f5e1158e55",
+                      "status": "created",
+                      "transaction_status": "pending",
+                      "amount": 1299,
+                      "currency": "USD",
+                      "payment_method": {
+                        "type": "card",
+                        "id": "fa5dc53e-b070-417b-9355-5dc9b80a69e3",
+                        "authorization_url": null
+                      },
+                      "created_at": "2013-07-16T19:23:00.000Z",
+                      "updated_at": "2013-07-16T19:23:00.000Z",
+                      "external_identifier": null,
+                      "payment_service_id": "stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480"
+                    }
+                  },
+                  "A PayPal transaction": {
+                    "value": {
+                      "type": "transaction",
+                      "id": "18d41625-16d5-40a8-bc92-16f5e1158e55",
+                      "status": "created",
+                      "transaction_status": "pending",
+                      "amount": 1299,
+                      "currency": "USD",
+                      "payment_method": {
+                        "type": "paypal",
+                        "id": "2ca870b0-4e73-42c7-8651-86bd2e833608",
+                        "authorization_url": null
+                      },
+                      "created_at": "2013-07-16T19:23:00.000Z",
+                      "updated_at": "2013-07-16T19:23:00.000Z",
+                      "external_identifier": null,
+                      "payment_service_id": "stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480"
+                    }
+                  },
+                  "A BitCoin transaction": {
+                    "value": {
+                      "type": "transaction",
+                      "id": "18d41625-16d5-40a8-bc92-16f5e1158e55",
+                      "status": "created",
+                      "transaction_status": "pending",
+                      "amount": 0.039999,
+                      "currency": "USD",
+                      "payment_method": {
+                        "type": "bitcoin",
+                        "id": "2ca870b0-4e73-42c7-8651-86bd2e833608",
+                        "authorization_url": null
+                      },
+                      "created_at": "2013-07-16T19:23:00.000Z",
+                      "updated_at": "2013-07-16T19:23:00.000Z",
+                      "external_identifier": null,
+                      "payment_service_id": "stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "An unauthorized request": {
+                    "value": {
+                      "type": "error",
+                      "code": "unauthorized",
+                      "status": 401,
+                      "message": "No valid authentication found",
+                      "additional_context": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the transaction can not be found or has not yet been created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Transaction not found": {
+                    "value": {
+                      "type": "error",
+                      "code": "not_found",
+                      "status": 404,
+                      "message": "The resource could not be found",
+                      "additional_context": null
+                    }
+                  },
+                  "Transaction pending": {
+                    "value": {
+                      "type": "error",
+                      "code": "status_pending",
+                      "status": 404,
+                      "message": "The resource is still pending",
+                      "additional_context": {
+                        "type": "status",
+                        "status": "pending",
+                        "resource_type": "transaction",
+                        "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/{transaction_id}/authorize": {
       "parameters": [
         {
           "schema": {
@@ -1893,13 +2285,77 @@
         }
       ],
       "post": {
-        "operationId": "post-async-transactions-transaction_id-capture",
-        "summary": "Capture a previously authorized transaction (Async)",
+        "operationId": "post-transactions-transaction_id-authorize",
+        "summary": "Authorize pending transasction",
         "tags": [
-          "Async APIs"
+          "Transactions"
         ],
-        "description": "Captures a previously authorized transaction.\n\nThis API returns asynchronously, returning status object with the ID of the\npending `Transaction` resource.",
+        "description": "Authorize an existing but pending transaction.\n\nThis endpoint is used when a transaction was previously created that required\nadditional information, or a redirect, from the buyer. Use this endpoint to\npost the additional information to trigger the transaction to be properly\nauthorized.\n\nAdditionally, this endpoint will capture the transaction and store the payment\nmethod if this was previously specified when creating the transaction. We\ncurrently do not support overwritting these settings at this point.",
         "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionAuthorizeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transaction"
+                },
+                "examples": {
+                  "An authorized transaction": {
+                    "value": {
+                      "type": "transaction",
+                      "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+                      "status": "created",
+                      "transaction_status": "authorized",
+                      "amount": 1299,
+                      "currency": "USD",
+                      "payment_method": {
+                        "type": "card",
+                        "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
+                        "authorization_url": null
+                      },
+                      "created_at": "2013-07-16T19:23:00.000Z",
+                      "external_identifier": "user-789123",
+                      "updated_at": "2019-08-24T14:15:22Z",
+                      "payment_service_id": "card-stripe-169f5226-4644-4d1e-ac36-14999e73601f"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/{transaction_id}/capture": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "transaction_id",
+          "in": "path",
+          "required": true,
+          "description": "The ID for the transaction to get the information for."
+        }
+      ],
+      "post": {
+        "operationId": "post-transactions-transaction_id-capture",
+        "summary": "Capture previously authorized transaction",
+        "description": "Captures a previously authorized transaction.",
+        "tags": [
+          "Transactions"
+        ],
+        "requestBody": {
+          "description": "",
           "content": {
             "application/json": {
               "schema": {
@@ -1917,21 +2373,73 @@
           }
         },
         "responses": {
-          "202": {
-            "description": "Accepted",
+          "201": {
+            "description": "",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Status"
+                  "$ref": "#/components/schemas/Transaction"
                 },
                 "examples": {
-                  "Pending transaction": {
+                  "A transaction": {
                     "value": {
-                      "type": "status",
-                      "status": "pending",
-                      "resource_type": "transaction",
-                      "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-                      "external_identifier": "user-789123"
+                      "type": "transaction",
+                      "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+                      "status": "created",
+                      "transaction_status": "authorized",
+                      "amount": 1299,
+                      "currency": "USD",
+                      "payment_method": {
+                        "type": "card",
+                        "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
+                        "authorization_url": null
+                      },
+                      "created_at": "2013-07-16T19:23:00.000Z",
+                      "external_identifier": "user-789123",
+                      "updated_at": "2019-08-24T14:15:22Z",
+                      "payment_service_id": "stripe-card-169f5226-4644-4d1e-ac36-14999e73601f"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Returns an error if the request is missing any required fields, or the request body is not valid JSON.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Incorrect JSON": {
+                    "value": {
+                      "type": "error",
+                      "code": "incorrect_json",
+                      "status": 400,
+                      "message": "The request body was not valid JSON.",
+                      "additional_context": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "An unauthorized request": {
+                    "value": {
+                      "type": "error",
+                      "code": "unauthorized",
+                      "status": 401,
+                      "message": "No valid API authentication found",
+                      "additional_context": null
                     }
                   }
                 }
@@ -1941,44 +2449,92 @@
         }
       }
     },
-    "/async/transactions/batch-capture": {
-      "post": {
-        "operationId": "post-async-transactions-batch-capture",
-        "summary": "Batch capture authorizations (Async)",
+    "/transactions/{transaction_id}/events": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "transaction_id",
+          "in": "path",
+          "required": true,
+          "description": "The ID for the transaction to get the information for."
+        }
+      ],
+      "get": {
+        "operationId": "get-transactions-transaction_id-events",
+        "summary": "List the events for a given transaction",
+        "description": "Returns a list of events for a given transaction.",
         "tags": [
-          "Async APIs"
+          "Transactions"
         ],
-        "description": "The body of this API takes either a list of items as a JSON object, or a CSV\nfile with each line representing an authorization request, and the headers\nrepresenting the fields to process.\n\nThis API returns asynchronously, returning a list of status objects with the\nIDs of the pending `Transaction` resources.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionEvents"
+                },
+                "examples": {
+                  "A list of events": {
+                    "value": {
+                      "items": [
+                        {
+                          "id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
+                          "type": "transactions.event",
+                          "code": "transactions.rejected.account_closed",
+                          "external_service": {
+                            "id": "stripe-card-699c1745-53cf-4b13-b977-fef0ecd4c681",
+                            "type": "payment-service",
+                            "service_id": "stripe-card",
+                            "display_name": "Stripe (Main)"
+                          },
+                          "created_at": "2020-04-01 14:00:00Z"
+                        }
+                      ],
+                      "limit": 100,
+                      "next_page": "5159a2ee-f8f9-4669-99e7-e1dc85f98cb9",
+                      "previous_page": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/batch-capture": {
+      "post": {
+        "operationId": "post-transactions-batch-capture",
+        "summary": "Batch capture authorizations",
+        "tags": [
+          "Transactions"
+        ],
+        "description": "Takes a list of authorization IDs and processes them as needed.",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "items": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/TransactionCaptureRequest"
-                    }
-                  }
-                }
+                "$ref": "#/components/schemas/TransactionsBatchCaptureRequest"
               },
               "examples": {
-                "Capture multiple transactions": {
+                "Capture multiple authorizations": {
                   "value": {
                     "items": [
                       {
-                        "authorization_id": "931b9b0c-dc95-4d45-b1fc-64966244ef74",
+                        "transaction_id": "931b9b0c-dc95-4d45-b1fc-64966244ef74",
                         "amount": 1299,
                         "currency": "USD"
                       },
                       {
-                        "authorization_id": "272dee2b-2196-4e4e-acf7-e5983f1fdc61",
+                        "transaction_id": "272dee2b-2196-4e4e-acf7-e5983f1fdc61",
                         "amount": 199,
                         "currency": "GBP"
                       },
                       {
-                        "authorization_id": "d3c096cd-33ad-4235-bba9-f2eb0ccb307d",
+                        "transaction_id": "d3c096cd-33ad-4235-bba9-f2eb0ccb307d",
                         "amount": 0.0003999,
                         "currency": "BTC"
                       }
@@ -1987,50 +2543,101 @@
                 }
               }
             }
-          }
+          },
+          "description": "The body of this API takes either a list of items as a JSON object, or a CSV\nfile with each line representing an authorization request, and the headers\nrepresenting the fields to process.\n"
         },
         "responses": {
-          "202": {
-            "description": "Accepted",
+          "201": {
+            "description": "Returns a list of status objects, one for each requested capture.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Statuses"
+                  "$ref": "#/components/schemas/Transactions"
                 },
                 "examples": {
-                  "A list of accepted capture requests": {
+                  "A list of transactions": {
                     "value": {
                       "items": [
                         {
-                          "type": "status",
-                          "status": "pending",
-                          "resource_type": "transaction",
-                          "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-                          "external_identifier": "user-12345"
-                        },
-                        {
-                          "type": "status",
-                          "status": "pending",
-                          "resource_type": "transaction",
-                          "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-                          "external_identifier": "user-2345"
-                        },
-                        {
-                          "type": "status",
-                          "status": "pending",
-                          "resource_type": "transaction",
-                          "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-                          "external_identifier": null
+                          "type": "transaction",
+                          "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+                          "status": "created",
+                          "transaction_status": "authorized",
+                          "amount": 1299,
+                          "currency": "USD",
+                          "payment_method": {
+                            "type": "card",
+                            "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
+                            "authorization_url": "https://paypal.com....."
+                          },
+                          "created_at": "2013-07-16T19:23:00.000Z",
+                          "external_identifier": "user-789123",
+                          "updated_at": "2019-08-24T14:15:22Z",
+                          "payment_service_id": "169f5226-4644-4d1e-ac36-14999e73601f"
                         }
                       ],
                       "limit": 100,
-                      "next_page": null,
-                      "previous_page": null
+                      "next_page": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
+                      "previous_page": "9049b2f9-0c67-47c5-af18-e8525f855263"
                     }
                   }
                 }
               }
             }
+          },
+          "400": {
+            "description": "Returns an error if the request is missing any required fields, or the request body is not valid JSON/CSV.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Incorrect JSON": {
+                    "value": {
+                      "type": "error",
+                      "code": "incorrect_json",
+                      "status": 400,
+                      "message": "The request body was not valid JSON.",
+                      "additional_context": null
+                    }
+                  },
+                  "Incorrect CSV": {
+                    "value": {
+                      "type": "error",
+                      "code": "incorrect_csv",
+                      "status": 400,
+                      "message": "The request body was not valid CSV.",
+                      "additional_context": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "An unauthorized request": {
+                    "value": {
+                      "type": "error",
+                      "code": "unauthorized",
+                      "status": 401,
+                      "message": "No valid API authentication found",
+                      "additional_context": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
           }
         }
       }
@@ -2043,12 +2650,6 @@
         "type": "object",
         "x-tags": [
           "Cards"
-        ],
-        "required": [
-          "type",
-          "id",
-          "status",
-          "created_at"
         ],
         "properties": {
           "type": {
@@ -2103,12 +2704,6 @@
         "description": "An event that happened for a transaction.",
         "x-tags": [
           "Cards"
-        ],
-        "required": [
-          "id",
-          "type",
-          "created_at",
-          "code"
         ],
         "properties": {
           "id": {
@@ -2187,12 +2782,6 @@
         "x-tags": [
           "Cards"
         ],
-        "required": [
-          "items",
-          "limit",
-          "next_page",
-          "previous_page"
-        ],
         "properties": {
           "items": {
             "type": "array",
@@ -2259,12 +2848,6 @@
         "description": "A list of cards",
         "x-tags": [
           "Cards"
-        ],
-        "required": [
-          "items",
-          "limit",
-          "next_page",
-          "previous_page"
         ],
         "properties": {
           "items": {
@@ -2371,19 +2954,482 @@
           }
         }
       },
+      "CardRuleset": {
+        "title": "Card Ruleset",
+        "type": "object",
+        "description": "A card ruleset which holds the rules that are parsed for a card transaction.\n\nMultiple rulesets can exists at any time, but only one can be deployed.",
+        "x-tags": [
+          "Card Rulesets"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "ruleset",
+            "description": "`ruleset`",
+            "enum": [
+              "ruleset"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "example": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
+            "description": "The ID of the ruleset",
+            "format": "uuid"
+          },
+          "display_name": {
+            "type": "string",
+            "description": "The display name of the ruleset",
+            "example": "Q2 2020 Ruleset"
+          },
+          "active": {
+            "type": "boolean",
+            "example": true,
+            "description": "Wether this ruleset is currently in use. Only one ruleset can\nbe active at any time."
+          },
+          "valid": {
+            "type": "boolean",
+            "example": true,
+            "description": "Wether this ruleset is valid and complete. Only valid rulesets can be\nactivated."
+          },
+          "root_rule_id": {
+            "type": "string",
+            "example": "0",
+            "description": "The ID of the rule that is the starting point of the ruleset."
+          },
+          "rules": {
+            "type": "array",
+            "description": "A list of rules in this ruleset",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/CardRuleConditional"
+                },
+                {
+                  "$ref": "#/components/schemas/CardRuleTerminal"
+                }
+              ]
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2012-12-12T10:53:43-08:00",
+            "description": "The date and time when this ruleset was created"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2012-12-12T10:53:43-08:00",
+            "description": "The date and time when this ruleset was last updated"
+          }
+        },
+        "x-examples": {
+          "A ruleset": {
+            "type": "ruleset",
+            "id": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
+            "display_name": "Q2 2020 Ruleset",
+            "active": true,
+            "valid": true,
+            "root_rule_id": "0",
+            "created_at": "2012-12-12T10:53:43-08:00",
+            "updated_at": "2012-12-12T10:53:43-08:00",
+            "rules": [
+              {
+                "type": "card-rule",
+                "id": "0",
+                "rule_type": "conditional",
+                "key": "amount",
+                "condition": ">=",
+                "value": "200",
+                "true_rule_id": "1",
+                "false_rule_id": "2"
+              },
+              {
+                "type": "card-rule",
+                "id": "1",
+                "rule_type": "terminal",
+                "payment_service_ids": [
+                  "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
+                ]
+              },
+              {
+                "type": "card-rule",
+                "id": "2",
+                "rule_type": "terminal",
+                "payment_service_ids": [
+                  "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "CardRulesets": {
+        "title": "Card Rulesets",
+        "type": "object",
+        "description": "A list of card rulesets",
+        "x-tags": [
+          "Card Rulesets"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "A list of card rulesets",
+            "items": {
+              "$ref": "#/components/schemas/CardRuleset"
+            }
+          }
+        },
+        "x-examples": {
+          "A list of card rulesets": {
+            "items": [
+              {
+                "type": "ruleset",
+                "id": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
+                "display_name": "Q2 2020 Ruleset",
+                "active": true,
+                "valid": true,
+                "root_rule_id": "0",
+                "created_at": "2012-12-12T10:53:43-08:00",
+                "updated_at": "2012-12-12T10:53:43-08:00",
+                "rules": [
+                  {
+                    "type": "card-rule",
+                    "id": "0",
+                    "rule_type": "conditional",
+                    "key": "amount",
+                    "condition": ">=",
+                    "value": "200",
+                    "true_rule_id": "1",
+                    "false_rule_id": "2"
+                  },
+                  {
+                    "type": "card-rule",
+                    "id": "1",
+                    "rule_type": "terminal",
+                    "payment_service_ids": [
+                      "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
+                    ]
+                  },
+                  {
+                    "type": "card-rule",
+                    "id": "2",
+                    "rule_type": "terminal",
+                    "payment_service_ids": [
+                      "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "An empty list of card rulesets": {
+            "items": []
+          }
+        }
+      },
+      "CardRuleConditional": {
+        "title": "Conditional Card Rule",
+        "type": "object",
+        "description": "A conditional rule in a ruleset. It defines an if/else condition and a rule to\nmove on to next for each of these values.",
+        "x-tags": [
+          "Card Rulesets"
+        ],
+        "required": [
+          "type",
+          "id",
+          "rule_type",
+          "key",
+          "condition",
+          "value",
+          "true_rule_id",
+          "false_rule_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`card-rule`",
+            "example": "card-rule",
+            "enum": [
+              "card-rule"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "A unique ID for this rule in the ruleset",
+            "example": "0"
+          },
+          "rule_type": {
+            "type": "string",
+            "description": "`conditional`",
+            "example": "conditional",
+            "enum": [
+              "conditional"
+            ]
+          },
+          "key": {
+            "type": "string",
+            "description": "The transation field to filter by",
+            "example": "amount",
+            "enum": [
+              "amount",
+              "currency",
+              "cctype",
+              "store",
+              "use_test_environment"
+            ]
+          },
+          "condition": {
+            "type": "string",
+            "description": "The comparison to make to `value` property.",
+            "example": "<=",
+            "enum": [
+              "==",
+              "!=",
+              "<=",
+              ">="
+            ]
+          },
+          "value": {
+            "type": "string",
+            "description": "The value to compare the `key` to. This value may be casted to\na number for the currency amount.",
+            "example": "200"
+          },
+          "true_rule_id": {
+            "type": "string",
+            "description": "the ID of the rule to use if the comparison equals true.",
+            "example": "1"
+          },
+          "false_rule_id": {
+            "type": "string",
+            "description": "the ID of the rule to use if the comparison equals false.",
+            "example": "2"
+          }
+        },
+        "x-examples": {
+          "A conditonal rule": {
+            "type": "card-rule",
+            "id": "0",
+            "rule_type": "conditional",
+            "key": "amount",
+            "condition": ">=",
+            "value": "200",
+            "true_rule_id": "1",
+            "false_rule_id": "2"
+          }
+        }
+      },
+      "CardRuleTerminal": {
+        "title": "Terminal Card Rule",
+        "type": "object",
+        "description": "A terminal rule in a ruleset. It the payment services to use in case the\nruleset reaches this node.",
+        "x-tags": [
+          "Card Rulesets"
+        ],
+        "required": [
+          "type",
+          "id",
+          "rule_type",
+          "payment_service_ids"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`card-rule`",
+            "example": "card-rule",
+            "enum": [
+              "card-rule"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "A unique ID for this rule in the ruleset",
+            "example": "0"
+          },
+          "rule_type": {
+            "type": "string",
+            "description": "`terminal`",
+            "example": "terminal",
+            "enum": [
+              "terminal"
+            ]
+          },
+          "payment_service_ids": {
+            "type": "array",
+            "description": "A list of IDs for the payment services to use, in order of priority.\nThe payment services all need to process cards.",
+            "example": [
+              "card-stripe-f47db210-8e30-4f74-8123-b834604f2042",
+              "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "x-examples": {
+          "A terminal rule": {
+            "type": "card-rule",
+            "id": "0",
+            "rule_type": "terminal",
+            "payment_service_ids": [
+              "card-stripe-f47db210-8e30-4f74-8123-b834604f2042",
+              "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+            ]
+          }
+        }
+      },
+      "CardRulesetCreateRequest": {
+        "title": "Card Ruleset (Create)",
+        "type": "object",
+        "description": "Creates a new card ruleset which holds the rules that are parsed for a card\ntransaction.",
+        "x-tags": [
+          "Card Rulesets"
+        ],
+        "required": [
+          "display_name",
+          "root_rule_id",
+          "rules"
+        ],
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "description": "The display name of the ruleset",
+            "example": "Q2 2020 Ruleset"
+          },
+          "root_rule_id": {
+            "type": "string",
+            "example": "0",
+            "description": "The ID of the rule that is the starting point of the ruleset."
+          },
+          "rules": {
+            "type": "array",
+            "description": "A list of rules in this ruleset",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/CardRuleConditional"
+                },
+                {
+                  "$ref": "#/components/schemas/CardRuleTerminal"
+                }
+              ]
+            }
+          }
+        },
+        "x-examples": {
+          "Minimal ruleset": {
+            "display_name": "Q2 2020 Ruleset",
+            "root_rule_id": "0",
+            "rules": [
+              {
+                "type": "card-rule",
+                "id": "0",
+                "rule_type": "conditional",
+                "key": "amount",
+                "condition": ">=",
+                "value": "200",
+                "true_rule_id": "1",
+                "false_rule_id": "2"
+              },
+              {
+                "type": "card-rule",
+                "id": "1",
+                "rule_type": "terminal",
+                "payment_service_ids": [
+                  "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
+                ]
+              },
+              {
+                "type": "card-rule",
+                "id": "2",
+                "rule_type": "terminal",
+                "payment_service_ids": [
+                  "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "CardRulesetUpdateRequest": {
+        "title": "Card Ruleset (Update)",
+        "type": "object",
+        "description": "Updates a card ruleset which holds the rules that are parsed for a card\ntransaction.",
+        "x-tags": [
+          "Card Rulesets"
+        ],
+        "required": [
+          "display_name",
+          "root_rule_id",
+          "rules"
+        ],
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "description": "The display name of the ruleset",
+            "example": "Q2 2020 Ruleset"
+          },
+          "root_rule_id": {
+            "type": "string",
+            "example": "0",
+            "description": "The ID of the rule that is the starting point of the ruleset."
+          },
+          "rules": {
+            "type": "array",
+            "description": "A list of rules in this ruleset",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/CardRuleConditional"
+                },
+                {
+                  "$ref": "#/components/schemas/CardRuleTerminal"
+                }
+              ]
+            }
+          }
+        },
+        "x-examples": {
+          "Minimal ruleset": {
+            "display_name": "Q2 2020 Ruleset",
+            "root_rule_id": "0",
+            "rules": [
+              {
+                "type": "card-rule",
+                "id": "0",
+                "rule_type": "conditional",
+                "key": "amount",
+                "condition": ">=",
+                "value": "200",
+                "true_rule_id": "1",
+                "false_rule_id": "2"
+              },
+              {
+                "type": "card-rule",
+                "id": "1",
+                "rule_type": "terminal",
+                "payment_service_ids": [
+                  "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
+                ]
+              },
+              {
+                "type": "card-rule",
+                "id": "2",
+                "rule_type": "terminal",
+                "payment_service_ids": [
+                  "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+                ]
+              }
+            ]
+          }
+        }
+      },
       "Error": {
         "title": "Error",
         "type": "object",
         "description": "A generic client error.",
         "x-tags": [
           "Errors"
-        ],
-        "required": [
-          "type",
-          "code",
-          "status",
-          "message",
-          "documentation_url"
         ],
         "properties": {
           "type": {
@@ -2414,12 +3460,6 @@
             "type": "string",
             "description": "A human readable message that describes the error. The content of this field should not be used to determine any business logic. ",
             "example": "The request body was not valid JSON."
-          },
-          "documentation_url": {
-            "type": "string",
-            "description": "A link to the developer documentation for this error.",
-            "format": "uri",
-            "example": "https://developer.gr4vy.com/errors/incorrect-json"
           }
         },
         "x-examples": {
@@ -2427,8 +3467,7 @@
             "type": "error",
             "code": "incorrect_json",
             "status": 400,
-            "message": "The request body was not valid JSON.",
-            "documentation_url": "https://developer.gr4vy.com/errors/incorrect-json"
+            "message": "The request body was not valid JSON."
           }
         }
       },
@@ -2438,11 +3477,6 @@
         "description": "A generic object to hold payment method details.",
         "x-tags": [
           "Payment Methods"
-        ],
-        "required": [
-          "type",
-          "id",
-          "authorization_url"
         ],
         "properties": {
           "type": {
@@ -3278,12 +4312,6 @@
         "title": "Status",
         "type": "object",
         "description": "In many cases the Gr4vy API returns asynchronously, kicking off a job to create an authorization or a transaction, and returning a `Status` object with the ID of the pending object. The ID of this resource can be used to query an objects status, or additionally the client can use Pub/Sub to subscribe to the creation of the pending object.",
-        "required": [
-          "type",
-          "status",
-          "resource_type",
-          "resource_id"
-        ],
         "x-tags": [
           "Statuses"
         ],
@@ -3352,9 +4380,6 @@
         "x-tags": [
           "Statuses"
         ],
-        "required": [
-          "items"
-        ],
         "properties": {
           "items": {
             "type": "array",
@@ -3394,19 +4419,6 @@
         "description": "Captures a transaction.",
         "x-tags": [
           "Transactions"
-        ],
-        "required": [
-          "type",
-          "id",
-          "status",
-          "transaction_status",
-          "amount",
-          "currency",
-          "payment_method",
-          "created_at",
-          "external_identifier",
-          "updated_at",
-          "payment_service_id"
         ],
         "properties": {
           "type": {
@@ -3559,12 +4571,6 @@
         "type": "object",
         "x-tags": [
           "Transactions"
-        ],
-        "required": [
-          "items",
-          "limit",
-          "next_page",
-          "previous_page"
         ],
         "properties": {
           "items": {
@@ -3846,12 +4852,6 @@
         "x-tags": [
           "Transactions"
         ],
-        "required": [
-          "id",
-          "type",
-          "created_at",
-          "code"
-        ],
         "properties": {
           "id": {
             "type": "string",
@@ -3929,12 +4929,6 @@
         "description": "A list of events for a transaction",
         "x-tags": [
           "Transactions"
-        ],
-        "required": [
-          "items",
-          "limit",
-          "next_page",
-          "previous_page"
         ],
         "properties": {
           "items": {
