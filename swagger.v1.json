@@ -212,6 +212,219 @@
         "summary": "Capture a previously authorized transaction (Async)"
       }
     },
+    "/card-rulesets": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "A list of rulesets",
+            "schema": {
+              "$ref": "#/definitions/CardRulesets"
+            }
+          }
+        },
+        "tags": [
+          "Card Rulesets"
+        ],
+        "description": "Returns a list of rulesets that can be used for card transactions.",
+        "operationId": "get-cards-rulesets",
+        "summary": "List the rulesets for card transactions"
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/CardRulesetCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "A newly created ruleset",
+            "schema": {
+              "$ref": "#/definitions/CardRuleset"
+            }
+          },
+          "400": {
+            "description": "Returns an error if the ruleset is not valid JSON",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Card Rulesets"
+        ],
+        "description": "Creates a new ruleset that can be used for card transactions.",
+        "operationId": "post-cards-rulesets",
+        "summary": "Create a new ruleset for card transactions"
+      }
+    },
+    "/card-rulesets/{card_ruleset_id}": {
+      "parameters": [
+        {
+          "description": "The unique ID for a card ruleset.",
+          "format": "uuid",
+          "in": "path",
+          "name": "card_ruleset_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Returns an error if the ruleset could not be deleted",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Returns an error if the ruleset could not be found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Card Rulesets"
+        ],
+        "description": "Deletes a specific card ruleset",
+        "operationId": "delete-card-rulesets-card_ruleset_id",
+        "summary": "Delete a card ruleset"
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "A card ruleset",
+            "schema": {
+              "$ref": "#/definitions/CardRuleset"
+            }
+          },
+          "404": {
+            "description": "Returns an error if the ruleset could not be found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Card Rulesets"
+        ],
+        "description": "Returns a rulesets that can be used for card transactions.",
+        "operationId": "get-cards-rulesets-card_ruleset_id",
+        "summary": "Get a ruleset for card transactions"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/CardRulesetUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An updated ruleset",
+            "schema": {
+              "$ref": "#/definitions/CardRuleset"
+            }
+          },
+          "400": {
+            "description": "Returns an error if the ruleset is not valid JSON",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Returns an error if the ruleset could not be found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Card Rulesets"
+        ],
+        "description": "Updates a ruleset that can be used for card transactions.",
+        "operationId": "put-cards-rulesets-card_ruleset_id",
+        "summary": "Update a ruleset for card transactions"
+      }
+    },
+    "/card-rulesets/{card_ruleset_id}/activate": {
+      "parameters": [
+        {
+          "description": "The unique ID for a card ruleset.",
+          "format": "uuid",
+          "in": "path",
+          "name": "card_ruleset_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "An activated ruleset",
+            "schema": {
+              "$ref": "#/definitions/CardRuleset"
+            }
+          },
+          "403": {
+            "description": "Returns an error if the ruleset is not valid",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Returns an error if the ruleset could not be found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Card Rulesets"
+        ],
+        "description": "Activates aa ruleset for card transactions, making it the one\nruleset used by all card transactions.\n\nOnly one ruleset can be active at any time. By activating a ruleset the\nexisting active ruleset will be deactivated.\n\nOnly valid rulesets can be activated.",
+        "operationId": "post-cards-rulesets-card_ruleset_id-activate",
+        "summary": "Activates a ruleset for card transactions"
+      }
+    },
     "/cards": {
       "get": {
         "produces": [
@@ -304,7 +517,7 @@
     "/cards/{card_id}": {
       "parameters": [
         {
-          "description": "The ID for the card to get the information for.",
+          "description": "The unique ID for a card.",
           "format": "uuid",
           "in": "path",
           "name": "card_id",
@@ -348,7 +561,7 @@
     "/cards/{card_id}/events": {
       "parameters": [
         {
-          "description": "The ID for the card to get the information for.",
+          "description": "The unique ID for a card.",
           "format": "uuid",
           "in": "path",
           "name": "card_id",
@@ -1022,12 +1235,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "type",
-        "id",
-        "status",
-        "created_at"
-      ],
       "title": "Card",
       "type": "object",
       "x-examples": {
@@ -1143,12 +1350,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "id",
-        "type",
-        "created_at",
-        "code"
-      ],
       "title": "Card Event",
       "type": "object",
       "x-examples": {
@@ -1210,12 +1411,6 @@
           "x-nullable": true
         }
       },
-      "required": [
-        "items",
-        "limit",
-        "next_page",
-        "previous_page"
-      ],
       "title": "Card Events",
       "type": "object",
       "x-examples": {
@@ -1247,6 +1442,449 @@
       },
       "x-tags": [
         "Cards"
+      ]
+    },
+    "CardRuleConditional": {
+      "description": "A conditional rule in a ruleset. It defines an if/else condition and a rule to\nmove on to next for each of these values.",
+      "properties": {
+        "condition": {
+          "description": "The comparison to make to `value` property.",
+          "enum": [
+            "==",
+            "!=",
+            "<=",
+            ">="
+          ],
+          "example": "<=",
+          "type": "string"
+        },
+        "false_rule_id": {
+          "description": "the ID of the rule to use if the comparison equals false.",
+          "example": "2",
+          "type": "string"
+        },
+        "id": {
+          "description": "A unique ID for this rule in the ruleset",
+          "example": "0",
+          "type": "string"
+        },
+        "key": {
+          "description": "The transation field to filter by",
+          "enum": [
+            "amount",
+            "currency",
+            "cctype",
+            "store",
+            "use_test_environment"
+          ],
+          "example": "amount",
+          "type": "string"
+        },
+        "rule_type": {
+          "description": "`conditional`",
+          "enum": [
+            "conditional"
+          ],
+          "example": "conditional",
+          "type": "string"
+        },
+        "true_rule_id": {
+          "description": "the ID of the rule to use if the comparison equals true.",
+          "example": "1",
+          "type": "string"
+        },
+        "type": {
+          "description": "`card-rule`",
+          "enum": [
+            "card-rule"
+          ],
+          "example": "card-rule",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value to compare the `key` to. This value may be casted to\na number for the currency amount.",
+          "example": "200",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "rule_type",
+        "key",
+        "condition",
+        "value",
+        "true_rule_id",
+        "false_rule_id"
+      ],
+      "title": "Conditional Card Rule",
+      "type": "object",
+      "x-examples": {
+        "A conditonal rule": {
+          "condition": ">=",
+          "false_rule_id": "2",
+          "id": "0",
+          "key": "amount",
+          "rule_type": "conditional",
+          "true_rule_id": "1",
+          "type": "card-rule",
+          "value": "200"
+        }
+      },
+      "x-tags": [
+        "Card Rulesets"
+      ]
+    },
+    "CardRuleTerminal": {
+      "description": "A terminal rule in a ruleset. It the payment services to use in case the\nruleset reaches this node.",
+      "properties": {
+        "id": {
+          "description": "A unique ID for this rule in the ruleset",
+          "example": "0",
+          "type": "string"
+        },
+        "payment_service_ids": {
+          "description": "A list of IDs for the payment services to use, in order of priority.\nThe payment services all need to process cards.",
+          "example": [
+            "card-stripe-f47db210-8e30-4f74-8123-b834604f2042",
+            "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "rule_type": {
+          "description": "`terminal`",
+          "enum": [
+            "terminal"
+          ],
+          "example": "terminal",
+          "type": "string"
+        },
+        "type": {
+          "description": "`card-rule`",
+          "enum": [
+            "card-rule"
+          ],
+          "example": "card-rule",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "rule_type",
+        "payment_service_ids"
+      ],
+      "title": "Terminal Card Rule",
+      "type": "object",
+      "x-examples": {
+        "A terminal rule": {
+          "id": "0",
+          "payment_service_ids": [
+            "card-stripe-f47db210-8e30-4f74-8123-b834604f2042",
+            "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+          ],
+          "rule_type": "terminal",
+          "type": "card-rule"
+        }
+      },
+      "x-tags": [
+        "Card Rulesets"
+      ]
+    },
+    "CardRuleset": {
+      "description": "A card ruleset which holds the rules that are parsed for a card transaction.\n\nMultiple rulesets can exists at any time, but only one can be deployed.",
+      "properties": {
+        "active": {
+          "description": "Wether this ruleset is currently in use. Only one ruleset can\nbe active at any time.",
+          "example": true,
+          "type": "boolean"
+        },
+        "created_at": {
+          "description": "The date and time when this ruleset was created",
+          "example": "2012-12-12T10:53:43-08:00",
+          "format": "date-time",
+          "type": "string"
+        },
+        "display_name": {
+          "description": "The display name of the ruleset",
+          "example": "Q2 2020 Ruleset",
+          "type": "string"
+        },
+        "id": {
+          "description": "The ID of the ruleset",
+          "example": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
+          "format": "uuid",
+          "type": "string"
+        },
+        "root_rule_id": {
+          "description": "The ID of the rule that is the starting point of the ruleset.",
+          "example": "0",
+          "type": "string"
+        },
+        "rules": {
+          "description": "A list of rules in this ruleset",
+          "items": {},
+          "type": "array"
+        },
+        "type": {
+          "description": "`ruleset`",
+          "enum": [
+            "ruleset"
+          ],
+          "example": "ruleset",
+          "type": "string"
+        },
+        "updated_at": {
+          "description": "The date and time when this ruleset was last updated",
+          "example": "2012-12-12T10:53:43-08:00",
+          "format": "date-time",
+          "type": "string"
+        },
+        "valid": {
+          "description": "Wether this ruleset is valid and complete. Only valid rulesets can be\nactivated.",
+          "example": true,
+          "type": "boolean"
+        }
+      },
+      "title": "Card Ruleset",
+      "type": "object",
+      "x-examples": {
+        "A ruleset": {
+          "active": true,
+          "created_at": "2012-12-12T10:53:43-08:00",
+          "display_name": "Q2 2020 Ruleset",
+          "id": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
+          "root_rule_id": "0",
+          "rules": [
+            {
+              "condition": ">=",
+              "false_rule_id": "2",
+              "id": "0",
+              "key": "amount",
+              "rule_type": "conditional",
+              "true_rule_id": "1",
+              "type": "card-rule",
+              "value": "200"
+            },
+            {
+              "id": "1",
+              "payment_service_ids": [
+                "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
+              ],
+              "rule_type": "terminal",
+              "type": "card-rule"
+            },
+            {
+              "id": "2",
+              "payment_service_ids": [
+                "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+              ],
+              "rule_type": "terminal",
+              "type": "card-rule"
+            }
+          ],
+          "type": "ruleset",
+          "updated_at": "2012-12-12T10:53:43-08:00",
+          "valid": true
+        }
+      },
+      "x-tags": [
+        "Card Rulesets"
+      ]
+    },
+    "CardRulesetCreateRequest": {
+      "description": "Creates a new card ruleset which holds the rules that are parsed for a card\ntransaction.",
+      "properties": {
+        "display_name": {
+          "description": "The display name of the ruleset",
+          "example": "Q2 2020 Ruleset",
+          "type": "string"
+        },
+        "root_rule_id": {
+          "description": "The ID of the rule that is the starting point of the ruleset.",
+          "example": "0",
+          "type": "string"
+        },
+        "rules": {
+          "description": "A list of rules in this ruleset",
+          "items": {},
+          "type": "array"
+        }
+      },
+      "required": [
+        "display_name",
+        "root_rule_id",
+        "rules"
+      ],
+      "title": "Card Ruleset (Create)",
+      "type": "object",
+      "x-examples": {
+        "Minimal ruleset": {
+          "display_name": "Q2 2020 Ruleset",
+          "root_rule_id": "0",
+          "rules": [
+            {
+              "condition": ">=",
+              "false_rule_id": "2",
+              "id": "0",
+              "key": "amount",
+              "rule_type": "conditional",
+              "true_rule_id": "1",
+              "type": "card-rule",
+              "value": "200"
+            },
+            {
+              "id": "1",
+              "payment_service_ids": [
+                "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
+              ],
+              "rule_type": "terminal",
+              "type": "card-rule"
+            },
+            {
+              "id": "2",
+              "payment_service_ids": [
+                "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+              ],
+              "rule_type": "terminal",
+              "type": "card-rule"
+            }
+          ]
+        }
+      },
+      "x-tags": [
+        "Card Rulesets"
+      ]
+    },
+    "CardRulesetUpdateRequest": {
+      "description": "Updates a card ruleset which holds the rules that are parsed for a card\ntransaction.",
+      "properties": {
+        "display_name": {
+          "description": "The display name of the ruleset",
+          "example": "Q2 2020 Ruleset",
+          "type": "string"
+        },
+        "root_rule_id": {
+          "description": "The ID of the rule that is the starting point of the ruleset.",
+          "example": "0",
+          "type": "string"
+        },
+        "rules": {
+          "description": "A list of rules in this ruleset",
+          "items": {},
+          "type": "array"
+        }
+      },
+      "required": [
+        "display_name",
+        "root_rule_id",
+        "rules"
+      ],
+      "title": "Card Ruleset (Update)",
+      "type": "object",
+      "x-examples": {
+        "Minimal ruleset": {
+          "display_name": "Q2 2020 Ruleset",
+          "root_rule_id": "0",
+          "rules": [
+            {
+              "condition": ">=",
+              "false_rule_id": "2",
+              "id": "0",
+              "key": "amount",
+              "rule_type": "conditional",
+              "true_rule_id": "1",
+              "type": "card-rule",
+              "value": "200"
+            },
+            {
+              "id": "1",
+              "payment_service_ids": [
+                "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
+              ],
+              "rule_type": "terminal",
+              "type": "card-rule"
+            },
+            {
+              "id": "2",
+              "payment_service_ids": [
+                "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+              ],
+              "rule_type": "terminal",
+              "type": "card-rule"
+            }
+          ]
+        }
+      },
+      "x-tags": [
+        "Card Rulesets"
+      ]
+    },
+    "CardRulesets": {
+      "description": "A list of card rulesets",
+      "properties": {
+        "items": {
+          "description": "A list of card rulesets",
+          "items": {
+            "$ref": "#/definitions/CardRuleset"
+          },
+          "type": "array"
+        }
+      },
+      "title": "Card Rulesets",
+      "type": "object",
+      "x-examples": {
+        "A list of card rulesets": {
+          "items": [
+            {
+              "active": true,
+              "created_at": "2012-12-12T10:53:43-08:00",
+              "display_name": "Q2 2020 Ruleset",
+              "id": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
+              "root_rule_id": "0",
+              "rules": [
+                {
+                  "condition": ">=",
+                  "false_rule_id": "2",
+                  "id": "0",
+                  "key": "amount",
+                  "rule_type": "conditional",
+                  "true_rule_id": "1",
+                  "type": "card-rule",
+                  "value": "200"
+                },
+                {
+                  "id": "1",
+                  "payment_service_ids": [
+                    "card-stripe-f47db210-8e30-4f74-8123-b834604f2042"
+                  ],
+                  "rule_type": "terminal",
+                  "type": "card-rule"
+                },
+                {
+                  "id": "2",
+                  "payment_service_ids": [
+                    "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+                  ],
+                  "rule_type": "terminal",
+                  "type": "card-rule"
+                }
+              ],
+              "type": "ruleset",
+              "updated_at": "2012-12-12T10:53:43-08:00",
+              "valid": true
+            }
+          ]
+        },
+        "An empty list of card rulesets": {
+          "items": []
+        }
+      },
+      "x-tags": [
+        "Card Rulesets"
       ]
     },
     "Cards": {
@@ -1283,12 +1921,6 @@
           "x-nullable": true
         }
       },
-      "required": [
-        "items",
-        "limit",
-        "next_page",
-        "previous_page"
-      ],
       "title": "Cards",
       "type": "object",
       "x-examples": {
@@ -1325,12 +1957,6 @@
           "example": "incorrect_json",
           "type": "string"
         },
-        "documentation_url": {
-          "description": "A link to the developer documentation for this error.",
-          "example": "https://developer.gr4vy.com/errors/incorrect-json",
-          "format": "uri",
-          "type": "string"
-        },
         "message": {
           "description": "A human readable message that describes the error. The content of this field should not be used to determine any business logic. ",
           "example": "The request body was not valid JSON.",
@@ -1356,19 +1982,11 @@
           "type": "string"
         }
       },
-      "required": [
-        "type",
-        "code",
-        "status",
-        "message",
-        "documentation_url"
-      ],
       "title": "Error",
       "type": "object",
       "x-examples": {
         "Incorrect JSON": {
           "code": "incorrect_json",
-          "documentation_url": "https://developer.gr4vy.com/errors/incorrect-json",
           "message": "The request body was not valid JSON.",
           "status": 400,
           "type": "error"
@@ -1406,11 +2024,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "type",
-        "id",
-        "authorization_url"
-      ],
       "title": "PaymentMethod",
       "type": "object",
       "x-examples": {
@@ -2263,12 +2876,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "type",
-        "status",
-        "resource_type",
-        "resource_id"
-      ],
       "title": "Status",
       "type": "object",
       "x-examples": {
@@ -2302,9 +2909,6 @@
           "type": "array"
         }
       },
-      "required": [
-        "items"
-      ],
       "title": "Statuses",
       "type": "object",
       "x-examples": {
@@ -2410,19 +3014,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "type",
-        "id",
-        "status",
-        "transaction_status",
-        "amount",
-        "currency",
-        "payment_method",
-        "created_at",
-        "external_identifier",
-        "updated_at",
-        "payment_service_id"
-      ],
       "title": "Transaction",
       "type": "object",
       "x-examples": {
@@ -2710,12 +3301,6 @@
           "type": "string"
         }
       },
-      "required": [
-        "id",
-        "type",
-        "created_at",
-        "code"
-      ],
       "title": "Transaction Event",
       "type": "object",
       "x-examples": {
@@ -2777,12 +3362,6 @@
           "x-nullable": true
         }
       },
-      "required": [
-        "items",
-        "limit",
-        "next_page",
-        "previous_page"
-      ],
       "title": "Transaction Events",
       "type": "object",
       "x-examples": {
@@ -2850,12 +3429,6 @@
           "x-nullable": true
         }
       },
-      "required": [
-        "items",
-        "limit",
-        "next_page",
-        "previous_page"
-      ],
       "title": "Transactions",
       "type": "object",
       "x-examples": {
@@ -2939,19 +3512,22 @@
   ],
   "tags": [
     {
+      "name": "Async APIs"
+    },
+    {
       "name": "Cards"
     },
     {
-      "name": "Transactions"
-    },
-    {
-      "name": "Payment Services"
+      "name": "Card Rulesets"
     },
     {
       "name": "Definitions"
     },
     {
-      "name": "Async APIs"
+      "name": "Payment Services"
+    },
+    {
+      "name": "Transactions"
     }
   ],
   "x-components": {}
