@@ -1,0 +1,37 @@
+{
+  "name": "gr4vy-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf build/*",
+    "prelint": "yarn build:openapi",
+    "lint": "yarn lint:yaml; yarn lint:spectral",
+    "lint:spectral": "spectral lint build/openapi.v1.json",
+    "lint:yaml": "yamllint reference",
+    "start": "redoc-cli serve reference/openapi.yaml -w --options.theme.colors.primary.main=teal --options.expandResponses=all --options.hideDownloadButton=true --options.hideSingleRequestSampleTab=true  --options.expandSingleSchemaField=true --options.jsonSampleExpandLevel=4 --options.noAutoAuth=true --options.pathInMiddlePanel=true --options.requiredPropsFirst=true --options.sortPropsAlphabetically=true",
+    "build:redoc": "redoc-cli bundle -o build/index.html reference/openapi.yaml --options.theme.colors.primary.main=teal --options.expandResponses=all --options.hideDownloadButton=true --options.hideSingleRequestSampleTab=true  --options.expandSingleSchemaField=true --options.jsonSampleExpandLevel=4 --options.noAutoAuth=true --options.pathInMiddlePanel=true --options.requiredPropsFirst=true --options.sortPropsAlphabetically=true",
+    "build:openapi": "node ./scripts/build-openapi.js",
+    "prebuild:swagger": "yarn build:openapi",
+    "build:swagger": "api-spec-converter --from=openapi_3 --to=swagger_2 --syntax=json build/openapi.v1.json > build/swagger.v1.json",
+    "test": "yarn lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gr4vy/gr4vy-openapi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gr4vy/gr4vy-openapi/issues"
+  },
+  "homepage": "https://github.com/gr4vy/gr4vy-openapi#readme",
+  "dependencies": {
+    "@apidevtools/json-schema-ref-parser": "^9.0.6",
+    "@stoplight/spectral": "^5.7.1",
+    "api-spec-converter": "^2.11.2",
+    "js-yaml": "^3.14.0",
+    "jsonpath": "^1.0.2",
+    "redoc-cli": "^0.9.12"
+  }
+}

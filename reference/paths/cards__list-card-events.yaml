@@ -1,0 +1,13 @@
+---
+operationId: list-card-event
+summary: List card events
+description: Returns a list of events for a given transaction.
+tags: ["Cards"]
+
+responses:
+  "200":
+    description: OK
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/CardEvents"

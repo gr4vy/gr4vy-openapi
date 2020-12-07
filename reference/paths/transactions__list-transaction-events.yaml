@@ -1,0 +1,13 @@
+---
+operationId: list-transaction-events
+summary: List transaction events
+description: Returns a list of events for a given transaction.
+tags: ["Transactions"]
+
+responses:
+  "200":
+    description: OK
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/TransactionEvents"

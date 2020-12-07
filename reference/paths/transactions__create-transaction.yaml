@@ -1,0 +1,141 @@
+---
+summary: Create transaction
+tags: ["Transactions"]
+operationId: authorize-new-transaction
+description: |
+  Attempts to create an authorization for a payment method. In some cases it is
+  not possible to create the authorization without redirectingt the user for
+  their authorization. In these cases the status is set to
+  `user_authorization_required` and an `authorization_url` is returned.
+
+  Additionally, this endpoint accepts a few additional fields that allow for
+  simultanious capturing and storage of the payment method.
+
+  * `payment_method.store` - Use this field to store the payment method for
+  furture use. Not all payment methods support this feature.
+  * `capture` - Use this method to also perform a capture of the transaction
+  after it has been authorized.
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: "../openapi.yaml#/components/schemas/TransactionCreateRequest"
+      examples:
+        Authorize a new card:
+          value:
+            amount: 1299
+            currency: USD
+            payment_method_type: card
+            payment_method:
+              number: "4111111111111111"
+              expiration_date: 11/25
+              security_code: "123"
+        Authorize a tokenized card:
+          value:
+            amount: 1299
+            currency: USD
+            payment_method_type: card
+            payment_method:
+              number: "4111111111111111"
+        Authorized and tokenize a card:
+          value:
+            amount: 1299
+            currency: USD
+            payment_method_type: card
+            payment_method:
+              number: "4111111111111111"
+              expiration_date: 11/25
+              security_code: "123"
+              store: true
+        "Authorize, capture, and tokenize a card":
+          value:
+            amount: 1299
+            currency: USD
+            payment_method_type: card
+            capture: true
+            payment_method:
+              number: "4111111111111111"
+              expiration_date: 11/25
+              security_code: "123"
+              store: true
+        Authorize and capture a PayPal transaction:
+          value:
+            amount: 1299
+            currency: USD
+            payment_method_type: paypal
+            capture: true
+
+responses:
+  "201":
+    description: "A successful transaction"
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Transaction"
+        examples:
+          Card transaction:
+            value:
+              type: transaction
+              id: fe26475d-ec3e-4884-9553-f7356683f7f9
+              status: created
+              transaction_status: created
+              amount: 1299
+              currency: USD
+              payment_method:
+                type: card
+                id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+                authorization_url: null
+              created_at: "2013-07-16T19:23:00.000Z"
+              external_identifier: user-789123
+              updated_at: "2019-08-24T14:15:22Z"
+              payment_service_id: |-
+                stripe-card-169f5226-4644-4d1e-ac36-14999e73601f
+          Pending PayPal transaction:
+            value:
+              type: transaction
+              id: fe26475d-ec3e-4884-9553-f7356683f7f9
+              status: created
+              transaction_status: user_authorization_required
+              amount: 1299
+              currency: USD
+              payment_method:
+                type: paypal
+                id: null
+                status: user_authorization_required
+                authorization_url: "https://paypal.com/..."
+              created_at: "2013-07-16T19:23:00.000Z"
+              external_identifier: user-12345
+              updated_at: "2019-08-24T14:15:22Z"
+              payment_service_id: |-
+                paypal-paypal-169f5226-4644-4d1e-ac36-14999e73601f
+  "400":
+    description:
+      "Returns an error if the request is missing any required fields, or the
+      request body is not valid JSON."
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error"
+        examples:
+          Incorrect JSON:
+            value:
+              type: error
+              code: incorrect_json
+              status: 400
+              message: The request body was not valid JSON.
+              additional_context: null
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error"
+        examples:
+          An unauthorized request:
+            value:
+              type: error
+              code: unauthorized
+              status: 401
+              message: No valid API authentication found
+              additional_context: null

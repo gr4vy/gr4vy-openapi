@@ -1,0 +1,46 @@
+---
+operationId: async-create-transaction
+summary: Create transaction
+tags: ["Async APIs"]
+description: |
+  Attempts to create an authorization for a payment method.
+
+  This endpoint accepts a few additional fields that allow for simultanious
+  capturing and storage of the payment method.
+
+  * `payment_method.store` - Use this field to store the payment method for
+  future use. Not all payment methods support this feature.
+  * `capture` - Use this method to also perform a capture of the transaction
+  after it has been authorized.
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: "../openapi.yaml#/components/schemas/TransactionCreateRequest"
+      examples:
+        Authorize a new card:
+          value:
+            amount: 1299
+            currency: USD
+            external_identifier: user-789123
+            payment_method_type: card
+            payment_method:
+              number: "4111111111111111"
+              expiration_date: 11/25
+              security_code: "123"
+        Authorized and capture a PayPal payment:
+          value:
+            amount: 1299
+            currency: USD
+            payment_method_type: paypal
+            capture: true
+            external_identifier: user-789123
+
+responses:
+  "202":
+    description: Accepted
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Status"

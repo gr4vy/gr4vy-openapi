@@ -1,0 +1,45 @@
+---
+operationId: async-authorize-transaction
+summary: Authorize pending transaction
+tags: ["Async APIs"]
+
+description: |-
+  Authorize an existing but pending transaction.
+
+  This endpoint is used when a transaction was previously created that required
+  additional information, or a redirect, from the buyer. Use this endpoint to
+  post the additional information to trigger the transaction to be properly
+  authorized.
+
+  Additionally, this endpoint will capture the transaction and store the payment
+  method if this was previously specified when creating the transaction. We
+  currently do not support overwritting these settings at this point.
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: "../openapi.yaml#/components/schemas/TransactionAuthorizeRequest"
+      examples:
+        A basic authorize request:
+          value: {}
+        An authorize request for a lower amount:
+          value:
+            amount: 399
+            currency: USD
+
+responses:
+  "202":
+    description: Accepted
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Status"
+        examples:
+          A status:
+            value:
+              type: status
+              status: pending
+              resource_type: transaction
+              resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+              external_identifier: user-789123

@@ -1,0 +1,20 @@
+---
+operationId: add-payment-service-definition
+summary: Add payment service definition
+description: Creates a new payment service definition
+tags: ["Payment Service Definitions"]
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: |-
+          ../openapi.yaml#/components/schemas/PaymentServiceDefinitionCreateRequest
+
+responses:
+  "201":
+    description: Created
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/PaymentServiceDefinition"

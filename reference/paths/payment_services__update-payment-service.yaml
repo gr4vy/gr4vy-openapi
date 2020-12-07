@@ -1,0 +1,21 @@
+---
+operationId: update-payment-service
+summary: Update payment service
+description:
+  Updates an existing payment service. Allows all fields to be changed except
+  for the service ID.
+tags: ["Payment Services"]
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: "../openapi.yaml#/components/schemas/PaymentServiceUpdateRequest"
+
+responses:
+  "201":
+    description: The updated payment service
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/PaymentService"

@@ -1,0 +1,39 @@
+---
+title: Card
+type: object
+x-tags:
+  - Cards
+
+properties:
+  type:
+    type: string
+    description: The type of this resource. Is always `card`
+    example: card
+    enum:
+      - card
+  id:
+    type: string
+    example: fe26475d-ec3e-4884-9553-f7356683f7f9
+    description: The internal ID for this card
+  status:
+    type: string
+    description: Wether this card was successfully created or not.
+    enum:
+      - created
+      - error
+      - partially_created
+    example: created
+  created_at:
+    type: string
+    description: |-
+      The date and time
+      when this card was created in our system.
+    format: date-time
+    example: "2013-07-16T19:23:00.000Z"
+  external_identifier:
+    type: string
+    description:
+      An external identifier that can be used by the merchant to match the card
+      against their own records.
+    example: user-789123
+    nullable: true

@@ -1,0 +1,13 @@
+---
+operationId: get-payment-service-definition
+summary: Get payment service definition
+description: Gets the definition for a payment service.
+tags: ["Payment Service Definitions"]
+
+responses:
+  "200":
+    description: OK
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/PaymentServiceDefinition"

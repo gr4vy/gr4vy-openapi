@@ -1,0 +1,14 @@
+---
+title: Card Rulesets
+type: object
+description: A list of card rulesets
+
+x-tags:
+  - Card Rulesets
+
+properties:
+  items:
+    type: array
+    description: A list of card rulesets
+    items:
+      $ref: "../openapi.yaml#/components/schemas/CardRuleset"

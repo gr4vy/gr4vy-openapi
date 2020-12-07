@@ -1,0 +1,52 @@
+---
+title: Status
+type: object
+description:
+  "In many cases the Gr4vy API returns asynchronously, kicking off a job to
+  create an authorization or a transaction, and returning a `Status` object with
+  the ID of the pending object. The ID of this resource can be used to query an
+  objects status, or additionally the client can use Pub/Sub to subscribe to the
+  creation of the pending object."
+
+x-tags:
+  - Statuses
+
+properties:
+  type:
+    type: string
+    description: The type of this object. This is always `status`.
+    enum:
+      - status
+    example: status
+  status:
+    type: string
+    enum:
+      - pending
+      - success
+      - failure
+    example: pending
+    description: |-
+      The status of this resource being created. This can be one of:
+
+      * `pending` - The creation has not yet completed
+      * `created` - The resource has been created and can now be queried.
+  resource_type:
+    type: string
+    description: |
+      The type of the object that is pending.
+    example: transaction
+    enum:
+      - transaction
+      - card
+  resource_id:
+    type: string
+    format: uuid
+    example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+    description: The ID of the object for which this status has been created.
+  external_identifier:
+    type: string
+    description:
+      An external identifier that can be used by the merchant to match the card
+      against their own records.
+    example: user-789123
+    nullable: true

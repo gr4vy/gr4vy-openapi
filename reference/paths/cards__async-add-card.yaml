@@ -1,0 +1,39 @@
+---
+operationId: async-add-card
+summary: Register card
+description: |-
+  Registers a card with all available processors.
+
+  This API returns asynchronously, returning a pending `Status` object with the
+  ID of the pending card resource.
+tags:
+  - Async APIs
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: "../openapi.yaml#/components/schemas/CardCreateRequest"
+      examples:
+        Register a card:
+          value:
+            number: "4111111111111111"
+            expiration_date: 11/25
+            security_code: "123"
+            external_identifier: user-789123
+
+responses:
+  "202":
+    description: Accepted
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Status"
+        examples:
+          Card status:
+            value:
+              type: status
+              status: pending
+              resource_type: card
+              resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+              external_identifier: user-789123

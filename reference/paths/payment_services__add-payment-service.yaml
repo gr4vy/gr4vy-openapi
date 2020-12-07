@@ -1,0 +1,37 @@
+---
+summary: Add payment service
+operationId: add-payment-service
+description:
+  Adds a new payment service by providing a custom name and a value for each of
+  the required fields.
+tags: ["Payment Services"]
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: "../openapi.yaml#/components/schemas/PaymentServiceCreateRequest"
+
+responses:
+  "201":
+    description: A created response
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/PaymentService"
+        examples:
+          Stripe:
+            value:
+              id: stripe-card-5a303fc4-817b-4073-9b41-a26eff29080a
+              type: payment-service
+              display_name: Stripe (Global)
+              status: created
+              service_id: stripe-card
+              payment_method_id: card
+              use_test_environment: false
+              accepted_currencies:
+                - GBP
+                - EUR
+              accepted_countries:
+                - GB
+                - DE

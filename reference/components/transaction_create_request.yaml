@@ -1,0 +1,71 @@
+---
+title: Transaction (Create)
+type: object
+description: A request to create a transaction
+
+x-tags:
+  - Request Bodies
+
+required:
+  - amount
+  - currency
+  - payment_method_type
+
+properties:
+  amount:
+    description: |-
+      The monitary amount to create an authorization for, in the smallest
+      currency unit for the given currency, for example `1299` cents to create
+      an autorization for `$12.99`.
+
+      For BitCoin, this value will be a decimal point number, for example
+      `0.0039`.
+    type: number
+  currency:
+    type: string
+    example: USD
+    description: A supported ISO-4217 currency code.
+  payment_method_type:
+    type: string
+    description: The type of payment method to create an authorization for.
+    enum:
+      - card
+      - paypal
+      - bitcoin
+    example: card
+  payment_method:
+    oneOf:
+      - allOf:
+          - $ref: "../openapi.yaml#/components/schemas/CardCreateRequest"
+          - type: object
+            properties:
+              store:
+                type: boolean
+                description: |-
+                  Wether or not to also try and store the card with us so that
+                  it can be used again for future use.
+
+                  If the `number` of this card represents a tokenized card, then
+                  this value is ignored.
+                example: true
+    description:
+      The optional payment method details to create an authorization for. This
+      field is required for processing a card.
+  capture:
+    type: boolean
+    description:
+      "Wether a successful authorization should immediately be captured as well,
+      effectively processing the payment directly."
+    default: "false"
+    example: true
+  external_identifier:
+    type: string
+    description:
+      An external identifier that can be used by the merchant to match the
+      authorization against their own records.
+    nullable: true
+  use_test_environment:
+    type: boolean
+    description:
+      Defines if this transaction should run in the payment provider's test
+      environment. Defaults to false.

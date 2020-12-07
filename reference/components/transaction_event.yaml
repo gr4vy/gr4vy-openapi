@@ -1,0 +1,55 @@
+---
+title: Transaction Event
+type: object
+description: An event that happened for a transaction.
+
+x-tags:
+  - Transactions
+
+properties:
+  id:
+    type: string
+    description: The unique ID for this event.
+    format: uuid
+    example: be828248-56de-481e-a580-44b6e1d4df81
+
+  type:
+    type: string
+    example: transaction.event
+    description: "`transaction.event`"
+    enum:
+      - transaction.event
+
+  created_at:
+    type: string
+    description: |
+      When this event was recorded.
+    format: date-time
+    example: "2012-12-12T10:53:43-08:00"
+
+  code:
+    type: string
+    description: The type of event, in dot-format syntax.
+    example: transaction.rejected.account_closed
+
+  resource:
+    type: object
+    description: An optional related resource that triggered this event.
+    properties:
+      id:
+        type: string
+        example: stripe-card-c4a988a2-cae6-4854-9aa0-a8365da0816d
+        description: |
+          The ID of the resource
+      type:
+        type: string
+        example: payment-service
+        description: The type of the resource
+      display_name:
+        type: string
+        example: Stripe (Card)
+        description: The user's name for the resource
+      service_id:
+        type: string
+        example: stripe-card
+        description: The ID of the service that this resource is based on.

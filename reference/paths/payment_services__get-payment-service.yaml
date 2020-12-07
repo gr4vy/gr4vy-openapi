@@ -1,0 +1,13 @@
+---
+operationId: get-payment-service
+summary: Get payment service
+description: Retrieves the details of a single configured payment service.
+tags: ["Payment Services"]
+
+responses:
+  "200":
+    description: OK
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/PaymentService"

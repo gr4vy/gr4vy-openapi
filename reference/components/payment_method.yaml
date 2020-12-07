@@ -1,0 +1,32 @@
+---
+title: PaymentMethod
+type: object
+description: A generic object to hold payment method details.
+x-tags:
+  - Payment Methods
+
+properties:
+  type:
+    type: string
+    description: The type of payment method
+    enum:
+      - card
+      - paypal
+      - bitcoin
+    example: card
+  id:
+    type: string
+    description:
+      "The optional ID of any stored payment method details, for example a
+      stored `card` ID."
+    format: uuid
+    example: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+    nullable: true
+  authorization_url:
+    type: string
+    format: uri
+    example: "https://paypal.com....."
+    description:
+      The optional URL that needs to be presented to a consumer to allow them to
+      approve the authorization.
+    nullable: true

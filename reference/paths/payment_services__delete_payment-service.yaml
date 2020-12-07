@@ -1,0 +1,9 @@
+---
+operationId: delete-payment-service
+summary: Delete active payment service
+description: Deletes a specific active payment service.
+tags: ["Payment Services"]
+
+responses:
+  "204":
+    description: No Content

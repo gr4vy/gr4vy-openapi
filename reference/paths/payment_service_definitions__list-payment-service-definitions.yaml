@@ -1,0 +1,13 @@
+---
+operationId: list-payment-service-definitions
+summary: List payment service definitions
+description: Returns a list of all available payment service definitions.
+tags: ["Payment Service Definitions"]
+
+responses:
+  "200":
+    description: OK
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/PaymentServiceDefinitions"

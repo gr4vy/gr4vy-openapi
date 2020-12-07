@@ -1,0 +1,48 @@
+---
+operationId: authorize-transaction
+summary: Authorize pending transaction
+tags: ["Transactions"]
+
+description: |-
+  Authorize an existing but pending transaction.
+
+  This endpoint is used when a transaction was previously created that required
+  additional information, or a redirect, from the buyer. Use this endpoint to
+  post the additional information to trigger the transaction to be properly
+  authorized.
+
+  Additionally, this endpoint will capture the transaction and store the payment
+  method if this was previously specified when creating the transaction. We
+  currently do not support overwritting these settings at this point.
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: "../openapi.yaml#/components/schemas/TransactionAuthorizeRequest"
+
+responses:
+  "200":
+    description: OK
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Transaction"
+        examples:
+          An authorized transaction:
+            value:
+              type: transaction
+              id: fe26475d-ec3e-4884-9553-f7356683f7f9
+              status: created
+              transaction_status: authorized
+              amount: 1299
+              currency: USD
+              payment_method:
+                type: card
+                id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+                authorization_url: null
+              created_at: "2013-07-16T19:23:00.000Z"
+              external_identifier: user-789123
+              updated_at: "2019-08-24T14:15:22Z"
+              payment_service_id: |-
+                stripe-card-169f5226-4644-4d1e-ac36-14999e73601f

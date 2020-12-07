@@ -1,0 +1,9 @@
+---
+operationId: delete-payment-services-definition
+summary: Delete payment service definition
+description: Removes a payment service definition
+tags: ["Payment Service Definitions"]
+
+responses:
+  "204":
+    description: No Content

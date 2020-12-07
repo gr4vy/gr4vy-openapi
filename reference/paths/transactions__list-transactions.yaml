@@ -1,0 +1,109 @@
+---
+operationId: list-transactions
+summary: List transactions
+description:
+  Lists all transactions for an account. Sorted by last `updated_at` status.
+tags: ["Transactions"]
+
+parameters:
+  - schema:
+      type: integer
+      default: 20
+      example: 50
+      minimum: 0
+      maximum: 100
+      format: int32
+    in: query
+    name: limit
+    description: The maximum number of items to return
+
+  - schema:
+      type: string
+      example: "1593343179"
+    in: query
+    name: marker
+    description: |-
+      The marker that identifies the offsett for the page of results to return.
+
+      For the first page of results, simply omit this parameter. For next pages,
+      simply use the value returned by the API in the `next_page` field.
+
+      A marker is an opague string that is only meaningful to ur API. No
+      additional value can be ascribed to this value.
+
+  - schema:
+      type: string
+      example: be828248-56de-481e-a580-44b6e1d4df81
+    in: query
+    name: search
+    description:
+      Filters the results to just the transactions that match this external
+      identifier or transaction ID.
+
+  - schema:
+      type: string
+      example: "2012-12-12T10:53:43-08:00"
+    in: query
+    name: before_updated_at
+    description:
+      Filters the results to only transactions last updated before this ISO
+      date-time string.
+
+  - schema:
+      type: string
+      example: "2012-12-12T10:53:43-08:00"
+    in: query
+    name: after_updated_at
+    description:
+      Filters the results to only transactions last updated after this ISO
+      date-time string.
+
+  - schema:
+      type: string
+      example: "2012-12-12T10:53:43-08:00"
+    in: query
+    name: before_created_at
+    description:
+      Filters the results to only transactions created before this ISO date-time
+      string.
+
+  - schema:
+      type: string
+      example: "2012-12-12T10:53:43-08:00"
+    in: query
+    name: after_created_at
+    description:
+      Filters the results to only transactions created after this ISO date-time
+      string.
+
+  - schema:
+      type: string
+      example: captured
+    in: query
+    name: transaction_status
+    description:
+      Filters the results to only transactions with as specific transaction
+      status.
+
+responses:
+  "200":
+    description: Returns a paginated list of transactions for an account.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Transactions"
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error"
+        examples:
+          An unauthorized request:
+            value:
+              type: error
+              code: unauthorized
+              status: 401
+              message: No valid authentication found
+              additional_context: null

@@ -1,0 +1,20 @@
+---
+operationId: update-payment-services-definition
+summary: Update payment service definition
+description: Makes an update to a payment service definition
+tags: ["Payment Service Definitions"]
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: |-
+          ../openapi.yaml#/components/schemas/PaymentServiceDefinitionUpdateRequest
+
+responses:
+  "202":
+    description: OK
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/PaymentServiceDefinition"

@@ -1,0 +1,15 @@
+---
+operationId: list-payment-services
+summary: List payment services
+description:
+  Lists the currently configured and activated payment services for a for a
+  merchant.
+tags: ["Payment Services"]
+
+responses:
+  "200":
+    description: OK
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/PaymentServices"
