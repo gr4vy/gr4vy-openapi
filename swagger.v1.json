@@ -6,17 +6,13 @@
       "name": "Gr4vy Support",
       "url": "https://gr4vy.com"
     },
-    "description": "Welcome to the Gr4vy developer documentation. Our API is still very much a work\nin product and subject to change.\n\n# Authentication\n\nThe Gr4vy API uses a JWT bearer token for authentication, passed into the\n`authorization`-header as follows.\n\n```sh\ncurl -i -X GET \"https://{cluster}/transactions\" \\\n     -H \"authorization: bearer [JWT]\"\n```\n<!-- ReDoc-Inject: <security-definitions> -->\n",
+    "description": "Welcome to the Gr4vy API reference documentation.\nOur API is still very much a work in product and subject to change.",
     "license": {
       "name": "MIT"
     },
     "termsOfService": "https://gr4vy.com",
     "title": "Gr4vy API (Beta)",
-    "version": "1.0",
-    "x-logo": {
-      "altText": "Gr4vy",
-      "url": "https://pbs.twimg.com/profile_images/1286678982713397254/MsTCfC92_400x400.jpg"
-    }
+    "version": "1.0"
   },
   "host": "merchant_id.api.gr4vy.com",
   "basePath": "/",
