@@ -12,11 +12,9 @@ info:
   termsOfService: "https://gr4vy.com"
   license:
     name: MIT
-  description:
-    $ref: "./docs/index.md"
-  x-logo:
-    url: https://pbs.twimg.com/profile_images/1286678982713397254/MsTCfC92_400x400.jpg
-    altText: Gr4vy
+  description: |-
+    Welcome to the Gr4vy API reference documentation.
+    Our API is still very much a work in product and subject to change.
 
 servers:
   - url: "https://{merchant_id}.api.gr4vy.com"

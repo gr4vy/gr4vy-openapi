@@ -38,4 +38,5 @@ jp.apply(schema, '$..description', bundleMarkdown)
 // Flatten all local references
 jp.apply(schema, '$..["$ref"]', bundleReferences)
 
+if (!fs.existsSync('../build')) { fs.mkdirSync('../build') }
 fs.writeFileSync('../build/openapi.v1.json', JSON.stringify(schema, null, 2))
