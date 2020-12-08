@@ -104,7 +104,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -169,7 +169,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -243,7 +243,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -306,7 +306,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -355,7 +355,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -412,7 +412,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -480,7 +480,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -525,42 +525,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
           },
           "404": {
-            "description": "Returns an error if the authorization can not be found or has not yet been created.",
+            "description": "Returns an error if the resource can not be found.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Card not found": {
-                    "value": {
-                      "type": "error",
-                      "code": "not_found",
-                      "status": 404,
-                      "message": "The resource could not be found",
-                      "additional_context": null
-                    }
-                  },
-                  "Card creation pending": {
-                    "value": {
-                      "type": "error",
-                      "code": "status_pending",
-                      "status": 404,
-                      "message": "The resource is still pending",
-                      "additional_context": {
-                        "type": "status",
-                        "status": "pending",
-                        "resource_type": "card",
-                        "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error404NotFound"
                 }
               }
             }
@@ -607,28 +582,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
           },
           "404": {
-            "description": "Returns an error if the resource could not be found",
+            "description": "Returns an error if the resource can not be found.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Ruleset not found": {
-                    "value": {
-                      "type": "error",
-                      "code": "not_found",
-                      "status": 404,
-                      "message": "The resource could not be found",
-                      "additional_context": null
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error404NotFound"
                 }
               }
             }
@@ -651,28 +615,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
           },
           "404": {
-            "description": "Returns an error if the resource could not be found",
+            "description": "Returns an error if the resource can not be found.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Ruleset not found": {
-                    "value": {
-                      "type": "error",
-                      "code": "not_found",
-                      "status": 404,
-                      "message": "The resource could not be found",
-                      "additional_context": null
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error404NotFound"
                 }
               }
             }
@@ -729,7 +682,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -799,7 +752,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -845,42 +798,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
           },
           "404": {
-            "description": "Returns an error if the authorization can not be found or has not yet been created.",
+            "description": "Returns an error if the resource can not be found or has not yet been created.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Card not found": {
-                    "value": {
-                      "type": "error",
-                      "code": "not_found",
-                      "status": 404,
-                      "message": "The resource could not be found",
-                      "additional_context": null
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error404NotFound"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error404PendingCreation"
                     }
-                  },
-                  "Card creation pending": {
-                    "value": {
-                      "type": "error",
-                      "code": "status_pending",
-                      "status": 404,
-                      "message": "The resource is still pending",
-                      "additional_context": {
-                        "type": "status",
-                        "status": "pending",
-                        "resource_type": "card",
-                        "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
-                      }
-                    }
-                  }
+                  ]
                 }
               }
             }
@@ -925,7 +860,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -957,7 +892,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -1017,7 +952,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -1062,7 +997,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
                 }
               }
             }
@@ -1101,7 +1046,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
                 }
               }
             }
@@ -1124,7 +1079,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
                 }
               }
             }
@@ -1157,7 +1122,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -1197,7 +1162,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -1242,7 +1207,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
                 }
               }
             }
@@ -1282,7 +1257,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
                 }
               }
             }
@@ -1306,7 +1291,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
                 }
               }
             }
@@ -1389,7 +1384,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -1527,7 +1522,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -1614,28 +1609,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
           },
           "404": {
-            "description": "Returns an error if the ruleset could not be found",
+            "description": "Returns an error if the resource can not be found.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Ruleset not found": {
-                    "value": {
-                      "type": "error",
-                      "code": "not_found",
-                      "status": 404,
-                      "message": "The resource could not be found",
-                      "additional_context": null
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error404NotFound"
                 }
               }
             }
@@ -1773,28 +1757,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
           },
           "404": {
-            "description": "Returns an error if the ruleset could not be found",
+            "description": "Returns an error if the resource can not be found.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Ruleset not found": {
-                    "value": {
-                      "type": "error",
-                      "code": "not_found",
-                      "status": 404,
-                      "message": "The resource could not be found",
-                      "additional_context": null
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error404NotFound"
                 }
               }
             }
@@ -1817,7 +1790,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -1844,22 +1817,11 @@
             }
           },
           "404": {
-            "description": "Returns an error if the ruleset could not be found",
+            "description": "Returns an error if the resource can not be found.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Ruleset not found": {
-                    "value": {
-                      "type": "error",
-                      "code": "not_found",
-                      "status": 404,
-                      "message": "The resource could not be found",
-                      "additional_context": null
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error404NotFound"
                 }
               }
             }
@@ -1946,7 +1908,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -1973,22 +1935,11 @@
             }
           },
           "404": {
-            "description": "Returns an error if the ruleset could not be found",
+            "description": "Returns an error if the resource can not be found.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Ruleset not found": {
-                    "value": {
-                      "type": "error",
-                      "code": "not_found",
-                      "status": 404,
-                      "message": "The resource could not be found",
-                      "additional_context": null
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error404NotFound"
                 }
               }
             }
@@ -2098,7 +2049,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -2258,7 +2209,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -2360,42 +2311,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
           },
           "404": {
-            "description": "Returns an error if the transaction can not be found or has not yet been created.",
+            "description": "Returns an error if the resource can not be found or has not yet been created.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Transaction not found": {
-                    "value": {
-                      "type": "error",
-                      "code": "not_found",
-                      "status": 404,
-                      "message": "The resource could not be found",
-                      "additional_context": null
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error404NotFound"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error404PendingCreation"
                     }
-                  },
-                  "Transaction pending": {
-                    "value": {
-                      "type": "error",
-                      "code": "status_pending",
-                      "status": 404,
-                      "message": "The resource is still pending",
-                      "additional_context": {
-                        "type": "status",
-                        "status": "pending",
-                        "resource_type": "transaction",
-                        "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
-                      }
-                    }
-                  }
+                  ]
                 }
               }
             }
@@ -2468,7 +2401,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found or has not yet been created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error404NotFound"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error404PendingCreation"
+                    }
+                  ]
                 }
               }
             }
@@ -2570,7 +2520,24 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found or has not yet been created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error404NotFound"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error404PendingCreation"
+                    }
+                  ]
                 }
               }
             }
@@ -2613,138 +2580,27 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401"
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/transactions/batch-capture": {
-      "post": {
-        "operationId": "batch-capture-transactions",
-        "summary": "Batch capture authorizations",
-        "tags": [
-          "Transactions"
-        ],
-        "description": "Takes a list of authorization IDs and processes them as needed.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TransactionsBatchCaptureRequest"
-              },
-              "examples": {
-                "Capture multiple authorizations": {
-                  "value": {
-                    "items": [
-                      {
-                        "transaction_id": "931b9b0c-dc95-4d45-b1fc-64966244ef74",
-                        "amount": 1299,
-                        "currency": "USD"
-                      },
-                      {
-                        "transaction_id": "272dee2b-2196-4e4e-acf7-e5983f1fdc61",
-                        "amount": 199,
-                        "currency": "GBP"
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Returns a list of status objects, one for each requested capture.",
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found or has not yet been created.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Transactions"
-                },
-                "examples": {
-                  "A list of transactions": {
-                    "value": {
-                      "items": [
-                        {
-                          "type": "transaction",
-                          "id": "931b9b0c-dc95-4d45-b1fc-64966244ef74",
-                          "status": "created",
-                          "transaction_status": "authorized",
-                          "amount": 1299,
-                          "currency": "USD",
-                          "payment_method": {
-                            "type": "card",
-                            "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
-                            "authorization_url": "https://paypal.com....."
-                          },
-                          "created_at": "2013-07-16T19:23:00.000Z",
-                          "external_identifier": "user-789123",
-                          "updated_at": "2019-08-24T14:15:22Z",
-                          "payment_service_id": "stripe-card-169f5226-4644-4d1e-ac36-14999e73601f"
-                        },
-                        {
-                          "type": "transaction",
-                          "id": "169f5226-4644-4d1e-ac36-14999e73601f",
-                          "status": "created",
-                          "transaction_status": "authorized",
-                          "amount": 199,
-                          "currency": "GBP",
-                          "payment_method": {
-                            "type": "card",
-                            "id": null,
-                            "authorization_url": "https://paypal.com....."
-                          },
-                          "created_at": "2013-07-16T19:23:00.000Z",
-                          "external_identifier": "user-789123",
-                          "updated_at": "2019-08-24T14:15:22Z",
-                          "payment_service_id": "stripe-card-169f5226-4644-4d1e-ac36-14999e73601f"
-                        }
-                      ],
-                      "limit": 100,
-                      "next_page": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
-                      "previous_page": "9049b2f9-0c67-47c5-af18-e8525f855263"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error404NotFound"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error404PendingCreation"
                     }
-                  }
+                  ]
                 }
               }
             }
-          },
-          "400": {
-            "description": "Returns an error if the request is missing any required fields, or the request body is not valid JSON.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "Incorrect JSON": {
-                    "value": {
-                      "type": "error",
-                      "code": "incorrect_json",
-                      "status": 400,
-                      "message": "The request body was not valid JSON.",
-                      "additional_context": null
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden"
           }
         }
       }
@@ -3435,10 +3291,10 @@
           }
         }
       },
-      "Error401": {
+      "Error401Unauthorized": {
         "title": "Unauthorized Error",
         "type": "object",
-        "description": "Unauthorized error (HTTP 401)",
+        "description": "Unauthorized Error (HTTP 401)",
         "x-tags": [
           "Errors"
         ],
@@ -3473,6 +3329,90 @@
             "example": "No valid API authentication found",
             "enum": [
               "No valid API authentication found"
+            ]
+          }
+        }
+      },
+      "Error404PendingCreation": {
+        "title": "Pending Creation Error",
+        "type": "object",
+        "description": "Pending Creation Error (HTTP 404)",
+        "x-tags": [
+          "Errors"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`error`",
+            "enum": [
+              "error"
+            ],
+            "example": "error"
+          },
+          "code": {
+            "type": "string",
+            "description": "`pending_creation`",
+            "example": "pending_creation",
+            "enum": [
+              "pending_creation"
+            ]
+          },
+          "status": {
+            "type": "integer",
+            "description": "`404`",
+            "example": 404,
+            "enum": [
+              404
+            ]
+          },
+          "message": {
+            "type": "string",
+            "description": " The resource is still pending",
+            "example": "The resource is still pending",
+            "enum": [
+              "The resource is still pending"
+            ]
+          }
+        }
+      },
+      "Error404NotFound": {
+        "title": "Not Found Error",
+        "type": "object",
+        "description": "Not Found Error (HTTP 404)",
+        "x-tags": [
+          "Errors"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`error`",
+            "enum": [
+              "error"
+            ],
+            "example": "error"
+          },
+          "code": {
+            "type": "string",
+            "description": "`not_found`",
+            "example": "not_found",
+            "enum": [
+              "not_found"
+            ]
+          },
+          "status": {
+            "type": "integer",
+            "description": "`404`",
+            "example": 404,
+            "enum": [
+              404
+            ]
+          },
+          "message": {
+            "type": "string",
+            "description": "The resource could not be found",
+            "example": "The resource could not be found",
+            "enum": [
+              "The resource could not be found"
             ]
           }
         }
