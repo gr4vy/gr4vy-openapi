@@ -76,8 +76,35 @@ properties:
       Defines if this transaction should run in the payment provider's test
       environment. Defaults to false.
 
-  buyer_id:
-    type: string
-    format: uuid
+  buyer:
+    type: object
     description: |-
-      The Gr4vy ID of the buyer to associate this transaction to.
+      The buyer resource to associate this transaction to. Provide the `id` to
+      associate the transaction to an existing buyer, or provide the
+      `external_identifier` to automatically find-or-create a buyer. Any
+      `display_name` value is always applied to the buyer resource.
+    properties:
+      id:
+        type: string
+        example: fe26475d-ec3e-4884-9553-f7356683f7f9
+        description: |-
+          The unique Gr4vy ID for an existing buyer. If provided we will try
+          and associate the transaction to this buyer.
+
+      external_identifier:
+        type: string
+        description: |-
+          An external identifier for a buyer. If provided together with the `id`
+          value then an existing buyer will be updated with this new value.
+
+          If provided without the buyer `id` then this will be used to
+          find-or-create a buyer with this `external_identifier` value.
+        example: user-789123
+
+      display_name:
+        type: string
+        description:
+          A unique name for this buyer which is used in the Gr4vy admin panel to
+          give a buyer a human readable name. This name will be applied to any
+          new or existing buyer resource.
+        example: John L.
