@@ -21,10 +21,12 @@ properties:
       For BitCoin, this value will be a decimal point number, for example
       `0.0039`.
     type: number
+
   currency:
     type: string
     example: USD
     description: A supported ISO-4217 currency code.
+
   payment_method_type:
     type: string
     description: The type of payment method to create an authorization for.
@@ -33,6 +35,7 @@ properties:
       - paypal
       - bitcoin
     example: card
+
   payment_method:
     oneOf:
       - allOf:
@@ -51,6 +54,7 @@ properties:
     description:
       The optional payment method details to create an authorization for. This
       field is required for processing a card.
+
   capture:
     type: boolean
     description:
@@ -58,14 +62,22 @@ properties:
       effectively processing the payment directly."
     default: "false"
     example: true
+
   external_identifier:
     type: string
     description:
       An external identifier that can be used by the merchant to match the
       authorization against their own records.
     nullable: true
+
   use_test_environment:
     type: boolean
     description:
       Defines if this transaction should run in the payment provider's test
       environment. Defaults to false.
+
+  buyer_id:
+    type: string
+    format: uuid
+    description: |-
+      The Gr4vy ID of the buyer to associate this transaction to.

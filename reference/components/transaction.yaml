@@ -71,3 +71,8 @@ properties:
     example: paypal-paypal-169f5226-4644-4d1e-ac36-14999e73601f
     description:
       The ID of the payment service that was used for this transaction.
+  buyer_id:
+    type: string
+    format: uuid
+    description: |-
+      The Gr4vy ID of the buyer to associate this transaction to.

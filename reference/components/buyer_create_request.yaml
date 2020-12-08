@@ -11,7 +11,7 @@ properties:
     type: string
     description:
       An external identifier that can be used by the merchant to match the buyer
-      against their own records.
+      against their own records. This value needs to be unique for all buyers.
     example: user-789123
     nullable: true
 

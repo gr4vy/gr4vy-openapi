@@ -16,6 +16,7 @@ properties:
     minimum: 0.000001
     maximum: 99999999
     example: 1299
+
   currency:
     type: string
     description: |

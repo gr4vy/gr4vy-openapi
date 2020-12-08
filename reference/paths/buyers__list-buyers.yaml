@@ -12,8 +12,7 @@ parameters:
     in: query
     name: external_identifier
     description:
-      Filters the results to just the buyers that match this external
-      identifier.
+      Filters the results to just the buyer that match this external identifier.
 
   - schema:
       type: integer

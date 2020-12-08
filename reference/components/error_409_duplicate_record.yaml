@@ -1,0 +1,35 @@
+---
+title: Duplicate Record Error
+type: object
+description: Duplicate Record Error (HTTP 409)
+
+x-tags:
+  - Errors
+
+properties:
+  type:
+    type: string
+    description: "`error`"
+    enum:
+      - error
+    example: error
+
+  code:
+    type: string
+    description: "`duplicate_record`"
+    example: duplicate_record
+    enum:
+      - duplicate_record
+
+  status:
+    type: integer
+    description: "`409`"
+    example: 409
+    enum:
+      - 409
+
+  message:
+    type: string
+    description: Further details on the field that triggered the error.
+    example: |-
+      A duplicate ecord exists with this external_identifier value

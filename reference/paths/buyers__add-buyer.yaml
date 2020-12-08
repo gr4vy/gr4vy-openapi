@@ -47,3 +47,10 @@ responses:
       application/json:
         schema:
           $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
+
+  "409":
+    description: Returns an error if duplicate resource has been found.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error409DuplicateRecord"

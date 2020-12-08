@@ -11,10 +11,12 @@ properties:
     example: buyer
     enum:
       - buyer
+
   id:
     type: string
     example: fe26475d-ec3e-4884-9553-f7356683f7f9
     description: The unique Gr4vy ID for this buyer
+
   external_identifier:
     type: string
     description:
@@ -22,6 +24,7 @@ properties:
       against their own records.
     example: user-789123
     nullable: true
+
   display_name:
     type: string
     description:
@@ -29,6 +32,7 @@ properties:
       give a buyer a human readable name.
     example: John L.
     nullable: true
+
   created_at:
     type: string
     description: |-
@@ -36,6 +40,7 @@ properties:
       when this buyer was created in our system.
     format: date-time
     example: "2013-07-16T19:23:00.000Z"
+
   updated_at:
     type: string
     description: |-
