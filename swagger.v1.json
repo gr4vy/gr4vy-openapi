@@ -2743,7 +2743,8 @@
       "name": "Payment Services"
     },
     {
-      "name": "Payment Service Definitions"
+      "name": "Payment Service Definitions",
+      "x-internal": true
     },
     {
       "name": "Transactions"
