@@ -44,6 +44,12 @@
               "$ref": "#/definitions/Status"
             }
           },
+          "400": {
+            "description": "Returns an error if the request was badly formatted.",
+            "schema": {
+              "$ref": "#/definitions/Error400IncorrectJson"
+            }
+          },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
@@ -83,6 +89,12 @@
               "$ref": "#/definitions/Status"
             }
           },
+          "400": {
+            "description": "Returns an error if the request was badly formatted.",
+            "schema": {
+              "$ref": "#/definitions/Error400IncorrectJson"
+            }
+          },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
@@ -114,7 +126,7 @@
               "properties": {
                 "items": {
                   "items": {
-                    "$ref": "#/definitions/TransactionCaptureRequest"
+                    "$ref": "#/definitions/TransactionsBatchCaptureRequest"
                   },
                   "type": "array"
                 }
@@ -128,6 +140,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/Statuses"
+            }
+          },
+          "400": {
+            "description": "Returns an error if the request was badly formatted.",
+            "schema": {
+              "$ref": "#/definitions/Error400IncorrectJson"
             }
           },
           "401": {
@@ -178,6 +196,12 @@
               "$ref": "#/definitions/Status"
             }
           },
+          "400": {
+            "description": "Returns an error if the request was badly formatted.",
+            "schema": {
+              "$ref": "#/definitions/Error400IncorrectJson"
+            }
+          },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
@@ -224,6 +248,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/Status"
+            }
+          },
+          "400": {
+            "description": "Returns an error if the request was badly formatted.",
+            "schema": {
+              "$ref": "#/definitions/Error400IncorrectJson"
             }
           },
           "401": {
@@ -310,10 +340,8 @@
             }
           },
           "400": {
-            "description": "Returns an error if the request is missing any required fields, or the request body is not valid JSON.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "schema": {}
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -425,6 +453,10 @@
               "$ref": "#/definitions/Buyer"
             }
           },
+          "400": {
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "schema": {}
+          },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
@@ -497,10 +529,8 @@
             }
           },
           "400": {
-            "description": "Returns an error if the ruleset is not valid JSON",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "schema": {}
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -619,10 +649,8 @@
             }
           },
           "400": {
-            "description": "Returns an error if the ruleset is not valid JSON",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "schema": {}
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -764,10 +792,8 @@
             }
           },
           "400": {
-            "description": "Returns an error if the request is missing any required fields, or the request body is not valid JSON.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "schema": {}
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -915,6 +941,10 @@
               "$ref": "#/definitions/PaymentServiceDefinition"
             }
           },
+          "400": {
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "schema": {}
+          },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
@@ -1027,6 +1057,10 @@
               "$ref": "#/definitions/PaymentServiceDefinition"
             }
           },
+          "400": {
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "schema": {}
+          },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
@@ -1098,6 +1132,10 @@
             "schema": {
               "$ref": "#/definitions/PaymentService"
             }
+          },
+          "400": {
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "schema": {}
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -1208,6 +1246,10 @@
             "schema": {
               "$ref": "#/definitions/PaymentService"
             }
+          },
+          "400": {
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "schema": {}
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -1334,10 +1376,8 @@
             }
           },
           "400": {
-            "description": "Returns an error if the request is missing any required fields, or the request body is not valid JSON.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "schema": {}
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -1428,6 +1468,10 @@
               "$ref": "#/definitions/Transaction"
             }
           },
+          "400": {
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "schema": {}
+          },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
@@ -1481,10 +1525,8 @@
             }
           },
           "400": {
-            "description": "Returns an error if the request is missing any required fields, or the request body is not valid JSON.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "schema": {}
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -2199,6 +2241,84 @@
         }
       },
       "title": "Error",
+      "type": "object",
+      "x-tags": [
+        "Errors"
+      ]
+    },
+    "Error400BadRequest": {
+      "description": "Bad Request (HTTP 400)",
+      "properties": {
+        "code": {
+          "description": "`bad_request`",
+          "enum": [
+            "bad_request"
+          ],
+          "example": "bad_request",
+          "type": "string"
+        },
+        "message": {
+          "description": "Describes the fields that are missing or incorrectly formatted in the API\nrequest.",
+          "example": "Missing 'display_name' field",
+          "type": "string"
+        },
+        "status": {
+          "description": "`400`",
+          "enum": [
+            400
+          ],
+          "example": 400,
+          "type": "integer"
+        },
+        "type": {
+          "description": "`error`",
+          "enum": [
+            "error"
+          ],
+          "example": "error",
+          "type": "string"
+        }
+      },
+      "title": "Bad Request",
+      "type": "object",
+      "x-tags": [
+        "Errors"
+      ]
+    },
+    "Error400IncorrectJson": {
+      "description": "Incorrect JSON (HTTP 400)",
+      "properties": {
+        "code": {
+          "description": "`incorrect_json`",
+          "enum": [
+            "incorrect_json"
+          ],
+          "example": "incorrect_json",
+          "type": "string"
+        },
+        "message": {
+          "description": "Incorrect JSON. The request body could not be parsed as valid JSON.",
+          "example": "Incorrect JSON. The request body could not be parsed as valid JSON.",
+          "type": "string"
+        },
+        "status": {
+          "description": "`400`",
+          "enum": [
+            400
+          ],
+          "example": 400,
+          "type": "integer"
+        },
+        "type": {
+          "description": "`error`",
+          "enum": [
+            "error"
+          ],
+          "example": "error",
+          "type": "string"
+        }
+      },
+      "title": "Incorrect JSON",
       "type": "object",
       "x-tags": [
         "Errors"
