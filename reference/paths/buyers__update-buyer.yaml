@@ -26,6 +26,19 @@ responses:
         schema:
           $ref: "../openapi.yaml#/components/schemas/Buyer"
 
+  "400":
+    description:
+      Returns an error if the request was badly formatted or missing required
+      fields.
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400BadRequest
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400IncorrectJson
+
   "401":
     description: Returns an error if no valid authentication was provided.
     content:

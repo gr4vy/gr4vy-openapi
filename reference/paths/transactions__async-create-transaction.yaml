@@ -45,6 +45,13 @@ responses:
         schema:
           $ref: "../openapi.yaml#/components/schemas/Status"
 
+  "400":
+    description: Returns an error if the request was badly formatted.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error400IncorrectJson"
+
   "401":
     description: Returns an error if no valid authentication was provided.
     content:

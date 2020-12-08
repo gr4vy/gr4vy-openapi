@@ -18,7 +18,7 @@ requestBody:
             type: array
             items:
               $ref: |-
-                ../openapi.yaml#/components/schemas/TransactionCaptureRequest
+                ../openapi.yaml#/components/schemas/TransactionsBatchCaptureRequest
 
 responses:
   "202":
@@ -27,6 +27,13 @@ responses:
       application/json:
         schema:
           $ref: "../openapi.yaml#/components/schemas/Statuses"
+
+  "400":
+    description: Returns an error if the request was badly formatted.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error400IncorrectJson"
 
   "401":
     description: Returns an error if no valid authentication was provided.

@@ -74,19 +74,17 @@ responses:
                     - card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96
 
   "400":
-    description: Returns an error if the ruleset is not valid JSON
+    description:
+      Returns an error if the request was badly formatted or missing required
+      fields.
     content:
       application/json:
         schema:
-          $ref: "../openapi.yaml#/components/schemas/Error"
-        examples:
-          Invalid JSON:
-            value:
-              type: error
-              code: invalid_json
-              status: 400
-              message: Invalid JSON
-              additional_context: null
+          oneOf:
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400BadRequest
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400IncorrectJson
 
   "401":
     description: Returns an error if no valid authentication was provided.

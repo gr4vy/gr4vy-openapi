@@ -30,20 +30,16 @@ responses:
 
   "400":
     description:
-      "Returns an error if the request is missing any required fields, or the
-      request body is not valid JSON."
+      Returns an error if the request was badly formatted or missing required
+      fields.
     content:
       application/json:
         schema:
-          $ref: "../openapi.yaml#/components/schemas/Error"
-        examples:
-          Incorrect JSON:
-            value:
-              type: error
-              code: incorrect_json
-              status: 400
-              message: The request body was not valid JSON.
-              additional_context: null
+          oneOf:
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400BadRequest
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400IncorrectJson
 
   "401":
     description: Returns an error if no valid authentication was provided.

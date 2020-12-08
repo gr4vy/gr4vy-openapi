@@ -47,6 +47,19 @@ responses:
               payment_service_id: |-
                 stripe-card-169f5226-4644-4d1e-ac36-14999e73601f
 
+  "400":
+    description:
+      Returns an error if the request was badly formatted or missing required
+      fields.
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400BadRequest
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400IncorrectJson
+
   "401":
     description: Returns an error if no valid authentication was provided.
     content:
@@ -62,5 +75,7 @@ responses:
       application/json:
         schema:
           oneOf:
-            - $ref: "../openapi.yaml#/components/schemas/Error404NotFound"
-            - $ref: "../openapi.yaml#/components/schemas/Error404PendingCreation"
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error404NotFound
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error404PendingCreation

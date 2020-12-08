@@ -27,5 +27,7 @@ responses:
       application/json:
         schema:
           oneOf:
-            - $ref: "../openapi.yaml#/components/schemas/Error404NotFound"
-            - $ref: "../openapi.yaml#/components/schemas/Error404PendingCreation"
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error404NotFound
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error404PendingCreation
