@@ -43,6 +43,12 @@
             "schema": {
               "$ref": "#/definitions/Status"
             }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
+            }
           }
         },
         "tags": [
@@ -75,6 +81,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/Status"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
             }
           }
         },
@@ -116,6 +128,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/Statuses"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
             }
           }
         },
@@ -159,6 +177,12 @@
             "schema": {
               "$ref": "#/definitions/Status"
             }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
+            }
           }
         },
         "tags": [
@@ -200,6 +224,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/Status"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
             }
           }
         },
@@ -245,7 +275,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Error401"
             }
           }
         },
@@ -288,7 +318,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Error401"
             }
           }
         },
@@ -320,6 +350,12 @@
           "204": {
             "description": "No Content"
           },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
+            }
+          },
           "404": {
             "description": "Returns an error if the resource could not be found",
             "schema": {
@@ -349,7 +385,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Error401"
             }
           },
           "404": {
@@ -389,6 +425,12 @@
               "$ref": "#/definitions/Buyer"
             }
           },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
+            }
+          },
           "404": {
             "description": "Returns an error if the resource could not be found",
             "schema": {
@@ -415,6 +457,12 @@
             "description": "A list of rulesets",
             "schema": {
               "$ref": "#/definitions/CardRulesets"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
             }
           }
         },
@@ -453,6 +501,12 @@
             "schema": {
               "$ref": "#/definitions/Error"
             }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
+            }
           }
         },
         "tags": [
@@ -482,6 +536,12 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
+            }
           },
           "403": {
             "description": "Returns an error if the ruleset could not be deleted",
@@ -513,6 +573,12 @@
             "description": "A card ruleset",
             "schema": {
               "$ref": "#/definitions/CardRuleset"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
             }
           },
           "404": {
@@ -558,6 +624,12 @@
               "$ref": "#/definitions/Error"
             }
           },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
+            }
+          },
           "404": {
             "description": "Returns an error if the ruleset could not be found",
             "schema": {
@@ -594,6 +666,12 @@
             "description": "An activated ruleset",
             "schema": {
               "$ref": "#/definitions/CardRuleset"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
             }
           },
           "403": {
@@ -651,7 +729,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Error401"
             }
           }
         },
@@ -694,7 +772,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Error401"
             }
           }
         },
@@ -732,7 +810,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Error401"
             }
           },
           "404": {
@@ -772,6 +850,12 @@
             "schema": {
               "$ref": "#/definitions/CardEvents"
             }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
+            }
           }
         },
         "tags": [
@@ -793,6 +877,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/PaymentServiceDefinitions"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
             }
           }
         },
@@ -826,6 +916,12 @@
             "schema": {
               "$ref": "#/definitions/PaymentServiceDefinition"
             }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
+            }
           }
         },
         "tags": [
@@ -848,10 +944,19 @@
         }
       ],
       "delete": {
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
+            }
           }
         },
         "tags": [
@@ -872,6 +977,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/PaymentServiceDefinition"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
             }
           }
         },
@@ -905,6 +1016,12 @@
             "schema": {
               "$ref": "#/definitions/PaymentServiceDefinition"
             }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
+            }
           }
         },
         "tags": [
@@ -927,6 +1044,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/PaymentServices"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
             }
           }
         },
@@ -959,6 +1082,12 @@
             "schema": {
               "$ref": "#/definitions/PaymentService"
             }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
+            }
           }
         },
         "tags": [
@@ -981,10 +1110,19 @@
         }
       ],
       "delete": {
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
+            }
           }
         },
         "tags": [
@@ -1004,6 +1142,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/PaymentService"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
             }
           }
         },
@@ -1035,6 +1179,12 @@
             "description": "The updated payment service",
             "schema": {
               "$ref": "#/definitions/PaymentService"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
             }
           }
         },
@@ -1115,7 +1265,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Error401"
             }
           }
         },
@@ -1158,7 +1308,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Error401"
             }
           }
         },
@@ -1203,7 +1353,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Error401"
             }
           },
           "403": {
@@ -1243,7 +1393,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Error401"
             }
           },
           "404": {
@@ -1292,6 +1442,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Transaction"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
             }
           }
         },
@@ -1345,7 +1501,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Error401"
             }
           }
         },
@@ -1377,6 +1533,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/TransactionEvents"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401"
             }
           }
         },
@@ -2041,6 +2203,48 @@
         }
       },
       "title": "Error",
+      "type": "object",
+      "x-tags": [
+        "Errors"
+      ]
+    },
+    "Error401": {
+      "description": "Unauthorized error (HTTP 401)",
+      "properties": {
+        "code": {
+          "description": "`unauthorized`",
+          "enum": [
+            "unauthorized"
+          ],
+          "example": "unauthorized",
+          "type": "string"
+        },
+        "message": {
+          "description": "No valid API authentication found",
+          "enum": [
+            "No valid API authentication found"
+          ],
+          "example": "No valid API authentication found",
+          "type": "string"
+        },
+        "status": {
+          "description": "`401`",
+          "enum": [
+            401
+          ],
+          "example": 401,
+          "type": "integer"
+        },
+        "type": {
+          "description": "`error`",
+          "enum": [
+            "error"
+          ],
+          "example": "error",
+          "type": "string"
+        }
+      },
+      "title": "Unauthorized Error",
       "type": "object",
       "x-tags": [
         "Errors"
