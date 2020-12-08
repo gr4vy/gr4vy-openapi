@@ -47,7 +47,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           }
         },
@@ -86,7 +86,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           }
         },
@@ -133,7 +133,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           }
         },
@@ -181,7 +181,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           }
         },
@@ -229,7 +229,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           }
         },
@@ -275,7 +275,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           }
         },
@@ -318,7 +318,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           }
         },
@@ -353,13 +353,13 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           },
           "404": {
-            "description": "Returns an error if the resource could not be found",
+            "description": "Returns an error if the resource can not be found.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Error404NotFound"
             }
           }
         },
@@ -385,13 +385,13 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           },
           "404": {
-            "description": "Returns an error if the authorization can not be found or has not yet been created.",
+            "description": "Returns an error if the resource can not be found.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Error404NotFound"
             }
           }
         },
@@ -428,13 +428,13 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           },
           "404": {
-            "description": "Returns an error if the resource could not be found",
+            "description": "Returns an error if the resource can not be found.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Error404NotFound"
             }
           }
         },
@@ -462,7 +462,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           }
         },
@@ -505,7 +505,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           }
         },
@@ -540,7 +540,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           },
           "403": {
@@ -550,9 +550,9 @@
             }
           },
           "404": {
-            "description": "Returns an error if the ruleset could not be found",
+            "description": "Returns an error if the resource can not be found.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Error404NotFound"
             }
           }
         },
@@ -578,13 +578,13 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           },
           "404": {
-            "description": "Returns an error if the ruleset could not be found",
+            "description": "Returns an error if the resource can not be found.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Error404NotFound"
             }
           }
         },
@@ -627,13 +627,13 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           },
           "404": {
-            "description": "Returns an error if the ruleset could not be found",
+            "description": "Returns an error if the resource can not be found.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Error404NotFound"
             }
           }
         },
@@ -671,7 +671,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           },
           "403": {
@@ -681,9 +681,9 @@
             }
           },
           "404": {
-            "description": "Returns an error if the ruleset could not be found",
+            "description": "Returns an error if the resource can not be found.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/Error404NotFound"
             }
           }
         },
@@ -729,7 +729,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           }
         },
@@ -772,7 +772,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           }
         },
@@ -810,14 +810,12 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           },
           "404": {
-            "description": "Returns an error if the authorization can not be found or has not yet been created.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Returns an error if the resource can not be found or has not yet been created.",
+            "schema": {}
           }
         },
         "tags": [
@@ -854,7 +852,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           }
         },
@@ -882,7 +880,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           }
         },
@@ -920,7 +918,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           }
         },
@@ -955,7 +953,13 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "schema": {
+              "$ref": "#/definitions/Error404NotFound"
             }
           }
         },
@@ -982,7 +986,13 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "schema": {
+              "$ref": "#/definitions/Error404NotFound"
             }
           }
         },
@@ -1020,7 +1030,13 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "schema": {
+              "$ref": "#/definitions/Error404NotFound"
             }
           }
         },
@@ -1049,7 +1065,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           }
         },
@@ -1086,7 +1102,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           }
         },
@@ -1121,7 +1137,13 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "schema": {
+              "$ref": "#/definitions/Error404NotFound"
             }
           }
         },
@@ -1147,7 +1169,13 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "schema": {
+              "$ref": "#/definitions/Error404NotFound"
             }
           }
         },
@@ -1184,7 +1212,13 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "schema": {
+              "$ref": "#/definitions/Error404NotFound"
             }
           }
         },
@@ -1265,7 +1299,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           }
         },
@@ -1308,7 +1342,7 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           }
         },
@@ -1318,54 +1352,6 @@
         "description": "Attempts to create an authorization for a payment method. In some cases it is\nnot possible to create the authorization without redirectingt the user for\ntheir authorization. In these cases the status is set to\n`user_authorization_required` and an `authorization_url` is returned.\n\nAdditionally, this endpoint accepts a few additional fields that allow for\nsimultanious capturing and storage of the payment method.\n\n* `payment_method.store` - Use this field to store the payment method for\nfurture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
         "operationId": "authorize-new-transaction",
         "summary": "Create transaction"
-      }
-    },
-    "/transactions/batch-capture": {
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/TransactionsBatchCaptureRequest"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Returns a list of status objects, one for each requested capture.",
-            "schema": {
-              "$ref": "#/definitions/Transactions"
-            }
-          },
-          "400": {
-            "description": "Returns an error if the request is missing any required fields, or the request body is not valid JSON.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "schema": {
-              "$ref": "#/definitions/Error401"
-            }
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "tags": [
-          "Transactions"
-        ],
-        "description": "Takes a list of authorization IDs and processes them as needed.",
-        "operationId": "batch-capture-transactions",
-        "summary": "Batch capture authorizations"
       }
     },
     "/transactions/{transaction_id}": {
@@ -1393,14 +1379,12 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
           },
           "404": {
-            "description": "Returns an error if the transaction can not be found or has not yet been created.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Returns an error if the resource can not be found or has not yet been created.",
+            "schema": {}
           }
         },
         "tags": [
@@ -1447,8 +1431,12 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found or has not yet been created.",
+            "schema": {}
           }
         },
         "tags": [
@@ -1501,8 +1489,12 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found or has not yet been created.",
+            "schema": {}
           }
         },
         "tags": [
@@ -1538,8 +1530,12 @@
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
-              "$ref": "#/definitions/Error401"
+              "$ref": "#/definitions/Error401Unauthorized"
             }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found or has not yet been created.",
+            "schema": {}
           }
         },
         "tags": [
@@ -2208,8 +2204,8 @@
         "Errors"
       ]
     },
-    "Error401": {
-      "description": "Unauthorized error (HTTP 401)",
+    "Error401Unauthorized": {
+      "description": "Unauthorized Error (HTTP 401)",
       "properties": {
         "code": {
           "description": "`unauthorized`",
@@ -2245,6 +2241,90 @@
         }
       },
       "title": "Unauthorized Error",
+      "type": "object",
+      "x-tags": [
+        "Errors"
+      ]
+    },
+    "Error404NotFound": {
+      "description": "Not Found Error (HTTP 404)",
+      "properties": {
+        "code": {
+          "description": "`not_found`",
+          "enum": [
+            "not_found"
+          ],
+          "example": "not_found",
+          "type": "string"
+        },
+        "message": {
+          "description": "The resource could not be found",
+          "enum": [
+            "The resource could not be found"
+          ],
+          "example": "The resource could not be found",
+          "type": "string"
+        },
+        "status": {
+          "description": "`404`",
+          "enum": [
+            404
+          ],
+          "example": 404,
+          "type": "integer"
+        },
+        "type": {
+          "description": "`error`",
+          "enum": [
+            "error"
+          ],
+          "example": "error",
+          "type": "string"
+        }
+      },
+      "title": "Not Found Error",
+      "type": "object",
+      "x-tags": [
+        "Errors"
+      ]
+    },
+    "Error404PendingCreation": {
+      "description": "Pending Creation Error (HTTP 404)",
+      "properties": {
+        "code": {
+          "description": "`pending_creation`",
+          "enum": [
+            "pending_creation"
+          ],
+          "example": "pending_creation",
+          "type": "string"
+        },
+        "message": {
+          "description": " The resource is still pending",
+          "enum": [
+            "The resource is still pending"
+          ],
+          "example": "The resource is still pending",
+          "type": "string"
+        },
+        "status": {
+          "description": "`404`",
+          "enum": [
+            404
+          ],
+          "example": 404,
+          "type": "integer"
+        },
+        "type": {
+          "description": "`error`",
+          "enum": [
+            "error"
+          ],
+          "example": "error",
+          "type": "string"
+        }
+      },
+      "title": "Pending Creation Error",
       "type": "object",
       "x-tags": [
         "Errors"
