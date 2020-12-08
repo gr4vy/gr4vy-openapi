@@ -1,0 +1,42 @@
+---
+operationId: update-buyer
+summary: Update buyer
+description: |
+  Updates a buyer's details.
+tags:
+  - Buyers
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: "../openapi.yaml#/components/schemas/BuyerUpdateRequest"
+      examples:
+        Update a buyer:
+          value:
+            external_identifier: "42623266"
+            display_name: John D.
+
+responses:
+  "200":
+    description: |-
+      An updated buyer record.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Buyer"
+
+  "404":
+    description: Returns an error if the resource could not be found
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error"
+        examples:
+          Ruleset not found:
+            value:
+              type: error
+              code: not_found
+              status: 404
+              message: The resource could not be found
+              additional_context: null

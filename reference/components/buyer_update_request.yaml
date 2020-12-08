@@ -1,0 +1,24 @@
+---
+title: Buyer (Update)
+type: object
+description: A request to update a buyer.
+
+x-tags:
+  - Buyers
+
+properties:
+  external_identifier:
+    type: string
+    description:
+      An external identifier that can be used by the merchant to match the buyer
+      against their own records.
+    example: user-789123
+    nullable: true
+
+  display_name:
+    type: string
+    description:
+      A unique name for this buyer which is used in the Gr4vy admin panel to
+      give a buyer a human readable name.
+    example: John L.
+    nullable: true

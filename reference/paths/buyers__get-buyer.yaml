@@ -1,19 +1,18 @@
 ---
-operationId: get-card
+operationId: get-buyer
 
-summary: Get card
-description: Gets the information about a card
-tags: ["Cards"]
-
-parameters: []
+summary: Get buyer
+description: Gets the information about a buyer
+tags:
+  - Buyers
 
 responses:
   "200":
-    description: Returns the details about a tokenized card.
+    description: Returns the information about a buyer.
     content:
       application/json:
         schema:
-          $ref: "../openapi.yaml#/components/schemas/Card"
+          $ref: "../openapi.yaml#/components/schemas/Buyer"
 
   "401":
     description: Returns an error if no valid authentication was provided.

@@ -1,0 +1,27 @@
+---
+operationId: delete-buyer
+summary: Delete buyer
+description: |-
+  Deletes a buyer record. Any associated tokenized payment methods will remain
+  in the system but no longer associated to the buyer.
+tags:
+  - Buyers
+
+responses:
+  "204":
+    description: No Content
+
+  "404":
+    description: Returns an error if the resource could not be found
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error"
+        examples:
+          Ruleset not found:
+            value:
+              type: error
+              code: not_found
+              status: 404
+              message: The resource could not be found
+              additional_context: null

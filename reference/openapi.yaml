@@ -24,6 +24,7 @@ servers:
         description: The subdomain for the customer's.
 
 tags:
+  - name: Buyers
   - name: Cards
   - name: Card Rulesets
   - name: Payment Services
@@ -56,6 +57,22 @@ paths:
   "/async/transactions/batch-capture":
     post:
       $ref: "./paths/transactions__async-batch-capture-transactions.yaml"
+
+  "/buyers":
+    get:
+      $ref: "./paths/buyers__list-buyers.yaml"
+    post:
+      $ref: "./paths/buyers__add-buyer.yaml"
+
+  "/buyers/{buyer_id}":
+    parameters:
+      - $ref: "./parameters/buyer_id.yaml"
+    get:
+      $ref: "./paths/buyers__get-buyer.yaml"
+    put:
+      $ref: "./paths/buyers__update-buyer.yaml"
+    delete:
+      $ref: "./paths/buyers__delete-buyer.yaml"
 
   "/cards":
     get:
@@ -165,6 +182,14 @@ paths:
 
 components:
   schemas:
+    Buyer:
+      $ref: "./components/buyer.yaml"
+    Buyers:
+      $ref: "./components/buyers.yaml"
+    BuyerCreateRequest:
+      $ref: "./components/buyer_create_request.yaml"
+    BuyerUpdateRequest:
+      $ref: "./components/buyer_update_request.yaml"
     Card:
       $ref: "./components/card.yaml"
     CardEvent:
