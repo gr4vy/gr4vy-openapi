@@ -608,7 +608,8 @@
         ],
         "description": "Returns a list of all available payment service definitions.",
         "operationId": "list-payment-service-definitions",
-        "summary": "List payment service definitions"
+        "summary": "List payment service definitions",
+        "x-internal": true
       },
       "post": {
         "consumes": [
@@ -639,7 +640,8 @@
         ],
         "description": "Creates a new payment service definition",
         "operationId": "add-payment-service-definition",
-        "summary": "Add payment service definition"
+        "summary": "Add payment service definition",
+        "x-internal": true
       }
     },
     "/payment-service-definitions/{payment_service_definition_id}": {
@@ -664,7 +666,8 @@
         ],
         "description": "Removes a payment service definition",
         "operationId": "delete-payment-services-definition",
-        "summary": "Delete payment service definition"
+        "summary": "Delete payment service definition",
+        "x-internal": true
       },
       "get": {
         "produces": [
@@ -684,7 +687,8 @@
         ],
         "description": "Gets the definition for a payment service.",
         "operationId": "get-payment-service-definition",
-        "summary": "Get payment service definition"
+        "summary": "Get payment service definition",
+        "x-internal": true
       },
       "put": {
         "consumes": [
@@ -715,7 +719,8 @@
         ],
         "description": "Makes an update to a payment service definition",
         "operationId": "update-payment-services-definition",
-        "summary": "Update payment service definition"
+        "summary": "Update payment service definition",
+        "x-internal": true
       }
     },
     "/payment-services": {
