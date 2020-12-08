@@ -98,6 +98,16 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
           }
         }
       }
@@ -150,6 +160,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -217,6 +237,16 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
           }
         }
       }
@@ -270,6 +300,16 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
           }
         }
       }
@@ -306,6 +346,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Statuses"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -362,18 +412,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "An unauthorized request": {
-                    "value": {
-                      "type": "error",
-                      "code": "unauthorized",
-                      "status": 401,
-                      "message": "No valid authentication found",
-                      "additional_context": null
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -441,18 +480,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "An unauthorized request": {
-                    "value": {
-                      "type": "error",
-                      "code": "unauthorized",
-                      "status": 401,
-                      "message": "No valid API authentication found",
-                      "additional_context": null
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -497,18 +525,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "An unauthorized request": {
-                    "value": {
-                      "type": "error",
-                      "code": "unauthorized",
-                      "status": 401,
-                      "message": "No valid authentication found",
-                      "additional_context": null
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -585,6 +602,16 @@
               }
             }
           },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Returns an error if the resource could not be found",
             "content": {
@@ -618,6 +645,16 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
           },
           "404": {
             "description": "Returns an error if the resource could not be found",
@@ -692,18 +729,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "An unauthorized request": {
-                    "value": {
-                      "type": "error",
-                      "code": "unauthorized",
-                      "status": 401,
-                      "message": "No valid authentication found",
-                      "additional_context": null
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -773,18 +799,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "An unauthorized request": {
-                    "value": {
-                      "type": "error",
-                      "code": "unauthorized",
-                      "status": 401,
-                      "message": "No valid API authentication found",
-                      "additional_context": null
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -830,18 +845,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "An unauthorized request": {
-                    "value": {
-                      "type": "error",
-                      "code": "unauthorized",
-                      "status": 401,
-                      "message": "No valid authentication found",
-                      "additional_context": null
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -915,6 +919,16 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
           }
         }
       }
@@ -934,6 +948,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PaymentServices"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -987,6 +1011,16 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
           }
         }
       }
@@ -1022,6 +1056,16 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
           }
         }
       },
@@ -1051,6 +1095,16 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
           }
         }
       },
@@ -1064,6 +1118,16 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
           }
         }
       }
@@ -1084,6 +1148,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PaymentServiceDefinitions"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -1114,6 +1188,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PaymentServiceDefinition"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -1152,6 +1236,16 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
           }
         }
       },
@@ -1182,6 +1276,16 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
           }
         }
       },
@@ -1196,6 +1300,16 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
           }
         }
       }
@@ -1266,6 +1380,16 @@
                       "items": []
                     }
                   }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -1397,6 +1521,16 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
           }
         }
       }
@@ -1471,6 +1605,16 @@
                       ]
                     }
                   }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -1624,6 +1768,16 @@
               }
             }
           },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
           "404": {
             "description": "Returns an error if the ruleset could not be found",
             "content": {
@@ -1657,6 +1811,16 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
           },
           "403": {
             "description": "Returns an error if the ruleset could not be deleted",
@@ -1773,6 +1937,16 @@
                       ]
                     }
                   }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -1924,18 +2098,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "An unauthorized request": {
-                    "value": {
-                      "type": "error",
-                      "code": "unauthorized",
-                      "status": 401,
-                      "message": "No valid authentication found",
-                      "additional_context": null
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -2095,18 +2258,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "An unauthorized request": {
-                    "value": {
-                      "type": "error",
-                      "code": "unauthorized",
-                      "status": 401,
-                      "message": "No valid API authentication found",
-                      "additional_context": null
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -2208,18 +2360,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "An unauthorized request": {
-                    "value": {
-                      "type": "error",
-                      "code": "unauthorized",
-                      "status": 401,
-                      "message": "No valid authentication found",
-                      "additional_context": null
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -2321,6 +2462,16 @@
                 }
               }
             }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
           }
         }
       }
@@ -2419,18 +2570,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "An unauthorized request": {
-                    "value": {
-                      "type": "error",
-                      "code": "unauthorized",
-                      "status": 401,
-                      "message": "No valid API authentication found",
-                      "additional_context": null
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -2464,6 +2604,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/TransactionEvents"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -2588,18 +2738,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "examples": {
-                  "An unauthorized request": {
-                    "value": {
-                      "type": "error",
-                      "code": "unauthorized",
-                      "status": 401,
-                      "message": "No valid API authentication found",
-                      "additional_context": null
-                    }
-                  }
+                  "$ref": "#/components/schemas/Error401"
                 }
               }
             }
@@ -3293,6 +3432,48 @@
             "type": "string",
             "description": "A human readable message that describes the error. The content of this field should not be used to determine any business logic. ",
             "example": "The request body was not valid JSON."
+          }
+        }
+      },
+      "Error401": {
+        "title": "Unauthorized Error",
+        "type": "object",
+        "description": "Unauthorized error (HTTP 401)",
+        "x-tags": [
+          "Errors"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`error`",
+            "enum": [
+              "error"
+            ],
+            "example": "error"
+          },
+          "code": {
+            "type": "string",
+            "description": "`unauthorized`",
+            "example": "unauthorized",
+            "enum": [
+              "unauthorized"
+            ]
+          },
+          "status": {
+            "type": "integer",
+            "description": "`401`",
+            "example": 401,
+            "enum": [
+              401
+            ]
+          },
+          "message": {
+            "type": "string",
+            "description": "No valid API authentication found",
+            "example": "No valid API authentication found",
+            "enum": [
+              "No valid API authentication found"
+            ]
           }
         }
       },
