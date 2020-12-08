@@ -26,7 +26,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: "../openapi.yaml#/components/schemas/Card"
+          $ref: "../openapi.yaml#/components/schemas/Buyer"
 
   "400":
     description:
