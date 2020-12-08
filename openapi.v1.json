@@ -27,6 +27,9 @@
   ],
   "tags": [
     {
+      "name": "Buyers"
+    },
+    {
       "name": "Cards"
     },
     {
@@ -310,6 +313,336 @@
         }
       }
     },
+    "/buyers": {
+      "get": {
+        "operationId": "list-buyers",
+        "summary": "List buyers",
+        "description": "Returns a list of cards",
+        "tags": [
+          "Buyers"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 100,
+              "example": 1000,
+              "minimum": 0,
+              "maximum": 1000,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "The maximum number of items to return"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "1593343179"
+            },
+            "in": "query",
+            "name": "marker",
+            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, simply omit this parameter.\nFor next pages, simply use the value returned by the API in\nthe `next_page` field."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of buyers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Buyers"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "An unauthorized request": {
+                    "value": {
+                      "type": "error",
+                      "code": "unauthorized",
+                      "status": 401,
+                      "message": "No valid authentication found",
+                      "additional_context": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "add-buyer",
+        "summary": "Add buyer",
+        "description": "Adds a buyer, allowing for payment methods and transactions to be associated\nto this buyer.\n",
+        "tags": [
+          "Buyers"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BuyerCreateRequest"
+              },
+              "examples": {
+                "Create a buyer": {
+                  "value": {
+                    "external_identifier": "412231123",
+                    "display_name": "John L."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "This API returns asynchronously, returning status object with the ID of the pending `Card` resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Card"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Returns an error if the request is missing any required fields, or the request body is not valid JSON.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Incorrect JSON": {
+                    "value": {
+                      "type": "error",
+                      "code": "incorrect_json",
+                      "status": 400,
+                      "message": "The request body was not valid JSON.",
+                      "additional_context": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "An unauthorized request": {
+                    "value": {
+                      "type": "error",
+                      "code": "unauthorized",
+                      "status": 401,
+                      "message": "No valid API authentication found",
+                      "additional_context": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/buyers/{buyer_id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
+          },
+          "name": "buyer_id",
+          "in": "path",
+          "required": true,
+          "description": "The unique ID for a buyer."
+        }
+      ],
+      "get": {
+        "operationId": "get-buyer",
+        "summary": "Get buyer",
+        "description": "Gets the information about a buyer",
+        "tags": [
+          "Buyers"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the information about a buyer.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Buyer"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "An unauthorized request": {
+                    "value": {
+                      "type": "error",
+                      "code": "unauthorized",
+                      "status": 401,
+                      "message": "No valid authentication found",
+                      "additional_context": null
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the authorization can not be found or has not yet been created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Card not found": {
+                    "value": {
+                      "type": "error",
+                      "code": "not_found",
+                      "status": 404,
+                      "message": "The resource could not be found",
+                      "additional_context": null
+                    }
+                  },
+                  "Card creation pending": {
+                    "value": {
+                      "type": "error",
+                      "code": "status_pending",
+                      "status": 404,
+                      "message": "The resource is still pending",
+                      "additional_context": {
+                        "type": "status",
+                        "status": "pending",
+                        "resource_type": "card",
+                        "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "update-buyer",
+        "summary": "Update buyer",
+        "description": "Updates a buyer's details.\n",
+        "tags": [
+          "Buyers"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BuyerUpdateRequest"
+              },
+              "examples": {
+                "Update a buyer": {
+                  "value": {
+                    "external_identifier": "42623266",
+                    "display_name": "John D."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "An updated buyer record.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Buyer"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource could not be found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Ruleset not found": {
+                    "value": {
+                      "type": "error",
+                      "code": "not_found",
+                      "status": 404,
+                      "message": "The resource could not be found",
+                      "additional_context": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "delete-buyer",
+        "summary": "Delete buyer",
+        "description": "Deletes a buyer record. Any associated tokenized payment methods will remain\nin the system but no longer associated to the buyer.",
+        "tags": [
+          "Buyers"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Returns an error if the resource could not be found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "Ruleset not found": {
+                    "value": {
+                      "type": "error",
+                      "code": "not_found",
+                      "status": 404,
+                      "message": "The resource could not be found",
+                      "additional_context": null
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/cards": {
       "get": {
         "operationId": "list-cards",
@@ -476,14 +809,14 @@
       "get": {
         "operationId": "get-card",
         "summary": "Get card",
-        "description": "Get an authorization. ",
+        "description": "Gets the information about a card",
         "tags": [
           "Cards"
         ],
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Returns a created card resource.",
+            "description": "Returns the details about a tokenized card.",
             "content": {
               "application/json": {
                 "schema": {
@@ -2280,6 +2613,136 @@
   },
   "components": {
     "schemas": {
+      "Buyer": {
+        "title": "Buyer",
+        "type": "object",
+        "x-tags": [
+          "Buyers"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of this resource. Is always `buyer`",
+            "example": "buyer",
+            "enum": [
+              "buyer"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+            "description": "The unique Gr4vy ID for this buyer"
+          },
+          "external_identifier": {
+            "type": "string",
+            "description": "An external identifier that can be used by the merchant to match the buyer against their own records.",
+            "example": "user-789123",
+            "nullable": true
+          },
+          "display_name": {
+            "type": "string",
+            "description": "A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.",
+            "example": "John L.",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "description": "The date and time\nwhen this buyer was created in our system.",
+            "format": "date-time",
+            "example": "2013-07-16T19:23:00.000Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "The date and time\nwhen this buyer was last updated in our system.",
+            "format": "date-time",
+            "example": "2013-07-16T19:23:00.000Z"
+          }
+        }
+      },
+      "Buyers": {
+        "title": "Buyers",
+        "type": "object",
+        "description": "A list of buyers",
+        "x-tags": [
+          "Buyers"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "A list of buyers",
+            "items": {
+              "$ref": "#/components/schemas/Buyer"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The limit set to the number of items returned. ",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1000,
+            "example": 100,
+            "default": 100
+          },
+          "next_page": {
+            "type": "string",
+            "description": "The marker that represents the next page of results.",
+            "format": "uuid",
+            "example": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
+            "nullable": true
+          },
+          "previous_page": {
+            "type": "string",
+            "description": "The marker that represents the previ page of results.",
+            "format": "uuid",
+            "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
+            "nullable": true
+          }
+        }
+      },
+      "BuyerCreateRequest": {
+        "title": "Buyer (Create)",
+        "type": "object",
+        "description": "A request to create a buyer.",
+        "x-tags": [
+          "Buyers"
+        ],
+        "properties": {
+          "external_identifier": {
+            "type": "string",
+            "description": "An external identifier that can be used by the merchant to match the buyer against their own records.",
+            "example": "user-789123",
+            "nullable": true
+          },
+          "display_name": {
+            "type": "string",
+            "description": "A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.",
+            "example": "John L.",
+            "nullable": true
+          }
+        }
+      },
+      "BuyerUpdateRequest": {
+        "title": "Buyer (Update)",
+        "type": "object",
+        "description": "A request to update a buyer.",
+        "x-tags": [
+          "Buyers"
+        ],
+        "properties": {
+          "external_identifier": {
+            "type": "string",
+            "description": "An external identifier that can be used by the merchant to match the buyer against their own records.",
+            "example": "user-789123",
+            "nullable": true
+          },
+          "display_name": {
+            "type": "string",
+            "description": "A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.",
+            "example": "John L.",
+            "nullable": true
+          }
+        }
+      },
       "Card": {
         "title": "Card",
         "type": "object",
@@ -2430,7 +2893,7 @@
         "properties": {
           "items": {
             "type": "array",
-            "description": "A list of authorizations",
+            "description": "A list of cards",
             "items": {
               "$ref": "#/components/schemas/Card"
             }
