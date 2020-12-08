@@ -211,6 +211,199 @@
         "summary": "Capture authorized transaction"
       }
     },
+    "/buyers": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "default": 100,
+            "description": "The maximum number of items to return",
+            "format": "int32",
+            "in": "query",
+            "maximum": 1000,
+            "minimum": 0,
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, simply omit this parameter.\nFor next pages, simply use the value returned by the API in\nthe `next_page` field.",
+            "format": "",
+            "in": "query",
+            "name": "marker",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of buyers",
+            "schema": {
+              "$ref": "#/definitions/Buyers"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Buyers"
+        ],
+        "description": "Returns a list of cards",
+        "operationId": "list-buyers",
+        "summary": "List buyers"
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/BuyerCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "This API returns asynchronously, returning status object with the ID of the pending `Card` resource.",
+            "schema": {
+              "$ref": "#/definitions/Card"
+            }
+          },
+          "400": {
+            "description": "Returns an error if the request is missing any required fields, or the request body is not valid JSON.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Buyers"
+        ],
+        "description": "Adds a buyer, allowing for payment methods and transactions to be associated\nto this buyer.\n",
+        "operationId": "add-buyer",
+        "summary": "Add buyer"
+      }
+    },
+    "/buyers/{buyer_id}": {
+      "parameters": [
+        {
+          "description": "The unique ID for a buyer.",
+          "format": "uuid",
+          "in": "path",
+          "name": "buyer_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Returns an error if the resource could not be found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Buyers"
+        ],
+        "description": "Deletes a buyer record. Any associated tokenized payment methods will remain\nin the system but no longer associated to the buyer.",
+        "operationId": "delete-buyer",
+        "summary": "Delete buyer"
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Returns the information about a buyer.",
+            "schema": {
+              "$ref": "#/definitions/Buyer"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "Returns an error if the authorization can not be found or has not yet been created.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Buyers"
+        ],
+        "description": "Gets the information about a buyer",
+        "operationId": "get-buyer",
+        "summary": "Get buyer"
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/BuyerUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An updated buyer record.",
+            "schema": {
+              "$ref": "#/definitions/Buyer"
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource could not be found",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "tags": [
+          "Buyers"
+        ],
+        "description": "Updates a buyer's details.\n",
+        "operationId": "update-buyer",
+        "summary": "Update buyer"
+      }
+    },
     "/card-rulesets": {
       "get": {
         "produces": [
@@ -531,7 +724,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Returns a created card resource.",
+            "description": "Returns the details about a tokenized card.",
             "schema": {
               "$ref": "#/definitions/Card"
             }
@@ -552,7 +745,7 @@
         "tags": [
           "Cards"
         ],
-        "description": "Get an authorization. ",
+        "description": "Gets the information about a card",
         "operationId": "get-card",
         "summary": "Get card"
       }
@@ -1197,6 +1390,136 @@
     }
   },
   "definitions": {
+    "Buyer": {
+      "properties": {
+        "created_at": {
+          "description": "The date and time\nwhen this buyer was created in our system.",
+          "example": "2013-07-16T19:23:00.000Z",
+          "format": "date-time",
+          "type": "string"
+        },
+        "display_name": {
+          "description": "A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.",
+          "example": "John L.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "external_identifier": {
+          "description": "An external identifier that can be used by the merchant to match the buyer against their own records.",
+          "example": "user-789123",
+          "type": "string",
+          "x-nullable": true
+        },
+        "id": {
+          "description": "The unique Gr4vy ID for this buyer",
+          "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of this resource. Is always `buyer`",
+          "enum": [
+            "buyer"
+          ],
+          "example": "buyer",
+          "type": "string"
+        },
+        "updated_at": {
+          "description": "The date and time\nwhen this buyer was last updated in our system.",
+          "example": "2013-07-16T19:23:00.000Z",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "title": "Buyer",
+      "type": "object",
+      "x-tags": [
+        "Buyers"
+      ]
+    },
+    "BuyerCreateRequest": {
+      "description": "A request to create a buyer.",
+      "properties": {
+        "display_name": {
+          "description": "A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.",
+          "example": "John L.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "external_identifier": {
+          "description": "An external identifier that can be used by the merchant to match the buyer against their own records.",
+          "example": "user-789123",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "title": "Buyer (Create)",
+      "type": "object",
+      "x-tags": [
+        "Buyers"
+      ]
+    },
+    "BuyerUpdateRequest": {
+      "description": "A request to update a buyer.",
+      "properties": {
+        "display_name": {
+          "description": "A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.",
+          "example": "John L.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "external_identifier": {
+          "description": "An external identifier that can be used by the merchant to match the buyer against their own records.",
+          "example": "user-789123",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "title": "Buyer (Update)",
+      "type": "object",
+      "x-tags": [
+        "Buyers"
+      ]
+    },
+    "Buyers": {
+      "description": "A list of buyers",
+      "properties": {
+        "items": {
+          "description": "A list of buyers",
+          "items": {
+            "$ref": "#/definitions/Buyer"
+          },
+          "type": "array"
+        },
+        "limit": {
+          "default": 100,
+          "description": "The limit set to the number of items returned. ",
+          "example": 100,
+          "format": "int32",
+          "maximum": 1000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "next_page": {
+          "description": "The marker that represents the next page of results.",
+          "example": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
+          "format": "uuid",
+          "type": "string",
+          "x-nullable": true
+        },
+        "previous_page": {
+          "description": "The marker that represents the previ page of results.",
+          "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
+          "format": "uuid",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "title": "Buyers",
+      "type": "object",
+      "x-tags": [
+        "Buyers"
+      ]
+    },
     "Card": {
       "properties": {
         "created_at": {
@@ -1648,7 +1971,7 @@
       "description": "A list of cards",
       "properties": {
         "items": {
-          "description": "A list of authorizations",
+          "description": "A list of cards",
           "items": {
             "$ref": "#/definitions/Card"
           },
@@ -2733,6 +3056,9 @@
     }
   ],
   "tags": [
+    {
+      "name": "Buyers"
+    },
     {
       "name": "Cards"
     },
