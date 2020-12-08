@@ -29,8 +29,8 @@
     "@apidevtools/json-schema-ref-parser": "^9.0.6",
     "@stoplight/spectral": "^5.7.1",
     "api-spec-converter": "^2.11.2",
-    "js-yaml": "^3.14.0",
+    "js-yaml": "^3.14.1",
     "jsonpath": "^1.0.2",
-    "redoc-cli": "^0.9.12"
+    "redoc-cli": "^0.10.2"
   }
 }
