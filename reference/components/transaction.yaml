@@ -21,7 +21,7 @@ properties:
 
   status:
     type: string
-    description: Wether this transaction was successfully created or not.
+    description: Whether this transaction was successfully created or not.
     enum:
       - created
       - failure

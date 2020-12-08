@@ -12,7 +12,7 @@ parameters:
     in: query
     name: external_identifier
     description:
-      Filters the results to just the buyer that match this external identifier.
+      Filters the results to the buyer that matches this external identifier.
 
   - schema:
       type: integer
@@ -34,8 +34,8 @@ parameters:
     description: |-
       The marker that identifies the page of results to return.
 
-      For the first page of results, simply omit this parameter.
-      For next pages, simply use the value returned by the API in
+      For the first page of results, omit this parameter.
+      For next pages, use the value returned by the API in
       the `next_page` field.
 
 responses:

@@ -17,7 +17,7 @@ properties:
     description: The internal ID for this card
   status:
     type: string
-    description: Wether this card was successfully created or not.
+    description: Whether this card was successfully created or not.
     enum:
       - created
       - error

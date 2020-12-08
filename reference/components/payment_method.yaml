@@ -1,5 +1,5 @@
 ---
-title: PaymentMethod
+title: Payment Method
 type: object
 description: A generic object to hold payment method details.
 x-tags:

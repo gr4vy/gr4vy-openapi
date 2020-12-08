@@ -64,7 +64,7 @@ properties:
   supported_currencies:
     type: array
     description:
-      A list of 3-letter ISO currency codes that this service supports
+      A list of three-letter ISO currency codes that this service supports
     items:
       type: string
     example:
@@ -74,7 +74,8 @@ properties:
 
   supported_countries:
     type: array
-    description: A list of 2-letter ISO country codes that this service supports
+    description:
+      A list of two-letter ISO country codes that this service supports
     items:
       type: string
     example:

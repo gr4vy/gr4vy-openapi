@@ -14,7 +14,7 @@ properties:
   type:
     type: string
     example: transaction.event
-    description: The type of this resource. Must always be transaction.event
+    description: "`transaction.event`"
   created_at:
     type: string
     description: |

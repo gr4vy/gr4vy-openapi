@@ -5,7 +5,7 @@ tags: ["Async APIs"]
 description: |
   Attempts to create an authorization for a payment method.
 
-  This endpoint accepts a few additional fields that allow for simultanious
+  This endpoint accepts a few additional fields that allow for simultaneous
   capturing and storage of the payment method.
 
   * `payment_method.store` - Use this field to store the payment method for

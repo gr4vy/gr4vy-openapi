@@ -14,9 +14,9 @@ required:
 properties:
   amount:
     description: |-
-      The monitary amount to create an authorization for, in the smallest
+      The monetary amount to create an authorization for, in the smallest
       currency unit for the given currency, for example `1299` cents to create
-      an autorization for `$12.99`.
+      an authorization for `$12.99`.
 
       For BitCoin, this value will be a decimal point number, for example
       `0.0039`.
@@ -45,7 +45,7 @@ properties:
               store:
                 type: boolean
                 description: |-
-                  Wether or not to also try and store the card with us so that
+                  Whether or not to also try and store the card with us so that
                   it can be used again for future use.
 
                   If the `number` of this card represents a tokenized card, then
@@ -58,8 +58,8 @@ properties:
   capture:
     type: boolean
     description:
-      "Wether a successful authorization should immediately be captured as well,
-      effectively processing the payment directly."
+      "Whether a successful authorization should immediately be captured as
+      well, effectively processing the payment directly."
     default: "false"
     example: true
 

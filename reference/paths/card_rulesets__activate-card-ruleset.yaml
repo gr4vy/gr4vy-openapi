@@ -2,7 +2,7 @@
 operationId: activate-card-ruleset
 summary: Activate card ruleset
 description: |-
-  Activates aa ruleset for card transactions, making it the one
+  Activates a ruleset for card transactions, making it the one
   ruleset used by all card transactions.
 
   Only one ruleset can be active at any time. By activating a ruleset the

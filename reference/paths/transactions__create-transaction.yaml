@@ -4,15 +4,15 @@ tags: ["Transactions"]
 operationId: authorize-new-transaction
 description: |
   Attempts to create an authorization for a payment method. In some cases it is
-  not possible to create the authorization without redirectingt the user for
+  not possible to create the authorization without redirecting the user for
   their authorization. In these cases the status is set to
   `user_authorization_required` and an `authorization_url` is returned.
 
   Additionally, this endpoint accepts a few additional fields that allow for
-  simultanious capturing and storage of the payment method.
+  simultaneous capturing and storage of the payment method.
 
   * `payment_method.store` - Use this field to store the payment method for
-  furture use. Not all payment methods support this feature.
+  future use. Not all payment methods support this feature.
   * `capture` - Use this method to also perform a capture of the transaction
   after it has been authorized.
 

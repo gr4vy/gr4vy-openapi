@@ -29,13 +29,13 @@ properties:
     type: boolean
     example: true
     description: |-
-      Wether this ruleset is currently in use. Only one ruleset can
+      Whether this ruleset is currently in use. Only one ruleset can
       be active at any time.
   valid:
     type: boolean
     example: true
     description: |-
-      Wether this ruleset is valid and complete. Only valid rulesets can be
+      Whether this ruleset is valid and complete. Only valid rulesets can be
       activated.
   root_rule_id:
     type: string

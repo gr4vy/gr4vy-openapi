@@ -9,7 +9,7 @@ x-tags:
 properties:
   type:
     type: string
-    description: The typeof this object. This is always `error`.
+    description: The type of this object. This is always `error`.
     enum:
       - error
     example: error

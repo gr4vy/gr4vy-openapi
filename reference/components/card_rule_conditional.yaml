@@ -39,7 +39,7 @@ properties:
 
   key:
     type: string
-    description: The transation field to filter by
+    description: The transaction field to filter by
     example: amount
     enum:
       - amount
@@ -61,7 +61,7 @@ properties:
   value:
     type: string
     description: |-
-      The value to compare the `key` to. This value may be casted to
+      The value to compare the `key` to. This value will be converted to
       a number for the currency amount.
     example: "200"
 

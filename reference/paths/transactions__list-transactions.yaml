@@ -23,12 +23,13 @@ parameters:
     in: query
     name: marker
     description: |-
-      The marker that identifies the offsett for the page of results to return.
+      The marker that determines the offset for the page of results to be
+      returned.
 
-      For the first page of results, simply omit this parameter. For next pages,
-      simply use the value returned by the API in the `next_page` field.
+      For the first page of results, omit this parameter. For next pages,
+      use the value returned by the API in the `next_page` field.
 
-      A marker is an opague string that is only meaningful to ur API. No
+      A marker is an opaque string that is only meaningful to our API. No
       additional value can be ascribed to this value.
 
   - schema:
@@ -37,7 +38,7 @@ parameters:
     in: query
     name: search
     description:
-      Filters the results to just the transactions that match this external
+      Filters the results to the transactions that match this external
       identifier or transaction ID.
 
   - schema:
