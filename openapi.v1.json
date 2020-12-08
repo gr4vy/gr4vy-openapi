@@ -742,6 +742,7 @@
         "tags": [
           "Payment Service Definitions"
         ],
+        "x-internal": true,
         "responses": {
           "200": {
             "description": "OK",
@@ -762,6 +763,7 @@
         "tags": [
           "Payment Service Definitions"
         ],
+        "x-internal": true,
         "requestBody": {
           "content": {
             "application/json": {
@@ -805,6 +807,7 @@
         "tags": [
           "Payment Service Definitions"
         ],
+        "x-internal": true,
         "responses": {
           "200": {
             "description": "OK",
@@ -825,6 +828,7 @@
         "tags": [
           "Payment Service Definitions"
         ],
+        "x-internal": true,
         "requestBody": {
           "content": {
             "application/json": {
@@ -854,6 +858,7 @@
         "tags": [
           "Payment Service Definitions"
         ],
+        "x-internal": true,
         "responses": {
           "204": {
             "description": "No Content"
