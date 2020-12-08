@@ -429,7 +429,7 @@
             },
             "in": "query",
             "name": "external_identifier",
-            "description": "Filters the results to just the buyers that match this external identifier."
+            "description": "Filters the results to just the buyer that match this external identifier."
           },
           {
             "schema": {
@@ -536,6 +536,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Returns an error if duplicate resource has been found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409DuplicateRecord"
                 }
               }
             }
@@ -2841,7 +2851,7 @@
         "properties": {
           "external_identifier": {
             "type": "string",
-            "description": "An external identifier that can be used by the merchant to match the buyer against their own records.",
+            "description": "An external identifier that can be used by the merchant to match the buyer against their own records. This value needs to be unique for all buyers.",
             "example": "user-789123",
             "nullable": true
           },
@@ -3632,6 +3642,45 @@
           }
         }
       },
+      "Error409DuplicateRecord": {
+        "title": "Duplicate Record Error",
+        "type": "object",
+        "description": "Duplicate Record Error (HTTP 409)",
+        "x-tags": [
+          "Errors"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`error`",
+            "enum": [
+              "error"
+            ],
+            "example": "error"
+          },
+          "code": {
+            "type": "string",
+            "description": "`duplicate_record`",
+            "example": "duplicate_record",
+            "enum": [
+              "duplicate_record"
+            ]
+          },
+          "status": {
+            "type": "integer",
+            "description": "`409`",
+            "example": 409,
+            "enum": [
+              409
+            ]
+          },
+          "message": {
+            "type": "string",
+            "description": "Further details on the field that triggered the error.",
+            "example": "A duplicate ecord exists with this external_identifier value"
+          }
+        }
+      },
       "PaymentMethod": {
         "title": "PaymentMethod",
         "type": "object",
@@ -4344,6 +4393,11 @@
             "type": "string",
             "example": "paypal-paypal-169f5226-4644-4d1e-ac36-14999e73601f",
             "description": "The ID of the payment service that was used for this transaction."
+          },
+          "buyer_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The Gr4vy ID of the buyer to associate this transaction to."
           }
         }
       },
@@ -4512,6 +4566,11 @@
           "use_test_environment": {
             "type": "boolean",
             "description": "Defines if this transaction should run in the payment provider's test environment. Defaults to false."
+          },
+          "buyer_id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "The Gr4vy ID of the buyer to associate this transaction to."
           }
         }
       },
