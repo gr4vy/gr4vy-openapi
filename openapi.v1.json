@@ -27,7 +27,8 @@
   ],
   "tags": [
     {
-      "name": "Buyers"
+      "name": "Buyers",
+      "description": "In Gr4vy, a buyer represents a merchant's customer, the shopper who's performing\na checkout and making a purchase.\n\n## Buyer features\n\nA buyer can be used by a merchant to:\n\n* Display a human readable name (`display_name`) for a buyer in the Gr4vy admin panel\n* Associate multiple tokenized payment methods with a single user\n* Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the\n  buyer's previously stored payment methods, allowing for faster checkout."
     },
     {
       "name": "Cards"
