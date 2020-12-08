@@ -278,7 +278,7 @@
         ],
         "parameters": [
           {
-            "description": "Filters the results to just the buyers that match this external identifier.",
+            "description": "Filters the results to just the buyer that match this external identifier.",
             "in": "query",
             "name": "external_identifier",
             "type": "string"
@@ -353,6 +353,12 @@
             "description": "Returns an error if no valid authentication was provided.",
             "schema": {
               "$ref": "#/definitions/Error401Unauthorized"
+            }
+          },
+          "409": {
+            "description": "Returns an error if duplicate resource has been found.",
+            "schema": {
+              "$ref": "#/definitions/Error409DuplicateRecord"
             }
           }
         },
@@ -1652,7 +1658,7 @@
           "x-nullable": true
         },
         "external_identifier": {
-          "description": "An external identifier that can be used by the merchant to match the buyer against their own records.",
+          "description": "An external identifier that can be used by the merchant to match the buyer against their own records. This value needs to be unique for all buyers.",
           "example": "user-789123",
           "type": "string",
           "x-nullable": true
@@ -2456,6 +2462,45 @@
         "Errors"
       ]
     },
+    "Error409DuplicateRecord": {
+      "description": "Duplicate Record Error (HTTP 409)",
+      "properties": {
+        "code": {
+          "description": "`duplicate_record`",
+          "enum": [
+            "duplicate_record"
+          ],
+          "example": "duplicate_record",
+          "type": "string"
+        },
+        "message": {
+          "description": "Further details on the field that triggered the error.",
+          "example": "A duplicate ecord exists with this external_identifier value",
+          "type": "string"
+        },
+        "status": {
+          "description": "`409`",
+          "enum": [
+            409
+          ],
+          "example": 409,
+          "type": "integer"
+        },
+        "type": {
+          "description": "`error`",
+          "enum": [
+            "error"
+          ],
+          "example": "error",
+          "type": "string"
+        }
+      },
+      "title": "Duplicate Record Error",
+      "type": "object",
+      "x-tags": [
+        "Errors"
+      ]
+    },
     "PaymentMethod": {
       "description": "A generic object to hold payment method details.",
       "properties": {
@@ -3099,6 +3144,11 @@
           "minimum": 0.000001,
           "type": "number"
         },
+        "buyer_id": {
+          "description": "The Gr4vy ID of the buyer to associate this transaction to.",
+          "format": "uuid",
+          "type": "string"
+        },
         "created_at": {
           "description": "The date and time when this transaction was created in our system.",
           "example": "2013-07-16T19:23:00.000Z",
@@ -3235,6 +3285,11 @@
         "amount": {
           "description": "The monitary amount to create an authorization for, in the smallest\ncurrency unit for the given currency, for example `1299` cents to create\nan autorization for `$12.99`.\n\nFor BitCoin, this value will be a decimal point number, for example\n`0.0039`.",
           "type": "number"
+        },
+        "buyer_id": {
+          "description": "The Gr4vy ID of the buyer to associate this transaction to.",
+          "format": "uuid",
+          "type": "string"
         },
         "capture": {
           "default": "false",
