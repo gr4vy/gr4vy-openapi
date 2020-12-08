@@ -14,6 +14,7 @@ properties:
       - error
     example: error
     default: error
+
   code:
     type: string
     description:
@@ -21,6 +22,7 @@ properties:
       code provides further specification within the HTTP `status` code and can
       be used by a program to define logic based on the error.
     example: incorrect_json
+
   status:
     type: integer
     description: The HTTP status code of this error
@@ -30,6 +32,7 @@ properties:
     exclusiveMaximum: true
     maximum: 600
     example: 499
+
   message:
     type: string
     description:

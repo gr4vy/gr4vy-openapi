@@ -1,7 +1,7 @@
 ---
 title: Unauthorized Error
 type: object
-description: Unauthorized error (HTTP 401)
+description: Unauthorized Error (HTTP 401)
 
 x-tags:
   - Errors

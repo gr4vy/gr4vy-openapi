@@ -176,10 +176,6 @@ paths:
     get:
       $ref: "./paths/transactions__list-transaction-events.yaml"
 
-  "/transactions/batch-capture":
-    post:
-      $ref: "./paths/transactions__batch-capture-transactions.yaml"
-
 components:
   schemas:
     Buyer:
@@ -214,8 +210,12 @@ components:
       $ref: "./components/card_ruleset_update_request.yaml"
     Error:
       $ref: "./components/error.yaml"
-    Error401:
-      $ref: "./components/error_401.yaml"
+    Error401Unauthorized:
+      $ref: "./components/error_401_unauthorized.yaml"
+    Error404PendingCreation:
+      $ref: "./components/error_404_pending_creation.yaml"
+    Error404NotFound:
+      $ref: "./components/error_404_not_found.yaml"
     PaymentMethod:
       $ref: "./components/payment_method.yaml"
     PaymentService:

@@ -47,19 +47,11 @@ responses:
     content:
       application/json:
         schema:
-          $ref: "../openapi.yaml#/components/schemas/Error401"
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
 
   "404":
-    description: Returns an error if the ruleset could not be found
+    description: Returns an error if the resource can not be found.
     content:
       application/json:
         schema:
-          $ref: "../openapi.yaml#/components/schemas/Error"
-        examples:
-          Ruleset not found:
-            value:
-              type: error
-              code: not_found
-              status: 404
-              message: The resource could not be found
-              additional_context: null
+          $ref: "../openapi.yaml#/components/schemas/Error404NotFound"
