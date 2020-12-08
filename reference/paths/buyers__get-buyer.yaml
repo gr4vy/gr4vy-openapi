@@ -19,15 +19,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: "../openapi.yaml#/components/schemas/Error"
-        examples:
-          An unauthorized request:
-            value:
-              type: error
-              code: unauthorized
-              status: 401
-              message: No valid authentication found
-              additional_context: null
+          $ref: "../openapi.yaml#/components/schemas/Error401"
 
   "404":
     description:

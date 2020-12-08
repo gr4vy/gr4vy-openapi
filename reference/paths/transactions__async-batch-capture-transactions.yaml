@@ -27,3 +27,10 @@ responses:
       application/json:
         schema:
           $ref: "../openapi.yaml#/components/schemas/Statuses"
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401"

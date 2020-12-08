@@ -2,11 +2,19 @@
 operationId: delete-card-ruleset
 summary: Delete card ruleset
 description: Deletes a specific card ruleset
-tags: ["Card Rulesets"]
+tags:
+  - Card Rulesets
 
 responses:
   "204":
     description: No Content
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401"
 
   "403":
     description: Returns an error if the ruleset could not be deleted

@@ -2,7 +2,8 @@
 operationId: add-card-ruleset
 summary: Create card ruleset
 description: Creates a new ruleset that can be used for card transactions.
-tags: ["Card Rulesets"]
+tags:
+  - Card Rulesets
 
 requestBody:
   content:
@@ -86,3 +87,10 @@ responses:
               status: 400
               message: Invalid JSON
               additional_context: null
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401"

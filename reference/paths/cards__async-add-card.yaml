@@ -37,3 +37,10 @@ responses:
               resource_type: card
               resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
               external_identifier: user-789123
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401"

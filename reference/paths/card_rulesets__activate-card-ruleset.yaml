@@ -9,7 +9,9 @@ description: |-
   existing active ruleset will be deactivated.
 
   Only valid rulesets can be activated.
-tags: ["Card Rulesets"]
+tags:
+  - Card Rulesets
+
 responses:
   "201":
     description: An activated ruleset
@@ -47,6 +49,13 @@ responses:
                   rule_type: terminal
                   payment_service_ids:
                     - card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401"
 
   "403":
     description: Returns an error if the ruleset is not valid

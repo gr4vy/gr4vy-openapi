@@ -46,3 +46,10 @@ responses:
               updated_at: "2019-08-24T14:15:22Z"
               payment_service_id: |-
                 stripe-card-169f5226-4644-4d1e-ac36-14999e73601f
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401"

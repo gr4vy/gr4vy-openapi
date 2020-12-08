@@ -26,6 +26,13 @@ responses:
         schema:
           $ref: "../openapi.yaml#/components/schemas/Buyer"
 
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401"
+
   "404":
     description: Returns an error if the resource could not be found
     content:

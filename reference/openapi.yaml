@@ -214,6 +214,8 @@ components:
       $ref: "./components/card_ruleset_update_request.yaml"
     Error:
       $ref: "./components/error.yaml"
+    Error401:
+      $ref: "./components/error_401.yaml"
     PaymentMethod:
       $ref: "./components/payment_method.yaml"
     PaymentService:

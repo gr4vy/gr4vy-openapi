@@ -56,17 +56,10 @@ responses:
               status: 400
               message: The request body was not valid JSON.
               additional_context: null
+
   "401":
     description: Returns an error if no valid authentication was provided.
     content:
       application/json:
         schema:
-          $ref: "../openapi.yaml#/components/schemas/Error"
-        examples:
-          An unauthorized request:
-            value:
-              type: error
-              code: unauthorized
-              status: 401
-              message: No valid API authentication found
-              additional_context: null
+          $ref: "../openapi.yaml#/components/schemas/Error401"
