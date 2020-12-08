@@ -3284,26 +3284,15 @@
           "description": "The monetary amount to create an authorization for, in the smallest\ncurrency unit for the given currency, for example `1299` cents to create\nan authorization for `$12.99`.\n\nFor BitCoin, this value will be a decimal point number, for example\n`0.0039`.",
           "type": "number"
         },
-        "buyer": {
-          "description": "The buyer resource to associate this transaction to. Provide the `id` to\nassociate the transaction to an existing buyer, or provide the\n`external_identifier` to automatically find-or-create a buyer. Any\n`display_name` value is always applied to the buyer resource.",
-          "properties": {
-            "display_name": {
-              "description": "A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name. This name will be applied to any new or existing buyer resource.",
-              "example": "John L.",
-              "type": "string"
-            },
-            "external_identifier": {
-              "description": "An external identifier for a buyer. If provided together with the `id`\nvalue then an existing buyer will be updated with this new value.\n\nIf provided without the buyer `id` then this will be used to\nfind-or-create a buyer with this `external_identifier` value.",
-              "example": "user-789123",
-              "type": "string"
-            },
-            "id": {
-              "description": "The unique Gr4vy ID for an existing buyer. If provided we will try\nand associate the transaction to this buyer.",
-              "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-              "type": "string"
-            }
-          },
-          "type": "object"
+        "buyer_external_identifier": {
+          "description": "The `external_identifier` of the buyer to associate this transaction to.\nThis field is ignored if the `buyer_id` is provided.",
+          "example": "user-789123",
+          "type": "string"
+        },
+        "buyer_id": {
+          "description": "The ID of the buyer to associate this transaction to. If provided, the\n`buyer_external_identifier` is ignored.",
+          "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+          "type": "string"
         },
         "capture": {
           "default": "false",
