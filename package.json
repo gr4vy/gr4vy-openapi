@@ -26,7 +26,6 @@
   },
   "homepage": "https://github.com/gr4vy/gr4vy-openapi#readme",
   "dependencies": {
-    "@apidevtools/json-schema-ref-parser": "^9.0.6",
     "@stoplight/spectral": "^5.7.1",
     "api-spec-converter": "^2.11.2",
     "js-yaml": "^3.14.1",
