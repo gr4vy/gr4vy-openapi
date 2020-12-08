@@ -105,7 +105,7 @@
         "tags": [
           "Async APIs"
         ],
-        "description": "Attempts to create an authorization for a payment method.\n\nThis endpoint accepts a few additional fields that allow for simultanious\ncapturing and storage of the payment method.\n\n* `payment_method.store` - Use this field to store the payment method for\nfuture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
+        "description": "Attempts to create an authorization for a payment method.\n\nThis endpoint accepts a few additional fields that allow for simultaneous\ncapturing and storage of the payment method.\n\n* `payment_method.store` - Use this field to store the payment method for\nfuture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
         "operationId": "async-create-transaction",
         "summary": "Create transaction"
       }
@@ -212,7 +212,7 @@
         "tags": [
           "Async APIs"
         ],
-        "description": "Authorize an existing but pending transaction.\n\nThis endpoint is used when a transaction was previously created that required\nadditional information, or a redirect, from the buyer. Use this endpoint to\npost the additional information to trigger the transaction to be properly\nauthorized.\n\nAdditionally, this endpoint will capture the transaction and store the payment\nmethod if this was previously specified when creating the transaction. We\ncurrently do not support overwritting these settings at this point.",
+        "description": "Authorize an existing but pending transaction.\n\nThis endpoint is used when a transaction was previously created that required\nadditional information, or a redirect, from the buyer. Use this endpoint to\npost the additional information to trigger the transaction to be properly\nauthorized.\n\nAdditionally, this endpoint will capture the transaction and store the payment\nmethod if this was previously specified when creating the transaction. We\ncurrently do not support overwriting these settings at this point.",
         "operationId": "async-authorize-transaction",
         "summary": "Authorize pending transaction"
       }
@@ -278,7 +278,7 @@
         ],
         "parameters": [
           {
-            "description": "Filters the results to just the buyer that match this external identifier.",
+            "description": "Filters the results to the buyer that matches this external identifier.",
             "in": "query",
             "name": "external_identifier",
             "type": "string"
@@ -294,7 +294,7 @@
             "type": "integer"
           },
           {
-            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, simply omit this parameter.\nFor next pages, simply use the value returned by the API in\nthe `next_page` field.",
+            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, omit this parameter.\nFor next pages, use the value returned by the API in\nthe `next_page` field.",
             "format": "",
             "in": "query",
             "name": "marker",
@@ -730,7 +730,7 @@
         "tags": [
           "Card Rulesets"
         ],
-        "description": "Activates aa ruleset for card transactions, making it the one\nruleset used by all card transactions.\n\nOnly one ruleset can be active at any time. By activating a ruleset the\nexisting active ruleset will be deactivated.\n\nOnly valid rulesets can be activated.",
+        "description": "Activates a ruleset for card transactions, making it the one\nruleset used by all card transactions.\n\nOnly one ruleset can be active at any time. By activating a ruleset the\nexisting active ruleset will be deactivated.\n\nOnly valid rulesets can be activated.",
         "operationId": "activate-card-ruleset",
         "summary": "Activate card ruleset"
       }
@@ -752,7 +752,7 @@
             "type": "integer"
           },
           {
-            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, simply omit this parameter.\nFor next pages, simply use the value returned by the API in\nthe `next_page` field.",
+            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, omit this parameter.\nFor next pages, use the value returned by the API in\nthe `next_page` field.",
             "format": "",
             "in": "query",
             "name": "marker",
@@ -1301,13 +1301,13 @@
             "type": "integer"
           },
           {
-            "description": "The marker that identifies the offsett for the page of results to return.\n\nFor the first page of results, simply omit this parameter. For next pages,\nsimply use the value returned by the API in the `next_page` field.\n\nA marker is an opague string that is only meaningful to ur API. No\nadditional value can be ascribed to this value.",
+            "description": "The marker that determines the offset for the page of results to be\nreturned.\n\nFor the first page of results, omit this parameter. For next pages,\nuse the value returned by the API in the `next_page` field.\n\nA marker is an opaque string that is only meaningful to our API. No\nadditional value can be ascribed to this value.",
             "in": "query",
             "name": "marker",
             "type": "string"
           },
           {
-            "description": "Filters the results to just the transactions that match this external identifier or transaction ID.",
+            "description": "Filters the results to the transactions that match this external identifier or transaction ID.",
             "in": "query",
             "name": "search",
             "type": "string"
@@ -1401,7 +1401,7 @@
         "tags": [
           "Transactions"
         ],
-        "description": "Attempts to create an authorization for a payment method. In some cases it is\nnot possible to create the authorization without redirectingt the user for\ntheir authorization. In these cases the status is set to\n`user_authorization_required` and an `authorization_url` is returned.\n\nAdditionally, this endpoint accepts a few additional fields that allow for\nsimultanious capturing and storage of the payment method.\n\n* `payment_method.store` - Use this field to store the payment method for\nfurture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
+        "description": "Attempts to create an authorization for a payment method. In some cases it is\nnot possible to create the authorization without redirecting the user for\ntheir authorization. In these cases the status is set to\n`user_authorization_required` and an `authorization_url` is returned.\n\nAdditionally, this endpoint accepts a few additional fields that allow for\nsimultaneous capturing and storage of the payment method.\n\n* `payment_method.store` - Use this field to store the payment method for\nfuture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
         "operationId": "authorize-new-transaction",
         "summary": "Create transaction"
       }
@@ -1498,7 +1498,7 @@
         "tags": [
           "Transactions"
         ],
-        "description": "Authorize an existing but pending transaction.\n\nThis endpoint is used when a transaction was previously created that required\nadditional information, or a redirect, from the buyer. Use this endpoint to\npost the additional information to trigger the transaction to be properly\nauthorized.\n\nAdditionally, this endpoint will capture the transaction and store the payment\nmethod if this was previously specified when creating the transaction. We\ncurrently do not support overwritting these settings at this point.",
+        "description": "Authorize an existing but pending transaction.\n\nThis endpoint is used when a transaction was previously created that required\nadditional information, or a redirect, from the buyer. Use this endpoint to\npost the additional information to trigger the transaction to be properly\nauthorized.\n\nAdditionally, this endpoint will capture the transaction and store the payment\nmethod if this was previously specified when creating the transaction. We\ncurrently do not support overwriting these settings at this point.",
         "operationId": "authorize-transaction",
         "summary": "Authorize pending transaction"
       }
@@ -1719,7 +1719,7 @@
           "x-nullable": true
         },
         "previous_page": {
-          "description": "The marker that represents the previ page of results.",
+          "description": "The marker that represents the previous page of results.",
           "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
           "format": "uuid",
           "type": "string",
@@ -1752,7 +1752,7 @@
           "type": "string"
         },
         "status": {
-          "description": "Wether this card was successfully created or not.",
+          "description": "Whether this card was successfully created or not.",
           "enum": [
             "created",
             "error",
@@ -1863,7 +1863,7 @@
           "type": "string"
         },
         "type": {
-          "description": "The type of this resource. Must always be transaction.event",
+          "description": "`transaction.event`",
           "example": "transaction.event",
           "type": "string"
         }
@@ -1901,7 +1901,7 @@
           "x-nullable": true
         },
         "previous_page": {
-          "description": "The marker that represents the previ page of results.",
+          "description": "The marker that represents the previous page of results.",
           "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
           "format": "uuid",
           "type": "string",
@@ -1939,7 +1939,7 @@
           "type": "string"
         },
         "key": {
-          "description": "The transation field to filter by",
+          "description": "The transaction field to filter by",
           "enum": [
             "amount",
             "currency",
@@ -1972,7 +1972,7 @@
           "type": "string"
         },
         "value": {
-          "description": "The value to compare the `key` to. This value may be casted to\na number for the currency amount.",
+          "description": "The value to compare the `key` to. This value will be converted to\na number for the currency amount.",
           "example": "200",
           "type": "string"
         }
@@ -2045,7 +2045,7 @@
       "description": "A card ruleset which holds the rules that are parsed for a card transaction.\n\nMultiple rulesets can exists at any time, but only one can be deployed.",
       "properties": {
         "active": {
-          "description": "Wether this ruleset is currently in use. Only one ruleset can\nbe active at any time.",
+          "description": "Whether this ruleset is currently in use. Only one ruleset can\nbe active at any time.",
           "example": true,
           "type": "boolean"
         },
@@ -2091,7 +2091,7 @@
           "type": "string"
         },
         "valid": {
-          "description": "Wether this ruleset is valid and complete. Only valid rulesets can be\nactivated.",
+          "description": "Whether this ruleset is valid and complete. Only valid rulesets can be\nactivated.",
           "example": true,
           "type": "boolean"
         }
@@ -2206,7 +2206,7 @@
           "x-nullable": true
         },
         "previous_page": {
-          "description": "The marker that represents the previ page of results.",
+          "description": "The marker that represents the previous page of results.",
           "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
           "format": "uuid",
           "type": "string",
@@ -2244,7 +2244,7 @@
         },
         "type": {
           "default": "error",
-          "description": "The typeof this object. This is always `error`.",
+          "description": "The type of this object. This is always `error`.",
           "enum": [
             "error"
           ],
@@ -2529,7 +2529,7 @@
           "type": "string"
         }
       },
-      "title": "PaymentMethod",
+      "title": "Payment Method",
       "type": "object",
       "x-tags": [
         "Payment Methods"
@@ -2751,7 +2751,7 @@
           "type": "array"
         },
         "supported_countries": {
-          "description": "A list of 2-letter ISO country codes that this service supports",
+          "description": "A list of two-letter ISO country codes that this service supports",
           "example": [
             "US",
             "GB",
@@ -2763,7 +2763,7 @@
           "type": "array"
         },
         "supported_currencies": {
-          "description": "A list of 3-letter ISO currency codes that this service supports",
+          "description": "A list of three-letter ISO currency codes that this service supports",
           "example": [
             "USD",
             "GBP",
@@ -2848,7 +2848,7 @@
           "type": "array"
         },
         "supported_countries": {
-          "description": "A list of 2-letter ISO country codes that this service supports",
+          "description": "A list of two-letter ISO country codes that this service supports",
           "example": [
             "US",
             "GB",
@@ -2860,7 +2860,7 @@
           "type": "array"
         },
         "supported_currencies": {
-          "description": "A list of 3-letter ISO currency codes that this service supports",
+          "description": "A list of three-letter ISO currency codes that this service supports",
           "example": [
             "USD",
             "GBP",
@@ -2945,7 +2945,7 @@
           "type": "array"
         },
         "supported_countries": {
-          "description": "A list of 2-letter ISO country codes that this service supports",
+          "description": "A list of two-letter ISO country codes that this service supports",
           "example": [
             "US",
             "GB",
@@ -2957,7 +2957,7 @@
           "type": "array"
         },
         "supported_currencies": {
-          "description": "A list of 3-letter ISO currency codes that this service supports",
+          "description": "A list of three-letter ISO currency codes that this service supports",
           "example": [
             "USD",
             "GBP",
@@ -3179,7 +3179,7 @@
           "type": "string"
         },
         "status": {
-          "description": "Wether this transaction was successfully created or not.",
+          "description": "Whether this transaction was successfully created or not.",
           "enum": [
             "created",
             "failure"
@@ -3281,7 +3281,7 @@
       "description": "A request to create a transaction",
       "properties": {
         "amount": {
-          "description": "The monitary amount to create an authorization for, in the smallest\ncurrency unit for the given currency, for example `1299` cents to create\nan autorization for `$12.99`.\n\nFor BitCoin, this value will be a decimal point number, for example\n`0.0039`.",
+          "description": "The monetary amount to create an authorization for, in the smallest\ncurrency unit for the given currency, for example `1299` cents to create\nan authorization for `$12.99`.\n\nFor BitCoin, this value will be a decimal point number, for example\n`0.0039`.",
           "type": "number"
         },
         "buyer": {
@@ -3307,7 +3307,7 @@
         },
         "capture": {
           "default": "false",
-          "description": "Wether a successful authorization should immediately be captured as well, effectively processing the payment directly.",
+          "description": "Whether a successful authorization should immediately be captured as well, effectively processing the payment directly.",
           "example": true,
           "type": "boolean"
         },
@@ -3438,7 +3438,7 @@
           "x-nullable": true
         },
         "previous_page": {
-          "description": "The marker that represents the previ page of results.",
+          "description": "The marker that represents the previous page of results.",
           "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
           "format": "uuid",
           "type": "string",
@@ -3478,7 +3478,7 @@
           "x-nullable": true
         },
         "previous_page": {
-          "description": "The marker that represents the previ page of results.",
+          "description": "The marker that represents the previous page of results.",
           "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
           "format": "uuid",
           "type": "string",
