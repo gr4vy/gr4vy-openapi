@@ -4373,6 +4373,9 @@
           "payment_method": {
             "$ref": "#/components/schemas/PaymentMethod"
           },
+          "buyer": {
+            "$ref": "#/components/schemas/Buyer"
+          },
           "created_at": {
             "type": "string",
             "description": "The date and time when this transaction was created in our system.",
@@ -4394,11 +4397,6 @@
             "type": "string",
             "example": "paypal-paypal-169f5226-4644-4d1e-ac36-14999e73601f",
             "description": "The ID of the payment service that was used for this transaction."
-          },
-          "buyer_id": {
-            "type": "string",
-            "format": "uuid",
-            "description": "The Gr4vy ID of the buyer to associate this transaction to."
           }
         }
       },
@@ -4568,10 +4566,26 @@
             "type": "boolean",
             "description": "Defines if this transaction should run in the payment provider's test environment. Defaults to false."
           },
-          "buyer_id": {
-            "type": "string",
-            "format": "uuid",
-            "description": "The Gr4vy ID of the buyer to associate this transaction to."
+          "buyer": {
+            "type": "object",
+            "description": "The buyer resource to associate this transaction to. Provide the `id` to\nassociate the transaction to an existing buyer, or provide the\n`external_identifier` to automatically find-or-create a buyer. Any\n`display_name` value is always applied to the buyer resource.",
+            "properties": {
+              "id": {
+                "type": "string",
+                "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+                "description": "The unique Gr4vy ID for an existing buyer. If provided we will try\nand associate the transaction to this buyer."
+              },
+              "external_identifier": {
+                "type": "string",
+                "description": "An external identifier for a buyer. If provided together with the `id`\nvalue then an existing buyer will be updated with this new value.\n\nIf provided without the buyer `id` then this will be used to\nfind-or-create a buyer with this `external_identifier` value.",
+                "example": "user-789123"
+              },
+              "display_name": {
+                "type": "string",
+                "description": "A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name. This name will be applied to any new or existing buyer resource.",
+                "example": "John L."
+              }
+            }
           }
         }
       },
