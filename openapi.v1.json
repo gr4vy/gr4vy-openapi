@@ -424,6 +424,15 @@
         "parameters": [
           {
             "schema": {
+              "type": "string",
+              "example": "be828248-56de-481e-a580-44b6e1d4df81"
+            },
+            "in": "query",
+            "name": "external_identifier",
+            "description": "Filters the results to just the buyers that match this external identifier."
+          },
+          {
+            "schema": {
               "type": "integer",
               "default": 100,
               "example": 1000,
@@ -499,7 +508,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Card"
+                  "$ref": "#/components/schemas/Buyer"
                 }
               }
             }
