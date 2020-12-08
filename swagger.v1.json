@@ -278,6 +278,12 @@
         ],
         "parameters": [
           {
+            "description": "Filters the results to just the buyers that match this external identifier.",
+            "in": "query",
+            "name": "external_identifier",
+            "type": "string"
+          },
+          {
             "default": 100,
             "description": "The maximum number of items to return",
             "format": "int32",
@@ -336,7 +342,7 @@
           "201": {
             "description": "This API returns asynchronously, returning status object with the ID of the pending `Card` resource.",
             "schema": {
-              "$ref": "#/definitions/Card"
+              "$ref": "#/definitions/Buyer"
             }
           },
           "400": {
