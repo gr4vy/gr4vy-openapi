@@ -1,9 +1,0 @@
----
-schema:
-  type: string
-  format: uuid
-  example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
-name: card_id
-in: path
-required: true
-description: The unique ID for a card.

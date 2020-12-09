@@ -11,6 +11,7 @@ description: |-
   Only valid rulesets can be activated.
 tags:
   - Card Rulesets
+x-internal: true
 
 responses:
   "201":

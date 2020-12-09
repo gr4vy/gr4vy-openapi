@@ -4,7 +4,8 @@ operationId: add-payment-service
 description:
   Adds a new payment service by providing a custom name and a value for each of
   the required fields.
-tags: ["Payment Services"]
+tags:
+  - Payment Services
 
 requestBody:
   content:
@@ -22,19 +23,17 @@ responses:
         examples:
           Stripe:
             value:
-              id: stripe-card-5a303fc4-817b-4073-9b41-a26eff29080a
+              id: stripe-card-faaad066-30b4-4997-a438-242b0752d7e1
               type: payment-service
-              display_name: Stripe (Global)
-              status: created
-              service_id: stripe-card
-              payment_method_id: card
-              use_test_environment: false
+              payment_service_definition_id: stripe
+              method: card
+              display_name: Stripe
+              status: pending
               accepted_currencies:
-                - GBP
                 - EUR
               accepted_countries:
-                - GB
                 - DE
+              use_test_environment: true
 
   "400":
     description:

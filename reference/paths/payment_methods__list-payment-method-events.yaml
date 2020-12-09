@@ -1,11 +1,9 @@
 ---
-operationId: list-payment-services
-summary: List payment services
-description:
-  Lists the currently configured and activated payment services for a for a
-  cluster.
+operationId: list-payment-method-event
+summary: List payment method events
+description: Returns a list of events for a given payment method.
 tags:
-  - Payment Services
+  - Payment Methods
 
 parameters:
   - schema:
@@ -34,11 +32,11 @@ parameters:
 
 responses:
   "200":
-    description: OK
+    description: Returns a list of payment method events.
     content:
       application/json:
         schema:
-          $ref: "../openapi.yaml#/components/schemas/PaymentServices"
+          $ref: "../openapi.yaml#/components/schemas/PaymentMethodEvents"
 
   "401":
     description: Returns an error if no valid authentication was provided.
@@ -46,3 +44,10 @@ responses:
       application/json:
         schema:
           $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
+
+  "404":
+    description: Returns an error if the resource can not be found.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error404NotFound"

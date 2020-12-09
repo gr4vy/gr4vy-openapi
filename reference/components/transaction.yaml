@@ -38,7 +38,7 @@ properties:
       - created
       - captured
       - authorized
-      - user_authorization_required
+      - buyer_authorization_required
       - pending
 
   amount:
@@ -54,10 +54,9 @@ properties:
     description: The currency code for this transaction.
 
   payment_method:
-    $ref: "../openapi.yaml#/components/schemas/PaymentMethod"
-
-  buyer:
-    $ref: "../openapi.yaml#/components/schemas/Buyer"
+    oneOf:
+      - $ref: "../openapi.yaml#/components/schemas/Card"
+      - $ref: "../openapi.yaml#/components/schemas/PayPal"
 
   created_at:
     type: string
@@ -69,8 +68,8 @@ properties:
   external_identifier:
     type: string
     description:
-      An external identifier that can be used by the merchant to match the
-      authorization against their own records.
+      An external identifier that can be used to match the transaction against
+      your own records.
     example: user-789123
     nullable: true
 
@@ -78,6 +77,7 @@ properties:
     type: string
     format: date-time
     description: "Defines when the transaction was last updated "
+
   payment_service_id:
     type: string
     example: paypal-paypal-169f5226-4644-4d1e-ac36-14999e73601f

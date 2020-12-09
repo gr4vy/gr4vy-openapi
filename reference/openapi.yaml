@@ -17,29 +17,29 @@ info:
     Our API is still very much a work in product and subject to change.
 
 servers:
-  - url: "https://{merchant_id}.api.gr4vy.com"
+  - url: "https://{subdomain}.api.gr4vy.com"
     variables:
-      merchant_id:
-        default: merchant_id
-        description: The subdomain for the customer's.
+      subdomain:
+        default: example
+        description: The subdomain for your cluster.
 
 tags:
   - name: Buyers
     description: |-
-      In Gr4vy, a buyer represents a merchant's customer, the shopper who's performing
+      In Gr4vy, a buyer represents your customer, the shopper who's performing
       a checkout and making a purchase.
 
-      ## Buyer features
+      ## Features
 
-      A buyer can be used by a merchant to:
+      A buyer can be used by you to:
 
       * Display a human readable name (`display_name`) for a buyer in the Gr4vy admin panel
       * Associate multiple tokenized payment methods with a single user
       * Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the
         buyer's previously stored payment methods, allowing for faster checkout.
 
-  - name: Cards
   - name: Card Rulesets
+  - name: Payment Methods
   - name: Payment Services
   - name: Payment Service Definitions
     x-internal: true
@@ -47,9 +47,9 @@ tags:
   - name: Async APIs
 
 paths:
-  "/async/cards":
+  "/async/payment-methods":
     post:
-      $ref: "./paths/cards__async-add-card.yaml"
+      $ref: "./paths/payment_methods__async-register-payment-method.yaml"
 
   "/async/transactions":
     post:
@@ -87,23 +87,37 @@ paths:
     delete:
       $ref: "./paths/buyers__delete-buyer.yaml"
 
-  "/cards":
+  "/buyers/{buyer_id}/payment-methods":
+    parameters:
+      - $ref: "./parameters/buyer_id.yaml"
     get:
-      $ref: "./paths/cards__list-cards.yaml"
+      $ref: "./paths/buyers__list-buyer-payment-methods.yaml"
+
+  "/payment-methods":
+    get:
+      $ref: "./paths/payment_methods__list-payment-methods.yaml"
     post:
-      $ref: "./paths/cards__add-card.yaml"
+      $ref: "./paths/payment_methods__register-payment-method.yaml"
 
-  "/cards/{card_id}":
+  "/payment-methods/{payment_method_id}":
     parameters:
-      - $ref: "./parameters/card_id.yaml"
+      - $ref: "./parameters/payment_method_id.yaml"
     get:
-      $ref: "./paths/cards__get-card.yaml"
+      $ref: "./paths/payment_methods__get-payment-method.yaml"
+    delete:
+      $ref: "./paths/payment_methods__delete-payment-method.yaml"
 
-  "/cards/{card_id}/events":
+  "/payment-methods/{payment_method_id}/authorize":
     parameters:
-      - $ref: "./parameters/card_id.yaml"
+      - $ref: "./parameters/payment_method_id.yaml"
+    post:
+      $ref: "./paths/payment_methods__authorize-payment-method.yaml"
+
+  "/payment-methods/{payment_method_id}/events":
+    parameters:
+      - $ref: "./parameters/payment_method_id.yaml"
     get:
-      $ref: "./paths/cards__list-card-events.yaml"
+      $ref: "./paths/payment_methods__list-payment-method-events.yaml"
 
   "/payment-services":
     get:
@@ -201,14 +215,10 @@ components:
       $ref: "./components/buyer_update_request.yaml"
     Card:
       $ref: "./components/card.yaml"
-    CardEvent:
-      $ref: "./components/card_event.yaml"
-    CardEvents:
-      $ref: "./components/card_events.yaml"
-    Cards:
-      $ref: "./components/cards.yaml"
-    CardCreateRequest:
-      $ref: "./components/card_create_request.yaml"
+    CardDetails:
+      $ref: "./components/card_details.yaml"
+    CardRegisterRequest:
+      $ref: "./components/card_register_request.yaml"
     CardRuleset:
       $ref: "./components/card_ruleset.yaml"
     CardRulesets:
@@ -237,6 +247,12 @@ components:
       $ref: "./components/error_409_duplicate_record.yaml"
     PaymentMethod:
       $ref: "./components/payment_method.yaml"
+    PaymentMethods:
+      $ref: "./components/payment_methods.yaml"
+    PaymentMethodEvent:
+      $ref: "./components/payment_method_event.yaml"
+    PaymentMethodEvents:
+      $ref: "./components/payment_method_events.yaml"
     PaymentService:
       $ref: "./components/payment_service.yaml"
     PaymentServices:
@@ -253,6 +269,12 @@ components:
       $ref: "./components/payment_service_definition_create_request.yaml"
     PaymentServiceDefinitionUpdateRequest:
       $ref: "./components/payment_service_definition_update_request.yaml"
+    PayPal:
+      $ref: "./components/paypal.yaml"
+    PayPalDetails:
+      $ref: "./components/paypal_details.yaml"
+    PayPalRegisterRequest:
+      $ref: "./components/paypal_register_request.yaml"
     Status:
       $ref: "./components/status.yaml"
     Statuses:

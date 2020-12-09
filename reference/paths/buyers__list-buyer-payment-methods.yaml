@@ -1,11 +1,10 @@
 ---
-operationId: list-payment-services
-summary: List payment services
-description:
-  Lists the currently configured and activated payment services for a for a
-  cluster.
+operationId: list-buyer-payment-methods
+summary: List registered payment methods for a buyer
+description: |-
+  Returns a list of registered payment methods for a buyer
 tags:
-  - Payment Services
+  - Buyers
 
 parameters:
   - schema:
@@ -38,7 +37,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: "../openapi.yaml#/components/schemas/PaymentServices"
+          $ref: "../openapi.yaml#/components/schemas/PaymentMethods"
 
   "401":
     description: Returns an error if no valid authentication was provided.

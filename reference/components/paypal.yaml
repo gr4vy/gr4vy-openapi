@@ -1,0 +1,34 @@
+---
+title: PayPal Account
+description: A registered PayPal account
+type: object
+x-tags:
+  - Payment Methods
+
+allOf:
+  - properties:
+      method:
+        type: string
+        description: "`paypal`"
+        example: paypal
+        enum:
+          - paypal
+
+      payment_method_status:
+        type: string
+        description: |-
+          The state of the account tokenization. After the first call this will
+          be set to `buyer_authorization_required` and the response will include
+          an `authorization_url`. The buyer needs to be redirected to this URL
+          to authorize the future payments. The token is subsequently posted to
+          the [authorize](/#operation/authorize-payment-method) endpoint
+          after which the `status` is updated to `registered`.
+        example: buyer_authorization_required
+        enum:
+          - registered
+          - buyer_authorization_required
+
+      details:
+        $ref: |-
+          ../openapi.yaml#/components/schemas/PayPalDetails
+  - $ref: "../openapi.yaml#/components/schemas/PaymentMethod"

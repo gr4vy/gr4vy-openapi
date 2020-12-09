@@ -26,10 +26,13 @@ properties:
     description: The display name of this service
     example: Stripe
 
-  payment_method_id:
+  method:
     type: string
     description: The ID of the payment method that this services handles
     example: card
+    enum:
+      - card
+      - paypal
 
   required_fields:
     type: array

@@ -3,6 +3,7 @@ operationId: get-card-ruleset
 summary: Get card ruleset
 description: Returns a rulesets that can be used for card transactions.
 tags: ["Card Rulesets"]
+x-internal: true
 
 responses:
   "200":

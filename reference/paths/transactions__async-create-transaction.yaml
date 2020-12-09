@@ -23,19 +23,39 @@ requestBody:
           value:
             amount: 1299
             currency: USD
-            external_identifier: user-789123
-            payment_method_type: card
             payment_method:
+              method: card
               number: "4111111111111111"
               expiration_date: 11/25
               security_code: "123"
-        Authorized and capture a PayPal payment:
+        Authorized and tokenize a card:
           value:
             amount: 1299
             currency: USD
-            payment_method_type: paypal
+            store: true
+            payment_method:
+              method: card
+              number: "4111111111111111"
+              expiration_date: 11/25
+              security_code: "123"
+        "Authorize, capture, and tokenize a card":
+          value:
+            amount: 1299
+            currency: USD
             capture: true
-            external_identifier: user-789123
+            store: true
+            payment_method:
+              method: card
+              number: "4111111111111111"
+              expiration_date: 11/25
+              security_code: "123"
+        Authorize and capture a PayPal transaction:
+          value:
+            amount: 1299
+            currency: USD
+            capture: true
+            payment_method:
+              method: paypal
 
 responses:
   "202":

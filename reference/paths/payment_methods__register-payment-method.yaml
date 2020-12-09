@@ -1,31 +1,29 @@
 ---
-operationId: add-card
-summary: Register card
-description: |
-  Registers a card with all available processors.
-tags: ["Cards"]
+operationId: register-payment-method
+summary: Register a new payment method
+description: Registers and tokenizes a new payment method
+tags:
+  - Payment Methods
+
 requestBody:
   content:
     application/json:
       schema:
-        $ref: "../openapi.yaml#/components/schemas/CardCreateRequest"
-      examples:
-        Tokenize a card:
-          value:
-            number: "4111111111111111"
-            expiration_date: 11/25
-            security_code: "123"
-            external_identifier: user-789123
+        oneOf:
+          - $ref: |-
+              ../openapi.yaml#/components/schemas/CardRegisterRequest
+          - $ref: |-
+              ../openapi.yaml#/components/schemas/PayPalRegisterRequest
 
 responses:
   "201":
-    description:
-      "This API returns asynchronously, returning status object with the ID of
-      the pending `Card` resource."
+    description: Created
     content:
       application/json:
         schema:
-          $ref: "../openapi.yaml#/components/schemas/Card"
+          oneOf:
+            - $ref: "../openapi.yaml#/components/schemas/Card"
+            - $ref: "../openapi.yaml#/components/schemas/PayPal"
 
   "400":
     description:

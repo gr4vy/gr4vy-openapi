@@ -33,4 +33,4 @@ properties:
     description: |-
       Describes the fields that are missing or incorrectly formatted in the API
       request.
-    example: "Missing 'display_name' field"
+    example: "Missing '****' field"

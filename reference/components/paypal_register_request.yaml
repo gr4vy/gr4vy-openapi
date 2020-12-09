@@ -1,0 +1,26 @@
+---
+title: PayPal Account (Register)
+type: object
+description: A request to tokenize a PayPal account.
+
+x-tags:
+  - Request Bodies
+
+required:
+  - method
+
+properties:
+  method:
+    type: string
+    description: "`paypal`"
+    example: paypal
+    enum:
+      - paypal
+
+  external_identifier:
+    type: string
+    description:
+      An external identifier that can be used to match the account against your
+      own records.
+    example: user-789123
+    nullable: true

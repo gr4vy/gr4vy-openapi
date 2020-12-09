@@ -20,8 +20,8 @@ properties:
   external_identifier:
     type: string
     description:
-      An external identifier that can be used by the merchant to match the buyer
-      against their own records.
+      An external identifier that can be used to match the buyer against your
+      own records.
     example: user-789123
     nullable: true
 

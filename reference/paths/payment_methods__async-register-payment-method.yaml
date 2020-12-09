@@ -1,11 +1,7 @@
 ---
-operationId: async-add-card
-summary: Register card
-description: |-
-  Registers a card with all available processors.
-
-  This API returns asynchronously, returning a pending `Status` object with the
-  ID of the pending card resource.
+operationId: async-register-payment-method
+summary: Register a new payment method
+description: Registers and tokenizes a new payment method
 tags:
   - Async APIs
 
@@ -13,14 +9,11 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: "../openapi.yaml#/components/schemas/CardCreateRequest"
-      examples:
-        Register a card:
-          value:
-            number: "4111111111111111"
-            expiration_date: 11/25
-            security_code: "123"
-            external_identifier: user-789123
+        oneOf:
+          - $ref: |-
+              ../openapi.yaml#/components/schemas/CardRegisterRequest
+          - $ref: |-
+              ../openapi.yaml#/components/schemas/PayPalRegisterRequest
 
 responses:
   "202":
@@ -30,20 +23,26 @@ responses:
         schema:
           $ref: "../openapi.yaml#/components/schemas/Status"
         examples:
-          Card status:
+          A status:
             value:
               type: status
               status: pending
-              resource_type: card
+              resource_type: payment-method
               resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
               external_identifier: user-789123
 
   "400":
-    description: Returns an error if the request was badly formatted.
+    description:
+      Returns an error if the request was badly formatted or missing required
+      fields.
     content:
       application/json:
         schema:
-          $ref: "../openapi.yaml#/components/schemas/Error400IncorrectJson"
+          oneOf:
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400BadRequest
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400IncorrectJson
 
   "401":
     description: Returns an error if no valid authentication was provided.

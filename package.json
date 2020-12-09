@@ -8,7 +8,7 @@
     "prelint": "yarn build:openapi",
     "lint": "yarn lint:yaml; yarn lint:spelling; yarn lint:sensitivity; yarn lint:spectral",
     "lint:spelling": "json-schema-spell-checker -a -n -d dictionaries/en_US -f 'description,title,summary' build/openapi.v1.json",
-    "lint:spectral": "spectral lint build/openapi.v1.json",
+    "lint:spectral": "spectral lint reference/openapi.yaml",
     "lint:sensitivity": "json-schema-sensitivity-checker -f 'description,title,summary' build/openapi.v1.json -c .alexrc.json",
     "lint:yaml": "yamllint reference",
     "start": "redoc-cli serve reference/openapi.yaml -w --options.theme.colors.primary.main=teal --options.expandResponses=all --options.hideDownloadButton=true --options.hideSingleRequestSampleTab=true  --options.expandSingleSchemaField=true --options.jsonSampleExpandLevel=4 --options.noAutoAuth=true --options.pathInMiddlePanel=true --options.requiredPropsFirst=true --options.sortPropsAlphabetically=true",

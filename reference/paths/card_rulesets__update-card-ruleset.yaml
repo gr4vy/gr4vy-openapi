@@ -3,6 +3,7 @@ operationId: update-card-ruleset
 summary: Update card ruleset
 description: Updates a ruleset that can be used for card transactions.
 tags: ["Card Rulesets"]
+x-internal: true
 
 requestBody:
   content:

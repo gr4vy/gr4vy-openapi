@@ -27,5 +27,5 @@ properties:
     type: string
     example: user-789123
     description:
-      An external identifier that can be used by the merchant to match the
-      authorization against their own records.
+      An external identifier that can be used to match the transaction against
+      your own records.

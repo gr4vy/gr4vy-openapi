@@ -4,6 +4,7 @@ summary: Create card ruleset
 description: Creates a new ruleset that can be used for card transactions.
 tags:
   - Card Rulesets
+x-internal: true
 
 requestBody:
   content:

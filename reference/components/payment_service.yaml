@@ -25,10 +25,13 @@ properties:
       The ID of the payment service used to create this service instance.
     example: stripe
 
-  payment_method_id:
+  method:
     type: string
     description: Defines the ID of the payment method that this service handles.
     example: card
+    enum:
+      - card
+      - paypal
 
   display_name:
     type: string

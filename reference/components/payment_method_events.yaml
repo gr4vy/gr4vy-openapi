@@ -1,17 +1,18 @@
 ---
-title: Card Events
-description: A list of events for a card
+title: Payment method events
+description: A list of events for a payment method
 type: object
 
 x-tags:
-  - Cards
+  - Payment Methods
 
 properties:
   items:
     type: array
-    description: A list of card events
+    description: A list of payment method events
     items:
-      $ref: "../openapi.yaml#/components/schemas/CardEvent"
+      $ref: "../openapi.yaml#/components/schemas/PaymentMethodEvent"
+
   limit:
     type: integer
     description: "The limit set to the number of items returned. "
@@ -20,12 +21,14 @@ properties:
     maximum: 1000
     example: 100
     default: 100
+
   next_page:
     type: string
     description: The marker that represents the next page of results.
     format: uuid
     example: 9f944c64-eaf0-4219-90fd-f7e56c7cd214
     nullable: true
+
   previous_page:
     type: string
     description: The marker that represents the previous page of results.

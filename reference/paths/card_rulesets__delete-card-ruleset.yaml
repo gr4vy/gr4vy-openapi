@@ -4,6 +4,7 @@ summary: Delete card ruleset
 description: Deletes a specific card ruleset
 tags:
   - Card Rulesets
+x-internal: true
 
 responses:
   "204":
