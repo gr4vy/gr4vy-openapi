@@ -8,6 +8,7 @@ x-tags:
 
 required:
   - method
+  - redirect_url
 
 properties:
   method:
@@ -16,6 +17,15 @@ properties:
     example: paypal
     enum:
       - paypal
+
+  redirect_url:
+    type: string
+    format: uri
+    description: |-
+      The redirect URL to redirect a buyer to after they have authorized their
+      PayPal transaction. This needs to match the URL registered for your PayPal
+      application.
+    example: https://example.com/callback
 
   external_identifier:
     type: string

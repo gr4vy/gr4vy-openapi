@@ -59,6 +59,7 @@ requestBody:
             capture: true
             payment_method:
               method: paypal
+              redirect_url: https://example.com/callback
 
 responses:
   "201":
