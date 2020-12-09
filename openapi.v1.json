@@ -748,76 +748,6 @@
         }
       }
     },
-    "/buyers/{buyer_id}/payment-methods": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string",
-            "format": "uuid",
-            "example": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
-          },
-          "name": "buyer_id",
-          "in": "path",
-          "required": true,
-          "description": "The unique ID for a buyer."
-        }
-      ],
-      "get": {
-        "operationId": "list-buyer-payment-methods",
-        "summary": "List registered payment methods for a buyer",
-        "description": "Returns a list of registered payment methods for a buyer",
-        "tags": [
-          "Buyers"
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "integer",
-              "default": 100,
-              "example": 1000,
-              "minimum": 0,
-              "maximum": 1000,
-              "format": "int32"
-            },
-            "in": "query",
-            "name": "limit",
-            "description": "The maximum number of items to return"
-          },
-          {
-            "schema": {
-              "type": "string",
-              "format": "",
-              "example": "1593343179"
-            },
-            "in": "query",
-            "name": "marker",
-            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, omit this parameter.\nFor next pages, use the value returned by the API in\nthe `next_page` field."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PaymentMethods"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/payment-methods": {
       "get": {
         "operationId": "list-payment-methods",
@@ -849,6 +779,24 @@
             "in": "query",
             "name": "marker",
             "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, omit this parameter.\nFor next pages, use the value returned by the API in\nthe `next_page` field."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "be828248-56de-481e-a580-44b6e1d4df81"
+            },
+            "in": "query",
+            "name": "buyer_id",
+            "description": "Filters the results to payment methods for a `buyer` that matches this\n`id`."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "be828248-56de-481e-a580-44b6e1d4df81"
+            },
+            "in": "query",
+            "name": "buyer_external_identifier",
+            "description": "Filters the results to payment methods for a `buyer` that matches this\n`external_identifier`."
           }
         ],
         "responses": {
