@@ -486,62 +486,6 @@
         "summary": "Update buyer"
       }
     },
-    "/buyers/{buyer_id}/payment-methods": {
-      "parameters": [
-        {
-          "description": "The unique ID for a buyer.",
-          "format": "uuid",
-          "in": "path",
-          "name": "buyer_id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "default": 100,
-            "description": "The maximum number of items to return",
-            "format": "int32",
-            "in": "query",
-            "maximum": 1000,
-            "minimum": 0,
-            "name": "limit",
-            "type": "integer"
-          },
-          {
-            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, omit this parameter.\nFor next pages, use the value returned by the API in\nthe `next_page` field.",
-            "format": "",
-            "in": "query",
-            "name": "marker",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PaymentMethods"
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "schema": {
-              "$ref": "#/definitions/Error401Unauthorized"
-            }
-          }
-        },
-        "tags": [
-          "Buyers"
-        ],
-        "description": "Returns a list of registered payment methods for a buyer",
-        "operationId": "list-buyer-payment-methods",
-        "summary": "List registered payment methods for a buyer"
-      }
-    },
     "/card-rulesets": {
       "get": {
         "produces": [
@@ -832,6 +776,18 @@
             "format": "",
             "in": "query",
             "name": "marker",
+            "type": "string"
+          },
+          {
+            "description": "Filters the results to payment methods for a `buyer` that matches this\n`id`.",
+            "in": "query",
+            "name": "buyer_id",
+            "type": "string"
+          },
+          {
+            "description": "Filters the results to payment methods for a `buyer` that matches this\n`external_identifier`.",
+            "in": "query",
+            "name": "buyer_external_identifier",
             "type": "string"
           }
         ],
