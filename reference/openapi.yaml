@@ -87,12 +87,6 @@ paths:
     delete:
       $ref: "./paths/buyers__delete-buyer.yaml"
 
-  "/buyers/{buyer_id}/payment-methods":
-    parameters:
-      - $ref: "./parameters/buyer_id.yaml"
-    get:
-      $ref: "./paths/buyers__list-buyer-payment-methods.yaml"
-
   "/payment-methods":
     get:
       $ref: "./paths/payment_methods__list-payment-methods.yaml"
