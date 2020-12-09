@@ -2695,10 +2695,17 @@
           ],
           "example": "paypal",
           "type": "string"
+        },
+        "redirect_url": {
+          "description": "The redirect URL to redirect a buyer to after they have authorized their\nPayPal transaction. This needs to match the URL registered for your PayPal\napplication.",
+          "example": "https://example.com/callback",
+          "format": "uri",
+          "type": "string"
         }
       },
       "required": [
-        "method"
+        "method",
+        "redirect_url"
       ],
       "title": "PayPal Account (Register)",
       "type": "object",
