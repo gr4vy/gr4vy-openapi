@@ -16,11 +16,11 @@
   },
   "servers": [
     {
-      "url": "https://{merchant_id}.api.gr4vy.com",
+      "url": "https://{subdomain}.api.gr4vy.com",
       "variables": {
-        "merchant_id": {
-          "default": "merchant_id",
-          "description": "The subdomain for the customer's."
+        "subdomain": {
+          "default": "example",
+          "description": "The subdomain for your cluster."
         }
       }
     }
@@ -28,13 +28,13 @@
   "tags": [
     {
       "name": "Buyers",
-      "description": "In Gr4vy, a buyer represents a merchant's customer, the shopper who's performing\na checkout and making a purchase.\n\n## Buyer features\n\nA buyer can be used by a merchant to:\n\n* Display a human readable name (`display_name`) for a buyer in the Gr4vy admin panel\n* Associate multiple tokenized payment methods with a single user\n* Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the\n  buyer's previously stored payment methods, allowing for faster checkout."
-    },
-    {
-      "name": "Cards"
+      "description": "In Gr4vy, a buyer represents your customer, the shopper who's performing\na checkout and making a purchase.\n\n## Features\n\nA buyer can be used by you to:\n\n* Display a human readable name (`display_name`) for a buyer in the Gr4vy admin panel\n* Associate multiple tokenized payment methods with a single user\n* Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the\n  buyer's previously stored payment methods, allowing for faster checkout."
     },
     {
       "name": "Card Rulesets"
+    },
+    {
+      "name": "Payment Methods"
     },
     {
       "name": "Payment Services"
@@ -51,11 +51,11 @@
     }
   ],
   "paths": {
-    "/async/cards": {
+    "/async/payment-methods": {
       "post": {
-        "operationId": "async-add-card",
-        "summary": "Register card",
-        "description": "Registers a card with all available processors.\n\nThis API returns asynchronously, returning a pending `Status` object with the\nID of the pending card resource.",
+        "operationId": "async-register-payment-method",
+        "summary": "Register a new payment method",
+        "description": "Registers and tokenizes a new payment method",
         "tags": [
           "Async APIs"
         ],
@@ -63,17 +63,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CardCreateRequest"
-              },
-              "examples": {
-                "Register a card": {
-                  "value": {
-                    "number": "4111111111111111",
-                    "expiration_date": "11/25",
-                    "security_code": "123",
-                    "external_identifier": "user-789123"
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/CardRegisterRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/PayPalRegisterRequest"
                   }
-                }
+                ]
               }
             }
           }
@@ -87,11 +84,11 @@
                   "$ref": "#/components/schemas/Status"
                 },
                 "examples": {
-                  "Card status": {
+                  "A status": {
                     "value": {
                       "type": "status",
                       "status": "pending",
-                      "resource_type": "card",
+                      "resource_type": "payment-method",
                       "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
                       "external_identifier": "user-789123"
                     }
@@ -101,11 +98,18 @@
             }
           },
           "400": {
-            "description": "Returns an error if the request was badly formatted.",
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error400IncorrectJson"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error400BadRequest"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error400IncorrectJson"
+                    }
+                  ]
                 }
               }
             }
@@ -142,22 +146,49 @@
                   "value": {
                     "amount": 1299,
                     "currency": "USD",
-                    "external_identifier": "user-789123",
-                    "payment_method_type": "card",
                     "payment_method": {
+                      "method": "card",
                       "number": "4111111111111111",
                       "expiration_date": "11/25",
                       "security_code": "123"
                     }
                   }
                 },
-                "Authorized and capture a PayPal payment": {
+                "Authorized and tokenize a card": {
                   "value": {
                     "amount": 1299,
                     "currency": "USD",
-                    "payment_method_type": "paypal",
+                    "store": true,
+                    "payment_method": {
+                      "method": "card",
+                      "number": "4111111111111111",
+                      "expiration_date": "11/25",
+                      "security_code": "123"
+                    }
+                  }
+                },
+                "Authorize, capture, and tokenize a card": {
+                  "value": {
+                    "amount": 1299,
+                    "currency": "USD",
                     "capture": true,
-                    "external_identifier": "user-789123"
+                    "store": true,
+                    "payment_method": {
+                      "method": "card",
+                      "number": "4111111111111111",
+                      "expiration_date": "11/25",
+                      "security_code": "123"
+                    }
+                  }
+                },
+                "Authorize and capture a PayPal transaction": {
+                  "value": {
+                    "amount": 1299,
+                    "currency": "USD",
+                    "capture": true,
+                    "payment_method": {
+                      "method": "paypal"
+                    }
                   }
                 }
               }
@@ -716,13 +747,26 @@
         }
       }
     },
-    "/cards": {
+    "/buyers/{buyer_id}/payment-methods": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
+          },
+          "name": "buyer_id",
+          "in": "path",
+          "required": true,
+          "description": "The unique ID for a buyer."
+        }
+      ],
       "get": {
-        "operationId": "list-cards",
-        "summary": "List cards",
-        "description": "Returns a list of cards",
+        "operationId": "list-buyer-payment-methods",
+        "summary": "List registered payment methods for a buyer",
+        "description": "Returns a list of registered payment methods for a buyer",
         "tags": [
-          "Cards"
+          "Buyers"
         ],
         "parameters": [
           {
@@ -751,11 +795,68 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns a list of cards",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Cards"
+                  "$ref": "#/components/schemas/PaymentMethods"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-methods": {
+      "get": {
+        "operationId": "list-payment-methods",
+        "summary": "List registered payment methods",
+        "description": "Returns a list of registered payment methods",
+        "tags": [
+          "Payment Methods"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 100,
+              "example": 1000,
+              "minimum": 0,
+              "maximum": 1000,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "The maximum number of items to return"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "1593343179"
+            },
+            "in": "query",
+            "name": "marker",
+            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, omit this parameter.\nFor next pages, use the value returned by the API in\nthe `next_page` field."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentMethods"
                 }
               }
             }
@@ -773,38 +874,42 @@
         }
       },
       "post": {
-        "operationId": "add-card",
-        "summary": "Register card",
-        "description": "Registers a card with all available processors.\n",
+        "operationId": "register-payment-method",
+        "summary": "Register a new payment method",
+        "description": "Registers and tokenizes a new payment method",
         "tags": [
-          "Cards"
+          "Payment Methods"
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CardCreateRequest"
-              },
-              "examples": {
-                "Tokenize a card": {
-                  "value": {
-                    "number": "4111111111111111",
-                    "expiration_date": "11/25",
-                    "security_code": "123",
-                    "external_identifier": "user-789123"
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/CardRegisterRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/PayPalRegisterRequest"
                   }
-                }
+                ]
               }
             }
           }
         },
         "responses": {
           "201": {
-            "description": "This API returns asynchronously, returning status object with the ID of the pending `Card` resource.",
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Card"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Card"
+                    },
+                    {
+                      "$ref": "#/components/schemas/PayPal"
+                    }
+                  ]
                 }
               }
             }
@@ -839,35 +944,41 @@
         }
       }
     },
-    "/cards/{card_id}": {
+    "/payment-methods/{payment_method_id}": {
       "parameters": [
         {
           "schema": {
             "type": "string",
-            "format": "uuid",
-            "example": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
+            "example": "46973e9d-88a7-44a6-abfe-be4ff0134ff4",
+            "format": "uuid"
           },
-          "name": "card_id",
+          "name": "payment_method_id",
           "in": "path",
           "required": true,
-          "description": "The unique ID for a card."
+          "description": "The ID of the payment method"
         }
       ],
       "get": {
-        "operationId": "get-card",
-        "summary": "Get card",
-        "description": "Gets the information about a card",
+        "operationId": "get-payment-method",
+        "summary": "Get registered payment method",
+        "description": "Gets the details for a registered payment method",
         "tags": [
-          "Cards"
+          "Payment Methods"
         ],
-        "parameters": [],
         "responses": {
           "200": {
-            "description": "Returns the details about a tokenized card.",
+            "description": "Returns a payment method",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Card"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Card"
+                    },
+                    {
+                      "$ref": "#/components/schemas/PayPal"
+                    }
+                  ]
                 }
               }
             }
@@ -883,18 +994,44 @@
             }
           },
           "404": {
-            "description": "Returns an error if the resource can not be found or has not yet been created.",
+            "description": "Returns an error if the resource can not be found.",
             "content": {
               "application/json": {
                 "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error404NotFound"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error404PendingCreation"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/Error404NotFound"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "delete-payment-method",
+        "summary": "Delete a payment method",
+        "description": "Removes a registered payment method",
+        "tags": [
+          "Payment Methods"
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
                 }
               }
             }
@@ -902,34 +1039,63 @@
         }
       }
     },
-    "/cards/{card_id}/events": {
+    "/payment-methods/{payment_method_id}/authorize": {
       "parameters": [
         {
           "schema": {
             "type": "string",
-            "format": "uuid",
-            "example": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
+            "example": "46973e9d-88a7-44a6-abfe-be4ff0134ff4",
+            "format": "uuid"
           },
-          "name": "card_id",
+          "name": "payment_method_id",
           "in": "path",
           "required": true,
-          "description": "The unique ID for a card."
+          "description": "The ID of the payment method"
         }
       ],
-      "get": {
-        "operationId": "list-card-event",
-        "summary": "List card events",
-        "description": "Returns a list of events for a given transaction.",
+      "post": {
+        "operationId": "authorize-payment-method",
+        "summary": "Confirm user authorization",
+        "description": "Confirm user authorization for a payment method. This is currently only used\nto confirm and fetch the card details for a `paypal` payment method after the\nuser authorization has been completed.",
         "tags": [
-          "Cards"
+          "Payment Methods"
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Returns the updated transaction",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CardEvents"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/PayPal"
+                    }
+                  ]
+                },
+                "examples": {
+                  "An authorized PayPal payment method": {
+                    "value": {
+                      "type": "payment-method",
+                      "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
+                      "method": "paypal",
+                      "status": "created",
+                      "payment_method_status": "registered",
+                      "details": {
+                        "authorization_url": null
+                      },
+                      "created_at": "2013-07-16T19:23:00.000Z",
+                      "updated_at": "2013-07-16T19:23:00.000Z",
+                      "external_identifier": "user-789123",
+                      "buyer": {
+                        "type": "buyer",
+                        "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+                        "external_identifier": "user-789123",
+                        "display_name": "John L.",
+                        "created_at": "2013-07-16T19:23:00.000Z",
+                        "updated_at": "2013-07-16T19:23:00.000Z"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -947,13 +1113,118 @@
         }
       }
     },
+    "/payment-methods/{payment_method_id}/events": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "example": "46973e9d-88a7-44a6-abfe-be4ff0134ff4",
+            "format": "uuid"
+          },
+          "name": "payment_method_id",
+          "in": "path",
+          "required": true,
+          "description": "The ID of the payment method"
+        }
+      ],
+      "get": {
+        "operationId": "list-payment-method-event",
+        "summary": "List payment method events",
+        "description": "Returns a list of events for a given payment method.",
+        "tags": [
+          "Payment Methods"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 100,
+              "example": 1000,
+              "minimum": 0,
+              "maximum": 1000,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "The maximum number of items to return"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "1593343179"
+            },
+            "in": "query",
+            "name": "marker",
+            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, omit this parameter.\nFor next pages, use the value returned by the API in\nthe `next_page` field."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of payment method events.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentMethodEvents"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/payment-services": {
       "get": {
         "operationId": "list-payment-services",
         "summary": "List payment services",
-        "description": "Lists the currently configured and activated payment services for a for a merchant.",
+        "description": "Lists the currently configured and activated payment services for a for a cluster.",
         "tags": [
           "Payment Services"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 100,
+              "example": 1000,
+              "minimum": 0,
+              "maximum": 1000,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "The maximum number of items to return"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "1593343179"
+            },
+            "in": "query",
+            "name": "marker",
+            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, omit this parameter.\nFor next pages, use the value returned by the API in\nthe `next_page` field."
+          }
         ],
         "responses": {
           "200": {
@@ -1005,21 +1276,19 @@
                 "examples": {
                   "Stripe": {
                     "value": {
-                      "id": "stripe-card-5a303fc4-817b-4073-9b41-a26eff29080a",
+                      "id": "stripe-card-faaad066-30b4-4997-a438-242b0752d7e1",
                       "type": "payment-service",
-                      "display_name": "Stripe (Global)",
-                      "status": "created",
-                      "service_id": "stripe-card",
-                      "payment_method_id": "card",
-                      "use_test_environment": false,
+                      "payment_service_definition_id": "stripe",
+                      "method": "card",
+                      "display_name": "Stripe",
+                      "status": "pending",
                       "accepted_currencies": [
-                        "GBP",
                         "EUR"
                       ],
                       "accepted_countries": [
-                        "GB",
                         "DE"
-                      ]
+                      ],
+                      "use_test_environment": true
                     }
                   }
                 }
@@ -1219,6 +1488,31 @@
           "Payment Service Definitions"
         ],
         "x-internal": true,
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 100,
+              "example": 1000,
+              "minimum": 0,
+              "maximum": 1000,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "The maximum number of items to return"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "1593343179"
+            },
+            "in": "query",
+            "name": "marker",
+            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, omit this parameter.\nFor next pages, use the value returned by the API in\nthe `next_page` field."
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -1464,6 +1758,32 @@
         "tags": [
           "Card Rulesets"
         ],
+        "x-internal": true,
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 100,
+              "example": 1000,
+              "minimum": 0,
+              "maximum": 1000,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "The maximum number of items to return"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "1593343179"
+            },
+            "in": "query",
+            "name": "marker",
+            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, omit this parameter.\nFor next pages, use the value returned by the API in\nthe `next_page` field."
+          }
+        ],
         "responses": {
           "200": {
             "description": "A list of rulesets",
@@ -1545,6 +1865,7 @@
         "tags": [
           "Card Rulesets"
         ],
+        "x-internal": true,
         "requestBody": {
           "content": {
             "application/json": {
@@ -1694,6 +2015,7 @@
         "tags": [
           "Card Rulesets"
         ],
+        "x-internal": true,
         "responses": {
           "200": {
             "description": "A card ruleset",
@@ -1776,6 +2098,7 @@
         "tags": [
           "Card Rulesets"
         ],
+        "x-internal": true,
         "requestBody": {
           "content": {
             "application/json": {
@@ -1920,6 +2243,7 @@
         "tags": [
           "Card Rulesets"
         ],
+        "x-internal": true,
         "responses": {
           "204": {
             "description": "No Content"
@@ -1989,6 +2313,7 @@
         "tags": [
           "Card Rulesets"
         ],
+        "x-internal": true,
         "responses": {
           "201": {
             "description": "An activated ruleset",
@@ -2196,12 +2521,12 @@
         }
       },
       "post": {
-        "summary": "Create transaction",
+        "summary": "Authorize new transaction",
         "tags": [
           "Transactions"
         ],
         "operationId": "authorize-new-transaction",
-        "description": "Attempts to create an authorization for a payment method. In some cases it is\nnot possible to create the authorization without redirecting the user for\ntheir authorization. In these cases the status is set to\n`user_authorization_required` and an `authorization_url` is returned.\n\nAdditionally, this endpoint accepts a few additional fields that allow for\nsimultaneous capturing and storage of the payment method.\n\n* `payment_method.store` - Use this field to store the payment method for\nfuture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
+        "description": "Attempts to create an authorization for a payment method. In some cases it is\nnot possible to create the authorization without redirecting the user for\ntheir authorization. In these cases the status is set to\n`buyer_authorization_required` and an `authorization_url` is returned.\n\nAdditionally, this endpoint accepts a few additional fields that allow for\nsimultaneous capturing and storage of the payment method.\n\n* `store` - Use this field to store the payment method for\nfuture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2213,21 +2538,11 @@
                   "value": {
                     "amount": 1299,
                     "currency": "USD",
-                    "payment_method_type": "card",
                     "payment_method": {
+                      "method": "card",
                       "number": "4111111111111111",
                       "expiration_date": "11/25",
                       "security_code": "123"
-                    }
-                  }
-                },
-                "Authorize a tokenized card": {
-                  "value": {
-                    "amount": 1299,
-                    "currency": "USD",
-                    "payment_method_type": "card",
-                    "payment_method": {
-                      "number": "4111111111111111"
                     }
                   }
                 },
@@ -2235,12 +2550,12 @@
                   "value": {
                     "amount": 1299,
                     "currency": "USD",
-                    "payment_method_type": "card",
+                    "store": true,
                     "payment_method": {
+                      "method": "card",
                       "number": "4111111111111111",
                       "expiration_date": "11/25",
-                      "security_code": "123",
-                      "store": true
+                      "security_code": "123"
                     }
                   }
                 },
@@ -2248,13 +2563,13 @@
                   "value": {
                     "amount": 1299,
                     "currency": "USD",
-                    "payment_method_type": "card",
                     "capture": true,
+                    "store": true,
                     "payment_method": {
+                      "method": "card",
                       "number": "4111111111111111",
                       "expiration_date": "11/25",
-                      "security_code": "123",
-                      "store": true
+                      "security_code": "123"
                     }
                   }
                 },
@@ -2262,8 +2577,10 @@
                   "value": {
                     "amount": 1299,
                     "currency": "USD",
-                    "payment_method_type": "paypal",
-                    "capture": true
+                    "capture": true,
+                    "payment_method": {
+                      "method": "paypal"
+                    }
                   }
                 }
               }
@@ -2288,9 +2605,25 @@
                       "amount": 1299,
                       "currency": "USD",
                       "payment_method": {
-                        "type": "card",
+                        "type": "payment-method",
                         "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
-                        "authorization_url": null
+                        "method": "card",
+                        "status": "created",
+                        "details": {
+                          "number": "XXXX XXXX XXXX 1111",
+                          "expiration_date": "11 / 21"
+                        },
+                        "created_at": "2013-07-16T19:23:00.000Z",
+                        "updated_at": "2013-07-16T19:23:00.000Z",
+                        "external_identifier": "user-789123",
+                        "buyer": {
+                          "type": "buyer",
+                          "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+                          "external_identifier": "user-789123",
+                          "display_name": "John L.",
+                          "created_at": "2013-07-16T19:23:00.000Z",
+                          "updated_at": "2013-07-16T19:23:00.000Z"
+                        }
                       },
                       "created_at": "2013-07-16T19:23:00.000Z",
                       "external_identifier": "user-789123",
@@ -2298,24 +2631,38 @@
                       "payment_service_id": "stripe-card-169f5226-4644-4d1e-ac36-14999e73601f"
                     }
                   },
-                  "Pending PayPal transaction": {
+                  "PayPal transaction": {
                     "value": {
                       "type": "transaction",
                       "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
                       "status": "created",
-                      "transaction_status": "user_authorization_required",
+                      "transaction_status": "buyer_authorization_required",
                       "amount": 1299,
                       "currency": "USD",
                       "payment_method": {
-                        "type": "paypal",
-                        "id": null,
-                        "status": "user_authorization_required",
-                        "authorization_url": "https://paypal.com/..."
+                        "type": "payment-method",
+                        "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
+                        "method": "paypal",
+                        "status": "buyer_authorization_required",
+                        "details": {
+                          "authorization_url": "https://paypal.com/..."
+                        },
+                        "created_at": "2013-07-16T19:23:00.000Z",
+                        "updated_at": "2013-07-16T19:23:00.000Z",
+                        "external_identifier": "user-789123",
+                        "buyer": {
+                          "type": "buyer",
+                          "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+                          "external_identifier": "user-789123",
+                          "display_name": "John L.",
+                          "created_at": "2013-07-16T19:23:00.000Z",
+                          "updated_at": "2013-07-16T19:23:00.000Z"
+                        }
                       },
                       "created_at": "2013-07-16T19:23:00.000Z",
-                      "external_identifier": "user-12345",
+                      "external_identifier": "user-789123",
                       "updated_at": "2019-08-24T14:15:22Z",
-                      "payment_service_id": "paypal-paypal-169f5226-4644-4d1e-ac36-14999e73601f"
+                      "payment_service_id": "stripe-card-169f5226-4644-4d1e-ac36-14999e73601f"
                     }
                   }
                 }
@@ -2712,6 +3059,31 @@
         "tags": [
           "Transactions"
         ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 100,
+              "example": 1000,
+              "minimum": 0,
+              "maximum": 1000,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "The maximum number of items to return"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "1593343179"
+            },
+            "in": "query",
+            "name": "marker",
+            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, omit this parameter.\nFor next pages, use the value returned by the API in\nthe `next_page` field."
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -2778,7 +3150,7 @@
           },
           "external_identifier": {
             "type": "string",
-            "description": "An external identifier that can be used by the merchant to match the buyer against their own records.",
+            "description": "An external identifier that can be used to match the buyer against your own records.",
             "example": "user-789123",
             "nullable": true
           },
@@ -2852,7 +3224,7 @@
         "properties": {
           "external_identifier": {
             "type": "string",
-            "description": "An external identifier that can be used by the merchant to match the buyer against their own records. This value needs to be unique for all buyers.",
+            "description": "An external identifier that can be used to match the buyer against your own records. This value needs to be unique for all buyers.",
             "example": "user-789123",
             "nullable": true
           },
@@ -2874,7 +3246,7 @@
         "properties": {
           "external_identifier": {
             "type": "string",
-            "description": "An external identifier that can be used by the merchant to match the buyer against their own records.",
+            "description": "An external identifier that can be used to match the buyer against your own records.",
             "example": "user-789123",
             "nullable": true
           },
@@ -2888,195 +3260,80 @@
       },
       "Card": {
         "title": "Card",
+        "description": "A registered card",
         "type": "object",
         "x-tags": [
-          "Cards"
+          "Payment Methods"
         ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "The type of this resource. Is always `card`",
-            "example": "card",
-            "enum": [
-              "card"
-            ]
-          },
-          "id": {
-            "type": "string",
-            "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-            "description": "The internal ID for this card"
-          },
-          "status": {
-            "type": "string",
-            "description": "Whether this card was successfully created or not.",
-            "enum": [
-              "created",
-              "error",
-              "partially_created"
-            ],
-            "example": "created"
-          },
-          "created_at": {
-            "type": "string",
-            "description": "The date and time\nwhen this card was created in our system.",
-            "format": "date-time",
-            "example": "2013-07-16T19:23:00.000Z"
-          },
-          "external_identifier": {
-            "type": "string",
-            "description": "An external identifier that can be used by the merchant to match the card against their own records.",
-            "example": "user-789123",
-            "nullable": true
-          }
-        }
-      },
-      "CardEvent": {
-        "title": "Card Event",
-        "type": "object",
-        "description": "An event that happened for a transaction.",
-        "x-tags": [
-          "Cards"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID for this event.",
-            "format": "uuid"
-          },
-          "type": {
-            "type": "string",
-            "example": "transaction.event",
-            "description": "`transaction.event`"
-          },
-          "created_at": {
-            "type": "string",
-            "description": "When this event was recorded.\n",
-            "format": "date-time"
-          },
-          "code": {
-            "type": "string",
-            "description": "The type of event, in dot-format syntax.",
-            "example": "transaction.rejected.account_closed"
-          },
-          "external_service": {
-            "type": "object",
-            "description": "An optional related resource that triggered this event.",
+        "allOf": [
+          {
             "properties": {
-              "id": {
+              "method": {
                 "type": "string",
-                "example": "stripe-card-c4a988a2-cae6-4854-9aa0-a8365da0816d",
-                "description": "The ID of the resource\n"
+                "description": "`card`",
+                "example": "card",
+                "enum": [
+                  "card"
+                ]
               },
-              "type": {
+              "payment_method_status": {
                 "type": "string",
-                "example": "payment-service",
-                "description": "The type of the resource"
+                "description": "The state of the card tokenization.",
+                "example": "registered",
+                "enum": [
+                  "registered"
+                ]
               },
-              "display_name": {
-                "type": "string",
-                "example": "Stripe (Card)",
-                "description": "The user's name for the resource"
-              },
-              "service_id": {
-                "type": "string",
-                "example": "stripe-card",
-                "description": "The ID of the service that this resource is based on."
+              "details": {
+                "$ref": "#/components/schemas/CardDetails"
               }
             }
+          },
+          {
+            "$ref": "#/components/schemas/PaymentMethod"
           }
-        }
+        ]
       },
-      "CardEvents": {
-        "title": "Card Events",
-        "description": "A list of events for a card",
+      "CardDetails": {
+        "title": "Card details",
+        "description": "Additional details about a registered card",
         "type": "object",
         "x-tags": [
-          "Cards"
+          "Payment Methods"
         ],
         "properties": {
-          "items": {
-            "type": "array",
-            "description": "A list of card events",
-            "items": {
-              "$ref": "#/components/schemas/CardEvent"
-            }
-          },
-          "limit": {
-            "type": "integer",
-            "description": "The limit set to the number of items returned. ",
-            "format": "int32",
-            "minimum": 0,
-            "maximum": 1000,
-            "example": 100,
-            "default": 100
-          },
-          "next_page": {
+          "number": {
             "type": "string",
-            "description": "The marker that represents the next page of results.",
-            "format": "uuid",
-            "example": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
-            "nullable": true
+            "description": "Partial number details for a registered card, hiding all but the last few\nnumbers.",
+            "example": "XXXX XXXX XXXX 1111"
           },
-          "previous_page": {
+          "expiration_date": {
             "type": "string",
-            "description": "The marker that represents the previous page of results.",
-            "format": "uuid",
-            "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
-            "nullable": true
+            "description": "The expiration date for a card.",
+            "example": "11 / 21"
           }
         }
       },
-      "Cards": {
-        "title": "Cards",
-        "type": "object",
-        "description": "A list of cards",
-        "x-tags": [
-          "Cards"
-        ],
-        "properties": {
-          "items": {
-            "type": "array",
-            "description": "A list of cards",
-            "items": {
-              "$ref": "#/components/schemas/Card"
-            }
-          },
-          "limit": {
-            "type": "integer",
-            "description": "The limit set to the number of items returned. ",
-            "format": "int32",
-            "minimum": 0,
-            "maximum": 1000,
-            "example": 100,
-            "default": 100
-          },
-          "next_page": {
-            "type": "string",
-            "description": "The marker that represents the next page of results.",
-            "format": "uuid",
-            "example": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
-            "nullable": true
-          },
-          "previous_page": {
-            "type": "string",
-            "description": "The marker that represents the previous page of results.",
-            "format": "uuid",
-            "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
-            "nullable": true
-          }
-        }
-      },
-      "CardCreateRequest": {
-        "title": "Card (Create)",
+      "CardRegisterRequest": {
+        "title": "Card (Register)",
         "type": "object",
         "description": "A request to store a card.",
         "x-tags": [
           "Request Bodies"
         ],
         "required": [
+          "method",
           "number"
         ],
         "properties": {
+          "method": {
+            "type": "string",
+            "description": "`card`",
+            "example": "card",
+            "enum": [
+              "card"
+            ]
+          },
           "number": {
             "type": "string",
             "minLength": 14,
@@ -3103,7 +3360,8 @@
           },
           "external_identifier": {
             "type": "string",
-            "description": "An external identifier that can be used by the merchant to match the card against their own records.",
+            "description": "An external identifier that can be used to match the card against your own records.",
+            "example": "user-789123",
             "nullable": true
           }
         }
@@ -3192,6 +3450,29 @@
             "items": {
               "$ref": "#/components/schemas/CardRuleset"
             }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The limit set to the number of items returned. ",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1000,
+            "example": 100,
+            "default": 100
+          },
+          "next_page": {
+            "type": "string",
+            "description": "The marker that represents the next page of results.",
+            "format": "uuid",
+            "example": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
+            "nullable": true
+          },
+          "previous_page": {
+            "type": "string",
+            "description": "The marker that represents the previous page of results.",
+            "format": "uuid",
+            "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
+            "nullable": true
           }
         }
       },
@@ -3474,7 +3755,7 @@
           "message": {
             "type": "string",
             "description": "Describes the fields that are missing or incorrectly formatted in the API\nrequest.",
-            "example": "Missing 'display_name' field"
+            "example": "Missing '****' field"
           }
         }
       },
@@ -3692,26 +3973,193 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "The type of payment method",
+            "description": "`payment-method`",
+            "example": "payment-method",
             "enum": [
-              "card",
-              "paypal",
-              "bitcoin"
-            ],
-            "example": "card"
+              "payment-method"
+            ]
           },
           "id": {
             "type": "string",
-            "description": "The optional ID of any stored payment method details, for example a stored `card` ID.",
+            "description": "The optional ID of the payment method details. This will be `null` if the\npayment method was not tokenized on only used in a one-off transaction.",
             "format": "uuid",
             "example": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
             "nullable": true
           },
-          "authorization_url": {
+          "status": {
             "type": "string",
-            "format": "uri",
-            "example": "https://paypal.com.....",
-            "description": "The optional URL that needs to be presented to a consumer to allow them to approve the authorization.",
+            "description": "The state of the payment method in Gr4vy.",
+            "example": "created"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "The date and time when this payment method was first created in our\nsystem.",
+            "format": "date-time",
+            "example": "2013-07-16T19:23:00.000Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "The date and time when this payment method was last updated in our system.",
+            "format": "date-time",
+            "example": "2013-07-16T19:23:00.000Z"
+          },
+          "external_identifier": {
+            "type": "string",
+            "description": "An external identifier that can be used to match the payment method\nagainst your own records.",
+            "example": "user-789123",
+            "nullable": true
+          },
+          "buyer": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Buyer"
+              },
+              {
+                "description": "The optional buyer for which this payment method has been registered."
+              },
+              {
+                "nullable": true
+              }
+            ]
+          }
+        }
+      },
+      "PaymentMethods": {
+        "title": "Cards",
+        "type": "object",
+        "description": "A list of registered payment methods",
+        "x-tags": [
+          "PaymentMethods"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "A list of registered payment methods",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/Card"
+                },
+                {
+                  "$ref": "#/components/schemas/PayPal"
+                }
+              ]
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The limit set to the number of items returned. ",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1000,
+            "example": 100,
+            "default": 100
+          },
+          "next_page": {
+            "type": "string",
+            "description": "The marker that represents the next page of results.",
+            "format": "uuid",
+            "example": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
+            "nullable": true
+          },
+          "previous_page": {
+            "type": "string",
+            "description": "The marker that represents the previous page of results.",
+            "format": "uuid",
+            "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
+            "nullable": true
+          }
+        }
+      },
+      "PaymentMethodEvent": {
+        "title": "Payment method event",
+        "type": "object",
+        "description": "An event that happened for a payment method.",
+        "x-tags": [
+          "Payment Methods"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique ID for this event.",
+            "format": "uuid",
+            "example": "639c56c8-a2e1-415e-9633-aabe251605d3"
+          },
+          "type": {
+            "type": "string",
+            "example": "payment-method.event",
+            "description": "`payment-method.event`"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "When this event was recorded.\n",
+            "format": "date-time",
+            "example": "2012-12-12T10:53:43-08:00"
+          },
+          "code": {
+            "type": "string",
+            "description": "The type of event, in dot-format syntax.",
+            "example": "payment-method.rejected.account_closed"
+          },
+          "external_service": {
+            "type": "object",
+            "description": "An optional related resource that triggered this event.",
+            "properties": {
+              "id": {
+                "type": "string",
+                "example": "stripe-card-c4a988a2-cae6-4854-9aa0-a8365da0816d",
+                "description": "The ID of the resource\n"
+              },
+              "type": {
+                "type": "string",
+                "example": "payment-service",
+                "description": "The type of the resource"
+              },
+              "display_name": {
+                "type": "string",
+                "example": "Stripe (Card)",
+                "description": "The user's name for the resource"
+              }
+            }
+          }
+        }
+      },
+      "PaymentMethodEvents": {
+        "title": "Payment method events",
+        "description": "A list of events for a payment method",
+        "type": "object",
+        "x-tags": [
+          "Payment Methods"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "A list of payment method events",
+            "items": {
+              "$ref": "#/components/schemas/PaymentMethodEvent"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The limit set to the number of items returned. ",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1000,
+            "example": 100,
+            "default": 100
+          },
+          "next_page": {
+            "type": "string",
+            "description": "The marker that represents the next page of results.",
+            "format": "uuid",
+            "example": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
+            "nullable": true
+          },
+          "previous_page": {
+            "type": "string",
+            "description": "The marker that represents the previous page of results.",
+            "format": "uuid",
+            "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
             "nullable": true
           }
         }
@@ -3742,10 +4190,14 @@
             "description": "The ID of the payment service used to create this service instance.\n",
             "example": "stripe"
           },
-          "payment_method_id": {
+          "method": {
             "type": "string",
             "description": "Defines the ID of the payment method that this service handles.",
-            "example": "card"
+            "example": "card",
+            "enum": [
+              "card",
+              "paypal"
+            ]
           },
           "display_name": {
             "type": "string",
@@ -3802,6 +4254,29 @@
             "items": {
               "$ref": "#/components/schemas/PaymentService"
             }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The limit set to the number of items returned. ",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1000,
+            "example": 100,
+            "default": 100
+          },
+          "next_page": {
+            "type": "string",
+            "description": "The marker that represents the next page of results.",
+            "format": "uuid",
+            "example": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
+            "nullable": true
+          },
+          "previous_page": {
+            "type": "string",
+            "description": "The marker that represents the previous page of results.",
+            "format": "uuid",
+            "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
+            "nullable": true
           }
         }
       },
@@ -3972,10 +4447,14 @@
             "description": "The display name of this service",
             "example": "Stripe"
           },
-          "payment_method_id": {
+          "method": {
             "type": "string",
             "description": "The ID of the payment method that this services handles",
-            "example": "card"
+            "example": "card",
+            "enum": [
+              "card",
+              "paypal"
+            ]
           },
           "required_fields": {
             "type": "array",
@@ -4058,6 +4537,29 @@
             "items": {
               "$ref": "#/components/schemas/PaymentServiceDefinition"
             }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The limit set to the number of items returned. ",
+            "format": "int32",
+            "minimum": 0,
+            "maximum": 1000,
+            "example": 100,
+            "default": 100
+          },
+          "next_page": {
+            "type": "string",
+            "description": "The marker that represents the next page of results.",
+            "format": "uuid",
+            "example": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
+            "nullable": true
+          },
+          "previous_page": {
+            "type": "string",
+            "description": "The marker that represents the previous page of results.",
+            "format": "uuid",
+            "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
+            "nullable": true
           }
         }
       },
@@ -4076,7 +4578,7 @@
           "display_name",
           "supported_currencies",
           "supported_countries",
-          "payment_method_id",
+          "method",
           "logo_url"
         ],
         "properties": {
@@ -4090,10 +4592,14 @@
             "description": "The display name of this service",
             "example": "Stripe"
           },
-          "payment_method_id": {
+          "method": {
             "type": "string",
-            "description": "The ID of the payment method that this services handles",
-            "example": "card"
+            "description": "The type of payments this services handles",
+            "example": "card",
+            "enum": [
+              "card",
+              "paypal"
+            ]
           },
           "required_fields": {
             "type": "array",
@@ -4176,10 +4682,14 @@
             "description": "The display name of this service",
             "example": "Stripe"
           },
-          "payment_method_id": {
+          "method": {
             "type": "string",
             "description": "The ID of the payment method that this services handles",
-            "example": "card"
+            "example": "card",
+            "enum": [
+              "card",
+              "paypal"
+            ]
           },
           "required_fields": {
             "type": "array",
@@ -4249,6 +4759,87 @@
           }
         }
       },
+      "PayPal": {
+        "title": "PayPal Account",
+        "description": "A registered PayPal account",
+        "type": "object",
+        "x-tags": [
+          "Payment Methods"
+        ],
+        "allOf": [
+          {
+            "properties": {
+              "method": {
+                "type": "string",
+                "description": "`paypal`",
+                "example": "paypal",
+                "enum": [
+                  "paypal"
+                ]
+              },
+              "payment_method_status": {
+                "type": "string",
+                "description": "The state of the account tokenization. After the first call this will\nbe set to `buyer_authorization_required` and the response will include\nan `authorization_url`. The buyer needs to be redirected to this URL\nto authorize the future payments. The token is subsequently posted to\nthe [authorize](/#operation/authorize-payment-method) endpoint\nafter which the `status` is updated to `registered`.",
+                "example": "buyer_authorization_required",
+                "enum": [
+                  "registered",
+                  "buyer_authorization_required"
+                ]
+              },
+              "details": {
+                "$ref": "#/components/schemas/PayPalDetails"
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/PaymentMethod"
+          }
+        ]
+      },
+      "PayPalDetails": {
+        "title": "PayPal account details",
+        "description": "Additional details about a registered PayPal account",
+        "type": "object",
+        "x-tags": [
+          "Payment Methods"
+        ],
+        "properties": {
+          "authorization_url": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://paypal.com.....",
+            "description": "The optional URL that the buyer needs to be redirected to to further authorize their PayPal payments.",
+            "nullable": true
+          }
+        }
+      },
+      "PayPalRegisterRequest": {
+        "title": "PayPal Account (Register)",
+        "type": "object",
+        "description": "A request to tokenize a PayPal account.",
+        "x-tags": [
+          "Request Bodies"
+        ],
+        "required": [
+          "method"
+        ],
+        "properties": {
+          "method": {
+            "type": "string",
+            "description": "`paypal`",
+            "example": "paypal",
+            "enum": [
+              "paypal"
+            ]
+          },
+          "external_identifier": {
+            "type": "string",
+            "description": "An external identifier that can be used to match the account against your own records.",
+            "example": "user-789123",
+            "nullable": true
+          }
+        }
+      },
       "Status": {
         "title": "Status",
         "type": "object",
@@ -4281,7 +4872,7 @@
             "example": "transaction",
             "enum": [
               "transaction",
-              "card"
+              "payment-method"
             ]
           },
           "resource_id": {
@@ -4292,7 +4883,7 @@
           },
           "external_identifier": {
             "type": "string",
-            "description": "An external identifier that can be used by the merchant to match the card against their own records.",
+            "description": "An external identifier that can be used to match the record against your own records.",
             "example": "user-789123",
             "nullable": true
           }
@@ -4354,7 +4945,7 @@
               "created",
               "captured",
               "authorized",
-              "user_authorization_required",
+              "buyer_authorization_required",
               "pending"
             ]
           },
@@ -4371,10 +4962,14 @@
             "description": "The currency code for this transaction."
           },
           "payment_method": {
-            "$ref": "#/components/schemas/PaymentMethod"
-          },
-          "buyer": {
-            "$ref": "#/components/schemas/Buyer"
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Card"
+              },
+              {
+                "$ref": "#/components/schemas/PayPal"
+              }
+            ]
           },
           "created_at": {
             "type": "string",
@@ -4384,7 +4979,7 @@
           },
           "external_identifier": {
             "type": "string",
-            "description": "An external identifier that can be used by the merchant to match the authorization against their own records.",
+            "description": "An external identifier that can be used to match the transaction against your own records.",
             "example": "user-789123",
             "nullable": true
           },
@@ -4463,7 +5058,7 @@
           "external_identifier": {
             "type": "string",
             "example": "user-789123",
-            "description": "An external identifier that can be used by the merchant to match the authorization against their own records."
+            "description": "An external identifier that can be used to match the transaction against your own records."
           }
         }
       },
@@ -4507,49 +5102,34 @@
         "required": [
           "amount",
           "currency",
-          "payment_method_type"
+          "payment_method"
         ],
         "properties": {
           "amount": {
             "description": "The monetary amount to create an authorization for, in the smallest\ncurrency unit for the given currency, for example `1299` cents to create\nan authorization for `$12.99`.\n\nFor BitCoin, this value will be a decimal point number, for example\n`0.0039`.",
-            "type": "number"
+            "type": "number",
+            "example": 1299
           },
           "currency": {
             "type": "string",
             "example": "USD",
             "description": "A supported ISO-4217 currency code."
           },
-          "payment_method_type": {
-            "type": "string",
-            "description": "The type of payment method to create an authorization for.",
-            "enum": [
-              "card",
-              "paypal",
-              "bitcoin"
-            ],
-            "example": "card"
-          },
           "payment_method": {
             "oneOf": [
               {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/CardCreateRequest"
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "store": {
-                        "type": "boolean",
-                        "description": "Whether or not to also try and store the card with us so that\nit can be used again for future use.\n\nIf the `number` of this card represents a tokenized card, then\nthis value is ignored.",
-                        "example": true
-                      }
-                    }
-                  }
-                ]
+                "$ref": "#/components/schemas/CardRegisterRequest"
+              },
+              {
+                "$ref": "#/components/schemas/PayPalRegisterRequest"
               }
             ],
             "description": "The optional payment method details to create an authorization for. This field is required for processing a card."
+          },
+          "store": {
+            "type": "boolean",
+            "description": "Whether or not to also try and store the payment method with us so that\nit can be used again for future use.",
+            "example": true
           },
           "capture": {
             "type": "boolean",
@@ -4559,12 +5139,14 @@
           },
           "external_identifier": {
             "type": "string",
-            "description": "An external identifier that can be used by the merchant to match the authorization against their own records.",
+            "example": "user-789123",
+            "description": "An external identifier that can be used to match the transaction against your own records.",
             "nullable": true
           },
           "use_test_environment": {
             "type": "boolean",
-            "description": "Defines if this transaction should run in the payment provider's test environment. Defaults to false."
+            "description": "Defines if this transaction should run in the payment provider's test environment. Defaults to false.",
+            "example": false
           },
           "buyer_id": {
             "type": "string",
@@ -4605,7 +5187,7 @@
           "external_identifier": {
             "type": "string",
             "example": "user-789123",
-            "description": "An external identifier that can be used by the merchant to match the capture against their own records."
+            "description": "An external identifier that can be used to match the transaction against your own records."
           }
         }
       },
@@ -4626,10 +5208,7 @@
           "type": {
             "type": "string",
             "example": "transaction.event",
-            "description": "`transaction.event`",
-            "enum": [
-              "transaction.event"
-            ]
+            "description": "`transaction.event`"
           },
           "created_at": {
             "type": "string",
@@ -4660,11 +5239,6 @@
                 "type": "string",
                 "example": "Stripe (Card)",
                 "description": "The user's name for the resource"
-              },
-              "service_id": {
-                "type": "string",
-                "example": "stripe-card",
-                "description": "The ID of the service that this resource is based on."
               }
             }
           }
