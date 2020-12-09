@@ -187,7 +187,8 @@
                     "currency": "USD",
                     "capture": true,
                     "payment_method": {
-                      "method": "paypal"
+                      "method": "paypal",
+                      "redirect_url": "https://example.com/callback"
                     }
                   }
                 }
@@ -2579,7 +2580,8 @@
                     "currency": "USD",
                     "capture": true,
                     "payment_method": {
-                      "method": "paypal"
+                      "method": "paypal",
+                      "redirect_url": "https://example.com/callback"
                     }
                   }
                 }
@@ -4821,7 +4823,8 @@
           "Request Bodies"
         ],
         "required": [
-          "method"
+          "method",
+          "redirect_url"
         ],
         "properties": {
           "method": {
@@ -4831,6 +4834,12 @@
             "enum": [
               "paypal"
             ]
+          },
+          "redirect_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The redirect URL to redirect a buyer to after they have authorized their\nPayPal transaction. This needs to match the URL registered for your PayPal\napplication.",
+            "example": "https://example.com/callback"
           },
           "external_identifier": {
             "type": "string",
