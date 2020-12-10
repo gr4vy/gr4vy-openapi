@@ -101,11 +101,11 @@ paths:
     delete:
       $ref: "./paths/payment_methods__delete-payment-method.yaml"
 
-  "/payment-methods/{payment_method_id}/authorize":
+  "/callbacks/payment-methods/{payment_method_id}/confirmation":
     parameters:
       - $ref: "./parameters/payment_method_id.yaml"
-    post:
-      $ref: "./paths/payment_methods__authorize-payment-method.yaml"
+    get:
+      $ref: "./paths/callbacks__payment-method-confirmation-callback.yaml"
 
   "/payment-methods/{payment_method_id}/events":
     parameters:

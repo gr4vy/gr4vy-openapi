@@ -13,6 +13,25 @@ properties:
       numbers.
     example: XXXX XXXX XXXX 1111
 
+  type:
+    type: string
+    example: visa
+    enum:
+      - visa
+      - mastercard
+      - american-express
+      - diners-club
+      - discover
+      - jcb
+      - unionpay
+      - maestro
+      - elo
+      - mir
+      - hiper
+      - hipercard
+    description: |-
+      The type of the card.
+
   expiration_date:
     type: string
     description: |-

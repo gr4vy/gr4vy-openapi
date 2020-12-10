@@ -6,6 +6,12 @@ x-tags:
   - Payment Methods
 
 properties:
+  email_address:
+    type: string
+    example: john@example.com
+    description: The email address associated to the PayPal account.
+    nullable: true
+
   authorization_url:
     type: string
     format: uri
