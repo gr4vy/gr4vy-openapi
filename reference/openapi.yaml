@@ -17,7 +17,7 @@ info:
     Our API is still very much a work in product and subject to change.
 
 servers:
-  - url: "https://{subdomain}.api.gr4vy.com"
+  - url: "https://api.{subdomain}.gr4vy.com"
     variables:
       subdomain:
         default: example
