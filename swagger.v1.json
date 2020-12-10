@@ -2971,15 +2971,10 @@
           "example": "Stripe (USA)",
           "type": "string"
         },
-        "payment_service_definition_id": {
-          "description": "The ID of the payment service to use",
-          "example": "stripe",
-          "type": "string"
-        },
-        "required_fields": {
-          "description": "A list of fields, each containing a key-value pair for each required field defined by the service for this payment service.",
+        "fields": {
+          "description": "A list of fields, each containing a key-value pair for each field defined\nby the service for this payment service. All the required fields for a\ndefinition should be posted here.",
           "items": {
-            "description": "A field containing a key-value pair for a required field defined by the service for this payment service.",
+            "description": "A field containing a key-value pair for a field defined by the definition for this payment service.",
             "properties": {
               "key": {
                 "description": "The key of the field to set a value for.",
@@ -3000,6 +2995,11 @@
           },
           "type": "array"
         },
+        "payment_service_definition_id": {
+          "description": "The ID of the payment service to use",
+          "example": "stripe",
+          "type": "string"
+        },
         "use_test_environment": {
           "description": "Defines if this payment service uses the service's test or sandbox environment. Defaults to false.",
           "example": false,
@@ -3009,7 +3009,7 @@
       "required": [
         "display_name",
         "payment_service_definition_id",
-        "required_fields",
+        "fields",
         "accepted_currencies",
         "use_test_environment",
         "accepted_countries"
@@ -3032,6 +3032,37 @@
           "description": "The display name of this service",
           "example": "Stripe",
           "type": "string"
+        },
+        "fields": {
+          "description": "A list of fields that need to be submitted when activating the payment service.",
+          "items": {
+            "description": "A single field that needs to be submitted for a payment service when it is created. ",
+            "properties": {
+              "display_name": {
+                "description": "The name to display for a field in the cluster UI",
+                "example": "Private API key",
+                "type": "string"
+              },
+              "help_url": {
+                "description": "A URL that provides more details about this field",
+                "example": "https://stripe.com/docs/private_api_key",
+                "type": "string"
+              },
+              "key": {
+                "description": "The key of a field that needs to be submitted",
+                "example": "private_api_key",
+                "type": "string"
+              },
+              "required": {
+                "description": "Defines if this field is required when the service is created",
+                "example": true,
+                "type": "boolean"
+              }
+            },
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
         },
         "help_url": {
           "description": "A URL that provides more details about this payment service",
@@ -3057,32 +3088,6 @@
           ],
           "example": "card",
           "type": "string"
-        },
-        "required_fields": {
-          "description": "A list of fields that need to be submitted when activating the payment service.",
-          "items": {
-            "description": "A single field that needs to be submitted for a payment service when it is created. ",
-            "properties": {
-              "display_name": {
-                "description": "The name to display for a field in the cluster UI",
-                "example": "Private API key",
-                "type": "string"
-              },
-              "help_url": {
-                "description": "A URL that provides more details about this field",
-                "example": "https://stripe.com/docs/private_api_key",
-                "type": "string"
-              },
-              "key": {
-                "description": "The key of a field that needs to be submitted",
-                "example": "private_api_key",
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "minItems": 1,
-          "type": "array"
         },
         "supported_countries": {
           "description": "A list of two-letter ISO country codes that this service supports",
@@ -3134,6 +3139,37 @@
           "example": "Stripe",
           "type": "string"
         },
+        "fields": {
+          "description": "A list of fields that can be submitted when activating the payment service.",
+          "items": {
+            "description": "A single field that needs to be submitted for a payment service when it is created. ",
+            "properties": {
+              "display_name": {
+                "description": "The name to display for a field in the cluster UI",
+                "example": "Private API key",
+                "type": "string"
+              },
+              "help_url": {
+                "description": "A URL that provides more details about this field",
+                "example": "https://stripe.com/docs/private_api_key",
+                "type": "string"
+              },
+              "key": {
+                "description": "The key of a field that needs to be submitted",
+                "example": "private_api_key",
+                "type": "string"
+              },
+              "required": {
+                "description": "Defines if this field is required when the service is created",
+                "example": true,
+                "type": "boolean"
+              }
+            },
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
         "help_url": {
           "description": "A URL that provides more details about this payment service",
           "example": "https://stripe.com/docs",
@@ -3158,32 +3194,6 @@
           ],
           "example": "card",
           "type": "string"
-        },
-        "required_fields": {
-          "description": "A list of fields that need to be submitted when activating the payment service.",
-          "items": {
-            "description": "A single field that needs to be submitted for a payment service when it is created. ",
-            "properties": {
-              "display_name": {
-                "description": "The name to display for a field in the cluster UI",
-                "example": "Private API key",
-                "type": "string"
-              },
-              "help_url": {
-                "description": "A URL that provides more details about this field",
-                "example": "https://stripe.com/docs/private_api_key",
-                "type": "string"
-              },
-              "key": {
-                "description": "The key of a field that needs to be submitted",
-                "example": "private_api_key",
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "minItems": 1,
-          "type": "array"
         },
         "supported_countries": {
           "description": "A list of two-letter ISO country codes that this service supports",
@@ -3212,7 +3222,7 @@
       },
       "required": [
         "id",
-        "required_fields",
+        "fields",
         "help_url",
         "available",
         "display_name",
@@ -3240,6 +3250,37 @@
           "example": "Stripe",
           "type": "string"
         },
+        "fields": {
+          "description": "An updated list of fields that can be submitted when activating the payment service.",
+          "items": {
+            "description": "A single field that needs to be submitted for a payment service when it is created. ",
+            "properties": {
+              "display_name": {
+                "description": "The name to display for a field in the cluster UI",
+                "example": "Private API key",
+                "type": "string"
+              },
+              "help_url": {
+                "description": "A URL that provides more details about this field",
+                "example": "https://stripe.com/docs/private_api_key",
+                "type": "string"
+              },
+              "key": {
+                "description": "The key of a field that needs to be submitted",
+                "example": "private_api_key",
+                "type": "string"
+              },
+              "required": {
+                "description": "Defines if this field is required when the service is created",
+                "example": true,
+                "type": "boolean"
+              }
+            },
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
         "help_url": {
           "description": "A URL that provides more details about this payment service",
           "example": "https://stripe.com/docs",
@@ -3259,32 +3300,6 @@
           ],
           "example": "card",
           "type": "string"
-        },
-        "required_fields": {
-          "description": "A list of fields that need to be submitted when activating the payment service.",
-          "items": {
-            "description": "A single field that needs to be submitted for a payment service when it is created. ",
-            "properties": {
-              "display_name": {
-                "description": "The name to display for a field in the cluster UI",
-                "example": "Private API key",
-                "type": "string"
-              },
-              "help_url": {
-                "description": "A URL that provides more details about this field",
-                "example": "https://stripe.com/docs/private_api_key",
-                "type": "string"
-              },
-              "key": {
-                "description": "The key of a field that needs to be submitted",
-                "example": "private_api_key",
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "minItems": 1,
-          "type": "array"
         },
         "supported_countries": {
           "description": "A list of two-letter ISO country codes that this service supports",
@@ -3385,8 +3400,8 @@
           "example": "Stripe (Main)",
           "type": "string"
         },
-        "required_fields": {
-          "description": "A list of fields, each containing a key-value pair for each required field defined by the service for this payment service.",
+        "fields": {
+          "description": "A list of fields, each containing a key-value pair for each field defined by the definition for this payment service.",
           "items": {
             "description": "A field containing a key-value pair for a required field defined by the service for this payment service.",
             "properties": {
