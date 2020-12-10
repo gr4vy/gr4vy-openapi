@@ -486,7 +486,7 @@
         "summary": "Update buyer"
       }
     },
-    "/callbacks/payment-methods/{payment_method_id}/confirmation": {
+    "/callbacks/payment-methods/{payment_method_id}/confirm": {
       "parameters": [
         {
           "description": "The ID of the payment method",
@@ -507,7 +507,7 @@
             "description": "Redirects the browser back to the `redirect_url` specified\nwhen the payment method was first created. It appends the payment method's\nID and status.",
             "headers": {
               "location": {
-                "description": "The URL to redirect the browser to. This is the `redirect_url` specified\nwhen the payment method was first created with some additional query\nparameters appended.\n\n* `payment_method_id` - The ID of the payment method\n* `payment_method_status` - The current value of the\n  `payment_method_status`  field of the payment method",
+                "description": "The URL to redirect the browser to. This is the `redirect_url`\nspecified when the payment method was first created with some\nadditional query parameters appended.\n\n* `payment_method_id` - The ID of the payment method\n* `payment_method_status` - The current value of the\n  `payment_method_status`  field of the payment method",
                 "format": "url",
                 "type": "string"
               }
@@ -524,8 +524,8 @@
         "tags": [
           "Callbacks"
         ],
-        "description": "Internal API used as a redirect endpoint for payment methods that require\nbuyer authorization.\n\nFor example, when a buyer tries to add a PayPal payment method, the buyer\nneeds to be sent to PayPal, after which they are sent back to this endpoint\nupon completion.\n\nThis API applies any required updates for the payment method based on its\nquery params and then redirects the browser back to the `redirect_url` specified\nwhen the payment method was first created.",
-        "operationId": "payment-method-confirmation-callback",
+        "description": "Internal API used as a redirect endpoint for payment methods that require\nbuyer authorization.\n\nFor example, when a buyer tries to add a PayPal payment method, the buyer\nneeds to be sent to PayPal, after which they are sent back to this endpoint\nupon completion.\n\nThis API applies any required updates for the payment method based on its\nquery parameters and then redirects the browser back to the `redirect_url`\nspecified when the payment method was first created.",
+        "operationId": "payment-method-confirm-callback",
         "summary": "Confirm buyer authorization",
         "x-internal": true
       }
@@ -3948,6 +3948,10 @@
     {
       "description": "In Gr4vy, a buyer represents your customer, the shopper who's performing\na checkout and making a purchase.\n\n## Features\n\nA buyer can be used by you to:\n\n* Display a human readable name (`display_name`) for a buyer in the Gr4vy admin panel\n* Associate multiple tokenized payment methods with a single user\n* Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the\n  buyer's previously stored payment methods, allowing for faster checkout.",
       "name": "Buyers"
+    },
+    {
+      "name": "Callbacks",
+      "x-internal": true
     },
     {
       "name": "Card Rulesets"
