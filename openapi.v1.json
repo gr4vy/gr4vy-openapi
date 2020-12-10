@@ -4240,7 +4240,7 @@
         "required": [
           "display_name",
           "payment_service_definition_id",
-          "required_fields",
+          "fields",
           "accepted_currencies",
           "use_test_environment",
           "accepted_countries"
@@ -4256,12 +4256,12 @@
             "description": "The ID of the payment service to use",
             "example": "stripe"
           },
-          "required_fields": {
+          "fields": {
             "type": "array",
-            "description": "A list of fields, each containing a key-value pair for each required field defined by the service for this payment service.",
+            "description": "A list of fields, each containing a key-value pair for each field defined\nby the service for this payment service. All the required fields for a\ndefinition should be posted here.",
             "items": {
               "type": "object",
-              "description": "A field containing a key-value pair for a required field defined by the service for this payment service.",
+              "description": "A field containing a key-value pair for a field defined by the definition for this payment service.",
               "properties": {
                 "key": {
                   "type": "string",
@@ -4325,9 +4325,9 @@
             "description": "A custom name for the payment service. This will be shown in the Admin UI.",
             "example": "Stripe (Main)"
           },
-          "required_fields": {
+          "fields": {
             "type": "array",
-            "description": "A list of fields, each containing a key-value pair for each required field defined by the service for this payment service.",
+            "description": "A list of fields, each containing a key-value pair for each field defined by the definition for this payment service.",
             "items": {
               "type": "object",
               "description": "A field containing a key-value pair for a required field defined by the service for this payment service.",
@@ -4406,7 +4406,7 @@
               "paypal"
             ]
           },
-          "required_fields": {
+          "fields": {
             "type": "array",
             "description": "A list of fields that need to be submitted when activating the payment service.",
             "minItems": 1,
@@ -4428,6 +4428,11 @@
                   "type": "string",
                   "example": "https://stripe.com/docs/private_api_key",
                   "description": "A URL that provides more details about this field"
+                },
+                "required": {
+                  "type": "boolean",
+                  "example": true,
+                  "description": "Defines if this field is required when the service is created"
                 }
               }
             }
@@ -4522,7 +4527,7 @@
         ],
         "required": [
           "id",
-          "required_fields",
+          "fields",
           "help_url",
           "available",
           "display_name",
@@ -4551,9 +4556,9 @@
               "paypal"
             ]
           },
-          "required_fields": {
+          "fields": {
             "type": "array",
-            "description": "A list of fields that need to be submitted when activating the payment service.",
+            "description": "A list of fields that can be submitted when activating the payment service.",
             "minItems": 1,
             "items": {
               "type": "object",
@@ -4573,6 +4578,11 @@
                   "type": "string",
                   "example": "https://stripe.com/docs/private_api_key",
                   "description": "A URL that provides more details about this field"
+                },
+                "required": {
+                  "type": "boolean",
+                  "example": true,
+                  "description": "Defines if this field is required when the service is created"
                 }
               }
             }
@@ -4641,9 +4651,9 @@
               "paypal"
             ]
           },
-          "required_fields": {
+          "fields": {
             "type": "array",
-            "description": "A list of fields that need to be submitted when activating the payment service.",
+            "description": "An updated list of fields that can be submitted when activating the payment service.",
             "minItems": 1,
             "items": {
               "type": "object",
@@ -4663,6 +4673,11 @@
                   "type": "string",
                   "example": "https://stripe.com/docs/private_api_key",
                   "description": "A URL that provides more details about this field"
+                },
+                "required": {
+                  "type": "boolean",
+                  "example": true,
+                  "description": "Defines if this field is required when the service is created"
                 }
               }
             }
