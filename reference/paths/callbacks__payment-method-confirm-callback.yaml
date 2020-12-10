@@ -1,5 +1,5 @@
 ---
-operationId: payment-method-confirmation-callback
+operationId: payment-method-confirm-callback
 summary: Confirm buyer authorization
 description: |-
   Internal API used as a redirect endpoint for payment methods that require
@@ -10,8 +10,8 @@ description: |-
   upon completion.
 
   This API applies any required updates for the payment method based on its
-  query params and then redirects the browser back to the `redirect_url` specified
-  when the payment method was first created.
+  query parameters and then redirects the browser back to the `redirect_url`
+  specified when the payment method was first created.
 tags:
   - Callbacks
 x-internal: true
@@ -26,9 +26,9 @@ responses:
     headers:
       location:
         description: |-
-          The URL to redirect the browser to. This is the `redirect_url` specified
-          when the payment method was first created with some additional query
-          parameters appended.
+          The URL to redirect the browser to. This is the `redirect_url`
+          specified when the payment method was first created with some
+          additional query parameters appended.
 
           * `payment_method_id` - The ID of the payment method
           * `payment_method_status` - The current value of the

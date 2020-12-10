@@ -38,6 +38,8 @@ tags:
       * Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the
         buyer's previously stored payment methods, allowing for faster checkout.
 
+  - name: Callbacks
+    x-internal: true
   - name: Card Rulesets
   - name: Payment Methods
   - name: Payment Services
@@ -101,11 +103,11 @@ paths:
     delete:
       $ref: "./paths/payment_methods__delete-payment-method.yaml"
 
-  "/callbacks/payment-methods/{payment_method_id}/confirmation":
+  "/callbacks/payment-methods/{payment_method_id}/confirm":
     parameters:
       - $ref: "./parameters/payment_method_id.yaml"
     get:
-      $ref: "./paths/callbacks__payment-method-confirmation-callback.yaml"
+      $ref: "./paths/callbacks__payment-method-confirm-callback.yaml"
 
   "/payment-methods/{payment_method_id}/events":
     parameters:
