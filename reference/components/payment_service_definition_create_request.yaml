@@ -8,7 +8,7 @@ x-tags:
 
 required:
   - id
-  - required_fields
+  - fields
   - help_url
   - available
   - display_name
@@ -38,10 +38,10 @@ properties:
       - card
       - paypal
 
-  required_fields:
+  fields:
     type: array
     description:
-      A list of fields that need to be submitted when activating the payment
+      A list of fields that can be submitted when activating the payment
       service.
     minItems: 1
     items:
@@ -62,6 +62,11 @@ properties:
           type: string
           example: https://stripe.com/docs/private_api_key
           description: A URL that provides more details about this field
+        required:
+          type: boolean
+          example: true
+          description: |-
+            Defines if this field is required when the service is created
 
   help_url:
     type: string
