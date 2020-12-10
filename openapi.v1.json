@@ -988,7 +988,7 @@
         }
       }
     },
-    "/payment-methods/{payment_method_id}/authorize": {
+    "/callbacks/payment-methods/{payment_method_id}/confirmation": {
       "parameters": [
         {
           "schema": {
@@ -1002,59 +1002,35 @@
           "description": "The ID of the payment method"
         }
       ],
-      "post": {
-        "operationId": "authorize-payment-method",
-        "summary": "Confirm user authorization",
-        "description": "Confirm user authorization for a payment method. This is currently only used\nto confirm and fetch the card details for a `paypal` payment method after the\nuser authorization has been completed.",
+      "get": {
+        "operationId": "payment-method-confirmation-callback",
+        "summary": "Confirm buyer authorization",
+        "description": "Internal API used as a redirect endpoint for payment methods that require\nbuyer authorization.\n\nFor example, when a buyer tries to add a PayPal payment method, the buyer\nneeds to be sent to PayPal, after which they are sent back to this endpoint\nupon completion.\n\nThis API applies any required updates for the payment method based on its\nquery params and then redirects the browser back to the `redirect_url` specified\nwhen the payment method was first created.",
         "tags": [
-          "Payment Methods"
+          "Callbacks"
         ],
+        "x-internal": true,
+        "security": [],
         "responses": {
-          "200": {
-            "description": "Returns the updated transaction",
-            "content": {
-              "application/json": {
+          "302": {
+            "description": "Redirects the browser back to the `redirect_url` specified\nwhen the payment method was first created. It appends the payment method's\nID and status.",
+            "headers": {
+              "location": {
+                "description": "The URL to redirect the browser to. This is the `redirect_url` specified\nwhen the payment method was first created with some additional query\nparameters appended.\n\n* `payment_method_id` - The ID of the payment method\n* `payment_method_status` - The current value of the\n  `payment_method_status`  field of the payment method",
                 "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/PayPal"
-                    }
-                  ]
-                },
-                "examples": {
-                  "An authorized PayPal payment method": {
-                    "value": {
-                      "type": "payment-method",
-                      "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
-                      "method": "paypal",
-                      "status": "created",
-                      "payment_method_status": "registered",
-                      "details": {
-                        "authorization_url": null
-                      },
-                      "created_at": "2013-07-16T19:23:00.000Z",
-                      "updated_at": "2013-07-16T19:23:00.000Z",
-                      "external_identifier": "user-789123",
-                      "buyer": {
-                        "type": "buyer",
-                        "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-                        "external_identifier": "user-789123",
-                        "display_name": "John L.",
-                        "created_at": "2013-07-16T19:23:00.000Z",
-                        "updated_at": "2013-07-16T19:23:00.000Z"
-                      }
-                    }
-                  }
+                  "type": "string",
+                  "format": "url",
+                  "example": "https://example.com/callback?payment_method_id=77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5&payment_method_status=registered"
                 }
               }
             }
           },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
+                  "$ref": "#/components/schemas/Error404NotFound"
                 }
               }
             }
@@ -3257,6 +3233,25 @@
             "description": "Partial number details for a registered card, hiding all but the last few\nnumbers.",
             "example": "XXXX XXXX XXXX 1111"
           },
+          "type": {
+            "type": "string",
+            "example": "visa",
+            "enum": [
+              "visa",
+              "mastercard",
+              "american-express",
+              "diners-club",
+              "discover",
+              "jcb",
+              "unionpay",
+              "maestro",
+              "elo",
+              "mir",
+              "hiper",
+              "hipercard"
+            ],
+            "description": "The type of the card."
+          },
           "expiration_date": {
             "type": "string",
             "description": "The expiration date for a card.",
@@ -4769,6 +4764,12 @@
           "Payment Methods"
         ],
         "properties": {
+          "email_address": {
+            "type": "string",
+            "example": "john@example.com",
+            "description": "The email address associated to the PayPal account.",
+            "nullable": true
+          },
           "authorization_url": {
             "type": "string",
             "format": "uri",
