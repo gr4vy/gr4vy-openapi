@@ -66,17 +66,3 @@ properties:
       Defines if this transaction should run in the payment provider's test
       environment. Defaults to false.
     example: false
-
-  buyer_id:
-    type: string
-    example: fe26475d-ec3e-4884-9553-f7356683f7f9
-    description: |-
-      The ID of the buyer to associate this transaction to. If provided, the
-      `buyer_external_identifier` is ignored.
-
-  buyer_external_identifier:
-    type: string
-    description: |-
-      The `external_identifier` of the buyer to associate this transaction to.
-      This field is ignored if the `buyer_id` is provided.
-    example: user-789123
