@@ -2694,7 +2694,7 @@
         }
       }
     },
-    "/transactions/{transaction_id}/authorize": {
+    "/transactions/{transaction_id}/capture": {
       "parameters": [
         {
           "schema": {
@@ -2707,24 +2707,32 @@
         }
       ],
       "post": {
-        "operationId": "authorize-transaction",
-        "summary": "Authorize pending transaction",
+        "operationId": "capture-transaction",
+        "summary": "Capture authorized transaction",
+        "description": "Captures a previously authorized transaction.",
         "tags": [
           "Transactions"
         ],
-        "description": "Authorize an existing but pending transaction.\n\nThis endpoint is used when a transaction was previously created that required\nadditional information, or a redirect, from the buyer. Use this endpoint to\npost the additional information to trigger the transaction to be properly\nauthorized.\n\nAdditionally, this endpoint will capture the transaction and store the payment\nmethod if this was previously specified when creating the transaction. We\ncurrently do not support overwriting these settings at this point.",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TransactionAuthorizeRequest"
+                "$ref": "#/components/schemas/TransactionCaptureRequest"
+              },
+              "examples": {
+                "Capture an authorization": {
+                  "value": {
+                    "amount": 1299,
+                    "currency": "USD"
+                  }
+                }
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "A transaction",
             "content": {
               "application/json": {
                 "schema": {
@@ -2780,7 +2788,7 @@
         }
       }
     },
-    "/transactions/{transaction_id}/capture": {
+    "/transactions/{transaction_id}/refund": {
       "parameters": [
         {
           "schema": {
@@ -2793,53 +2801,19 @@
         }
       ],
       "post": {
-        "operationId": "capture-transaction",
-        "summary": "Capture authorized transaction",
-        "description": "Captures a previously authorized transaction.",
+        "operationId": "refund-transaction",
+        "summary": "Refund or void transaction",
+        "description": "Refunds or voids transaction. If this transaction was already captured, it\nwill issue a refund. If the transaction was not yet captured the authorization\nwill instead be voided.",
         "tags": [
           "Transactions"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TransactionCaptureRequest"
-              },
-              "examples": {
-                "Capture an authorization": {
-                  "value": {
-                    "amount": 1299,
-                    "currency": "USD"
-                  }
-                }
-              }
-            }
-          }
-        },
         "responses": {
-          "201": {
-            "description": "A transaction",
+          "200": {
+            "description": "The cancelled transaction.",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Transaction"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error400BadRequest"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error400IncorrectJson"
-                    }
-                  ]
                 }
               }
             }
