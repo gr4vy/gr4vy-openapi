@@ -8,7 +8,8 @@
     },
     "description": "Welcome to the Gr4vy API reference documentation.\nOur API is still very much a work in product and subject to change.",
     "license": {
-      "name": "MIT"
+      "name": "MIT",
+      "url": "https://raw.githubusercontent.com/gr4vy/gr4vy-openapi/main/LICENSE"
     },
     "termsOfService": "https://gr4vy.com",
     "title": "Gr4vy API (Beta)",
@@ -983,15 +984,13 @@
             "description": "The country for which to return available payment options",
             "in": "query",
             "name": "country",
-            "type": "string",
-            "x-example": "IT"
+            "type": "string"
           },
           {
             "description": "The currency for which to return available payment options",
             "in": "query",
             "name": "currency",
-            "type": "string",
-            "x-example": "EUR"
+            "type": "string"
           }
         ],
         "responses": {
@@ -3979,10 +3978,15 @@
   ],
   "tags": [
     {
+      "description": "The asynchronous (async) APIs are convenience APIs that function as an\nalternative way to create transactions and register payment methods\nwithout having to wait for the API to complete. Each of thee APIs returns\ndirectly without processing the request fully, allowing you to render a\nnew page for the buyer while the request is processed.",
+      "name": "Async APIs"
+    },
+    {
       "description": "In Gr4vy, a buyer represents your customer, the shopper who's performing\na checkout and making a purchase.\n\n## Features\n\nA buyer can be used by you to:\n\n* Display a human readable name (`display_name`) for a buyer in the Gr4vy admin panel\n* Associate multiple tokenized payment methods with a single user\n* Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the\n  buyer's previously stored payment methods, allowing for faster checkout.",
       "name": "Buyers"
     },
     {
+      "description": "Callbacks are API endpoints used by Gr4vy for catching redirect callbacks\nfrom payment providers.",
       "name": "Callbacks",
       "x-internal": true
     },
@@ -3999,20 +4003,17 @@
       "name": "Payment Options"
     },
     {
-      "description": "In Gr4vy, a payment service represents a configured payment provider\n(Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,\netc)\n\n## Features\n\nThe payment services API can be used to:\n\n* Provide Gr4vy with the payment credentials for a payment provider\n* Set a display name for a payment provider\n* Prepare a payment provider for usage in a ruleset",
-      "name": "Payment Services"
-    },
-    {
+      "description": "Payment service definitions describe the fields required for a payment\nservice to be configured.",
       "name": "Payment Service Definitions",
       "x-internal": true
     },
     {
-      "description": "In Gr4vy, a transaction represents a payment in any state, either before it is\nauthorized, once it is captured, or after it has been refunded.\n\n## Features\n\nThe transactions API can be used to:\n\n- Authorize, capture, and store cards\n- Authorize, capture, and store alternative payment methods like PayPal\n- Refund, void, and otherwise cancel existing transactions",
-      "name": "Transactions"
+      "description": "In Gr4vy, a payment service represents a configured payment provider\n(Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,\netc)\n\n## Features\n\nThe payment services API can be used to:\n\n* Provide Gr4vy with the payment credentials for a payment provider\n* Set a display name for a payment provider\n* Prepare a payment provider for usage in a ruleset",
+      "name": "Payment Services"
     },
     {
-      "description": "The asynchronous (async) APIs are convenience APIs that function as an\nalternative way to create transactions and register payment methods\nwithout having to wait for the API to complete. Each of thee APIs returns\ndirectly without processing the request fully, allowing you to render a\nnew page for the buyer while the request is processed.",
-      "name": "Async APIs"
+      "description": "In Gr4vy, a transaction represents a payment in any state, either before it is\nauthorized, once it is captured, or after it has been refunded.\n\n## Features\n\nThe transactions API can be used to:\n\n- Authorize, capture, and store cards\n- Authorize, capture, and store alternative payment methods like PayPal\n- Refund, void, and otherwise cancel existing transactions",
+      "name": "Transactions"
     }
   ],
   "x-components": {}
