@@ -38,7 +38,8 @@
       "name": "Card Rulesets"
     },
     {
-      "name": "Payment Methods"
+      "name": "Payment Methods",
+      "description": "In Gr4vy, a payment method represents a way in which a payment can be processed,\nfor example a card payment, a PayPal payment, or a Bitcoin payment.\n\n## Features\n\nThe payment method API can be used to:\n\n* Determine the available payment methods in a cluster\n* Determine the available payment method for a buyer in a specific currency and country\n* Store (also known as tokenize) a payment method for a buyer\n* Fetch all previously tokenized payment methods for a buyer"
     },
     {
       "name": "Payment Services"
@@ -48,7 +49,8 @@
       "x-internal": true
     },
     {
-      "name": "Transactions"
+      "name": "Transactions",
+      "description": "In Gr4vy, a transaction represents a payment in any state, either before it is\nauthorized, once it is captured, or after it has been refunded.\n\n## Features\n\nThe transactions API can be used to:\n\n- Authorize, capture, and store cards\n- Authorize, capture, and store alternative payment methods like PayPal\n- Refund, void, and otherwise cancel existing transactions"
     },
     {
       "name": "Async APIs"
@@ -57,9 +59,9 @@
   "paths": {
     "/async/payment-methods": {
       "post": {
-        "operationId": "async-register-payment-method",
-        "summary": "Register a new payment method",
-        "description": "Registers and tokenizes a new payment method",
+        "operationId": "async-store-payment-method",
+        "summary": "Store a new payment method",
+        "description": "Stores and tokenizes a new payment method",
         "tags": [
           "Async APIs"
         ],
@@ -69,10 +71,10 @@
               "schema": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/CardRegisterRequest"
+                    "$ref": "#/components/schemas/CardStoreRequest"
                   },
                   {
-                    "$ref": "#/components/schemas/PayPalRegisterRequest"
+                    "$ref": "#/components/schemas/PayPalStoreRequest"
                   }
                 ]
               }
@@ -755,8 +757,8 @@
     "/payment-methods": {
       "get": {
         "operationId": "list-payment-methods",
-        "summary": "List registered payment methods",
-        "description": "Returns a list of registered payment methods",
+        "summary": "List stored payment methods",
+        "description": "Returns a list of stored payment methods",
         "tags": [
           "Payment Methods"
         ],
@@ -827,9 +829,9 @@
         }
       },
       "post": {
-        "operationId": "register-payment-method",
-        "summary": "Register a new payment method",
-        "description": "Registers and tokenizes a new payment method",
+        "operationId": "store-payment-method",
+        "summary": "Store a new payment method",
+        "description": "Stores and tokenizes a new payment method",
         "tags": [
           "Payment Methods"
         ],
@@ -839,10 +841,10 @@
               "schema": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/CardRegisterRequest"
+                    "$ref": "#/components/schemas/CardStoreRequest"
                   },
                   {
-                    "$ref": "#/components/schemas/PayPalRegisterRequest"
+                    "$ref": "#/components/schemas/PayPalStoreRequest"
                   }
                 ]
               }
@@ -913,8 +915,8 @@
       ],
       "get": {
         "operationId": "get-payment-method",
-        "summary": "Get registered payment method",
-        "description": "Gets the details for a registered payment method",
+        "summary": "Get stored payment method",
+        "description": "Gets the details for a stored payment method",
         "tags": [
           "Payment Methods"
         ],
@@ -961,7 +963,7 @@
       "delete": {
         "operationId": "delete-payment-method",
         "summary": "Delete a payment method",
-        "description": "Removes a registered payment method",
+        "description": "Removes a stored payment method",
         "tags": [
           "Payment Methods"
         ],
@@ -1024,7 +1026,7 @@
                 "schema": {
                   "type": "string",
                   "format": "url",
-                  "example": "https://example.com/callback?payment_method_id=77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5&payment_method_status=registered"
+                  "example": "https://example.com/callback?payment_method_id=77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5&payment_method_status=stored"
                 }
               }
             }
@@ -2539,6 +2541,7 @@
                         "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
                         "method": "card",
                         "status": "created",
+                        "payment_method_status": "stored",
                         "details": {
                           "number": "XXXX XXXX XXXX 1111",
                           "expiration_date": "11 / 21"
@@ -2574,8 +2577,10 @@
                         "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
                         "method": "paypal",
                         "status": "buyer_authorization_required",
+                        "payment_method_status": "stored",
                         "details": {
-                          "authorization_url": "https://paypal.com/..."
+                          "email_address": null,
+                          "authorization_url": "https://redirect.***.gr4vy.com/transactions/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c"
                         },
                         "created_at": "2013-07-16T19:23:00.000Z",
                         "updated_at": "2013-07-16T19:23:00.000Z",
@@ -2655,65 +2660,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Transaction"
-                },
-                "examples": {
-                  "A card transaction": {
-                    "value": {
-                      "type": "transaction",
-                      "id": "18d41625-16d5-40a8-bc92-16f5e1158e55",
-                      "status": "created",
-                      "transaction_status": "pending",
-                      "amount": 1299,
-                      "currency": "USD",
-                      "payment_method": {
-                        "type": "card",
-                        "id": "fa5dc53e-b070-417b-9355-5dc9b80a69e3",
-                        "authorization_url": null
-                      },
-                      "created_at": "2013-07-16T19:23:00.000Z",
-                      "updated_at": "2013-07-16T19:23:00.000Z",
-                      "external_identifier": null,
-                      "payment_service_id": "stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480"
-                    }
-                  },
-                  "A PayPal transaction": {
-                    "value": {
-                      "type": "transaction",
-                      "id": "18d41625-16d5-40a8-bc92-16f5e1158e55",
-                      "status": "created",
-                      "transaction_status": "pending",
-                      "amount": 1299,
-                      "currency": "USD",
-                      "payment_method": {
-                        "type": "paypal",
-                        "id": "2ca870b0-4e73-42c7-8651-86bd2e833608",
-                        "authorization_url": null
-                      },
-                      "created_at": "2013-07-16T19:23:00.000Z",
-                      "updated_at": "2013-07-16T19:23:00.000Z",
-                      "external_identifier": null,
-                      "payment_service_id": "stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480"
-                    }
-                  },
-                  "A BitCoin transaction": {
-                    "value": {
-                      "type": "transaction",
-                      "id": "18d41625-16d5-40a8-bc92-16f5e1158e55",
-                      "status": "created",
-                      "transaction_status": "pending",
-                      "amount": 0.039999,
-                      "currency": "USD",
-                      "payment_method": {
-                        "type": "bitcoin",
-                        "id": "2ca870b0-4e73-42c7-8651-86bd2e833608",
-                        "authorization_url": null
-                      },
-                      "created_at": "2013-07-16T19:23:00.000Z",
-                      "updated_at": "2013-07-16T19:23:00.000Z",
-                      "external_identifier": null,
-                      "payment_service_id": "stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480"
-                    }
-                  }
                 }
               }
             }
@@ -2783,27 +2729,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Transaction"
-                },
-                "examples": {
-                  "An authorized transaction": {
-                    "value": {
-                      "type": "transaction",
-                      "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-                      "status": "created",
-                      "transaction_status": "authorized",
-                      "amount": 1299,
-                      "currency": "USD",
-                      "payment_method": {
-                        "type": "card",
-                        "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
-                        "authorization_url": null
-                      },
-                      "created_at": "2013-07-16T19:23:00.000Z",
-                      "external_identifier": "user-789123",
-                      "updated_at": "2019-08-24T14:15:22Z",
-                      "payment_service_id": "stripe-card-169f5226-4644-4d1e-ac36-14999e73601f"
-                    }
-                  }
                 }
               }
             }
@@ -2898,27 +2823,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Transaction"
-                },
-                "examples": {
-                  "A transaction": {
-                    "value": {
-                      "type": "transaction",
-                      "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-                      "status": "created",
-                      "transaction_status": "authorized",
-                      "amount": 1299,
-                      "currency": "USD",
-                      "payment_method": {
-                        "type": "card",
-                        "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
-                        "authorization_url": null
-                      },
-                      "created_at": "2013-07-16T19:23:00.000Z",
-                      "external_identifier": "user-789123",
-                      "updated_at": "2019-08-24T14:15:22Z",
-                      "payment_service_id": "stripe-card-169f5226-4644-4d1e-ac36-14999e73601f"
-                    }
-                  }
                 }
               }
             }
@@ -3190,7 +3094,7 @@
       },
       "Card": {
         "title": "Card",
-        "description": "A registered card",
+        "description": "A stored card",
         "type": "object",
         "x-tags": [
           "Payment Methods"
@@ -3209,9 +3113,9 @@
               "payment_method_status": {
                 "type": "string",
                 "description": "The state of the card tokenization.",
-                "example": "registered",
+                "example": "stored",
                 "enum": [
-                  "registered"
+                  "stored"
                 ]
               },
               "details": {
@@ -3226,7 +3130,7 @@
       },
       "CardDetails": {
         "title": "Card details",
-        "description": "Additional details about a registered card",
+        "description": "Additional details about a stored card",
         "type": "object",
         "x-tags": [
           "Payment Methods"
@@ -3234,7 +3138,7 @@
         "properties": {
           "number": {
             "type": "string",
-            "description": "Partial number details for a registered card, hiding all but the last few\nnumbers.",
+            "description": "Partial number details for a stored card, hiding all but the last few\nnumbers.",
             "example": "XXXX XXXX XXXX 1111"
           },
           "type": {
@@ -3263,8 +3167,8 @@
           }
         }
       },
-      "CardRegisterRequest": {
-        "title": "Card (Register)",
+      "CardStoreRequest": {
+        "title": "Card (Store)",
         "type": "object",
         "description": "A request to store a card.",
         "x-tags": [
@@ -3975,7 +3879,7 @@
                 "$ref": "#/components/schemas/Buyer"
               },
               {
-                "description": "The optional buyer for which this payment method has been registered."
+                "description": "The optional buyer for which this payment method has been stored."
               },
               {
                 "nullable": true
@@ -3987,14 +3891,14 @@
       "PaymentMethods": {
         "title": "Cards",
         "type": "object",
-        "description": "A list of registered payment methods",
+        "description": "A list of stored payment methods",
         "x-tags": [
           "PaymentMethods"
         ],
         "properties": {
           "items": {
             "type": "array",
-            "description": "A list of registered payment methods",
+            "description": "A list of stored payment methods",
             "items": {
               "oneOf": [
                 {
@@ -4736,7 +4640,7 @@
       },
       "PayPal": {
         "title": "PayPal Account",
-        "description": "A registered PayPal account",
+        "description": "A stored PayPal account",
         "type": "object",
         "x-tags": [
           "Payment Methods"
@@ -4754,10 +4658,10 @@
               },
               "payment_method_status": {
                 "type": "string",
-                "description": "The state of the account tokenization. After the first call this will\nbe set to `buyer_authorization_required` and the response will include\nan `authorization_url`. The buyer needs to be redirected to this URL\nto authorize the future payments. The token is subsequently posted to\nthe [authorize](/#operation/authorize-payment-method) endpoint\nafter which the `status` is updated to `registered`.",
+                "description": "The state of the account tokenization. After the first call this will\nbe set to `buyer_authorization_required` and the response will include\nan `authorization_url`. The buyer needs to be redirected to this URL\nto authorize the future payments. The token is subsequently posted to\nthe [authorize](/#operation/authorize-payment-method) endpoint\nafter which the `status` is updated to `stored`.",
                 "example": "buyer_authorization_required",
                 "enum": [
-                  "registered",
+                  "stored",
                   "buyer_authorization_required"
                 ]
               },
@@ -4773,7 +4677,7 @@
       },
       "PayPalDetails": {
         "title": "PayPal account details",
-        "description": "Additional details about a registered PayPal account",
+        "description": "Additional details about a stored PayPal account",
         "type": "object",
         "x-tags": [
           "Payment Methods"
@@ -4788,14 +4692,14 @@
           "authorization_url": {
             "type": "string",
             "format": "uri",
-            "example": "https://paypal.com.....",
+            "example": "https://redirect.***.gr4vy.com/transactions/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c",
             "description": "The optional URL that the buyer needs to be redirected to to further authorize their PayPal payments.",
             "nullable": true
           }
         }
       },
-      "PayPalRegisterRequest": {
-        "title": "PayPal Account (Register)",
+      "PayPalStoreRequest": {
+        "title": "PayPal Account (Store)",
         "type": "object",
         "description": "A request to tokenize a PayPal account.",
         "x-tags": [
@@ -4817,7 +4721,7 @@
           "redirect_url": {
             "type": "string",
             "format": "uri",
-            "description": "The redirect URL to redirect a buyer to after they have authorized their\nPayPal transaction. This needs to match the URL registered for your PayPal\napplication.",
+            "description": "The redirect URL to redirect a buyer to after they have authorized their\nPayPal transaction.",
             "example": "https://example.com/callback"
           },
           "external_identifier": {
@@ -5117,10 +5021,10 @@
           "payment_method": {
             "oneOf": [
               {
-                "$ref": "#/components/schemas/CardRegisterRequest"
+                "$ref": "#/components/schemas/CardStoreRequest"
               },
               {
-                "$ref": "#/components/schemas/PayPalRegisterRequest"
+                "$ref": "#/components/schemas/PayPalStoreRequest"
               }
             ],
             "description": "The optional payment method details to create an authorization for. This field is required for processing a card."
