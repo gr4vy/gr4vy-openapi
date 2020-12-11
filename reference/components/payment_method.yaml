@@ -55,5 +55,5 @@ properties:
     allOf:
       - $ref: "../openapi.yaml#/components/schemas/Buyer"
       - description: |-
-          The optional buyer for which this payment method has been registered.
+          The optional buyer for which this payment method has been stored.
       - nullable: true

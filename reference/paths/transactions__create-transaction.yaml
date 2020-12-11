@@ -82,6 +82,7 @@ responses:
                 id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
                 method: card
                 status: created
+                payment_method_status: stored
                 details:
                   number: XXXX XXXX XXXX 1111
                   expiration_date: 11 / 21
@@ -113,8 +114,11 @@ responses:
                 id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
                 method: paypal
                 status: buyer_authorization_required
+                payment_method_status: stored
                 details:
-                  authorization_url: "https://paypal.com/..."
+                  email_address: null
+                  authorization_url: |-
+                    https://redirect.***.gr4vy.com/transactions/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c
                 created_at: "2013-07-16T19:23:00.000Z"
                 updated_at: "2013-07-16T19:23:00.000Z"
                 external_identifier: user-789123

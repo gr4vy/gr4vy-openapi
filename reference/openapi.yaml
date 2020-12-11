@@ -42,16 +42,41 @@ tags:
     x-internal: true
   - name: Card Rulesets
   - name: Payment Methods
+    description: |-
+      In Gr4vy, a payment method represents a way in which a payment can be processed,
+      for example a card payment, a PayPal payment, or a Bitcoin payment.
+
+      ## Features
+
+      The payment method API can be used to:
+
+      * Determine the available payment methods in a cluster
+      * Determine the available payment method for a buyer in a specific currency and country
+      * Store (also known as tokenize) a payment method for a buyer
+      * Fetch all previously tokenized payment methods for a buyer
+
   - name: Payment Services
   - name: Payment Service Definitions
     x-internal: true
   - name: Transactions
+    description: |-
+      In Gr4vy, a transaction represents a payment in any state, either before it is
+      authorized, once it is captured, or after it has been refunded.
+
+      ## Features
+
+      The transactions API can be used to:
+
+      - Authorize, capture, and store cards
+      - Authorize, capture, and store alternative payment methods like PayPal
+      - Refund, void, and otherwise cancel existing transactions
+
   - name: Async APIs
 
 paths:
   "/async/payment-methods":
     post:
-      $ref: "./paths/payment_methods__async-register-payment-method.yaml"
+      $ref: "./paths/payment_methods__async-store-payment-method.yaml"
 
   "/async/transactions":
     post:
@@ -93,7 +118,7 @@ paths:
     get:
       $ref: "./paths/payment_methods__list-payment-methods.yaml"
     post:
-      $ref: "./paths/payment_methods__register-payment-method.yaml"
+      $ref: "./paths/payment_methods__store-payment-method.yaml"
 
   "/payment-methods/{payment_method_id}":
     parameters:
@@ -213,8 +238,8 @@ components:
       $ref: "./components/card.yaml"
     CardDetails:
       $ref: "./components/card_details.yaml"
-    CardRegisterRequest:
-      $ref: "./components/card_register_request.yaml"
+    CardStoreRequest:
+      $ref: "./components/card_store_request.yaml"
     CardRuleset:
       $ref: "./components/card_ruleset.yaml"
     CardRulesets:
@@ -269,8 +294,8 @@ components:
       $ref: "./components/paypal.yaml"
     PayPalDetails:
       $ref: "./components/paypal_details.yaml"
-    PayPalRegisterRequest:
-      $ref: "./components/paypal_register_request.yaml"
+    PayPalStoreRequest:
+      $ref: "./components/paypal_store_request.yaml"
     Status:
       $ref: "./components/status.yaml"
     Statuses:

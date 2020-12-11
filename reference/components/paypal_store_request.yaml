@@ -1,5 +1,5 @@
 ---
-title: PayPal Account (Register)
+title: PayPal Account (Store)
 type: object
 description: A request to tokenize a PayPal account.
 
@@ -23,8 +23,7 @@ properties:
     format: uri
     description: |-
       The redirect URL to redirect a buyer to after they have authorized their
-      PayPal transaction. This needs to match the URL registered for your PayPal
-      application.
+      PayPal transaction.
     example: https://example.com/callback
 
   external_identifier:

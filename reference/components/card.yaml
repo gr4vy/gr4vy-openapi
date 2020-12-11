@@ -1,6 +1,6 @@
 ---
 title: Card
-description: A registered card
+description: A stored card
 type: object
 x-tags:
   - Payment Methods
@@ -18,9 +18,9 @@ allOf:
         type: string
         description: |-
           The state of the card tokenization.
-        example: registered
+        example: stored
         enum:
-          - registered
+          - stored
 
       details:
         $ref: |-

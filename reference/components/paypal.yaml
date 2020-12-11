@@ -1,6 +1,6 @@
 ---
 title: PayPal Account
-description: A registered PayPal account
+description: A stored PayPal account
 type: object
 x-tags:
   - Payment Methods
@@ -22,10 +22,10 @@ allOf:
           an `authorization_url`. The buyer needs to be redirected to this URL
           to authorize the future payments. The token is subsequently posted to
           the [authorize](/#operation/authorize-payment-method) endpoint
-          after which the `status` is updated to `registered`.
+          after which the `status` is updated to `stored`.
         example: buyer_authorization_required
         enum:
-          - registered
+          - stored
           - buyer_authorization_required
 
       details:

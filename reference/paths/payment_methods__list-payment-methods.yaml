@@ -1,7 +1,7 @@
 ---
 operationId: list-payment-methods
-summary: List registered payment methods
-description: Returns a list of registered payment methods
+summary: List stored payment methods
+description: Returns a list of stored payment methods
 tags:
   - Payment Methods
 

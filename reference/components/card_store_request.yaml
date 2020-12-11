@@ -1,5 +1,5 @@
 ---
-title: Card (Register)
+title: Card (Store)
 type: object
 description: A request to store a card.
 

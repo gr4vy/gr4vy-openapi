@@ -10,58 +10,6 @@ responses:
       application/json:
         schema:
           $ref: "../openapi.yaml#/components/schemas/Transaction"
-        examples:
-          A card transaction:
-            value:
-              type: transaction
-              id: 18d41625-16d5-40a8-bc92-16f5e1158e55
-              status: created
-              transaction_status: pending
-              amount: 1299
-              currency: USD
-              payment_method:
-                type: card
-                id: fa5dc53e-b070-417b-9355-5dc9b80a69e3
-                authorization_url: null
-              created_at: "2013-07-16T19:23:00.000Z"
-              updated_at: "2013-07-16T19:23:00.000Z"
-              external_identifier: null
-              payment_service_id: |-
-                stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480
-          A PayPal transaction:
-            value:
-              type: transaction
-              id: 18d41625-16d5-40a8-bc92-16f5e1158e55
-              status: created
-              transaction_status: pending
-              amount: 1299
-              currency: USD
-              payment_method:
-                type: paypal
-                id: 2ca870b0-4e73-42c7-8651-86bd2e833608
-                authorization_url: null
-              created_at: "2013-07-16T19:23:00.000Z"
-              updated_at: "2013-07-16T19:23:00.000Z"
-              external_identifier: null
-              payment_service_id: |-
-                stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480
-          A BitCoin transaction:
-            value:
-              type: transaction
-              id: 18d41625-16d5-40a8-bc92-16f5e1158e55
-              status: created
-              transaction_status: pending
-              amount: 0.039999
-              currency: USD
-              payment_method:
-                type: bitcoin
-                id: 2ca870b0-4e73-42c7-8651-86bd2e833608
-                authorization_url: null
-              created_at: "2013-07-16T19:23:00.000Z"
-              updated_at: "2013-07-16T19:23:00.000Z"
-              external_identifier: null
-              payment_service_id: |-
-                stripe-card-111afcdd-fbfd-4558-98be-5d3d28efd480
 
   "401":
     description: Returns an error if no valid authentication was provided.

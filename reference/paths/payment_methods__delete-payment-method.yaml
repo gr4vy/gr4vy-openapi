@@ -1,7 +1,7 @@
 ---
 operationId: delete-payment-method
 summary: Delete a payment method
-description: Removes a registered payment method
+description: Removes a stored payment method
 tags:
   - Payment Methods
 

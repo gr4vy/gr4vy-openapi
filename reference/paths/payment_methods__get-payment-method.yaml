@@ -1,7 +1,7 @@
 ---
 operationId: get-payment-method
-summary: Get registered payment method
-description: Gets the details for a registered payment method
+summary: Get stored payment method
+description: Gets the details for a stored payment method
 tags:
   - Payment Methods
 

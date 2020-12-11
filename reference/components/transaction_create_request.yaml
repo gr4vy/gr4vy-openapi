@@ -30,8 +30,8 @@ properties:
 
   payment_method:
     oneOf:
-      - $ref: "../openapi.yaml#/components/schemas/CardRegisterRequest"
-      - $ref: "../openapi.yaml#/components/schemas/PayPalRegisterRequest"
+      - $ref: "../openapi.yaml#/components/schemas/CardStoreRequest"
+      - $ref: "../openapi.yaml#/components/schemas/PayPalStoreRequest"
 
     description:
       The optional payment method details to create an authorization for. This

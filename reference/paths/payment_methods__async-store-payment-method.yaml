@@ -1,7 +1,7 @@
 ---
-operationId: async-register-payment-method
-summary: Register a new payment method
-description: Registers and tokenizes a new payment method
+operationId: async-store-payment-method
+summary: Store a new payment method
+description: Stores and tokenizes a new payment method
 tags:
   - Async APIs
 
@@ -11,9 +11,9 @@ requestBody:
       schema:
         oneOf:
           - $ref: |-
-              ../openapi.yaml#/components/schemas/CardRegisterRequest
+              ../openapi.yaml#/components/schemas/CardStoreRequest
           - $ref: |-
-              ../openapi.yaml#/components/schemas/PayPalRegisterRequest
+              ../openapi.yaml#/components/schemas/PayPalStoreRequest
 
 responses:
   "202":
