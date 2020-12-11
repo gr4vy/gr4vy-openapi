@@ -35,14 +35,20 @@
       "x-internal": true
     },
     {
-      "name": "Card Rulesets"
+      "name": "Card Rulesets",
+      "description": "In Gr4vy, a card ruleset represents a set of rules that define how a card\ntransaction is processed. It determines which payment services are used,\nand with what priority, based on the transaction amount, card type, and\nmany more attributes.\n\n## Features\n\nA card ruleset can be used to:\n\n* Determine what payment service is used based on transaction and card\nproperties.\n* Determine what fallback payment services to use if the transaction\ndid not succeed with the initial provider."
     },
     {
       "name": "Payment Methods",
       "description": "In Gr4vy, a payment method represents a way in which a payment can be processed,\nfor example a card payment, a PayPal payment, or a Bitcoin payment.\n\n## Features\n\nThe payment method API can be used to:\n\n* Determine the available payment methods in a cluster\n* Determine the available payment method for a buyer in a specific currency and country\n* Store (also known as tokenize) a payment method for a buyer\n* Fetch all previously tokenized payment methods for a buyer"
     },
     {
-      "name": "Payment Services"
+      "name": "Payment Options",
+      "description": "In Gr4vy, a payment option represents a list of methods (card, PayPal,\netc) that are available for a given locale.\n\n## Features\n\nThe payment options API can be used to:\n\n* Determine what types of payments can be processed in a specific locale\n* Display a list options to a buyer to choose from"
+    },
+    {
+      "name": "Payment Services",
+      "description": "In Gr4vy, a payment service represents a configured payment provider\n(Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,\netc)\n\n## Features\n\nThe payment services API can be used to:\n\n* Provide Gr4vy with the payment credentials for a payment provider\n* Set a display name for a payment provider\n* Prepare a payment provider for usage in a ruleset"
     },
     {
       "name": "Payment Service Definitions",
@@ -53,7 +59,8 @@
       "description": "In Gr4vy, a transaction represents a payment in any state, either before it is\nauthorized, once it is captured, or after it has been refunded.\n\n## Features\n\nThe transactions API can be used to:\n\n- Authorize, capture, and store cards\n- Authorize, capture, and store alternative payment methods like PayPal\n- Refund, void, and otherwise cancel existing transactions"
     },
     {
-      "name": "Async APIs"
+      "name": "Async APIs",
+      "description": "The asynchronous (async) APIs are convenience APIs that function as an\nalternative way to create transactions and register payment methods\nwithout having to wait for the API to complete. Each of thee APIs returns\ndirectly without processing the request fully, allowing you to render a\nnew page for the buyer while the request is processed."
     }
   ],
   "paths": {
@@ -445,6 +452,56 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/callbacks/payment-methods/{payment_method_id}/confirm": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "example": "46973e9d-88a7-44a6-abfe-be4ff0134ff4",
+            "format": "uuid"
+          },
+          "name": "payment_method_id",
+          "in": "path",
+          "required": true,
+          "description": "The ID of the payment method"
+        }
+      ],
+      "get": {
+        "operationId": "payment-method-confirm-callback",
+        "summary": "Confirm buyer authorization",
+        "description": "Internal API used as a redirect endpoint for payment methods that require\nbuyer authorization.\n\nFor example, when a buyer tries to add a PayPal payment method, the buyer\nneeds to be sent to PayPal, after which they are sent back to this endpoint\nupon completion.\n\nThis API applies any required updates for the payment method based on its\nquery parameters and then redirects the browser back to the `redirect_url`\nspecified when the payment method was first created.",
+        "tags": [
+          "Callbacks"
+        ],
+        "x-internal": true,
+        "security": [],
+        "responses": {
+          "302": {
+            "description": "Redirects the browser back to the `redirect_url` specified\nwhen the payment method was first created. It appends the payment method's\nID and status.",
+            "headers": {
+              "location": {
+                "description": "The URL to redirect the browser to. This is the `redirect_url`\nspecified when the payment method was first created with some\nadditional query parameters appended.\n\n* `payment_method_id` - The ID of the payment method\n* `payment_method_status` - The current value of the\n  `payment_method_status`  field of the payment method",
+                "schema": {
+                  "type": "string",
+                  "format": "url",
+                  "example": "https://example.com/callback?payment_method_id=77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5&payment_method_status=stored"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
                 }
               }
             }
@@ -994,56 +1051,6 @@
         }
       }
     },
-    "/callbacks/payment-methods/{payment_method_id}/confirm": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string",
-            "example": "46973e9d-88a7-44a6-abfe-be4ff0134ff4",
-            "format": "uuid"
-          },
-          "name": "payment_method_id",
-          "in": "path",
-          "required": true,
-          "description": "The ID of the payment method"
-        }
-      ],
-      "get": {
-        "operationId": "payment-method-confirm-callback",
-        "summary": "Confirm buyer authorization",
-        "description": "Internal API used as a redirect endpoint for payment methods that require\nbuyer authorization.\n\nFor example, when a buyer tries to add a PayPal payment method, the buyer\nneeds to be sent to PayPal, after which they are sent back to this endpoint\nupon completion.\n\nThis API applies any required updates for the payment method based on its\nquery parameters and then redirects the browser back to the `redirect_url`\nspecified when the payment method was first created.",
-        "tags": [
-          "Callbacks"
-        ],
-        "x-internal": true,
-        "security": [],
-        "responses": {
-          "302": {
-            "description": "Redirects the browser back to the `redirect_url` specified\nwhen the payment method was first created. It appends the payment method's\nID and status.",
-            "headers": {
-              "location": {
-                "description": "The URL to redirect the browser to. This is the `redirect_url`\nspecified when the payment method was first created with some\nadditional query parameters appended.\n\n* `payment_method_id` - The ID of the payment method\n* `payment_method_status` - The current value of the\n  `payment_method_status`  field of the payment method",
-                "schema": {
-                  "type": "string",
-                  "format": "url",
-                  "example": "https://example.com/callback?payment_method_id=77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5&payment_method_status=stored"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error404NotFound"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/payment-methods/{payment_method_id}/events": {
       "parameters": [
         {
@@ -1117,6 +1124,68 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error404NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-options": {
+      "get": {
+        "operationId": "list-payment-options",
+        "summary": "List available payment options for a locale",
+        "description": "Returns a list of available payment method options for a currency\nand country.",
+        "tags": [
+          "Payment Options"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "country",
+            "example": "IT",
+            "description": "The country for which to return available payment options"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "currency",
+            "example": "EUR",
+            "description": "The currency for which to return available payment options"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of available payment options for the given currency and\ncountry code.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentOptions"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Returns an error if  any of the query parameters are not recognised.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400BadRequest"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
                 }
               }
             }
@@ -4609,6 +4678,74 @@
             "type": "boolean",
             "example": true,
             "description": "Defines if a service is available to be activated in this cluster."
+          }
+        }
+      },
+      "PaymentOption": {
+        "title": "A payment option",
+        "type": "object",
+        "description": "An available payment option for a locale",
+        "x-tags": [
+          "Payment Option"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`payment-option`",
+            "example": "payment-option",
+            "enum": [
+              "payment-option"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "description": "The type of payment method that is available",
+            "example": "card",
+            "enum": [
+              "card",
+              "paypal"
+            ]
+          },
+          "accepted_countries": {
+            "type": "array",
+            "description": "A list of countries that this option is supported for.",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "US",
+              "GB",
+              "DE"
+            ]
+          },
+          "accepted_currencies": {
+            "type": "array",
+            "description": "A list of currencies that this payment option is supported for.",
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "EUR",
+              "USD",
+              "GBP"
+            ]
+          }
+        }
+      },
+      "PaymentOptions": {
+        "title": "A list of payment options",
+        "type": "object",
+        "description": "A list of payment options",
+        "x-tags": [
+          "Payment Options"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentOption"
+            }
           }
         }
       },
