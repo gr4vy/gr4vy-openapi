@@ -1,0 +1,15 @@
+formats: []
+
+extends: [[spectral:oas, all]]
+
+rules:
+  operation-default-response: off
+  operation-2xx-response: off
+
+  parameters-need-description:
+    description: Parameter requires example
+    given: $..parameters[*].schema
+    severity: error
+    then:
+      field: example
+      function: truthy

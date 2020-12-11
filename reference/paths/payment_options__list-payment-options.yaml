@@ -10,17 +10,17 @@ tags:
 parameters:
   - schema:
       type: string
+      example: IT
     in: query
     name: country
-    example: IT
     description: |-
       The country for which to return available payment options
 
   - schema:
       type: string
+      example: EUR
     in: query
     name: currency
-    example: EUR
     description: |-
       The currency for which to return available payment options
 

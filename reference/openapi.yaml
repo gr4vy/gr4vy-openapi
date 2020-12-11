@@ -12,6 +12,7 @@ info:
   termsOfService: "https://gr4vy.com"
   license:
     name: MIT
+    url: https://raw.githubusercontent.com/gr4vy/gr4vy-openapi/main/LICENSE
   description: |-
     Welcome to the Gr4vy API reference documentation.
     Our API is still very much a work in product and subject to change.
@@ -24,6 +25,13 @@ servers:
         description: The subdomain for your cluster.
 
 tags:
+  - name: Async APIs
+    description: |-
+      The asynchronous (async) APIs are convenience APIs that function as an
+      alternative way to create transactions and register payment methods
+      without having to wait for the API to complete. Each of thee APIs returns
+      directly without processing the request fully, allowing you to render a
+      new page for the buyer while the request is processed.
   - name: Buyers
     description: |-
       In Gr4vy, a buyer represents your customer, the shopper who's performing
@@ -40,6 +48,9 @@ tags:
 
   - name: Callbacks
     x-internal: true
+    description: |-
+      Callbacks are API endpoints used by Gr4vy for catching redirect callbacks
+      from payment providers.
   - name: Card Rulesets
     description: |-
       In Gr4vy, a card ruleset represents a set of rules that define how a card
@@ -80,6 +91,11 @@ tags:
 
       * Determine what types of payments can be processed in a specific locale
       * Display a list options to a buyer to choose from
+  - name: Payment Service Definitions
+    x-internal: true
+    description: |-
+      Payment service definitions describe the fields required for a payment
+      service to be configured.
   - name: Payment Services
     description: |-
       In Gr4vy, a payment service represents a configured payment provider
@@ -93,8 +109,6 @@ tags:
       * Provide Gr4vy with the payment credentials for a payment provider
       * Set a display name for a payment provider
       * Prepare a payment provider for usage in a ruleset
-  - name: Payment Service Definitions
-    x-internal: true
   - name: Transactions
     description: |-
       In Gr4vy, a transaction represents a payment in any state, either before it is
@@ -107,14 +121,6 @@ tags:
       - Authorize, capture, and store cards
       - Authorize, capture, and store alternative payment methods like PayPal
       - Refund, void, and otherwise cancel existing transactions
-
-  - name: Async APIs
-    description: |-
-      The asynchronous (async) APIs are convenience APIs that function as an
-      alternative way to create transactions and register payment methods
-      without having to wait for the API to complete. Each of thee APIs returns
-      directly without processing the request fully, allowing you to render a
-      new page for the buyer while the request is processed.
 
 paths:
   "/async/payment-methods":
