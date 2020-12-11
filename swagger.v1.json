@@ -56,9 +56,9 @@
         "tags": [
           "Async APIs"
         ],
-        "description": "Registers and tokenizes a new payment method",
-        "operationId": "async-register-payment-method",
-        "summary": "Register a new payment method"
+        "description": "Stores and tokenizes a new payment method",
+        "operationId": "async-store-payment-method",
+        "summary": "Store a new payment method"
       }
     },
     "/async/transactions": {
@@ -852,9 +852,9 @@
         "tags": [
           "Payment Methods"
         ],
-        "description": "Returns a list of registered payment methods",
+        "description": "Returns a list of stored payment methods",
         "operationId": "list-payment-methods",
-        "summary": "List registered payment methods"
+        "summary": "List stored payment methods"
       },
       "post": {
         "consumes": [
@@ -889,9 +889,9 @@
         "tags": [
           "Payment Methods"
         ],
-        "description": "Registers and tokenizes a new payment method",
-        "operationId": "register-payment-method",
-        "summary": "Register a new payment method"
+        "description": "Stores and tokenizes a new payment method",
+        "operationId": "store-payment-method",
+        "summary": "Store a new payment method"
       }
     },
     "/payment-methods/{payment_method_id}": {
@@ -930,7 +930,7 @@
         "tags": [
           "Payment Methods"
         ],
-        "description": "Removes a registered payment method",
+        "description": "Removes a stored payment method",
         "operationId": "delete-payment-method",
         "summary": "Delete a payment method"
       },
@@ -960,9 +960,9 @@
         "tags": [
           "Payment Methods"
         ],
-        "description": "Gets the details for a registered payment method",
+        "description": "Gets the details for a stored payment method",
         "operationId": "get-payment-method",
-        "summary": "Get registered payment method"
+        "summary": "Get stored payment method"
       }
     },
     "/payment-methods/{payment_method_id}/events": {
@@ -1929,9 +1929,9 @@
             "payment_method_status": {
               "description": "The state of the card tokenization.",
               "enum": [
-                "registered"
+                "stored"
               ],
-              "example": "registered",
+              "example": "stored",
               "type": "string"
             }
           }
@@ -1940,7 +1940,7 @@
           "$ref": "#/definitions/PaymentMethod"
         }
       ],
-      "description": "A registered card",
+      "description": "A stored card",
       "title": "Card",
       "type": "object",
       "x-tags": [
@@ -1948,7 +1948,7 @@
       ]
     },
     "CardDetails": {
-      "description": "Additional details about a registered card",
+      "description": "Additional details about a stored card",
       "properties": {
         "expiration_date": {
           "description": "The expiration date for a card.",
@@ -1956,7 +1956,7 @@
           "type": "string"
         },
         "number": {
-          "description": "Partial number details for a registered card, hiding all but the last few\nnumbers.",
+          "description": "Partial number details for a stored card, hiding all but the last few\nnumbers.",
           "example": "XXXX XXXX XXXX 1111",
           "type": "string"
         },
@@ -1984,69 +1984,6 @@
       "type": "object",
       "x-tags": [
         "Payment Methods"
-      ]
-    },
-    "CardRegisterRequest": {
-      "description": "A request to store a card.",
-      "properties": {
-        "buyer_external_identifier": {
-          "description": "The `external_identifier` of the buyer to associate this payment method\nto. This field is ignored if the `buyer_id` is provided.",
-          "example": "user-789123",
-          "type": "string"
-        },
-        "buyer_id": {
-          "description": "The ID of the buyer to associate this payment method to. If provided, the\n`buyer_external_identifier` is ignored.",
-          "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-          "format": "uuid",
-          "type": "string"
-        },
-        "expiration_date": {
-          "description": "The expiration date of the card, formatted `MM/YY`. If a card has been\npreviously stored with us this value is optional.\n\nIf the `number` of this card represents a tokenized card, then this value\nis ignored.",
-          "example": "11/15",
-          "maxLength": 5,
-          "minLength": 5,
-          "pattern": "^\\d\\d/\\d\\d$",
-          "type": "string"
-        },
-        "external_identifier": {
-          "description": "An external identifier that can be used to match the card against your own records.",
-          "example": "user-789123",
-          "type": "string",
-          "x-nullable": true
-        },
-        "method": {
-          "description": "`card`",
-          "enum": [
-            "card"
-          ],
-          "example": "card",
-          "type": "string"
-        },
-        "number": {
-          "description": "The 15-16 digit number for this credit card as it can be found on the\nfront of the card.\n\nIf a card has been stored with us previously, this number will represent\nthe unique tokenized card ID provided via our API.",
-          "example": "4111111111111111",
-          "maxLength": 16,
-          "minLength": 14,
-          "pattern": "^[0-9]{14,16}$",
-          "type": "string"
-        },
-        "security_code": {
-          "description": "The 3 or 4 digit security code often found on the card. This often\nreferred to as the CVV or CVD.\n\nIf the `number` of this card represents a tokenized card, then this value\nis ignored.",
-          "example": "123",
-          "maxLength": 4,
-          "minLength": 3,
-          "pattern": "^\\d{3,4}$",
-          "type": "string"
-        }
-      },
-      "required": [
-        "method",
-        "number"
-      ],
-      "title": "Card (Register)",
-      "type": "object",
-      "x-tags": [
-        "Request Bodies"
       ]
     },
     "CardRuleConditional": {
@@ -2335,6 +2272,69 @@
       "type": "object",
       "x-tags": [
         "Card Rulesets"
+      ]
+    },
+    "CardStoreRequest": {
+      "description": "A request to store a card.",
+      "properties": {
+        "buyer_external_identifier": {
+          "description": "The `external_identifier` of the buyer to associate this payment method\nto. This field is ignored if the `buyer_id` is provided.",
+          "example": "user-789123",
+          "type": "string"
+        },
+        "buyer_id": {
+          "description": "The ID of the buyer to associate this payment method to. If provided, the\n`buyer_external_identifier` is ignored.",
+          "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+          "format": "uuid",
+          "type": "string"
+        },
+        "expiration_date": {
+          "description": "The expiration date of the card, formatted `MM/YY`. If a card has been\npreviously stored with us this value is optional.\n\nIf the `number` of this card represents a tokenized card, then this value\nis ignored.",
+          "example": "11/15",
+          "maxLength": 5,
+          "minLength": 5,
+          "pattern": "^\\d\\d/\\d\\d$",
+          "type": "string"
+        },
+        "external_identifier": {
+          "description": "An external identifier that can be used to match the card against your own records.",
+          "example": "user-789123",
+          "type": "string",
+          "x-nullable": true
+        },
+        "method": {
+          "description": "`card`",
+          "enum": [
+            "card"
+          ],
+          "example": "card",
+          "type": "string"
+        },
+        "number": {
+          "description": "The 15-16 digit number for this credit card as it can be found on the\nfront of the card.\n\nIf a card has been stored with us previously, this number will represent\nthe unique tokenized card ID provided via our API.",
+          "example": "4111111111111111",
+          "maxLength": 16,
+          "minLength": 14,
+          "pattern": "^[0-9]{14,16}$",
+          "type": "string"
+        },
+        "security_code": {
+          "description": "The 3 or 4 digit security code often found on the card. This often\nreferred to as the CVV or CVD.\n\nIf the `number` of this card represents a tokenized card, then this value\nis ignored.",
+          "example": "123",
+          "maxLength": 4,
+          "minLength": 3,
+          "pattern": "^\\d{3,4}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "method",
+        "number"
+      ],
+      "title": "Card (Store)",
+      "type": "object",
+      "x-tags": [
+        "Request Bodies"
       ]
     },
     "Error": {
@@ -2635,9 +2635,9 @@
               "type": "string"
             },
             "payment_method_status": {
-              "description": "The state of the account tokenization. After the first call this will\nbe set to `buyer_authorization_required` and the response will include\nan `authorization_url`. The buyer needs to be redirected to this URL\nto authorize the future payments. The token is subsequently posted to\nthe [authorize](/#operation/authorize-payment-method) endpoint\nafter which the `status` is updated to `registered`.",
+              "description": "The state of the account tokenization. After the first call this will\nbe set to `buyer_authorization_required` and the response will include\nan `authorization_url`. The buyer needs to be redirected to this URL\nto authorize the future payments. The token is subsequently posted to\nthe [authorize](/#operation/authorize-payment-method) endpoint\nafter which the `status` is updated to `stored`.",
               "enum": [
-                "registered",
+                "stored",
                 "buyer_authorization_required"
               ],
               "example": "buyer_authorization_required",
@@ -2649,7 +2649,7 @@
           "$ref": "#/definitions/PaymentMethod"
         }
       ],
-      "description": "A registered PayPal account",
+      "description": "A stored PayPal account",
       "title": "PayPal Account",
       "type": "object",
       "x-tags": [
@@ -2657,11 +2657,11 @@
       ]
     },
     "PayPalDetails": {
-      "description": "Additional details about a registered PayPal account",
+      "description": "Additional details about a stored PayPal account",
       "properties": {
         "authorization_url": {
           "description": "The optional URL that the buyer needs to be redirected to to further authorize their PayPal payments.",
-          "example": "https://paypal.com.....",
+          "example": "https://redirect.***.gr4vy.com/transactions/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c",
           "format": "uri",
           "type": "string",
           "x-nullable": true
@@ -2679,7 +2679,7 @@
         "Payment Methods"
       ]
     },
-    "PayPalRegisterRequest": {
+    "PayPalStoreRequest": {
       "description": "A request to tokenize a PayPal account.",
       "properties": {
         "buyer_external_identifier": {
@@ -2708,7 +2708,7 @@
           "type": "string"
         },
         "redirect_url": {
-          "description": "The redirect URL to redirect a buyer to after they have authorized their\nPayPal transaction. This needs to match the URL registered for your PayPal\napplication.",
+          "description": "The redirect URL to redirect a buyer to after they have authorized their\nPayPal transaction.",
           "example": "https://example.com/callback",
           "format": "uri",
           "type": "string"
@@ -2718,7 +2718,7 @@
         "method",
         "redirect_url"
       ],
-      "title": "PayPal Account (Register)",
+      "title": "PayPal Account (Store)",
       "type": "object",
       "x-tags": [
         "Request Bodies"
@@ -2733,7 +2733,7 @@
               "$ref": "#/definitions/Buyer"
             },
             {
-              "description": "The optional buyer for which this payment method has been registered."
+              "description": "The optional buyer for which this payment method has been stored."
             },
             {
               "x-nullable": true
@@ -2879,10 +2879,10 @@
       ]
     },
     "PaymentMethods": {
-      "description": "A list of registered payment methods",
+      "description": "A list of stored payment methods",
       "properties": {
         "items": {
-          "description": "A list of registered payment methods",
+          "description": "A list of stored payment methods",
           "items": {},
           "type": "array"
         },
@@ -3969,6 +3969,7 @@
       "name": "Card Rulesets"
     },
     {
+      "description": "In Gr4vy, a payment method represents a way in which a payment can be processed,\nfor example a card payment, a PayPal payment, or a Bitcoin payment.\n\n## Features\n\nThe payment method API can be used to:\n\n* Determine the available payment methods in a cluster\n* Determine the available payment method for a buyer in a specific currency and country\n* Store (also known as tokenize) a payment method for a buyer\n* Fetch all previously tokenized payment methods for a buyer",
       "name": "Payment Methods"
     },
     {
@@ -3979,6 +3980,7 @@
       "x-internal": true
     },
     {
+      "description": "In Gr4vy, a transaction represents a payment in any state, either before it is\nauthorized, once it is captured, or after it has been refunded.\n\n## Features\n\nThe transactions API can be used to:\n\n- Authorize, capture, and store cards\n- Authorize, capture, and store alternative payment methods like PayPal\n- Refund, void, and otherwise cancel existing transactions",
       "name": "Transactions"
     },
     {
