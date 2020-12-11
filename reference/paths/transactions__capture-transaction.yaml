@@ -16,7 +16,7 @@ requestBody:
             currency: USD
 
 responses:
-  "201":
+  "200":
     description: A transaction
     content:
       application/json:

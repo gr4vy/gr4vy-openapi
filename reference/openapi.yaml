@@ -206,17 +206,17 @@ paths:
     get:
       $ref: "./paths/transactions__get-transaction.yaml"
 
-  "/transactions/{transaction_id}/authorize":
-    parameters:
-      - $ref: "./parameters/transaction_id.yaml"
-    post:
-      $ref: "./paths/transactions__authorize-transaction.yaml"
-
   "/transactions/{transaction_id}/capture":
     parameters:
       - $ref: "./parameters/transaction_id.yaml"
     post:
       $ref: "./paths/transactions__capture-transaction.yaml"
+
+  "/transactions/{transaction_id}/refund":
+    parameters:
+      - $ref: "./parameters/transaction_id.yaml"
+    post:
+      $ref: "./paths/transactions__refund-transaction.yaml"
 
   "/transactions/{transaction_id}/events":
     parameters:
