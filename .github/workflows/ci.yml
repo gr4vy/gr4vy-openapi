@@ -83,6 +83,12 @@ jobs:
           FOLDER: build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: "Trigger Netlify deployment"
+        uses: joelwmale/webhook-action@2.0.2
+        env:
+          WEBHOOK_URL: ${{ secrets.NETLIFY_WEBHOOK }}
+          data: "{}"
+
   swagger:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
