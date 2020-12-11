@@ -67,6 +67,7 @@ properties:
 
   buyer_id:
     type: string
+    format: uuid
     example: fe26475d-ec3e-4884-9553-f7356683f7f9
     description: |-
       The ID of the buyer to associate this payment method to. If provided, the
