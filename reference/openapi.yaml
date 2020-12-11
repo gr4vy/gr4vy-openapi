@@ -54,7 +54,7 @@ tags:
       * Determine the available payment method for a buyer in a specific currency and country
       * Store (also known as tokenize) a payment method for a buyer
       * Fetch all previously tokenized payment methods for a buyer
-
+  - name: Payment Options
   - name: Payment Services
   - name: Payment Service Definitions
     x-internal: true
@@ -98,6 +98,12 @@ paths:
     post:
       $ref: "./paths/transactions__async-batch-capture-transactions.yaml"
 
+  "/callbacks/payment-methods/{payment_method_id}/confirm":
+    parameters:
+      - $ref: "./parameters/payment_method_id.yaml"
+    get:
+      $ref: "./paths/callbacks__payment-method-confirm-callback.yaml"
+
   "/buyers":
     get:
       $ref: "./paths/buyers__list-buyers.yaml"
@@ -128,17 +134,15 @@ paths:
     delete:
       $ref: "./paths/payment_methods__delete-payment-method.yaml"
 
-  "/callbacks/payment-methods/{payment_method_id}/confirm":
-    parameters:
-      - $ref: "./parameters/payment_method_id.yaml"
-    get:
-      $ref: "./paths/callbacks__payment-method-confirm-callback.yaml"
-
   "/payment-methods/{payment_method_id}/events":
     parameters:
       - $ref: "./parameters/payment_method_id.yaml"
     get:
       $ref: "./paths/payment_methods__list-payment-method-events.yaml"
+
+  "/payment-options":
+    get:
+      $ref: "./paths/payment_options__list-payment-options.yaml"
 
   "/payment-services":
     get:
@@ -290,6 +294,10 @@ components:
       $ref: "./components/payment_service_definition_create_request.yaml"
     PaymentServiceDefinitionUpdateRequest:
       $ref: "./components/payment_service_definition_update_request.yaml"
+    PaymentOption:
+      $ref: "./components/payment_option.yaml"
+    PaymentOptions:
+      $ref: "./components/payment_options.yaml"
     PayPal:
       $ref: "./components/paypal.yaml"
     PayPalDetails:

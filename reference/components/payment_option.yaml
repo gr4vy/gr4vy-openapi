@@ -1,0 +1,44 @@
+---
+title: A payment option
+type: object
+description: An available payment option for a locale
+
+x-tags:
+  - Payment Option
+
+properties:
+  type:
+    type: string
+    description: "`payment-option`"
+    example: payment-option
+    enum:
+      - payment-option
+
+  method:
+    type: string
+    description: The type of payment method that is available
+    example: card
+    enum:
+      - card
+      - paypal
+
+  accepted_countries:
+    type: array
+    description: A list of countries that this option is supported for.
+    items:
+      type: string
+    example:
+      - US
+      - GB
+      - DE
+
+  accepted_currencies:
+    type: array
+    description: A list of currencies that this payment option is supported for.
+    minItems: 1
+    items:
+      type: string
+    example:
+      - EUR
+      - USD
+      - GBP
