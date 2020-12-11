@@ -1027,6 +1027,55 @@
         "summary": "List payment method events"
       }
     },
+    "/payment-options": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "The country for which to return available payment options",
+            "in": "query",
+            "name": "country",
+            "type": "string",
+            "x-example": "IT"
+          },
+          {
+            "description": "The currency for which to return available payment options",
+            "in": "query",
+            "name": "currency",
+            "type": "string",
+            "x-example": "EUR"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of available payment options for the given currency and\ncountry code.",
+            "schema": {
+              "$ref": "#/definitions/PaymentOptions"
+            }
+          },
+          "400": {
+            "description": "Returns an error if  any of the query parameters are not recognised.",
+            "schema": {
+              "$ref": "#/definitions/Error400BadRequest"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          }
+        },
+        "tags": [
+          "Payment Options"
+        ],
+        "description": "Returns a list of available payment method options for a currency\nand country.",
+        "operationId": "list-payment-options",
+        "summary": "List available payment options for a locale"
+      }
+    },
     "/payment-service-definitions": {
       "get": {
         "produces": [
@@ -2901,6 +2950,74 @@
         "PaymentMethods"
       ]
     },
+    "PaymentOption": {
+      "description": "An available payment option for a locale",
+      "properties": {
+        "accepted_countries": {
+          "description": "A list of countries that this option is supported for.",
+          "example": [
+            "US",
+            "GB",
+            "DE"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "accepted_currencies": {
+          "description": "A list of currencies that this payment option is supported for.",
+          "example": [
+            "EUR",
+            "USD",
+            "GBP"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "method": {
+          "description": "The type of payment method that is available",
+          "enum": [
+            "card",
+            "paypal"
+          ],
+          "example": "card",
+          "type": "string"
+        },
+        "type": {
+          "description": "`payment-option`",
+          "enum": [
+            "payment-option"
+          ],
+          "example": "payment-option",
+          "type": "string"
+        }
+      },
+      "title": "A payment option",
+      "type": "object",
+      "x-tags": [
+        "Payment Option"
+      ]
+    },
+    "PaymentOptions": {
+      "description": "A list of payment options",
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/definitions/PaymentOption"
+          },
+          "type": "array"
+        }
+      },
+      "title": "A list of payment options",
+      "type": "object",
+      "x-tags": [
+        "Payment Options"
+      ]
+    },
     "PaymentService": {
       "description": "An active, configured payment service",
       "properties": {
@@ -3951,6 +4068,7 @@
       "x-internal": true
     },
     {
+      "description": "In Gr4vy, a card ruleset represents a set of rules that define how a card\ntransaction is processed. It determines which payment services are used,\nand with what priority, based on the transaction amount, card type, and\nmany more attributes.\n\n## Features\n\nA card ruleset can be used to:\n\n* Determine what payment service is used based on transaction and card\nproperties.\n* Determine what fallback payment services to use if the transaction\ndid not succeed with the initial provider.",
       "name": "Card Rulesets"
     },
     {
@@ -3958,6 +4076,11 @@
       "name": "Payment Methods"
     },
     {
+      "description": "In Gr4vy, a payment option represents a list of methods (card, PayPal,\netc) that are available for a given locale.\n\n## Features\n\nThe payment options API can be used to:\n\n* Determine what types of payments can be processed in a specific locale\n* Display a list options to a buyer to choose from",
+      "name": "Payment Options"
+    },
+    {
+      "description": "In Gr4vy, a payment service represents a configured payment provider\n(Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,\netc)\n\n## Features\n\nThe payment services API can be used to:\n\n* Provide Gr4vy with the payment credentials for a payment provider\n* Set a display name for a payment provider\n* Prepare a payment provider for usage in a ruleset",
       "name": "Payment Services"
     },
     {
@@ -3969,6 +4092,7 @@
       "name": "Transactions"
     },
     {
+      "description": "The asynchronous (async) APIs are convenience APIs that function as an\nalternative way to create transactions and register payment methods\nwithout having to wait for the API to complete. Each of thee APIs returns\ndirectly without processing the request fully, allowing you to render a\nnew page for the buyer while the request is processed.",
       "name": "Async APIs"
     }
   ],
