@@ -1997,6 +1997,7 @@
         "buyer_id": {
           "description": "The ID of the buyer to associate this payment method to. If provided, the\n`buyer_external_identifier` is ignored.",
           "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+          "format": "uuid",
           "type": "string"
         },
         "expiration_date": {
@@ -2681,6 +2682,17 @@
     "PayPalRegisterRequest": {
       "description": "A request to tokenize a PayPal account.",
       "properties": {
+        "buyer_external_identifier": {
+          "description": "The `external_identifier` of the buyer to associate this payment method\nto. This field is ignored if the `buyer_id` is provided.",
+          "example": "user-789123",
+          "type": "string"
+        },
+        "buyer_id": {
+          "description": "The ID of the buyer to associate this payment method to. If provided, the\n`buyer_external_identifier` is ignored.",
+          "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+          "format": "uuid",
+          "type": "string"
+        },
         "external_identifier": {
           "description": "An external identifier that can be used to match the account against your own records.",
           "example": "user-789123",
