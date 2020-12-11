@@ -243,90 +243,6 @@
         }
       }
     },
-    "/async/transactions/{transaction_id}/authorize": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "transaction_id",
-          "in": "path",
-          "required": true,
-          "description": "The ID for the transaction to get the information for."
-        }
-      ],
-      "post": {
-        "operationId": "async-authorize-transaction",
-        "summary": "Authorize pending transaction",
-        "tags": [
-          "Async APIs"
-        ],
-        "description": "Authorize an existing but pending transaction.\n\nThis endpoint is used when a transaction was previously created that required\nadditional information, or a redirect, from the buyer. Use this endpoint to\npost the additional information to trigger the transaction to be properly\nauthorized.\n\nAdditionally, this endpoint will capture the transaction and store the payment\nmethod if this was previously specified when creating the transaction. We\ncurrently do not support overwriting these settings at this point.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TransactionAuthorizeRequest"
-              },
-              "examples": {
-                "A basic authorize request": {
-                  "value": {}
-                },
-                "An authorize request for a lower amount": {
-                  "value": {
-                    "amount": 399,
-                    "currency": "USD"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                },
-                "examples": {
-                  "A status": {
-                    "value": {
-                      "type": "status",
-                      "status": "pending",
-                      "resource_type": "transaction",
-                      "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-                      "external_identifier": "user-789123"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Returns an error if the request was badly formatted.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error400IncorrectJson"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/async/transactions/{transaction_id}/capture": {
       "parameters": [
         {
@@ -5046,33 +4962,6 @@
             "format": "uuid",
             "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
             "nullable": true
-          }
-        }
-      },
-      "TransactionAuthorizeRequest": {
-        "title": "Authorize (Create)",
-        "type": "object",
-        "description": "A request to authorize a transaction",
-        "x-tags": [
-          "Request Bodies"
-        ],
-        "properties": {
-          "amount": {
-            "type": "number",
-            "description": "The (partial) amount to capture.\n\nWhen left blank, this will capture the entire amount.",
-            "minimum": 0.000001,
-            "maximum": 99999999,
-            "example": 1299
-          },
-          "currency": {
-            "type": "string",
-            "description": "A supported ISO-4217 currency code.\n",
-            "example": "USD"
-          },
-          "external_identifier": {
-            "type": "string",
-            "example": "user-789123",
-            "description": "An external identifier that can be used to match the transaction against your own records."
           }
         }
       },
