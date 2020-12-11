@@ -41,6 +41,21 @@ tags:
   - name: Callbacks
     x-internal: true
   - name: Card Rulesets
+    description: |-
+      In Gr4vy, a card ruleset represents a set of rules that define how a card
+      transaction is processed. It determines which payment services are used,
+      and with what priority, based on the transaction amount, card type, and
+      many more attributes.
+
+      ## Features
+
+      A card ruleset can be used to:
+
+      * Determine what payment service is used based on transaction and card
+      properties.
+      * Determine what fallback payment services to use if the transaction
+      did not succeed with the initial provider.
+
   - name: Payment Methods
     description: |-
       In Gr4vy, a payment method represents a way in which a payment can be processed,
@@ -55,7 +70,29 @@ tags:
       * Store (also known as tokenize) a payment method for a buyer
       * Fetch all previously tokenized payment methods for a buyer
   - name: Payment Options
+    description: |-
+      In Gr4vy, a payment option represents a list of methods (card, PayPal,
+      etc) that are available for a given locale.
+
+      ## Features
+
+      The payment options API can be used to:
+
+      * Determine what types of payments can be processed in a specific locale
+      * Display a list options to a buyer to choose from
   - name: Payment Services
+    description: |-
+      In Gr4vy, a payment service represents a configured payment provider
+      (Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,
+      etc)
+
+      ## Features
+
+      The payment services API can be used to:
+
+      * Provide Gr4vy with the payment credentials for a payment provider
+      * Set a display name for a payment provider
+      * Prepare a payment provider for usage in a ruleset
   - name: Payment Service Definitions
     x-internal: true
   - name: Transactions
@@ -72,6 +109,12 @@ tags:
       - Refund, void, and otherwise cancel existing transactions
 
   - name: Async APIs
+    description: |-
+      The asynchronous (async) APIs are convenience APIs that function as an
+      alternative way to create transactions and register payment methods
+      without having to wait for the API to complete. Each of thee APIs returns
+      directly without processing the request fully, allowing you to render a
+      new page for the buyer while the request is processed.
 
 paths:
   "/async/payment-methods":
