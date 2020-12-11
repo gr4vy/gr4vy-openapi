@@ -125,12 +125,6 @@ paths:
     post:
       $ref: "./paths/transactions__async-create-transaction.yaml"
 
-  "/async/transactions/{transaction_id}/authorize":
-    parameters:
-      - $ref: "./parameters/transaction_id.yaml"
-    post:
-      $ref: "./paths/transactions__async-authorize-transaction.yaml"
-
   "/async/transactions/{transaction_id}/capture":
     parameters:
       - $ref: "./parameters/transaction_id.yaml"
@@ -355,8 +349,6 @@ components:
       $ref: "./components/transaction.yaml"
     Transactions:
       $ref: "./components/transactions.yaml"
-    TransactionAuthorizeRequest:
-      $ref: "./components/transaction_authorize_request.yaml"
     TransactionsBatchCaptureRequest:
       $ref: "./components/transactions_batch_capture_request.yaml"
     TransactionCreateRequest:
