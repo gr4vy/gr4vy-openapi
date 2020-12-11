@@ -3315,6 +3315,7 @@
           },
           "buyer_id": {
             "type": "string",
+            "format": "uuid",
             "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
             "description": "The ID of the buyer to associate this payment method to. If provided, the\n`buyer_external_identifier` is ignored."
           },
@@ -4824,6 +4825,17 @@
             "description": "An external identifier that can be used to match the account against your own records.",
             "example": "user-789123",
             "nullable": true
+          },
+          "buyer_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+            "description": "The ID of the buyer to associate this payment method to. If provided, the\n`buyer_external_identifier` is ignored."
+          },
+          "buyer_external_identifier": {
+            "type": "string",
+            "description": "The `external_identifier` of the buyer to associate this payment method\nto. This field is ignored if the `buyer_id` is provided.",
+            "example": "user-789123"
           }
         }
       },
