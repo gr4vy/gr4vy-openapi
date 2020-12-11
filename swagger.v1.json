@@ -1608,62 +1608,6 @@
         "summary": "Get transaction"
       }
     },
-    "/transactions/{transaction_id}/authorize": {
-      "parameters": [
-        {
-          "description": "The ID for the transaction to get the information for.",
-          "in": "path",
-          "name": "transaction_id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/TransactionAuthorizeRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Transaction"
-            }
-          },
-          "400": {
-            "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "schema": {}
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "schema": {
-              "$ref": "#/definitions/Error401Unauthorized"
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found or has not yet been created.",
-            "schema": {}
-          }
-        },
-        "tags": [
-          "Transactions"
-        ],
-        "description": "Authorize an existing but pending transaction.\n\nThis endpoint is used when a transaction was previously created that required\nadditional information, or a redirect, from the buyer. Use this endpoint to\npost the additional information to trigger the transaction to be properly\nauthorized.\n\nAdditionally, this endpoint will capture the transaction and store the payment\nmethod if this was previously specified when creating the transaction. We\ncurrently do not support overwriting these settings at this point.",
-        "operationId": "authorize-transaction",
-        "summary": "Authorize pending transaction"
-      }
-    },
     "/transactions/{transaction_id}/capture": {
       "parameters": [
         {
@@ -1691,7 +1635,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "A transaction",
             "schema": {
               "$ref": "#/definitions/Transaction"
@@ -1777,6 +1721,47 @@
         "description": "Returns a list of events for a given transaction.",
         "operationId": "list-transaction-events",
         "summary": "List transaction events"
+      }
+    },
+    "/transactions/{transaction_id}/refund": {
+      "parameters": [
+        {
+          "description": "The ID for the transaction to get the information for.",
+          "in": "path",
+          "name": "transaction_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The cancelled transaction.",
+            "schema": {
+              "$ref": "#/definitions/Transaction"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found or has not yet been created.",
+            "schema": {}
+          }
+        },
+        "tags": [
+          "Transactions"
+        ],
+        "description": "Refunds or voids transaction. If this transaction was already captured, it\nwill issue a refund. If the transaction was not yet captured the authorization\nwill instead be voided.",
+        "operationId": "refund-transaction",
+        "summary": "Refund or void transaction"
       }
     }
   },
