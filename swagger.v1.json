@@ -15,7 +15,7 @@
     "title": "Gr4vy API (Beta)",
     "version": "1.0"
   },
-  "host": "api.example.gr4vy.com",
+  "host": "api.demo.gr4vy.com",
   "basePath": "/",
   "schemes": [
     "https"
@@ -2987,6 +2987,14 @@
           "example": "Example Inc",
           "type": "string"
         },
+        "short_name": {
+          "description": "The unique short-name of the merchant, as used in their Gr4vy URLs. For\nexample, a short-name of `nike` would result in the Gr4vy cluster's API\nbeing hosted on `https://api.nike.gr4vy.com`.",
+          "enum": [
+            "merchant"
+          ],
+          "example": "merchant",
+          "type": "string"
+        },
         "type": {
           "description": "`merchant`",
           "enum": [
@@ -3088,7 +3096,7 @@
       "properties": {
         "authorization_url": {
           "description": "The optional URL that the buyer needs to be redirected to to further authorize their PayPal payments.",
-          "example": "https://redirect.***.gr4vy.com/transactions/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c",
+          "example": "https://redirect.{merchant}.gr4vy.com/transactions/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c",
           "format": "uri",
           "type": "string",
           "x-nullable": true
