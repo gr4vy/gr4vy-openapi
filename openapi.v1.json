@@ -32,6 +32,11 @@
       "description": "The asynchronous (async) APIs are convenience APIs that function as an\nalternative way to create transactions and register payment methods\nwithout having to wait for the API to complete. Each of thee APIs returns\ndirectly without processing the request fully, allowing you to render a\nnew page for the buyer while the request is processed."
     },
     {
+      "name": "Authentication",
+      "description": "The authentication APIs are used to facilitate user sessions for the Gr4vy\ncluster admin.",
+      "x-internal": true
+    },
+    {
       "name": "Buyers",
       "description": "In Gr4vy, a buyer represents your customer, the shopper who's performing\na checkout and making a purchase.\n\n## Features\n\nA buyer can be used by you to:\n\n* Display a human readable name (`display_name`) for a buyer in the Gr4vy admin panel\n* Associate multiple tokenized payment methods with a single user\n* Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the\n  buyer's previously stored payment methods, allowing for faster checkout."
     },
@@ -46,7 +51,8 @@
     },
     {
       "name": "Merchants",
-      "description": "In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.\nCurrently only one merchant is supported per cluster."
+      "description": "In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.\nCurrently only one merchant is supported per cluster.",
+      "x-internal": true
     },
     {
       "name": "Payment Methods",
@@ -71,7 +77,8 @@
     },
     {
       "name": "Users",
-      "description": "In Gr4vy, a user represents an employee of the merchant with access to the\ncluster admin panel."
+      "description": "In Gr4vy, a user represents an employee of the merchant with access to the\ncluster admin panel.",
+      "x-internal": true
     }
   ],
   "paths": {
@@ -418,6 +425,126 @@
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/session": {
+      "post": {
+        "operationId": "authenticate",
+        "summary": "Authenticate a user",
+        "description": "Authenticate a user using an email address and password.\n",
+        "tags": [
+          "Authentication"
+        ],
+        "x-internal": true,
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SessionCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns a session object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error400BadRequest"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error400IncorrectJson"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if the credentials provided were not valid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/session/refresh": {
+      "post": {
+        "operationId": "refresh-authentication",
+        "summary": "Refresh user authentication",
+        "description": "Re-authenticate a user using a refresh token.\n",
+        "tags": [
+          "Authentication"
+        ],
+        "x-internal": true,
+        "security": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SessionRefreshRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns a session object",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Session"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error400BadRequest"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error400IncorrectJson"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if the refresh token provided was not valid.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4906,6 +5033,90 @@
             "type": "string",
             "description": "The `external_identifier` of the buyer to associate this payment method\nto. This field is ignored if the `buyer_id` is provided.",
             "example": "user-789123"
+          }
+        }
+      },
+      "Session": {
+        "title": "Session",
+        "description": "A user session.",
+        "type": "object",
+        "x-tags": [
+          "Authentication"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "auth.session",
+            "description": "`auth.session`",
+            "enum": [
+              "auth.session"
+            ]
+          },
+          "token_type": {
+            "type": "string",
+            "enum": [
+              "bearer"
+            ],
+            "example": "bearer",
+            "description": "`bearer`"
+          },
+          "access_token": {
+            "type": "string",
+            "description": "A server-signed JWT that can be used as the bearer token in any\nAPI calls.",
+            "example": "c3FIOG9vSGV4VHo4QzAyg5T1JvNnJoZ3ExaVNyQWw6WjRsanRKZG5lQk9qUE1BVQ"
+          },
+          "refresh_token": {
+            "type": "string",
+            "description": "A server-signed JWT that can be used as the bearer token to refresh the\naccess token.",
+            "example": "nJoZ3ExaVNyQWw6WjRsanRKZG5lQk9qUE1BVQ3FIOG9vSGV4VHo4QzAyg5T1JvNc"
+          },
+          "expires_in": {
+            "type": "integer",
+            "format": "int64",
+            "example": 3600,
+            "description": "The time in seconds in seconds by which the `access_token` token will\nexpire."
+          }
+        }
+      },
+      "SessionCreateRequest": {
+        "title": "Session (Create)",
+        "type": "object",
+        "description": "A request to create a session using an email address and password.",
+        "x-tags": [
+          "Authentication"
+        ],
+        "required": [
+          "email_address",
+          "password"
+        ],
+        "properties": {
+          "email_address": {
+            "type": "string",
+            "description": "The email address of the user to log in as.",
+            "example": "john@example.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "The password the user to log in as.",
+            "example": "this-is-n0t-a-secure-passw0rd"
+          }
+        }
+      },
+      "SessionRefreshRequest": {
+        "title": "Session (Refresh)",
+        "type": "object",
+        "description": "A request to refresh a session using a refresh token.",
+        "x-tags": [
+          "Authentication"
+        ],
+        "required": [
+          "refresh_token"
+        ],
+        "properties": {
+          "refresh_token": {
+            "type": "string",
+            "description": "The refresh token that is used to create a new access token.",
+            "example": "nJoZ3ExaVNyQWw6WjRsanRKZG5lQk9qUE1BVQ3FIOG9vSGV4VHo4QzAyg5T1JvNc"
           }
         }
       },
