@@ -1,7 +1,7 @@
 ---
 schema:
   type: string
-  example: 42773804-3ceb-4851-baae-afd0d7ee37a8
+  example: gg9ILy
 name: api_key_pair_id
 in: path
 required: true

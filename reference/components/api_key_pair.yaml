@@ -16,9 +16,8 @@ properties:
 
   id:
     type: string
-    format: uuid
     description: A unique ID for this key-pair.
-    example: 42773804-3ceb-4851-baae-afd0d7ee37a8
+    example: gg9ILy
 
   private_key:
     type: string

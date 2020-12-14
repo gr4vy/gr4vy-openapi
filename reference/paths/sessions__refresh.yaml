@@ -7,14 +7,6 @@ tags:
   - Sessions
 x-internal: true
 
-security: []
-
-requestBody:
-  content:
-    application/json:
-      schema:
-        $ref: "../openapi.yaml#/components/schemas/SessionRefreshRequest"
-
 responses:
   "200":
     description: |-

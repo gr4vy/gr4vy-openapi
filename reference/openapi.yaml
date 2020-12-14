@@ -162,15 +162,13 @@ paths:
     post:
       $ref: "./paths/transactions__async-batch-capture-transactions.yaml"
 
-  "/auth/session":
+  "/auth/sessions":
     post:
       $ref: "./paths/sessions__login.yaml"
+    put:
+      $ref: "./paths/sessions__refresh.yaml"
     delete:
       $ref: "./paths/sessions__logout.yaml"
-
-  "/auth/session/refresh":
-    post:
-      $ref: "./paths/sessions__refresh.yaml"
 
   "/api-key-pairs":
     get:
@@ -406,8 +404,6 @@ components:
       $ref: "./components/session.yaml"
     SessionCreateRequest:
       $ref: "./components/session_create_request.yaml"
-    SessionRefreshRequest:
-      $ref: "./components/session_refresh_request.yaml"
     Status:
       $ref: "./components/status.yaml"
     Statuses:
