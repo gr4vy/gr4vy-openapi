@@ -399,7 +399,7 @@
         }
       }
     },
-    "/auth/session": {
+    "/auth/sessions": {
       "post": {
         "operationId": "login",
         "summary": "Create a user session (Logout)",
@@ -458,33 +458,7 @@
           }
         }
       },
-      "delete": {
-        "operationId": "logout",
-        "summary": "Ends a user session (Logout)",
-        "description": "Ends a user's session by invalidating the used access token.",
-        "tags": [
-          "Sessions"
-        ],
-        "x-internal": true,
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/auth/session/refresh": {
-      "post": {
+      "put": {
         "operationId": "refresh-session",
         "summary": "Renew a user session",
         "description": "Re-authenticate a user using a refresh token.\n",
@@ -492,16 +466,6 @@
           "Sessions"
         ],
         "x-internal": true,
-        "security": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SessionRefreshRequest"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Returns a session object",
@@ -541,6 +505,30 @@
             }
           }
         }
+      },
+      "delete": {
+        "operationId": "logout",
+        "summary": "Ends a user session (Logout)",
+        "description": "Ends a user's session by invalidating the used access token.",
+        "tags": [
+          "Sessions"
+        ],
+        "x-internal": true,
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api-key-pairs": {
@@ -566,7 +554,7 @@
                       "items": [
                         {
                           "type": "api-key-pair",
-                          "id": "42773804-3ceb-4851-baae-afd0d7ee37a8",
+                          "id": "gg9ILy",
                           "private_key": null,
                           "passphrase": null,
                           "created_at": "2012-12-12T10:53:43-08:00",
@@ -619,7 +607,7 @@
                   "A newly created API key pair": {
                     "value": {
                       "type": "api-key-pair",
-                      "id": "42773804-3ceb-4851-baae-afd0d7ee37a8",
+                      "id": "gg9ILy",
                       "private_key": "-----BEGIN ENCRYPTED PRIVATE KEY-----\n...\n-----END ENCRYPTED PRIVATE KEY-----",
                       "passphrase": "af2675c9aba7de1f3bccb30757d7afd8",
                       "created_at": "2012-12-12T10:53:43-08:00",
@@ -648,7 +636,7 @@
         {
           "schema": {
             "type": "string",
-            "example": "42773804-3ceb-4851-baae-afd0d7ee37a8"
+            "example": "gg9ILy"
           },
           "name": "api_key_pair_id",
           "in": "path",
@@ -4243,9 +4231,8 @@
           },
           "id": {
             "type": "string",
-            "format": "uuid",
             "description": "A unique ID for this key-pair.",
-            "example": "42773804-3ceb-4851-baae-afd0d7ee37a8"
+            "example": "gg9ILy"
           },
           "private_key": {
             "type": "string",
@@ -5347,24 +5334,6 @@
             "type": "string",
             "description": "The password the user to log in as.",
             "example": "this-is-n0t-a-secure-passw0rd"
-          }
-        }
-      },
-      "SessionRefreshRequest": {
-        "title": "Session (Refresh)",
-        "type": "object",
-        "description": "A request to refresh a session using a refresh token.",
-        "x-tags": [
-          "Authentication"
-        ],
-        "required": [
-          "refresh_token"
-        ],
-        "properties": {
-          "refresh_token": {
-            "type": "string",
-            "description": "The refresh token that is used to create a new access token.",
-            "example": "nJoZ3ExaVNyQWw6WjRsanRKZG5lQk9qUE1BVQ3FIOG9vSGV4VHo4QzAyg5T1JvNc"
           }
         }
       },
