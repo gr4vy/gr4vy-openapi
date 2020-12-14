@@ -1051,6 +1051,7 @@
         "tags": [
           "Merchants"
         ],
+        "x-internal": true,
         "responses": {
           "200": {
             "description": "Returns the information about the merchant.",
@@ -3287,6 +3288,7 @@
         "tags": [
           "Users"
         ],
+        "x-internal": true,
         "responses": {
           "200": {
             "description": "Returns the currently authenticated user",
