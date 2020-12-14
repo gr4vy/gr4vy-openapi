@@ -4,6 +4,7 @@ summary: Get current
 description: Get current user information
 tags:
   - Users
+x-internal: true
 
 responses:
   "200":

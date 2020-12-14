@@ -5,6 +5,7 @@ summary: Get current merchant details
 description: Gets the information about the current merchant account
 tags:
   - Merchants
+x-internal: true
 
 responses:
   "200":
