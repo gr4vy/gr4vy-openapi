@@ -313,8 +313,6 @@ components:
       $ref: "./components/error_404_not_found.yaml"
     Error409DuplicateRecord:
       $ref: "./components/error_409_duplicate_record.yaml"
-    PaymentMethod:
-      $ref: "./components/payment_method.yaml"
     PaymentMethods:
       $ref: "./components/payment_methods.yaml"
     PaymentMethodEvent:

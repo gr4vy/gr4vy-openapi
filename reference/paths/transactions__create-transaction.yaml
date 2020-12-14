@@ -86,6 +86,7 @@ responses:
                 details:
                   number: XXXX XXXX XXXX 1111
                   expiration_date: 11 / 21
+                  type: visa
                 created_at: "2013-07-16T19:23:00.000Z"
                 updated_at: "2013-07-16T19:23:00.000Z"
                 external_identifier: user-789123

@@ -31,7 +31,6 @@ responses:
               status: 403
               message: |-
                 The resource could not be removed as it's currently active
-              additional_context: null
 
   "404":
     description: Returns an error if the resource can not be found.
