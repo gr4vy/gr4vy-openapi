@@ -21,6 +21,103 @@
     "https"
   ],
   "paths": {
+    "/api-key-pairs": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "A list of active key pairs",
+            "schema": {
+              "$ref": "#/definitions/APIKeyPairs"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          }
+        },
+        "tags": [
+          "API Key Pairs"
+        ],
+        "description": "Returns a list of active API key-pairs",
+        "operationId": "list-api-key-pairs",
+        "summary": "List the currently active API key-pairs",
+        "x-internal": true
+      },
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "A newly created key pair",
+            "schema": {
+              "$ref": "#/definitions/APIKeyPair"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          }
+        },
+        "tags": [
+          "API Key Pairs"
+        ],
+        "description": "Creates a new API key-pair",
+        "operationId": "create-api-key-pair",
+        "summary": "Create an API key-pair",
+        "x-internal": true
+      }
+    },
+    "/api-key-pairs/{api_key_pair_id}": {
+      "parameters": [
+        {
+          "description": "The ID for the API key pair.",
+          "in": "path",
+          "name": "api_key_pair_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "schema": {
+              "$ref": "#/definitions/Error404NotFound"
+            }
+          }
+        },
+        "tags": [
+          "API Key Pairs"
+        ],
+        "description": "Deletes an API key-pair",
+        "operationId": "delete-api-key-pair",
+        "summary": "Delete an API key-pair",
+        "x-internal": true
+      }
+    },
     "/async/payment-methods": {
       "post": {
         "consumes": [
@@ -214,72 +311,7 @@
         "summary": "Capture authorized transaction"
       }
     },
-    "/auth/jwt-key-pairs": {
-      "get": {
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "A list of active key pairs",
-            "schema": {
-              "$ref": "#/definitions/JWTKeyPairs"
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "schema": {
-              "$ref": "#/definitions/Error401Unauthorized"
-            }
-          }
-        },
-        "tags": [
-          "JWT Key Pairs"
-        ],
-        "description": "Returns a list of active JWT key-pairs",
-        "operationId": "list-jwt-key-pairs",
-        "summary": "List the currently active JWT key-pairs",
-        "x-internal": true
-      },
-      "post": {
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "201": {
-            "description": "A newly created key pair",
-            "schema": {
-              "$ref": "#/definitions/JWTKeyPair"
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "schema": {
-              "$ref": "#/definitions/Error401Unauthorized"
-            }
-          }
-        },
-        "tags": [
-          "JWT Key Pairs"
-        ],
-        "description": "Creates a new JWT key-pair",
-        "operationId": "create-jwt-key-pair",
-        "summary": "Create a JWT key-pair",
-        "x-internal": true
-      }
-    },
-    "/auth/jwt-key-pairs/{jwt_key_pair_id}": {
-      "parameters": [
-        {
-          "description": "The ID for the JWT key pair.",
-          "in": "path",
-          "name": "jwt_key_pair_id",
-          "required": true,
-          "type": "string"
-        }
-      ],
+    "/auth/session": {
       "delete": {
         "produces": [
           "application/json"
@@ -294,24 +326,16 @@
             "schema": {
               "$ref": "#/definitions/Error401Unauthorized"
             }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "schema": {
-              "$ref": "#/definitions/Error404NotFound"
-            }
           }
         },
         "tags": [
-          "JWT Key Pairs"
+          "Sessions"
         ],
-        "description": "Deletes a JWT key-pair",
-        "operationId": "delete-jwt-key-pair",
-        "summary": "Delete a JWT key-pair",
+        "description": "Ends a user's session by invalidating the used access token.",
+        "operationId": "logout",
+        "summary": "Ends a user session (Logout)",
         "x-internal": true
-      }
-    },
-    "/auth/session": {
+      },
       "post": {
         "consumes": [
           "application/json"
@@ -348,11 +372,11 @@
         },
         "security": [],
         "tags": [
-          "Authentication"
+          "Sessions"
         ],
         "description": "Authenticate a user using an email address and password.\n",
-        "operationId": "authenticate",
-        "summary": "Authenticate a user",
+        "operationId": "login",
+        "summary": "Create a user session (Logout)",
         "x-internal": true
       }
     },
@@ -393,11 +417,11 @@
         },
         "security": [],
         "tags": [
-          "Authentication"
+          "Sessions"
         ],
         "description": "Re-authenticate a user using a refresh token.\n",
-        "operationId": "refresh-authentication",
-        "summary": "Refresh user authentication",
+        "operationId": "refresh-session",
+        "summary": "Renew a user session",
         "x-internal": true
       }
     },
@@ -933,7 +957,7 @@
         "x-internal": true
       }
     },
-    "/merchants/current": {
+    "/merchants/main": {
       "get": {
         "produces": [
           "application/json"
@@ -2009,6 +2033,70 @@
     }
   },
   "definitions": {
+    "APIKeyPair": {
+      "description": "Details about an API key pair",
+      "properties": {
+        "created_at": {
+          "description": "The date and time when this key pair was created",
+          "example": "2012-12-12T10:53:43-08:00",
+          "format": "date-time",
+          "type": "string"
+        },
+        "id": {
+          "description": "A unique ID for this key-pair.",
+          "example": "42773804-3ceb-4851-baae-afd0d7ee37a8",
+          "format": "uuid",
+          "type": "string"
+        },
+        "passphrase": {
+          "description": "The passphrase used to decrypt the private key. This is only returned\nafter the key is initially requested. For subsequent API calls this value\nis `null`.",
+          "example": "af2675c9aba7de1f3bccb30757d7afd8",
+          "type": "string",
+          "x-nullable": true
+        },
+        "private_key": {
+          "description": "The encrypted private key for the key-pair. This is only returned after\nthe key is initially requested. For subsequent API calls this value is\n`null`.",
+          "example": "-----BEGIN ENCRYPTED PRIVATE KEY-----\n...\n-----END ENCRYPTED PRIVATE KEY-----",
+          "type": "string",
+          "x-nullable": true
+        },
+        "type": {
+          "description": "`api-key-pair`",
+          "enum": [
+            "api-key-pair"
+          ],
+          "example": "api-key-pair",
+          "type": "string"
+        },
+        "updated_at": {
+          "description": "The date and time when this key pair was last updated",
+          "example": "2012-12-12T10:53:43-08:00",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "title": "API Key Pair",
+      "type": "object",
+      "x-tags": [
+        "API Key Pairs"
+      ]
+    },
+    "APIKeyPairs": {
+      "description": "A list of the currently active API key pairs",
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/definitions/APIKeyPair"
+          },
+          "type": "array"
+        }
+      },
+      "title": "A list of active API key pairs",
+      "type": "object",
+      "x-tags": [
+        "API Key Pairs"
+      ]
+    },
     "Buyer": {
       "properties": {
         "created_at": {
@@ -2889,70 +2977,6 @@
       "type": "object",
       "x-tags": [
         "Errors"
-      ]
-    },
-    "JWTKeyPair": {
-      "description": "Details about a JWT key pair",
-      "properties": {
-        "created_at": {
-          "description": "The date and time when this key pair was created",
-          "example": "2012-12-12T10:53:43-08:00",
-          "format": "date-time",
-          "type": "string"
-        },
-        "id": {
-          "description": "A unique ID for this key-pair.",
-          "example": "42773804-3ceb-4851-baae-afd0d7ee37a8",
-          "format": "uuid",
-          "type": "string"
-        },
-        "passphrase": {
-          "description": "The passphrase used to decrypt the private key. This is only returned\nafter the key is initially requested. For subsequent API calls this value\nis `null`.",
-          "example": "af2675c9aba7de1f3bccb30757d7afd8",
-          "type": "string",
-          "x-nullable": true
-        },
-        "private_key": {
-          "description": "The encrypted private key for the key-pair. This is only returned after\nthe key is initially requested. For subsequent API calls this value is\n`null`.",
-          "example": "-----BEGIN ENCRYPTED PRIVATE KEY-----\n...\n-----END ENCRYPTED PRIVATE KEY-----",
-          "type": "string",
-          "x-nullable": true
-        },
-        "type": {
-          "description": "`jwt-key-pair`",
-          "enum": [
-            "jwt-key-pair"
-          ],
-          "example": "jwt-key-pair",
-          "type": "string"
-        },
-        "updated_at": {
-          "description": "The date and time when this key pair was last updated",
-          "example": "2012-12-12T10:53:43-08:00",
-          "format": "date-time",
-          "type": "string"
-        }
-      },
-      "title": "JWT Key Pair",
-      "type": "object",
-      "x-tags": [
-        "JWT Key Pairs"
-      ]
-    },
-    "JWTKeyPairs": {
-      "description": "A list of the currently active JWT key pairs",
-      "properties": {
-        "items": {
-          "items": {
-            "$ref": "#/definitions/JWTKeyPair"
-          },
-          "type": "array"
-        }
-      },
-      "title": "A list of active JWT key pairs",
-      "type": "object",
-      "x-tags": [
-        "JWT Key Pairs"
       ]
     },
     "Merchant": {
@@ -4457,13 +4481,13 @@
   ],
   "tags": [
     {
-      "description": "The asynchronous (async) APIs are convenience APIs that function as an\nalternative way to create transactions and register payment methods\nwithout having to wait for the API to complete. Each of thee APIs returns\ndirectly without processing the request fully, allowing you to render a\nnew page for the buyer while the request is processed.",
-      "name": "Async APIs"
+      "description": "In Gr4vy, an API key pair is used to sign and validate JWTs. A JWT is used\nas a bearer token to authenticate to the API.",
+      "name": "API Key Pairs",
+      "x-internal": true
     },
     {
-      "description": "The authentication APIs are used to facilitate user sessions for the Gr4vy\ncluster admin.",
-      "name": "Authentication",
-      "x-internal": true
+      "description": "The asynchronous (async) APIs are convenience APIs that function as an\nalternative way to create transactions and register payment methods\nwithout having to wait for the API to complete. Each of thee APIs returns\ndirectly without processing the request fully, allowing you to render a\nnew page for the buyer while the request is processed.",
+      "name": "Async APIs"
     },
     {
       "description": "In Gr4vy, a buyer represents your customer, the shopper who's performing\na checkout and making a purchase.\n\n## Features\n\nA buyer can be used by you to:\n\n* Display a human readable name (`display_name`) for a buyer in the Gr4vy admin panel\n* Associate multiple tokenized payment methods with a single user\n* Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the\n  buyer's previously stored payment methods, allowing for faster checkout.",
@@ -4477,11 +4501,6 @@
     {
       "description": "In Gr4vy, a card ruleset represents a set of rules that define how a card\ntransaction is processed. It determines which payment services are used,\nand with what priority, based on the transaction amount, card type, and\nmany more attributes.\n\n## Features\n\nA card ruleset can be used to:\n\n* Determine what payment service is used based on transaction and card\nproperties.\n* Determine what fallback payment services to use if the transaction\ndid not succeed with the initial provider.",
       "name": "Card Rulesets"
-    },
-    {
-      "description": "In Gr4vy, a JWT key pair is used to sign and validate JWTs. A JWT is used\nas a bearer token to authenticate to the API.",
-      "name": "JWT Key Pairs",
-      "x-internal": true
     },
     {
       "description": "In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.\nCurrently only one merchant is supported per cluster.",
@@ -4504,6 +4523,11 @@
     {
       "description": "In Gr4vy, a payment service represents a configured payment provider\n(Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,\netc)\n\n## Features\n\nThe payment services API can be used to:\n\n* Provide Gr4vy with the payment credentials for a payment provider\n* Set a display name for a payment provider\n* Prepare a payment provider for usage in a ruleset",
       "name": "Payment Services"
+    },
+    {
+      "description": "The sessions APIs are used to facilitate user authentication for the Gr4vy\ncluster admin.",
+      "name": "Sessions",
+      "x-internal": true
     },
     {
       "description": "In Gr4vy, a transaction represents a payment in any state, either before it is\nauthorized, once it is captured, or after it has been refunded.\n\n## Features\n\nThe transactions API can be used to:\n\n- Authorize, capture, and store cards\n- Authorize, capture, and store alternative payment methods like PayPal\n- Refund, void, and otherwise cancel existing transactions",
