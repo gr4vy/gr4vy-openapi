@@ -67,6 +67,11 @@ tags:
       * Determine what fallback payment services to use if the transaction
       did not succeed with the initial provider.
 
+  - name: Merchants
+    description: |-
+      In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.
+      Currently only one merchant is supported per cluster.
+
   - name: Payment Methods
     description: |-
       In Gr4vy, a payment method represents a way in which a payment can be processed,
@@ -123,6 +128,10 @@ tags:
       - Refund, void, and otherwise cancel existing transactions
 
 paths:
+  "/merchants/current":
+    get:
+      $ref: "./paths/merchants__get-current-merchant.yaml"
+
   "/async/payment-methods":
     post:
       $ref: "./paths/payment_methods__async-store-payment-method.yaml"
@@ -140,6 +149,12 @@ paths:
   "/async/transactions/batch-capture":
     post:
       $ref: "./paths/transactions__async-batch-capture-transactions.yaml"
+
+  # "/auth/sessions":
+  #   post:
+  #     $ref: "./paths/authentication__login.yaml"
+  #   delete:
+  #     $ref: "./paths/authentication__logout.yaml"
 
   "/callbacks/payment-methods/{payment_method_id}/confirm":
     parameters:
@@ -271,6 +286,10 @@ paths:
     get:
       $ref: "./paths/transactions__list-transaction-events.yaml"
 
+  # "/users/me":
+  #   get:
+  #     $ref: "./paths/users_get_current_user.yaml"
+
 components:
   schemas:
     Buyer:
@@ -313,6 +332,8 @@ components:
       $ref: "./components/error_404_not_found.yaml"
     Error409DuplicateRecord:
       $ref: "./components/error_409_duplicate_record.yaml"
+    Merchant:
+      $ref: "./components/merchant.yaml"
     PaymentMethods:
       $ref: "./components/payment_methods.yaml"
     PaymentMethodEvent:
