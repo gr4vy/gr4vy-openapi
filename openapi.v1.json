@@ -68,6 +68,10 @@
     {
       "name": "Transactions",
       "description": "In Gr4vy, a transaction represents a payment in any state, either before it is\nauthorized, once it is captured, or after it has been refunded.\n\n## Features\n\nThe transactions API can be used to:\n\n- Authorize, capture, and store cards\n- Authorize, capture, and store alternative payment methods like PayPal\n- Refund, void, and otherwise cancel existing transactions"
+    },
+    {
+      "name": "Users",
+      "description": "In Gr4vy, a user represents an employee of the merchant with access to the\ncluster admin panel."
     }
   ],
   "paths": {
@@ -2970,6 +2974,38 @@
           }
         }
       }
+    },
+    "/users/me": {
+      "get": {
+        "operationId": "get-current-user",
+        "summary": "Get current",
+        "description": "Get current user information",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the currently authenticated user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -5277,6 +5313,38 @@
             "format": "uuid",
             "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
             "nullable": true
+          }
+        }
+      },
+      "User": {
+        "title": "User",
+        "type": "object",
+        "x-tags": [
+          "Users"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`user`",
+            "example": "user",
+            "enum": [
+              "user"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+            "description": "The unique Gr4vy ID for this user"
+          },
+          "name": {
+            "type": "string",
+            "description": "The full name of this user",
+            "example": "John Gravy"
+          },
+          "email_adress": {
+            "type": "string",
+            "description": "The email address for this user",
+            "example": "john@example.com"
           }
         }
       }
