@@ -32,6 +32,11 @@ tags:
       without having to wait for the API to complete. Each of thee APIs returns
       directly without processing the request fully, allowing you to render a
       new page for the buyer while the request is processed.
+  - name: Authentication
+    description: |-
+      The authentication APIs are used to facilitate user sessions for the Gr4vy
+      cluster admin.
+    x-internal: true
   - name: Buyers
     description: |-
       In Gr4vy, a buyer represents your customer, the shopper who's performing
@@ -71,7 +76,7 @@ tags:
     description: |-
       In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.
       Currently only one merchant is supported per cluster.
-
+    x-internal: true
   - name: Payment Methods
     description: |-
       In Gr4vy, a payment method represents a way in which a payment can be processed,
@@ -130,6 +135,7 @@ tags:
     description: |-
       In Gr4vy, a user represents an employee of the merchant with access to the
       cluster admin panel.
+    x-internal: true
 
 paths:
   "/merchants/current":
@@ -154,11 +160,13 @@ paths:
     post:
       $ref: "./paths/transactions__async-batch-capture-transactions.yaml"
 
-  # "/auth/sessions":
-  #   post:
-  #     $ref: "./paths/authentication__login.yaml"
-  #   delete:
-  #     $ref: "./paths/authentication__logout.yaml"
+  "/auth/session":
+    post:
+      $ref: "./paths/authentication__authenticate.yaml"
+
+  "/auth/session/refresh":
+    post:
+      $ref: "./paths/authentication__refresh-authentication.yaml"
 
   "/callbacks/payment-methods/{payment_method_id}/confirm":
     parameters:
@@ -370,6 +378,12 @@ components:
       $ref: "./components/paypal_details.yaml"
     PayPalStoreRequest:
       $ref: "./components/paypal_store_request.yaml"
+    Session:
+      $ref: "./components/session.yaml"
+    SessionCreateRequest:
+      $ref: "./components/session_create_request.yaml"
+    SessionRefreshRequest:
+      $ref: "./components/session_refresh_request.yaml"
     Status:
       $ref: "./components/status.yaml"
     Statuses:
