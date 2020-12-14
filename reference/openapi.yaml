@@ -126,6 +126,10 @@ tags:
       - Authorize, capture, and store cards
       - Authorize, capture, and store alternative payment methods like PayPal
       - Refund, void, and otherwise cancel existing transactions
+  - name: Users
+    description: |-
+      In Gr4vy, a user represents an employee of the merchant with access to the
+      cluster admin panel.
 
 paths:
   "/merchants/current":
@@ -286,9 +290,9 @@ paths:
     get:
       $ref: "./paths/transactions__list-transaction-events.yaml"
 
-  # "/users/me":
-  #   get:
-  #     $ref: "./paths/users_get_current_user.yaml"
+  "/users/me":
+    get:
+      $ref: "./paths/users__get-current-user.yaml"
 
 components:
   schemas:
@@ -384,6 +388,8 @@ components:
       $ref: "./components/transaction_event.yaml"
     TransactionEvents:
       $ref: "./components/transaction_events.yaml"
+    User:
+      $ref: "./components/user.yaml"
 
   securitySchemes:
     BearerAuth:
