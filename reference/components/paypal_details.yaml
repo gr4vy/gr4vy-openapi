@@ -16,7 +16,7 @@ properties:
     type: string
     format: uri
     example: |-
-      https://redirect.***.gr4vy.com/transactions/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c
+      https://redirect.{merchant}.gr4vy.com/transactions/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c
     description:
       The optional URL that the buyer needs to be redirected to to further
       authorize their PayPal payments.
