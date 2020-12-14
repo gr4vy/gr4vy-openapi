@@ -311,7 +311,7 @@
         "summary": "Capture authorized transaction"
       }
     },
-    "/auth/session": {
+    "/auth/sessions": {
       "delete": {
         "produces": [
           "application/json"
@@ -378,25 +378,12 @@
         "operationId": "login",
         "summary": "Create a user session (Logout)",
         "x-internal": true
-      }
-    },
-    "/auth/session/refresh": {
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
+      },
+      "put": {
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/SessionRefreshRequest"
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Returns a session object",
@@ -415,7 +402,6 @@
             }
           }
         },
-        "security": [],
         "tags": [
           "Sessions"
         ],
@@ -2046,8 +2032,7 @@
         },
         "id": {
           "description": "A unique ID for this key-pair.",
-          "example": "42773804-3ceb-4851-baae-afd0d7ee37a8",
-          "format": "uuid",
+          "example": "gg9ILy",
           "type": "string"
         },
         "passphrase": {
@@ -4028,24 +4013,6 @@
         "password"
       ],
       "title": "Session (Create)",
-      "type": "object",
-      "x-tags": [
-        "Authentication"
-      ]
-    },
-    "SessionRefreshRequest": {
-      "description": "A request to refresh a session using a refresh token.",
-      "properties": {
-        "refresh_token": {
-          "description": "The refresh token that is used to create a new access token.",
-          "example": "nJoZ3ExaVNyQWw6WjRsanRKZG5lQk9qUE1BVQ3FIOG9vSGV4VHo4QzAyg5T1JvNc",
-          "type": "string"
-        }
-      },
-      "required": [
-        "refresh_token"
-      ],
-      "title": "Session (Refresh)",
       "type": "object",
       "x-tags": [
         "Authentication"
