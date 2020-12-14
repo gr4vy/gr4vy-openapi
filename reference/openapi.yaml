@@ -25,6 +25,11 @@ servers:
         description: The subdomain for your cluster.
 
 tags:
+  - name: API Key Pairs
+    description: |-
+      In Gr4vy, an API key pair is used to sign and validate JWTs. A JWT is used
+      as a bearer token to authenticate to the API.
+    x-internal: true
   - name: Async APIs
     description: |-
       The asynchronous (async) APIs are convenience APIs that function as an
@@ -32,11 +37,6 @@ tags:
       without having to wait for the API to complete. Each of thee APIs returns
       directly without processing the request fully, allowing you to render a
       new page for the buyer while the request is processed.
-  - name: Authentication
-    description: |-
-      The authentication APIs are used to facilitate user sessions for the Gr4vy
-      cluster admin.
-    x-internal: true
   - name: Buyers
     description: |-
       In Gr4vy, a buyer represents your customer, the shopper who's performing
@@ -71,11 +71,6 @@ tags:
       properties.
       * Determine what fallback payment services to use if the transaction
       did not succeed with the initial provider.
-  - name: JWT Key Pairs
-    description: |-
-      In Gr4vy, a JWT key pair is used to sign and validate JWTs. A JWT is used
-      as a bearer token to authenticate to the API.
-    x-internal: true
   - name: Merchants
     description: |-
       In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.
@@ -123,6 +118,11 @@ tags:
       * Provide Gr4vy with the payment credentials for a payment provider
       * Set a display name for a payment provider
       * Prepare a payment provider for usage in a ruleset
+  - name: Sessions
+    description: |-
+      The sessions APIs are used to facilitate user authentication for the Gr4vy
+      cluster admin.
+    x-internal: true
   - name: Transactions
     description: |-
       In Gr4vy, a transaction represents a payment in any state, either before it is
@@ -162,23 +162,25 @@ paths:
 
   "/auth/session":
     post:
-      $ref: "./paths/authentication__authenticate.yaml"
+      $ref: "./paths/sessions__login.yaml"
+    delete:
+      $ref: "./paths/sessions__logout.yaml"
 
   "/auth/session/refresh":
     post:
-      $ref: "./paths/authentication__refresh-authentication.yaml"
+      $ref: "./paths/sessions__refresh.yaml"
 
-  "/auth/jwt-key-pairs":
+  "/api-key-pairs":
     get:
-      $ref: "./paths/jwt_key_pairs__list-jwt-key-pairs.yaml"
+      $ref: "./paths/api_key_pairs__list-api-key-pairs.yaml"
     post:
-      $ref: "./paths/jwt_key_pairs__create-jwt-key-pair.yaml"
+      $ref: "./paths/api_key_pairs__create-api-key-pair.yaml"
 
-  "/auth/jwt-key-pairs/{jwt_key_pair_id}":
+  "/api-key-pairs/{api_key_pair_id}":
     parameters:
-      - $ref: "./parameters/jwt_key_pair_id.yaml"
+      - $ref: "./parameters/api_key_pair_id.yaml"
     delete:
-      $ref: "./paths/jwt_key_pairs__delete-jwt-key-pair.yaml"
+      $ref: "./paths/api_key_pairs__delete-api-key-pair.yaml"
 
   "/callbacks/payment-methods/{payment_method_id}/confirm":
     parameters:
@@ -202,7 +204,7 @@ paths:
     delete:
       $ref: "./paths/buyers__delete-buyer.yaml"
 
-  "/merchants/current":
+  "/merchants/main":
     get:
       $ref: "./paths/merchants__get-current-merchant.yaml"
 
@@ -360,10 +362,10 @@ components:
       $ref: "./components/error_404_not_found.yaml"
     Error409DuplicateRecord:
       $ref: "./components/error_409_duplicate_record.yaml"
-    JWTKeyPair:
-      $ref: "./components/jwt_key_pair.yaml"
-    JWTKeyPairs:
-      $ref: "./components/jwt_key_pairs.yaml"
+    APIKeyPair:
+      $ref: "./components/api_key_pair.yaml"
+    APIKeyPairs:
+      $ref: "./components/api_key_pairs.yaml"
     Merchant:
       $ref: "./components/merchant.yaml"
     PaymentMethods:

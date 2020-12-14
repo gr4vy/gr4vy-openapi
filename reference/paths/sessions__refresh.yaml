@@ -1,10 +1,10 @@
 ---
-operationId: refresh-authentication
-summary: Refresh user authentication
+operationId: refresh-session
+summary: Renew a user session
 description: |
   Re-authenticate a user using a refresh token.
 tags:
-  - Authentication
+  - Sessions
 x-internal: true
 
 security: []

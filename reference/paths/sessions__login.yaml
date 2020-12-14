@@ -1,10 +1,10 @@
 ---
-operationId: authenticate
-summary: Authenticate a user
+operationId: login
+summary: Create a user session (Logout)
 description: |
   Authenticate a user using an email address and password.
 tags:
-  - Authentication
+  - Sessions
 x-internal: true
 
 security: []

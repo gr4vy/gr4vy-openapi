@@ -1,9 +1,9 @@
 ---
-operationId: delete-jwt-key-pair
-summary: Delete a JWT key-pair
-description: Deletes a JWT key-pair
+operationId: delete-api-key-pair
+summary: Delete an API key-pair
+description: Deletes an API key-pair
 tags:
-  - JWT Key Pairs
+  - API Key Pairs
 x-internal: true
 
 responses:

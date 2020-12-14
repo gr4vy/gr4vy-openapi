@@ -1,18 +1,18 @@
 ---
-title: JWT Key Pair
+title: API Key Pair
 type: object
-description: Details about a JWT key pair
+description: Details about an API key pair
 
 x-tags:
-  - JWT Key Pairs
+  - API Key Pairs
 
 properties:
   type:
     type: string
-    description: "`jwt-key-pair`"
-    example: jwt-key-pair
+    description: "`api-key-pair`"
+    example: api-key-pair
     enum:
-      - jwt-key-pair
+      - api-key-pair
 
   id:
     type: string

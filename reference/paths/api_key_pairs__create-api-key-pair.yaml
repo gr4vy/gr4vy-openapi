@@ -1,9 +1,9 @@
 ---
-operationId: create-jwt-key-pair
-summary: Create a JWT key-pair
-description: Creates a new JWT key-pair
+operationId: create-api-key-pair
+summary: Create an API key-pair
+description: Creates a new API key-pair
 tags:
-  - JWT Key Pairs
+  - API Key Pairs
 x-internal: true
 
 responses:
@@ -12,11 +12,11 @@ responses:
     content:
       application/json:
         schema:
-          $ref: "../openapi.yaml#/components/schemas/JWTKeyPair"
+          $ref: "../openapi.yaml#/components/schemas/APIKeyPair"
         examples:
-          A newly created JWT key pair:
+          A newly created API key pair:
             value:
-              type: jwt-key-pair
+              type: api-key-pair
               id: 42773804-3ceb-4851-baae-afd0d7ee37a8
               private_key: |-
                 -----BEGIN ENCRYPTED PRIVATE KEY-----
