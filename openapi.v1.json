@@ -2191,8 +2191,7 @@
                       "type": "error",
                       "code": "forbidden",
                       "status": 403,
-                      "message": "The resource could not be removed as it's currently active",
-                      "additional_context": null
+                      "message": "The resource could not be removed as it's currently active"
                     }
                   }
                 }
@@ -2310,8 +2309,7 @@
                       "type": "error",
                       "code": "invalid_ruleset",
                       "status": 403,
-                      "message": "Ruleset is not valid. Only valid rulesets can be deployed",
-                      "additional_context": null
+                      "message": "Ruleset is not valid. Only valid rulesets can be deployed"
                     }
                   }
                 }
@@ -2533,7 +2531,8 @@
                         "payment_method_status": "stored",
                         "details": {
                           "number": "XXXX XXXX XXXX 1111",
-                          "expiration_date": "11 / 21"
+                          "expiration_date": "11 / 21",
+                          "type": "visa"
                         },
                         "created_at": "2013-07-16T19:23:00.000Z",
                         "updated_at": "2013-07-16T19:23:00.000Z",
@@ -3066,34 +3065,78 @@
         "x-tags": [
           "Payment Methods"
         ],
-        "allOf": [
-          {
-            "properties": {
-              "method": {
-                "type": "string",
-                "description": "`card`",
-                "example": "card",
-                "enum": [
-                  "card"
-                ]
-              },
-              "payment_method_status": {
-                "type": "string",
-                "description": "The state of the card tokenization.",
-                "example": "stored",
-                "enum": [
-                  "stored"
-                ]
-              },
-              "details": {
-                "$ref": "#/components/schemas/CardDetails"
-              }
-            }
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`payment-method`",
+            "example": "payment-method",
+            "enum": [
+              "payment-method"
+            ]
           },
-          {
-            "$ref": "#/components/schemas/PaymentMethod"
+          "id": {
+            "type": "string",
+            "description": "The optional ID of the payment method details. This will be `null` if the\npayment method was not tokenized on only used in a one-off transaction.",
+            "format": "uuid",
+            "example": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "description": "The state of the payment method in Gr4vy.",
+            "example": "created"
+          },
+          "payment_method_status": {
+            "type": "string",
+            "description": "The state of the card tokenization.",
+            "example": "stored",
+            "enum": [
+              "stored"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "description": "`card`",
+            "example": "card",
+            "enum": [
+              "card"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "description": "The date and time when this payment method was first created in our\nsystem.",
+            "format": "date-time",
+            "example": "2013-07-16T19:23:00.000Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "The date and time when this payment method was last updated in our system.",
+            "format": "date-time",
+            "example": "2013-07-16T19:23:00.000Z"
+          },
+          "external_identifier": {
+            "type": "string",
+            "description": "An external identifier that can be used to match the payment method\nagainst your own records.",
+            "example": "user-789123",
+            "nullable": true
+          },
+          "buyer": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Buyer"
+              },
+              {
+                "description": "The optional buyer for which this payment method has been stored."
+              },
+              {
+                "nullable": true
+              }
+            ]
+          },
+          "details": {
+            "$ref": "#/components/schemas/CardDetails"
           }
-        ]
+        }
       },
       "CardDetails": {
         "title": "Card details",
@@ -3791,67 +3834,6 @@
             "type": "string",
             "description": "Further details on the field that triggered the error.",
             "example": "A duplicate ecord exists with this external_identifier value"
-          }
-        }
-      },
-      "PaymentMethod": {
-        "title": "Payment Method",
-        "type": "object",
-        "description": "A generic object to hold payment method details.",
-        "x-tags": [
-          "Payment Methods"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "`payment-method`",
-            "example": "payment-method",
-            "enum": [
-              "payment-method"
-            ]
-          },
-          "id": {
-            "type": "string",
-            "description": "The optional ID of the payment method details. This will be `null` if the\npayment method was not tokenized on only used in a one-off transaction.",
-            "format": "uuid",
-            "example": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
-            "nullable": true
-          },
-          "status": {
-            "type": "string",
-            "description": "The state of the payment method in Gr4vy.",
-            "example": "created"
-          },
-          "created_at": {
-            "type": "string",
-            "description": "The date and time when this payment method was first created in our\nsystem.",
-            "format": "date-time",
-            "example": "2013-07-16T19:23:00.000Z"
-          },
-          "updated_at": {
-            "type": "string",
-            "description": "The date and time when this payment method was last updated in our system.",
-            "format": "date-time",
-            "example": "2013-07-16T19:23:00.000Z"
-          },
-          "external_identifier": {
-            "type": "string",
-            "description": "An external identifier that can be used to match the payment method\nagainst your own records.",
-            "example": "user-789123",
-            "nullable": true
-          },
-          "buyer": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Buyer"
-              },
-              {
-                "description": "The optional buyer for which this payment method has been stored."
-              },
-              {
-                "nullable": true
-              }
-            ]
           }
         }
       },
@@ -4680,35 +4662,79 @@
         "x-tags": [
           "Payment Methods"
         ],
-        "allOf": [
-          {
-            "properties": {
-              "method": {
-                "type": "string",
-                "description": "`paypal`",
-                "example": "paypal",
-                "enum": [
-                  "paypal"
-                ]
-              },
-              "payment_method_status": {
-                "type": "string",
-                "description": "The state of the account tokenization. After the first call this will\nbe set to `buyer_authorization_required` and the response will include\nan `authorization_url`. The buyer needs to be redirected to this URL\nto authorize the future payments. The token is subsequently posted to\nthe [authorize](/#operation/authorize-payment-method) endpoint\nafter which the `status` is updated to `stored`.",
-                "example": "buyer_authorization_required",
-                "enum": [
-                  "stored",
-                  "buyer_authorization_required"
-                ]
-              },
-              "details": {
-                "$ref": "#/components/schemas/PayPalDetails"
-              }
-            }
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`payment-method`",
+            "example": "payment-method",
+            "enum": [
+              "payment-method"
+            ]
           },
-          {
-            "$ref": "#/components/schemas/PaymentMethod"
+          "id": {
+            "type": "string",
+            "description": "The optional ID of the payment method details. This will be `null` if the\npayment method was not tokenized on only used in a one-off transaction.",
+            "format": "uuid",
+            "example": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "description": "The state of the payment method in Gr4vy.",
+            "example": "created"
+          },
+          "payment_method_status": {
+            "type": "string",
+            "description": "The state of the account tokenization. After the first call this will\nbe set to `buyer_authorization_required` and the response will include\nan `authorization_url`. The buyer needs to be redirected to this URL\nto authorize the future payments. The token is subsequently posted to\nthe [authorize](/#operation/authorize-payment-method) endpoint\nafter which the `status` is updated to `stored`.",
+            "example": "buyer_authorization_required",
+            "enum": [
+              "stored",
+              "buyer_authorization_required"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "description": "`paypal`",
+            "example": "paypal",
+            "enum": [
+              "paypal"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "description": "The date and time when this payment method was first created in our\nsystem.",
+            "format": "date-time",
+            "example": "2013-07-16T19:23:00.000Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "The date and time when this payment method was last updated in our system.",
+            "format": "date-time",
+            "example": "2013-07-16T19:23:00.000Z"
+          },
+          "external_identifier": {
+            "type": "string",
+            "description": "An external identifier that can be used to match the payment method\nagainst your own records.",
+            "example": "user-789123",
+            "nullable": true
+          },
+          "buyer": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Buyer"
+              },
+              {
+                "description": "The optional buyer for which this payment method has been stored."
+              },
+              {
+                "nullable": true
+              }
+            ]
+          },
+          "details": {
+            "$ref": "#/components/schemas/PayPalDetails"
           }
-        ]
+        }
       },
       "PayPalDetails": {
         "title": "PayPal account details",
