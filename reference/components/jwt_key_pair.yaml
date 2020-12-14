@@ -1,0 +1,54 @@
+---
+title: JWT Key Pair
+type: object
+description: Details about a JWT key pair
+
+x-tags:
+  - JWT Key Pairs
+
+properties:
+  type:
+    type: string
+    description: "`jwt-key-pair`"
+    example: jwt-key-pair
+    enum:
+      - jwt-key-pair
+
+  id:
+    type: string
+    format: uuid
+    description: A unique ID for this key-pair.
+    example: 42773804-3ceb-4851-baae-afd0d7ee37a8
+
+  private_key:
+    type: string
+    nullable: true
+    description: |-
+      The encrypted private key for the key-pair. This is only returned after
+      the key is initially requested. For subsequent API calls this value is
+      `null`.
+    example: |-
+      -----BEGIN ENCRYPTED PRIVATE KEY-----
+      ...
+      -----END ENCRYPTED PRIVATE KEY-----
+
+  passphrase:
+    type: string
+    nullable: true
+    description: |-
+      The passphrase used to decrypt the private key. This is only returned
+      after the key is initially requested. For subsequent API calls this value
+      is `null`.
+    example: af2675c9aba7de1f3bccb30757d7afd8
+
+  created_at:
+    type: string
+    format: date-time
+    example: "2012-12-12T10:53:43-08:00"
+    description: The date and time when this key pair was created
+
+  updated_at:
+    type: string
+    format: date-time
+    example: "2012-12-12T10:53:43-08:00"
+    description: The date and time when this key pair was last updated

@@ -1,0 +1,25 @@
+---
+operationId: delete-jwt-key-pair
+summary: Delete a JWT key-pair
+description: Deletes a JWT key-pair
+tags:
+  - JWT Key Pairs
+x-internal: true
+
+responses:
+  "204":
+    description: No Content
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
+
+  "404":
+    description: Returns an error if the resource can not be found.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error404NotFound"

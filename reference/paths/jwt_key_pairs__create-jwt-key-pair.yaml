@@ -1,0 +1,34 @@
+---
+operationId: create-jwt-key-pair
+summary: Create a JWT key-pair
+description: Creates a new JWT key-pair
+tags:
+  - JWT Key Pairs
+x-internal: true
+
+responses:
+  "201":
+    description: A newly created key pair
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/JWTKeyPair"
+        examples:
+          A newly created JWT key pair:
+            value:
+              type: jwt-key-pair
+              id: 42773804-3ceb-4851-baae-afd0d7ee37a8
+              private_key: |-
+                -----BEGIN ENCRYPTED PRIVATE KEY-----
+                ...
+                -----END ENCRYPTED PRIVATE KEY-----
+              passphrase: af2675c9aba7de1f3bccb30757d7afd8
+              created_at: "2012-12-12T10:53:43-08:00"
+              updated_at: "2012-12-12T10:53:43-08:00"
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"

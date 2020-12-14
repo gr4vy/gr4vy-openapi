@@ -71,7 +71,11 @@ tags:
       properties.
       * Determine what fallback payment services to use if the transaction
       did not succeed with the initial provider.
-
+  - name: JWT Key Pairs
+    description: |-
+      In Gr4vy, a JWT key pair is used to sign and validate JWTs. A JWT is used
+      as a bearer token to authenticate to the API.
+    x-internal: true
   - name: Merchants
     description: |-
       In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.
@@ -138,10 +142,6 @@ tags:
     x-internal: true
 
 paths:
-  "/merchants/current":
-    get:
-      $ref: "./paths/merchants__get-current-merchant.yaml"
-
   "/async/payment-methods":
     post:
       $ref: "./paths/payment_methods__async-store-payment-method.yaml"
@@ -168,6 +168,18 @@ paths:
     post:
       $ref: "./paths/authentication__refresh-authentication.yaml"
 
+  "/auth/jwt-key-pairs":
+    get:
+      $ref: "./paths/jwt_key_pairs__list-jwt-key-pairs.yaml"
+    post:
+      $ref: "./paths/jwt_key_pairs__create-jwt-key-pair.yaml"
+
+  "/auth/jwt-key-pairs/{jwt_key_pair_id}":
+    parameters:
+      - $ref: "./parameters/jwt_key_pair_id.yaml"
+    delete:
+      $ref: "./paths/jwt_key_pairs__delete-jwt-key-pair.yaml"
+
   "/callbacks/payment-methods/{payment_method_id}/confirm":
     parameters:
       - $ref: "./parameters/payment_method_id.yaml"
@@ -189,6 +201,10 @@ paths:
       $ref: "./paths/buyers__update-buyer.yaml"
     delete:
       $ref: "./paths/buyers__delete-buyer.yaml"
+
+  "/merchants/current":
+    get:
+      $ref: "./paths/merchants__get-current-merchant.yaml"
 
   "/payment-methods":
     get:
@@ -344,6 +360,10 @@ components:
       $ref: "./components/error_404_not_found.yaml"
     Error409DuplicateRecord:
       $ref: "./components/error_409_duplicate_record.yaml"
+    JWTKeyPair:
+      $ref: "./components/jwt_key_pair.yaml"
+    JWTKeyPairs:
+      $ref: "./components/jwt_key_pairs.yaml"
     Merchant:
       $ref: "./components/merchant.yaml"
     PaymentMethods:

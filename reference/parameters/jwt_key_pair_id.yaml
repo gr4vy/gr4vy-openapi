@@ -1,0 +1,8 @@
+---
+schema:
+  type: string
+  example: 42773804-3ceb-4851-baae-afd0d7ee37a8
+name: jwt_key_pair_id
+in: path
+required: true
+description: The ID for the JWT key pair.
