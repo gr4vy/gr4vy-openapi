@@ -2991,10 +2991,7 @@
         },
         "short_name": {
           "description": "The unique short-name of the merchant, as used in their Gr4vy URLs. For\nexample, a short-name of `nike` would result in the Gr4vy cluster's API\nbeing hosted on `https://api.nike.gr4vy.com`.",
-          "enum": [
-            "merchant"
-          ],
-          "example": "merchant",
+          "example": "acme",
           "type": "string"
         },
         "type": {
