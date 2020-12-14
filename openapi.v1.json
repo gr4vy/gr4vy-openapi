@@ -50,6 +50,11 @@
       "description": "In Gr4vy, a card ruleset represents a set of rules that define how a card\ntransaction is processed. It determines which payment services are used,\nand with what priority, based on the transaction amount, card type, and\nmany more attributes.\n\n## Features\n\nA card ruleset can be used to:\n\n* Determine what payment service is used based on transaction and card\nproperties.\n* Determine what fallback payment services to use if the transaction\ndid not succeed with the initial provider."
     },
     {
+      "name": "JWT Key Pairs",
+      "description": "In Gr4vy, a JWT key pair is used to sign and validate JWTs. A JWT is used\nas a bearer token to authenticate to the API.",
+      "x-internal": true
+    },
+    {
       "name": "Merchants",
       "description": "In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.\nCurrently only one merchant is supported per cluster.",
       "x-internal": true
@@ -82,48 +87,6 @@
     }
   ],
   "paths": {
-    "/merchants/current": {
-      "get": {
-        "operationId": "get-current-merchant",
-        "summary": "Get current merchant details",
-        "description": "Gets the information about the current merchant account",
-        "tags": [
-          "Merchants"
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the information about the merchant.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Merchant"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error404NotFound"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/async/payment-methods": {
       "post": {
         "operationId": "async-store-payment-method",
@@ -556,6 +519,154 @@
         }
       }
     },
+    "/auth/jwt-key-pairs": {
+      "get": {
+        "operationId": "list-jwt-key-pairs",
+        "summary": "List the currently active JWT key-pairs",
+        "description": "Returns a list of active JWT key-pairs",
+        "tags": [
+          "JWT Key Pairs"
+        ],
+        "x-internal": true,
+        "responses": {
+          "200": {
+            "description": "A list of active key pairs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JWTKeyPairs"
+                },
+                "examples": {
+                  "A list of key pairs": {
+                    "value": {
+                      "items": [
+                        {
+                          "type": "jwt-key-pair",
+                          "id": "42773804-3ceb-4851-baae-afd0d7ee37a8",
+                          "private_key": null,
+                          "passphrase": null,
+                          "created_at": "2012-12-12T10:53:43-08:00",
+                          "updated_at": "2012-12-12T10:53:43-08:00"
+                        },
+                        {
+                          "type": "jwt-key-pair",
+                          "id": "d028ec5c-12e4-43d0-b187-c6fe79b3b5dd",
+                          "private_key": null,
+                          "passphrase": null,
+                          "created_at": "2012-12-12T10:53:12-08:00",
+                          "updated_at": "2012-12-12T10:53:12-08:00"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "create-jwt-key-pair",
+        "summary": "Create a JWT key-pair",
+        "description": "Creates a new JWT key-pair",
+        "tags": [
+          "JWT Key Pairs"
+        ],
+        "x-internal": true,
+        "responses": {
+          "201": {
+            "description": "A newly created key pair",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JWTKeyPair"
+                },
+                "examples": {
+                  "A newly created JWT key pair": {
+                    "value": {
+                      "type": "jwt-key-pair",
+                      "id": "42773804-3ceb-4851-baae-afd0d7ee37a8",
+                      "private_key": "-----BEGIN ENCRYPTED PRIVATE KEY-----\n...\n-----END ENCRYPTED PRIVATE KEY-----",
+                      "passphrase": "af2675c9aba7de1f3bccb30757d7afd8",
+                      "created_at": "2012-12-12T10:53:43-08:00",
+                      "updated_at": "2012-12-12T10:53:43-08:00"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/jwt-key-pairs/{jwt_key_pair_id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "example": "42773804-3ceb-4851-baae-afd0d7ee37a8"
+          },
+          "name": "jwt_key_pair_id",
+          "in": "path",
+          "required": true,
+          "description": "The ID for the JWT key pair."
+        }
+      ],
+      "delete": {
+        "operationId": "delete-jwt-key-pair",
+        "summary": "Delete a JWT key-pair",
+        "description": "Deletes a JWT key-pair",
+        "tags": [
+          "JWT Key Pairs"
+        ],
+        "x-internal": true,
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/callbacks/payment-methods/{payment_method_id}/confirm": {
       "parameters": [
         {
@@ -884,6 +995,48 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/merchants/current": {
+      "get": {
+        "operationId": "get-current-merchant",
+        "summary": "Get current merchant details",
+        "description": "Gets the information about the current merchant account",
+        "tags": [
+          "Merchants"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the information about the merchant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Merchant"
+                }
+              }
+            }
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -4043,6 +4196,70 @@
             "type": "string",
             "description": "Further details on the field that triggered the error.",
             "example": "A duplicate ecord exists with this external_identifier value"
+          }
+        }
+      },
+      "JWTKeyPair": {
+        "title": "JWT Key Pair",
+        "type": "object",
+        "description": "Details about a JWT key pair",
+        "x-tags": [
+          "JWT Key Pairs"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`jwt-key-pair`",
+            "example": "jwt-key-pair",
+            "enum": [
+              "jwt-key-pair"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "A unique ID for this key-pair.",
+            "example": "42773804-3ceb-4851-baae-afd0d7ee37a8"
+          },
+          "private_key": {
+            "type": "string",
+            "nullable": true,
+            "description": "The encrypted private key for the key-pair. This is only returned after\nthe key is initially requested. For subsequent API calls this value is\n`null`.",
+            "example": "-----BEGIN ENCRYPTED PRIVATE KEY-----\n...\n-----END ENCRYPTED PRIVATE KEY-----"
+          },
+          "passphrase": {
+            "type": "string",
+            "nullable": true,
+            "description": "The passphrase used to decrypt the private key. This is only returned\nafter the key is initially requested. For subsequent API calls this value\nis `null`.",
+            "example": "af2675c9aba7de1f3bccb30757d7afd8"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2012-12-12T10:53:43-08:00",
+            "description": "The date and time when this key pair was created"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2012-12-12T10:53:43-08:00",
+            "description": "The date and time when this key pair was last updated"
+          }
+        }
+      },
+      "JWTKeyPairs": {
+        "title": "A list of active JWT key pairs",
+        "type": "object",
+        "description": "A list of the currently active JWT key pairs",
+        "x-tags": [
+          "JWT Key Pairs"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/JWTKeyPair"
+            }
           }
         }
       },
