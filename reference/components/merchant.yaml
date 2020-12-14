@@ -20,9 +20,7 @@ properties:
       The unique short-name of the merchant, as used in their Gr4vy URLs. For
       example, a short-name of `nike` would result in the Gr4vy cluster's API
       being hosted on `https://api.nike.gr4vy.com`.
-    example: merchant
-    enum:
-      - merchant
+    example: acme
 
   display_name:
     type: string
