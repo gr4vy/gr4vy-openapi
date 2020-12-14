@@ -45,6 +45,10 @@
       "description": "In Gr4vy, a card ruleset represents a set of rules that define how a card\ntransaction is processed. It determines which payment services are used,\nand with what priority, based on the transaction amount, card type, and\nmany more attributes.\n\n## Features\n\nA card ruleset can be used to:\n\n* Determine what payment service is used based on transaction and card\nproperties.\n* Determine what fallback payment services to use if the transaction\ndid not succeed with the initial provider."
     },
     {
+      "name": "Merchants",
+      "description": "In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.\nCurrently only one merchant is supported per cluster."
+    },
+    {
       "name": "Payment Methods",
       "description": "In Gr4vy, a payment method represents a way in which a payment can be processed,\nfor example a card payment, a PayPal payment, or a Bitcoin payment.\n\n## Features\n\nThe payment method API can be used to:\n\n* Determine the available payment methods in a cluster\n* Determine the available payment method for a buyer in a specific currency and country\n* Store (also known as tokenize) a payment method for a buyer\n* Fetch all previously tokenized payment methods for a buyer"
     },
@@ -67,6 +71,48 @@
     }
   ],
   "paths": {
+    "/merchants/current": {
+      "get": {
+        "operationId": "get-current-merchant",
+        "summary": "Get current merchant details",
+        "description": "Gets the information about the current merchant account",
+        "tags": [
+          "Merchants"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the information about the merchant.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Merchant"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/async/payment-methods": {
       "post": {
         "operationId": "async-store-payment-method",
@@ -3834,6 +3880,29 @@
             "type": "string",
             "description": "Further details on the field that triggered the error.",
             "example": "A duplicate ecord exists with this external_identifier value"
+          }
+        }
+      },
+      "Merchant": {
+        "title": "Merchant",
+        "type": "object",
+        "description": "A merchant in a cluster",
+        "x-tags": [
+          "Merchants"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`merchant`",
+            "example": "merchant",
+            "enum": [
+              "merchant"
+            ]
+          },
+          "display_name": {
+            "type": "string",
+            "description": "The name of this merchant as it will be displayed in the admin UI.",
+            "example": "Example Inc"
           }
         }
       },
