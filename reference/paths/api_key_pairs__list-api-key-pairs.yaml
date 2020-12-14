@@ -1,6 +1,6 @@
 ---
 operationId: list-api-key-pairs
-summary: List the currently active API key-pairs
+summary: List API key-pairs
 description: Returns a list of active API key-pairs
 tags:
   - API Key Pairs
