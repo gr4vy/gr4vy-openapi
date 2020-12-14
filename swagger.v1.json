@@ -988,7 +988,8 @@
         ],
         "description": "Gets the information about the current merchant account",
         "operationId": "get-current-merchant",
-        "summary": "Get current merchant details"
+        "summary": "Get current merchant details",
+        "x-internal": true
       }
     },
     "/payment-methods": {
@@ -2028,7 +2029,8 @@
         ],
         "description": "Get current user information",
         "operationId": "get-current-user",
-        "summary": "Get current"
+        "summary": "Get current",
+        "x-internal": true
       }
     }
   },
