@@ -28,13 +28,13 @@
   ],
   "tags": [
     {
-      "name": "Async APIs",
-      "description": "The asynchronous (async) APIs are convenience APIs that function as an\nalternative way to create transactions and register payment methods\nwithout having to wait for the API to complete. Each of thee APIs returns\ndirectly without processing the request fully, allowing you to render a\nnew page for the buyer while the request is processed."
+      "name": "API Key Pairs",
+      "description": "In Gr4vy, an API key pair is used to sign and validate JWTs. A JWT is used\nas a bearer token to authenticate to the API.",
+      "x-internal": true
     },
     {
-      "name": "Authentication",
-      "description": "The authentication APIs are used to facilitate user sessions for the Gr4vy\ncluster admin.",
-      "x-internal": true
+      "name": "Async APIs",
+      "description": "The asynchronous (async) APIs are convenience APIs that function as an\nalternative way to create transactions and register payment methods\nwithout having to wait for the API to complete. Each of thee APIs returns\ndirectly without processing the request fully, allowing you to render a\nnew page for the buyer while the request is processed."
     },
     {
       "name": "Buyers",
@@ -48,11 +48,6 @@
     {
       "name": "Card Rulesets",
       "description": "In Gr4vy, a card ruleset represents a set of rules that define how a card\ntransaction is processed. It determines which payment services are used,\nand with what priority, based on the transaction amount, card type, and\nmany more attributes.\n\n## Features\n\nA card ruleset can be used to:\n\n* Determine what payment service is used based on transaction and card\nproperties.\n* Determine what fallback payment services to use if the transaction\ndid not succeed with the initial provider."
-    },
-    {
-      "name": "JWT Key Pairs",
-      "description": "In Gr4vy, a JWT key pair is used to sign and validate JWTs. A JWT is used\nas a bearer token to authenticate to the API.",
-      "x-internal": true
     },
     {
       "name": "Merchants",
@@ -75,6 +70,11 @@
     {
       "name": "Payment Services",
       "description": "In Gr4vy, a payment service represents a configured payment provider\n(Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,\netc)\n\n## Features\n\nThe payment services API can be used to:\n\n* Provide Gr4vy with the payment credentials for a payment provider\n* Set a display name for a payment provider\n* Prepare a payment provider for usage in a ruleset"
+    },
+    {
+      "name": "Sessions",
+      "description": "The sessions APIs are used to facilitate user authentication for the Gr4vy\ncluster admin.",
+      "x-internal": true
     },
     {
       "name": "Transactions",
@@ -401,11 +401,11 @@
     },
     "/auth/session": {
       "post": {
-        "operationId": "authenticate",
-        "summary": "Authenticate a user",
+        "operationId": "login",
+        "summary": "Create a user session (Logout)",
         "description": "Authenticate a user using an email address and password.\n",
         "tags": [
-          "Authentication"
+          "Sessions"
         ],
         "x-internal": true,
         "security": [],
@@ -457,15 +457,39 @@
             }
           }
         }
+      },
+      "delete": {
+        "operationId": "logout",
+        "summary": "Ends a user session (Logout)",
+        "description": "Ends a user's session by invalidating the used access token.",
+        "tags": [
+          "Sessions"
+        ],
+        "x-internal": true,
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/auth/session/refresh": {
       "post": {
-        "operationId": "refresh-authentication",
-        "summary": "Refresh user authentication",
+        "operationId": "refresh-session",
+        "summary": "Renew a user session",
         "description": "Re-authenticate a user using a refresh token.\n",
         "tags": [
-          "Authentication"
+          "Sessions"
         ],
         "x-internal": true,
         "security": [],
@@ -519,13 +543,13 @@
         }
       }
     },
-    "/auth/jwt-key-pairs": {
+    "/api-key-pairs": {
       "get": {
-        "operationId": "list-jwt-key-pairs",
-        "summary": "List the currently active JWT key-pairs",
-        "description": "Returns a list of active JWT key-pairs",
+        "operationId": "list-api-key-pairs",
+        "summary": "List the currently active API key-pairs",
+        "description": "Returns a list of active API key-pairs",
         "tags": [
-          "JWT Key Pairs"
+          "API Key Pairs"
         ],
         "x-internal": true,
         "responses": {
@@ -534,14 +558,14 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/JWTKeyPairs"
+                  "$ref": "#/components/schemas/APIKeyPairs"
                 },
                 "examples": {
                   "A list of key pairs": {
                     "value": {
                       "items": [
                         {
-                          "type": "jwt-key-pair",
+                          "type": "api-key-pair",
                           "id": "42773804-3ceb-4851-baae-afd0d7ee37a8",
                           "private_key": null,
                           "passphrase": null,
@@ -549,7 +573,7 @@
                           "updated_at": "2012-12-12T10:53:43-08:00"
                         },
                         {
-                          "type": "jwt-key-pair",
+                          "type": "api-key-pair",
                           "id": "d028ec5c-12e4-43d0-b187-c6fe79b3b5dd",
                           "private_key": null,
                           "passphrase": null,
@@ -576,11 +600,11 @@
         }
       },
       "post": {
-        "operationId": "create-jwt-key-pair",
-        "summary": "Create a JWT key-pair",
-        "description": "Creates a new JWT key-pair",
+        "operationId": "create-api-key-pair",
+        "summary": "Create an API key-pair",
+        "description": "Creates a new API key-pair",
         "tags": [
-          "JWT Key Pairs"
+          "API Key Pairs"
         ],
         "x-internal": true,
         "responses": {
@@ -589,12 +613,12 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/JWTKeyPair"
+                  "$ref": "#/components/schemas/APIKeyPair"
                 },
                 "examples": {
-                  "A newly created JWT key pair": {
+                  "A newly created API key pair": {
                     "value": {
-                      "type": "jwt-key-pair",
+                      "type": "api-key-pair",
                       "id": "42773804-3ceb-4851-baae-afd0d7ee37a8",
                       "private_key": "-----BEGIN ENCRYPTED PRIVATE KEY-----\n...\n-----END ENCRYPTED PRIVATE KEY-----",
                       "passphrase": "af2675c9aba7de1f3bccb30757d7afd8",
@@ -619,25 +643,25 @@
         }
       }
     },
-    "/auth/jwt-key-pairs/{jwt_key_pair_id}": {
+    "/api-key-pairs/{api_key_pair_id}": {
       "parameters": [
         {
           "schema": {
             "type": "string",
             "example": "42773804-3ceb-4851-baae-afd0d7ee37a8"
           },
-          "name": "jwt_key_pair_id",
+          "name": "api_key_pair_id",
           "in": "path",
           "required": true,
-          "description": "The ID for the JWT key pair."
+          "description": "The ID for the API key pair."
         }
       ],
       "delete": {
-        "operationId": "delete-jwt-key-pair",
-        "summary": "Delete a JWT key-pair",
-        "description": "Deletes a JWT key-pair",
+        "operationId": "delete-api-key-pair",
+        "summary": "Delete an API key-pair",
+        "description": "Deletes an API key-pair",
         "tags": [
-          "JWT Key Pairs"
+          "API Key Pairs"
         ],
         "x-internal": true,
         "responses": {
@@ -1019,7 +1043,7 @@
         }
       }
     },
-    "/merchants/current": {
+    "/merchants/main": {
       "get": {
         "operationId": "get-current-merchant",
         "summary": "Get current merchant details",
@@ -4199,20 +4223,20 @@
           }
         }
       },
-      "JWTKeyPair": {
-        "title": "JWT Key Pair",
+      "APIKeyPair": {
+        "title": "API Key Pair",
         "type": "object",
-        "description": "Details about a JWT key pair",
+        "description": "Details about an API key pair",
         "x-tags": [
-          "JWT Key Pairs"
+          "API Key Pairs"
         ],
         "properties": {
           "type": {
             "type": "string",
-            "description": "`jwt-key-pair`",
-            "example": "jwt-key-pair",
+            "description": "`api-key-pair`",
+            "example": "api-key-pair",
             "enum": [
-              "jwt-key-pair"
+              "api-key-pair"
             ]
           },
           "id": {
@@ -4247,18 +4271,18 @@
           }
         }
       },
-      "JWTKeyPairs": {
-        "title": "A list of active JWT key pairs",
+      "APIKeyPairs": {
+        "title": "A list of active API key pairs",
         "type": "object",
-        "description": "A list of the currently active JWT key pairs",
+        "description": "A list of the currently active API key pairs",
         "x-tags": [
-          "JWT Key Pairs"
+          "API Key Pairs"
         ],
         "properties": {
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/JWTKeyPair"
+              "$ref": "#/components/schemas/APIKeyPair"
             }
           }
         }
