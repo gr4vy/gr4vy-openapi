@@ -1791,6 +1791,34 @@
         "operationId": "refund-transaction",
         "summary": "Refund or void transaction"
       }
+    },
+    "/users/me": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Returns the currently authenticated user",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "description": "Get current user information",
+        "operationId": "get-current-user",
+        "summary": "Get current"
+      }
     }
   },
   "definitions": {
@@ -4046,6 +4074,38 @@
       "x-tags": [
         "Request Bodies"
       ]
+    },
+    "User": {
+      "properties": {
+        "email_adress": {
+          "description": "The email address for this user",
+          "example": "john@example.com",
+          "type": "string"
+        },
+        "id": {
+          "description": "The unique Gr4vy ID for this user",
+          "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+          "type": "string"
+        },
+        "name": {
+          "description": "The full name of this user",
+          "example": "John Gravy",
+          "type": "string"
+        },
+        "type": {
+          "description": "`user`",
+          "enum": [
+            "user"
+          ],
+          "example": "user",
+          "type": "string"
+        }
+      },
+      "title": "User",
+      "type": "object",
+      "x-tags": [
+        "Users"
+      ]
     }
   },
   "securityDefinitions": {
@@ -4102,6 +4162,10 @@
     {
       "description": "In Gr4vy, a transaction represents a payment in any state, either before it is\nauthorized, once it is captured, or after it has been refunded.\n\n## Features\n\nThe transactions API can be used to:\n\n- Authorize, capture, and store cards\n- Authorize, capture, and store alternative payment methods like PayPal\n- Refund, void, and otherwise cancel existing transactions",
       "name": "Transactions"
+    },
+    {
+      "description": "In Gr4vy, a user represents an employee of the merchant with access to the\ncluster admin panel.",
+      "name": "Users"
     }
   ],
   "x-components": {}
