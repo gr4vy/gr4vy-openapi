@@ -214,6 +214,96 @@
         "summary": "Capture authorized transaction"
       }
     },
+    "/auth/session": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SessionCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a session object",
+            "schema": {
+              "$ref": "#/definitions/Session"
+            }
+          },
+          "400": {
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "schema": {}
+          },
+          "401": {
+            "description": "Returns an error if the credentials provided were not valid.",
+            "schema": {
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          }
+        },
+        "security": [],
+        "tags": [
+          "Authentication"
+        ],
+        "description": "Authenticate a user using an email address and password.\n",
+        "operationId": "authenticate",
+        "summary": "Authenticate a user",
+        "x-internal": true
+      }
+    },
+    "/auth/session/refresh": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SessionRefreshRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a session object",
+            "schema": {
+              "$ref": "#/definitions/Session"
+            }
+          },
+          "400": {
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "schema": {}
+          },
+          "401": {
+            "description": "Returns an error if the refresh token provided was not valid.",
+            "schema": {
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          }
+        },
+        "security": [],
+        "tags": [
+          "Authentication"
+        ],
+        "description": "Re-authenticate a user using a refresh token.\n",
+        "operationId": "refresh-authentication",
+        "summary": "Refresh user authentication",
+        "x-internal": true
+      }
+    },
     "/buyers": {
       "get": {
         "produces": [
@@ -3685,6 +3775,90 @@
         "Payment Services"
       ]
     },
+    "Session": {
+      "description": "A user session.",
+      "properties": {
+        "access_token": {
+          "description": "A server-signed JWT that can be used as the bearer token in any\nAPI calls.",
+          "example": "c3FIOG9vSGV4VHo4QzAyg5T1JvNnJoZ3ExaVNyQWw6WjRsanRKZG5lQk9qUE1BVQ",
+          "type": "string"
+        },
+        "expires_in": {
+          "description": "The time in seconds in seconds by which the `access_token` token will\nexpire.",
+          "example": 3600,
+          "format": "int64",
+          "type": "integer"
+        },
+        "refresh_token": {
+          "description": "A server-signed JWT that can be used as the bearer token to refresh the\naccess token.",
+          "example": "nJoZ3ExaVNyQWw6WjRsanRKZG5lQk9qUE1BVQ3FIOG9vSGV4VHo4QzAyg5T1JvNc",
+          "type": "string"
+        },
+        "token_type": {
+          "description": "`bearer`",
+          "enum": [
+            "bearer"
+          ],
+          "example": "bearer",
+          "type": "string"
+        },
+        "type": {
+          "description": "`auth.session`",
+          "enum": [
+            "auth.session"
+          ],
+          "example": "auth.session",
+          "type": "string"
+        }
+      },
+      "title": "Session",
+      "type": "object",
+      "x-tags": [
+        "Authentication"
+      ]
+    },
+    "SessionCreateRequest": {
+      "description": "A request to create a session using an email address and password.",
+      "properties": {
+        "email_address": {
+          "description": "The email address of the user to log in as.",
+          "example": "john@example.com",
+          "type": "string"
+        },
+        "password": {
+          "description": "The password the user to log in as.",
+          "example": "this-is-n0t-a-secure-passw0rd",
+          "type": "string"
+        }
+      },
+      "required": [
+        "email_address",
+        "password"
+      ],
+      "title": "Session (Create)",
+      "type": "object",
+      "x-tags": [
+        "Authentication"
+      ]
+    },
+    "SessionRefreshRequest": {
+      "description": "A request to refresh a session using a refresh token.",
+      "properties": {
+        "refresh_token": {
+          "description": "The refresh token that is used to create a new access token.",
+          "example": "nJoZ3ExaVNyQWw6WjRsanRKZG5lQk9qUE1BVQ3FIOG9vSGV4VHo4QzAyg5T1JvNc",
+          "type": "string"
+        }
+      },
+      "required": [
+        "refresh_token"
+      ],
+      "title": "Session (Refresh)",
+      "type": "object",
+      "x-tags": [
+        "Authentication"
+      ]
+    },
     "Status": {
       "description": "In many cases the Gr4vy API returns asynchronously, kicking off a job to create an authorization or a transaction, and returning a `Status` object with the ID of the pending object. The ID of this resource can be used to query an objects status, or additionally the client can use Pub/Sub to subscribe to the creation of the pending object.",
       "properties": {
@@ -4126,6 +4300,11 @@
       "name": "Async APIs"
     },
     {
+      "description": "The authentication APIs are used to facilitate user sessions for the Gr4vy\ncluster admin.",
+      "name": "Authentication",
+      "x-internal": true
+    },
+    {
       "description": "In Gr4vy, a buyer represents your customer, the shopper who's performing\na checkout and making a purchase.\n\n## Features\n\nA buyer can be used by you to:\n\n* Display a human readable name (`display_name`) for a buyer in the Gr4vy admin panel\n* Associate multiple tokenized payment methods with a single user\n* Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the\n  buyer's previously stored payment methods, allowing for faster checkout.",
       "name": "Buyers"
     },
@@ -4140,7 +4319,8 @@
     },
     {
       "description": "In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.\nCurrently only one merchant is supported per cluster.",
-      "name": "Merchants"
+      "name": "Merchants",
+      "x-internal": true
     },
     {
       "description": "In Gr4vy, a payment method represents a way in which a payment can be processed,\nfor example a card payment, a PayPal payment, or a Bitcoin payment.\n\n## Features\n\nThe payment method API can be used to:\n\n* Determine the available payment methods in a cluster\n* Determine the available payment method for a buyer in a specific currency and country\n* Store (also known as tokenize) a payment method for a buyer\n* Fetch all previously tokenized payment methods for a buyer",
@@ -4165,7 +4345,8 @@
     },
     {
       "description": "In Gr4vy, a user represents an employee of the merchant with access to the\ncluster admin panel.",
-      "name": "Users"
+      "name": "Users",
+      "x-internal": true
     }
   ],
   "x-components": {}
