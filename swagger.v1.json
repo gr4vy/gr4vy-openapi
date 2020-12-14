@@ -46,7 +46,7 @@
         ],
         "description": "Returns a list of active API key-pairs",
         "operationId": "list-api-key-pairs",
-        "summary": "List the currently active API key-pairs",
+        "summary": "List API key-pairs",
         "x-internal": true
       },
       "post": {
