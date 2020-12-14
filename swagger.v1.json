@@ -214,6 +214,103 @@
         "summary": "Capture authorized transaction"
       }
     },
+    "/auth/jwt-key-pairs": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "A list of active key pairs",
+            "schema": {
+              "$ref": "#/definitions/JWTKeyPairs"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          }
+        },
+        "tags": [
+          "JWT Key Pairs"
+        ],
+        "description": "Returns a list of active JWT key-pairs",
+        "operationId": "list-jwt-key-pairs",
+        "summary": "List the currently active JWT key-pairs",
+        "x-internal": true
+      },
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "A newly created key pair",
+            "schema": {
+              "$ref": "#/definitions/JWTKeyPair"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          }
+        },
+        "tags": [
+          "JWT Key Pairs"
+        ],
+        "description": "Creates a new JWT key-pair",
+        "operationId": "create-jwt-key-pair",
+        "summary": "Create a JWT key-pair",
+        "x-internal": true
+      }
+    },
+    "/auth/jwt-key-pairs/{jwt_key_pair_id}": {
+      "parameters": [
+        {
+          "description": "The ID for the JWT key pair.",
+          "in": "path",
+          "name": "jwt_key_pair_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "schema": {
+              "$ref": "#/definitions/Error404NotFound"
+            }
+          }
+        },
+        "tags": [
+          "JWT Key Pairs"
+        ],
+        "description": "Deletes a JWT key-pair",
+        "operationId": "delete-jwt-key-pair",
+        "summary": "Delete a JWT key-pair",
+        "x-internal": true
+      }
+    },
     "/auth/session": {
       "post": {
         "consumes": [
@@ -2794,6 +2891,70 @@
         "Errors"
       ]
     },
+    "JWTKeyPair": {
+      "description": "Details about a JWT key pair",
+      "properties": {
+        "created_at": {
+          "description": "The date and time when this key pair was created",
+          "example": "2012-12-12T10:53:43-08:00",
+          "format": "date-time",
+          "type": "string"
+        },
+        "id": {
+          "description": "A unique ID for this key-pair.",
+          "example": "42773804-3ceb-4851-baae-afd0d7ee37a8",
+          "format": "uuid",
+          "type": "string"
+        },
+        "passphrase": {
+          "description": "The passphrase used to decrypt the private key. This is only returned\nafter the key is initially requested. For subsequent API calls this value\nis `null`.",
+          "example": "af2675c9aba7de1f3bccb30757d7afd8",
+          "type": "string",
+          "x-nullable": true
+        },
+        "private_key": {
+          "description": "The encrypted private key for the key-pair. This is only returned after\nthe key is initially requested. For subsequent API calls this value is\n`null`.",
+          "example": "-----BEGIN ENCRYPTED PRIVATE KEY-----\n...\n-----END ENCRYPTED PRIVATE KEY-----",
+          "type": "string",
+          "x-nullable": true
+        },
+        "type": {
+          "description": "`jwt-key-pair`",
+          "enum": [
+            "jwt-key-pair"
+          ],
+          "example": "jwt-key-pair",
+          "type": "string"
+        },
+        "updated_at": {
+          "description": "The date and time when this key pair was last updated",
+          "example": "2012-12-12T10:53:43-08:00",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "title": "JWT Key Pair",
+      "type": "object",
+      "x-tags": [
+        "JWT Key Pairs"
+      ]
+    },
+    "JWTKeyPairs": {
+      "description": "A list of the currently active JWT key pairs",
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/definitions/JWTKeyPair"
+          },
+          "type": "array"
+        }
+      },
+      "title": "A list of active JWT key pairs",
+      "type": "object",
+      "x-tags": [
+        "JWT Key Pairs"
+      ]
+    },
     "Merchant": {
       "description": "A merchant in a cluster",
       "properties": {
@@ -4316,6 +4477,11 @@
     {
       "description": "In Gr4vy, a card ruleset represents a set of rules that define how a card\ntransaction is processed. It determines which payment services are used,\nand with what priority, based on the transaction amount, card type, and\nmany more attributes.\n\n## Features\n\nA card ruleset can be used to:\n\n* Determine what payment service is used based on transaction and card\nproperties.\n* Determine what fallback payment services to use if the transaction\ndid not succeed with the initial provider.",
       "name": "Card Rulesets"
+    },
+    {
+      "description": "In Gr4vy, a JWT key pair is used to sign and validate JWTs. A JWT is used\nas a bearer token to authenticate to the API.",
+      "name": "JWT Key Pairs",
+      "x-internal": true
     },
     {
       "description": "In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.\nCurrently only one merchant is supported per cluster.",
