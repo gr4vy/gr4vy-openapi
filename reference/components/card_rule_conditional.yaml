@@ -4,7 +4,7 @@ type: object
 description: |-
   A conditional rule in a ruleset. It defines an if/else condition and a rule to
   move on to next for each of these values.
-
+x-internal: true
 x-tags:
   - Card Rulesets
 

@@ -2,6 +2,7 @@
 title: Merchant
 type: object
 description: A merchant in a cluster
+x-internal: true
 
 x-tags:
   - Merchants

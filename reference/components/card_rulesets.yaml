@@ -2,7 +2,7 @@
 title: Card Rulesets
 type: object
 description: A list of card rulesets
-
+x-internal: true
 x-tags:
   - Card Rulesets
 

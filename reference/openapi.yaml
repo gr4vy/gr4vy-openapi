@@ -59,6 +59,7 @@ tags:
       Callbacks are API endpoints used by Gr4vy for catching redirect callbacks
       from payment providers.
   - name: Card Rulesets
+    x-internal: true
     description: |-
       In Gr4vy, a card ruleset represents a set of rules that define how a card
       transaction is processed. It determines which payment services are used,

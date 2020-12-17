@@ -2,6 +2,7 @@
 title: Error
 type: object
 description: A generic client error.
+x-internal: true
 
 x-tags:
   - Errors

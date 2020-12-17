@@ -4,7 +4,7 @@ type: object
 description: |-
   Creates a new card ruleset which holds the rules that are parsed for a card
   transaction.
-
+x-internal: true
 x-tags:
   - Card Rulesets
 

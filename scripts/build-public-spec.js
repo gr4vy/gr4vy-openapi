@@ -1,14 +1,16 @@
 const fs = require("fs")
 const yaml = require("js-yaml")
 
-process.chdir(`${__dirname}/../reference/`)
+process.chdir(`${__dirname}/../public/`)
 
 // filter all internal endpoints
 const filterEndpoints = (endpoints) => {
   Object.entries(endpoints).forEach(([verb, endpoint]) => {
     if (!endpoint?.['$ref']) { return }
     const spec = yaml.load(fs.readFileSync(endpoint['$ref']))
+
     if (spec['x-internal']) {
+      fs.unlinkSync(endpoint['$ref'])
       delete endpoints[verb]
     }
   })
@@ -36,8 +38,9 @@ Object.entries(schema.components.schemas).forEach(([name, component]) => {
   if (!component?.['$ref']) { return }
   const spec = yaml.load(fs.readFileSync(component['$ref']))
   if (spec['x-internal']) {
+    fs.unlinkSync(component['$ref'])
     delete schema.components.schemas[name]
   }
 })
 
-fs.writeFileSync('openapi-public.yaml', yaml.dump(schema, null, 2))
+fs.writeFileSync('openapi.yaml', yaml.dump(schema, null, 2))

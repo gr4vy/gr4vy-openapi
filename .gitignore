@@ -2,4 +2,4 @@ build
 swagger
 node_modules
 .DS_Store
-openapi-public.yaml
+public

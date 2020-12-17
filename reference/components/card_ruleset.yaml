@@ -5,7 +5,7 @@ description: |-
   A card ruleset which holds the rules that are parsed for a card transaction.
 
   Multiple rulesets can exists at any time, but only one can be deployed.
-
+x-internal: true
 x-tags:
   - Card Rulesets
 

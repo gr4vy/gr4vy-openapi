@@ -4,7 +4,7 @@ type: object
 description: |-
   A terminal rule in a ruleset. It the payment services to use in case the
   ruleset reaches this node.
-
+x-internal: true
 x-tags:
   - Card Rulesets
 
