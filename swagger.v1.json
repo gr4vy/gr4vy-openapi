@@ -1555,7 +1555,6 @@
       "parameters": [
         {
           "description": "The ID of the payment service",
-          "format": "uuid",
           "in": "path",
           "name": "payment_service_id",
           "required": true,
