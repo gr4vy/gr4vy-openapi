@@ -96,9 +96,3 @@ properties:
     example: https://cdn.stripe.com/logo.png
     description: The logo for this provider
     format: uri
-
-  available:
-    type: boolean
-    example: true
-    description:
-      Defines if a service is available to be activated in this cluster.
