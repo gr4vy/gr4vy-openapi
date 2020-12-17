@@ -47,6 +47,7 @@
     },
     {
       "name": "Card Rulesets",
+      "x-internal": true,
       "description": "In Gr4vy, a card ruleset represents a set of rules that define how a card\ntransaction is processed. It determines which payment services are used,\nand with what priority, based on the transaction amount, card type, and\nmany more attributes.\n\n## Features\n\nA card ruleset can be used to:\n\n* Determine what payment service is used based on transaction and card\nproperties.\n* Determine what fallback payment services to use if the transaction\ndid not succeed with the initial provider."
     },
     {
@@ -3620,6 +3621,7 @@
         "title": "Card Ruleset",
         "type": "object",
         "description": "A card ruleset which holds the rules that are parsed for a card transaction.\n\nMultiple rulesets can exists at any time, but only one can be deployed.",
+        "x-internal": true,
         "x-tags": [
           "Card Rulesets"
         ],
@@ -3690,6 +3692,7 @@
         "title": "Card Rulesets",
         "type": "object",
         "description": "A list of card rulesets",
+        "x-internal": true,
         "x-tags": [
           "Card Rulesets"
         ],
@@ -3730,6 +3733,7 @@
         "title": "Conditional Card Rule",
         "type": "object",
         "description": "A conditional rule in a ruleset. It defines an if/else condition and a rule to\nmove on to next for each of these values.",
+        "x-internal": true,
         "x-tags": [
           "Card Rulesets"
         ],
@@ -3809,6 +3813,7 @@
         "title": "Terminal Card Rule",
         "type": "object",
         "description": "A terminal rule in a ruleset. It the payment services to use in case the\nruleset reaches this node.",
+        "x-internal": true,
         "x-tags": [
           "Card Rulesets"
         ],
@@ -3857,6 +3862,7 @@
         "title": "Card Ruleset (Create)",
         "type": "object",
         "description": "Creates a new card ruleset which holds the rules that are parsed for a card\ntransaction.",
+        "x-internal": true,
         "x-tags": [
           "Card Rulesets"
         ],
@@ -3896,6 +3902,7 @@
         "title": "Card Ruleset (Update)",
         "type": "object",
         "description": "Updates a card ruleset which holds the rules that are parsed for a card\ntransaction.",
+        "x-internal": true,
         "x-tags": [
           "Card Rulesets"
         ],
@@ -3935,6 +3942,7 @@
         "title": "Error",
         "type": "object",
         "description": "A generic client error.",
+        "x-internal": true,
         "x-tags": [
           "Errors"
         ],
@@ -4282,6 +4290,7 @@
         "title": "Merchant",
         "type": "object",
         "description": "A merchant in a cluster",
+        "x-internal": true,
         "x-tags": [
           "Merchants"
         ],
