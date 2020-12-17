@@ -3,6 +3,7 @@ title: User
 type: object
 x-tags:
   - Users
+x-internal: true
 
 properties:
   type:

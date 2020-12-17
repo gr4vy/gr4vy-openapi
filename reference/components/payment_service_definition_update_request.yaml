@@ -2,6 +2,7 @@
 title: Update an available Payment Service (Discovery)
 type: object
 description: Updates an available payment service
+x-internal: true
 
 x-tags:
   - Discovery

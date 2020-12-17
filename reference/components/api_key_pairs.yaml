@@ -2,6 +2,7 @@
 title: A list of active API key pairs
 type: object
 description: A list of the currently active API key pairs
+x-internal: true
 
 x-tags:
   - API Key Pairs

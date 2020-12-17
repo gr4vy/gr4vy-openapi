@@ -4,6 +4,7 @@ description: A user session.
 type: object
 x-tags:
   - Authentication
+x-internal: true
 
 properties:
   type:

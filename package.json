@@ -13,9 +13,11 @@
     "lint:examples": "openapi-examples-validator -n reference/openapi.yaml",
     "lint:yaml": "yamllint reference",
     "start": "redoc-cli serve reference/openapi.yaml -w --options.theme.colors.primary.main=teal --options.expandResponses=all --options.hideDownloadButton=true --options.hideSingleRequestSampleTab=true  --options.expandSingleSchemaField=true --options.jsonSampleExpandLevel=4 --options.noAutoAuth=true --options.pathInMiddlePanel=true --options.requiredPropsFirst=true --options.sortPropsAlphabetically=true",
+    "start:public": "redoc-cli serve reference/openapi-public.yaml -w --options.theme.colors.primary.main=teal --options.expandResponses=all --options.hideDownloadButton=true --options.hideSingleRequestSampleTab=true  --options.expandSingleSchemaField=true --options.jsonSampleExpandLevel=4 --options.noAutoAuth=true --options.pathInMiddlePanel=true --options.requiredPropsFirst=true --options.sortPropsAlphabetically=true",
     "build:openapi": "node ./scripts/build-openapi.js",
     "prebuild:swagger": "yarn build:openapi",
     "build:swagger": "api-spec-converter --from=openapi_3 --to=swagger_2 --syntax=json build/openapi.v1.json > build/swagger.v1.json",
+    "build:public-yaml": "node ./scripts/build-public-yaml.js",
     "test": "yarn lint"
   },
   "repository": {

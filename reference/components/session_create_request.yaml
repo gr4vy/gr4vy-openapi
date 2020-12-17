@@ -2,6 +2,7 @@
 title: Session (Create)
 type: object
 description: A request to create a session using an email address and password.
+x-internal: true
 
 x-tags:
   - Authentication

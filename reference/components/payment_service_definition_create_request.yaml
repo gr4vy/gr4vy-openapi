@@ -2,6 +2,7 @@
 title: Create a payment service definition
 type: object
 description: Updates an available payment service
+x-internal: true
 
 x-tags:
   - Discovery

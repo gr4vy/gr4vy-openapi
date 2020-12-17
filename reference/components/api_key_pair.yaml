@@ -2,6 +2,7 @@
 title: API Key Pair
 type: object
 description: Details about an API key pair
+x-internal: true
 
 x-tags:
   - API Key Pairs
