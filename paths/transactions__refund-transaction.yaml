@@ -1,0 +1,37 @@
+---
+operationId: refund-transaction
+summary: Refund or void transaction
+description: |-
+  Refunds or voids transaction. If this transaction was already captured, it
+  will issue a refund. If the transaction was not yet captured the authorization
+  will instead be voided.
+tags:
+  - Transactions
+
+responses:
+  "200":
+    description: The cancelled transaction.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Transaction"
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
+
+  "404":
+    description:
+      Returns an error if the resource can not be found or has not yet been
+      created.
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error404NotFound
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error404PendingCreation

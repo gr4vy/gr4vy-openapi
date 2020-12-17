@@ -1,0 +1,48 @@
+---
+operationId: list-payment-services
+summary: List payment services
+description:
+  Lists the currently configured and activated payment services for a for a
+  cluster.
+tags:
+  - Payment Services
+
+parameters:
+  - schema:
+      type: integer
+      default: 100
+      example: 1000
+      minimum: 0
+      maximum: 1000
+      format: int32
+    in: query
+    name: limit
+    description: The maximum number of items to return
+
+  - schema:
+      type: string
+      format: ""
+      example: "1593343179"
+    in: query
+    name: marker
+    description: |-
+      The marker that identifies the page of results to return.
+
+      For the first page of results, omit this parameter.
+      For next pages, use the value returned by the API in
+      the `next_page` field.
+
+responses:
+  "200":
+    description: OK
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/PaymentServices"
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"

@@ -1,0 +1,56 @@
+---
+operationId: add-buyer
+summary: Add buyer
+description: |
+  Adds a buyer, allowing for payment methods and transactions to be associated
+  to this buyer.
+tags:
+  - Buyers
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: "../openapi.yaml#/components/schemas/BuyerCreateRequest"
+      examples:
+        Create a buyer:
+          value:
+            external_identifier: "412231123"
+            display_name: John L.
+
+responses:
+  "201":
+    description:
+      "This API returns asynchronously, returning status object with the ID of
+      the pending `Card` resource."
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Buyer"
+
+  "400":
+    description:
+      Returns an error if the request was badly formatted or missing required
+      fields.
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400BadRequest
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400IncorrectJson
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
+
+  "409":
+    description: Returns an error if duplicate resource has been found.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error409DuplicateRecord"

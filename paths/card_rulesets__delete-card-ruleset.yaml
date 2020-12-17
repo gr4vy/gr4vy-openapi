@@ -1,0 +1,40 @@
+---
+operationId: delete-card-ruleset
+summary: Delete card ruleset
+description: Deletes a specific card ruleset
+tags:
+  - Card Rulesets
+x-internal: true
+
+responses:
+  "204":
+    description: No Content
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
+
+  "403":
+    description: Returns an error if the ruleset could not be deleted
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error"
+        examples:
+          Ruleset is active:
+            value:
+              type: error
+              code: forbidden
+              status: 403
+              message: |-
+                The resource could not be removed as it's currently active
+
+  "404":
+    description: Returns an error if the resource can not be found.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error404NotFound"

@@ -1,0 +1,54 @@
+---
+operationId: update-buyer
+summary: Update buyer
+description: |
+  Updates a buyer's details.
+tags:
+  - Buyers
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: "../openapi.yaml#/components/schemas/BuyerUpdateRequest"
+      examples:
+        Update a buyer:
+          value:
+            external_identifier: "42623266"
+            display_name: John D.
+
+responses:
+  "200":
+    description: |-
+      An updated buyer record.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Buyer"
+
+  "400":
+    description:
+      Returns an error if the request was badly formatted or missing required
+      fields.
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400BadRequest
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400IncorrectJson
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
+
+  "404":
+    description: Returns an error if the resource can not be found.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error404NotFound"

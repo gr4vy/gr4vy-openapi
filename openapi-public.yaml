@@ -1,0 +1,313 @@
+openapi: 3.0.0
+info:
+  title: Gr4vy API (Beta)
+  version: '1.0'
+  contact:
+    name: Gr4vy Support
+    email: support@gr4vy.com
+    url: 'https://gr4vy.com'
+  termsOfService: 'https://gr4vy.com'
+  license:
+    name: MIT
+    url: 'https://raw.githubusercontent.com/gr4vy/gr4vy-openapi/main/LICENSE'
+  description: |-
+    Welcome to the Gr4vy API reference documentation.
+    Our API is still very much a work in product and subject to change.
+servers:
+  - url: 'https://api.{merchant}.gr4vy.com'
+    variables:
+      merchant:
+        default: demo
+        description: |-
+          The subdomain for your cluster as specified by the
+          cluster's main merchant `short_name`.
+tags:
+  - name: Async APIs
+    description: |-
+      The asynchronous (async) APIs are convenience APIs that function as an
+      alternative way to create transactions and register payment methods
+      without having to wait for the API to complete. Each of thee APIs returns
+      directly without processing the request fully, allowing you to render a
+      new page for the buyer while the request is processed.
+  - name: Buyers
+    description: >-
+      In Gr4vy, a buyer represents your customer, the shopper who's performing
+
+      a checkout and making a purchase.
+
+
+      ## Features
+
+
+      A buyer can be used by you to:
+
+
+      * Display a human readable name (`display_name`) for a buyer in the Gr4vy
+      admin panel
+
+      * Associate multiple tokenized payment methods with a single user
+
+      * Initialize **Gr4vy Embed** with the buyer ID, automatically displaying
+      the
+        buyer's previously stored payment methods, allowing for faster checkout.
+  - name: Card Rulesets
+    description: |-
+      In Gr4vy, a card ruleset represents a set of rules that define how a card
+      transaction is processed. It determines which payment services are used,
+      and with what priority, based on the transaction amount, card type, and
+      many more attributes.
+
+      ## Features
+
+      A card ruleset can be used to:
+
+      * Determine what payment service is used based on transaction and card
+      properties.
+      * Determine what fallback payment services to use if the transaction
+      did not succeed with the initial provider.
+  - name: Payment Methods
+    description: >-
+      In Gr4vy, a payment method represents a way in which a payment can be
+      processed,
+
+      for example a card payment, a PayPal payment, or a Bitcoin payment.
+
+
+      ## Features
+
+
+      The payment method API can be used to:
+
+
+      * Determine the available payment methods in a cluster
+
+      * Determine the available payment method for a buyer in a specific
+      currency and country
+
+      * Store (also known as tokenize) a payment method for a buyer
+
+      * Fetch all previously tokenized payment methods for a buyer
+  - name: Payment Options
+    description: |-
+      In Gr4vy, a payment option represents a list of methods (card, PayPal,
+      etc) that are available for a given locale.
+
+      ## Features
+
+      The payment options API can be used to:
+
+      * Determine what types of payments can be processed in a specific locale
+      * Display a list options to a buyer to choose from
+  - name: Payment Services
+    description: |-
+      In Gr4vy, a payment service represents a configured payment provider
+      (Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,
+      etc)
+
+      ## Features
+
+      The payment services API can be used to:
+
+      * Provide Gr4vy with the payment credentials for a payment provider
+      * Set a display name for a payment provider
+      * Prepare a payment provider for usage in a ruleset
+  - name: Transactions
+    description: >-
+      In Gr4vy, a transaction represents a payment in any state, either before
+      it is
+
+      authorized, once it is captured, or after it has been refunded.
+
+
+      ## Features
+
+
+      The transactions API can be used to:
+
+
+      - Authorize, capture, and store cards
+
+      - Authorize, capture, and store alternative payment methods like PayPal
+
+      - Refund, void, and otherwise cancel existing transactions
+paths:
+  /async/payment-methods:
+    post:
+      $ref: ./paths/payment_methods__async-store-payment-method.yaml
+  /async/transactions:
+    post:
+      $ref: ./paths/transactions__async-create-transaction.yaml
+  '/async/transactions/{transaction_id}/capture':
+    parameters:
+      - $ref: ./parameters/transaction_id.yaml
+    post:
+      $ref: ./paths/transactions__async-capture-transaction.yaml
+  /async/transactions/batch-capture:
+    post:
+      $ref: ./paths/transactions__async-batch-capture-transactions.yaml
+  /buyers:
+    get:
+      $ref: ./paths/buyers__list-buyers.yaml
+    post:
+      $ref: ./paths/buyers__add-buyer.yaml
+  '/buyers/{buyer_id}':
+    parameters:
+      - $ref: ./parameters/buyer_id.yaml
+    get:
+      $ref: ./paths/buyers__get-buyer.yaml
+    put:
+      $ref: ./paths/buyers__update-buyer.yaml
+    delete:
+      $ref: ./paths/buyers__delete-buyer.yaml
+  /payment-methods:
+    get:
+      $ref: ./paths/payment_methods__list-payment-methods.yaml
+    post:
+      $ref: ./paths/payment_methods__store-payment-method.yaml
+  '/payment-methods/{payment_method_id}':
+    parameters:
+      - $ref: ./parameters/payment_method_id.yaml
+    get:
+      $ref: ./paths/payment_methods__get-payment-method.yaml
+    delete:
+      $ref: ./paths/payment_methods__delete-payment-method.yaml
+  '/payment-methods/{payment_method_id}/events':
+    parameters:
+      - $ref: ./parameters/payment_method_id.yaml
+    get:
+      $ref: ./paths/payment_methods__list-payment-method-events.yaml
+  /payment-options:
+    get:
+      $ref: ./paths/payment_options__list-payment-options.yaml
+  /payment-services:
+    get:
+      $ref: ./paths/payment_services__list-payment-services.yaml
+    post:
+      $ref: ./paths/payment_services__add-payment-service.yaml
+  '/payment-services/{payment_service_id}':
+    parameters:
+      - $ref: ./parameters/payment_service_id.yaml
+    get:
+      $ref: ./paths/payment_services__get-payment-service.yaml
+    put:
+      $ref: ./paths/payment_services__update-payment-service.yaml
+    delete:
+      $ref: ./paths/payment_services__delete_payment-service.yaml
+  /transactions:
+    get:
+      $ref: ./paths/transactions__list-transactions.yaml
+    post:
+      $ref: ./paths/transactions__create-transaction.yaml
+  '/transactions/{transaction_id}':
+    parameters:
+      - $ref: ./parameters/transaction_id.yaml
+    get:
+      $ref: ./paths/transactions__get-transaction.yaml
+  '/transactions/{transaction_id}/capture':
+    parameters:
+      - $ref: ./parameters/transaction_id.yaml
+    post:
+      $ref: ./paths/transactions__capture-transaction.yaml
+  '/transactions/{transaction_id}/refund':
+    parameters:
+      - $ref: ./parameters/transaction_id.yaml
+    post:
+      $ref: ./paths/transactions__refund-transaction.yaml
+  '/transactions/{transaction_id}/events':
+    parameters:
+      - $ref: ./parameters/transaction_id.yaml
+    get:
+      $ref: ./paths/transactions__list-transaction-events.yaml
+components:
+  schemas:
+    Buyer:
+      $ref: ./components/buyer.yaml
+    Buyers:
+      $ref: ./components/buyers.yaml
+    BuyerCreateRequest:
+      $ref: ./components/buyer_create_request.yaml
+    BuyerUpdateRequest:
+      $ref: ./components/buyer_update_request.yaml
+    Card:
+      $ref: ./components/card.yaml
+    CardDetails:
+      $ref: ./components/card_details.yaml
+    CardStoreRequest:
+      $ref: ./components/card_store_request.yaml
+    CardRuleset:
+      $ref: ./components/card_ruleset.yaml
+    CardRulesets:
+      $ref: ./components/card_rulesets.yaml
+    CardRuleConditional:
+      $ref: ./components/card_rule_conditional.yaml
+    CardRuleTerminal:
+      $ref: ./components/card_rule_terminal.yaml
+    CardRulesetCreateRequest:
+      $ref: ./components/card_ruleset_create_request.yaml
+    CardRulesetUpdateRequest:
+      $ref: ./components/card_ruleset_update_request.yaml
+    Error:
+      $ref: ./components/error.yaml
+    Error400BadRequest:
+      $ref: ./components/error_400_bad_request.yaml
+    Error400IncorrectJson:
+      $ref: ./components/error_400_incorrect_json.yaml
+    Error401Unauthorized:
+      $ref: ./components/error_401_unauthorized.yaml
+    Error404PendingCreation:
+      $ref: ./components/error_404_pending_creation.yaml
+    Error404NotFound:
+      $ref: ./components/error_404_not_found.yaml
+    Error409DuplicateRecord:
+      $ref: ./components/error_409_duplicate_record.yaml
+    Merchant:
+      $ref: ./components/merchant.yaml
+    PaymentMethods:
+      $ref: ./components/payment_methods.yaml
+    PaymentMethodEvent:
+      $ref: ./components/payment_method_event.yaml
+    PaymentMethodEvents:
+      $ref: ./components/payment_method_events.yaml
+    PaymentService:
+      $ref: ./components/payment_service.yaml
+    PaymentServices:
+      $ref: ./components/payment_services.yaml
+    PaymentServiceCreateRequest:
+      $ref: ./components/payment_service_create_request.yaml
+    PaymentServiceUpdateRequest:
+      $ref: ./components/payment_service_update_request.yaml
+    PaymentOption:
+      $ref: ./components/payment_option.yaml
+    PaymentOptions:
+      $ref: ./components/payment_options.yaml
+    PayPal:
+      $ref: ./components/paypal.yaml
+    PayPalDetails:
+      $ref: ./components/paypal_details.yaml
+    PayPalStoreRequest:
+      $ref: ./components/paypal_store_request.yaml
+    Status:
+      $ref: ./components/status.yaml
+    Statuses:
+      $ref: ./components/statuses.yaml
+    Transaction:
+      $ref: ./components/transaction.yaml
+    Transactions:
+      $ref: ./components/transactions.yaml
+    TransactionsBatchCaptureRequest:
+      $ref: ./components/transactions_batch_capture_request.yaml
+    TransactionCreateRequest:
+      $ref: ./components/transaction_create_request.yaml
+    TransactionCaptureRequest:
+      $ref: ./components/transaction_capture_request.yaml
+    TransactionEvent:
+      $ref: ./components/transaction_event.yaml
+    TransactionEvents:
+      $ref: ./components/transaction_events.yaml
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - BearerAuth: []

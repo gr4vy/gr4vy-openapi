@@ -1,0 +1,80 @@
+---
+operationId: list-cards-rulesets
+summary: List card rulesets
+description: Returns a list of rulesets that can be used for card transactions.
+tags: ["Card Rulesets"]
+x-internal: true
+
+parameters:
+  - schema:
+      type: integer
+      default: 100
+      example: 1000
+      minimum: 0
+      maximum: 1000
+      format: int32
+    in: query
+    name: limit
+    description: The maximum number of items to return
+
+  - schema:
+      type: string
+      format: ""
+      example: "1593343179"
+    in: query
+    name: marker
+    description: |-
+      The marker that identifies the page of results to return.
+
+      For the first page of results, omit this parameter.
+      For next pages, use the value returned by the API in
+      the `next_page` field.
+
+responses:
+  "200":
+    description: A list of rulesets
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/CardRulesets"
+        examples:
+          A list of card rulesets:
+            value:
+              items:
+                - type: ruleset
+                  id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+                  display_name: Q2 2020 Ruleset
+                  active: true
+                  valid: true
+                  root_rule_id: "0"
+                  created_at: "2012-12-12T10:53:43-08:00"
+                  updated_at: "2012-12-12T10:53:43-08:00"
+                  rules:
+                    - type: card-rule
+                      id: "0"
+                      rule_type: conditional
+                      key: amount
+                      condition: ">="
+                      value: "200"
+                      true_rule_id: "1"
+                      false_rule_id: "2"
+                    - type: card-rule
+                      id: "1"
+                      rule_type: terminal
+                      payment_service_ids:
+                        - stripe-card-f47db210-8e30-4f74-8123-b834604f2042
+                    - type: card-rule
+                      id: "2"
+                      rule_type: terminal
+                      payment_service_ids:
+                        - card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96
+          An empty list of card rulesets:
+            value:
+              items: []
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"

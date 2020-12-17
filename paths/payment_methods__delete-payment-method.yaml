@@ -1,0 +1,24 @@
+---
+operationId: delete-payment-method
+summary: Delete a payment method
+description: Removes a stored payment method
+tags:
+  - Payment Methods
+
+responses:
+  "204":
+    description: No Content
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
+
+  "404":
+    description: Returns an error if the resource can not be found.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error404NotFound"

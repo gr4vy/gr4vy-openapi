@@ -1,0 +1,43 @@
+---
+operationId: async-batch-capture-transactions
+summary: Batch capture authorizations
+tags: ["Async APIs"]
+description: |-
+  The body of this API takes a list of items as a JSON object.
+
+  This API returns asynchronously, returning a list of status objects with the
+  IDs of the pending `Transaction` resources.
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: |-
+                ../openapi.yaml#/components/schemas/TransactionsBatchCaptureRequest
+
+responses:
+  "202":
+    description: Accepted
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Statuses"
+
+  "400":
+    description: Returns an error if the request was badly formatted.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error400IncorrectJson"
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"

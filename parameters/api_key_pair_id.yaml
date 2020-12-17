@@ -1,0 +1,8 @@
+---
+schema:
+  type: string
+  example: gg9ILy
+name: api_key_pair_id
+in: path
+required: true
+description: The ID for the API key pair.

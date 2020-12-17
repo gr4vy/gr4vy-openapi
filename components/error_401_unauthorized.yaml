@@ -1,0 +1,36 @@
+---
+title: Unauthorized Error
+type: object
+description: Unauthorized Error (HTTP 401)
+
+x-tags:
+  - Errors
+
+properties:
+  type:
+    type: string
+    description: "`error`"
+    enum:
+      - error
+    example: error
+
+  code:
+    type: string
+    description: "`unauthorized`"
+    example: unauthorized
+    enum:
+      - unauthorized
+
+  status:
+    type: integer
+    description: "`401`"
+    example: 401
+    enum:
+      - 401
+
+  message:
+    type: string
+    description: "No valid API authentication found"
+    example: No valid API authentication found
+    enum:
+      - No valid API authentication found

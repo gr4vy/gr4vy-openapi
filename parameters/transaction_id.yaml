@@ -1,0 +1,8 @@
+---
+schema:
+  type: string
+  example: fe26475d-ec3e-4884-9553-f7356683f7f9
+name: transaction_id
+in: path
+required: true
+description: The ID for the transaction to get the information for.

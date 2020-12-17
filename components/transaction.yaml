@@ -1,0 +1,85 @@
+---
+title: Transaction
+type: object
+description: Captures a transaction.
+x-tags:
+  - Transactions
+
+properties:
+  type:
+    type: string
+    description: The type of this resource. Is always `transaction`
+    example: transaction
+    enum:
+      - transaction
+
+  id:
+    type: string
+    example: fe26475d-ec3e-4884-9553-f7356683f7f9
+    description: The unique identifier for this transaction
+    format: uuid
+
+  status:
+    type: string
+    description: Whether this transaction was successfully created or not.
+    enum:
+      - created
+      - failure
+    example: created
+
+  transaction_status:
+    type: string
+    description:
+      "The status of the transaction being processed. This is different from the
+      `status` field in that it represents the status of the transaction at the
+      payment processor, not the status of the transaction created in Gr4vy."
+    example: created
+    enum:
+      - created
+      - captured
+      - authorized
+      - buyer_authorization_required
+      - pending
+
+  amount:
+    type: number
+    description: The currency amount captured by this transaction.
+    example: 1299
+    minimum: 0.000001
+    maximum: 99999999
+
+  currency:
+    type: string
+    example: USD
+    description: The currency code for this transaction.
+
+  payment_method:
+    oneOf:
+      - $ref: "../openapi.yaml#/components/schemas/Card"
+      - $ref: "../openapi.yaml#/components/schemas/PayPal"
+
+  created_at:
+    type: string
+    description:
+      The date and time when this transaction was created in our system.
+    format: date-time
+    example: "2013-07-16T19:23:00.000Z"
+
+  external_identifier:
+    type: string
+    description:
+      An external identifier that can be used to match the transaction against
+      your own records.
+    example: user-789123
+    nullable: true
+
+  updated_at:
+    type: string
+    format: date-time
+    description: "Defines when the transaction was last updated "
+
+  payment_service_id:
+    type: string
+    example: paypal-paypal-169f5226-4644-4d1e-ac36-14999e73601f
+    description:
+      The ID of the payment service that was used for this transaction.

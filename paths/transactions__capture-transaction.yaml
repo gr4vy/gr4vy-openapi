@@ -1,0 +1,57 @@
+---
+operationId: capture-transaction
+summary: Capture authorized transaction
+description: Captures a previously authorized transaction.
+tags: ["Transactions"]
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: "../openapi.yaml#/components/schemas/TransactionCaptureRequest"
+      examples:
+        Capture an authorization:
+          value:
+            amount: 1299
+            currency: USD
+
+responses:
+  "200":
+    description: A transaction
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Transaction"
+
+  "400":
+    description:
+      Returns an error if the request was badly formatted or missing required
+      fields.
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400BadRequest
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400IncorrectJson
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
+
+  "404":
+    description:
+      Returns an error if the resource can not be found or has not yet been
+      created.
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error404NotFound
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error404PendingCreation

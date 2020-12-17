@@ -1,0 +1,37 @@
+---
+operationId: refresh-session
+summary: Renew a user session
+description: |
+  Re-authenticate a user using a refresh token.
+tags:
+  - Sessions
+x-internal: true
+
+responses:
+  "200":
+    description: |-
+      Returns a session object
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Session"
+
+  "400":
+    description:
+      Returns an error if the request was badly formatted or missing required
+      fields.
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400BadRequest
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400IncorrectJson
+
+  "401":
+    description: Returns an error if the refresh token provided was not valid.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"

@@ -1,0 +1,50 @@
+---
+operationId: list-payment-options
+summary: List available payment options for a locale
+description: |-
+  Returns a list of available payment method options for a currency
+  and country.
+tags:
+  - Payment Options
+
+parameters:
+  - schema:
+      type: string
+      example: IT
+    in: query
+    name: country
+    description: |-
+      The country for which to return available payment options
+
+  - schema:
+      type: string
+      example: EUR
+    in: query
+    name: currency
+    description: |-
+      The currency for which to return available payment options
+
+responses:
+  "200":
+    description: |-
+      Returns a list of available payment options for the given currency and
+      country code.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/PaymentOptions"
+
+  "400":
+    description: |-
+      Returns an error if  any of the query parameters are not recognised.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error400BadRequest"
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"

@@ -1,0 +1,30 @@
+---
+operationId: get-payment-method
+summary: Get stored payment method
+description: Gets the details for a stored payment method
+tags:
+  - Payment Methods
+
+responses:
+  "200":
+    description: Returns a payment method
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: "../openapi.yaml#/components/schemas/Card"
+            - $ref: "../openapi.yaml#/components/schemas/PayPal"
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
+
+  "404":
+    description: Returns an error if the resource can not be found.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error404NotFound"

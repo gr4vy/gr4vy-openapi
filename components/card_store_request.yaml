@@ -1,0 +1,81 @@
+---
+title: Card (Store)
+type: object
+description: A request to store a card.
+
+x-tags:
+  - Request Bodies
+
+required:
+  - method
+  - number
+
+properties:
+  method:
+    type: string
+    description: "`card`"
+    example: card
+    enum:
+      - card
+
+  number:
+    type: string
+    minLength: 14
+    maxLength: 16
+    example: "4111111111111111"
+    pattern: "^[0-9]{14,16}$"
+    description: |-
+      The 15-16 digit number for this credit card as it can be found on the
+      front of the card.
+
+      If a card has been stored with us previously, this number will represent
+      the unique tokenized card ID provided via our API.
+
+  expiration_date:
+    type: string
+    description: |-
+      The expiration date of the card, formatted `MM/YY`. If a card has been
+      previously stored with us this value is optional.
+
+      If the `number` of this card represents a tokenized card, then this value
+      is ignored.
+    example: 11/15
+    pattern: ^\d\d/\d\d$
+    minLength: 5
+    maxLength: 5
+
+  security_code:
+    type: string
+    description: |-
+      The 3 or 4 digit security code often found on the card. This often
+      referred to as the CVV or CVD.
+
+      If the `number` of this card represents a tokenized card, then this value
+      is ignored.
+    pattern: '^\d{3,4}$'
+    minLength: 3
+    maxLength: 4
+    example: "123"
+
+  external_identifier:
+    type: string
+    description:
+      An external identifier that can be used to match the card against your own
+      records.
+    example: user-789123
+    nullable: true
+
+  buyer_id:
+    type: string
+    format: uuid
+    example: fe26475d-ec3e-4884-9553-f7356683f7f9
+    description: |-
+      The ID of the buyer to associate this payment method to. If provided, the
+      `buyer_external_identifier` is ignored.
+
+  buyer_external_identifier:
+    type: string
+    description: |-
+      The `external_identifier` of the buyer to associate this payment method
+      to. This field is ignored if the `buyer_id` is provided.
+    example: user-789123

@@ -1,0 +1,76 @@
+---
+title: Conditional Card Rule
+type: object
+description: |-
+  A conditional rule in a ruleset. It defines an if/else condition and a rule to
+  move on to next for each of these values.
+
+x-tags:
+  - Card Rulesets
+
+required:
+  - type
+  - id
+  - rule_type
+  - key
+  - condition
+  - value
+  - true_rule_id
+  - false_rule_id
+
+properties:
+  type:
+    type: string
+    description: "`card-rule`"
+    example: card-rule
+    enum:
+      - card-rule
+  id:
+    type: string
+    description: A unique ID for this rule in the ruleset
+    example: "0"
+
+  rule_type:
+    type: string
+    description: "`conditional`"
+    example: conditional
+    enum:
+      - conditional
+
+  key:
+    type: string
+    description: The transaction field to filter by
+    example: amount
+    enum:
+      - amount
+      - currency
+      - cctype
+      - store
+      - use_test_environment
+
+  condition:
+    type: string
+    description: The comparison to make to `value` property.
+    example: "<="
+    enum:
+      - "=="
+      - "!="
+      - "<="
+      - ">="
+
+  value:
+    type: string
+    description: |-
+      The value to compare the `key` to. This value will be converted to
+      a number for the currency amount.
+    example: "200"
+
+  true_rule_id:
+    type: string
+    description: the ID of the rule to use if the comparison equals true.
+    example: "1"
+
+  false_rule_id:
+    type: string
+    description: the ID of the rule to use if the comparison equals false.
+    example: "2"

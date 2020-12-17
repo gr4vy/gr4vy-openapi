@@ -1,0 +1,30 @@
+---
+operationId: get-current-merchant
+
+summary: Get current merchant details
+description: Gets the information about the current merchant account
+tags:
+  - Merchants
+x-internal: true
+
+responses:
+  "200":
+    description: Returns the information about the merchant.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Merchant"
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
+
+  "404":
+    description: Returns an error if the resource can not be found.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error404NotFound"

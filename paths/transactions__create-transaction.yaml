@@ -1,0 +1,157 @@
+---
+summary: Authorize new transaction
+tags: ["Transactions"]
+operationId: authorize-new-transaction
+description: |
+  Attempts to create an authorization for a payment method. In some cases it is
+  not possible to create the authorization without redirecting the user for
+  their authorization. In these cases the status is set to
+  `buyer_authorization_required` and an `authorization_url` is returned.
+
+  Additionally, this endpoint accepts a few additional fields that allow for
+  simultaneous capturing and storage of the payment method.
+
+  * `store` - Use this field to store the payment method for
+  future use. Not all payment methods support this feature.
+  * `capture` - Use this method to also perform a capture of the transaction
+  after it has been authorized.
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: "../openapi.yaml#/components/schemas/TransactionCreateRequest"
+      examples:
+        Authorize a new card:
+          value:
+            amount: 1299
+            currency: USD
+            payment_method:
+              method: card
+              number: "4111111111111111"
+              expiration_date: 11/25
+              security_code: "123"
+        Authorized and tokenize a card:
+          value:
+            amount: 1299
+            currency: USD
+            store: true
+            payment_method:
+              method: card
+              number: "4111111111111111"
+              expiration_date: 11/25
+              security_code: "123"
+        "Authorize, capture, and tokenize a card":
+          value:
+            amount: 1299
+            currency: USD
+            capture: true
+            store: true
+            payment_method:
+              method: card
+              number: "4111111111111111"
+              expiration_date: 11/25
+              security_code: "123"
+        Authorize and capture a PayPal transaction:
+          value:
+            amount: 1299
+            currency: USD
+            capture: true
+            payment_method:
+              method: paypal
+              redirect_url: https://example.com/callback
+
+responses:
+  "201":
+    description: "A successful transaction"
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Transaction"
+        examples:
+          Card transaction:
+            value:
+              type: transaction
+              id: fe26475d-ec3e-4884-9553-f7356683f7f9
+              status: created
+              transaction_status: created
+              amount: 1299
+              currency: USD
+              payment_method:
+                type: payment-method
+                id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+                method: card
+                status: created
+                payment_method_status: stored
+                details:
+                  number: XXXX XXXX XXXX 1111
+                  expiration_date: 11 / 21
+                  type: visa
+                created_at: "2013-07-16T19:23:00.000Z"
+                updated_at: "2013-07-16T19:23:00.000Z"
+                external_identifier: user-789123
+                buyer:
+                  type: buyer
+                  id: fe26475d-ec3e-4884-9553-f7356683f7f9
+                  external_identifier: user-789123
+                  display_name: John L.
+                  created_at: "2013-07-16T19:23:00.000Z"
+                  updated_at: "2013-07-16T19:23:00.000Z"
+              created_at: "2013-07-16T19:23:00.000Z"
+              external_identifier: user-789123
+              updated_at: "2019-08-24T14:15:22Z"
+              payment_service_id: |-
+                stripe-card-169f5226-4644-4d1e-ac36-14999e73601f
+          PayPal transaction:
+            value:
+              type: transaction
+              id: fe26475d-ec3e-4884-9553-f7356683f7f9
+              status: created
+              transaction_status: buyer_authorization_required
+              amount: 1299
+              currency: USD
+              payment_method:
+                type: payment-method
+                id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+                method: paypal
+                status: buyer_authorization_required
+                payment_method_status: stored
+                details:
+                  email_address: null
+                  authorization_url: |-
+                    https://redirect.{merchant}.gr4vy.com/transactions/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c
+                created_at: "2013-07-16T19:23:00.000Z"
+                updated_at: "2013-07-16T19:23:00.000Z"
+                external_identifier: user-789123
+                buyer:
+                  type: buyer
+                  id: fe26475d-ec3e-4884-9553-f7356683f7f9
+                  external_identifier: user-789123
+                  display_name: John L.
+                  created_at: "2013-07-16T19:23:00.000Z"
+                  updated_at: "2013-07-16T19:23:00.000Z"
+              created_at: "2013-07-16T19:23:00.000Z"
+              external_identifier: user-789123
+              updated_at: "2019-08-24T14:15:22Z"
+              payment_service_id: |-
+                stripe-card-169f5226-4644-4d1e-ac36-14999e73601f
+
+  "400":
+    description:
+      Returns an error if the request was badly formatted or missing required
+      fields.
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400BadRequest
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400IncorrectJson
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"

@@ -1,0 +1,9 @@
+---
+schema:
+  type: string
+  example: 46973e9d-88a7-44a6-abfe-be4ff0134ff4
+  format: uuid
+name: payment_method_id
+in: path
+required: true
+description: The ID of the payment method
