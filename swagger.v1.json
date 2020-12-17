@@ -3514,11 +3514,6 @@
     "PaymentServiceDefinition": {
       "description": "An available payment service that can be configured for this cluster.",
       "properties": {
-        "available": {
-          "description": "Defines if a service is available to be activated in this cluster.",
-          "example": true,
-          "type": "boolean"
-        },
         "display_name": {
           "description": "The display name of this service",
           "example": "Stripe",
@@ -3621,11 +3616,6 @@
     "PaymentServiceDefinitionCreateRequest": {
       "description": "Updates an available payment service",
       "properties": {
-        "available": {
-          "description": "Defines if a service is available to be activated in this cluster.",
-          "example": true,
-          "type": "boolean"
-        },
         "display_name": {
           "description": "The display name of this service",
           "example": "Stripe",
@@ -3733,11 +3723,6 @@
     "PaymentServiceDefinitionUpdateRequest": {
       "description": "Updates an available payment service",
       "properties": {
-        "available": {
-          "description": "Defines if a service is available to be activated in this cluster.",
-          "example": true,
-          "type": "boolean"
-        },
         "display_name": {
           "description": "The display name of this service",
           "example": "Stripe",
@@ -3846,15 +3831,13 @@
         },
         "next_page": {
           "description": "The marker that represents the next page of results.",
-          "example": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
-          "format": "uuid",
+          "example": "stripe-card",
           "type": "string",
           "x-nullable": true
         },
         "previous_page": {
           "description": "The marker that represents the previous page of results.",
-          "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
-          "format": "uuid",
+          "example": null,
           "type": "string",
           "x-nullable": true
         }
