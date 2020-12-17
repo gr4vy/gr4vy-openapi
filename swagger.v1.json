@@ -2410,6 +2410,7 @@
       ],
       "title": "Conditional Card Rule",
       "type": "object",
+      "x-internal": true,
       "x-tags": [
         "Card Rulesets"
       ]
@@ -2458,6 +2459,7 @@
       ],
       "title": "Terminal Card Rule",
       "type": "object",
+      "x-internal": true,
       "x-tags": [
         "Card Rulesets"
       ]
@@ -2519,6 +2521,7 @@
       },
       "title": "Card Ruleset",
       "type": "object",
+      "x-internal": true,
       "x-tags": [
         "Card Rulesets"
       ]
@@ -2549,6 +2552,7 @@
       ],
       "title": "Card Ruleset (Create)",
       "type": "object",
+      "x-internal": true,
       "x-tags": [
         "Card Rulesets"
       ]
@@ -2579,6 +2583,7 @@
       ],
       "title": "Card Ruleset (Update)",
       "type": "object",
+      "x-internal": true,
       "x-tags": [
         "Card Rulesets"
       ]
@@ -2619,6 +2624,7 @@
       },
       "title": "Card Rulesets",
       "type": "object",
+      "x-internal": true,
       "x-tags": [
         "Card Rulesets"
       ]
@@ -2721,6 +2727,7 @@
       },
       "title": "Error",
       "type": "object",
+      "x-internal": true,
       "x-tags": [
         "Errors"
       ]
@@ -2992,6 +2999,7 @@
       },
       "title": "Merchant",
       "type": "object",
+      "x-internal": true,
       "x-tags": [
         "Merchants"
       ]
@@ -4483,7 +4491,8 @@
     },
     {
       "description": "In Gr4vy, a card ruleset represents a set of rules that define how a card\ntransaction is processed. It determines which payment services are used,\nand with what priority, based on the transaction amount, card type, and\nmany more attributes.\n\n## Features\n\nA card ruleset can be used to:\n\n* Determine what payment service is used based on transaction and card\nproperties.\n* Determine what fallback payment services to use if the transaction\ndid not succeed with the initial provider.",
-      "name": "Card Rulesets"
+      "name": "Card Rulesets",
+      "x-internal": true
     },
     {
       "description": "In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.\nCurrently only one merchant is supported per cluster.",
