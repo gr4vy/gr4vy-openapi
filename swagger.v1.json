@@ -2064,6 +2064,7 @@
       },
       "title": "API Key Pair",
       "type": "object",
+      "x-internal": true,
       "x-tags": [
         "API Key Pairs"
       ]
@@ -2080,6 +2081,7 @@
       },
       "title": "A list of active API key pairs",
       "type": "object",
+      "x-internal": true,
       "x-tags": [
         "API Key Pairs"
       ]
@@ -3603,6 +3605,7 @@
       },
       "title": "Payment Service Definition",
       "type": "object",
+      "x-internal": true,
       "x-tags": [
         "Discovery"
       ]
@@ -3714,6 +3717,7 @@
       ],
       "title": "Create a payment service definition",
       "type": "object",
+      "x-internal": true,
       "x-tags": [
         "Discovery"
       ]
@@ -3809,6 +3813,7 @@
       },
       "title": "Update an available Payment Service (Discovery)",
       "type": "object",
+      "x-internal": true,
       "x-tags": [
         "Discovery"
       ]
@@ -3848,6 +3853,7 @@
       },
       "title": "Payment service definitions",
       "type": "object",
+      "x-internal": true,
       "x-tags": [
         "Discovery"
       ]
@@ -3990,6 +3996,7 @@
       },
       "title": "Session",
       "type": "object",
+      "x-internal": true,
       "x-tags": [
         "Authentication"
       ]
@@ -4014,6 +4021,7 @@
       ],
       "title": "Session (Create)",
       "type": "object",
+      "x-internal": true,
       "x-tags": [
         "Authentication"
       ]
@@ -4436,6 +4444,7 @@
       },
       "title": "User",
       "type": "object",
+      "x-internal": true,
       "x-tags": [
         "Users"
       ]
