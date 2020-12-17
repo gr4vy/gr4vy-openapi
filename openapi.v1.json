@@ -4217,6 +4217,7 @@
         "title": "API Key Pair",
         "type": "object",
         "description": "Details about an API key pair",
+        "x-internal": true,
         "x-tags": [
           "API Key Pairs"
         ],
@@ -4264,6 +4265,7 @@
         "title": "A list of active API key pairs",
         "type": "object",
         "description": "A list of the currently active API key pairs",
+        "x-internal": true,
         "x-tags": [
           "API Key Pairs"
         ],
@@ -4707,6 +4709,7 @@
         "title": "Payment Service Definition",
         "type": "object",
         "description": "An available payment service that can be configured for this cluster.",
+        "x-internal": true,
         "x-tags": [
           "Discovery"
         ],
@@ -4813,6 +4816,7 @@
         "title": "Payment service definitions",
         "type": "object",
         "description": "A list of available payment services definitions.",
+        "x-internal": true,
         "x-tags": [
           "Discovery"
         ],
@@ -4852,6 +4856,7 @@
         "title": "Create a payment service definition",
         "type": "object",
         "description": "Updates an available payment service",
+        "x-internal": true,
         "x-tags": [
           "Discovery"
         ],
@@ -4963,6 +4968,7 @@
         "title": "Update an available Payment Service (Discovery)",
         "type": "object",
         "description": "Updates an available payment service",
+        "x-internal": true,
         "x-tags": [
           "Discovery"
         ],
@@ -5278,6 +5284,7 @@
         "x-tags": [
           "Authentication"
         ],
+        "x-internal": true,
         "properties": {
           "type": {
             "type": "string",
@@ -5317,6 +5324,7 @@
         "title": "Session (Create)",
         "type": "object",
         "description": "A request to create a session using an email address and password.",
+        "x-internal": true,
         "x-tags": [
           "Authentication"
         ],
@@ -5750,6 +5758,7 @@
         "x-tags": [
           "Users"
         ],
+        "x-internal": true,
         "properties": {
           "type": {
             "type": "string",
