@@ -4813,11 +4813,6 @@
             "example": "https://cdn.stripe.com/logo.png",
             "description": "The logo for this provider",
             "format": "uri"
-          },
-          "available": {
-            "type": "boolean",
-            "example": true,
-            "description": "Defines if a service is available to be activated in this cluster."
           }
         }
       },
@@ -4848,15 +4843,13 @@
           "next_page": {
             "type": "string",
             "description": "The marker that represents the next page of results.",
-            "format": "uuid",
-            "example": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
+            "example": "stripe-card",
             "nullable": true
           },
           "previous_page": {
             "type": "string",
             "description": "The marker that represents the previous page of results.",
-            "format": "uuid",
-            "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
+            "example": null,
             "nullable": true
           }
         }
@@ -4965,11 +4958,6 @@
             "example": "https://cdn.stripe.com/logo.png",
             "description": "The logo for this provider",
             "format": "uri"
-          },
-          "available": {
-            "type": "boolean",
-            "example": true,
-            "description": "Defines if a service is available to be activated in this cluster."
           }
         }
       },
@@ -5061,11 +5049,6 @@
             "example": "https://cdn.stripe.com/logo.png",
             "description": "The logo for this provider",
             "format": "uri"
-          },
-          "available": {
-            "type": "boolean",
-            "example": true,
-            "description": "Defines if a service is available to be activated in this cluster."
           }
         }
       },
