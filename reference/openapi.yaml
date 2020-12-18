@@ -363,6 +363,8 @@ components:
       $ref: "./components/error_404_not_found.yaml"
     Error409DuplicateRecord:
       $ref: "./components/error_409_duplicate_record.yaml"
+    ErrorDetail:
+      $ref: "./components/error_detail.yaml"
     APIKeyPair:
       $ref: "./components/api_key_pair.yaml"
     APIKeyPairs:

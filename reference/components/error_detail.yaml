@@ -1,0 +1,39 @@
+---
+title: Error details
+description: |-
+  Additional detail about the part of a request body that caused an issue.
+
+type: object
+x-tags:
+  - Errors
+
+properties:
+  location:
+    type: string
+    example: body
+    description: The location where the error caused an issue.
+    enum:
+      - query
+      - body
+      - path
+      - header
+
+  type:
+    type: string
+    example: value_error.missing
+    description: |-
+      A unique identifier for the type of error that occurred.
+
+  pointer:
+    type: string
+    example: /payment_method/number
+    description: |-
+      The exact item for which the validation did not succeed. This is a JSON
+      pointer for request bodies, while for query, path, and header parameters
+      it is the name of the parameter.
+
+  message:
+    type: string
+    example: field required
+    description: |-
+      A human readable message for this error detail.

@@ -75,6 +75,7 @@ properties:
       A list of three-letter ISO currency codes that this service supports
     items:
       type: string
+    minItems: 1
     example:
       - USD
       - GBP
@@ -86,6 +87,7 @@ properties:
       A list of two-letter ISO country codes that this service supports
     items:
       type: string
+    minItems: 1
     example:
       - US
       - GB

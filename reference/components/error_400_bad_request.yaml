@@ -34,3 +34,10 @@ properties:
       Describes the fields that are missing or incorrectly formatted in the API
       request.
     example: "Missing '****' field"
+
+  details:
+    type: array
+    description: |-
+      A list of detail objects that further clarify the reason for the error.
+    items:
+      $ref: "../openapi.yaml#/components/schemas/ErrorDetail"

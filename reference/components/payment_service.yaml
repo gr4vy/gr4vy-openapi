@@ -56,7 +56,7 @@ properties:
       three-letter code format."
     items:
       type: string
-      minLength: 1
+    minItems: 1
     example:
       - EUR
 
@@ -67,7 +67,7 @@ properties:
       code format."
     items:
       type: string
-      minLength: 1
+    minItems: 1
     example:
       - DE
 

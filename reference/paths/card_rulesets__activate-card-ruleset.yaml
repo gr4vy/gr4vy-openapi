@@ -71,6 +71,7 @@ responses:
               code: invalid_ruleset
               status: 403
               message: Ruleset is not valid. Only valid rulesets can be deployed
+              details: []
 
   "404":
     description: Returns an error if the resource can not be found.

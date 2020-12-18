@@ -34,3 +34,12 @@ properties:
       Incorrect JSON. The request body could not be parsed as valid JSON.
     example: |-
       Incorrect JSON. The request body could not be parsed as valid JSON.
+
+  details:
+    type: array
+    description: |-
+      A list of detail objects that further clarify the reason for the error.
+      Not every error supports more detail.
+    example: []
+    items:
+      $ref: "../openapi.yaml#/components/schemas/ErrorDetail"
