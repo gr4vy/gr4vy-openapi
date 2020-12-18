@@ -45,12 +45,6 @@ properties:
       - store
       - use_test_environment
 
-  value:
-    type: boolean
-    description: |-
-      The values to compare the `key` to.
-    example: false
-
   true_rule_id:
     type: string
     description: the ID of the rule to use if the comparison equals true.
