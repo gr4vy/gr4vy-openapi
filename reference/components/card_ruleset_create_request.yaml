@@ -1,4 +1,5 @@
 ---
+# yamllint disable rule:line-length
 title: Card Ruleset (Create)
 type: object
 description: |-
@@ -27,5 +28,7 @@ properties:
     description: A list of rules in this ruleset
     items:
       oneOf:
-        - $ref: "../openapi.yaml#/components/schemas/CardRuleConditional"
-        - $ref: "../openapi.yaml#/components/schemas/CardRuleTerminal"
+        - $ref: "../openapi.yaml#/components/schemas/CardRuleStringConditional"
+        - $ref: "../openapi.yaml#/components/schemas/CardRuleNumberConditional"
+        - $ref: "../openapi.yaml#/components/schemas/CardRuleBooleanConditional"
+        - $ref: "../openapi.yaml#/components/schemas/CardRulePaymentServicesTerminal"

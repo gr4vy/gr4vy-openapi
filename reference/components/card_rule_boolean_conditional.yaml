@@ -1,0 +1,62 @@
+---
+title: Card rule (Boolean conditional)
+type: object
+description: |-
+  A conditional rule in a ruleset that matches boolean fields. It defines an
+  if/else condition and a rule to move on to next for each of these values.
+x-internal: true
+x-tags:
+  - Card Rulesets
+
+required:
+  - type
+  - id
+  - rule_type
+  - key
+  - condition
+  - values
+  - true_rule_id
+  - false_rule_id
+
+properties:
+  type:
+    type: string
+    description: "`card-rule`"
+    example: card-rule
+    enum:
+      - card-rule
+  id:
+    type: string
+    description: A unique ID for this rule in the ruleset.
+    example: "0"
+
+  rule_type:
+    type: string
+    description: "`boolean-conditional`"
+    example: boolean-conditional
+    enum:
+      - boolean-conditional
+
+  key:
+    type: string
+    description: The transaction field to filter by.
+    example: store
+    enum:
+      - store
+      - use_test_environment
+
+  value:
+    type: boolean
+    description: |-
+      The values to compare the `key` to.
+    example: false
+
+  true_rule_id:
+    type: string
+    description: the ID of the rule to use if the comparison equals true.
+    example: "1"
+
+  false_rule_id:
+    type: string
+    description: the ID of the rule to use if the comparison equals false.
+    example: "2"

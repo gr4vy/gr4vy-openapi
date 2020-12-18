@@ -52,20 +52,20 @@ responses:
                   rules:
                     - type: card-rule
                       id: "0"
-                      rule_type: conditional
-                      key: amount
-                      condition: ">="
-                      value: "200"
+                      rule_type: string-conditional
+                      key: currency
+                      condition: "IN"
+                      values: ["USD", "GBP"]
                       true_rule_id: "1"
                       false_rule_id: "2"
                     - type: card-rule
                       id: "1"
-                      rule_type: terminal
+                      rule_type: payment-services-terminal
                       payment_service_ids:
                         - stripe-card-f47db210-8e30-4f74-8123-b834604f2042
                     - type: card-rule
                       id: "2"
-                      rule_type: terminal
+                      rule_type: payment-services-terminal
                       payment_service_ids:
                         - card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96
           An empty list of card rulesets:

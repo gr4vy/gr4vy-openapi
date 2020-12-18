@@ -341,10 +341,14 @@ components:
       $ref: "./components/card_ruleset.yaml"
     CardRulesets:
       $ref: "./components/card_rulesets.yaml"
-    CardRuleConditional:
-      $ref: "./components/card_rule_conditional.yaml"
-    CardRuleTerminal:
-      $ref: "./components/card_rule_terminal.yaml"
+    CardRuleBooleanConditional:
+      $ref: "./components/card_rule_boolean_conditional.yaml"
+    CardRuleNumberConditional:
+      $ref: "./components/card_rule_number_conditional.yaml"
+    CardRuleStringConditional:
+      $ref: "./components/card_rule_string_conditional.yaml"
+    CardRulePaymentServicesTerminal:
+      $ref: "./components/card_rule_payment_services_terminal.yaml"
     CardRulesetCreateRequest:
       $ref: "./components/card_ruleset_create_request.yaml"
     CardRulesetUpdateRequest:

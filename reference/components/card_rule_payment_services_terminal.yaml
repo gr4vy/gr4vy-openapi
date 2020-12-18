@@ -28,10 +28,10 @@ properties:
 
   rule_type:
     type: string
-    description: "`terminal`"
-    example: terminal
+    description: "`payment-services-terminal`"
+    example: payment-services-terminal
     enum:
-      - terminal
+      - payment-services-terminal
 
   payment_service_ids:
     type: array
