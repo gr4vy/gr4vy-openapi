@@ -26,7 +26,9 @@ properties:
   payment_service_definition_id:
     type: string
     description: The ID of the payment service to use
-    example: stripe
+    example: stripe-card
+    minLength: 1
+    maxLength: 50
 
   fields:
     type: array
@@ -44,6 +46,8 @@ properties:
           type: string
           description: The key of the field to set a value for.
           example: private_key
+          minLength: 1
+          maxLength: 50
 
         value:
           type: string
