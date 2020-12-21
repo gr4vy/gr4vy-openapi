@@ -4222,6 +4222,7 @@
           "description": "The optional payment method details to create an authorization for. This field is required for processing a card."
         },
         "store": {
+          "default": false,
           "description": "Whether or not to also try and store the payment method with us so that\nit can be used again for future use.",
           "example": true,
           "type": "boolean"
