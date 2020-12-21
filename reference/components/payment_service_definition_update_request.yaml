@@ -78,6 +78,8 @@ properties:
       A list of two-letter ISO country codes that this service supports
     items:
       type: string
+      minLength: 2
+      maxLength: 2
     minItems: 1
     example:
       - US
