@@ -25,7 +25,7 @@ properties:
     type: string
     description: |
       The ID of the payment service used to create this service instance.
-    example: stripe
+    example: stripe-card
     minLength: 1
     maxLength: 50
 
