@@ -5598,7 +5598,8 @@
           "store": {
             "type": "boolean",
             "description": "Whether or not to also try and store the payment method with us so that\nit can be used again for future use.",
-            "example": true
+            "example": true,
+            "default": false
           },
           "capture": {
             "type": "boolean",
