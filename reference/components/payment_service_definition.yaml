@@ -75,6 +75,8 @@ properties:
       A list of three-letter ISO currency codes that this service supports
     items:
       type: string
+      minLength: 3
+      maxLength: 3
     minItems: 1
     example:
       - USD
