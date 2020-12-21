@@ -35,5 +35,5 @@ properties:
     minLength: 1
     maxLength: 1000
     description: The marker that represents the previous page of results.
-    example: ZXhhbXBsZTI=
+    example: ZXhhbXBsZTI
     nullable: true
