@@ -17,15 +17,21 @@ required:
 properties:
   display_name:
     type: string
-    description: The display name of the ruleset
+    description: The display name of the ruleset.
     example: Q2 2020 Ruleset
+    minLength: 1
+    maxLength: 50
+
   root_rule_id:
     type: string
-    example: "0"
+    example: "rule-0"
     description: The ID of the rule that is the starting point of the ruleset.
+    minLength: 1
+    maxLength: 50
+
   rules:
     type: array
-    description: A list of rules in this ruleset
+    description: A list of rules in this ruleset.
     items:
       oneOf:
         - $ref: "../openapi.yaml#/components/schemas/CardRuleStringConditional"

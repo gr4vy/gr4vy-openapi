@@ -22,10 +22,14 @@ properties:
     example: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
     description: The ID of the ruleset
     format: uuid
+    minLength: 36
+    maxLength: 36
   display_name:
     type: string
     description: The display name of the ruleset
     example: Q2 2020 Ruleset
+    minLength: 1
+    maxLength: 50
   active:
     type: boolean
     example: true
@@ -40,8 +44,10 @@ properties:
       activated.
   root_rule_id:
     type: string
-    example: "0"
+    example: "rule-0"
     description: The ID of the rule that is the starting point of the ruleset.
+    minLength: 1
+    maxLength: 50
   rules:
     type: array
     description: A list of rules in this ruleset

@@ -21,10 +21,13 @@ properties:
     example: card-rule
     enum:
       - card-rule
+
   id:
     type: string
     description: A unique ID for this rule in the ruleset
-    example: "0"
+    example: "rule-0"
+    minLength: 1
+    maxLength: 50
 
   rule_type:
     type: string
@@ -43,3 +46,5 @@ properties:
       - card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96
     items:
       type: string
+      minLength: 1
+      maxLength: 100

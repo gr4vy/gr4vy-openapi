@@ -27,13 +27,15 @@ properties:
   next_page:
     type: string
     description: The marker that represents the next page of results.
-    format: uuid
-    example: 9f944c64-eaf0-4219-90fd-f7e56c7cd214
+    minLength: 1
+    maxLength: 1000
+    example: ZXhhbXBsZTE=
     nullable: true
 
   previous_page:
     type: string
+    minLength: 1
+    maxLength: 1000
     description: The marker that represents the previous page of results.
-    format: uuid
-    example: 9049b2f9-0c67-47c5-af18-e8525f855263
+    example: ZXhhbXBsZTI=
     nullable: true

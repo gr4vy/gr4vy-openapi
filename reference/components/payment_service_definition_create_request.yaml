@@ -24,17 +24,23 @@ properties:
     description:
       The ID of the payment service. This is the underlying provider followed by
       a dash followed by the payment method ID.
-    example: stipe-card
+    example: stripe-card
+    minLength: 1
+    maxLength: 50
 
   display_name:
     type: string
     description: The display name of this service
     example: Stripe
+    minLength: 1
+    maxLength: 50
 
   method:
     type: string
     description: The type of payments this services handles
     example: card
+    minLength: 1
+    maxLength: 50
     enum:
       - card
       - paypal
@@ -55,14 +61,21 @@ properties:
           type: string
           example: private_api_key
           description: The key of a field that needs to be submitted
+          minLength: 1
+          maxLength: 100
         display_name:
           type: string
           example: Private API key
           description: The name to display for a field in the cluster UI
+          minLength: 1
+          maxLength: 50
         help_url:
           type: string
+          format: uri
           example: https://stripe.com/docs/private_api_key
           description: A URL that provides more details about this field
+          minLength: 1
+          maxLength: 1000
         required:
           type: boolean
           example: true
@@ -71,16 +84,21 @@ properties:
 
   help_url:
     type: string
+    format: uri
     example: https://stripe.com/docs
     description: A URL that provides more details about this payment service
+    minLength: 1
+    maxLength: 1000
 
   supported_currencies:
     type: array
     description:
       A list of three-letter ISO currency codes that this service supports.
+    minItems: 1
     items:
       type: string
-    minItems: 1
+      minLength: 3
+      maxLength: 3
     example:
       - USD
       - GBP
@@ -90,9 +108,11 @@ properties:
     type: array
     description:
       A list of two-letter ISO country codes that this service supports
+    minItems: 1
     items:
       type: string
-    minItems: 1
+      minLength: 2
+      maxLength: 2
     example:
       - US
       - GB
@@ -103,3 +123,5 @@ properties:
     example: https://cdn.stripe.com/logo.png
     description: The logo for this provider
     format: uri
+    minLength: 1
+    maxLength: 1000

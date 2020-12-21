@@ -28,7 +28,7 @@ parameters:
   - schema:
       type: string
       format: ""
-      example: "1593343179"
+      example: "ZXhhbXBsZTE="
     in: query
     name: marker
     description: |-

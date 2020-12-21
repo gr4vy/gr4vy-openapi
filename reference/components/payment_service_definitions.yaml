@@ -25,11 +25,15 @@ properties:
   next_page:
     type: string
     description: The marker that represents the next page of results.
-    example: stripe-card
+    minLength: 1
+    maxLength: 1000
+    example: ZXhhbXBsZTE=
     nullable: true
 
   previous_page:
     type: string
+    minLength: 1
+    maxLength: 1000
     description: The marker that represents the previous page of results.
-    example: null
+    example: ZXhhbXBsZTI=
     nullable: true
