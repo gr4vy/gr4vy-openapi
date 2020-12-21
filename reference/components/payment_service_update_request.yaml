@@ -51,6 +51,8 @@ properties:
       two-letter code format.
     items:
       type: string
+      minLength: 2
+      maxLength: 2
     minItems: 1
     example:
       - USD
