@@ -55,7 +55,7 @@ properties:
       maxLength: 2
     minItems: 1
     example:
-      - USD
+      - US
 
   use_test_environment:
     type: boolean
