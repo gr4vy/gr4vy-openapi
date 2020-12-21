@@ -27,7 +27,7 @@ properties:
     description: The marker that represents the next page of results.
     minLength: 1
     maxLength: 1000
-    example: ZXhhbXBsZTE=
+    example: ZXhhbXBsZTE
     nullable: true
 
   previous_page:
@@ -35,5 +35,5 @@ properties:
     minLength: 1
     maxLength: 1000
     description: The marker that represents the previous page of results.
-    example: ZXhhbXBsZTI=
+    example: ZXhhbXBsZTI
     nullable: true
