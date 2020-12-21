@@ -24,7 +24,7 @@ properties:
   payment_service_definition_id:
     type: string
     description: |
-      The ID of the payment service used to create this service instance.
+      The ID of the payment service definition used to create this service.
     example: stripe-card
     minLength: 1
     maxLength: 50
