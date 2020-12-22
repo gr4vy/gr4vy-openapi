@@ -1,0 +1,9 @@
+---
+schema:
+  type: string
+  example: user-12345
+in: query
+name: external_identifier
+description: |-
+  Filters the results to only the items for which the `external_identifier`
+  matches this value.

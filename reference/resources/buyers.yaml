@@ -1,0 +1,23 @@
+---
+title: Buyers
+type: object
+description: A list of buyers
+
+x-tags:
+  - Buyers
+
+properties:
+  items:
+    type: array
+    description: A list of buyers
+    items:
+      $ref: "../openapi.yaml#/components/schemas/Buyer"
+
+  limit:
+    $ref: "../properties/limit-100.yaml"
+
+  next_cursor:
+    $ref: "../properties/next_cursor.yaml"
+
+  previous_cursor:
+    $ref: "../properties/previous_cursor.yaml"

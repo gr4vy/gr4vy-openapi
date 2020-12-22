@@ -1,0 +1,10 @@
+---
+type: integer
+description: |-
+  The limit applied to request. This represents the number of items that are at
+  maximum returned by this request.
+format: int32
+minimum: 1
+maximum: 500
+example: 1
+default: 20

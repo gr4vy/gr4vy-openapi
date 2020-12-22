@@ -1,0 +1,10 @@
+---
+title: Buyer (Update)
+type: object
+description: A request to update a buyer.
+
+x-tags:
+  - Buyers
+
+allOf:
+  - $ref: "../openapi.yaml#/components/schemas/BuyerCreateRequest"

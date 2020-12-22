@@ -155,7 +155,7 @@ paths:
 
   "/async/transactions/{transaction_id}/capture":
     parameters:
-      - $ref: "./parameters/transaction_id.yaml"
+      - $ref: "./path-parameters/transaction_id.yaml"
     post:
       $ref: "./paths/transactions__async-capture-transaction.yaml"
 
@@ -179,13 +179,13 @@ paths:
 
   "/api-key-pairs/{api_key_pair_id}":
     parameters:
-      - $ref: "./parameters/api_key_pair_id.yaml"
+      - $ref: "./path-parameters/api_key_pair_id.yaml"
     delete:
       $ref: "./paths/api_key_pairs__delete-api-key-pair.yaml"
 
   "/callbacks/payment-methods/{payment_method_id}/confirm":
     parameters:
-      - $ref: "./parameters/payment_method_id.yaml"
+      - $ref: "./path-parameters/payment_method_id.yaml"
     get:
       $ref: "./paths/callbacks__payment-method-confirm-callback.yaml"
 
@@ -197,7 +197,7 @@ paths:
 
   "/buyers/{buyer_id}":
     parameters:
-      - $ref: "./parameters/buyer_id.yaml"
+      - $ref: "./path-parameters/buyer_id.yaml"
     get:
       $ref: "./paths/buyers__get-buyer.yaml"
     put:
@@ -217,7 +217,7 @@ paths:
 
   "/payment-methods/{payment_method_id}":
     parameters:
-      - $ref: "./parameters/payment_method_id.yaml"
+      - $ref: "./path-parameters/payment_method_id.yaml"
     get:
       $ref: "./paths/payment_methods__get-payment-method.yaml"
     delete:
@@ -225,7 +225,7 @@ paths:
 
   "/payment-methods/{payment_method_id}/events":
     parameters:
-      - $ref: "./parameters/payment_method_id.yaml"
+      - $ref: "./path-parameters/payment_method_id.yaml"
     get:
       $ref: "./paths/payment_methods__list-payment-method-events.yaml"
 
@@ -241,7 +241,7 @@ paths:
 
   "/payment-services/{payment_service_id}":
     parameters:
-      - $ref: "./parameters/payment_service_id.yaml"
+      - $ref: "./path-parameters/payment_service_id.yaml"
     get:
       $ref: "./paths/payment_services__get-payment-service.yaml"
     put:
@@ -252,18 +252,12 @@ paths:
   "/payment-service-definitions":
     get:
       $ref: "./paths/payment_service_definitions__list-payment-service-definitions.yaml"
-    post:
-      $ref: "./paths/payment_service_definitions__add-payment-service-definition.yaml"
 
   "/payment-service-definitions/{payment_service_definition_id}":
     parameters:
-      - $ref: "./parameters/payment_service_definition_id.yaml"
+      - $ref: "./path-parameters/payment_service_definition_id.yaml"
     get:
       $ref: "./paths/payment_service_definitions__get-payment-service-definition.yaml"
-    put:
-      $ref: "./paths/payment_service_definitions__update-payment-service-definition.yaml"
-    delete:
-      $ref: "./paths/payment_service_definitions__delete-payment-service-definition.yaml"
 
   "/card-rulesets":
     get:
@@ -273,7 +267,7 @@ paths:
 
   "/card-rulesets/{card_ruleset_id}":
     parameters:
-      - $ref: "./parameters/card_ruleset_id.yaml"
+      - $ref: "./path-parameters/card_ruleset_id.yaml"
     get:
       $ref: "./paths/card_rulesets__get-card-ruleset.yaml"
     put:
@@ -283,7 +277,7 @@ paths:
 
   "/card-rulesets/{card_ruleset_id}/activate":
     parameters:
-      - $ref: "./parameters/card_ruleset_id.yaml"
+      - $ref: "./path-parameters/card_ruleset_id.yaml"
     post:
       $ref: "./paths/card_rulesets__activate-card-ruleset.yaml"
 
@@ -295,25 +289,25 @@ paths:
 
   "/transactions/{transaction_id}":
     parameters:
-      - $ref: "./parameters/transaction_id.yaml"
+      - $ref: "./path-parameters/transaction_id.yaml"
     get:
       $ref: "./paths/transactions__get-transaction.yaml"
 
   "/transactions/{transaction_id}/capture":
     parameters:
-      - $ref: "./parameters/transaction_id.yaml"
+      - $ref: "./path-parameters/transaction_id.yaml"
     post:
       $ref: "./paths/transactions__capture-transaction.yaml"
 
   "/transactions/{transaction_id}/refund":
     parameters:
-      - $ref: "./parameters/transaction_id.yaml"
+      - $ref: "./path-parameters/transaction_id.yaml"
     post:
       $ref: "./paths/transactions__refund-transaction.yaml"
 
   "/transactions/{transaction_id}/events":
     parameters:
-      - $ref: "./parameters/transaction_id.yaml"
+      - $ref: "./path-parameters/transaction_id.yaml"
     get:
       $ref: "./paths/transactions__list-transaction-events.yaml"
 
@@ -324,113 +318,109 @@ paths:
 components:
   schemas:
     Buyer:
-      $ref: "./components/buyer.yaml"
+      $ref: "./resources/buyer.yaml"
     Buyers:
-      $ref: "./components/buyers.yaml"
+      $ref: "./resources/buyers.yaml"
     BuyerCreateRequest:
-      $ref: "./components/buyer_create_request.yaml"
+      $ref: "./request-bodies/buyer_create_request.yaml"
     BuyerUpdateRequest:
-      $ref: "./components/buyer_update_request.yaml"
+      $ref: "./request-bodies/buyer_update_request.yaml"
     Card:
-      $ref: "./components/card.yaml"
+      $ref: "./resources/card.yaml"
     CardDetails:
-      $ref: "./components/card_details.yaml"
+      $ref: "./resources/card_details.yaml"
     CardStoreRequest:
-      $ref: "./components/card_store_request.yaml"
+      $ref: "./request-bodies/card_store_request.yaml"
     CardRuleset:
-      $ref: "./components/card_ruleset.yaml"
+      $ref: "./resources/card_ruleset.yaml"
     CardRulesets:
-      $ref: "./components/card_rulesets.yaml"
+      $ref: "./resources/card_rulesets.yaml"
     CardRuleBooleanConditional:
-      $ref: "./components/card_rule_boolean_conditional.yaml"
+      $ref: "./resources/card_rule_boolean_conditional.yaml"
     CardRuleNumberConditional:
-      $ref: "./components/card_rule_number_conditional.yaml"
+      $ref: "./resources/card_rule_number_conditional.yaml"
     CardRuleStringConditional:
-      $ref: "./components/card_rule_string_conditional.yaml"
+      $ref: "./resources/card_rule_string_conditional.yaml"
     CardRulePaymentServicesTerminal:
-      $ref: "./components/card_rule_payment_services_terminal.yaml"
+      $ref: "./resources/card_rule_payment_services_terminal.yaml"
     CardRulesetCreateRequest:
-      $ref: "./components/card_ruleset_create_request.yaml"
+      $ref: "./request-bodies/card_ruleset_create_request.yaml"
     CardRulesetUpdateRequest:
-      $ref: "./components/card_ruleset_update_request.yaml"
+      $ref: "./request-bodies/card_ruleset_update_request.yaml"
     Error:
-      $ref: "./components/error.yaml"
+      $ref: "./resources/error.yaml"
     Error400BadRequest:
-      $ref: "./components/error_400_bad_request.yaml"
+      $ref: "./resources/error_400_bad_request.yaml"
     Error400IncorrectJson:
-      $ref: "./components/error_400_incorrect_json.yaml"
+      $ref: "./resources/error_400_incorrect_json.yaml"
     Error401Unauthorized:
-      $ref: "./components/error_401_unauthorized.yaml"
+      $ref: "./resources/error_401_unauthorized.yaml"
     Error404PendingCreation:
-      $ref: "./components/error_404_pending_creation.yaml"
+      $ref: "./resources/error_404_pending_creation.yaml"
     Error404NotFound:
-      $ref: "./components/error_404_not_found.yaml"
+      $ref: "./resources/error_404_not_found.yaml"
     Error409DuplicateRecord:
-      $ref: "./components/error_409_duplicate_record.yaml"
+      $ref: "./resources/error_409_duplicate_record.yaml"
     ErrorDetail:
-      $ref: "./components/error_detail.yaml"
+      $ref: "./resources/error_detail.yaml"
     APIKeyPair:
-      $ref: "./components/api_key_pair.yaml"
+      $ref: "./resources/api_key_pair.yaml"
     APIKeyPairs:
-      $ref: "./components/api_key_pairs.yaml"
+      $ref: "./resources/api_key_pairs.yaml"
     Merchant:
-      $ref: "./components/merchant.yaml"
+      $ref: "./resources/merchant.yaml"
     PaymentMethods:
-      $ref: "./components/payment_methods.yaml"
+      $ref: "./resources/payment_methods.yaml"
     PaymentMethodEvent:
-      $ref: "./components/payment_method_event.yaml"
+      $ref: "./resources/payment_method_event.yaml"
     PaymentMethodEvents:
-      $ref: "./components/payment_method_events.yaml"
+      $ref: "./resources/payment_method_events.yaml"
     PaymentService:
-      $ref: "./components/payment_service.yaml"
+      $ref: "./resources/payment_service.yaml"
     PaymentServices:
-      $ref: "./components/payment_services.yaml"
+      $ref: "./resources/payment_services.yaml"
     PaymentServiceCreateRequest:
-      $ref: "./components/payment_service_create_request.yaml"
+      $ref: "./request-bodies/payment_service_create_request.yaml"
     PaymentServiceUpdateRequest:
-      $ref: "./components/payment_service_update_request.yaml"
+      $ref: "./request-bodies/payment_service_update_request.yaml"
     PaymentServiceDefinition:
-      $ref: "./components/payment_service_definition.yaml"
+      $ref: "./resources/payment_service_definition.yaml"
     PaymentServiceDefinitions:
-      $ref: "./components/payment_service_definitions.yaml"
-    PaymentServiceDefinitionCreateRequest:
-      $ref: "./components/payment_service_definition_create_request.yaml"
-    PaymentServiceDefinitionUpdateRequest:
-      $ref: "./components/payment_service_definition_update_request.yaml"
+      $ref: "./resources/payment_service_definitions.yaml"
     PaymentOption:
-      $ref: "./components/payment_option.yaml"
+      $ref: "./resources/payment_option.yaml"
     PaymentOptions:
-      $ref: "./components/payment_options.yaml"
+      $ref: "./resources/payment_options.yaml"
     PayPal:
-      $ref: "./components/paypal.yaml"
+      $ref: "./resources/paypal.yaml"
     PayPalDetails:
-      $ref: "./components/paypal_details.yaml"
+      $ref: "./resources/paypal_details.yaml"
     PayPalStoreRequest:
-      $ref: "./components/paypal_store_request.yaml"
+      $ref: "./request-bodies/paypal_store_request.yaml"
     Session:
-      $ref: "./components/session.yaml"
+      $ref: "./resources/session.yaml"
     SessionCreateRequest:
-      $ref: "./components/session_create_request.yaml"
+      $ref: "./request-bodies/session_create_request.yaml"
     Status:
-      $ref: "./components/status.yaml"
+      $ref: "./resources/status.yaml"
     Statuses:
-      $ref: "./components/statuses.yaml"
+      $ref: "./resources/statuses.yaml"
     Transaction:
-      $ref: "./components/transaction.yaml"
+      $ref: "./resources/transaction.yaml"
     Transactions:
-      $ref: "./components/transactions.yaml"
+      $ref: "./resources/transactions.yaml"
     TransactionsBatchCaptureRequest:
-      $ref: "./components/transactions_batch_capture_request.yaml"
+      $ref: "./request-bodies/transactions_batch_capture_request.yaml"
     TransactionCreateRequest:
-      $ref: "./components/transaction_create_request.yaml"
+      $ref: "./request-bodies/transaction_create_request.yaml"
     TransactionCaptureRequest:
-      $ref: "./components/transaction_capture_request.yaml"
+      $ref: "./request-bodies/transaction_capture_request.yaml"
     TransactionEvent:
-      $ref: "./components/transaction_event.yaml"
+      $ref: "./resources/transaction_event.yaml"
     TransactionEvents:
-      $ref: "./components/transaction_events.yaml"
+      $ref: "./resources/transaction_events.yaml"
     User:
-      $ref: "./components/user.yaml"
+      $ref: "./resources/user.yaml"
 
   securitySchemes:
     BearerAuth:

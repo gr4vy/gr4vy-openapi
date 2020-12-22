@@ -12,3 +12,12 @@ properties:
     type: array
     items:
       $ref: "../openapi.yaml#/components/schemas/APIKeyPair"
+
+  limit:
+    $ref: "../properties/limit-100.yaml"
+
+  next_cursor:
+    $ref: "../properties/next_cursor.yaml"
+
+  previous_cursor:
+    $ref: "../properties/previous_cursor.yaml"
