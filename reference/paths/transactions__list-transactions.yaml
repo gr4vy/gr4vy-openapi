@@ -3,65 +3,18 @@ operationId: list-transactions
 summary: List transactions
 description:
   Lists all transactions for an account. Sorted by last `updated_at` status.
-tags: ["Transactions"]
+tags:
+  - Transactions
 
 parameters:
-  - $ref: "../parameters/limit-500.yaml"
-  - $ref: "../parameters/cursor.yaml"
-
-  - schema:
-      type: string
-      example: be828248-56de-481e-a580-44b6e1d4df81
-    in: query
-    name: search
-    description:
-      Filters the results to the transactions that match this external
-      identifier or transaction ID.
-
-  - schema:
-      type: string
-      example: "2012-12-12T10:53:43-08:00"
-    in: query
-    name: before_updated_at
-    description:
-      Filters the results to only transactions last updated before this ISO
-      date-time string.
-
-  - schema:
-      type: string
-      example: "2012-12-12T10:53:43-08:00"
-    in: query
-    name: after_updated_at
-    description:
-      Filters the results to only transactions last updated after this ISO
-      date-time string.
-
-  - schema:
-      type: string
-      example: "2012-12-12T10:53:43-08:00"
-    in: query
-    name: before_created_at
-    description:
-      Filters the results to only transactions created before this ISO date-time
-      string.
-
-  - schema:
-      type: string
-      example: "2012-12-12T10:53:43-08:00"
-    in: query
-    name: after_created_at
-    description:
-      Filters the results to only transactions created after this ISO date-time
-      string.
-
-  - schema:
-      type: string
-      example: captured
-    in: query
-    name: transaction_status
-    description:
-      Filters the results to only transactions with as specific transaction
-      status.
+  - $ref: "../query-parameters/transaction-search.yaml"
+  - $ref: "../query-parameters/transaction_status.yaml"
+  - $ref: "../query-parameters/before_created_at.yaml"
+  - $ref: "../query-parameters/after_created_at.yaml"
+  - $ref: "../query-parameters/before_updated_at.yaml"
+  - $ref: "../query-parameters/after_updated_at.yaml"
+  - $ref: "../query-parameters/limit-500.yaml"
+  - $ref: "../query-parameters/cursor.yaml"
 
 responses:
   "200":

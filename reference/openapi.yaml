@@ -155,7 +155,7 @@ paths:
 
   "/async/transactions/{transaction_id}/capture":
     parameters:
-      - $ref: "./parameters/transaction_id.yaml"
+      - $ref: "./path-parameters/transaction_id.yaml"
     post:
       $ref: "./paths/transactions__async-capture-transaction.yaml"
 
@@ -179,13 +179,13 @@ paths:
 
   "/api-key-pairs/{api_key_pair_id}":
     parameters:
-      - $ref: "./parameters/api_key_pair_id.yaml"
+      - $ref: "./path-parameters/api_key_pair_id.yaml"
     delete:
       $ref: "./paths/api_key_pairs__delete-api-key-pair.yaml"
 
   "/callbacks/payment-methods/{payment_method_id}/confirm":
     parameters:
-      - $ref: "./parameters/payment_method_id.yaml"
+      - $ref: "./path-parameters/payment_method_id.yaml"
     get:
       $ref: "./paths/callbacks__payment-method-confirm-callback.yaml"
 
@@ -197,7 +197,7 @@ paths:
 
   "/buyers/{buyer_id}":
     parameters:
-      - $ref: "./parameters/buyer_id.yaml"
+      - $ref: "./path-parameters/buyer_id.yaml"
     get:
       $ref: "./paths/buyers__get-buyer.yaml"
     put:
@@ -217,7 +217,7 @@ paths:
 
   "/payment-methods/{payment_method_id}":
     parameters:
-      - $ref: "./parameters/payment_method_id.yaml"
+      - $ref: "./path-parameters/payment_method_id.yaml"
     get:
       $ref: "./paths/payment_methods__get-payment-method.yaml"
     delete:
@@ -225,7 +225,7 @@ paths:
 
   "/payment-methods/{payment_method_id}/events":
     parameters:
-      - $ref: "./parameters/payment_method_id.yaml"
+      - $ref: "./path-parameters/payment_method_id.yaml"
     get:
       $ref: "./paths/payment_methods__list-payment-method-events.yaml"
 
@@ -241,7 +241,7 @@ paths:
 
   "/payment-services/{payment_service_id}":
     parameters:
-      - $ref: "./parameters/payment_service_id.yaml"
+      - $ref: "./path-parameters/payment_service_id.yaml"
     get:
       $ref: "./paths/payment_services__get-payment-service.yaml"
     put:
@@ -257,7 +257,7 @@ paths:
 
   "/payment-service-definitions/{payment_service_definition_id}":
     parameters:
-      - $ref: "./parameters/payment_service_definition_id.yaml"
+      - $ref: "./path-parameters/payment_service_definition_id.yaml"
     get:
       $ref: "./paths/payment_service_definitions__get-payment-service-definition.yaml"
     put:
@@ -273,7 +273,7 @@ paths:
 
   "/card-rulesets/{card_ruleset_id}":
     parameters:
-      - $ref: "./parameters/card_ruleset_id.yaml"
+      - $ref: "./path-parameters/card_ruleset_id.yaml"
     get:
       $ref: "./paths/card_rulesets__get-card-ruleset.yaml"
     put:
@@ -283,7 +283,7 @@ paths:
 
   "/card-rulesets/{card_ruleset_id}/activate":
     parameters:
-      - $ref: "./parameters/card_ruleset_id.yaml"
+      - $ref: "./path-parameters/card_ruleset_id.yaml"
     post:
       $ref: "./paths/card_rulesets__activate-card-ruleset.yaml"
 
@@ -295,25 +295,25 @@ paths:
 
   "/transactions/{transaction_id}":
     parameters:
-      - $ref: "./parameters/transaction_id.yaml"
+      - $ref: "./path-parameters/transaction_id.yaml"
     get:
       $ref: "./paths/transactions__get-transaction.yaml"
 
   "/transactions/{transaction_id}/capture":
     parameters:
-      - $ref: "./parameters/transaction_id.yaml"
+      - $ref: "./path-parameters/transaction_id.yaml"
     post:
       $ref: "./paths/transactions__capture-transaction.yaml"
 
   "/transactions/{transaction_id}/refund":
     parameters:
-      - $ref: "./parameters/transaction_id.yaml"
+      - $ref: "./path-parameters/transaction_id.yaml"
     post:
       $ref: "./paths/transactions__refund-transaction.yaml"
 
   "/transactions/{transaction_id}/events":
     parameters:
-      - $ref: "./parameters/transaction_id.yaml"
+      - $ref: "./path-parameters/transaction_id.yaml"
     get:
       $ref: "./paths/transactions__list-transaction-events.yaml"
 

@@ -6,8 +6,8 @@ tags: ["Card Rulesets"]
 x-internal: true
 
 parameters:
-  - $ref: "../parameters/limit-100.yaml"
-  - $ref: "../parameters/cursor.yaml"
+  - $ref: "../query-parameters/limit-100.yaml"
+  - $ref: "../query-parameters/cursor.yaml"
 
 responses:
   "200":

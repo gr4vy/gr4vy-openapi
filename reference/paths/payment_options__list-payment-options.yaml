@@ -8,21 +8,10 @@ tags:
   - Payment Options
 
 parameters:
-  - schema:
-      type: string
-      example: IT
-    in: query
-    name: country
-    description: |-
-      The country for which to return available payment options
-
-  - schema:
-      type: string
-      example: EUR
-    in: query
-    name: currency
-    description: |-
-      The currency for which to return available payment options
+  - $ref: "../query-parameters/country.yaml"
+  - $ref: "../query-parameters/currency.yaml"
+  - $ref: "../query-parameters/limit-100.yaml"
+  - $ref: "../query-parameters/cursor.yaml"
 
 responses:
   "200":

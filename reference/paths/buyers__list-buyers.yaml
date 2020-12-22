@@ -6,15 +6,9 @@ tags:
   - Buyers
 
 parameters:
-  - $ref: "../parameters/limit-100.yaml"
-  - $ref: "../parameters/cursor.yaml"
-  - schema:
-      type: string
-      example: be828248-56de-481e-a580-44b6e1d4df81
-    in: query
-    name: external_identifier
-    description:
-      Filters the results to the buyer that matches this external identifier.
+  - $ref: "../query-parameters/external_identifier.yaml"
+  - $ref: "../query-parameters/limit-100.yaml"
+  - $ref: "../query-parameters/cursor.yaml"
 
 responses:
   "200":
