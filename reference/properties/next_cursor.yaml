@@ -1,0 +1,9 @@
+---
+type: string
+description: |-
+  The cursor that represents the next page of results. Use the `cursor` query
+  parameter to fetch this page of items.
+example: ZXhhbXBsZTE
+nullable: true
+minLength: 1
+maxLength: 1000

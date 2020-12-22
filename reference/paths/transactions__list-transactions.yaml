@@ -6,31 +6,8 @@ description:
 tags: ["Transactions"]
 
 parameters:
-  - schema:
-      type: integer
-      default: 20
-      example: 50
-      minimum: 0
-      maximum: 100
-      format: int32
-    in: query
-    name: limit
-    description: The maximum number of items to return
-
-  - schema:
-      type: string
-      example: "ZXhhbXBsZTE="
-    in: query
-    name: marker
-    description: |-
-      The marker that determines the offset for the page of results to be
-      returned.
-
-      For the first page of results, omit this parameter. For next pages,
-      use the value returned by the API in the `next_page` field.
-
-      A marker is an opaque string that is only meaningful to our API. No
-      additional value can be ascribed to this value.
+  - $ref: "../parameters/limit-500.yaml"
+  - $ref: "../parameters/cursor.yaml"
 
   - schema:
       type: string

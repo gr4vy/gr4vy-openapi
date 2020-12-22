@@ -14,26 +14,10 @@ properties:
       $ref: "../openapi.yaml#/components/schemas/Transaction"
 
   limit:
-    type: integer
-    description: "The limit set to the number of items returned. "
-    format: int32
-    minimum: 0
-    maximum: 1000
-    example: 100
-    default: 100
+    $ref: "../properties/limit-500.yaml"
 
-  next_page:
-    type: string
-    description: The marker that represents the next page of results.
-    minLength: 1
-    maxLength: 1000
-    example: ZXhhbXBsZTE=
-    nullable: true
+  next_cursor:
+    $ref: "../properties/next_cursor.yaml"
 
-  previous_page:
-    type: string
-    minLength: 1
-    maxLength: 1000
-    description: The marker that represents the previous page of results.
-    example: ZXhhbXBsZTI=
-    nullable: true
+  previous_cursor:
+    $ref: "../properties/previous_cursor.yaml"
