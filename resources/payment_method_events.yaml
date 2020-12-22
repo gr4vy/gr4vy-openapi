@@ -1,0 +1,23 @@
+---
+title: Payment method events
+description: A list of events for a payment method
+type: object
+
+x-tags:
+  - Payment Methods
+
+properties:
+  items:
+    type: array
+    description: A list of payment method events
+    items:
+      $ref: "../openapi.yaml#/components/schemas/PaymentMethodEvent"
+
+  limit:
+    $ref: "../properties/limit-100.yaml"
+
+  next_cursor:
+    $ref: "../properties/next_cursor.yaml"
+
+  previous_cursor:
+    $ref: "../properties/previous_cursor.yaml"

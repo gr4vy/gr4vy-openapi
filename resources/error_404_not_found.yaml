@@ -34,3 +34,12 @@ properties:
     example: The resource could not be found
     enum:
       - The resource could not be found
+
+  details:
+    type: array
+    description: |-
+      A list of detail objects that further clarify the reason for the error.
+      Not every error supports more detail.
+    example: []
+    items:
+      $ref: "../openapi.yaml#/components/schemas/ErrorDetail"

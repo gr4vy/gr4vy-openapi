@@ -124,7 +124,7 @@ paths:
       $ref: ./paths/transactions__async-create-transaction.yaml
   '/async/transactions/{transaction_id}/capture':
     parameters:
-      - $ref: ./parameters/transaction_id.yaml
+      - $ref: ./path-parameters/transaction_id.yaml
     post:
       $ref: ./paths/transactions__async-capture-transaction.yaml
   /async/transactions/batch-capture:
@@ -137,7 +137,7 @@ paths:
       $ref: ./paths/buyers__add-buyer.yaml
   '/buyers/{buyer_id}':
     parameters:
-      - $ref: ./parameters/buyer_id.yaml
+      - $ref: ./path-parameters/buyer_id.yaml
     get:
       $ref: ./paths/buyers__get-buyer.yaml
     put:
@@ -151,14 +151,14 @@ paths:
       $ref: ./paths/payment_methods__store-payment-method.yaml
   '/payment-methods/{payment_method_id}':
     parameters:
-      - $ref: ./parameters/payment_method_id.yaml
+      - $ref: ./path-parameters/payment_method_id.yaml
     get:
       $ref: ./paths/payment_methods__get-payment-method.yaml
     delete:
       $ref: ./paths/payment_methods__delete-payment-method.yaml
   '/payment-methods/{payment_method_id}/events':
     parameters:
-      - $ref: ./parameters/payment_method_id.yaml
+      - $ref: ./path-parameters/payment_method_id.yaml
     get:
       $ref: ./paths/payment_methods__list-payment-method-events.yaml
   /payment-options:
@@ -171,7 +171,7 @@ paths:
       $ref: ./paths/payment_services__add-payment-service.yaml
   '/payment-services/{payment_service_id}':
     parameters:
-      - $ref: ./parameters/payment_service_id.yaml
+      - $ref: ./path-parameters/payment_service_id.yaml
     get:
       $ref: ./paths/payment_services__get-payment-service.yaml
     put:
@@ -185,94 +185,96 @@ paths:
       $ref: ./paths/transactions__create-transaction.yaml
   '/transactions/{transaction_id}':
     parameters:
-      - $ref: ./parameters/transaction_id.yaml
+      - $ref: ./path-parameters/transaction_id.yaml
     get:
       $ref: ./paths/transactions__get-transaction.yaml
   '/transactions/{transaction_id}/capture':
     parameters:
-      - $ref: ./parameters/transaction_id.yaml
+      - $ref: ./path-parameters/transaction_id.yaml
     post:
       $ref: ./paths/transactions__capture-transaction.yaml
   '/transactions/{transaction_id}/refund':
     parameters:
-      - $ref: ./parameters/transaction_id.yaml
+      - $ref: ./path-parameters/transaction_id.yaml
     post:
       $ref: ./paths/transactions__refund-transaction.yaml
   '/transactions/{transaction_id}/events':
     parameters:
-      - $ref: ./parameters/transaction_id.yaml
+      - $ref: ./path-parameters/transaction_id.yaml
     get:
       $ref: ./paths/transactions__list-transaction-events.yaml
 components:
   schemas:
     Buyer:
-      $ref: ./components/buyer.yaml
+      $ref: ./resources/buyer.yaml
     Buyers:
-      $ref: ./components/buyers.yaml
+      $ref: ./resources/buyers.yaml
     BuyerCreateRequest:
-      $ref: ./components/buyer_create_request.yaml
+      $ref: ./request-bodies/buyer_create_request.yaml
     BuyerUpdateRequest:
-      $ref: ./components/buyer_update_request.yaml
+      $ref: ./request-bodies/buyer_update_request.yaml
     Card:
-      $ref: ./components/card.yaml
+      $ref: ./resources/card.yaml
     CardDetails:
-      $ref: ./components/card_details.yaml
+      $ref: ./resources/card_details.yaml
     CardStoreRequest:
-      $ref: ./components/card_store_request.yaml
+      $ref: ./request-bodies/card_store_request.yaml
     Error400BadRequest:
-      $ref: ./components/error_400_bad_request.yaml
+      $ref: ./resources/error_400_bad_request.yaml
     Error400IncorrectJson:
-      $ref: ./components/error_400_incorrect_json.yaml
+      $ref: ./resources/error_400_incorrect_json.yaml
     Error401Unauthorized:
-      $ref: ./components/error_401_unauthorized.yaml
+      $ref: ./resources/error_401_unauthorized.yaml
     Error404PendingCreation:
-      $ref: ./components/error_404_pending_creation.yaml
+      $ref: ./resources/error_404_pending_creation.yaml
     Error404NotFound:
-      $ref: ./components/error_404_not_found.yaml
+      $ref: ./resources/error_404_not_found.yaml
     Error409DuplicateRecord:
-      $ref: ./components/error_409_duplicate_record.yaml
+      $ref: ./resources/error_409_duplicate_record.yaml
+    ErrorDetail:
+      $ref: ./resources/error_detail.yaml
     PaymentMethods:
-      $ref: ./components/payment_methods.yaml
+      $ref: ./resources/payment_methods.yaml
     PaymentMethodEvent:
-      $ref: ./components/payment_method_event.yaml
+      $ref: ./resources/payment_method_event.yaml
     PaymentMethodEvents:
-      $ref: ./components/payment_method_events.yaml
+      $ref: ./resources/payment_method_events.yaml
     PaymentService:
-      $ref: ./components/payment_service.yaml
+      $ref: ./resources/payment_service.yaml
     PaymentServices:
-      $ref: ./components/payment_services.yaml
+      $ref: ./resources/payment_services.yaml
     PaymentServiceCreateRequest:
-      $ref: ./components/payment_service_create_request.yaml
+      $ref: ./request-bodies/payment_service_create_request.yaml
     PaymentServiceUpdateRequest:
-      $ref: ./components/payment_service_update_request.yaml
+      $ref: ./request-bodies/payment_service_update_request.yaml
     PaymentOption:
-      $ref: ./components/payment_option.yaml
+      $ref: ./resources/payment_option.yaml
     PaymentOptions:
-      $ref: ./components/payment_options.yaml
+      $ref: ./resources/payment_options.yaml
     PayPal:
-      $ref: ./components/paypal.yaml
+      $ref: ./resources/paypal.yaml
     PayPalDetails:
-      $ref: ./components/paypal_details.yaml
+      $ref: ./resources/paypal_details.yaml
     PayPalStoreRequest:
-      $ref: ./components/paypal_store_request.yaml
+      $ref: ./request-bodies/paypal_store_request.yaml
     Status:
-      $ref: ./components/status.yaml
+      $ref: ./resources/status.yaml
     Statuses:
-      $ref: ./components/statuses.yaml
+      $ref: ./resources/statuses.yaml
     Transaction:
-      $ref: ./components/transaction.yaml
+      $ref: ./resources/transaction.yaml
     Transactions:
-      $ref: ./components/transactions.yaml
+      $ref: ./resources/transactions.yaml
     TransactionsBatchCaptureRequest:
-      $ref: ./components/transactions_batch_capture_request.yaml
+      $ref: ./request-bodies/transactions_batch_capture_request.yaml
     TransactionCreateRequest:
-      $ref: ./components/transaction_create_request.yaml
+      $ref: ./request-bodies/transaction_create_request.yaml
     TransactionCaptureRequest:
-      $ref: ./components/transaction_capture_request.yaml
+      $ref: ./request-bodies/transaction_capture_request.yaml
     TransactionEvent:
-      $ref: ./components/transaction_event.yaml
+      $ref: ./resources/transaction_event.yaml
     TransactionEvents:
-      $ref: ./components/transaction_events.yaml
+      $ref: ./resources/transaction_events.yaml
   securitySchemes:
     BearerAuth:
       type: http

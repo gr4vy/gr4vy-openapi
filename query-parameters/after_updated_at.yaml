@@ -1,0 +1,9 @@
+---
+schema:
+  type: string
+  example: "2012-12-12T10:53:43-08:00"
+in: query
+name: after_updated_at
+description: |-
+  Filters the results to only transactions last updated after this ISO
+  date-time string.

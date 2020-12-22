@@ -11,6 +11,8 @@ properties:
     type: string
     description: The ID of this payment service instance
     example: stripe-card-faaad066-30b4-4997-a438-242b0752d7e1
+    minLength: 1
+    maxLength: 200
 
   type:
     type: string
@@ -22,8 +24,10 @@ properties:
   payment_service_definition_id:
     type: string
     description: |
-      The ID of the payment service used to create this service instance.
-    example: stripe
+      The ID of the payment service definition used to create this service.
+    example: stripe-card
+    minLength: 1
+    maxLength: 50
 
   method:
     type: string
@@ -37,6 +41,8 @@ properties:
     type: string
     description: The custom name set for this service
     example: Stripe (Main)
+    minLength: 1
+    maxLength: 50
 
   status:
     type: string
@@ -54,9 +60,11 @@ properties:
     description:
       "A list of currencies for which this service is enabled, in ISO 4217
       three-letter code format."
+    minItems: 1
     items:
       type: string
-      minLength: 1
+      minLength: 3
+      maxLength: 3
     example:
       - EUR
 
@@ -65,9 +73,11 @@ properties:
     description:
       "A list of countries for which this service is enabled, in ISO two-letter
       code format."
+    minItems: 1
     items:
       type: string
-      minLength: 1
+      minLength: 2
+      maxLength: 2
     example:
       - DE
 

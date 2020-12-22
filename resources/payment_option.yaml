@@ -27,6 +27,7 @@ properties:
     description: A list of countries that this option is supported for.
     items:
       type: string
+    minItems: 1
     example:
       - US
       - GB

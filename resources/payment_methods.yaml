@@ -1,0 +1,25 @@
+---
+title: Cards
+type: object
+description: A list of stored payment methods
+
+x-tags:
+  - PaymentMethods
+
+properties:
+  items:
+    type: array
+    description: A list of stored payment methods
+    items:
+      oneOf:
+        - $ref: "../openapi.yaml#/components/schemas/Card"
+        - $ref: "../openapi.yaml#/components/schemas/PayPal"
+
+  limit:
+    $ref: "../properties/limit-100.yaml"
+
+  next_cursor:
+    $ref: "../properties/next_cursor.yaml"
+
+  previous_cursor:
+    $ref: "../properties/previous_cursor.yaml"

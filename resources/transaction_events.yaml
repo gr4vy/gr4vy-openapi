@@ -1,0 +1,23 @@
+---
+title: Transaction Events
+type: object
+description: A list of events for a transaction
+
+x-tags:
+  - Transactions
+
+properties:
+  items:
+    type: array
+    description: A list of transaction events
+    items:
+      $ref: "../openapi.yaml#/components/schemas/TransactionEvent"
+
+  limit:
+    $ref: "../properties/limit-100.yaml"
+
+  next_cursor:
+    $ref: "../properties/next_cursor.yaml"
+
+  previous_cursor:
+    $ref: "../properties/previous_cursor.yaml"
