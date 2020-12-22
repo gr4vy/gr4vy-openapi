@@ -541,6 +541,14 @@
           "API Key Pairs"
         ],
         "x-internal": true,
+        "parameters": [
+          {
+            "$ref": "../query-parameters/limit-100.yaml"
+          },
+          {
+            "$ref": "../query-parameters/cursor.yaml"
+          }
+        ],
         "responses": {
           "200": {
             "description": "A list of active key pairs",
@@ -740,36 +748,13 @@
         ],
         "parameters": [
           {
-            "schema": {
-              "type": "string",
-              "example": "be828248-56de-481e-a580-44b6e1d4df81"
-            },
-            "in": "query",
-            "name": "external_identifier",
-            "description": "Filters the results to the buyer that matches this external identifier."
+            "$ref": "../query-parameters/external_identifier.yaml"
           },
           {
-            "schema": {
-              "type": "integer",
-              "default": 100,
-              "example": 1000,
-              "minimum": 0,
-              "maximum": 1000,
-              "format": "int32"
-            },
-            "in": "query",
-            "name": "limit",
-            "description": "The maximum number of items to return"
+            "$ref": "../query-parameters/limit-100.yaml"
           },
           {
-            "schema": {
-              "type": "string",
-              "format": "",
-              "example": "1593343179"
-            },
-            "in": "query",
-            "name": "marker",
-            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, omit this parameter.\nFor next pages, use the value returned by the API in\nthe `next_page` field."
+            "$ref": "../query-parameters/cursor.yaml"
           }
         ],
         "responses": {
@@ -1085,45 +1070,16 @@
         ],
         "parameters": [
           {
-            "schema": {
-              "type": "integer",
-              "default": 100,
-              "example": 1000,
-              "minimum": 0,
-              "maximum": 1000,
-              "format": "int32"
-            },
-            "in": "query",
-            "name": "limit",
-            "description": "The maximum number of items to return"
+            "$ref": "../query-parameters/buyer_id.yaml"
           },
           {
-            "schema": {
-              "type": "string",
-              "format": "",
-              "example": "1593343179"
-            },
-            "in": "query",
-            "name": "marker",
-            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, omit this parameter.\nFor next pages, use the value returned by the API in\nthe `next_page` field."
+            "$ref": "../query-parameters/buyer_external_identifier.yaml"
           },
           {
-            "schema": {
-              "type": "string",
-              "example": "be828248-56de-481e-a580-44b6e1d4df81"
-            },
-            "in": "query",
-            "name": "buyer_id",
-            "description": "Filters the results to payment methods for a `buyer` that matches this\n`id`."
+            "$ref": "../query-parameters/limit-100.yaml"
           },
           {
-            "schema": {
-              "type": "string",
-              "example": "be828248-56de-481e-a580-44b6e1d4df81"
-            },
-            "in": "query",
-            "name": "buyer_external_identifier",
-            "description": "Filters the results to payment methods for a `buyer` that matches this\n`external_identifier`."
+            "$ref": "../query-parameters/cursor.yaml"
           }
         ],
         "responses": {
@@ -1338,27 +1294,10 @@
         ],
         "parameters": [
           {
-            "schema": {
-              "type": "integer",
-              "default": 100,
-              "example": 1000,
-              "minimum": 0,
-              "maximum": 1000,
-              "format": "int32"
-            },
-            "in": "query",
-            "name": "limit",
-            "description": "The maximum number of items to return"
+            "$ref": "../query-parameters/limit-100.yaml"
           },
           {
-            "schema": {
-              "type": "string",
-              "format": "",
-              "example": "1593343179"
-            },
-            "in": "query",
-            "name": "marker",
-            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, omit this parameter.\nFor next pages, use the value returned by the API in\nthe `next_page` field."
+            "$ref": "../query-parameters/cursor.yaml"
           }
         ],
         "responses": {
@@ -1405,22 +1344,16 @@
         ],
         "parameters": [
           {
-            "schema": {
-              "type": "string",
-              "example": "IT"
-            },
-            "in": "query",
-            "name": "country",
-            "description": "The country for which to return available payment options"
+            "$ref": "../query-parameters/country.yaml"
           },
           {
-            "schema": {
-              "type": "string",
-              "example": "EUR"
-            },
-            "in": "query",
-            "name": "currency",
-            "description": "The currency for which to return available payment options"
+            "$ref": "../query-parameters/currency.yaml"
+          },
+          {
+            "$ref": "../query-parameters/limit-100.yaml"
+          },
+          {
+            "$ref": "../query-parameters/cursor.yaml"
           }
         ],
         "responses": {
@@ -1467,27 +1400,10 @@
         ],
         "parameters": [
           {
-            "schema": {
-              "type": "integer",
-              "default": 100,
-              "example": 1000,
-              "minimum": 0,
-              "maximum": 1000,
-              "format": "int32"
-            },
-            "in": "query",
-            "name": "limit",
-            "description": "The maximum number of items to return"
+            "$ref": "../query-parameters/limit-100.yaml"
           },
           {
-            "schema": {
-              "type": "string",
-              "format": "",
-              "example": "1593343179"
-            },
-            "in": "query",
-            "name": "marker",
-            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, omit this parameter.\nFor next pages, use the value returned by the API in\nthe `next_page` field."
+            "$ref": "../query-parameters/cursor.yaml"
           }
         ],
         "responses": {
@@ -1753,27 +1669,10 @@
         "x-internal": true,
         "parameters": [
           {
-            "schema": {
-              "type": "integer",
-              "default": 100,
-              "example": 1000,
-              "minimum": 0,
-              "maximum": 1000,
-              "format": "int32"
-            },
-            "in": "query",
-            "name": "limit",
-            "description": "The maximum number of items to return"
+            "$ref": "../query-parameters/limit-100.yaml"
           },
           {
-            "schema": {
-              "type": "string",
-              "format": "",
-              "example": "1593343179"
-            },
-            "in": "query",
-            "name": "marker",
-            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, omit this parameter.\nFor next pages, use the value returned by the API in\nthe `next_page` field."
+            "$ref": "../query-parameters/cursor.yaml"
           }
         ],
         "responses": {
@@ -1783,63 +1682,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/PaymentServiceDefinitions"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "add-payment-service-definition",
-        "summary": "Add payment service definition",
-        "description": "Creates a new payment service definition",
-        "tags": [
-          "Payment Service Definitions"
-        ],
-        "x-internal": true,
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PaymentServiceDefinitionCreateRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PaymentServiceDefinition"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error400BadRequest"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error400IncorrectJson"
-                    }
-                  ]
                 }
               }
             }
@@ -1910,107 +1752,6 @@
             }
           }
         }
-      },
-      "put": {
-        "operationId": "update-payment-services-definition",
-        "summary": "Update payment service definition",
-        "description": "Makes an update to a payment service definition",
-        "tags": [
-          "Payment Service Definitions"
-        ],
-        "x-internal": true,
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PaymentServiceDefinitionUpdateRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "202": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PaymentServiceDefinition"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error400BadRequest"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error400IncorrectJson"
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error404NotFound"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "delete-payment-services-definition",
-        "summary": "Delete payment service definition",
-        "description": "Removes a payment service definition",
-        "tags": [
-          "Payment Service Definitions"
-        ],
-        "x-internal": true,
-        "responses": {
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error404NotFound"
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/card-rulesets": {
@@ -2024,27 +1765,10 @@
         "x-internal": true,
         "parameters": [
           {
-            "schema": {
-              "type": "integer",
-              "default": 100,
-              "example": 1000,
-              "minimum": 0,
-              "maximum": 1000,
-              "format": "int32"
-            },
-            "in": "query",
-            "name": "limit",
-            "description": "The maximum number of items to return"
+            "$ref": "../query-parameters/limit-100.yaml"
           },
           {
-            "schema": {
-              "type": "string",
-              "format": "",
-              "example": "1593343179"
-            },
-            "in": "query",
-            "name": "marker",
-            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, omit this parameter.\nFor next pages, use the value returned by the API in\nthe `next_page` field."
+            "$ref": "../query-parameters/cursor.yaml"
           }
         ],
         "responses": {
@@ -2072,17 +1796,20 @@
                             {
                               "type": "card-rule",
                               "id": "0",
-                              "rule_type": "conditional",
-                              "key": "amount",
-                              "condition": ">=",
-                              "value": "200",
+                              "rule_type": "string-conditional",
+                              "key": "currency",
+                              "condition": "IN",
+                              "values": [
+                                "USD",
+                                "GBP"
+                              ],
                               "true_rule_id": "1",
                               "false_rule_id": "2"
                             },
                             {
                               "type": "card-rule",
                               "id": "1",
-                              "rule_type": "terminal",
+                              "rule_type": "payment-services-terminal",
                               "payment_service_ids": [
                                 "stripe-card-f47db210-8e30-4f74-8123-b834604f2042"
                               ]
@@ -2090,7 +1817,7 @@
                             {
                               "type": "card-rule",
                               "id": "2",
-                              "rule_type": "terminal",
+                              "rule_type": "payment-services-terminal",
                               "payment_service_ids": [
                                 "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
                               ]
@@ -2144,17 +1871,17 @@
                       {
                         "type": "card-rule",
                         "id": "0",
-                        "rule_type": "conditional",
+                        "rule_type": "number-conditional",
                         "key": "amount",
                         "condition": ">=",
-                        "value": "200",
+                        "value": 200,
                         "true_rule_id": "1",
                         "false_rule_id": "2"
                       },
                       {
                         "type": "card-rule",
                         "id": "1",
-                        "rule_type": "terminal",
+                        "rule_type": "payment-services-terminal",
                         "payment_service_ids": [
                           "stripe-card-f47db210-8e30-4f74-8123-b834604f2042"
                         ]
@@ -2162,7 +1889,7 @@
                       {
                         "type": "card-rule",
                         "id": "2",
-                        "rule_type": "terminal",
+                        "rule_type": "payment-services-terminal",
                         "payment_service_ids": [
                           "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
                         ]
@@ -2197,17 +1924,17 @@
                         {
                           "type": "card-rule",
                           "id": "0",
-                          "rule_type": "conditional",
+                          "rule_type": "number-conditional",
                           "key": "amount",
                           "condition": ">=",
-                          "value": "200",
+                          "value": 200,
                           "true_rule_id": "1",
                           "false_rule_id": "2"
                         },
                         {
                           "type": "card-rule",
                           "id": "1",
-                          "rule_type": "terminal",
+                          "rule_type": "payment-services-terminal",
                           "payment_service_ids": [
                             "stripe-card-f47db210-8e30-4f74-8123-b834604f2042"
                           ]
@@ -2215,7 +1942,7 @@
                         {
                           "type": "card-rule",
                           "id": "2",
-                          "rule_type": "terminal",
+                          "rule_type": "payment-services-terminal",
                           "payment_service_ids": [
                             "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
                           ]
@@ -2302,17 +2029,17 @@
                         {
                           "type": "card-rule",
                           "id": "0",
-                          "rule_type": "conditional",
+                          "rule_type": "number-conditional",
                           "key": "amount",
                           "condition": ">=",
-                          "value": "200",
+                          "value": 200,
                           "true_rule_id": "1",
                           "false_rule_id": "2"
                         },
                         {
                           "type": "card-rule",
                           "id": "1",
-                          "rule_type": "terminal",
+                          "rule_type": "payment-services-terminal",
                           "payment_service_ids": [
                             "stripe-card-f47db210-8e30-4f74-8123-b834604f2042"
                           ]
@@ -2320,7 +2047,7 @@
                         {
                           "type": "card-rule",
                           "id": "2",
-                          "rule_type": "terminal",
+                          "rule_type": "payment-services-terminal",
                           "payment_service_ids": [
                             "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
                           ]
@@ -2377,17 +2104,20 @@
                       {
                         "type": "card-rule",
                         "id": "0",
-                        "rule_type": "conditional",
-                        "key": "amount",
-                        "condition": ">=",
-                        "value": "200",
+                        "rule_type": "string-conditional",
+                        "key": "currency",
+                        "condition": "IN",
+                        "values": [
+                          "USD",
+                          "GBP"
+                        ],
                         "true_rule_id": "1",
                         "false_rule_id": "2"
                       },
                       {
                         "type": "card-rule",
                         "id": "1",
-                        "rule_type": "terminal",
+                        "rule_type": "payment-services-terminal",
                         "payment_service_ids": [
                           "stripe-card-f47db210-8e30-4f74-8123-b834604f2042"
                         ]
@@ -2395,7 +2125,7 @@
                       {
                         "type": "card-rule",
                         "id": "2",
-                        "rule_type": "terminal",
+                        "rule_type": "payment-services-terminal",
                         "payment_service_ids": [
                           "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
                         ]
@@ -2430,17 +2160,20 @@
                         {
                           "type": "card-rule",
                           "id": "0",
-                          "rule_type": "conditional",
-                          "key": "amount",
-                          "condition": ">=",
-                          "value": "200",
+                          "rule_type": "string-conditional",
+                          "key": "currency",
+                          "condition": "IN",
+                          "values": [
+                            "USD",
+                            "GBP"
+                          ],
                           "true_rule_id": "1",
                           "false_rule_id": "2"
                         },
                         {
                           "type": "card-rule",
                           "id": "1",
-                          "rule_type": "terminal",
+                          "rule_type": "payment-services-terminal",
                           "payment_service_ids": [
                             "stripe-card-f47db210-8e30-4f74-8123-b834604f2042"
                           ]
@@ -2448,7 +2181,7 @@
                         {
                           "type": "card-rule",
                           "id": "2",
-                          "rule_type": "terminal",
+                          "rule_type": "payment-services-terminal",
                           "payment_service_ids": [
                             "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
                           ]
@@ -2534,7 +2267,8 @@
                       "type": "error",
                       "code": "forbidden",
                       "status": 403,
-                      "message": "The resource could not be removed as it's currently active"
+                      "message": "The resource could not be removed as it's currently active",
+                      "details": []
                     }
                   }
                 }
@@ -2599,17 +2333,17 @@
                         {
                           "type": "card-rule",
                           "id": "0",
-                          "rule_type": "conditional",
+                          "rule_type": "number-conditional",
                           "key": "amount",
                           "condition": ">=",
-                          "value": "200",
+                          "value": 200,
                           "true_rule_id": "1",
                           "false_rule_id": "2"
                         },
                         {
                           "type": "card-rule",
                           "id": "1",
-                          "rule_type": "terminal",
+                          "rule_type": "payment-services-terminal",
                           "payment_service_ids": [
                             "stripe-card-f47db210-8e30-4f74-8123-b834604f2042"
                           ]
@@ -2617,7 +2351,7 @@
                         {
                           "type": "card-rule",
                           "id": "2",
-                          "rule_type": "terminal",
+                          "rule_type": "payment-services-terminal",
                           "payment_service_ids": [
                             "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
                           ]
@@ -2652,7 +2386,8 @@
                       "type": "error",
                       "code": "invalid_ruleset",
                       "status": 403,
-                      "message": "Ruleset is not valid. Only valid rulesets can be deployed"
+                      "message": "Ruleset is not valid. Only valid rulesets can be deployed",
+                      "details": []
                     }
                   }
                 }
@@ -2682,80 +2417,28 @@
         ],
         "parameters": [
           {
-            "schema": {
-              "type": "integer",
-              "default": 20,
-              "example": 50,
-              "minimum": 0,
-              "maximum": 100,
-              "format": "int32"
-            },
-            "in": "query",
-            "name": "limit",
-            "description": "The maximum number of items to return"
+            "$ref": "../query-parameters/transaction-search.yaml"
           },
           {
-            "schema": {
-              "type": "string",
-              "example": "1593343179"
-            },
-            "in": "query",
-            "name": "marker",
-            "description": "The marker that determines the offset for the page of results to be\nreturned.\n\nFor the first page of results, omit this parameter. For next pages,\nuse the value returned by the API in the `next_page` field.\n\nA marker is an opaque string that is only meaningful to our API. No\nadditional value can be ascribed to this value."
+            "$ref": "../query-parameters/transaction_status.yaml"
           },
           {
-            "schema": {
-              "type": "string",
-              "example": "be828248-56de-481e-a580-44b6e1d4df81"
-            },
-            "in": "query",
-            "name": "search",
-            "description": "Filters the results to the transactions that match this external identifier or transaction ID."
+            "$ref": "../query-parameters/before_created_at.yaml"
           },
           {
-            "schema": {
-              "type": "string",
-              "example": "2012-12-12T10:53:43-08:00"
-            },
-            "in": "query",
-            "name": "before_updated_at",
-            "description": "Filters the results to only transactions last updated before this ISO date-time string."
+            "$ref": "../query-parameters/after_created_at.yaml"
           },
           {
-            "schema": {
-              "type": "string",
-              "example": "2012-12-12T10:53:43-08:00"
-            },
-            "in": "query",
-            "name": "after_updated_at",
-            "description": "Filters the results to only transactions last updated after this ISO date-time string."
+            "$ref": "../query-parameters/before_updated_at.yaml"
           },
           {
-            "schema": {
-              "type": "string",
-              "example": "2012-12-12T10:53:43-08:00"
-            },
-            "in": "query",
-            "name": "before_created_at",
-            "description": "Filters the results to only transactions created before this ISO date-time string."
+            "$ref": "../query-parameters/after_updated_at.yaml"
           },
           {
-            "schema": {
-              "type": "string",
-              "example": "2012-12-12T10:53:43-08:00"
-            },
-            "in": "query",
-            "name": "after_created_at",
-            "description": "Filters the results to only transactions created after this ISO date-time string."
+            "$ref": "../query-parameters/limit-500.yaml"
           },
           {
-            "schema": {
-              "type": "string",
-              "example": "captured"
-            },
-            "in": "query",
-            "name": "transaction_status",
-            "description": "Filters the results to only transactions with as specific transaction status."
+            "$ref": "../query-parameters/cursor.yaml"
           }
         ],
         "responses": {
@@ -3204,27 +2887,10 @@
         ],
         "parameters": [
           {
-            "schema": {
-              "type": "integer",
-              "default": 100,
-              "example": 1000,
-              "minimum": 0,
-              "maximum": 1000,
-              "format": "int32"
-            },
-            "in": "query",
-            "name": "limit",
-            "description": "The maximum number of items to return"
+            "$ref": "../query-parameters/limit-100.yaml"
           },
           {
-            "schema": {
-              "type": "string",
-              "format": "",
-              "example": "1593343179"
-            },
-            "in": "query",
-            "name": "marker",
-            "description": "The marker that identifies the page of results to return.\n\nFor the first page of results, omit this parameter.\nFor next pages, use the value returned by the API in\nthe `next_page` field."
+            "$ref": "../query-parameters/cursor.yaml"
           }
         ],
         "responses": {
@@ -3322,19 +2988,24 @@
           "id": {
             "type": "string",
             "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-            "description": "The unique Gr4vy ID for this buyer"
+            "description": "The unique Gr4vy ID for this buyer",
+            "format": "uuid"
           },
           "external_identifier": {
             "type": "string",
             "description": "An external identifier that can be used to match the buyer against your own records.",
             "example": "user-789123",
-            "nullable": true
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 320
           },
           "display_name": {
             "type": "string",
             "description": "A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.",
             "example": "John L.",
-            "nullable": true
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           },
           "created_at": {
             "type": "string",
@@ -3366,27 +3037,13 @@
             }
           },
           "limit": {
-            "type": "integer",
-            "description": "The limit set to the number of items returned. ",
-            "format": "int32",
-            "minimum": 0,
-            "maximum": 1000,
-            "example": 100,
-            "default": 100
+            "$ref": "../properties/limit-100.yaml"
           },
-          "next_page": {
-            "type": "string",
-            "description": "The marker that represents the next page of results.",
-            "format": "uuid",
-            "example": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
-            "nullable": true
+          "next_cursor": {
+            "$ref": "../properties/next_cursor.yaml"
           },
-          "previous_page": {
-            "type": "string",
-            "description": "The marker that represents the previous page of results.",
-            "format": "uuid",
-            "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
-            "nullable": true
+          "previous_cursor": {
+            "$ref": "../properties/previous_cursor.yaml"
           }
         }
       },
@@ -3419,20 +3076,11 @@
         "x-tags": [
           "Buyers"
         ],
-        "properties": {
-          "external_identifier": {
-            "type": "string",
-            "description": "An external identifier that can be used to match the buyer against your own records.",
-            "example": "user-789123",
-            "nullable": true
-          },
-          "display_name": {
-            "type": "string",
-            "description": "A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.",
-            "example": "John L.",
-            "nullable": true
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/BuyerCreateRequest"
           }
-        }
+        ]
       },
       "Card": {
         "title": "Card",
@@ -3642,7 +3290,9 @@
           "display_name": {
             "type": "string",
             "description": "The display name of the ruleset",
-            "example": "Q2 2020 Ruleset"
+            "example": "Q2 2020 Ruleset",
+            "minLength": 1,
+            "maxLength": 50
           },
           "active": {
             "type": "boolean",
@@ -3656,8 +3306,10 @@
           },
           "root_rule_id": {
             "type": "string",
-            "example": "0",
-            "description": "The ID of the rule that is the starting point of the ruleset."
+            "example": "rule-0",
+            "description": "The ID of the rule that is the starting point of the ruleset.",
+            "minLength": 1,
+            "maxLength": 50
           },
           "rules": {
             "type": "array",
@@ -3665,10 +3317,16 @@
             "items": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/CardRuleConditional"
+                  "$ref": "#/components/schemas/CardRuleStringConditional"
                 },
                 {
-                  "$ref": "#/components/schemas/CardRuleTerminal"
+                  "$ref": "#/components/schemas/CardRuleNumberConditional"
+                },
+                {
+                  "$ref": "#/components/schemas/CardRuleBooleanConditional"
+                },
+                {
+                  "$ref": "#/components/schemas/CardRulePaymentServicesTerminal"
                 }
               ]
             }
@@ -3704,34 +3362,87 @@
             }
           },
           "limit": {
-            "type": "integer",
-            "description": "The limit set to the number of items returned. ",
-            "format": "int32",
-            "minimum": 0,
-            "maximum": 1000,
-            "example": 100,
-            "default": 100
+            "$ref": "../properties/limit-100.yaml"
           },
-          "next_page": {
-            "type": "string",
-            "description": "The marker that represents the next page of results.",
-            "format": "uuid",
-            "example": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
-            "nullable": true
+          "next_cursor": {
+            "$ref": "../properties/next_cursor.yaml"
           },
-          "previous_page": {
-            "type": "string",
-            "description": "The marker that represents the previous page of results.",
-            "format": "uuid",
-            "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
-            "nullable": true
+          "previous_cursor": {
+            "$ref": "../properties/previous_cursor.yaml"
           }
         }
       },
-      "CardRuleConditional": {
-        "title": "Conditional Card Rule",
+      "CardRuleBooleanConditional": {
+        "title": "Card rule (Boolean conditional)",
         "type": "object",
-        "description": "A conditional rule in a ruleset. It defines an if/else condition and a rule to\nmove on to next for each of these values.",
+        "description": "A conditional rule in a ruleset that matches boolean fields. It defines an\nif/else condition and a rule to move on to next for each of these values.",
+        "x-internal": true,
+        "x-tags": [
+          "Card Rulesets"
+        ],
+        "required": [
+          "type",
+          "id",
+          "rule_type",
+          "key",
+          "condition",
+          "values",
+          "true_rule_id",
+          "false_rule_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`card-rule`",
+            "example": "card-rule",
+            "enum": [
+              "card-rule"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "A unique ID for this rule in the ruleset.",
+            "example": "rule-0",
+            "minLength": 1,
+            "maxLength": 50
+          },
+          "rule_type": {
+            "type": "string",
+            "description": "`boolean-conditional`",
+            "example": "boolean-conditional",
+            "enum": [
+              "boolean-conditional"
+            ]
+          },
+          "key": {
+            "type": "string",
+            "description": "The transaction field to filter by.",
+            "example": "store",
+            "enum": [
+              "store",
+              "use_test_environment"
+            ]
+          },
+          "true_rule_id": {
+            "type": "string",
+            "description": "the ID of the rule to use if the comparison equals true.",
+            "example": "rule-1",
+            "minLength": 1,
+            "maxLength": 50
+          },
+          "false_rule_id": {
+            "type": "string",
+            "description": "the ID of the rule to use if the comparison equals false.",
+            "example": "rule-2",
+            "minLength": 1,
+            "maxLength": 50
+          }
+        }
+      },
+      "CardRuleNumberConditional": {
+        "title": "Card rule (Number conditional)",
+        "type": "object",
+        "description": "A conditional rule in a ruleset that matches numbers. It defines an if/else\ncondition and a rule to move on to next for each of these values.",
         "x-internal": true,
         "x-tags": [
           "Card Rulesets"
@@ -3757,58 +3468,153 @@
           },
           "id": {
             "type": "string",
-            "description": "A unique ID for this rule in the ruleset",
-            "example": "0"
+            "description": "A unique ID for this rule in the ruleset.",
+            "example": "rule-0"
           },
           "rule_type": {
             "type": "string",
-            "description": "`conditional`",
-            "example": "conditional",
+            "description": "`number-conditional`",
+            "example": "number-conditional",
             "enum": [
-              "conditional"
+              "number-conditional"
             ]
           },
           "key": {
             "type": "string",
-            "description": "The transaction field to filter by",
+            "description": "The transaction field to filter by.",
             "example": "amount",
             "enum": [
-              "amount",
-              "currency",
-              "cctype",
-              "store",
-              "use_test_environment"
+              "amount"
             ]
           },
           "condition": {
             "type": "string",
             "description": "The comparison to make to `value` property.",
-            "example": "<=",
+            "example": ">=",
             "enum": [
               "==",
               "!=",
               "<=",
-              ">="
+              ">=",
+              ">",
+              "<"
             ]
           },
           "value": {
-            "type": "string",
-            "description": "The value to compare the `key` to. This value will be converted to\na number for the currency amount.",
-            "example": "200"
+            "type": "number",
+            "description": "The values to compare the `key` to.",
+            "example": 200,
+            "minimum": 0,
+            "maximum": 99999
           },
           "true_rule_id": {
             "type": "string",
             "description": "the ID of the rule to use if the comparison equals true.",
-            "example": "1"
+            "example": "rule-1",
+            "minLength": 1,
+            "maxLength": 50
           },
           "false_rule_id": {
             "type": "string",
             "description": "the ID of the rule to use if the comparison equals false.",
-            "example": "2"
+            "example": "rule-2",
+            "minLength": 1,
+            "maxLength": 50
           }
         }
       },
-      "CardRuleTerminal": {
+      "CardRuleStringConditional": {
+        "title": "Card rule (String conditional)",
+        "type": "object",
+        "description": "A conditional rule in a ruleset that matches strings. It defines an if/else\ncondition and a rule to move on to next for each of these values.",
+        "x-internal": true,
+        "x-tags": [
+          "Card Rulesets"
+        ],
+        "required": [
+          "type",
+          "id",
+          "rule_type",
+          "key",
+          "condition",
+          "values",
+          "true_rule_id",
+          "false_rule_id"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`card-rule`",
+            "example": "card-rule",
+            "enum": [
+              "card-rule"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "A unique ID for this rule in the ruleset.",
+            "example": "rule-0",
+            "minLength": 1,
+            "maxLength": 50
+          },
+          "rule_type": {
+            "type": "string",
+            "description": "`string-conditional`",
+            "example": "string-conditional",
+            "enum": [
+              "string-conditional"
+            ]
+          },
+          "key": {
+            "type": "string",
+            "description": "The transaction field to filter by.",
+            "example": "currency",
+            "enum": [
+              "currency",
+              "card_type"
+            ]
+          },
+          "condition": {
+            "type": "string",
+            "description": "The comparison to make to `value` property.",
+            "example": "IN",
+            "enum": [
+              "IN",
+              "NOT IN"
+            ]
+          },
+          "values": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 100,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 50
+            },
+            "description": "The values to compare the `key` to.",
+            "example": [
+              "USD",
+              "EUR"
+            ]
+          },
+          "true_rule_id": {
+            "type": "string",
+            "description": "the ID of the rule to use if the comparison equals true.",
+            "example": "rule-1",
+            "minLength": 1,
+            "maxLength": 50
+          },
+          "false_rule_id": {
+            "type": "string",
+            "description": "the ID of the rule to use if the comparison equals false.",
+            "example": "rule-2",
+            "minLength": 1,
+            "maxLength": 50
+          }
+        }
+      },
+      "CardRulePaymentServicesTerminal": {
         "title": "Terminal Card Rule",
         "type": "object",
         "description": "A terminal rule in a ruleset. It the payment services to use in case the\nruleset reaches this node.",
@@ -3834,14 +3640,16 @@
           "id": {
             "type": "string",
             "description": "A unique ID for this rule in the ruleset",
-            "example": "0"
+            "example": "rule-0",
+            "minLength": 1,
+            "maxLength": 50
           },
           "rule_type": {
             "type": "string",
-            "description": "`terminal`",
-            "example": "terminal",
+            "description": "`payment-services-terminal`",
+            "example": "payment-services-terminal",
             "enum": [
-              "terminal"
+              "payment-services-terminal"
             ]
           },
           "payment_service_ids": {
@@ -3852,7 +3660,9 @@
               "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
             ],
             "items": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
             }
           }
         }
@@ -3873,24 +3683,34 @@
         "properties": {
           "display_name": {
             "type": "string",
-            "description": "The display name of the ruleset",
-            "example": "Q2 2020 Ruleset"
+            "description": "The display name of the ruleset.",
+            "example": "Q2 2020 Ruleset",
+            "minLength": 1,
+            "maxLength": 50
           },
           "root_rule_id": {
             "type": "string",
-            "example": "0",
-            "description": "The ID of the rule that is the starting point of the ruleset."
+            "example": "rule-0",
+            "description": "The ID of the rule that is the starting point of the ruleset.",
+            "minLength": 1,
+            "maxLength": 50
           },
           "rules": {
             "type": "array",
-            "description": "A list of rules in this ruleset",
+            "description": "A list of rules in this ruleset.",
             "items": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/CardRuleConditional"
+                  "$ref": "#/components/schemas/CardRuleStringConditional"
                 },
                 {
-                  "$ref": "#/components/schemas/CardRuleTerminal"
+                  "$ref": "#/components/schemas/CardRuleNumberConditional"
+                },
+                {
+                  "$ref": "#/components/schemas/CardRuleBooleanConditional"
+                },
+                {
+                  "$ref": "#/components/schemas/CardRulePaymentServicesTerminal"
                 }
               ]
             }
@@ -3905,37 +3725,11 @@
         "x-tags": [
           "Card Rulesets"
         ],
-        "required": [
-          "display_name",
-          "root_rule_id",
-          "rules"
-        ],
-        "properties": {
-          "display_name": {
-            "type": "string",
-            "description": "The display name of the ruleset",
-            "example": "Q2 2020 Ruleset"
-          },
-          "root_rule_id": {
-            "type": "string",
-            "example": "0",
-            "description": "The ID of the rule that is the starting point of the ruleset."
-          },
-          "rules": {
-            "type": "array",
-            "description": "A list of rules in this ruleset",
-            "items": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/CardRuleConditional"
-                },
-                {
-                  "$ref": "#/components/schemas/CardRuleTerminal"
-                }
-              ]
-            }
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CardRulesetCreateRequest"
           }
-        }
+        ]
       },
       "Error": {
         "title": "Error",
@@ -3974,6 +3768,13 @@
             "type": "string",
             "description": "A human readable message that describes the error. The content of this field should not be used to determine any business logic. ",
             "example": "The request body was not valid JSON."
+          },
+          "details": {
+            "type": "array",
+            "description": "A list of detail objects that further clarify the reason for the error.\nNot every error supports more detail.",
+            "items": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            }
           }
         }
       },
@@ -4013,6 +3814,13 @@
             "type": "string",
             "description": "Describes the fields that are missing or incorrectly formatted in the API\nrequest.",
             "example": "Missing '****' field"
+          },
+          "details": {
+            "type": "array",
+            "description": "A list of detail objects that further clarify the reason for the error.",
+            "items": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            }
           }
         }
       },
@@ -4052,6 +3860,14 @@
             "type": "string",
             "description": "Incorrect JSON. The request body could not be parsed as valid JSON.",
             "example": "Incorrect JSON. The request body could not be parsed as valid JSON."
+          },
+          "details": {
+            "type": "array",
+            "description": "A list of detail objects that further clarify the reason for the error.\nNot every error supports more detail.",
+            "example": [],
+            "items": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            }
           }
         }
       },
@@ -4094,6 +3910,14 @@
             "enum": [
               "No valid API authentication found"
             ]
+          },
+          "details": {
+            "type": "array",
+            "description": "A list of detail objects that further clarify the reason for the error.\nNot every error supports more detail.",
+            "example": [],
+            "items": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            }
           }
         }
       },
@@ -4136,6 +3960,14 @@
             "enum": [
               "The resource is still pending"
             ]
+          },
+          "details": {
+            "type": "array",
+            "description": "A list of detail objects that further clarify the reason for the error.\nNot every error supports more detail.",
+            "example": [],
+            "items": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            }
           }
         }
       },
@@ -4178,6 +4010,14 @@
             "enum": [
               "The resource could not be found"
             ]
+          },
+          "details": {
+            "type": "array",
+            "description": "A list of detail objects that further clarify the reason for the error.\nNot every error supports more detail.",
+            "example": [],
+            "items": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            }
           }
         }
       },
@@ -4217,6 +4057,50 @@
             "type": "string",
             "description": "Further details on the field that triggered the error.",
             "example": "A duplicate ecord exists with this external_identifier value"
+          },
+          "details": {
+            "type": "array",
+            "description": "A list of detail objects that further clarify the reason for the error.\nNot every error supports more detail.",
+            "example": [],
+            "items": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            }
+          }
+        }
+      },
+      "ErrorDetail": {
+        "title": "Error details",
+        "description": "Additional detail about the part of a request body that caused an issue.",
+        "type": "object",
+        "x-tags": [
+          "Errors"
+        ],
+        "properties": {
+          "location": {
+            "type": "string",
+            "example": "body",
+            "description": "The location where the error caused an issue.",
+            "enum": [
+              "query",
+              "body",
+              "path",
+              "header"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "example": "value_error.missing",
+            "description": "A unique identifier for the type of error that occurred."
+          },
+          "pointer": {
+            "type": "string",
+            "example": "/payment_method/number",
+            "description": "The exact item for which the validation did not succeed. This is a JSON\npointer for request bodies, while for query, path, and header parameters\nit is the name of the parameter."
+          },
+          "message": {
+            "type": "string",
+            "example": "field required",
+            "description": "A human readable message for this error detail."
           }
         }
       },
@@ -4282,6 +4166,15 @@
             "items": {
               "$ref": "#/components/schemas/APIKeyPair"
             }
+          },
+          "limit": {
+            "$ref": "../properties/limit-100.yaml"
+          },
+          "next_cursor": {
+            "$ref": "../properties/next_cursor.yaml"
+          },
+          "previous_cursor": {
+            "$ref": "../properties/previous_cursor.yaml"
           }
         }
       },
@@ -4337,27 +4230,13 @@
             }
           },
           "limit": {
-            "type": "integer",
-            "description": "The limit set to the number of items returned. ",
-            "format": "int32",
-            "minimum": 0,
-            "maximum": 1000,
-            "example": 100,
-            "default": 100
+            "$ref": "../properties/limit-100.yaml"
           },
-          "next_page": {
-            "type": "string",
-            "description": "The marker that represents the next page of results.",
-            "format": "uuid",
-            "example": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
-            "nullable": true
+          "next_cursor": {
+            "$ref": "../properties/next_cursor.yaml"
           },
-          "previous_page": {
-            "type": "string",
-            "description": "The marker that represents the previous page of results.",
-            "format": "uuid",
-            "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
-            "nullable": true
+          "previous_cursor": {
+            "$ref": "../properties/previous_cursor.yaml"
           }
         }
       },
@@ -4430,27 +4309,13 @@
             }
           },
           "limit": {
-            "type": "integer",
-            "description": "The limit set to the number of items returned. ",
-            "format": "int32",
-            "minimum": 0,
-            "maximum": 1000,
-            "example": 100,
-            "default": 100
+            "$ref": "../properties/limit-100.yaml"
           },
-          "next_page": {
-            "type": "string",
-            "description": "The marker that represents the next page of results.",
-            "format": "uuid",
-            "example": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
-            "nullable": true
+          "next_cursor": {
+            "$ref": "../properties/next_cursor.yaml"
           },
-          "previous_page": {
-            "type": "string",
-            "description": "The marker that represents the previous page of results.",
-            "format": "uuid",
-            "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
-            "nullable": true
+          "previous_cursor": {
+            "$ref": "../properties/previous_cursor.yaml"
           }
         }
       },
@@ -4465,7 +4330,9 @@
           "id": {
             "type": "string",
             "description": "The ID of this payment service instance",
-            "example": "stripe-card-faaad066-30b4-4997-a438-242b0752d7e1"
+            "example": "stripe-card-faaad066-30b4-4997-a438-242b0752d7e1",
+            "minLength": 1,
+            "maxLength": 200
           },
           "type": {
             "type": "string",
@@ -4477,8 +4344,10 @@
           },
           "payment_service_definition_id": {
             "type": "string",
-            "description": "The ID of the payment service used to create this service instance.\n",
-            "example": "stripe"
+            "description": "The ID of the payment service definition used to create this service.\n",
+            "example": "stripe-card",
+            "minLength": 1,
+            "maxLength": 50
           },
           "method": {
             "type": "string",
@@ -4492,7 +4361,9 @@
           "display_name": {
             "type": "string",
             "description": "The custom name set for this service",
-            "example": "Stripe (Main)"
+            "example": "Stripe (Main)",
+            "minLength": 1,
+            "maxLength": 50
           },
           "status": {
             "type": "string",
@@ -4506,9 +4377,11 @@
           "accepted_currencies": {
             "type": "array",
             "description": "A list of currencies for which this service is enabled, in ISO 4217 three-letter code format.",
+            "minItems": 1,
             "items": {
               "type": "string",
-              "minLength": 1
+              "minLength": 3,
+              "maxLength": 3
             },
             "example": [
               "EUR"
@@ -4517,9 +4390,11 @@
           "accepted_countries": {
             "type": "array",
             "description": "A list of countries for which this service is enabled, in ISO two-letter code format.",
+            "minItems": 1,
             "items": {
               "type": "string",
-              "minLength": 1
+              "minLength": 2,
+              "maxLength": 2
             },
             "example": [
               "DE"
@@ -4546,27 +4421,13 @@
             }
           },
           "limit": {
-            "type": "integer",
-            "description": "The limit set to the number of items returned. ",
-            "format": "int32",
-            "minimum": 0,
-            "maximum": 1000,
-            "example": 100,
-            "default": 100
+            "$ref": "../properties/limit-100.yaml"
           },
-          "next_page": {
-            "type": "string",
-            "description": "The marker that represents the next page of results.",
-            "format": "uuid",
-            "example": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
-            "nullable": true
+          "next_cursor": {
+            "$ref": "../properties/next_cursor.yaml"
           },
-          "previous_page": {
-            "type": "string",
-            "description": "The marker that represents the previous page of results.",
-            "format": "uuid",
-            "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
-            "nullable": true
+          "previous_cursor": {
+            "$ref": "../properties/previous_cursor.yaml"
           }
         }
       },
@@ -4577,80 +4438,32 @@
         "x-tags": [
           "Request Bodies"
         ],
-        "required": [
-          "display_name",
-          "payment_service_definition_id",
-          "fields",
-          "accepted_currencies",
-          "use_test_environment",
-          "accepted_countries"
-        ],
-        "properties": {
-          "display_name": {
-            "type": "string",
-            "description": "A custom name for the payment service. This will be shown in the Admin UI.",
-            "example": "Stripe (USA)"
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PaymentServiceUpdateRequest"
           },
-          "payment_service_definition_id": {
-            "type": "string",
-            "description": "The ID of the payment service to use",
-            "example": "stripe"
+          {
+            "required": [
+              "display_name",
+              "payment_service_definition_id",
+              "fields",
+              "accepted_currencies",
+              "use_test_environment",
+              "accepted_countries"
+            ]
           },
-          "fields": {
-            "type": "array",
-            "description": "A list of fields, each containing a key-value pair for each field defined\nby the service for this payment service. All the required fields for a\ndefinition should be posted here.",
-            "items": {
-              "type": "object",
-              "description": "A field containing a key-value pair for a field defined by the definition for this payment service.",
-              "properties": {
-                "key": {
-                  "type": "string",
-                  "description": "The key of the field to set a value for.",
-                  "example": "private_key"
-                },
-                "value": {
-                  "type": "string",
-                  "description": "The value of a field to set.",
-                  "example": "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
-                }
-              },
-              "required": [
-                "key",
-                "value"
-              ]
+          {
+            "properties": {
+              "payment_service_definition_id": {
+                "type": "string",
+                "description": "The ID of the payment service to use.",
+                "example": "stripe-card",
+                "minLength": 1,
+                "maxLength": 50
+              }
             }
-          },
-          "accepted_countries": {
-            "type": "array",
-            "description": "A list of countries that this payment service needs to support in ISO two-letter code format.",
-            "items": {
-              "type": "string"
-            },
-            "example": [
-              "US",
-              "GB",
-              "DE"
-            ]
-          },
-          "accepted_currencies": {
-            "type": "array",
-            "description": "A list of currencies that this payment service needs to support in ISO 4217 three-letter code format.",
-            "minItems": 1,
-            "items": {
-              "type": "string"
-            },
-            "example": [
-              "EUR",
-              "USD",
-              "GBP"
-            ]
-          },
-          "use_test_environment": {
-            "type": "boolean",
-            "description": "Defines if this payment service uses the service's test or sandbox environment. Defaults to false.",
-            "example": false
           }
-        }
+        ]
       },
       "PaymentServiceUpdateRequest": {
         "title": "Payment Service (Update)",
@@ -4663,7 +4476,9 @@
           "display_name": {
             "type": "string",
             "description": "A custom name for the payment service. This will be shown in the Admin UI.",
-            "example": "Stripe (Main)"
+            "example": "Stripe (Main)",
+            "minLength": 1,
+            "maxLength": 50
           },
           "fields": {
             "type": "array",
@@ -4671,39 +4486,56 @@
             "items": {
               "type": "object",
               "description": "A field containing a key-value pair for a required field defined by the service for this payment service.",
+              "required": [
+                "key",
+                "value"
+              ],
               "properties": {
                 "key": {
                   "type": "string",
                   "description": "The key of the field to set a value for.",
-                  "example": "private_key"
+                  "example": "private_key",
+                  "minLength": 1,
+                  "maxLength": 50
                 },
                 "value": {
                   "type": "string",
                   "description": "The value of a field to set.",
-                  "example": "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
+                  "example": "sk_test_4eC39HqLyjWDarjtT1zdp7dc",
+                  "minLength": 1,
+                  "maxLength": 1500
                 }
               }
             }
+          },
+          "accepted_countries": {
+            "type": "array",
+            "description": "A list of countries that this payment service needs to support in ISO two-letter code format.",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 2
+            },
+            "example": [
+              "US",
+              "GB",
+              "DE"
+            ]
           },
           "accepted_currencies": {
             "type": "array",
             "description": "A list of currencies that this payment service needs to support in ISO 4217 three-letter code format.",
             "minItems": 1,
             "items": {
-              "type": "string"
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 3
             },
             "example": [
-              "US"
-            ]
-          },
-          "accepted_countries": {
-            "type": "array",
-            "description": "A list of countries that this payment service needs to support in ISO two-letter code format.",
-            "items": {
-              "type": "string"
-            },
-            "example": [
-              "USD"
+              "EUR",
+              "USD",
+              "GBP"
             ]
           },
           "use_test_environment": {
@@ -4787,8 +4619,11 @@
             "type": "array",
             "description": "A list of three-letter ISO currency codes that this service supports",
             "items": {
-              "type": "string"
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 3
             },
+            "minItems": 1,
             "example": [
               "USD",
               "GBP",
@@ -4801,6 +4636,7 @@
             "items": {
               "type": "string"
             },
+            "minItems": 1,
             "example": [
               "US",
               "GB",
@@ -4831,223 +4667,13 @@
             }
           },
           "limit": {
-            "type": "integer",
-            "description": "The limit set to the number of items returned. ",
-            "format": "int32",
-            "minimum": 0,
-            "maximum": 1000,
-            "example": 100,
-            "default": 100
+            "$ref": "../properties/limit-100.yaml"
           },
-          "next_page": {
-            "type": "string",
-            "description": "The marker that represents the next page of results.",
-            "example": "stripe-card",
-            "nullable": true
+          "next_cursor": {
+            "$ref": "../properties/next_cursor.yaml"
           },
-          "previous_page": {
-            "type": "string",
-            "description": "The marker that represents the previous page of results.",
-            "example": null,
-            "nullable": true
-          }
-        }
-      },
-      "PaymentServiceDefinitionCreateRequest": {
-        "title": "Create a payment service definition",
-        "type": "object",
-        "description": "Updates an available payment service",
-        "x-internal": true,
-        "x-tags": [
-          "Discovery"
-        ],
-        "required": [
-          "id",
-          "fields",
-          "help_url",
-          "available",
-          "display_name",
-          "supported_currencies",
-          "supported_countries",
-          "method",
-          "logo_url"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The ID of the payment service. This is the underlying provider followed by a dash followed by the payment method ID.",
-            "example": "stipe-card"
-          },
-          "display_name": {
-            "type": "string",
-            "description": "The display name of this service",
-            "example": "Stripe"
-          },
-          "method": {
-            "type": "string",
-            "description": "The type of payments this services handles",
-            "example": "card",
-            "enum": [
-              "card",
-              "paypal"
-            ]
-          },
-          "fields": {
-            "type": "array",
-            "description": "A list of fields that can be submitted when activating the payment service.",
-            "minItems": 1,
-            "items": {
-              "type": "object",
-              "description": "A single field that needs to be submitted for a payment service when it is created. ",
-              "properties": {
-                "key": {
-                  "type": "string",
-                  "example": "private_api_key",
-                  "description": "The key of a field that needs to be submitted"
-                },
-                "display_name": {
-                  "type": "string",
-                  "example": "Private API key",
-                  "description": "The name to display for a field in the cluster UI"
-                },
-                "help_url": {
-                  "type": "string",
-                  "example": "https://stripe.com/docs/private_api_key",
-                  "description": "A URL that provides more details about this field"
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true,
-                  "description": "Defines if this field is required when the service is created"
-                }
-              }
-            }
-          },
-          "help_url": {
-            "type": "string",
-            "example": "https://stripe.com/docs",
-            "description": "A URL that provides more details about this payment service"
-          },
-          "supported_currencies": {
-            "type": "array",
-            "description": "A list of three-letter ISO currency codes that this service supports",
-            "items": {
-              "type": "string"
-            },
-            "example": [
-              "USD",
-              "GBP",
-              "EUR"
-            ]
-          },
-          "supported_countries": {
-            "type": "array",
-            "description": "A list of two-letter ISO country codes that this service supports",
-            "items": {
-              "type": "string"
-            },
-            "example": [
-              "US",
-              "GB",
-              "DE"
-            ]
-          },
-          "logo_url": {
-            "type": "string",
-            "example": "https://cdn.stripe.com/logo.png",
-            "description": "The logo for this provider",
-            "format": "uri"
-          }
-        }
-      },
-      "PaymentServiceDefinitionUpdateRequest": {
-        "title": "Update an available Payment Service (Discovery)",
-        "type": "object",
-        "description": "Updates an available payment service",
-        "x-internal": true,
-        "x-tags": [
-          "Discovery"
-        ],
-        "properties": {
-          "display_name": {
-            "type": "string",
-            "description": "The display name of this service",
-            "example": "Stripe"
-          },
-          "method": {
-            "type": "string",
-            "description": "The ID of the payment method that this services handles",
-            "example": "card",
-            "enum": [
-              "card",
-              "paypal"
-            ]
-          },
-          "fields": {
-            "type": "array",
-            "description": "An updated list of fields that can be submitted when activating the payment service.",
-            "minItems": 1,
-            "items": {
-              "type": "object",
-              "description": "A single field that needs to be submitted for a payment service when it is created. ",
-              "properties": {
-                "key": {
-                  "type": "string",
-                  "example": "private_api_key",
-                  "description": "The key of a field that needs to be submitted"
-                },
-                "display_name": {
-                  "type": "string",
-                  "example": "Private API key",
-                  "description": "The name to display for a field in the cluster UI"
-                },
-                "help_url": {
-                  "type": "string",
-                  "example": "https://stripe.com/docs/private_api_key",
-                  "description": "A URL that provides more details about this field"
-                },
-                "required": {
-                  "type": "boolean",
-                  "example": true,
-                  "description": "Defines if this field is required when the service is created"
-                }
-              }
-            }
-          },
-          "help_url": {
-            "type": "string",
-            "example": "https://stripe.com/docs",
-            "description": "A URL that provides more details about this payment service"
-          },
-          "supported_currencies": {
-            "type": "array",
-            "description": "A list of three-letter ISO currency codes that this service supports",
-            "items": {
-              "type": "string"
-            },
-            "example": [
-              "USD",
-              "GBP",
-              "EUR"
-            ]
-          },
-          "supported_countries": {
-            "type": "array",
-            "description": "A list of two-letter ISO country codes that this service supports",
-            "items": {
-              "type": "string"
-            },
-            "example": [
-              "US",
-              "GB",
-              "DE"
-            ]
-          },
-          "logo_url": {
-            "type": "string",
-            "example": "https://cdn.stripe.com/logo.png",
-            "description": "The logo for this provider",
-            "format": "uri"
+          "previous_cursor": {
+            "$ref": "../properties/previous_cursor.yaml"
           }
         }
       },
@@ -5082,6 +4708,7 @@
             "items": {
               "type": "string"
             },
+            "minItems": 1,
             "example": [
               "US",
               "GB",
@@ -5116,6 +4743,15 @@
             "items": {
               "$ref": "#/components/schemas/PaymentOption"
             }
+          },
+          "limit": {
+            "$ref": "../properties/limit-100.yaml"
+          },
+          "next_cursor": {
+            "$ref": "../properties/next_cursor.yaml"
+          },
+          "previous_cursor": {
+            "$ref": "../properties/previous_cursor.yaml"
           }
         }
       },
@@ -5507,27 +5143,13 @@
             }
           },
           "limit": {
-            "type": "integer",
-            "description": "The limit set to the number of items returned. ",
-            "format": "int32",
-            "minimum": 0,
-            "maximum": 1000,
-            "example": 100,
-            "default": 100
+            "$ref": "../properties/limit-500.yaml"
           },
-          "next_page": {
-            "type": "string",
-            "description": "The marker that represents the next page of results.",
-            "format": "uuid",
-            "example": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
-            "nullable": true
+          "next_cursor": {
+            "$ref": "../properties/next_cursor.yaml"
           },
-          "previous_page": {
-            "type": "string",
-            "description": "The marker that represents the previous page of results.",
-            "format": "uuid",
-            "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
-            "nullable": true
+          "previous_cursor": {
+            "$ref": "../properties/previous_cursor.yaml"
           }
         }
       },
@@ -5720,27 +5342,13 @@
             }
           },
           "limit": {
-            "type": "integer",
-            "description": "The limit set to the number of items returned. ",
-            "format": "int32",
-            "minimum": 0,
-            "maximum": 1000,
-            "example": 100,
-            "default": 100
+            "$ref": "../properties/limit-100.yaml"
           },
-          "next_page": {
-            "type": "string",
-            "description": "The marker that represents the next page of results.",
-            "format": "uuid",
-            "example": "9f944c64-eaf0-4219-90fd-f7e56c7cd214",
-            "nullable": true
+          "next_cursor": {
+            "$ref": "../properties/next_cursor.yaml"
           },
-          "previous_page": {
-            "type": "string",
-            "description": "The marker that represents the previous page of results.",
-            "format": "uuid",
-            "example": "9049b2f9-0c67-47c5-af18-e8525f855263",
-            "nullable": true
+          "previous_cursor": {
+            "$ref": "../properties/previous_cursor.yaml"
           }
         }
       },
