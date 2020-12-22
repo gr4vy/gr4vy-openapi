@@ -1,0 +1,15 @@
+---
+schema:
+  type: string
+  format: ""
+  example: "ZXhhbXBsZTE"
+in: query
+name: cursor
+description: |-
+  A cursor that identifies the page of results to return. This is used to
+  paginate the results of this API.
+
+  For the first page of results, this parameter can be left out.
+  For additional pages, use the value returned by the API in
+  the `next_cursor` field. Similarly the `previous_cursor` can be used to
+  reverse backwards in the list.

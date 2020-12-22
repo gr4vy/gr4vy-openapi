@@ -6,37 +6,9 @@ tags:
   - Buyers
 
 parameters:
-  - schema:
-      type: string
-      example: be828248-56de-481e-a580-44b6e1d4df81
-    in: query
-    name: external_identifier
-    description:
-      Filters the results to the buyer that matches this external identifier.
-
-  - schema:
-      type: integer
-      default: 100
-      example: 1000
-      minimum: 0
-      maximum: 1000
-      format: int32
-    in: query
-    name: limit
-    description: The maximum number of items to return
-
-  - schema:
-      type: string
-      format: ""
-      example: "1593343179"
-    in: query
-    name: marker
-    description: |-
-      The marker that identifies the page of results to return.
-
-      For the first page of results, omit this parameter.
-      For next pages, use the value returned by the API in
-      the `next_page` field.
+  - $ref: "../query-parameters/external_identifier.yaml"
+  - $ref: "../query-parameters/limit-100.yaml"
+  - $ref: "../query-parameters/cursor.yaml"
 
 responses:
   "200":

@@ -1,0 +1,85 @@
+---
+title: Card rule (String conditional)
+type: object
+description: |-
+  A conditional rule in a ruleset that matches strings. It defines an if/else
+  condition and a rule to move on to next for each of these values.
+x-internal: true
+x-tags:
+  - Card Rulesets
+
+required:
+  - type
+  - id
+  - rule_type
+  - key
+  - condition
+  - values
+  - true_rule_id
+  - false_rule_id
+
+properties:
+  type:
+    type: string
+    description: "`card-rule`"
+    example: card-rule
+    enum:
+      - card-rule
+
+  id:
+    type: string
+    description: A unique ID for this rule in the ruleset.
+    example: "rule-0"
+    minLength: 1
+    maxLength: 50
+
+  rule_type:
+    type: string
+    description: "`string-conditional`"
+    example: string-conditional
+    enum:
+      - string-conditional
+
+  key:
+    type: string
+    description: The transaction field to filter by.
+    example: currency
+    enum:
+      - currency
+      - card_type
+
+  condition:
+    type: string
+    description: The comparison to make to `value` property.
+    example: "IN"
+    enum:
+      - "IN"
+      - "NOT IN"
+
+  values:
+    type: array
+    minItems: 1
+    maxItems: 100
+    items:
+      type: string
+      minLength: 1
+      maxLength: 50
+    description: |-
+      The values to compare the `key` to.
+    example:
+      - USD
+      - EUR
+
+  true_rule_id:
+    type: string
+    description: the ID of the rule to use if the comparison equals true.
+    example: "rule-1"
+    minLength: 1
+    maxLength: 50
+
+  false_rule_id:
+    type: string
+    description: the ID of the rule to use if the comparison equals false.
+    example: "rule-2"
+    minLength: 1
+    maxLength: 50

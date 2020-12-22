@@ -1,0 +1,23 @@
+---
+title: Transactions
+description: A list of transactions
+type: object
+
+x-tags:
+  - Transactions
+
+properties:
+  items:
+    type: array
+    description: A list of transactions
+    items:
+      $ref: "../openapi.yaml#/components/schemas/Transaction"
+
+  limit:
+    $ref: "../properties/limit-500.yaml"
+
+  next_cursor:
+    $ref: "../properties/next_cursor.yaml"
+
+  previous_cursor:
+    $ref: "../properties/previous_cursor.yaml"

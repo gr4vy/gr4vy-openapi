@@ -1,0 +1,9 @@
+---
+schema:
+  type: string
+  example: US
+in: query
+name: country
+description: |-
+  Filters the results to only the items which support this country code. A
+  country is formatted as 2-letter ISO country code.

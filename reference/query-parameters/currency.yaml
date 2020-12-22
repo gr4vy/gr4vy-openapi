@@ -1,0 +1,9 @@
+---
+schema:
+  type: string
+  example: USD
+in: query
+name: currency
+description: |-
+  Filters the results to only the items which support this currency code. A
+  currency is formatted as 3-letter ISO currency code.
