@@ -30,7 +30,7 @@ const bundleMarkdown = (string) => {
 // Dereference all paths
 jp.apply(schema, '$.paths[*][*]', dereference)
 // Dereference all parameters
-jp.apply(schema, '$..parameters[*]', dereference)
+jp.apply(schema, '$.paths[*].parameters[*]', dereference)
 // Dereference all components
 jp.apply(schema, '$.components.schemas[*]', dereference)
 // Import all markdown

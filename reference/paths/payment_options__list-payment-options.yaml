@@ -8,10 +8,10 @@ tags:
   - Payment Options
 
 parameters:
-  - $ref: "./query-parameters/country.yaml"
-  - $ref: "./query-parameters/currency.yaml"
-  - $ref: "./query-parameters/limit-100.yaml"
-  - $ref: "./query-parameters/cursor.yaml"
+  - $ref: "../query-parameters/country.yaml"
+  - $ref: "../query-parameters/currency.yaml"
+  - $ref: "../query-parameters/limit-100.yaml"
+  - $ref: "../query-parameters/cursor.yaml"
 
 responses:
   "200":

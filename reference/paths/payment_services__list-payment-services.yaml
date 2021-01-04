@@ -8,8 +8,8 @@ tags:
   - Payment Services
 
 parameters:
-  - $ref: "./query-parameters/limit-100.yaml"
-  - $ref: "./query-parameters/cursor.yaml"
+  - $ref: "../query-parameters/limit-100.yaml"
+  - $ref: "../query-parameters/cursor.yaml"
 
 responses:
   "200":
