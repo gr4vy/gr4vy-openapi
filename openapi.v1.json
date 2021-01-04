@@ -102,10 +102,13 @@
               "schema": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/CardStoreRequest"
+                    "$ref": "#/components/schemas/CardRequest"
                   },
                   {
-                    "$ref": "#/components/schemas/PayPalStoreRequest"
+                    "$ref": "#/components/schemas/PayPalRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/TokenRequest"
                   }
                 ]
               }
@@ -226,6 +229,17 @@
                     "payment_method": {
                       "method": "paypal",
                       "redirect_url": "https://example.com/callback"
+                    }
+                  }
+                },
+                "Authorize and capture using a previously tokenized card": {
+                  "value": {
+                    "amount": 1299,
+                    "currency": "USD",
+                    "capture": true,
+                    "payment_method": {
+                      "method": "token",
+                      "token": "0123456789123458"
                     }
                   }
                 }
@@ -1187,10 +1201,13 @@
               "schema": {
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/CardStoreRequest"
+                    "$ref": "#/components/schemas/CardRequest"
                   },
                   {
-                    "$ref": "#/components/schemas/PayPalStoreRequest"
+                    "$ref": "#/components/schemas/PayPalRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/TokenRequest"
                   }
                 ]
               }
@@ -2746,6 +2763,17 @@
                       "redirect_url": "https://example.com/callback"
                     }
                   }
+                },
+                "Authorize and capture using a previously tokenized card": {
+                  "value": {
+                    "amount": 1299,
+                    "currency": "USD",
+                    "capture": true,
+                    "payment_method": {
+                      "method": "token",
+                      "token": "0123456789123458"
+                    }
+                  }
                 }
               }
             }
@@ -3275,13 +3303,29 @@
             }
           },
           "limit": {
-            "$ref": "../properties/limit-100.yaml"
+            "type": "integer",
+            "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "example": 1,
+            "default": 20
           },
           "next_cursor": {
-            "$ref": "../properties/next_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": "ZXhhbXBsZTE",
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           },
           "previous_cursor": {
-            "$ref": "../properties/previous_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": null,
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           }
         }
       },
@@ -3445,10 +3489,10 @@
           }
         }
       },
-      "CardStoreRequest": {
-        "title": "Card (Store)",
+      "CardRequest": {
+        "title": "Card",
         "type": "object",
-        "description": "A request to store a card.",
+        "description": "Card details to use in a transaction or to register a new payment method.",
         "x-tags": [
           "Request Bodies"
         ],
@@ -3608,13 +3652,29 @@
             }
           },
           "limit": {
-            "$ref": "../properties/limit-100.yaml"
+            "type": "integer",
+            "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "example": 1,
+            "default": 20
           },
           "next_cursor": {
-            "$ref": "../properties/next_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": "ZXhhbXBsZTE",
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           },
           "previous_cursor": {
-            "$ref": "../properties/previous_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": null,
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           }
         }
       },
@@ -4414,13 +4474,29 @@
             }
           },
           "limit": {
-            "$ref": "../properties/limit-100.yaml"
+            "type": "integer",
+            "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "example": 1,
+            "default": 20
           },
           "next_cursor": {
-            "$ref": "../properties/next_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": "ZXhhbXBsZTE",
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           },
           "previous_cursor": {
-            "$ref": "../properties/previous_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": null,
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           }
         }
       },
@@ -4476,13 +4552,29 @@
             }
           },
           "limit": {
-            "$ref": "../properties/limit-100.yaml"
+            "type": "integer",
+            "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "example": 1,
+            "default": 20
           },
           "next_cursor": {
-            "$ref": "../properties/next_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": "ZXhhbXBsZTE",
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           },
           "previous_cursor": {
-            "$ref": "../properties/previous_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": null,
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           }
         }
       },
@@ -4555,13 +4647,29 @@
             }
           },
           "limit": {
-            "$ref": "../properties/limit-100.yaml"
+            "type": "integer",
+            "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "example": 1,
+            "default": 20
           },
           "next_cursor": {
-            "$ref": "../properties/next_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": "ZXhhbXBsZTE",
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           },
           "previous_cursor": {
-            "$ref": "../properties/previous_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": null,
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           }
         }
       },
@@ -4667,13 +4775,29 @@
             }
           },
           "limit": {
-            "$ref": "../properties/limit-100.yaml"
+            "type": "integer",
+            "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "example": 1,
+            "default": 20
           },
           "next_cursor": {
-            "$ref": "../properties/next_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": "ZXhhbXBsZTE",
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           },
           "previous_cursor": {
-            "$ref": "../properties/previous_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": null,
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           }
         }
       },
@@ -4913,13 +5037,29 @@
             }
           },
           "limit": {
-            "$ref": "../properties/limit-100.yaml"
+            "type": "integer",
+            "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "example": 1,
+            "default": 20
           },
           "next_cursor": {
-            "$ref": "../properties/next_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": "ZXhhbXBsZTE",
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           },
           "previous_cursor": {
-            "$ref": "../properties/previous_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": null,
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           }
         }
       },
@@ -4991,13 +5131,29 @@
             }
           },
           "limit": {
-            "$ref": "../properties/limit-100.yaml"
+            "type": "integer",
+            "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "example": 1,
+            "default": 20
           },
           "next_cursor": {
-            "$ref": "../properties/next_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": "ZXhhbXBsZTE",
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           },
           "previous_cursor": {
-            "$ref": "../properties/previous_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": null,
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           }
         }
       },
@@ -5111,10 +5267,10 @@
           }
         }
       },
-      "PayPalStoreRequest": {
-        "title": "PayPal Account (Store)",
+      "PayPalRequest": {
+        "title": "PayPal Account",
         "type": "object",
-        "description": "A request to tokenize a PayPal account.",
+        "description": "PayPal request to use in a transaction or to register a new payment method.",
         "x-tags": [
           "Request Bodies"
         ],
@@ -5290,6 +5446,33 @@
           }
         }
       },
+      "TokenRequest": {
+        "title": "Token",
+        "type": "object",
+        "description": "Details for a previously tokenized payment method.",
+        "x-tags": [
+          "Request Bodies"
+        ],
+        "required": [
+          "method",
+          "token"
+        ],
+        "properties": {
+          "method": {
+            "type": "string",
+            "description": "`token`",
+            "example": "token",
+            "enum": [
+              "token"
+            ]
+          },
+          "token": {
+            "type": "string",
+            "description": "A Gr4vy token that represents a previously tokenized payment method, in\nthe format of a card number starting with the digit 0. This token can\nrepresent any type of payment method.",
+            "example": "0123456789123458"
+          }
+        }
+      },
       "Transaction": {
         "title": "Transaction",
         "type": "object",
@@ -5395,13 +5578,29 @@
             }
           },
           "limit": {
-            "$ref": "../properties/limit-500.yaml"
+            "type": "integer",
+            "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 500,
+            "example": 1,
+            "default": 20
           },
           "next_cursor": {
-            "$ref": "../properties/next_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": "ZXhhbXBsZTE",
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           },
           "previous_cursor": {
-            "$ref": "../properties/previous_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": null,
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           }
         }
       },
@@ -5461,10 +5660,13 @@
           "payment_method": {
             "oneOf": [
               {
-                "$ref": "#/components/schemas/CardStoreRequest"
+                "$ref": "#/components/schemas/CardRequest"
               },
               {
-                "$ref": "#/components/schemas/PayPalStoreRequest"
+                "$ref": "#/components/schemas/PayPalRequest"
+              },
+              {
+                "$ref": "#/components/schemas/TokenRequest"
               }
             ],
             "description": "The optional payment method details to create an authorization for. This field is required for processing a card."
@@ -5594,13 +5796,29 @@
             }
           },
           "limit": {
-            "$ref": "../properties/limit-100.yaml"
+            "type": "integer",
+            "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "example": 1,
+            "default": 20
           },
           "next_cursor": {
-            "$ref": "../properties/next_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": "ZXhhbXBsZTE",
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           },
           "previous_cursor": {
-            "$ref": "../properties/previous_cursor.yaml"
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": null,
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           }
         }
       },
