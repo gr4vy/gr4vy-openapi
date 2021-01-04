@@ -1,7 +1,8 @@
 ---
-title: Card (Store)
+title: Card
 type: object
-description: A request to store a card.
+description: |-
+  Card details to use in a transaction or to register a new payment method.
 
 x-tags:
   - Request Bodies

@@ -5,37 +5,31 @@ const jp = require("jsonpath")
 process.chdir(`${__dirname}/../reference/`)
 const schema = yaml.load(fs.readFileSync(`openapi.yaml`))
 
+const OPENAPI = '../openapi.yaml'
+
 const dereference = (object) => {
-  if (object["$ref"]) {
+  if (object["$ref"] && !object["$ref"].startsWith(OPENAPI)) {
     const ref = object['$ref'].replace('../', './')
     return yaml.load(fs.readFileSync(ref))
   }
   return object
 }
 
-const MATCH = '../openapi.yaml'
 const bundleReferences = (ref) => {
-  if (ref.startsWith(MATCH)) {
-    return ref.replace(MATCH, '')
+  if (ref.startsWith(OPENAPI)) {
+    return ref.replace(OPENAPI, '')
   }
   return ref
 }
 
-const bundleMarkdown = (string) => {
-  if (string["$ref"]) {
-    return String(fs.readFileSync(string["$ref"]))
-  }
-  return string
-}
-
 // Dereference all paths
-jp.apply(schema, '$.paths[*][*]', dereference)
-// Dereference all parameters
-jp.apply(schema, '$..parameters[*]', dereference)
+jp.apply(schema, '$..paths[*][*]', dereference)
 // Dereference all components
 jp.apply(schema, '$.components.schemas[*]', dereference)
-// Import all markdown
-jp.apply(schema, '$..description', bundleMarkdown)
+// Dereference all parameters
+jp.apply(schema, '$..parameters[*]', dereference)
+// Dereference all properties
+jp.apply(schema, '$..properties[*]', dereference)
 // Flatten all local references
 jp.apply(schema, '$..["$ref"]', bundleReferences)
 

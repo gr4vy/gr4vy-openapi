@@ -11,9 +11,11 @@ requestBody:
       schema:
         oneOf:
           - $ref: |-
-              ../openapi.yaml#/components/schemas/CardStoreRequest
+              ../openapi.yaml#/components/schemas/CardRequest
           - $ref: |-
-              ../openapi.yaml#/components/schemas/PayPalStoreRequest
+              ../openapi.yaml#/components/schemas/PayPalRequest
+          - $ref: |-
+              ../openapi.yaml#/components/schemas/TokenRequest
 
 responses:
   "201":
