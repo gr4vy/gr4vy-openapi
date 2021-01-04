@@ -82,7 +82,8 @@ responses:
                 id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
                 method: card
                 status: created
-                payment_method_status: stored
+                payment_method_status: tokenized
+                token: "0123456789123458"
                 details:
                   number: XXXX XXXX XXXX 1111
                   expiration_date: 11 / 21
@@ -115,7 +116,8 @@ responses:
                 id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
                 method: paypal
                 status: buyer_authorization_required
-                payment_method_status: stored
+                payment_method_status: buyer_authorization_required
+                token: null
                 details:
                   email_address: null
                   authorization_url: |-

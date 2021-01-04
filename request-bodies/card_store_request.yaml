@@ -9,6 +9,8 @@ x-tags:
 required:
   - method
   - number
+  - expiration_date
+  - security_code
 
 properties:
   method:
