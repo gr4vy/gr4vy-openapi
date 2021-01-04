@@ -1,7 +1,8 @@
 ---
-title: PayPal Account (Store)
+title: PayPal Account
 type: object
-description: A request to tokenize a PayPal account.
+description: |-
+  PayPal request to use in a transaction or to register a new payment method.
 
 x-tags:
   - Request Bodies

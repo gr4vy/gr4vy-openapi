@@ -1,0 +1,28 @@
+---
+title: Token
+type: object
+description: |-
+  Details for a previously tokenized payment method.
+
+x-tags:
+  - Request Bodies
+
+required:
+  - method
+  - token
+
+properties:
+  method:
+    type: string
+    description: "`token`"
+    example: token
+    enum:
+      - token
+
+  token:
+    type: string
+    description: |-
+      A Gr4vy token that represents a previously tokenized payment method, in
+      the format of a card number starting with the digit 0. This token can
+      represent any type of payment method.
+    example: "0123456789123458"

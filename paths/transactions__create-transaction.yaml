@@ -60,6 +60,14 @@ requestBody:
             payment_method:
               method: paypal
               redirect_url: https://example.com/callback
+        Authorize and capture using a previously tokenized card:
+          value:
+            amount: 1299
+            currency: USD
+            capture: true
+            payment_method:
+              method: token
+              token: "0123456789123458"
 
 responses:
   "201":

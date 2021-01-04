@@ -217,8 +217,8 @@ components:
       $ref: ./resources/card.yaml
     CardDetails:
       $ref: ./resources/card_details.yaml
-    CardStoreRequest:
-      $ref: ./request-bodies/card_store_request.yaml
+    CardRequest:
+      $ref: ./request-bodies/card_request.yaml
     Error400BadRequest:
       $ref: ./resources/error_400_bad_request.yaml
     Error400IncorrectJson:
@@ -255,12 +255,14 @@ components:
       $ref: ./resources/paypal.yaml
     PayPalDetails:
       $ref: ./resources/paypal_details.yaml
-    PayPalStoreRequest:
-      $ref: ./request-bodies/paypal_store_request.yaml
+    PayPalRequest:
+      $ref: ./request-bodies/paypal_request.yaml
     Status:
       $ref: ./resources/status.yaml
     Statuses:
       $ref: ./resources/statuses.yaml
+    TokenRequest:
+      $ref: ./request-bodies/token_request.yaml
     Transaction:
       $ref: ./resources/transaction.yaml
     Transactions:
