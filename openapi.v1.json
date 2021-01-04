@@ -2559,7 +2559,7 @@
                         "details": {
                           "number": "XXXX XXXX XXXX 1111",
                           "expiration_date": "11 / 21",
-                          "type": "visa"
+                          "scheme": "visa"
                         },
                         "created_at": "2013-07-16T19:23:00.000Z",
                         "updated_at": "2013-07-16T19:23:00.000Z",
@@ -3183,7 +3183,7 @@
             "description": "Partial number details for a stored card, hiding all but the last few\nnumbers.",
             "example": "XXXX XXXX XXXX 1111"
           },
-          "type": {
+          "scheme": {
             "type": "string",
             "example": "visa",
             "enum": [
