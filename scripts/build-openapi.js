@@ -7,7 +7,8 @@ const schema = yaml.load(fs.readFileSync(`openapi.yaml`))
 
 const dereference = (object) => {
   if (object["$ref"]) {
-    return yaml.load(fs.readFileSync(object["$ref"]))
+    const ref = object['$ref'].replace('../', './')
+    return yaml.load(fs.readFileSync(ref))
   }
   return object
 }
@@ -30,7 +31,7 @@ const bundleMarkdown = (string) => {
 // Dereference all paths
 jp.apply(schema, '$.paths[*][*]', dereference)
 // Dereference all parameters
-jp.apply(schema, '$.paths[*].parameters[*]', dereference)
+jp.apply(schema, '$..parameters[*]', dereference)
 // Dereference all components
 jp.apply(schema, '$.components.schemas[*]', dereference)
 // Import all markdown
