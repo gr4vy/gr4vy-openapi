@@ -7,14 +7,14 @@ tags:
   - Transactions
 
 parameters:
-  - $ref: "../query-parameters/transaction-search.yaml"
-  - $ref: "../query-parameters/transaction_status.yaml"
-  - $ref: "../query-parameters/before_created_at.yaml"
-  - $ref: "../query-parameters/after_created_at.yaml"
-  - $ref: "../query-parameters/before_updated_at.yaml"
-  - $ref: "../query-parameters/after_updated_at.yaml"
-  - $ref: "../query-parameters/limit-500.yaml"
-  - $ref: "../query-parameters/cursor.yaml"
+  - $ref: "./query-parameters/transaction-search.yaml"
+  - $ref: "./query-parameters/transaction_status.yaml"
+  - $ref: "./query-parameters/before_created_at.yaml"
+  - $ref: "./query-parameters/after_created_at.yaml"
+  - $ref: "./query-parameters/before_updated_at.yaml"
+  - $ref: "./query-parameters/after_updated_at.yaml"
+  - $ref: "./query-parameters/limit-500.yaml"
+  - $ref: "./query-parameters/cursor.yaml"
 
 responses:
   "200":
