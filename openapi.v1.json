@@ -543,10 +543,27 @@
         "x-internal": true,
         "parameters": [
           {
-            "$ref": "../query-parameters/limit-100.yaml"
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "example": 1,
+              "minimum": 1,
+              "maximum": 100,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Defines the maximum number of items to return for this request."
           },
           {
-            "$ref": "../query-parameters/cursor.yaml"
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "ZXhhbXBsZTE"
+            },
+            "in": "query",
+            "name": "cursor",
+            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
           }
         ],
         "responses": {
@@ -748,13 +765,36 @@
         ],
         "parameters": [
           {
-            "$ref": "../query-parameters/external_identifier.yaml"
+            "schema": {
+              "type": "string",
+              "example": "user-12345"
+            },
+            "in": "query",
+            "name": "external_identifier",
+            "description": "Filters the results to only the items for which the `external_identifier`\nmatches this value."
           },
           {
-            "$ref": "../query-parameters/limit-100.yaml"
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "example": 1,
+              "minimum": 1,
+              "maximum": 100,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Defines the maximum number of items to return for this request."
           },
           {
-            "$ref": "../query-parameters/cursor.yaml"
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "ZXhhbXBsZTE"
+            },
+            "in": "query",
+            "name": "cursor",
+            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
           }
         ],
         "responses": {
@@ -1070,16 +1110,45 @@
         ],
         "parameters": [
           {
-            "$ref": "../query-parameters/buyer_id.yaml"
+            "schema": {
+              "type": "string",
+              "example": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
+            },
+            "in": "query",
+            "name": "buyer_id",
+            "description": "Filters the results to only the items for which the `buyer` has an\n`id` that matches this value."
           },
           {
-            "$ref": "../query-parameters/buyer_external_identifier.yaml"
+            "schema": {
+              "type": "string",
+              "example": "user-12345"
+            },
+            "in": "query",
+            "name": "buyer_external_identifier",
+            "description": "Filters the results to only the items for which the `buyer` has an\n`external_identifier` that matches this value."
           },
           {
-            "$ref": "../query-parameters/limit-100.yaml"
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "example": 1,
+              "minimum": 1,
+              "maximum": 100,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Defines the maximum number of items to return for this request."
           },
           {
-            "$ref": "../query-parameters/cursor.yaml"
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "ZXhhbXBsZTE"
+            },
+            "in": "query",
+            "name": "cursor",
+            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
           }
         ],
         "responses": {
@@ -1294,10 +1363,27 @@
         ],
         "parameters": [
           {
-            "$ref": "../query-parameters/limit-100.yaml"
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "example": 1,
+              "minimum": 1,
+              "maximum": 100,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Defines the maximum number of items to return for this request."
           },
           {
-            "$ref": "../query-parameters/cursor.yaml"
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "ZXhhbXBsZTE"
+            },
+            "in": "query",
+            "name": "cursor",
+            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
           }
         ],
         "responses": {
@@ -1344,16 +1430,45 @@
         ],
         "parameters": [
           {
-            "$ref": "../query-parameters/country.yaml"
+            "schema": {
+              "type": "string",
+              "example": "US"
+            },
+            "in": "query",
+            "name": "country",
+            "description": "Filters the results to only the items which support this country code. A\ncountry is formatted as 2-letter ISO country code."
           },
           {
-            "$ref": "../query-parameters/currency.yaml"
+            "schema": {
+              "type": "string",
+              "example": "USD"
+            },
+            "in": "query",
+            "name": "currency",
+            "description": "Filters the results to only the items which support this currency code. A\ncurrency is formatted as 3-letter ISO currency code."
           },
           {
-            "$ref": "../query-parameters/limit-100.yaml"
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "example": 1,
+              "minimum": 1,
+              "maximum": 100,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Defines the maximum number of items to return for this request."
           },
           {
-            "$ref": "../query-parameters/cursor.yaml"
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "ZXhhbXBsZTE"
+            },
+            "in": "query",
+            "name": "cursor",
+            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
           }
         ],
         "responses": {
@@ -1400,10 +1515,27 @@
         ],
         "parameters": [
           {
-            "$ref": "../query-parameters/limit-100.yaml"
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "example": 1,
+              "minimum": 1,
+              "maximum": 100,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Defines the maximum number of items to return for this request."
           },
           {
-            "$ref": "../query-parameters/cursor.yaml"
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "ZXhhbXBsZTE"
+            },
+            "in": "query",
+            "name": "cursor",
+            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
           }
         ],
         "responses": {
@@ -1669,10 +1801,27 @@
         "x-internal": true,
         "parameters": [
           {
-            "$ref": "../query-parameters/limit-100.yaml"
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "example": 1,
+              "minimum": 1,
+              "maximum": 100,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Defines the maximum number of items to return for this request."
           },
           {
-            "$ref": "../query-parameters/cursor.yaml"
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "ZXhhbXBsZTE"
+            },
+            "in": "query",
+            "name": "cursor",
+            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
           }
         ],
         "responses": {
@@ -1765,10 +1914,27 @@
         "x-internal": true,
         "parameters": [
           {
-            "$ref": "../query-parameters/limit-100.yaml"
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "example": 1,
+              "minimum": 1,
+              "maximum": 100,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Defines the maximum number of items to return for this request."
           },
           {
-            "$ref": "../query-parameters/cursor.yaml"
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "ZXhhbXBsZTE"
+            },
+            "in": "query",
+            "name": "cursor",
+            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
           }
         ],
         "responses": {
@@ -2417,28 +2583,81 @@
         ],
         "parameters": [
           {
-            "$ref": "../query-parameters/transaction-search.yaml"
+            "schema": {
+              "type": "string",
+              "example": "be828248-56de-481e-a580-44b6e1d4df81"
+            },
+            "in": "query",
+            "name": "search",
+            "description": "Filters the results to only the items for which the `id` or\n`external_identifier` matches this value."
           },
           {
-            "$ref": "../query-parameters/transaction_status.yaml"
+            "schema": {
+              "type": "string",
+              "example": "captured"
+            },
+            "in": "query",
+            "name": "transaction_status",
+            "description": "Filters the results to only the items for which the `transaction_status`\nmatches this value."
           },
           {
-            "$ref": "../query-parameters/before_created_at.yaml"
+            "schema": {
+              "type": "string",
+              "example": "2012-12-12T10:53:43-08:00"
+            },
+            "in": "query",
+            "name": "before_created_at",
+            "description": "Filters the results to only transactions created before this ISO date-time string."
           },
           {
-            "$ref": "../query-parameters/after_created_at.yaml"
+            "schema": {
+              "type": "string",
+              "example": "2012-12-12T10:53:43-08:00"
+            },
+            "in": "query",
+            "name": "after_created_at",
+            "description": "Filters the results to only transactions created after this ISO date-time string."
           },
           {
-            "$ref": "../query-parameters/before_updated_at.yaml"
+            "schema": {
+              "type": "string",
+              "example": "2012-12-12T10:53:43-08:00"
+            },
+            "in": "query",
+            "name": "before_updated_at",
+            "description": "Filters the results to only transactions last updated before this ISO\ndate-time string."
           },
           {
-            "$ref": "../query-parameters/after_updated_at.yaml"
+            "schema": {
+              "type": "string",
+              "example": "2012-12-12T10:53:43-08:00"
+            },
+            "in": "query",
+            "name": "after_updated_at",
+            "description": "Filters the results to only transactions last updated after this ISO\ndate-time string."
           },
           {
-            "$ref": "../query-parameters/limit-500.yaml"
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "example": 1,
+              "minimum": 1,
+              "maximum": 500,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Defines the maximum number of items to return for this request."
           },
           {
-            "$ref": "../query-parameters/cursor.yaml"
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "ZXhhbXBsZTE"
+            },
+            "in": "query",
+            "name": "cursor",
+            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
           }
         ],
         "responses": {
@@ -2889,10 +3108,27 @@
         ],
         "parameters": [
           {
-            "$ref": "../query-parameters/limit-100.yaml"
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "example": 1,
+              "minimum": 1,
+              "maximum": 100,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Defines the maximum number of items to return for this request."
           },
           {
-            "$ref": "../query-parameters/cursor.yaml"
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "ZXhhbXBsZTE"
+            },
+            "in": "query",
+            "name": "cursor",
+            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
           }
         ],
         "responses": {
