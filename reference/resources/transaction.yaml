@@ -21,13 +21,6 @@ properties:
 
   status:
     type: string
-    description: Whether this transaction was successfully created or not.
-    enum:
-      - created
-    example: created
-
-  transaction_status:
-    type: string
     description:
       "The status of the transaction being processed. This is different from the
       `status` field in that it represents the status of the transaction at the

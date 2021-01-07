@@ -23,12 +23,6 @@ properties:
   status:
     type: string
     description: |-
-      The state of the payment method in Gr4vy.
-    example: created
-
-  payment_method_status:
-    type: string
-    description: |-
       The state of the card tokenization.
     example: stored
     enum:

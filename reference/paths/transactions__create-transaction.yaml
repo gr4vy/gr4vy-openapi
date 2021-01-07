@@ -81,16 +81,14 @@ responses:
             value:
               type: transaction
               id: fe26475d-ec3e-4884-9553-f7356683f7f9
-              status: created
-              transaction_status: authorized
+              status: authorized
               amount: 1299
               currency: USD
               payment_method:
                 type: payment-method
                 id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
                 method: card
-                status: created
-                payment_method_status: stored
+                status: stored
                 token: "0123456789123458"
                 details:
                   number: XXXX XXXX XXXX 1111
@@ -115,8 +113,7 @@ responses:
             value:
               type: transaction
               id: fe26475d-ec3e-4884-9553-f7356683f7f9
-              status: created
-              transaction_status: buyer_approval_pending
+              status: buyer_approval_pending
               amount: 1299
               currency: USD
               payment_method:
@@ -124,7 +121,6 @@ responses:
                 id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
                 method: paypal
                 status: buyer_approval_pending
-                payment_method_status: buyer_approval_pending
                 token: null
                 details:
                   email_address: null

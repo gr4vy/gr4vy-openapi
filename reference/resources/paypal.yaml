@@ -23,12 +23,6 @@ properties:
   status:
     type: string
     description: |-
-      The state of the payment method in Gr4vy.
-    example: created
-
-  payment_method_status:
-    type: string
-    description: |-
       The state of the account tokenization. After the first call this will
       be set to `buyer_approval_pending` and the response will include
       an `authorization_url`. The buyer needs to be redirected to this URL
