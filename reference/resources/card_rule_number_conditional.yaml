@@ -2,11 +2,11 @@
 title: Card rule (Number conditional)
 type: object
 description: |-
-  A conditional rule in a ruleset that matches numbers. It defines an if/else
+  A conditional rule in a workflow that matches numbers. It defines an if/else
   condition and a rule to move on to next for each of these values.
 x-internal: true
 x-tags:
-  - Card Rulesets
+  - Card Workflows
 
 required:
   - type
@@ -28,7 +28,7 @@ properties:
 
   id:
     type: string
-    description: A unique ID for this rule in the ruleset.
+    description: A unique ID for this rule in the workflow.
     example: "rule-0"
 
   rule_type:

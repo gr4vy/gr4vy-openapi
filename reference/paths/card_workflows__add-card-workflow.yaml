@@ -1,27 +1,28 @@
 ---
-operationId: update-card-ruleset
-summary: Update card ruleset
-description: Updates a ruleset that can be used for card transactions.
-tags: ["Card Rulesets"]
+operationId: add-card-workflow
+summary: Create card workflow
+description: Creates a new workflow that can be used for card transactions.
+tags:
+  - Card Workflows
 x-internal: true
 
 requestBody:
   content:
     application/json:
       schema:
-        $ref: "../openapi.yaml#/components/schemas/CardRulesetUpdateRequest"
+        $ref: "../openapi.yaml#/components/schemas/CardWorkflowCreateRequest"
       examples:
-        A valid ruleset:
+        A minimum valid workflow:
           value:
-            display_name: Q2 2020 Ruleset
+            display_name: Q2 2020 Workflow
             root_rule_id: "0"
             rules:
               - type: card-rule
                 id: "0"
-                rule_type: string-conditional
-                key: currency
-                condition: "IN"
-                values: ["USD", "GBP"]
+                rule_type: number-conditional
+                key: amount
+                condition: ">="
+                value: 200
                 true_rule_id: "1"
                 false_rule_id: "2"
               - type: card-rule
@@ -36,18 +37,18 @@ requestBody:
                   - card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96
 
 responses:
-  "200":
-    description: An updated ruleset
+  "201":
+    description: A newly created workflow
     content:
       application/json:
         schema:
-          $ref: "../openapi.yaml#/components/schemas/CardRuleset"
+          $ref: "../openapi.yaml#/components/schemas/CardWorkflow"
         examples:
-          A newly created ruleset:
+          A newly created workflow:
             value:
-              type: ruleset
+              type: workflow
               id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
-              display_name: Q2 2020 Ruleset
+              display_name: Q2 2020 Workflow
               active: true
               valid: true
               root_rule_id: "0"
@@ -56,10 +57,10 @@ responses:
               rules:
                 - type: card-rule
                   id: "0"
-                  rule_type: string-conditional
-                  key: currency
-                  condition: "IN"
-                  values: ["USD", "GBP"]
+                  rule_type: number-conditional
+                  key: amount
+                  condition: ">="
+                  value: 200
                   true_rule_id: "1"
                   false_rule_id: "2"
                 - type: card-rule
@@ -92,10 +93,3 @@ responses:
       application/json:
         schema:
           $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
-
-  "404":
-    description: Returns an error if the resource can not be found.
-    content:
-      application/json:
-        schema:
-          $ref: "../openapi.yaml#/components/schemas/Error404NotFound"
