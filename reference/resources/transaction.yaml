@@ -24,7 +24,6 @@ properties:
     description: Whether this transaction was successfully created or not.
     enum:
       - created
-      - failure
     example: created
 
   transaction_status:
@@ -33,13 +32,22 @@ properties:
       "The status of the transaction being processed. This is different from the
       `status` field in that it represents the status of the transaction at the
       payment processor, not the status of the transaction created in Gr4vy."
-    example: created
+    example: processing
     enum:
-      - created
+      - processing
+      - processing_failed
       - captured
+      - capture_pending
+      - capture_declined
       - authorized
-      - buyer_authorization_required
-      - pending
+      - authorization_pending
+      - authorization_declined
+      - authorization_expired
+      - authorization_voided
+      - refunded
+      - buyer_approval_pending
+      - buyer_approval_declined
+      - buyer_approval_timedout
 
   amount:
     type: number

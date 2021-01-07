@@ -30,10 +30,11 @@ properties:
     type: string
     description: |-
       The state of the card tokenization.
-    example: tokenized
+    example: stored
     enum:
-      - tokenized
-      - not_tokenized
+      - processing
+      - processing_failed
+      - stored
 
   token:
     type: string

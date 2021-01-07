@@ -30,14 +30,17 @@ properties:
     type: string
     description: |-
       The state of the account tokenization. After the first call this will
-      be set to `buyer_authorization_required` and the response will include
+      be set to `buyer_approval_pending` and the response will include
       an `authorization_url`. The buyer needs to be redirected to this URL
       to authorize the future payments.
-    example: buyer_authorization_required
+    example: buyer_approval_pending
     enum:
-      - tokenized
-      - buyer_authorization_required
-      - not_tokenized
+      - processing
+      - processing_failed
+      - buyer_approval_pending
+      - buyer_approval_declined
+      - buyer_approval_timedout
+      - stored
 
   token:
     type: string
