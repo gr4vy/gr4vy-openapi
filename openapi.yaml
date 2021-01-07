@@ -5,16 +5,16 @@ info:
   contact:
     name: Gr4vy Support
     email: support@gr4vy.com
-    url: 'https://gr4vy.com'
-  termsOfService: 'https://gr4vy.com'
+    url: https://gr4vy.com
+  termsOfService: https://gr4vy.com
   license:
     name: MIT
-    url: 'https://raw.githubusercontent.com/gr4vy/gr4vy-openapi/main/LICENSE'
+    url: https://raw.githubusercontent.com/gr4vy/gr4vy-openapi/main/LICENSE
   description: |-
     Welcome to the Gr4vy API reference documentation.
     Our API is still very much a work in product and subject to change.
 servers:
-  - url: 'https://api.{merchant}.gr4vy.com'
+  - url: https://api.{merchant}.gr4vy.com
     variables:
       merchant:
         default: demo
@@ -122,7 +122,7 @@ paths:
   /async/transactions:
     post:
       $ref: ./paths/transactions__async-create-transaction.yaml
-  '/async/transactions/{transaction_id}/capture':
+  /async/transactions/{transaction_id}/capture:
     parameters:
       - $ref: ./path-parameters/transaction_id.yaml
     post:
@@ -135,7 +135,7 @@ paths:
       $ref: ./paths/buyers__list-buyers.yaml
     post:
       $ref: ./paths/buyers__add-buyer.yaml
-  '/buyers/{buyer_id}':
+  /buyers/{buyer_id}:
     parameters:
       - $ref: ./path-parameters/buyer_id.yaml
     get:
@@ -149,14 +149,14 @@ paths:
       $ref: ./paths/payment_methods__list-payment-methods.yaml
     post:
       $ref: ./paths/payment_methods__store-payment-method.yaml
-  '/payment-methods/{payment_method_id}':
+  /payment-methods/{payment_method_id}:
     parameters:
       - $ref: ./path-parameters/payment_method_id.yaml
     get:
       $ref: ./paths/payment_methods__get-payment-method.yaml
     delete:
       $ref: ./paths/payment_methods__delete-payment-method.yaml
-  '/payment-methods/{payment_method_id}/events':
+  /payment-methods/{payment_method_id}/events:
     parameters:
       - $ref: ./path-parameters/payment_method_id.yaml
     get:
@@ -169,7 +169,7 @@ paths:
       $ref: ./paths/payment_services__list-payment-services.yaml
     post:
       $ref: ./paths/payment_services__add-payment-service.yaml
-  '/payment-services/{payment_service_id}':
+  /payment-services/{payment_service_id}:
     parameters:
       - $ref: ./path-parameters/payment_service_id.yaml
     get:
@@ -183,22 +183,22 @@ paths:
       $ref: ./paths/transactions__list-transactions.yaml
     post:
       $ref: ./paths/transactions__create-transaction.yaml
-  '/transactions/{transaction_id}':
+  /transactions/{transaction_id}:
     parameters:
       - $ref: ./path-parameters/transaction_id.yaml
     get:
       $ref: ./paths/transactions__get-transaction.yaml
-  '/transactions/{transaction_id}/capture':
+  /transactions/{transaction_id}/capture:
     parameters:
       - $ref: ./path-parameters/transaction_id.yaml
     post:
       $ref: ./paths/transactions__capture-transaction.yaml
-  '/transactions/{transaction_id}/refund':
+  /transactions/{transaction_id}/refund:
     parameters:
       - $ref: ./path-parameters/transaction_id.yaml
     post:
       $ref: ./paths/transactions__refund-transaction.yaml
-  '/transactions/{transaction_id}/events':
+  /transactions/{transaction_id}/events:
     parameters:
       - $ref: ./path-parameters/transaction_id.yaml
     get:
