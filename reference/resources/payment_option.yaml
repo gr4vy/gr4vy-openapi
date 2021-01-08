@@ -1,5 +1,5 @@
 ---
-title: A payment option
+title: Payment option
 type: object
 description: An available payment option for a locale
 
