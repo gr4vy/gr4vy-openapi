@@ -6,7 +6,7 @@ description: |
   Attempts to create an authorization for a payment method. In some cases it is
   not possible to create the authorization without redirecting the user for
   their authorization. In these cases the status is set to
-  `buyer_authorization_required` and an `authorization_url` is returned.
+  `buyer_approval_pending` and an `authorization_url` is returned.
 
   Additionally, this endpoint accepts a few additional fields that allow for
   simultaneous capturing and storage of the payment method.
@@ -81,16 +81,14 @@ responses:
             value:
               type: transaction
               id: fe26475d-ec3e-4884-9553-f7356683f7f9
-              status: created
-              transaction_status: created
+              status: authorized
               amount: 1299
               currency: USD
               payment_method:
                 type: payment-method
                 id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
                 method: card
-                status: created
-                payment_method_status: tokenized
+                status: stored
                 token: "0123456789123458"
                 details:
                   number: XXXX XXXX XXXX 1111
@@ -115,16 +113,14 @@ responses:
             value:
               type: transaction
               id: fe26475d-ec3e-4884-9553-f7356683f7f9
-              status: created
-              transaction_status: buyer_authorization_required
+              status: buyer_approval_pending
               amount: 1299
               currency: USD
               payment_method:
                 type: payment-method
                 id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
                 method: paypal
-                status: buyer_authorization_required
-                payment_method_status: buyer_authorization_required
+                status: buyer_approval_pending
                 token: null
                 details:
                   email_address: null

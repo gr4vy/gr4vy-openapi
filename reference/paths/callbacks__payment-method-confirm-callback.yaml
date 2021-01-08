@@ -31,14 +31,14 @@ responses:
           additional query parameters appended.
 
           * `payment_method_id` - The ID of the payment method
-          * `payment_method_status` - The current value of the
-            `payment_method_status`  field of the payment method
+          * `transaction_status` - The current value of the
+            `status`  field of the payment method
 
         schema:
           type: string
           format: url
           example: |-
-            https://example.com/callback?payment_method_id=77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5&payment_method_status=stored
+            https://example.com/callback?payment_method_id=77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5&transaction_status=tokenized
 
   "404":
     description: Returns an error if the resource can not be found.

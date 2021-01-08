@@ -23,14 +23,9 @@ properties:
     type: string
     enum:
       - pending
-      - success
-      - failure
     example: pending
     description: |-
-      The status of this resource being created. This can be one of:
-
-      * `pending` - The creation has not yet completed
-      * `created` - The resource has been created and can now be queried.
+      The status of this resource being created. This is always `pending`.
 
   resource_type:
     type: string

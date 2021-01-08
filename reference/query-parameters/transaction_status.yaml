@@ -2,8 +2,23 @@
 schema:
   type: string
   example: captured
+  enum:
+    - processing
+    - processing_failed
+    - captured
+    - capture_pending
+    - capture_declined
+    - authorized
+    - authorization_pending
+    - authorization_declined
+    - authorization_expired
+    - authorization_voided
+    - refunded
+    - buyer_approval_pending
+    - buyer_approval_declined
+    - buyer_approval_timedout
 in: query
 name: transaction_status
 description: |-
-  Filters the results to only the items for which the `transaction_status`
+  Filters the results to only the transactions for which the `status`
   matches this value.
