@@ -144,6 +144,11 @@ paths:
       $ref: ./paths/buyers__update-buyer.yaml
     delete:
       $ref: ./paths/buyers__delete-buyer.yaml
+  /buyers/{buyer_id}/payment-methods:
+    parameters:
+      - $ref: ./path-parameters/buyer_id.yaml
+    get:
+      $ref: ./paths/buyers__list-buyer-payment-methods.yaml
   /payment-methods:
     get:
       $ref: ./paths/payment_methods__list-payment-methods.yaml
@@ -215,6 +220,8 @@ components:
       $ref: ./request-bodies/buyer_update_request.yaml
     Card:
       $ref: ./resources/card.yaml
+    Card--Token:
+      $ref: ./resources/card--token.yaml
     CardDetails:
       $ref: ./resources/card_details.yaml
     CardRequest:
@@ -235,6 +242,8 @@ components:
       $ref: ./resources/error_detail.yaml
     PaymentMethods:
       $ref: ./resources/payment_methods.yaml
+    PaymentMethods--Token:
+      $ref: ./resources/payment_methods--token.yaml
     PaymentMethodEvent:
       $ref: ./resources/payment_method_event.yaml
     PaymentMethodEvents:
@@ -253,6 +262,8 @@ components:
       $ref: ./resources/payment_options.yaml
     PayPal:
       $ref: ./resources/paypal.yaml
+    PayPal--Token:
+      $ref: ./resources/paypal--token.yaml
     PayPalDetails:
       $ref: ./resources/paypal_details.yaml
     PayPalRequest:
