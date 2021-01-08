@@ -1071,6 +1071,61 @@
         }
       }
     },
+    "/buyers/{buyer_id}/payment-methods": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
+          },
+          "name": "buyer_id",
+          "in": "path",
+          "required": true,
+          "description": "The unique ID for a buyer."
+        }
+      ],
+      "get": {
+        "operationId": "list-buyer-payment-methods",
+        "summary": "List payment methods for a buyer",
+        "description": "Lists the payment methods for a buyer. This endpoint returns all payment\nmethods in the `token` format and only returns fully stored and tokenized\npayment methods.",
+        "tags": [
+          "Payment Methods"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of token-formatted payment methods",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentMethods--Token"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/merchants/main": {
       "get": {
         "operationId": "get-current-merchant",
@@ -1123,6 +1178,20 @@
           "Payment Methods"
         ],
         "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "full",
+              "default": "full",
+              "enum": [
+                "full",
+                "token"
+              ]
+            },
+            "in": "query",
+            "name": "format",
+            "description": "Determines the format of the payment method returned. Currently we have 2\navailable formats:\n\n* `full` - Returns the default full format of a resource.\n* `token` - Returns only the payment method's token and details. This is used\n   by Gr4vy Embed to render available payment options."
+          },
           {
             "schema": {
               "type": "string",
@@ -1463,29 +1532,6 @@
             "in": "query",
             "name": "currency",
             "description": "Filters the results to only the items which support this currency code. A\ncurrency is formatted as 3-letter ISO currency code."
-          },
-          {
-            "schema": {
-              "type": "integer",
-              "default": 20,
-              "example": 1,
-              "minimum": 1,
-              "maximum": 100,
-              "format": "int32"
-            },
-            "in": "query",
-            "name": "limit",
-            "description": "Defines the maximum number of items to return for this request."
-          },
-          {
-            "schema": {
-              "type": "string",
-              "format": "",
-              "example": "ZXhhbXBsZTE"
-            },
-            "in": "query",
-            "name": "cursor",
-            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
           }
         ],
         "responses": {
@@ -3458,6 +3504,41 @@
           }
         }
       },
+      "Card--Token": {
+        "title": "Card (Token)",
+        "description": "A mini format version of the card",
+        "type": "object",
+        "x-tags": [
+          "Payment Methods"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`payment-method`",
+            "example": "payment-method",
+            "enum": [
+              "payment-method"
+            ]
+          },
+          "token": {
+            "type": "string",
+            "description": "A Gr4vy token that represents this payment method, in the format of a\ncredit-card number starting with the digit 0. You can store this token\nin your own system and use it to process a payment with this payment\nmethod at a later date.",
+            "example": "0123456789123458",
+            "nullable": true
+          },
+          "method": {
+            "type": "string",
+            "description": "`card`",
+            "example": "card",
+            "enum": [
+              "card"
+            ]
+          },
+          "details": {
+            "$ref": "#/components/schemas/CardDetails"
+          }
+        }
+      },
       "CardDetails": {
         "title": "Card details",
         "description": "Additional details about a stored card",
@@ -4538,7 +4619,7 @@
         }
       },
       "PaymentMethods": {
-        "title": "Cards",
+        "title": "Payment Methods",
         "type": "object",
         "description": "A list of stored payment methods",
         "x-tags": [
@@ -4554,7 +4635,13 @@
                   "$ref": "#/components/schemas/Card"
                 },
                 {
+                  "$ref": "#/components/schemas/Card--Token"
+                },
+                {
                   "$ref": "#/components/schemas/PayPal"
+                },
+                {
+                  "$ref": "#/components/schemas/PayPal--Token"
                 }
               ]
             }
@@ -4583,6 +4670,30 @@
             "nullable": true,
             "minLength": 1,
             "maxLength": 1000
+          }
+        }
+      },
+      "PaymentMethods--Token": {
+        "title": "Payment Methods (Token)",
+        "type": "object",
+        "description": "A list of stored payment methods in a token-format.",
+        "x-tags": [
+          "PaymentMethods"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "A list of stored payment methods",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/Card--Token"
+                },
+                {
+                  "$ref": "#/components/schemas/PayPal--Token"
+                }
+              ]
+            }
           }
         }
       },
@@ -5072,7 +5183,7 @@
         }
       },
       "PaymentOption": {
-        "title": "A payment option",
+        "title": "Payment option",
         "type": "object",
         "description": "An available payment option for a locale",
         "x-tags": [
@@ -5095,32 +5206,6 @@
               "card",
               "paypal"
             ]
-          },
-          "accepted_countries": {
-            "type": "array",
-            "description": "A list of countries that this option is supported for.",
-            "items": {
-              "type": "string"
-            },
-            "minItems": 1,
-            "example": [
-              "US",
-              "GB",
-              "DE"
-            ]
-          },
-          "accepted_currencies": {
-            "type": "array",
-            "description": "A list of currencies that this payment option is supported for.",
-            "minItems": 1,
-            "items": {
-              "type": "string"
-            },
-            "example": [
-              "EUR",
-              "USD",
-              "GBP"
-            ]
           }
         }
       },
@@ -5137,31 +5222,6 @@
             "items": {
               "$ref": "#/components/schemas/PaymentOption"
             }
-          },
-          "limit": {
-            "type": "integer",
-            "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 100,
-            "example": 1,
-            "default": 20
-          },
-          "next_cursor": {
-            "type": "string",
-            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
-            "example": "ZXhhbXBsZTE",
-            "nullable": true,
-            "minLength": 1,
-            "maxLength": 1000
-          },
-          "previous_cursor": {
-            "type": "string",
-            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
-            "example": null,
-            "nullable": true,
-            "minLength": 1,
-            "maxLength": 1000
           }
         }
       },
@@ -5243,6 +5303,41 @@
               {
                 "nullable": true
               }
+            ]
+          },
+          "details": {
+            "$ref": "#/components/schemas/PayPalDetails"
+          }
+        }
+      },
+      "PayPal--Token": {
+        "title": "PayPal Account",
+        "description": "A stored PayPal account in a mini format",
+        "type": "object",
+        "x-tags": [
+          "Payment Methods"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`payment-method`",
+            "example": "payment-method",
+            "enum": [
+              "payment-method"
+            ]
+          },
+          "token": {
+            "type": "string",
+            "description": "A Gr4vy token that represents this payment method, in the format of a\ncredit-card number starting with the digit 0. You can store this token\nin your own system and use it to process a payment with this payment\nmethod at a later date.",
+            "example": "0123456789123458",
+            "nullable": true
+          },
+          "method": {
+            "type": "string",
+            "description": "`paypal`",
+            "example": "paypal",
+            "enum": [
+              "paypal"
             ]
           },
           "details": {
