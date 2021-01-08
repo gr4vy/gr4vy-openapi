@@ -1,9 +1,9 @@
 ---
-operationId: delete-card-ruleset
-summary: Delete card ruleset
-description: Deletes a specific card ruleset
+operationId: delete-card-workflow
+summary: Delete card workflow
+description: Deletes a specific card workflow
 tags:
-  - Card Rulesets
+  - Card Workflows
 x-internal: true
 
 responses:
@@ -18,13 +18,13 @@ responses:
           $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
 
   "403":
-    description: Returns an error if the ruleset could not be deleted
+    description: Returns an error if the workflow could not be deleted
     content:
       application/json:
         schema:
           $ref: "../openapi.yaml#/components/schemas/Error"
         examples:
-          Ruleset is active:
+          Workflow is active:
             value:
               type: error
               code: forbidden

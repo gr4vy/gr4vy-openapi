@@ -1,8 +1,9 @@
 ---
-operationId: list-cards-rulesets
-summary: List card rulesets
-description: Returns a list of rulesets that can be used for card transactions.
-tags: ["Card Rulesets"]
+operationId: list-cards-workflows
+summary: List card workflows
+description: Returns a list of workflows that can be used for card transactions.
+tags:
+  - Card Workflows
 x-internal: true
 
 parameters:
@@ -11,18 +12,18 @@ parameters:
 
 responses:
   "200":
-    description: A list of rulesets
+    description: A list of workflows
     content:
       application/json:
         schema:
-          $ref: "../openapi.yaml#/components/schemas/CardRulesets"
+          $ref: "../openapi.yaml#/components/schemas/CardWorkflows"
         examples:
-          A list of card rulesets:
+          A list of card workflows:
             value:
               items:
-                - type: ruleset
+                - type: workflow
                   id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
-                  display_name: Q2 2020 Ruleset
+                  display_name: Q2 2020 Workflow
                   active: true
                   valid: true
                   root_rule_id: "0"
@@ -47,7 +48,7 @@ responses:
                       rule_type: payment-services-terminal
                       payment_service_ids:
                         - card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96
-          An empty list of card rulesets:
+          An empty list of card workflows:
             value:
               items: []
 

@@ -1,0 +1,13 @@
+---
+# yamllint disable rule:line-length
+title: Card Workflow (Update)
+type: object
+description: |-
+  Updates a card workflow which holds the rules that are parsed for a card
+  transaction.
+x-internal: true
+x-tags:
+  - Card Workflows
+
+allOf:
+  - $ref: "../openapi.yaml#/components/schemas/CardWorkflowCreateRequest"

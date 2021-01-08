@@ -1,23 +1,31 @@
 ---
-operationId: get-card-ruleset
-summary: Get card ruleset
-description: Returns a rulesets that can be used for card transactions.
-tags: ["Card Rulesets"]
+operationId: activate-card-workflow
+summary: Activate card workflow
+description: |-
+  Activates a workflow for card transactions, making it the one
+  workflow used by all card transactions.
+
+  Only one workflow can be active at any time. By activating a workflow the
+  existing active workflow will be deactivated.
+
+  Only valid workflows can be activated.
+tags:
+  - Card Workflows
 x-internal: true
 
 responses:
-  "200":
-    description: A card ruleset
+  "201":
+    description: An activated workflow
     content:
       application/json:
         schema:
-          $ref: "../openapi.yaml#/components/schemas/CardRuleset"
+          $ref: "../openapi.yaml#/components/schemas/CardWorkflow"
         examples:
-          A card ruleset:
+          A newly created workflow:
             value:
-              type: ruleset
+              type: workflow
               id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
-              display_name: Q2 2020 Ruleset
+              display_name: Q2 2020 Workflow
               active: true
               valid: true
               root_rule_id: "0"
@@ -49,6 +57,22 @@ responses:
       application/json:
         schema:
           $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
+
+  "403":
+    description: Returns an error if the workflow is not valid
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error"
+        examples:
+          Invalid JSON:
+            value:
+              type: error
+              code: invalid_workflow
+              status: 403
+              message:
+                Workflow is not valid. Only valid workflows can be deployed
+              details: []
 
   "404":
     description: Returns an error if the resource can not be found.

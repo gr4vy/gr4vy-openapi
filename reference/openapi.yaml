@@ -58,17 +58,17 @@ tags:
     description: |-
       Callbacks are API endpoints used by Gr4vy for catching redirect callbacks
       from payment providers.
-  - name: Card Rulesets
+  - name: Card Workflows
     x-internal: true
     description: |-
-      In Gr4vy, a card ruleset represents a set of rules that define how a card
+      In Gr4vy, a card workflow represents a set of rules that define how a card
       transaction is processed. It determines which payment services are used,
       and with what priority, based on the transaction amount, card type, and
       many more attributes.
 
       ## Features
 
-      A card ruleset can be used to:
+      A card workflow can be used to:
 
       * Determine what payment service is used based on transaction and card
       properties.
@@ -120,7 +120,7 @@ tags:
 
       * Provide Gr4vy with the payment credentials for a payment provider
       * Set a display name for a payment provider
-      * Prepare a payment provider for usage in a ruleset
+      * Prepare a payment provider for usage in a workflow
   - name: Sessions
     description: |-
       The sessions APIs are used to facilitate user authentication for the Gr4vy
@@ -259,27 +259,27 @@ paths:
     get:
       $ref: "./paths/payment_service_definitions__get-payment-service-definition.yaml"
 
-  "/card-rulesets":
+  "/card-workflows":
     get:
-      $ref: "./paths/card_rulesets__list-card-rulesets.yaml"
+      $ref: "./paths/card_workflows__list-card-workflows.yaml"
     post:
-      $ref: "./paths/card_rulesets__add-card-ruleset.yaml"
+      $ref: "./paths/card_workflows__add-card-workflow.yaml"
 
-  "/card-rulesets/{card_ruleset_id}":
+  "/card-workflows/{card_workflow_id}":
     parameters:
-      - $ref: "./path-parameters/card_ruleset_id.yaml"
+      - $ref: "./path-parameters/card_workflow_id.yaml"
     get:
-      $ref: "./paths/card_rulesets__get-card-ruleset.yaml"
+      $ref: "./paths/card_workflows__get-card-workflow.yaml"
     put:
-      $ref: "./paths/card_rulesets__update-card-ruleset.yaml"
+      $ref: "./paths/card_workflows__update-card-workflow.yaml"
     delete:
-      $ref: "./paths/card_rulesets__delete-card-ruleset.yaml"
+      $ref: "./paths/card_workflows__delete-card-workflow.yaml"
 
-  "/card-rulesets/{card_ruleset_id}/activate":
+  "/card-workflows/{card_workflow_id}/activate":
     parameters:
-      - $ref: "./path-parameters/card_ruleset_id.yaml"
+      - $ref: "./path-parameters/card_workflow_id.yaml"
     post:
-      $ref: "./paths/card_rulesets__activate-card-ruleset.yaml"
+      $ref: "./paths/card_workflows__activate-card-workflow.yaml"
 
   "/transactions":
     get:
@@ -331,10 +331,10 @@ components:
       $ref: "./resources/card_details.yaml"
     CardRequest:
       $ref: "./request-bodies/card_request.yaml"
-    CardRuleset:
-      $ref: "./resources/card_ruleset.yaml"
-    CardRulesets:
-      $ref: "./resources/card_rulesets.yaml"
+    CardWorkflow:
+      $ref: "./resources/card_workflow.yaml"
+    CardWorkflows:
+      $ref: "./resources/card_workflows.yaml"
     CardRuleBooleanConditional:
       $ref: "./resources/card_rule_boolean_conditional.yaml"
     CardRuleNumberConditional:
@@ -343,10 +343,10 @@ components:
       $ref: "./resources/card_rule_string_conditional.yaml"
     CardRulePaymentServicesTerminal:
       $ref: "./resources/card_rule_payment_services_terminal.yaml"
-    CardRulesetCreateRequest:
-      $ref: "./request-bodies/card_ruleset_create_request.yaml"
-    CardRulesetUpdateRequest:
-      $ref: "./request-bodies/card_ruleset_update_request.yaml"
+    CardWorkflowCreateRequest:
+      $ref: "./request-bodies/card_workflow_create_request.yaml"
+    CardWorkflowUpdateRequest:
+      $ref: "./request-bodies/card_workflow_update_request.yaml"
     Error:
       $ref: "./resources/error.yaml"
     Error400BadRequest:

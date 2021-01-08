@@ -2,11 +2,11 @@
 title: Terminal Card Rule
 type: object
 description: |-
-  A terminal rule in a ruleset. It the payment services to use in case the
-  ruleset reaches this node.
+  A terminal rule in a workflow. It the payment services to use in case the
+  workflow reaches this node.
 x-internal: true
 x-tags:
-  - Card Rulesets
+  - Card Workflows
 
 required:
   - type
@@ -24,7 +24,7 @@ properties:
 
   id:
     type: string
-    description: A unique ID for this rule in the ruleset
+    description: A unique ID for this rule in the workflow
     example: "rule-0"
     minLength: 1
     maxLength: 50
