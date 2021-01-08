@@ -46,9 +46,9 @@
       "description": "Callbacks are API endpoints used by Gr4vy for catching redirect callbacks\nfrom payment providers."
     },
     {
-      "name": "Card Rulesets",
+      "name": "Card Workflows",
       "x-internal": true,
-      "description": "In Gr4vy, a card ruleset represents a set of rules that define how a card\ntransaction is processed. It determines which payment services are used,\nand with what priority, based on the transaction amount, card type, and\nmany more attributes.\n\n## Features\n\nA card ruleset can be used to:\n\n* Determine what payment service is used based on transaction and card\nproperties.\n* Determine what fallback payment services to use if the transaction\ndid not succeed with the initial provider."
+      "description": "In Gr4vy, a card workflow represents a set of rules that define how a card\ntransaction is processed. It determines which payment services are used,\nand with what priority, based on the transaction amount, card type, and\nmany more attributes.\n\n## Features\n\nA card workflow can be used to:\n\n* Determine what payment service is used based on transaction and card\nproperties.\n* Determine what fallback payment services to use if the transaction\ndid not succeed with the initial provider."
     },
     {
       "name": "Merchants",
@@ -70,7 +70,7 @@
     },
     {
       "name": "Payment Services",
-      "description": "In Gr4vy, a payment service represents a configured payment provider\n(Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,\netc)\n\n## Features\n\nThe payment services API can be used to:\n\n* Provide Gr4vy with the payment credentials for a payment provider\n* Set a display name for a payment provider\n* Prepare a payment provider for usage in a ruleset"
+      "description": "In Gr4vy, a payment service represents a configured payment provider\n(Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,\netc)\n\n## Features\n\nThe payment services API can be used to:\n\n* Provide Gr4vy with the payment credentials for a payment provider\n* Set a display name for a payment provider\n* Prepare a payment provider for usage in a workflow"
     },
     {
       "name": "Sessions",
@@ -1920,13 +1920,13 @@
         }
       }
     },
-    "/card-rulesets": {
+    "/card-workflows": {
       "get": {
-        "operationId": "list-cards-rulesets",
-        "summary": "List card rulesets",
-        "description": "Returns a list of rulesets that can be used for card transactions.",
+        "operationId": "list-cards-workflows",
+        "summary": "List card workflows",
+        "description": "Returns a list of workflows that can be used for card transactions.",
         "tags": [
-          "Card Rulesets"
+          "Card Workflows"
         ],
         "x-internal": true,
         "parameters": [
@@ -1956,20 +1956,20 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of rulesets",
+            "description": "A list of workflows",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CardRulesets"
+                  "$ref": "#/components/schemas/CardWorkflows"
                 },
                 "examples": {
-                  "A list of card rulesets": {
+                  "A list of card workflows": {
                     "value": {
                       "items": [
                         {
-                          "type": "ruleset",
+                          "type": "workflow",
                           "id": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
-                          "display_name": "Q2 2020 Ruleset",
+                          "display_name": "Q2 2020 Workflow",
                           "active": true,
                           "valid": true,
                           "root_rule_id": "0",
@@ -2010,7 +2010,7 @@
                       ]
                     }
                   },
-                  "An empty list of card rulesets": {
+                  "An empty list of card workflows": {
                     "value": {
                       "items": []
                     }
@@ -2032,23 +2032,23 @@
         }
       },
       "post": {
-        "operationId": "add-card-ruleset",
-        "summary": "Create card ruleset",
-        "description": "Creates a new ruleset that can be used for card transactions.",
+        "operationId": "add-card-workflow",
+        "summary": "Create card workflow",
+        "description": "Creates a new workflow that can be used for card transactions.",
         "tags": [
-          "Card Rulesets"
+          "Card Workflows"
         ],
         "x-internal": true,
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CardRulesetCreateRequest"
+                "$ref": "#/components/schemas/CardWorkflowCreateRequest"
               },
               "examples": {
-                "A minimum valid ruleset": {
+                "A minimum valid workflow": {
                   "value": {
-                    "display_name": "Q2 2020 Ruleset",
+                    "display_name": "Q2 2020 Workflow",
                     "root_rule_id": "0",
                     "rules": [
                       {
@@ -2086,18 +2086,18 @@
         },
         "responses": {
           "201": {
-            "description": "A newly created ruleset",
+            "description": "A newly created workflow",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CardRuleset"
+                  "$ref": "#/components/schemas/CardWorkflow"
                 },
                 "examples": {
-                  "A newly created ruleset": {
+                  "A newly created workflow": {
                     "value": {
-                      "type": "ruleset",
+                      "type": "workflow",
                       "id": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
-                      "display_name": "Q2 2020 Ruleset",
+                      "display_name": "Q2 2020 Workflow",
                       "active": true,
                       "valid": true,
                       "root_rule_id": "0",
@@ -2167,7 +2167,7 @@
         }
       }
     },
-    "/card-rulesets/{card_ruleset_id}": {
+    "/card-workflows/{card_workflow_id}": {
       "parameters": [
         {
           "schema": {
@@ -2175,34 +2175,34 @@
             "format": "uuid",
             "example": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
           },
-          "name": "card_ruleset_id",
+          "name": "card_workflow_id",
           "in": "path",
           "required": true,
-          "description": "The unique ID for a card ruleset."
+          "description": "The unique ID for a card workflow."
         }
       ],
       "get": {
-        "operationId": "get-card-ruleset",
-        "summary": "Get card ruleset",
-        "description": "Returns a rulesets that can be used for card transactions.",
+        "operationId": "get-card-workflow",
+        "summary": "Get card workflow",
+        "description": "Returns a workflows that can be used for card transactions.",
         "tags": [
-          "Card Rulesets"
+          "Card Workflows"
         ],
         "x-internal": true,
         "responses": {
           "200": {
-            "description": "A card ruleset",
+            "description": "A card workflow",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CardRuleset"
+                  "$ref": "#/components/schemas/CardWorkflow"
                 },
                 "examples": {
-                  "A card ruleset": {
+                  "A card workflow": {
                     "value": {
-                      "type": "ruleset",
+                      "type": "workflow",
                       "id": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
-                      "display_name": "Q2 2020 Ruleset",
+                      "display_name": "Q2 2020 Workflow",
                       "active": true,
                       "valid": true,
                       "root_rule_id": "0",
@@ -2265,23 +2265,23 @@
         }
       },
       "put": {
-        "operationId": "update-card-ruleset",
-        "summary": "Update card ruleset",
-        "description": "Updates a ruleset that can be used for card transactions.",
+        "operationId": "update-card-workflow",
+        "summary": "Update card workflow",
+        "description": "Updates a workflow that can be used for card transactions.",
         "tags": [
-          "Card Rulesets"
+          "Card Workflows"
         ],
         "x-internal": true,
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CardRulesetUpdateRequest"
+                "$ref": "#/components/schemas/CardWorkflowUpdateRequest"
               },
               "examples": {
-                "A valid ruleset": {
+                "A valid workflow": {
                   "value": {
-                    "display_name": "Q2 2020 Ruleset",
+                    "display_name": "Q2 2020 Workflow",
                     "root_rule_id": "0",
                     "rules": [
                       {
@@ -2322,18 +2322,18 @@
         },
         "responses": {
           "200": {
-            "description": "An updated ruleset",
+            "description": "An updated workflow",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CardRuleset"
+                  "$ref": "#/components/schemas/CardWorkflow"
                 },
                 "examples": {
-                  "A newly created ruleset": {
+                  "A newly created workflow": {
                     "value": {
-                      "type": "ruleset",
+                      "type": "workflow",
                       "id": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
-                      "display_name": "Q2 2020 Ruleset",
+                      "display_name": "Q2 2020 Workflow",
                       "active": true,
                       "valid": true,
                       "root_rule_id": "0",
@@ -2416,11 +2416,11 @@
         }
       },
       "delete": {
-        "operationId": "delete-card-ruleset",
-        "summary": "Delete card ruleset",
-        "description": "Deletes a specific card ruleset",
+        "operationId": "delete-card-workflow",
+        "summary": "Delete card workflow",
+        "description": "Deletes a specific card workflow",
         "tags": [
-          "Card Rulesets"
+          "Card Workflows"
         ],
         "x-internal": true,
         "responses": {
@@ -2438,14 +2438,14 @@
             }
           },
           "403": {
-            "description": "Returns an error if the ruleset could not be deleted",
+            "description": "Returns an error if the workflow could not be deleted",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 },
                 "examples": {
-                  "Ruleset is active": {
+                  "Workflow is active": {
                     "value": {
                       "type": "error",
                       "code": "forbidden",
@@ -2471,7 +2471,7 @@
         }
       }
     },
-    "/card-rulesets/{card_ruleset_id}/activate": {
+    "/card-workflows/{card_workflow_id}/activate": {
       "parameters": [
         {
           "schema": {
@@ -2479,34 +2479,34 @@
             "format": "uuid",
             "example": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
           },
-          "name": "card_ruleset_id",
+          "name": "card_workflow_id",
           "in": "path",
           "required": true,
-          "description": "The unique ID for a card ruleset."
+          "description": "The unique ID for a card workflow."
         }
       ],
       "post": {
-        "operationId": "activate-card-ruleset",
-        "summary": "Activate card ruleset",
-        "description": "Activates a ruleset for card transactions, making it the one\nruleset used by all card transactions.\n\nOnly one ruleset can be active at any time. By activating a ruleset the\nexisting active ruleset will be deactivated.\n\nOnly valid rulesets can be activated.",
+        "operationId": "activate-card-workflow",
+        "summary": "Activate card workflow",
+        "description": "Activates a workflow for card transactions, making it the one\nworkflow used by all card transactions.\n\nOnly one workflow can be active at any time. By activating a workflow the\nexisting active workflow will be deactivated.\n\nOnly valid workflows can be activated.",
         "tags": [
-          "Card Rulesets"
+          "Card Workflows"
         ],
         "x-internal": true,
         "responses": {
           "201": {
-            "description": "An activated ruleset",
+            "description": "An activated workflow",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CardRuleset"
+                  "$ref": "#/components/schemas/CardWorkflow"
                 },
                 "examples": {
-                  "A newly created ruleset": {
+                  "A newly created workflow": {
                     "value": {
-                      "type": "ruleset",
+                      "type": "workflow",
                       "id": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
-                      "display_name": "Q2 2020 Ruleset",
+                      "display_name": "Q2 2020 Workflow",
                       "active": true,
                       "valid": true,
                       "root_rule_id": "0",
@@ -2557,7 +2557,7 @@
             }
           },
           "403": {
-            "description": "Returns an error if the ruleset is not valid",
+            "description": "Returns an error if the workflow is not valid",
             "content": {
               "application/json": {
                 "schema": {
@@ -2567,9 +2567,9 @@
                   "Invalid JSON": {
                     "value": {
                       "type": "error",
-                      "code": "invalid_ruleset",
+                      "code": "invalid_workflow",
                       "status": 403,
-                      "message": "Ruleset is not valid. Only valid rulesets can be deployed",
+                      "message": "Workflow is not valid. Only valid workflows can be deployed",
                       "details": []
                     }
                   }
@@ -3562,56 +3562,56 @@
           }
         }
       },
-      "CardRuleset": {
-        "title": "Card Ruleset",
+      "CardWorkflow": {
+        "title": "Card Workflow",
         "type": "object",
-        "description": "A card ruleset which holds the rules that are parsed for a card transaction.\n\nMultiple rulesets can exists at any time, but only one can be deployed.",
+        "description": "A card workflow which holds the rules that are parsed for a card transaction.\n\nMultiple workflows can exists at any time, but only one can be deployed.",
         "x-internal": true,
         "x-tags": [
-          "Card Rulesets"
+          "Card Workflows"
         ],
         "properties": {
           "type": {
             "type": "string",
-            "example": "ruleset",
-            "description": "`ruleset`",
+            "example": "workflow",
+            "description": "`workflow`",
             "enum": [
-              "ruleset"
+              "workflow"
             ]
           },
           "id": {
             "type": "string",
             "example": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
-            "description": "The ID of the ruleset",
+            "description": "The ID of the workflow",
             "format": "uuid"
           },
           "display_name": {
             "type": "string",
-            "description": "The display name of the ruleset",
-            "example": "Q2 2020 Ruleset",
+            "description": "The display name of the workflow",
+            "example": "Q2 2020 Workflow",
             "minLength": 1,
             "maxLength": 50
           },
           "active": {
             "type": "boolean",
             "example": true,
-            "description": "Whether this ruleset is currently in use. Only one ruleset can\nbe active at any time."
+            "description": "Whether this workflow is currently in use. Only one workflow can\nbe active at any time."
           },
           "valid": {
             "type": "boolean",
             "example": true,
-            "description": "Whether this ruleset is valid and complete. Only valid rulesets can be\nactivated."
+            "description": "Whether this workflow is valid and complete. Only valid workflows can be\nactivated."
           },
           "root_rule_id": {
             "type": "string",
             "example": "rule-0",
-            "description": "The ID of the rule that is the starting point of the ruleset.",
+            "description": "The ID of the rule that is the starting point of the workflow.",
             "minLength": 1,
             "maxLength": 50
           },
           "rules": {
             "type": "array",
-            "description": "A list of rules in this ruleset",
+            "description": "A list of rules in this workflow",
             "items": {
               "oneOf": [
                 {
@@ -3633,30 +3633,30 @@
             "type": "string",
             "format": "date-time",
             "example": "2012-12-12T10:53:43-08:00",
-            "description": "The date and time when this ruleset was created"
+            "description": "The date and time when this workflow was created"
           },
           "updated_at": {
             "type": "string",
             "format": "date-time",
             "example": "2012-12-12T10:53:43-08:00",
-            "description": "The date and time when this ruleset was last updated"
+            "description": "The date and time when this workflow was last updated"
           }
         }
       },
-      "CardRulesets": {
-        "title": "Card Rulesets",
+      "CardWorkflows": {
+        "title": "Card Workflows",
         "type": "object",
-        "description": "A list of card rulesets",
+        "description": "A list of card workflows",
         "x-internal": true,
         "x-tags": [
-          "Card Rulesets"
+          "Card Workflows"
         ],
         "properties": {
           "items": {
             "type": "array",
-            "description": "A list of card rulesets",
+            "description": "A list of card workflows",
             "items": {
-              "$ref": "#/components/schemas/CardRuleset"
+              "$ref": "#/components/schemas/CardWorkflow"
             }
           },
           "limit": {
@@ -3689,10 +3689,10 @@
       "CardRuleBooleanConditional": {
         "title": "Card rule (Boolean conditional)",
         "type": "object",
-        "description": "A conditional rule in a ruleset that matches boolean fields. It defines an\nif/else condition and a rule to move on to next for each of these values.",
+        "description": "A conditional rule in a workflow that matches boolean fields. It defines an\nif/else condition and a rule to move on to next for each of these values.",
         "x-internal": true,
         "x-tags": [
-          "Card Rulesets"
+          "Card Workflows"
         ],
         "required": [
           "type",
@@ -3715,7 +3715,7 @@
           },
           "id": {
             "type": "string",
-            "description": "A unique ID for this rule in the ruleset.",
+            "description": "A unique ID for this rule in the workflow.",
             "example": "rule-0",
             "minLength": 1,
             "maxLength": 50
@@ -3756,10 +3756,10 @@
       "CardRuleNumberConditional": {
         "title": "Card rule (Number conditional)",
         "type": "object",
-        "description": "A conditional rule in a ruleset that matches numbers. It defines an if/else\ncondition and a rule to move on to next for each of these values.",
+        "description": "A conditional rule in a workflow that matches numbers. It defines an if/else\ncondition and a rule to move on to next for each of these values.",
         "x-internal": true,
         "x-tags": [
-          "Card Rulesets"
+          "Card Workflows"
         ],
         "required": [
           "type",
@@ -3782,7 +3782,7 @@
           },
           "id": {
             "type": "string",
-            "description": "A unique ID for this rule in the ruleset.",
+            "description": "A unique ID for this rule in the workflow.",
             "example": "rule-0"
           },
           "rule_type": {
@@ -3840,10 +3840,10 @@
       "CardRuleStringConditional": {
         "title": "Card rule (String conditional)",
         "type": "object",
-        "description": "A conditional rule in a ruleset that matches strings. It defines an if/else\ncondition and a rule to move on to next for each of these values.",
+        "description": "A conditional rule in a workflow that matches strings. It defines an if/else\ncondition and a rule to move on to next for each of these values.",
         "x-internal": true,
         "x-tags": [
-          "Card Rulesets"
+          "Card Workflows"
         ],
         "required": [
           "type",
@@ -3866,7 +3866,7 @@
           },
           "id": {
             "type": "string",
-            "description": "A unique ID for this rule in the ruleset.",
+            "description": "A unique ID for this rule in the workflow.",
             "example": "rule-0",
             "minLength": 1,
             "maxLength": 50
@@ -3931,10 +3931,10 @@
       "CardRulePaymentServicesTerminal": {
         "title": "Terminal Card Rule",
         "type": "object",
-        "description": "A terminal rule in a ruleset. It the payment services to use in case the\nruleset reaches this node.",
+        "description": "A terminal rule in a workflow. It the payment services to use in case the\nworkflow reaches this node.",
         "x-internal": true,
         "x-tags": [
-          "Card Rulesets"
+          "Card Workflows"
         ],
         "required": [
           "type",
@@ -3953,7 +3953,7 @@
           },
           "id": {
             "type": "string",
-            "description": "A unique ID for this rule in the ruleset",
+            "description": "A unique ID for this rule in the workflow",
             "example": "rule-0",
             "minLength": 1,
             "maxLength": 50
@@ -3981,13 +3981,13 @@
           }
         }
       },
-      "CardRulesetCreateRequest": {
-        "title": "Card Ruleset (Create)",
+      "CardWorkflowCreateRequest": {
+        "title": "Card Workflow (Create)",
         "type": "object",
-        "description": "Creates a new card ruleset which holds the rules that are parsed for a card\ntransaction.",
+        "description": "Creates a new card workflow which holds the rules that are parsed for a card\ntransaction.",
         "x-internal": true,
         "x-tags": [
-          "Card Rulesets"
+          "Card Workflows"
         ],
         "required": [
           "display_name",
@@ -3997,21 +3997,21 @@
         "properties": {
           "display_name": {
             "type": "string",
-            "description": "The display name of the ruleset.",
-            "example": "Q2 2020 Ruleset",
+            "description": "The display name of the workflow.",
+            "example": "Q2 2020 Workflow",
             "minLength": 1,
             "maxLength": 50
           },
           "root_rule_id": {
             "type": "string",
             "example": "rule-0",
-            "description": "The ID of the rule that is the starting point of the ruleset.",
+            "description": "The ID of the rule that is the starting point of the workflow.",
             "minLength": 1,
             "maxLength": 50
           },
           "rules": {
             "type": "array",
-            "description": "A list of rules in this ruleset.",
+            "description": "A list of rules in this workflow.",
             "items": {
               "oneOf": [
                 {
@@ -4031,17 +4031,17 @@
           }
         }
       },
-      "CardRulesetUpdateRequest": {
-        "title": "Card Ruleset (Update)",
+      "CardWorkflowUpdateRequest": {
+        "title": "Card Workflow (Update)",
         "type": "object",
-        "description": "Updates a card ruleset which holds the rules that are parsed for a card\ntransaction.",
+        "description": "Updates a card workflow which holds the rules that are parsed for a card\ntransaction.",
         "x-internal": true,
         "x-tags": [
-          "Card Rulesets"
+          "Card Workflows"
         ],
         "allOf": [
           {
-            "$ref": "#/components/schemas/CardRulesetCreateRequest"
+            "$ref": "#/components/schemas/CardWorkflowCreateRequest"
           }
         ]
       },
