@@ -669,7 +669,7 @@
             "description": "Redirects the browser back to the `redirect_url` specified\nwhen the payment method was first created. It appends the payment method's\nID and status.",
             "headers": {
               "location": {
-                "description": "The URL to redirect the browser to. This is the `redirect_url`\nspecified when the payment method was first created with some\nadditional query parameters appended.\n\n* `payment_method_id` - The ID of the payment method\n* `payment_method_status` - The current value of the\n  `payment_method_status`  field of the payment method",
+                "description": "The URL to redirect the browser to. This is the `redirect_url`\nspecified when the payment method was first created with some\nadditional query parameters appended.\n\n* `payment_method_id` - The ID of the payment method\n* `transaction_status` - The current value of the\n  `status`  field of the payment method",
                 "format": "url",
                 "type": "string"
               }
@@ -1598,7 +1598,23 @@
             "type": "string"
           },
           {
-            "description": "Filters the results to only the items for which the `transaction_status`\nmatches this value.",
+            "description": "Filters the results to only the transactions for which the `status`\nmatches this value.",
+            "enum": [
+              "processing",
+              "processing_failed",
+              "captured",
+              "capture_pending",
+              "capture_declined",
+              "authorized",
+              "authorization_pending",
+              "authorization_declined",
+              "authorization_expired",
+              "authorization_voided",
+              "refunded",
+              "buyer_approval_pending",
+              "buyer_approval_declined",
+              "buyer_approval_timedout"
+            ],
             "in": "query",
             "name": "transaction_status",
             "type": "string"
@@ -1703,7 +1719,7 @@
         "tags": [
           "Transactions"
         ],
-        "description": "Attempts to create an authorization for a payment method. In some cases it is\nnot possible to create the authorization without redirecting the user for\ntheir authorization. In these cases the status is set to\n`buyer_authorization_required` and an `authorization_url` is returned.\n\nAdditionally, this endpoint accepts a few additional fields that allow for\nsimultaneous capturing and storage of the payment method.\n\n* `store` - Use this field to store the payment method for\nfuture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
+        "description": "Attempts to create an authorization for a payment method. In some cases it is\nnot possible to create the authorization without redirecting the user for\ntheir authorization. In these cases the status is set to\n`buyer_approval_pending` and an `authorization_url` is returned.\n\nAdditionally, this endpoint accepts a few additional fields that allow for\nsimultaneous capturing and storage of the payment method.\n\n* `store` - Use this field to store the payment method for\nfuture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
         "operationId": "authorize-new-transaction",
         "summary": "Authorize new transaction"
       }
@@ -2199,18 +2215,14 @@
           "example": "card",
           "type": "string"
         },
-        "payment_method_status": {
+        "status": {
           "description": "The state of the card tokenization.",
           "enum": [
-            "tokenized",
-            "not_tokenized"
+            "processing",
+            "processing_failed",
+            "stored"
           ],
-          "example": "tokenized",
-          "type": "string"
-        },
-        "status": {
-          "description": "The state of the payment method in Gr4vy.",
-          "example": "created",
+          "example": "stored",
           "type": "string"
         },
         "token": {
@@ -3244,19 +3256,17 @@
           "example": "paypal",
           "type": "string"
         },
-        "payment_method_status": {
-          "description": "The state of the account tokenization. After the first call this will\nbe set to `buyer_authorization_required` and the response will include\nan `authorization_url`. The buyer needs to be redirected to this URL\nto authorize the future payments.",
-          "enum": [
-            "tokenized",
-            "buyer_authorization_required",
-            "not_tokenized"
-          ],
-          "example": "buyer_authorization_required",
-          "type": "string"
-        },
         "status": {
-          "description": "The state of the payment method in Gr4vy.",
-          "example": "created",
+          "description": "The state of the account tokenization. After the first call this will\nbe set to `buyer_approval_pending` and the response will include\nan `authorization_url`. The buyer needs to be redirected to this URL\nto authorize the future payments.",
+          "enum": [
+            "processing",
+            "processing_failed",
+            "buyer_approval_pending",
+            "buyer_approval_declined",
+            "buyer_approval_timedout",
+            "stored"
+          ],
+          "example": "buyer_approval_pending",
           "type": "string"
         },
         "token": {
@@ -4066,11 +4076,9 @@
           "type": "string"
         },
         "status": {
-          "description": "The status of this resource being created. This can be one of:\n\n* `pending` - The creation has not yet completed\n* `created` - The resource has been created and can now be queried.",
+          "description": "The status of this resource being created. This is always `pending`.",
           "enum": [
-            "pending",
-            "success",
-            "failure"
+            "pending"
           ],
           "example": "pending",
           "type": "string"
@@ -4174,24 +4182,24 @@
           "type": "string"
         },
         "status": {
-          "description": "Whether this transaction was successfully created or not.",
-          "enum": [
-            "created",
-            "failure"
-          ],
-          "example": "created",
-          "type": "string"
-        },
-        "transaction_status": {
           "description": "The status of the transaction being processed. This is different from the `status` field in that it represents the status of the transaction at the payment processor, not the status of the transaction created in Gr4vy.",
           "enum": [
-            "created",
+            "processing",
+            "processing_failed",
             "captured",
+            "capture_pending",
+            "capture_declined",
             "authorized",
-            "buyer_authorization_required",
-            "pending"
+            "authorization_pending",
+            "authorization_declined",
+            "authorization_expired",
+            "authorization_voided",
+            "refunded",
+            "buyer_approval_pending",
+            "buyer_approval_declined",
+            "buyer_approval_timedout"
           ],
-          "example": "created",
+          "example": "processing",
           "type": "string"
         },
         "type": {
