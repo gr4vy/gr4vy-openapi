@@ -692,50 +692,6 @@
         "summary": "List payment methods for a buyer"
       }
     },
-    "/callbacks/payment-methods/{payment_method_id}/confirm": {
-      "parameters": [
-        {
-          "description": "The ID of the payment method",
-          "format": "uuid",
-          "in": "path",
-          "name": "payment_method_id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "302": {
-            "description": "Redirects the browser back to the `redirect_url` specified\nwhen the payment method was first created. It appends the payment method's\nID and status.",
-            "headers": {
-              "location": {
-                "description": "The URL to redirect the browser to. This is the `redirect_url`\nspecified when the payment method was first created with some\nadditional query parameters appended.\n\n* `payment_method_id` - The ID of the payment method\n* `transaction_status` - The current value of the\n  `status`  field of the payment method",
-                "format": "url",
-                "type": "string"
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "schema": {
-              "$ref": "#/definitions/Error404NotFound"
-            }
-          }
-        },
-        "security": [],
-        "tags": [
-          "Callbacks"
-        ],
-        "description": "Internal API used as a redirect endpoint for payment methods that require\nbuyer authorization.\n\nFor example, when a buyer tries to add a PayPal payment method, the buyer\nneeds to be sent to PayPal, after which they are sent back to this endpoint\nupon completion.\n\nThis API applies any required updates for the payment method based on its\nquery parameters and then redirects the browser back to the `redirect_url`\nspecified when the payment method was first created.",
-        "operationId": "payment-method-confirm-callback",
-        "summary": "Confirm buyer authorization",
-        "x-internal": true
-      }
-    },
     "/card-workflows": {
       "get": {
         "produces": [
@@ -1258,6 +1214,50 @@
         "description": "Redirect a buyer to an alternative payment method to approve",
         "operationId": "approve-payment-method",
         "summary": "Redirect a buyer to approve a payment method",
+        "x-internal": true
+      }
+    },
+    "/payment-methods/{payment_method_id}/confirm": {
+      "parameters": [
+        {
+          "description": "The ID of the payment method",
+          "format": "uuid",
+          "in": "path",
+          "name": "payment_method_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "302": {
+            "description": "Redirects the browser back to the `redirect_url` specified\nwhen the payment method was first created. It appends the payment method's\nID and status.",
+            "headers": {
+              "location": {
+                "description": "The URL to redirect the browser to. This is the `redirect_url`\nspecified when the payment method was first created with some\nadditional query parameters appended.\n\n* `payment_method_id` - The ID of the payment method\n* `payment_method_status` - The current value of the\n  `status`  field of the payment method",
+                "format": "url",
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "schema": {
+              "$ref": "#/definitions/Error404NotFound"
+            }
+          }
+        },
+        "security": [],
+        "tags": [
+          "Payment Methods"
+        ],
+        "description": "Internal API used as a redirect endpoint for payment methods that require\nbuyer authorization.\n\nFor example, when a buyer tries to add a PayPal payment method, the buyer\nneeds to be sent to PayPal, after which they are sent back to this endpoint\nupon completion.\n\nThis API applies any required updates for the payment method based on its\nquery parameters and then redirects the browser back to the `redirect_url`\nspecified when the payment method was first created.",
+        "operationId": "confirm-payment-method",
+        "summary": "Confirm buyer authorization",
         "x-internal": true
       }
     },
