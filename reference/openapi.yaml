@@ -183,12 +183,6 @@ paths:
     delete:
       $ref: "./paths/api_key_pairs__delete-api-key-pair.yaml"
 
-  "/callbacks/payment-methods/{payment_method_id}/confirm":
-    parameters:
-      - $ref: "./path-parameters/payment_method_id.yaml"
-    get:
-      $ref: "./paths/callbacks__payment-method-confirm-callback.yaml"
-
   "/buyers":
     get:
       $ref: "./paths/buyers__list-buyers.yaml"
@@ -240,6 +234,12 @@ paths:
       - $ref: "./path-parameters/payment_method_id.yaml"
     get:
       $ref: "./paths/payment_methods__approve-payment-method.yaml"
+
+  "/payment-methods/{payment_method_id}/confirm":
+    parameters:
+      - $ref: "./path-parameters/payment_method_id.yaml"
+    get:
+      $ref: "./paths/payment_methods__confirm-payment-method.yaml"
 
   "/payment-options":
     get:
