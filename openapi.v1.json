@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://api.{merchant}.gr4vy.com",
+      "url": "https://api.{merchant}.app.gr4vy.com",
       "variables": {
         "merchant": {
           "default": "demo",
@@ -1500,6 +1500,56 @@
         }
       }
     },
+    "/payment-methods/{payment_method_id}/approve": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "example": "46973e9d-88a7-44a6-abfe-be4ff0134ff4",
+            "format": "uuid"
+          },
+          "name": "payment_method_id",
+          "in": "path",
+          "required": true,
+          "description": "The ID of the payment method"
+        }
+      ],
+      "get": {
+        "operationId": "approve-payment-method",
+        "summary": "Redirect a buyer to approve a payment method",
+        "description": "Redirect a buyer to an alternative payment method to approve",
+        "tags": [
+          "Payment Methods"
+        ],
+        "x-internal": true,
+        "security": [],
+        "responses": {
+          "302": {
+            "description": "Redirect the buyer to approve this payment method.",
+            "headers": {
+              "location": {
+                "description": "The URL to redirect the browser to. This is the approval URL for an\nalternative payment method like PayPal.",
+                "schema": {
+                  "type": "string",
+                  "format": "url",
+                  "example": "https://paypal.com/..."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/payment-options": {
       "get": {
         "operationId": "list-payment-options",
@@ -2762,7 +2812,7 @@
           "Transactions"
         ],
         "operationId": "authorize-new-transaction",
-        "description": "Attempts to create an authorization for a payment method. In some cases it is\nnot possible to create the authorization without redirecting the user for\ntheir authorization. In these cases the status is set to\n`buyer_approval_pending` and an `authorization_url` is returned.\n\nAdditionally, this endpoint accepts a few additional fields that allow for\nsimultaneous capturing and storage of the payment method.\n\n* `store` - Use this field to store the payment method for\nfuture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
+        "description": "Attempts to create an authorization for a payment method. In some cases it is\nnot possible to create the authorization without redirecting the user for\ntheir authorization. In these cases the status is set to\n`buyer_approval_pending` and an `approval_url` is returned.\n\nAdditionally, this endpoint accepts a few additional fields that allow for\nsimultaneous capturing and storage of the payment method.\n\n* `store` - Use this field to store the payment method for\nfuture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
         "requestBody": {
           "content": {
             "application/json": {
@@ -2895,7 +2945,7 @@
                         "token": null,
                         "details": {
                           "email_address": null,
-                          "authorization_url": "https://redirect.{merchant}.gr4vy.com/transactions/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c"
+                          "approval_url": "https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve"
                         },
                         "created_at": "2013-07-16T19:23:00.000Z",
                         "updated_at": "2013-07-16T19:23:00.000Z",
@@ -4602,7 +4652,7 @@
           },
           "short_name": {
             "type": "string",
-            "description": "The unique short-name of the merchant, as used in their Gr4vy URLs. For\nexample, a short-name of `nike` would result in the Gr4vy cluster's API\nbeing hosted on `https://api.nike.gr4vy.com`.",
+            "description": "The unique short-name of the merchant, as used in their Gr4vy URLs. For\nexample, a short-name of `nike` would result in the Gr4vy cluster's API\nbeing hosted on `https://api.nike.app.gr4vy.com`.",
             "example": "acme"
           },
           "display_name": {
@@ -5243,7 +5293,7 @@
           },
           "status": {
             "type": "string",
-            "description": "The state of the account tokenization. After the first call this will\nbe set to `buyer_approval_pending` and the response will include\nan `authorization_url`. The buyer needs to be redirected to this URL\nto authorize the future payments.",
+            "description": "The state of the account tokenization. After the first call this will\nbe set to `buyer_approval_pending` and the response will include\nan `approval_url`. The buyer needs to be redirected to this URL\nto authorize the future payments.",
             "example": "buyer_approval_pending",
             "enum": [
               "processing",
@@ -5353,10 +5403,10 @@
             "description": "The email address associated to the PayPal account.",
             "nullable": true
           },
-          "authorization_url": {
+          "approval_url": {
             "type": "string",
             "format": "uri",
-            "example": "https://redirect.{merchant}.gr4vy.com/transactions/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c",
+            "example": "https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve",
             "description": "The optional URL that the buyer needs to be redirected to to further authorize their PayPal payments.",
             "nullable": true
           }
