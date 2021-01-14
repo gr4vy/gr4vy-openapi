@@ -15,7 +15,7 @@
     "title": "Gr4vy API (Beta)",
     "version": "1.0"
   },
-  "host": "api.demo.gr4vy.com",
+  "host": "api.demo.app.gr4vy.com",
   "basePath": "/",
   "schemes": [
     "https"
@@ -1217,6 +1217,50 @@
         "summary": "Get stored payment method"
       }
     },
+    "/payment-methods/{payment_method_id}/approve": {
+      "parameters": [
+        {
+          "description": "The ID of the payment method",
+          "format": "uuid",
+          "in": "path",
+          "name": "payment_method_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "302": {
+            "description": "Redirect the buyer to approve this payment method.",
+            "headers": {
+              "location": {
+                "description": "The URL to redirect the browser to. This is the approval URL for an\nalternative payment method like PayPal.",
+                "format": "url",
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "schema": {
+              "$ref": "#/definitions/Error404NotFound"
+            }
+          }
+        },
+        "security": [],
+        "tags": [
+          "Payment Methods"
+        ],
+        "description": "Redirect a buyer to an alternative payment method to approve",
+        "operationId": "approve-payment-method",
+        "summary": "Redirect a buyer to approve a payment method",
+        "x-internal": true
+      }
+    },
     "/payment-methods/{payment_method_id}/events": {
       "parameters": [
         {
@@ -1757,7 +1801,7 @@
         "tags": [
           "Transactions"
         ],
-        "description": "Attempts to create an authorization for a payment method. In some cases it is\nnot possible to create the authorization without redirecting the user for\ntheir authorization. In these cases the status is set to\n`buyer_approval_pending` and an `authorization_url` is returned.\n\nAdditionally, this endpoint accepts a few additional fields that allow for\nsimultaneous capturing and storage of the payment method.\n\n* `store` - Use this field to store the payment method for\nfuture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
+        "description": "Attempts to create an authorization for a payment method. In some cases it is\nnot possible to create the authorization without redirecting the user for\ntheir authorization. In these cases the status is set to\n`buyer_approval_pending` and an `approval_url` is returned.\n\nAdditionally, this endpoint accepts a few additional fields that allow for\nsimultaneous capturing and storage of the payment method.\n\n* `store` - Use this field to store the payment method for\nfuture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
         "operationId": "authorize-new-transaction",
         "summary": "Authorize new transaction"
       }
@@ -3264,7 +3308,7 @@
           "type": "string"
         },
         "short_name": {
-          "description": "The unique short-name of the merchant, as used in their Gr4vy URLs. For\nexample, a short-name of `nike` would result in the Gr4vy cluster's API\nbeing hosted on `https://api.nike.gr4vy.com`.",
+          "description": "The unique short-name of the merchant, as used in their Gr4vy URLs. For\nexample, a short-name of `nike` would result in the Gr4vy cluster's API\nbeing hosted on `https://api.nike.app.gr4vy.com`.",
           "example": "acme",
           "type": "string"
         },
@@ -3330,7 +3374,7 @@
           "type": "string"
         },
         "status": {
-          "description": "The state of the account tokenization. After the first call this will\nbe set to `buyer_approval_pending` and the response will include\nan `authorization_url`. The buyer needs to be redirected to this URL\nto authorize the future payments.",
+          "description": "The state of the account tokenization. After the first call this will\nbe set to `buyer_approval_pending` and the response will include\nan `approval_url`. The buyer needs to be redirected to this URL\nto authorize the future payments.",
           "enum": [
             "processing",
             "processing_failed",
@@ -3407,9 +3451,9 @@
     "PayPalDetails": {
       "description": "Additional details about a stored PayPal account",
       "properties": {
-        "authorization_url": {
+        "approval_url": {
           "description": "The optional URL that the buyer needs to be redirected to to further authorize their PayPal payments.",
-          "example": "https://redirect.{merchant}.gr4vy.com/transactions/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c",
+          "example": "https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve",
           "format": "uri",
           "type": "string",
           "x-nullable": true
