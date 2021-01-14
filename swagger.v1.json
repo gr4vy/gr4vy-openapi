@@ -1211,9 +1211,9 @@
         "tags": [
           "Payment Methods"
         ],
-        "description": "Redirect a buyer to an alternative payment method to approve",
+        "description": "Redirect a buyer to an alternative payment provider to approve their payment\nmethod. This is mainly used with providers like PayPal and Klarna to redirect\na buyer to their sites.",
         "operationId": "approve-payment-method",
-        "summary": "Redirect a buyer to approve a payment method",
+        "summary": "Approve payment method",
         "x-internal": true
       }
     },
