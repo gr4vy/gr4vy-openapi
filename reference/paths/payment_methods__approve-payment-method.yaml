@@ -1,8 +1,10 @@
 ---
 operationId: approve-payment-method
-summary: Redirect a buyer to approve a payment method
+summary: Approve payment method
 description: |-
-  Redirect a buyer to an alternative payment method to approve
+  Redirect a buyer to an alternative payment provider to approve their payment
+  method. This is mainly used with providers like PayPal and Klarna to redirect
+  a buyer to their sites.
 tags:
   - Payment Methods
 x-internal: true
