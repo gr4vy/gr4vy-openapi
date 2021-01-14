@@ -106,9 +106,6 @@
                   },
                   {
                     "$ref": "#/components/schemas/PayPalRequest"
-                  },
-                  {
-                    "$ref": "#/components/schemas/TokenRequest"
                   }
                 ]
               }
@@ -1274,9 +1271,6 @@
                   },
                   {
                     "$ref": "#/components/schemas/PayPalRequest"
-                  },
-                  {
-                    "$ref": "#/components/schemas/TokenRequest"
                   }
                 ]
               }
