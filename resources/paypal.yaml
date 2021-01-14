@@ -25,7 +25,7 @@ properties:
     description: |-
       The state of the account tokenization. After the first call this will
       be set to `buyer_approval_pending` and the response will include
-      an `authorization_url`. The buyer needs to be redirected to this URL
+      an `approval_url`. The buyer needs to be redirected to this URL
       to authorize the future payments.
     example: buyer_approval_pending
     enum:
