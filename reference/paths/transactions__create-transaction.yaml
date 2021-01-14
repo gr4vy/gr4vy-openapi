@@ -6,7 +6,7 @@ description: |
   Attempts to create an authorization for a payment method. In some cases it is
   not possible to create the authorization without redirecting the user for
   their authorization. In these cases the status is set to
-  `buyer_approval_pending` and an `authorization_url` is returned.
+  `buyer_approval_pending` and an `approval_url` is returned.
 
   Additionally, this endpoint accepts a few additional fields that allow for
   simultaneous capturing and storage of the payment method.
@@ -124,8 +124,8 @@ responses:
                 token: null
                 details:
                   email_address: null
-                  authorization_url: |-
-                    https://redirect.{merchant}.gr4vy.com/transactions/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c
+                  approval_url: |-
+                    https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
                 created_at: "2013-07-16T19:23:00.000Z"
                 updated_at: "2013-07-16T19:23:00.000Z"
                 external_identifier: user-789123

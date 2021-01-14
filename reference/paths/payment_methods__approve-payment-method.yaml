@@ -1,0 +1,33 @@
+---
+operationId: approve-payment-method
+summary: Redirect a buyer to approve a payment method
+description: |-
+  Redirect a buyer to an alternative payment method to approve
+tags:
+  - Payment Methods
+x-internal: true
+
+security: []
+
+responses:
+  "302":
+    description: |-
+      Redirect the buyer to approve this payment method.
+    headers:
+      location:
+        description: |-
+          The URL to redirect the browser to. This is the approval URL for an
+          alternative payment method like PayPal.
+
+        schema:
+          type: string
+          format: url
+          example: |-
+            https://paypal.com/...
+
+  "404":
+    description: Returns an error if the resource can not be found.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error404NotFound"

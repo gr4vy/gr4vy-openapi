@@ -18,7 +18,7 @@ info:
     Our API is still very much a work in product and subject to change.
 
 servers:
-  - url: "https://api.{merchant}.gr4vy.com"
+  - url: "https://api.{merchant}.app.gr4vy.com"
     variables:
       merchant:
         default: demo
@@ -234,6 +234,12 @@ paths:
       - $ref: "./path-parameters/payment_method_id.yaml"
     get:
       $ref: "./paths/payment_methods__list-payment-method-events.yaml"
+
+  "/payment-methods/{payment_method_id}/approve":
+    parameters:
+      - $ref: "./path-parameters/payment_method_id.yaml"
+    get:
+      $ref: "./paths/payment_methods__approve-payment-method.yaml"
 
   "/payment-options":
     get:
