@@ -53,11 +53,6 @@ tags:
       * Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the
         buyer's previously stored payment methods, allowing for faster checkout.
 
-  - name: Callbacks
-    x-internal: true
-    description: |-
-      Callbacks are API endpoints used by Gr4vy for catching redirect callbacks
-      from payment providers.
   - name: Card Workflows
     x-internal: true
     description: |-
