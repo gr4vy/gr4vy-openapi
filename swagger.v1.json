@@ -4648,11 +4648,6 @@
       "name": "Buyers"
     },
     {
-      "description": "Callbacks are API endpoints used by Gr4vy for catching redirect callbacks\nfrom payment providers.",
-      "name": "Callbacks",
-      "x-internal": true
-    },
-    {
       "description": "In Gr4vy, a card workflow represents a set of rules that define how a card\ntransaction is processed. It determines which payment services are used,\nand with what priority, based on the transaction amount, card type, and\nmany more attributes.\n\n## Features\n\nA card workflow can be used to:\n\n* Determine what payment service is used based on transaction and card\nproperties.\n* Determine what fallback payment services to use if the transaction\ndid not succeed with the initial provider.",
       "name": "Card Workflows",
       "x-internal": true
