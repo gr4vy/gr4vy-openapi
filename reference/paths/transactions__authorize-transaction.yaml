@@ -1,30 +1,17 @@
 ---
-operationId: store-payment-method
-summary: Store a new payment method
-description: Stores and tokenizes a new payment method
+operationId: authorize-transaction
+summary: Authorize approved transaction
+description: Authorize a previously approved transaction.
 tags:
-  - Payment Methods
-
-requestBody:
-  content:
-    application/json:
-      schema:
-        oneOf:
-          - $ref: |-
-              ../openapi.yaml#/components/schemas/CardRequest
-          # - $ref: |-
-          #     ../openapi.yaml#/components/schemas/PayPalRequest
+  - Transactions
 
 responses:
-  "201":
-    description: Created
+  "200":
+    description: A transaction
     content:
       application/json:
         schema:
-          oneOf:
-            - $ref: "../openapi.yaml#/components/schemas/Card"
-            # Disabled for now until we will support PayPal tokenization
-            # - $ref: "../openapi.yaml#/components/schemas/PayPal"
+          $ref: "../openapi.yaml#/components/schemas/Transaction"
 
   "400":
     description:
@@ -45,3 +32,16 @@ responses:
       application/json:
         schema:
           $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
+
+  "404":
+    description:
+      Returns an error if the resource can not be found or has not yet been
+      created.
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error404NotFound
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error404PendingCreation

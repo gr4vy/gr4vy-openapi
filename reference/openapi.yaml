@@ -137,6 +137,12 @@ paths:
     post:
       $ref: "./paths/transactions__async-create-transaction.yaml"
 
+  "/async/transactions/{transaction_id}/authorize":
+    parameters:
+      - $ref: "./path-parameters/transaction_id.yaml"
+    post:
+      $ref: "./paths/transactions__async-authorize-transaction.yaml"
+
   "/async/transactions/{transaction_id}/capture":
     parameters:
       - $ref: "./path-parameters/transaction_id.yaml"
@@ -219,11 +225,11 @@ paths:
     get:
       $ref: "./paths/payment_methods__approve-payment-method.yaml"
 
-  "/payment-methods/{payment_method_id}/confirm":
+  "/payment-method-approvals/{payment_method_approval_token}":
     parameters:
-      - $ref: "./path-parameters/payment_method_id.yaml"
+      - $ref: "./path-parameters/payment_method_approval_token.yaml"
     get:
-      $ref: "./paths/payment_methods__confirm-payment-method.yaml"
+      $ref: "./paths/payment_methods__redirect-payment-method-approval.yaml"
 
   "/payment-options":
     get:
@@ -289,6 +295,12 @@ paths:
     post:
       $ref: "./paths/transactions__capture-transaction.yaml"
 
+  "/transactions/{transaction_id}/authorize":
+    parameters:
+      - $ref: "./path-parameters/transaction_id.yaml"
+    post:
+      $ref: "./paths/transactions__authorize-transaction.yaml"
+
   "/transactions/{transaction_id}/refund":
     parameters:
       - $ref: "./path-parameters/transaction_id.yaml"
@@ -300,6 +312,18 @@ paths:
       - $ref: "./path-parameters/transaction_id.yaml"
     get:
       $ref: "./paths/transactions__list-transaction-events.yaml"
+
+  "/transactions/{transaction_id}/approve":
+    parameters:
+      - $ref: "./path-parameters/transaction_id.yaml"
+    get:
+      $ref: "./paths/transactions__approve-transaction.yaml"
+
+  "/transaction-approvals/{transaction_approval_token}":
+    parameters:
+      - $ref: "./path-parameters/transaction_approval_token.yaml"
+    get:
+      $ref: "./paths/transactions__redirect-transaction-approval.yaml"
 
   "/users/me":
     get:
