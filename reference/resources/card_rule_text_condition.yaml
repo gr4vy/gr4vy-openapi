@@ -9,14 +9,10 @@ x-tags:
   - Card Rules
 
 required:
-  - type
-  - id
-  - rule_type
+  - match
   - key
-  - condition
+  - operator
   - values
-  - true_rule_id
-  - false_rule_id
 
 properties:
   match:
