@@ -1,9 +1,9 @@
 ---
-operationId: delete-card-workflow
-summary: Delete card workflow
-description: Deletes a specific card workflow
+operationId: delete-card-rule
+summary: Delete card rule
+description: Deletes a specific card rule
 tags:
-  - Card Workflows
+  - Card Rules
 x-internal: true
 
 responses:

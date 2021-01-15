@@ -1,0 +1,85 @@
+---
+# yamllint disable rule:line-length
+title: Card Rule (Create)
+type: object
+description: |-
+  Creates a new rule for a card transactions.
+x-internal: true
+x-tags:
+  - Card Rules
+
+required:
+  - condition
+  - payment_service_ids
+
+properties:
+  active:
+    type: boolean
+    example: true
+    description: |-
+      Whether this rule is currently in use. Rules can be deactivated to allow
+      for them to be kept around and re-activated at a later date.
+
+  position:
+    type: number
+    example: 1
+    description: |-
+      The numeric rank of a rule. Rules with a lower position value
+      are processed first. When a rule is inserted at a position, any rules with
+      the the same value or higher are down a position accordingly. When left
+      out, the rule is inserted at the end of the list.
+
+  condition:
+    oneOf:
+      - $ref: "../openapi.yaml#/components/schemas/CardRuleTextCondition"
+      - $ref: "../openapi.yaml#/components/schemas/CardRuleNumberCondition"
+      - $ref: "../openapi.yaml#/components/schemas/CardRuleBooleanCondition"
+
+  payment_service_ids:
+    type: array
+    description: |-
+      A list of IDs for the payment services to use, in order of priority.
+      The payment services all need to process cards.
+    example:
+      - stripe-card-f47db210-8e30-4f74-8123-b834604f2042
+      - card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96
+    items:
+      type: string
+      minLength: 1
+      maxLength: 100
+
+  unprocessable_fallback_strategy:
+    type: string
+    example: use_all_providers
+    default: use_all_providers
+    enum:
+      - use_all_providers
+      - decline
+    description: |-
+      Defines what strategy to use when all of the payment services defined in
+      this rule declined or otherwise were not able to process the card.
+
+      * `use_all_providers` - Try all payment services enabled for this currency in
+      order of priority, even if they are not listed in this rule. This is the
+      default behaviour for a rule.
+      * `decline` - Decline the transaction.
+
+  invalid_rule_fallback_strategy:
+    type: string
+    example: use_all_providers
+    default: use_all_providers
+    enum:
+      - use_all_providers
+      - skip
+      - decline
+    description: |-
+      Defines what strategy to use when this rule is not valid. This can happen
+      when the rule has triggered for a certain transaction but none of the
+      listed payment services are eligible to process that transaction currency.
+
+      * `use_all_providers` - Try all payment services enabled for this currency in
+      order of priority, even if they are not listed in this rule. This is the
+      default behaviour for a rule.
+      * `skip` - Skip this rule and instead move on to the next highest priority
+      rule.
+      * `decline` - Decline the transaction.

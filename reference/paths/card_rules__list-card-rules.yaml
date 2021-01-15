@@ -1,0 +1,22 @@
+---
+operationId: list-cards-rules
+summary: List card rules
+description: Returns a list of rules for card transactions
+tags:
+  - Card Rules
+x-internal: true
+
+responses:
+  "200":
+    description: A list of card rules
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/CardRules"
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"

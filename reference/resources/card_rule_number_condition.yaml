@@ -1,0 +1,54 @@
+---
+title: Card rule (Number condition)
+type: object
+description: |-
+  Part of a rule that matches numeric fields. It defines the condition under
+  which this rule applies.
+x-internal: true
+x-tags:
+  - Card Workflows
+
+required:
+  - type
+  - id
+  - rule_type
+  - key
+  - condition
+  - value
+  - true_rule_id
+  - false_rule_id
+
+properties:
+  match:
+    type: string
+    description: "`number`"
+    example: number
+    enum:
+      - number
+
+  key:
+    type: string
+    description: The transaction field to filter by.
+    example: amount
+    enum:
+      - amount
+
+  operator:
+    type: string
+    description: The comparison to make to `value` property.
+    example: ">="
+    enum:
+      - "=="
+      - "!="
+      - "<="
+      - ">="
+      - ">"
+      - "<"
+
+  value:
+    type: number
+    description: |-
+      The values to compare the `key` to.
+    example: 200
+    minimum: 0
+    maximum: 99999
