@@ -692,35 +692,17 @@
         "summary": "List payment methods for a buyer"
       }
     },
-    "/card-workflows": {
+    "/card-rules": {
       "get": {
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "default": 20,
-            "description": "Defines the maximum number of items to return for this request.",
-            "format": "int32",
-            "in": "query",
-            "maximum": 100,
-            "minimum": 1,
-            "name": "limit",
-            "type": "integer"
-          },
-          {
-            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list.",
-            "format": "",
-            "in": "query",
-            "name": "cursor",
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
-            "description": "A list of workflows",
+            "description": "A list of card rules",
             "schema": {
-              "$ref": "#/definitions/CardWorkflows"
+              "$ref": "#/definitions/CardRules"
             }
           },
           "401": {
@@ -731,11 +713,11 @@
           }
         },
         "tags": [
-          "Card Workflows"
+          "Card Rules"
         ],
-        "description": "Returns a list of workflows that can be used for card transactions.",
-        "operationId": "list-cards-workflows",
-        "summary": "List card workflows",
+        "description": "Returns a list of rules for card transactions",
+        "operationId": "list-cards-rules",
+        "summary": "List card rules",
         "x-internal": true
       },
       "post": {
@@ -750,15 +732,15 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/CardWorkflowCreateRequest"
+              "$ref": "#/definitions/CardRuleCreateRequest"
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "A newly created workflow",
+            "description": "A newly created rule",
             "schema": {
-              "$ref": "#/definitions/CardWorkflow"
+              "$ref": "#/definitions/CardRule"
             }
           },
           "400": {
@@ -773,21 +755,21 @@
           }
         },
         "tags": [
-          "Card Workflows"
+          "Card Rules"
         ],
-        "description": "Creates a new workflow that can be used for card transactions.",
-        "operationId": "add-card-workflow",
-        "summary": "Create card workflow",
+        "description": "Creates a new rule that is used for card transactions.",
+        "operationId": "add-card-rule",
+        "summary": "Create card rule",
         "x-internal": true
       }
     },
-    "/card-workflows/{card_workflow_id}": {
+    "/card-rules/{card_rule_id}": {
       "parameters": [
         {
-          "description": "The unique ID for a card workflow.",
+          "description": "The unique ID for a card rule.",
           "format": "uuid",
           "in": "path",
-          "name": "card_workflow_id",
+          "name": "card_rule_id",
           "required": true,
           "type": "string"
         }
@@ -821,11 +803,11 @@
           }
         },
         "tags": [
-          "Card Workflows"
+          "Card Rules"
         ],
-        "description": "Deletes a specific card workflow",
-        "operationId": "delete-card-workflow",
-        "summary": "Delete card workflow",
+        "description": "Deletes a specific card rule",
+        "operationId": "delete-card-rule",
+        "summary": "Delete card rule",
         "x-internal": true
       },
       "get": {
@@ -835,9 +817,9 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "A card workflow",
+            "description": "A card rule",
             "schema": {
-              "$ref": "#/definitions/CardWorkflow"
+              "$ref": "#/definitions/CardRule"
             }
           },
           "401": {
@@ -854,11 +836,11 @@
           }
         },
         "tags": [
-          "Card Workflows"
+          "Card Rules"
         ],
-        "description": "Returns a workflows that can be used for card transactions.",
-        "operationId": "get-card-workflow",
-        "summary": "Get card workflow",
+        "description": "Returns a rule that can be used for card transactions.",
+        "operationId": "get-card-rule",
+        "summary": "Get card rule",
         "x-internal": true
       },
       "put": {
@@ -873,15 +855,15 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/CardWorkflowUpdateRequest"
+              "$ref": "#/definitions/CardRuleUpdateRequest"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "An updated workflow",
+            "description": "An updated card rule",
             "schema": {
-              "$ref": "#/definitions/CardWorkflow"
+              "$ref": "#/definitions/CardRule"
             }
           },
           "400": {
@@ -902,62 +884,11 @@
           }
         },
         "tags": [
-          "Card Workflows"
+          "Card Rules"
         ],
-        "description": "Updates a workflow that can be used for card transactions.",
-        "operationId": "update-card-workflow",
-        "summary": "Update card workflow",
-        "x-internal": true
-      }
-    },
-    "/card-workflows/{card_workflow_id}/activate": {
-      "parameters": [
-        {
-          "description": "The unique ID for a card workflow.",
-          "format": "uuid",
-          "in": "path",
-          "name": "card_workflow_id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "post": {
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "201": {
-            "description": "An activated workflow",
-            "schema": {
-              "$ref": "#/definitions/CardWorkflow"
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "schema": {
-              "$ref": "#/definitions/Error401Unauthorized"
-            }
-          },
-          "403": {
-            "description": "Returns an error if the workflow is not valid",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "schema": {
-              "$ref": "#/definitions/Error404NotFound"
-            }
-          }
-        },
-        "tags": [
-          "Card Workflows"
-        ],
-        "description": "Activates a workflow for card transactions, making it the one\nworkflow used by all card transactions.\n\nOnly one workflow can be active at any time. By activating a workflow the\nexisting active workflow will be deactivated.\n\nOnly valid workflows can be activated.",
-        "operationId": "activate-card-workflow",
-        "summary": "Activate card workflow",
+        "description": "Updates a rule that can be used for card transactions.",
+        "operationId": "update-card-rule",
+        "summary": "Update card rule",
         "x-internal": true
       }
     },
@@ -2473,165 +2404,52 @@
         "Request Bodies"
       ]
     },
-    "CardRuleBooleanConditional": {
-      "description": "A conditional rule in a workflow that matches boolean fields. It defines an\nif/else condition and a rule to move on to next for each of these values.",
+    "CardRule": {
+      "description": "A card rule that defines a custom payment provider to use for a card\ntransaction. Multiple rules can exists at any time and they are processed by\npriority.",
       "properties": {
-        "false_rule_id": {
-          "description": "the ID of the rule to use if the comparison equals false.",
-          "example": "rule-2",
-          "maxLength": 50,
-          "minLength": 1,
+        "active": {
+          "description": "Whether this rule is currently in use. Rules can be deactivated to allow\nfor them to be kept around and re-activated at a later date.",
+          "example": true,
+          "type": "boolean"
+        },
+        "conditions": {
+          "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/CardRuleTextCondition"
+              },
+              {
+                "$ref": "#/definitions/CardRuleNumberCondition"
+              },
+              {
+                "$ref": "#/definitions/CardRuleBooleanCondition"
+              }
+            ]
+          },
+          "minItems": 1
+        },
+        "created_at": {
+          "description": "The date and time when this rule was created",
+          "example": "2012-12-12T10:53:43-08:00",
+          "format": "date-time",
           "type": "string"
         },
         "id": {
-          "description": "A unique ID for this rule in the workflow.",
-          "example": "rule-0",
-          "maxLength": 50,
-          "minLength": 1,
+          "description": "The ID of the rule",
+          "example": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
+          "format": "uuid",
           "type": "string"
         },
-        "key": {
-          "description": "The transaction field to filter by.",
+        "invalid_rule_fallback_strategy": {
+          "default": "use_all_providers",
+          "description": "Defines what strategy to use when this rule is not valid. This can happen\nwhen the rule has triggered for a certain transaction but none of the\nlisted payment services are eligible to process that transaction currency.\n\n* `use_all_providers` - Try all payment services enabled for this currency in\norder of priority, even if they are not listed in this rule. This is the\ndefault behaviour for a rule.\n* `skip` - Skip this rule and instead move on to the next highest priority\nrule.\n* `decline` - Decline the transaction.",
           "enum": [
-            "store",
-            "use_test_environment"
+            "use_all_providers",
+            "skip",
+            "decline"
           ],
-          "example": "store",
-          "type": "string"
-        },
-        "rule_type": {
-          "description": "`boolean-conditional`",
-          "enum": [
-            "boolean-conditional"
-          ],
-          "example": "boolean-conditional",
-          "type": "string"
-        },
-        "true_rule_id": {
-          "description": "the ID of the rule to use if the comparison equals true.",
-          "example": "rule-1",
-          "maxLength": 50,
-          "minLength": 1,
-          "type": "string"
-        },
-        "type": {
-          "description": "`card-rule`",
-          "enum": [
-            "card-rule"
-          ],
-          "example": "card-rule",
-          "type": "string"
-        }
-      },
-      "required": [
-        "type",
-        "id",
-        "rule_type",
-        "key",
-        "condition",
-        "values",
-        "true_rule_id",
-        "false_rule_id"
-      ],
-      "title": "Card rule (Boolean conditional)",
-      "type": "object",
-      "x-internal": true,
-      "x-tags": [
-        "Card Workflows"
-      ]
-    },
-    "CardRuleNumberConditional": {
-      "description": "A conditional rule in a workflow that matches numbers. It defines an if/else\ncondition and a rule to move on to next for each of these values.",
-      "properties": {
-        "condition": {
-          "description": "The comparison to make to `value` property.",
-          "enum": [
-            "==",
-            "!=",
-            "<=",
-            ">=",
-            ">",
-            "<"
-          ],
-          "example": ">=",
-          "type": "string"
-        },
-        "false_rule_id": {
-          "description": "the ID of the rule to use if the comparison equals false.",
-          "example": "rule-2",
-          "maxLength": 50,
-          "minLength": 1,
-          "type": "string"
-        },
-        "id": {
-          "description": "A unique ID for this rule in the workflow.",
-          "example": "rule-0",
-          "type": "string"
-        },
-        "key": {
-          "description": "The transaction field to filter by.",
-          "enum": [
-            "amount"
-          ],
-          "example": "amount",
-          "type": "string"
-        },
-        "rule_type": {
-          "description": "`number-conditional`",
-          "enum": [
-            "number-conditional"
-          ],
-          "example": "number-conditional",
-          "type": "string"
-        },
-        "true_rule_id": {
-          "description": "the ID of the rule to use if the comparison equals true.",
-          "example": "rule-1",
-          "maxLength": 50,
-          "minLength": 1,
-          "type": "string"
-        },
-        "type": {
-          "description": "`card-rule`",
-          "enum": [
-            "card-rule"
-          ],
-          "example": "card-rule",
-          "type": "string"
-        },
-        "value": {
-          "description": "The values to compare the `key` to.",
-          "example": 200,
-          "maximum": 99999,
-          "minimum": 0,
-          "type": "number"
-        }
-      },
-      "required": [
-        "type",
-        "id",
-        "rule_type",
-        "key",
-        "condition",
-        "value",
-        "true_rule_id",
-        "false_rule_id"
-      ],
-      "title": "Card rule (Number conditional)",
-      "type": "object",
-      "x-internal": true,
-      "x-tags": [
-        "Card Workflows"
-      ]
-    },
-    "CardRulePaymentServicesTerminal": {
-      "description": "A terminal rule in a workflow. It the payment services to use in case the\nworkflow reaches this node.",
-      "properties": {
-        "id": {
-          "description": "A unique ID for this rule in the workflow",
-          "example": "rule-0",
-          "maxLength": 50,
-          "minLength": 1,
+          "example": "use_all_providers",
           "type": "string"
         },
         "payment_service_ids": {
@@ -2647,13 +2465,10 @@
           },
           "type": "array"
         },
-        "rule_type": {
-          "description": "`payment-services-terminal`",
-          "enum": [
-            "payment-services-terminal"
-          ],
-          "example": "payment-services-terminal",
-          "type": "string"
+        "position": {
+          "description": "The numeric rank of a rule. Rules with a lower position value\nare processed first.",
+          "example": 1,
+          "type": "number"
         },
         "type": {
           "description": "`card-rule`",
@@ -2662,47 +2477,201 @@
           ],
           "example": "card-rule",
           "type": "string"
+        },
+        "unprocessable_fallback_strategy": {
+          "default": "use_all_providers",
+          "description": "Defines what strategy to use when all of the payment services defined in\nthis rule declined or otherwise were not able to process the card.\n\n* `use_all_providers` - Try all payment services enabled for this currency in\norder of priority, even if they are not listed in this rule. This is the\ndefault behaviour for a rule.\n* `decline` - Decline the transaction.",
+          "enum": [
+            "use_all_providers",
+            "decline"
+          ],
+          "example": "use_all_providers",
+          "type": "string"
+        },
+        "updated_at": {
+          "description": "The date and time when this rule was last updated",
+          "example": "2012-12-12T10:53:43-08:00",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "title": "Card Rule",
+      "type": "object",
+      "x-internal": true,
+      "x-tags": [
+        "Card Rules"
+      ]
+    },
+    "CardRuleBooleanCondition": {
+      "description": "Part of a rule that matches boolean fields. It defines the condition under\nwhich this rule applies.",
+      "properties": {
+        "key": {
+          "description": "The transaction field to filter by.",
+          "enum": [
+            "store",
+            "use_test_environment"
+          ],
+          "example": "store",
+          "type": "string"
+        },
+        "match": {
+          "description": "`boolean`",
+          "enum": [
+            "boolean"
+          ],
+          "example": "boolean",
+          "type": "string"
+        },
+        "value": {
+          "description": "The values to compare the `key` to.",
+          "example": true,
+          "type": "boolean"
         }
       },
       "required": [
-        "type",
-        "id",
-        "rule_type",
+        "match",
+        "key",
+        "value"
+      ],
+      "title": "Card rule (Boolean condition)",
+      "type": "object",
+      "x-internal": true,
+      "x-tags": [
+        "Card Rules"
+      ]
+    },
+    "CardRuleCreateRequest": {
+      "description": "Creates a new rule for a card transactions.",
+      "properties": {
+        "active": {
+          "description": "Whether this rule is currently in use. Rules can be deactivated to allow\nfor them to be kept around and re-activated at a later date.",
+          "example": true,
+          "type": "boolean"
+        },
+        "conditions": {
+          "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/definitions/CardRuleTextCondition"
+              },
+              {
+                "$ref": "#/definitions/CardRuleNumberCondition"
+              },
+              {
+                "$ref": "#/definitions/CardRuleBooleanCondition"
+              }
+            ]
+          },
+          "minItems": 1
+        },
+        "invalid_rule_fallback_strategy": {
+          "default": "use_all_providers",
+          "description": "Defines what strategy to use when this rule is not valid. This can happen\nwhen the rule has triggered for a certain transaction but none of the\nlisted payment services are eligible to process that transaction currency.\n\n* `use_all_providers` - Try all payment services enabled for this currency in\norder of priority, even if they are not listed in this rule. This is the\ndefault behaviour for a rule.\n* `skip` - Skip this rule and instead move on to the next highest priority\nrule.\n* `decline` - Decline the transaction.",
+          "enum": [
+            "use_all_providers",
+            "skip",
+            "decline"
+          ],
+          "example": "use_all_providers",
+          "type": "string"
+        },
+        "payment_service_ids": {
+          "description": "A list of IDs for the payment services to use, in order of priority.\nThe payment services all need to process cards.",
+          "example": [
+            "stripe-card-f47db210-8e30-4f74-8123-b834604f2042",
+            "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+          ],
+          "items": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "position": {
+          "description": "The numeric rank of a rule. Rules with a lower position value\nare processed first. When a rule is inserted at a position, any rules with\nthe the same value or higher are down a position accordingly. When left\nout, the rule is inserted at the end of the list.",
+          "example": 1,
+          "type": "number"
+        },
+        "unprocessable_fallback_strategy": {
+          "default": "use_all_providers",
+          "description": "Defines what strategy to use when all of the payment services defined in\nthis rule declined or otherwise were not able to process the card.\n\n* `use_all_providers` - Try all payment services enabled for this currency in\norder of priority, even if they are not listed in this rule. This is the\ndefault behaviour for a rule.\n* `decline` - Decline the transaction.",
+          "enum": [
+            "use_all_providers",
+            "decline"
+          ],
+          "example": "use_all_providers",
+          "type": "string"
+        }
+      },
+      "required": [
+        "conditions",
         "payment_service_ids"
       ],
-      "title": "Terminal Card Rule",
+      "title": "Card Rule (Create)",
+      "type": "object",
+      "x-internal": true,
+      "x-tags": [
+        "Card Rules"
+      ]
+    },
+    "CardRuleNumberCondition": {
+      "description": "Part of a rule that matches numeric fields. It defines the condition under\nwhich this rule applies.",
+      "properties": {
+        "key": {
+          "description": "The transaction field to filter by.",
+          "enum": [
+            "amount"
+          ],
+          "example": "amount",
+          "type": "string"
+        },
+        "match": {
+          "description": "`number`",
+          "enum": [
+            "number"
+          ],
+          "example": "number",
+          "type": "string"
+        },
+        "operator": {
+          "description": "The comparison to make to `value` property.",
+          "enum": [
+            "==",
+            "!=",
+            "<=",
+            ">=",
+            ">",
+            "<"
+          ],
+          "example": ">=",
+          "type": "string"
+        },
+        "value": {
+          "description": "The values to compare the `key` to.",
+          "example": 200,
+          "maximum": 99999,
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "match",
+        "key",
+        "operator",
+        "value"
+      ],
+      "title": "Card rule (Number condition)",
       "type": "object",
       "x-internal": true,
       "x-tags": [
         "Card Workflows"
       ]
     },
-    "CardRuleStringConditional": {
-      "description": "A conditional rule in a workflow that matches strings. It defines an if/else\ncondition and a rule to move on to next for each of these values.",
+    "CardRuleTextCondition": {
+      "description": "Part of a rule that matches text fields. It defines the condition under\nwhich this rule applies.",
       "properties": {
-        "condition": {
-          "description": "The comparison to make to `value` property.",
-          "enum": [
-            "IN",
-            "NOT IN"
-          ],
-          "example": "IN",
-          "type": "string"
-        },
-        "false_rule_id": {
-          "description": "the ID of the rule to use if the comparison equals false.",
-          "example": "rule-2",
-          "maxLength": 50,
-          "minLength": 1,
-          "type": "string"
-        },
-        "id": {
-          "description": "A unique ID for this rule in the workflow.",
-          "example": "rule-0",
-          "maxLength": 50,
-          "minLength": 1,
-          "type": "string"
-        },
         "key": {
           "description": "The transaction field to filter by.",
           "enum": [
@@ -2712,27 +2681,21 @@
           "example": "currency",
           "type": "string"
         },
-        "rule_type": {
-          "description": "`string-conditional`",
+        "match": {
+          "description": "`text`",
           "enum": [
-            "string-conditional"
+            "text"
           ],
-          "example": "string-conditional",
+          "example": "text",
           "type": "string"
         },
-        "true_rule_id": {
-          "description": "the ID of the rule to use if the comparison equals true.",
-          "example": "rule-1",
-          "maxLength": 50,
-          "minLength": 1,
-          "type": "string"
-        },
-        "type": {
-          "description": "`card-rule`",
+        "operator": {
+          "description": "The comparison to make to `value` property.",
           "enum": [
-            "card-rule"
+            "IN",
+            "NOT IN"
           ],
-          "example": "card-rule",
+          "example": "IN",
           "type": "string"
         },
         "values": {
@@ -2752,178 +2715,106 @@
         }
       },
       "required": [
-        "type",
-        "id",
-        "rule_type",
+        "match",
         "key",
-        "condition",
-        "values",
-        "true_rule_id",
-        "false_rule_id"
+        "operator",
+        "values"
       ],
-      "title": "Card rule (String conditional)",
+      "title": "Card rule (Text)",
       "type": "object",
       "x-internal": true,
       "x-tags": [
-        "Card Workflows"
+        "Card Rules"
       ]
     },
-    "CardWorkflow": {
-      "description": "A card workflow which holds the rules that are parsed for a card transaction.\n\nMultiple workflows can exists at any time, but only one can be deployed.",
+    "CardRuleUpdateRequest": {
+      "description": "Updates a rule for a card transactions.",
       "properties": {
         "active": {
-          "description": "Whether this workflow is currently in use. Only one workflow can\nbe active at any time.",
+          "description": "Whether this rule is currently in use. Rules can be deactivated to allow\nfor them to be kept around and re-activated at a later date.",
           "example": true,
           "type": "boolean"
         },
-        "created_at": {
-          "description": "The date and time when this workflow was created",
-          "example": "2012-12-12T10:53:43-08:00",
-          "format": "date-time",
-          "type": "string"
-        },
-        "display_name": {
-          "description": "The display name of the workflow",
-          "example": "Q2 2020 Workflow",
-          "maxLength": 50,
-          "minLength": 1,
-          "type": "string"
-        },
-        "id": {
-          "description": "The ID of the workflow",
-          "example": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
-          "format": "uuid",
-          "type": "string"
-        },
-        "root_rule_id": {
-          "description": "The ID of the rule that is the starting point of the workflow.",
-          "example": "rule-0",
-          "maxLength": 50,
-          "minLength": 1,
-          "type": "string"
-        },
-        "rules": {
-          "description": "A list of rules in this workflow",
-          "items": {},
-          "type": "array"
-        },
-        "type": {
-          "description": "`workflow`",
-          "enum": [
-            "workflow"
-          ],
-          "example": "workflow",
-          "type": "string"
-        },
-        "updated_at": {
-          "description": "The date and time when this workflow was last updated",
-          "example": "2012-12-12T10:53:43-08:00",
-          "format": "date-time",
-          "type": "string"
-        },
-        "valid": {
-          "description": "Whether this workflow is valid and complete. Only valid workflows can be\nactivated.",
-          "example": true,
-          "type": "boolean"
-        }
-      },
-      "title": "Card Workflow",
-      "type": "object",
-      "x-internal": true,
-      "x-tags": [
-        "Card Workflows"
-      ]
-    },
-    "CardWorkflowCreateRequest": {
-      "description": "Creates a new card workflow which holds the rules that are parsed for a card\ntransaction.",
-      "properties": {
-        "display_name": {
-          "description": "The display name of the workflow.",
-          "example": "Q2 2020 Workflow",
-          "maxLength": 50,
-          "minLength": 1,
-          "type": "string"
-        },
-        "root_rule_id": {
-          "description": "The ID of the rule that is the starting point of the workflow.",
-          "example": "rule-0",
-          "maxLength": 50,
-          "minLength": 1,
-          "type": "string"
-        },
-        "rules": {
-          "description": "A list of rules in this workflow.",
-          "items": {},
-          "type": "array"
-        }
-      },
-      "required": [
-        "display_name",
-        "root_rule_id",
-        "rules"
-      ],
-      "title": "Card Workflow (Create)",
-      "type": "object",
-      "x-internal": true,
-      "x-tags": [
-        "Card Workflows"
-      ]
-    },
-    "CardWorkflowUpdateRequest": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/CardWorkflowCreateRequest"
-        }
-      ],
-      "description": "Updates a card workflow which holds the rules that are parsed for a card\ntransaction.",
-      "title": "Card Workflow (Update)",
-      "type": "object",
-      "x-internal": true,
-      "x-tags": [
-        "Card Workflows"
-      ]
-    },
-    "CardWorkflows": {
-      "description": "A list of card workflows",
-      "properties": {
-        "items": {
-          "description": "A list of card workflows",
+        "conditions": {
+          "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
           "items": {
-            "$ref": "#/definitions/CardWorkflow"
+            "oneOf": [
+              {
+                "$ref": "#/definitions/CardRuleTextCondition"
+              },
+              {
+                "$ref": "#/definitions/CardRuleNumberCondition"
+              },
+              {
+                "$ref": "#/definitions/CardRuleBooleanCondition"
+              }
+            ]
+          },
+          "minItems": 1
+        },
+        "invalid_rule_fallback_strategy": {
+          "default": "use_all_providers",
+          "description": "Defines what strategy to use when this rule is not valid. This can happen\nwhen the rule has triggered for a certain transaction but none of the\nlisted payment services are eligible to process that transaction currency.\n\n* `use_all_providers` - Try all payment services enabled for this currency in\norder of priority, even if they are not listed in this rule. This is the\ndefault behaviour for a rule.\n* `skip` - Skip this rule and instead move on to the next highest priority\nrule.\n* `decline` - Decline the transaction.",
+          "enum": [
+            "use_all_providers",
+            "skip",
+            "decline"
+          ],
+          "example": "use_all_providers",
+          "type": "string"
+        },
+        "payment_service_ids": {
+          "description": "A list of IDs for the payment services to use, in order of priority.\nThe payment services all need to process cards.",
+          "example": [
+            "stripe-card-f47db210-8e30-4f74-8123-b834604f2042",
+            "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+          ],
+          "items": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
           },
           "type": "array"
         },
-        "limit": {
-          "default": 20,
-          "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
+        "position": {
+          "description": "The numeric rank of a rule. Rules with a lower position value\nare processed first. When a rule is inserted at a position, any rules with\nthe the same value or higher are down a position accordingly.",
           "example": 1,
-          "format": "int32",
-          "maximum": 100,
-          "minimum": 1,
-          "type": "integer"
+          "type": "number"
         },
-        "next_cursor": {
-          "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
-          "example": "ZXhhbXBsZTE",
-          "maxLength": 1000,
-          "minLength": 1,
-          "type": "string",
-          "x-nullable": true
-        },
-        "previous_cursor": {
-          "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
-          "example": null,
-          "maxLength": 1000,
-          "minLength": 1,
-          "type": "string",
-          "x-nullable": true
+        "unprocessable_fallback_strategy": {
+          "default": "use_all_providers",
+          "description": "Defines what strategy to use when all of the payment services defined in\nthis rule declined or otherwise were not able to process the card.\n\n* `use_all_providers` - Try all payment services enabled for this currency in\norder of priority, even if they are not listed in this rule. This is the\ndefault behaviour for a rule.\n* `decline` - Decline the transaction.",
+          "enum": [
+            "use_all_providers",
+            "decline"
+          ],
+          "example": "use_all_providers",
+          "type": "string"
         }
       },
-      "title": "Card Workflows",
+      "title": "Card Rule (Create)",
       "type": "object",
       "x-internal": true,
       "x-tags": [
-        "Card Workflows"
+        "Card Rules"
+      ]
+    },
+    "CardRules": {
+      "description": "A list of card rules",
+      "properties": {
+        "items": {
+          "description": "A list of card rules",
+          "items": {
+            "$ref": "#/definitions/CardRule"
+          },
+          "type": "array"
+        }
+      },
+      "title": "Card Rules",
+      "type": "object",
+      "x-internal": true,
+      "x-tags": [
+        "Card Rules"
       ]
     },
     "Error": {
@@ -3768,6 +3659,11 @@
           "minLength": 1,
           "type": "string"
         },
+        "position": {
+          "description": "The numeric rank of a payment service. Payment services with a lower\nposition value are processed first.",
+          "example": 1,
+          "type": "number"
+        },
         "status": {
           "description": "The current status of this service. This will start off as pending, move\nto created, and might eventually move to an error status if and when the\ncredentials are no longer valid.\n",
           "enum": [
@@ -4045,6 +3941,11 @@
             "type": "object"
           },
           "type": "array"
+        },
+        "position": {
+          "description": "The numeric rank of a payment service. Payment services with a lower\nposition value are processed first. When a payment services is inserted at\na position, any payment services with the the same value or higher are\nshifted down a position accordingly. When left out, the payment service is\ninserted at the end of the list.",
+          "example": 1,
+          "type": "number"
         },
         "use_test_environment": {
           "description": "Defines if this payment service uses the service's test/sandbox environment.",
@@ -4654,8 +4555,8 @@
       "name": "Buyers"
     },
     {
-      "description": "In Gr4vy, a card workflow represents a set of rules that define how a card\ntransaction is processed. It determines which payment services are used,\nand with what priority, based on the transaction amount, card type, and\nmany more attributes.\n\n## Features\n\nA card workflow can be used to:\n\n* Determine what payment service is used based on transaction and card\nproperties.\n* Determine what fallback payment services to use if the transaction\ndid not succeed with the initial provider.",
-      "name": "Card Workflows",
+      "description": "In Gr4vy, a card rule defines how a card transaction is processed. It\ndetermines which payment services are used, and with what priority, based\non the transaction amount, card type, and many more attributes.",
+      "name": "Card Rules",
       "x-internal": true
     },
     {
@@ -4677,7 +4578,7 @@
       "x-internal": true
     },
     {
-      "description": "In Gr4vy, a payment service represents a configured payment provider\n(Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,\netc)\n\n## Features\n\nThe payment services API can be used to:\n\n* Provide Gr4vy with the payment credentials for a payment provider\n* Set a display name for a payment provider\n* Prepare a payment provider for usage in a workflow",
+      "description": "In Gr4vy, a payment service represents a configured payment provider\n(Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,\netc)\n\n## Features\n\nThe payment services API can be used to:\n\n* Provide Gr4vy with the payment credentials for a payment provider\n* Set a display name for a payment provider",
       "name": "Payment Services"
     },
     {
