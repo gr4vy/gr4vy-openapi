@@ -53,22 +53,12 @@ tags:
       * Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the
         buyer's previously stored payment methods, allowing for faster checkout.
 
-  - name: Card Workflows
+  - name: Card Rules
     x-internal: true
     description: |-
-      In Gr4vy, a card workflow represents a set of rules that define how a card
-      transaction is processed. It determines which payment services are used,
-      and with what priority, based on the transaction amount, card type, and
-      many more attributes.
-
-      ## Features
-
-      A card workflow can be used to:
-
-      * Determine what payment service is used based on transaction and card
-      properties.
-      * Determine what fallback payment services to use if the transaction
-      did not succeed with the initial provider.
+      In Gr4vy, a card rule defines how a card transaction is processed. It
+      determines which payment services are used, and with what priority, based
+      on the transaction amount, card type, and many more attributes.
   - name: Merchants
     description: |-
       In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.
@@ -115,7 +105,6 @@ tags:
 
       * Provide Gr4vy with the payment credentials for a payment provider
       * Set a display name for a payment provider
-      * Prepare a payment provider for usage in a workflow
   - name: Sessions
     description: |-
       The sessions APIs are used to facilitate user authentication for the Gr4vy
@@ -266,27 +255,21 @@ paths:
     get:
       $ref: "./paths/payment_service_definitions__get-payment-service-definition.yaml"
 
-  "/card-workflows":
+  "/card-rules":
     get:
-      $ref: "./paths/card_workflows__list-card-workflows.yaml"
+      $ref: "./paths/card_rules__list-card-rules.yaml"
     post:
-      $ref: "./paths/card_workflows__add-card-workflow.yaml"
+      $ref: "./paths/card_rules__add-card-rule.yaml"
 
-  "/card-workflows/{card_workflow_id}":
+  "/card-rules/{card_rule_id}":
     parameters:
-      - $ref: "./path-parameters/card_workflow_id.yaml"
+      - $ref: "./path-parameters/card_rule_id.yaml"
     get:
-      $ref: "./paths/card_workflows__get-card-workflow.yaml"
+      $ref: "./paths/card_rules__get-card-rule.yaml"
     put:
-      $ref: "./paths/card_workflows__update-card-workflow.yaml"
+      $ref: "./paths/card_rules__update-card-rule.yaml"
     delete:
-      $ref: "./paths/card_workflows__delete-card-workflow.yaml"
-
-  "/card-workflows/{card_workflow_id}/activate":
-    parameters:
-      - $ref: "./path-parameters/card_workflow_id.yaml"
-    post:
-      $ref: "./paths/card_workflows__activate-card-workflow.yaml"
+      $ref: "./paths/card_rules__delete-card-rule.yaml"
 
   "/transactions":
     get:
@@ -340,22 +323,20 @@ components:
       $ref: "./resources/card_details.yaml"
     CardRequest:
       $ref: "./request-bodies/card_request.yaml"
-    CardWorkflow:
-      $ref: "./resources/card_workflow.yaml"
-    CardWorkflows:
-      $ref: "./resources/card_workflows.yaml"
-    CardRuleBooleanConditional:
-      $ref: "./resources/card_rule_boolean_conditional.yaml"
-    CardRuleNumberConditional:
-      $ref: "./resources/card_rule_number_conditional.yaml"
-    CardRuleStringConditional:
-      $ref: "./resources/card_rule_string_conditional.yaml"
-    CardRulePaymentServicesTerminal:
-      $ref: "./resources/card_rule_payment_services_terminal.yaml"
-    CardWorkflowCreateRequest:
-      $ref: "./request-bodies/card_workflow_create_request.yaml"
-    CardWorkflowUpdateRequest:
-      $ref: "./request-bodies/card_workflow_update_request.yaml"
+    CardRule:
+      $ref: "./resources/card_rule.yaml"
+    CardRules:
+      $ref: "./resources/card_rules.yaml"
+    CardRuleBooleanCondition:
+      $ref: "./resources/card_rule_boolean_condition.yaml"
+    CardRuleNumberCondition:
+      $ref: "./resources/card_rule_number_condition.yaml"
+    CardRuleTextCondition:
+      $ref: "./resources/card_rule_text_condition.yaml"
+    CardRuleCreateRequest:
+      $ref: "./request-bodies/card_rule_create_request.yaml"
+    CardRuleUpdateRequest:
+      $ref: "./request-bodies/card_rule_update_request.yaml"
     Error:
       $ref: "./resources/error.yaml"
     Error400BadRequest:

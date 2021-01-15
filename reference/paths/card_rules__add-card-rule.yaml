@@ -1,0 +1,41 @@
+---
+operationId: add-card-rule
+summary: Create card rule
+description: Creates a new rule that is used for card transactions.
+tags:
+  - Card Rules
+x-internal: true
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: "../openapi.yaml#/components/schemas/CardRuleCreateRequest"
+
+responses:
+  "201":
+    description: A newly created rule
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/CardRule"
+
+  "400":
+    description:
+      Returns an error if the request was badly formatted or missing required
+      fields.
+    content:
+      application/json:
+        schema:
+          oneOf:
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400BadRequest
+            - $ref: |-
+                ../openapi.yaml#/components/schemas/Error400IncorrectJson
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"

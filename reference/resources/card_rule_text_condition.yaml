@@ -1,0 +1,57 @@
+---
+title: Card rule (Text)
+type: object
+description: |-
+  Part of a rule that matches text fields. It defines the condition under
+  which this rule applies.
+x-internal: true
+x-tags:
+  - Card Rules
+
+required:
+  - type
+  - id
+  - rule_type
+  - key
+  - condition
+  - values
+  - true_rule_id
+  - false_rule_id
+
+properties:
+  match:
+    type: string
+    description: "`text`"
+    example: text
+    enum:
+      - text
+
+  key:
+    type: string
+    description: The transaction field to filter by.
+    example: currency
+    enum:
+      - currency
+      - card_type
+
+  operator:
+    type: string
+    description: The comparison to make to `value` property.
+    example: "IN"
+    enum:
+      - "IN"
+      - "NOT IN"
+
+  values:
+    type: array
+    minItems: 1
+    maxItems: 100
+    items:
+      type: string
+      minLength: 1
+      maxLength: 50
+    description: |-
+      The values to compare the `key` to.
+    example:
+      - USD
+      - EUR

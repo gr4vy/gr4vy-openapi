@@ -1,0 +1,14 @@
+---
+title: Card Rules
+type: object
+description: A list of card rules
+x-internal: true
+x-tags:
+  - Card Rules
+
+properties:
+  items:
+    type: array
+    description: A list of card rules
+    items:
+      $ref: "../openapi.yaml#/components/schemas/CardRule"
