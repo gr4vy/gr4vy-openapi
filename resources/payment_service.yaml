@@ -85,3 +85,10 @@ properties:
     type: boolean
     description:
       Defines if this service should use the test credentials and/or endpoint.
+
+  position:
+    type: number
+    example: 1
+    description: |-
+      The numeric rank of a payment service. Payment services with a lower
+      position value are processed first.

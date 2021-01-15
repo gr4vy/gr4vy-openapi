@@ -95,7 +95,6 @@ tags:
 
       * Provide Gr4vy with the payment credentials for a payment provider
       * Set a display name for a payment provider
-      * Prepare a payment provider for usage in a workflow
   - name: Transactions
     description: >-
       In Gr4vy, a transaction represents a payment in any state, either before
