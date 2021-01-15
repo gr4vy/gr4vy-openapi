@@ -31,11 +31,16 @@ properties:
       Whether this rule is currently in use. Rules can be deactivated to allow
       for them to be kept around and re-activated at a later date.
 
-  condition:
-    oneOf:
-      - $ref: "../openapi.yaml#/components/schemas/CardRuleTextCondition"
-      - $ref: "../openapi.yaml#/components/schemas/CardRuleNumberCondition"
-      - $ref: "../openapi.yaml#/components/schemas/CardRuleBooleanCondition"
+  conditions:
+    description: |-
+      One or more conditions that apply for this rule. Each condition
+      needs to match for this rule to go into effect.
+    minItems: 1
+    items:
+      oneOf:
+        - $ref: "../openapi.yaml#/components/schemas/CardRuleTextCondition"
+        - $ref: "../openapi.yaml#/components/schemas/CardRuleNumberCondition"
+        - $ref: "../openapi.yaml#/components/schemas/CardRuleBooleanCondition"
 
   payment_service_ids:
     type: array

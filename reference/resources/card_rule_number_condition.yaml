@@ -9,14 +9,10 @@ x-tags:
   - Card Workflows
 
 required:
-  - type
-  - id
-  - rule_type
+  - match
   - key
-  - condition
+  - operator
   - value
-  - true_rule_id
-  - false_rule_id
 
 properties:
   match:
