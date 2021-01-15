@@ -1,0 +1,35 @@
+---
+operationId: redirect-transaction-approval
+summary: Approve payment method
+description: |-
+  Redirect a buyer to an alternative payment provider to approve their
+  transaction. This is mainly used with providers like PayPal and Klarna to
+  redirect a buyer to their sites.
+tags:
+  - Transactions
+x-internal: true
+
+security: []
+
+responses:
+  "302":
+    description: |-
+      Redirect the buyer to approve this transaction.
+    headers:
+      location:
+        description: |-
+          The URL to redirect the browser to. This is the approval URL for an
+          alternative payment method like PayPal.
+
+        schema:
+          type: string
+          format: url
+          example: |-
+            https://paypal.com/...
+
+  "404":
+    description: Returns an error if the resource can not be found.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error404NotFound"

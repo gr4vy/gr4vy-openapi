@@ -12,8 +12,8 @@ requestBody:
         oneOf:
           - $ref: |-
               ../openapi.yaml#/components/schemas/CardRequest
-          - $ref: |-
-              ../openapi.yaml#/components/schemas/PayPalRequest
+          # - $ref: |-
+          #     ../openapi.yaml#/components/schemas/PayPalRequest
 
 responses:
   "202":
