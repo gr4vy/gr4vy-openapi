@@ -2414,20 +2414,9 @@
         },
         "conditions": {
           "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
-          "items": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/CardRuleTextCondition"
-              },
-              {
-                "$ref": "#/definitions/CardRuleNumberCondition"
-              },
-              {
-                "$ref": "#/definitions/CardRuleBooleanCondition"
-              }
-            ]
-          },
-          "minItems": 1
+          "items": {},
+          "minItems": 1,
+          "type": "array"
         },
         "created_at": {
           "description": "The date and time when this rule was created",
@@ -2550,20 +2539,9 @@
         },
         "conditions": {
           "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
-          "items": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/CardRuleTextCondition"
-              },
-              {
-                "$ref": "#/definitions/CardRuleNumberCondition"
-              },
-              {
-                "$ref": "#/definitions/CardRuleBooleanCondition"
-              }
-            ]
-          },
-          "minItems": 1
+          "items": {},
+          "minItems": 1,
+          "type": "array"
         },
         "invalid_rule_fallback_strategy": {
           "default": "use_all_providers",
@@ -2737,20 +2715,9 @@
         },
         "conditions": {
           "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
-          "items": {
-            "oneOf": [
-              {
-                "$ref": "#/definitions/CardRuleTextCondition"
-              },
-              {
-                "$ref": "#/definitions/CardRuleNumberCondition"
-              },
-              {
-                "$ref": "#/definitions/CardRuleBooleanCondition"
-              }
-            ]
-          },
-          "minItems": 1
+          "items": {},
+          "minItems": 1,
+          "type": "array"
         },
         "invalid_rule_fallback_strategy": {
           "default": "use_all_providers",
