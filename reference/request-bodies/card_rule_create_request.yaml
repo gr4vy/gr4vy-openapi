@@ -30,6 +30,7 @@ properties:
       out, the rule is inserted at the end of the list.
 
   conditions:
+    type: array
     description: |-
       One or more conditions that apply for this rule. Each condition
       needs to match for this rule to go into effect.

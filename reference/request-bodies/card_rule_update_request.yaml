@@ -25,6 +25,7 @@ properties:
       the the same value or higher are down a position accordingly.
 
   conditions:
+    type: array
     description: |-
       One or more conditions that apply for this rule. Each condition
       needs to match for this rule to go into effect.
