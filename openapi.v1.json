@@ -98,9 +98,6 @@
                 "oneOf": [
                   {
                     "$ref": "#/components/schemas/CardRequest"
-                  },
-                  {
-                    "$ref": "#/components/schemas/PayPalRequest"
                   }
                 ]
               }
@@ -203,7 +200,7 @@
                   "value": {
                     "amount": 1299,
                     "currency": "USD",
-                    "capture": true,
+                    "intent": "capture",
                     "store": true,
                     "payment_method": {
                       "method": "card",
@@ -217,7 +214,7 @@
                   "value": {
                     "amount": 1299,
                     "currency": "USD",
-                    "capture": true,
+                    "intent": "capture",
                     "payment_method": {
                       "method": "paypal",
                       "redirect_url": "https://example.com/callback"
@@ -228,7 +225,7 @@
                   "value": {
                     "amount": 1299,
                     "currency": "USD",
-                    "capture": true,
+                    "intent": "capture",
                     "payment_method": {
                       "method": "token",
                       "token": "0123456789123458"
@@ -246,6 +243,71 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Status"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Returns an error if the request was badly formatted.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400IncorrectJson"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/async/transactions/{transaction_id}/authorize": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "example": "fe26475d-ec3e-4884-9553-f7356683f7f9"
+          },
+          "name": "transaction_id",
+          "in": "path",
+          "required": true,
+          "description": "The ID for the transaction to get the information for."
+        }
+      ],
+      "post": {
+        "operationId": "async-authorize-transaction",
+        "summary": "Authorize approved transaction",
+        "tags": [
+          "Async APIs"
+        ],
+        "description": "Authorize a previously approved transaction.\n\nThis API returns asynchronously, returning status object with the ID of the\npending `Transaction` resource.",
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                },
+                "examples": {
+                  "Pending transaction": {
+                    "value": {
+                      "type": "status",
+                      "status": "pending",
+                      "resource_type": "transaction",
+                      "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
+                      "external_identifier": "user-789123"
+                    }
+                  }
                 }
               }
             }
@@ -1213,9 +1275,6 @@
                 "oneOf": [
                   {
                     "$ref": "#/components/schemas/CardRequest"
-                  },
-                  {
-                    "$ref": "#/components/schemas/PayPalRequest"
                   }
                 ]
               }
@@ -1231,9 +1290,6 @@
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Card"
-                    },
-                    {
-                      "$ref": "#/components/schemas/PayPal"
                     }
                   ]
                 }
@@ -1461,8 +1517,8 @@
       ],
       "get": {
         "operationId": "approve-payment-method",
-        "summary": "Approve payment method",
-        "description": "Redirect a buyer to an alternative payment provider to approve their payment\nmethod. This is mainly used with providers like PayPal and Klarna to redirect\na buyer to their sites.",
+        "summary": "Buyer approval callback",
+        "description": "Internal API used as a redirect endpoint for payment methods that require\nbuyer authorization.\n\nFor example, when a buyer tries to add a PayPal payment method, the buyer\nneeds to be sent to PayPal, after which they are sent back to this endpoint\nupon completion.\n\nThis API applies any required updates for the payment method based on its\nquery parameters and then redirects the browser back to the `redirect_url`\nspecified when the payment method was first created.",
         "tags": [
           "Payment Methods"
         ],
@@ -1470,14 +1526,14 @@
         "security": [],
         "responses": {
           "302": {
-            "description": "Redirect the buyer to approve this payment method.",
+            "description": "Redirects the browser back to the `redirect_url` specified\nwhen the payment method was first created. It appends the payment method's\nID and status.",
             "headers": {
               "location": {
-                "description": "The URL to redirect the browser to. This is the approval URL for an\nalternative payment method like PayPal.",
+                "description": "The URL to redirect the browser to. This is the `redirect_url`\nspecified when the payment method was first created with some\nadditional query parameters appended.\n\n* `payment_method_id` - The ID of the payment method\n* `payment_method_status` - The current value of the\n  `status`  field of the payment method",
                 "schema": {
                   "type": "string",
                   "format": "url",
-                  "example": "https://paypal.com/..."
+                  "example": "https://example.com/callback?payment_method_id=77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5&payment_method_status=tokenized"
                 }
               }
             }
@@ -1495,24 +1551,23 @@
         }
       }
     },
-    "/payment-methods/{payment_method_id}/confirm": {
+    "/payment-method-approvals/{payment_method_approval_token}": {
       "parameters": [
         {
           "schema": {
             "type": "string",
-            "example": "46973e9d-88a7-44a6-abfe-be4ff0134ff4",
-            "format": "uuid"
+            "example": "NDY5NzNlOWQtODhhNy00NGE2LWFiZmUtYmU0ZmYwMTM0ZmY0"
           },
-          "name": "payment_method_id",
+          "name": "payment_method_approval_token",
           "in": "path",
           "required": true,
-          "description": "The ID of the payment method"
+          "description": "The token used to redirect the buyer for approval of the payment method setup.\nThis token does not represent anything to the consumer and no value should be\nderived from it except for internal use."
         }
       ],
       "get": {
-        "operationId": "confirm-payment-method",
-        "summary": "Confirm buyer authorization",
-        "description": "Internal API used as a redirect endpoint for payment methods that require\nbuyer authorization.\n\nFor example, when a buyer tries to add a PayPal payment method, the buyer\nneeds to be sent to PayPal, after which they are sent back to this endpoint\nupon completion.\n\nThis API applies any required updates for the payment method based on its\nquery parameters and then redirects the browser back to the `redirect_url`\nspecified when the payment method was first created.",
+        "operationId": "redirect-payment-method-approval",
+        "summary": "Approve payment method",
+        "description": "Redirect a buyer to an alternative payment provider to approve their payment\nmethod. This is mainly used with providers like PayPal and Klarna to redirect\na buyer to their sites.",
         "tags": [
           "Payment Methods"
         ],
@@ -1520,14 +1575,14 @@
         "security": [],
         "responses": {
           "302": {
-            "description": "Redirects the browser back to the `redirect_url` specified\nwhen the payment method was first created. It appends the payment method's\nID and status.",
+            "description": "Redirect the buyer to approve this payment method.",
             "headers": {
               "location": {
-                "description": "The URL to redirect the browser to. This is the `redirect_url`\nspecified when the payment method was first created with some\nadditional query parameters appended.\n\n* `payment_method_id` - The ID of the payment method\n* `payment_method_status` - The current value of the\n  `status`  field of the payment method",
+                "description": "The URL to redirect the browser to. This is the approval URL for an\nalternative payment method like PayPal.",
                 "schema": {
                   "type": "string",
                   "format": "url",
-                  "example": "https://example.com/callback?payment_method_id=77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5&payment_method_status=tokenized"
+                  "example": "https://paypal.com/..."
                 }
               }
             }
@@ -2442,7 +2497,7 @@
                   "value": {
                     "amount": 1299,
                     "currency": "USD",
-                    "capture": true,
+                    "intent": "capture",
                     "store": true,
                     "payment_method": {
                       "method": "card",
@@ -2456,7 +2511,7 @@
                   "value": {
                     "amount": 1299,
                     "currency": "USD",
-                    "capture": true,
+                    "intent": "capture",
                     "payment_method": {
                       "method": "paypal",
                       "redirect_url": "https://example.com/callback"
@@ -2467,7 +2522,7 @@
                   "value": {
                     "amount": 1299,
                     "currency": "USD",
-                    "capture": true,
+                    "intent": "capture",
                     "payment_method": {
                       "method": "token",
                       "token": "0123456789123458"
@@ -2748,6 +2803,84 @@
         }
       }
     },
+    "/transactions/{transaction_id}/authorize": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "example": "fe26475d-ec3e-4884-9553-f7356683f7f9"
+          },
+          "name": "transaction_id",
+          "in": "path",
+          "required": true,
+          "description": "The ID for the transaction to get the information for."
+        }
+      ],
+      "post": {
+        "operationId": "authorize-transaction",
+        "summary": "Authorize approved transaction",
+        "description": "Authorize a previously approved transaction.",
+        "tags": [
+          "Transactions"
+        ],
+        "responses": {
+          "200": {
+            "description": "A transaction",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Transaction"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error400BadRequest"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error400IncorrectJson"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found or has not yet been created.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error404NotFound"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error404PendingCreation"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/transactions/{transaction_id}/refund": {
       "parameters": [
         {
@@ -2888,6 +3021,104 @@
                       "$ref": "#/components/schemas/Error404PendingCreation"
                     }
                   ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/{transaction_id}/approve": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "example": "fe26475d-ec3e-4884-9553-f7356683f7f9"
+          },
+          "name": "transaction_id",
+          "in": "path",
+          "required": true,
+          "description": "The ID for the transaction to get the information for."
+        }
+      ],
+      "get": {
+        "operationId": "approve-transaction",
+        "summary": "Buyer approval callback",
+        "description": "Internal API used as a redirect endpoint for transactions that require\nbuyer authorization.\n\nFor example, when a buyer tries to create a PayPal transaction, the buyer\nneeds to be sent to PayPal, after which they are sent back to this endpoint\nupon completion.\n\nThis API applies any required updates for the transaction based on its\nquery parameters and then redirects the browser back to the `redirect_url`\nspecified when the payment method was first created.",
+        "tags": [
+          "Transactions"
+        ],
+        "x-internal": true,
+        "security": [],
+        "responses": {
+          "302": {
+            "description": "Redirects the browser back to the `redirect_url` specified\nwhen the transaction was first created. It appends the transaction's\nID and status.",
+            "headers": {
+              "location": {
+                "description": "The URL to redirect the browser to. This is the `redirect_url`\nspecified when the transaction was first created with some\nadditional query parameters appended.\n\n* `transaction_id` - The ID of the transaction\n* `transaction_status` - The current value of the\n  `status`  field of the transaction",
+                "schema": {
+                  "type": "string",
+                  "format": "url",
+                  "example": "https://example.com/callback?transaction_id=77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5&transaction_status=tokenized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transaction-approvals/{transaction_approval_token}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "example": "NDY5NzNlOWQtODhhNy00NGE2LWFiZmUtYmU0ZmYwMTM0ZmY0"
+          },
+          "name": "transaction_approval_token",
+          "in": "path",
+          "required": true,
+          "description": "The token used to redirect the buyer for approval of a transaction. This token\ndoes not represent anything to the consumer and no value should be derived\nfrom it except for internal use."
+        }
+      ],
+      "get": {
+        "operationId": "redirect-transaction-approval",
+        "summary": "Approve payment method",
+        "description": "Redirect a buyer to an alternative payment provider to approve their\ntransaction. This is mainly used with providers like PayPal and Klarna to\nredirect a buyer to their sites.",
+        "tags": [
+          "Transactions"
+        ],
+        "x-internal": true,
+        "security": [],
+        "responses": {
+          "302": {
+            "description": "Redirect the buyer to approve this transaction.",
+            "headers": {
+              "location": {
+                "description": "The URL to redirect the browser to. This is the approval URL for an\nalternative payment method like PayPal.",
+                "schema": {
+                  "type": "string",
+                  "format": "url",
+                  "example": "https://paypal.com/..."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
                 }
               }
             }
@@ -4837,6 +5068,7 @@
               "buyer_approval_pending",
               "buyer_approval_declined",
               "buyer_approval_timedout",
+              "buyer_approved",
               "stored"
             ]
           },
@@ -5358,15 +5590,20 @@
           },
           "store": {
             "type": "boolean",
-            "description": "Whether or not to also try and store the payment method with us so that\nit can be used again for future use.",
+            "description": "Whether or not to also try and store the payment method with us so that\nit can be used again for future use. This is only supported for payment\nmethods that support this feature.",
             "example": true,
             "default": false
           },
-          "capture": {
-            "type": "boolean",
-            "description": "Whether a successful authorization should immediately be captured as well, effectively processing the payment directly.",
-            "default": "false",
-            "example": true
+          "intent": {
+            "type": "string",
+            "description": "Defines the intent of this API call. This determines the desired initial\nstate of the transaction.\n\n* `approve` - Captures approval for the transaction from the user but does\nnot authorize it. This is only available to payment methods that require\nexplicit approval, like PayPal.\n* `authorize` - (Default) Optionally approves and then authorizes a\ntransaction but does not capture the funds.\n* `capture` - Optionally approves and then authorizes and captures the\nfunds of the transaction.",
+            "default": "authorize",
+            "example": "capture",
+            "enum": [
+              "approve",
+              "authorize",
+              "capture"
+            ]
           },
           "external_identifier": {
             "type": "string",
