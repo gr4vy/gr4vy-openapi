@@ -1,0 +1,11 @@
+---
+schema:
+  type: string
+  example: NDY5NzNlOWQtODhhNy00NGE2LWFiZmUtYmU0ZmYwMTM0ZmY0
+name: payment_method_approval_token
+in: path
+required: true
+description: |-
+  The token used to redirect the buyer for approval of the payment method setup.
+  This token does not represent anything to the consumer and no value should be
+  derived from it except for internal use.

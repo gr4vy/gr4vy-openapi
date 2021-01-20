@@ -42,7 +42,7 @@ requestBody:
           value:
             amount: 1299
             currency: USD
-            capture: true
+            intent: "capture"
             store: true
             payment_method:
               method: card
@@ -53,7 +53,7 @@ requestBody:
           value:
             amount: 1299
             currency: USD
-            capture: true
+            intent: "capture"
             payment_method:
               method: paypal
               redirect_url: https://example.com/callback
@@ -61,7 +61,7 @@ requestBody:
           value:
             amount: 1299
             currency: USD
-            capture: true
+            intent: "capture"
             payment_method:
               method: token
               token: "0123456789123458"
