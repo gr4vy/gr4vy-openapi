@@ -3309,6 +3309,7 @@
             "description": "Whether this rule is currently in use. Rules can be deactivated to allow\nfor them to be kept around and re-activated at a later date."
           },
           "conditions": {
+            "type": "array",
             "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
             "minItems": 1,
             "items": {
@@ -3569,6 +3570,7 @@
             "description": "The numeric rank of a rule. Rules with a lower position value\nare processed first. When a rule is inserted at a position, any rules with\nthe the same value or higher are down a position accordingly. When left\nout, the rule is inserted at the end of the list."
           },
           "conditions": {
+            "type": "array",
             "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
             "minItems": 1,
             "items": {
@@ -3641,6 +3643,7 @@
             "description": "The numeric rank of a rule. Rules with a lower position value\nare processed first. When a rule is inserted at a position, any rules with\nthe the same value or higher are down a position accordingly."
           },
           "conditions": {
+            "type": "array",
             "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
             "minItems": 1,
             "items": {
