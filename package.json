@@ -36,8 +36,8 @@
     "js-yaml": "^4.0.0",
     "json-schema-sensitivity-checker": "^1.0.6",
     "json-schema-spell-checker": "^2.0.1",
-    "jsonpath": "^1.0.2",
-    "openapi-examples-validator": "^4.2.0",
+    "jsonpath": "^1.1.0",
+    "openapi-examples-validator": "^4.2.1",
     "redoc-cli": "^0.10.2"
   }
 }

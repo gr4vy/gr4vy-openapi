@@ -1153,10 +1153,10 @@ commander@^5.1.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-5.1.0.tgz#46abbd1652f8e059bddaef99bbdcb2ad9cf179ae"
   integrity sha512-P0CysNDQ7rtVw4QIQtm+MRxV66vKFSvlsQvGYXZWR3qFU0jlMKHZZZgw8e+8DSah4UDKMqnknRDQz+xuQXQ/Zg==
 
-commander@^6.2.0:
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-6.2.0.tgz#b990bfb8ac030aedc6d11bc04d1488ffef56db75"
-  integrity sha512-zP4jEKbe8SHzKJYQmq8Y9gYjtO/POJLgIdKgV7B9qNmABVFVc+ctqSX6iXh4mCpJfRBOabiZ2YKPg8ciDw6C+Q==
+commander@^6.2.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-6.2.1.tgz#0792eb682dfbc325999bb2b84fddddba110ac73c"
+  integrity sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA==
 
 common-prefix@^1.1.0:
   version "1.1.0"
@@ -1569,10 +1569,10 @@ eol@0.9.1:
   resolved "https://registry.yarnpkg.com/eol/-/eol-0.9.1.tgz#f701912f504074be35c6117a5c4ade49cd547acd"
   integrity sha512-Ds/TEoZjwggRoz/Q2O7SE3i4Jm66mqTDfmdHdq/7DKVk3bro9Q8h6WdXKdPqFLMoqxrDK5SVRzHVPOS6uuGtrg==
 
-errno@0.1.7:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/errno/-/errno-0.1.7.tgz#4684d71779ad39af177e3f007996f7c67c852618"
-  integrity sha512-MfrRBDWzIWifgq6tJj60gkAwtLNb6sQPlcFrSOflcP1aFmmruKQ2wRnze/8V6kgyz7H3FF8Npzv78mZ7XLLflg==
+errno@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/errno/-/errno-1.0.0.tgz#0ea47d701864accf996412f09e29b4dc2cf3856d"
+  integrity sha512-3zV5mFS1E8/1bPxt/B0xxzI1snsg3uSCIh6Zo1qKg6iMw93hzPANk9oBFzSFBFrwuVoQuE3rLoouAUfwOAj1wQ==
   dependencies:
     prr "~1.0.1"
 
@@ -2930,6 +2930,11 @@ jsonpath-plus@^3.0.0:
   resolved "https://registry.yarnpkg.com/jsonpath-plus/-/jsonpath-plus-3.0.0.tgz#194ab4792a5e9b4ed27bf442188c8eb7e697a04b"
   integrity sha512-WQwgWEBgn+SJU1tlDa/GiY5/ngRpa9yrSj8n4BYPHcwoxTDaMEaYCHMOn42hIHHDd3CrUoRr3+HpsK0hCKoxzA==
 
+jsonpath-plus@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/jsonpath-plus/-/jsonpath-plus-5.0.2.tgz#ede88d064264172560ab1420a366a106cfab683d"
+  integrity sha512-J1StEInJIb5INbUkzf/DM6mby0hEyU2o6kw+AUzrJnrgMunvDKdZgGFXEqH5qA2TVF3mVH7A6ZZQJpcNXXg90A==
+
 jsonpath@^0.2.5:
   version "0.2.12"
   resolved "https://registry.yarnpkg.com/jsonpath/-/jsonpath-0.2.12.tgz#5bf9d911fb4616c1e3370beceb9f0db24ae34cd2"
@@ -2944,6 +2949,15 @@ jsonpath@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/jsonpath/-/jsonpath-1.0.2.tgz#e6aae681d03e9a77b4651d5d96eac5fc63b1fd13"
   integrity sha512-rmzlgFZiQPc6q4HDyK8s9Qb4oxBnI5sF61y/Co5PV0lc3q2bIuRsNdueVbhoSHdKM4fxeimphOAtfz47yjCfeA==
+  dependencies:
+    esprima "1.2.2"
+    static-eval "2.0.2"
+    underscore "1.7.0"
+
+jsonpath@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/jsonpath/-/jsonpath-1.1.0.tgz#ff3e9e4746eae77c11bc09d542e7219333c28055"
+  integrity sha512-CZHwa1sZOf42qkIyK7evwToFXeTB4iplbl6Z9CVwU0wmBQPffL6gtYJXCoeciJoZENMuzaidPjhp2iOLRei4wQ==
   dependencies:
     esprima "1.2.2"
     static-eval "2.0.2"
@@ -3707,19 +3721,19 @@ ono@^4.0.11, ono@^4.0.2:
   dependencies:
     format-util "^1.0.3"
 
-openapi-examples-validator@^4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/openapi-examples-validator/-/openapi-examples-validator-4.2.0.tgz#9d5756c49bb2d02dc140e3f6cab3f1f09abeed65"
-  integrity sha512-kgkHwxdPvuadi1XDKf0KNKGHYoIQZT+QoUdWbX4GLTBUKFhusp6b+gnQ9kxCHgzlNv5fKSnKpbAIlmAabQGcIA==
+openapi-examples-validator@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/openapi-examples-validator/-/openapi-examples-validator-4.2.1.tgz#22bcc180b874acb60d145c87dfe95208ecc9ec3c"
+  integrity sha512-cnI+ebMUK43XGvXhye3y7QYtt4/LulWVE0FySw3f+4empP84K9sCso9r9sxhjTkd5JIaz6K3zhdq89+6k1beEw==
   dependencies:
     ajv "^6.12.6"
     ajv-oai "1.2.1"
-    commander "^6.2.0"
-    errno "0.1.7"
+    commander "^6.2.1"
+    errno "^1.0.0"
     glob "^7.1.6"
     json-pointer "0.6.1"
     json-schema-ref-parser "^9.0.6"
-    jsonpath-plus "^4.0.0"
+    jsonpath-plus "^5.0.2"
     lodash.clonedeep "^4.5.0"
     lodash.flatmap "^4.5.0"
     lodash.flatten "^4.4.0"
