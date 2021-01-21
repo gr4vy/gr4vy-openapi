@@ -691,50 +691,6 @@
         "summary": "Update buyer"
       }
     },
-    "/buyers/{buyer_id}/payment-methods": {
-      "parameters": [
-        {
-          "description": "The unique ID for a buyer.",
-          "format": "uuid",
-          "in": "path",
-          "name": "buyer_id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Returns a list of token-formatted payment methods",
-            "schema": {
-              "$ref": "#/definitions/PaymentMethods--Token"
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "schema": {
-              "$ref": "#/definitions/Error401Unauthorized"
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "schema": {
-              "$ref": "#/definitions/Error404NotFound"
-            }
-          }
-        },
-        "tags": [
-          "Payment Methods"
-        ],
-        "description": "Lists the payment methods for a buyer. This endpoint returns all payment\nmethods in the `token` format and only returns fully stored and tokenized\npayment methods.",
-        "operationId": "list-buyer-payment-methods",
-        "summary": "List payment methods for a buyer"
-      }
-    },
     "/card-rules": {
       "get": {
         "produces": [
@@ -1077,7 +1033,7 @@
         "tags": [
           "Payment Methods"
         ],
-        "description": "Returns a list of stored payment methods",
+        "description": "Returns a list of stored, tokenized payment methods",
         "operationId": "list-payment-methods",
         "summary": "List stored payment methods"
       },
@@ -1455,6 +1411,16 @@
             "format": "",
             "in": "query",
             "name": "cursor",
+            "type": "string"
+          },
+          {
+            "description": "Filters the results to only the items for which the `method` has been set to this value.",
+            "enum": [
+              "card",
+              "paypal"
+            ],
+            "in": "query",
+            "name": "method",
             "type": "string"
           }
         ],
@@ -3678,21 +3644,6 @@
         }
       },
       "title": "Payment Methods",
-      "type": "object",
-      "x-tags": [
-        "PaymentMethods"
-      ]
-    },
-    "PaymentMethods--Token": {
-      "description": "A list of stored payment methods in a token-format.",
-      "properties": {
-        "items": {
-          "description": "A list of stored payment methods",
-          "items": {},
-          "type": "array"
-        }
-      },
-      "title": "Payment Methods (Token)",
       "type": "object",
       "x-tags": [
         "PaymentMethods"
