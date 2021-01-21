@@ -1075,61 +1075,6 @@
         }
       }
     },
-    "/buyers/{buyer_id}/payment-methods": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string",
-            "format": "uuid",
-            "example": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
-          },
-          "name": "buyer_id",
-          "in": "path",
-          "required": true,
-          "description": "The unique ID for a buyer."
-        }
-      ],
-      "get": {
-        "operationId": "list-buyer-payment-methods",
-        "summary": "List payment methods for a buyer",
-        "description": "Lists the payment methods for a buyer. This endpoint returns all payment\nmethods in the `token` format and only returns fully stored and tokenized\npayment methods.",
-        "tags": [
-          "Payment Methods"
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns a list of token-formatted payment methods",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PaymentMethods--Token"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error404NotFound"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/merchants/main": {
       "get": {
         "operationId": "get-current-merchant",
@@ -1177,7 +1122,7 @@
       "get": {
         "operationId": "list-payment-methods",
         "summary": "List stored payment methods",
-        "description": "Returns a list of stored payment methods",
+        "description": "Returns a list of stored, tokenized payment methods",
         "tags": [
           "Payment Methods"
         ],
@@ -1533,7 +1478,7 @@
                 "schema": {
                   "type": "string",
                   "format": "url",
-                  "example": "https://example.com/callback?payment_method_id=77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5&payment_method_status=tokenized"
+                  "example": "https://example.com/callback?payment_method_id=77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5&transaction_status=tokenized"
                 }
               }
             }
@@ -1693,6 +1638,19 @@
             "in": "query",
             "name": "cursor",
             "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "card",
+              "enum": [
+                "card",
+                "paypal"
+              ]
+            },
+            "in": "query",
+            "name": "method",
+            "description": "Filters the results to only the items for which the `method` has been set to this value."
           }
         ],
         "responses": {
@@ -4433,13 +4391,7 @@
             "items": {
               "oneOf": [
                 {
-                  "$ref": "#/components/schemas/Card"
-                },
-                {
                   "$ref": "#/components/schemas/Card--Token"
-                },
-                {
-                  "$ref": "#/components/schemas/PayPal"
                 },
                 {
                   "$ref": "#/components/schemas/PayPal--Token"
@@ -4471,30 +4423,6 @@
             "nullable": true,
             "minLength": 1,
             "maxLength": 1000
-          }
-        }
-      },
-      "PaymentMethods--Token": {
-        "title": "Payment Methods (Token)",
-        "type": "object",
-        "description": "A list of stored payment methods in a token-format.",
-        "x-tags": [
-          "PaymentMethods"
-        ],
-        "properties": {
-          "items": {
-            "type": "array",
-            "description": "A list of stored payment methods",
-            "items": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/Card--Token"
-                },
-                {
-                  "$ref": "#/components/schemas/PayPal--Token"
-                }
-              ]
-            }
           }
         }
       },
