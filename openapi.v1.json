@@ -1650,7 +1650,7 @@
             },
             "in": "query",
             "name": "method",
-            "description": "Filters the results to only the items for which the `method` has been set to this value."
+            "description": "Filters the results to only the items for which the `method` has been set to\nthis value."
           }
         ],
         "responses": {
