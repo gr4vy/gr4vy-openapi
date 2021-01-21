@@ -10,6 +10,7 @@ tags:
 parameters:
   - $ref: "../query-parameters/limit-100.yaml"
   - $ref: "../query-parameters/cursor.yaml"
+  - $ref: "../query-parameters/method.yaml"
 
 responses:
   "200":
