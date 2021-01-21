@@ -148,11 +148,6 @@ paths:
       $ref: ./paths/buyers__update-buyer.yaml
     delete:
       $ref: ./paths/buyers__delete-buyer.yaml
-  /buyers/{buyer_id}/payment-methods:
-    parameters:
-      - $ref: ./path-parameters/buyer_id.yaml
-    get:
-      $ref: ./paths/buyers__list-buyer-payment-methods.yaml
   /payment-methods:
     get:
       $ref: ./paths/payment_methods__list-payment-methods.yaml
@@ -251,8 +246,6 @@ components:
       $ref: ./resources/error_detail.yaml
     PaymentMethods:
       $ref: ./resources/payment_methods.yaml
-    PaymentMethods--Token:
-      $ref: ./resources/payment_methods--token.yaml
     PaymentMethodEvent:
       $ref: ./resources/payment_method_event.yaml
     PaymentMethodEvents:
