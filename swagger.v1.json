@@ -926,49 +926,6 @@
         "x-internal": true
       }
     },
-    "/payment-method-approvals/{payment_method_approval_token}": {
-      "parameters": [
-        {
-          "description": "The token used to redirect the buyer for approval of the payment method setup.\nThis token does not represent anything to the consumer and no value should be\nderived from it except for internal use.",
-          "in": "path",
-          "name": "payment_method_approval_token",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "302": {
-            "description": "Redirect the buyer to approve this payment method.",
-            "headers": {
-              "location": {
-                "description": "The URL to redirect the browser to. This is the approval URL for an\nalternative payment method like PayPal.",
-                "format": "url",
-                "type": "string"
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "schema": {
-              "$ref": "#/definitions/Error404NotFound"
-            }
-          }
-        },
-        "security": [],
-        "tags": [
-          "Payment Methods"
-        ],
-        "description": "Redirect a buyer to an alternative payment provider to approve their payment\nmethod. This is mainly used with providers like PayPal and Klarna to redirect\na buyer to their sites.",
-        "operationId": "redirect-payment-method-approval",
-        "summary": "Approve payment method",
-        "x-internal": true
-      }
-    },
     "/payment-methods": {
       "get": {
         "produces": [
@@ -1073,6 +1030,49 @@
         "description": "Stores and tokenizes a new payment method",
         "operationId": "store-payment-method",
         "summary": "Store a new payment method"
+      }
+    },
+    "/payment-methods/approvals/{payment_method_approval_token}": {
+      "parameters": [
+        {
+          "description": "The token used to redirect the buyer for approval of the payment method setup.\nThis token does not represent anything to the consumer and no value should be\nderived from it except for internal use.",
+          "in": "path",
+          "name": "payment_method_approval_token",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "302": {
+            "description": "Redirect the buyer to approve this payment method.",
+            "headers": {
+              "location": {
+                "description": "The URL to redirect the browser to. This is the approval URL for an\nalternative payment method like PayPal.",
+                "format": "url",
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "schema": {
+              "$ref": "#/definitions/Error404NotFound"
+            }
+          }
+        },
+        "security": [],
+        "tags": [
+          "Payment Methods"
+        ],
+        "description": "Redirect a buyer to an alternative payment provider to approve their payment\nmethod. This is mainly used with providers like PayPal and Klarna to redirect\na buyer to their sites.",
+        "operationId": "redirect-payment-method-approval",
+        "summary": "Approve payment method",
+        "x-internal": true
       }
     },
     "/payment-methods/{payment_method_id}": {
@@ -1606,49 +1606,6 @@
         "summary": "Update payment service"
       }
     },
-    "/transaction-approvals/{transaction_approval_token}": {
-      "parameters": [
-        {
-          "description": "The token used to redirect the buyer for approval of a transaction. This token\ndoes not represent anything to the consumer and no value should be derived\nfrom it except for internal use.",
-          "in": "path",
-          "name": "transaction_approval_token",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "302": {
-            "description": "Redirect the buyer to approve this transaction.",
-            "headers": {
-              "location": {
-                "description": "The URL to redirect the browser to. This is the approval URL for an\nalternative payment method like PayPal.",
-                "format": "url",
-                "type": "string"
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "schema": {
-              "$ref": "#/definitions/Error404NotFound"
-            }
-          }
-        },
-        "security": [],
-        "tags": [
-          "Transactions"
-        ],
-        "description": "Redirect a buyer to an alternative payment provider to approve their\ntransaction. This is mainly used with providers like PayPal and Klarna to\nredirect a buyer to their sites.",
-        "operationId": "redirect-transaction-approval",
-        "summary": "Approve payment method",
-        "x-internal": true
-      }
-    },
     "/transactions": {
       "get": {
         "produces": [
@@ -1786,6 +1743,49 @@
         "description": "Attempts to create an authorization for a payment method. In some cases it is\nnot possible to create the authorization without redirecting the user for\ntheir authorization. In these cases the status is set to\n`buyer_approval_pending` and an `approval_url` is returned.\n\nAdditionally, this endpoint accepts a few additional fields that allow for\nsimultaneous capturing and storage of the payment method.\n\n* `store` - Use this field to store the payment method for\nfuture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
         "operationId": "authorize-new-transaction",
         "summary": "Authorize new transaction"
+      }
+    },
+    "/transactions/approvals/{transaction_approval_token}": {
+      "parameters": [
+        {
+          "description": "The token used to redirect the buyer for approval of a transaction. This token\ndoes not represent anything to the consumer and no value should be derived\nfrom it except for internal use.",
+          "in": "path",
+          "name": "transaction_approval_token",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "302": {
+            "description": "Redirect the buyer to approve this transaction.",
+            "headers": {
+              "location": {
+                "description": "The URL to redirect the browser to. This is the approval URL for an\nalternative payment method like PayPal.",
+                "format": "url",
+                "type": "string"
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "schema": {
+              "$ref": "#/definitions/Error404NotFound"
+            }
+          }
+        },
+        "security": [],
+        "tags": [
+          "Transactions"
+        ],
+        "description": "Redirect a buyer to an alternative payment provider to approve their\ntransaction. This is mainly used with providers like PayPal and Klarna to\nredirect a buyer to their sites.",
+        "operationId": "redirect-transaction-approval",
+        "summary": "Approve payment method",
+        "x-internal": true
       }
     },
     "/transactions/{transaction_id}": {
@@ -2372,7 +2372,8 @@
           "enum": [
             "processing",
             "processing_failed",
-            "stored"
+            "stored",
+            "used"
           ],
           "example": "stored",
           "type": "string"
@@ -3379,7 +3380,8 @@
             "buyer_approval_declined",
             "buyer_approval_timedout",
             "buyer_approved",
-            "stored"
+            "stored",
+            "used"
           ],
           "example": "buyer_approval_pending",
           "type": "string"
