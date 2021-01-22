@@ -36,6 +36,7 @@ properties:
       - buyer_approval_timedout
       - buyer_approved
       - stored
+      - used
 
   token:
     type: string

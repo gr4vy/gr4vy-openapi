@@ -29,6 +29,7 @@ properties:
       - processing
       - processing_failed
       - stored
+      - used
 
   token:
     type: string
