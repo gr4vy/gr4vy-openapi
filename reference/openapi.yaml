@@ -219,7 +219,7 @@ paths:
     get:
       $ref: "./paths/payment_methods__approve-payment-method.yaml"
 
-  "/payment-method-approvals/{payment_method_approval_token}":
+  "/payment-methods/approvals/{payment_method_approval_token}":
     parameters:
       - $ref: "./path-parameters/payment_method_approval_token.yaml"
     get:
@@ -313,7 +313,7 @@ paths:
     get:
       $ref: "./paths/transactions__approve-transaction.yaml"
 
-  "/transaction-approvals/{transaction_approval_token}":
+  "/transactions/approvals/{transaction_approval_token}":
     parameters:
       - $ref: "./path-parameters/transaction_approval_token.yaml"
     get:
