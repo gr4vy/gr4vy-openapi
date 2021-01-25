@@ -4308,7 +4308,8 @@
             "refunded",
             "buyer_approval_pending",
             "buyer_approval_declined",
-            "buyer_approval_timedout"
+            "buyer_approval_timedout",
+            "buyer_approved"
           ],
           "example": "processing",
           "type": "string"
