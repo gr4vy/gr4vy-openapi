@@ -2899,7 +2899,7 @@
           "type": "string"
         }
       },
-      "title": "Card Rule (Create)",
+      "title": "Card Rule (Update)",
       "type": "object",
       "x-internal": true,
       "x-tags": [
