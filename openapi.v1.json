@@ -3814,7 +3814,7 @@
         }
       },
       "CardRuleUpdateRequest": {
-        "title": "Card Rule (Create)",
+        "title": "Card Rule (Update)",
         "type": "object",
         "description": "Updates a rule for a card transactions.",
         "x-internal": true,
