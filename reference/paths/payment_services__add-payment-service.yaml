@@ -33,7 +33,7 @@ responses:
                 - EUR
               accepted_countries:
                 - DE
-              use_test_environment: true
+              live_environment: true
 
   "400":
     description:

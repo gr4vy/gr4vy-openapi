@@ -75,9 +75,11 @@ properties:
       your own records.
     nullable: true
 
-  use_test_environment:
+  live_environment:
     type: boolean
-    description:
-      Defines if this transaction should run in the payment provider's test
-      environment. Defaults to false.
+    default: true
+    description: |-
+      Defines if this transaction should run using payment services that use a
+      live production environment or the sandbox/test environment. If not
+      specified this value defaults to the live environment (`true`).
     example: false

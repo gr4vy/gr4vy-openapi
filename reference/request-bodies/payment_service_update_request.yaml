@@ -72,11 +72,11 @@ properties:
       - USD
       - GBP
 
-  use_test_environment:
+  live_environment:
     type: boolean
     description:
-      Defines if this payment service uses the service's test/sandbox
-      environment.
+      Defines if this payment service uses the service's live production
+      environment or the sandbox/test environment.
     example: false
 
   position:
