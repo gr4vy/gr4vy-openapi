@@ -1,0 +1,11 @@
+---
+schema:
+  type: string
+  example: John
+in: query
+name: search
+description: |-
+  Filters the results to only the buyers for which the `display_name` or
+  `external_identifier` matches this value. This field allows for a partial
+  match, matching any buyer for which either of the fields partially or
+  completely matches.
