@@ -28,7 +28,7 @@ properties:
     example: currency
     enum:
       - currency
-      - card_type
+      - scheme
 
   operator:
     type: string

@@ -1,0 +1,8 @@
+---
+schema:
+  type: boolean
+  example: true
+in: query
+name: store
+description: |-
+  Filters the results to only the items that apply when for this `store` value.

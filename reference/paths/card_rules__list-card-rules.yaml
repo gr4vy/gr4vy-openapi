@@ -6,9 +6,17 @@ tags:
   - Card Rules
 x-internal: true
 
+parameters:
+  - $ref: "../query-parameters/amount.yaml"
+  - $ref: "../query-parameters/currency.yaml"
+  - $ref: "../query-parameters/scheme.yaml"
+  - $ref: "../query-parameters/store.yaml"
+
 responses:
   "200":
-    description: A list of card rules
+    description: |-
+      A list of card rules, optionally filtered down to only the ones that would
+      resolve for the given query parameters.
     content:
       application/json:
         schema:

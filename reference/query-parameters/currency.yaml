@@ -5,5 +5,5 @@ schema:
 in: query
 name: currency
 description: |-
-  Filters the results to only the items which support this currency code. A
+  Filters the results to only the items that match for this currency code. A
   currency is formatted as 3-letter ISO currency code.
