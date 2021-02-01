@@ -11,7 +11,7 @@ parameters:
 
 responses:
   "200":
-    description: OK
+    description: Returns a list of payment service definitions.
     content:
       application/json:
         schema:

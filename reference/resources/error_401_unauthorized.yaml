@@ -23,7 +23,7 @@ properties:
 
   status:
     type: integer
-    description: "`401`"
+    description: "`401`."
     example: 401
     enum:
       - 401

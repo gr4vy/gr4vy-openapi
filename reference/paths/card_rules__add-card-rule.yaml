@@ -14,7 +14,7 @@ requestBody:
 
 responses:
   "201":
-    description: A newly created rule
+    description: Returns the newly created rule.
     content:
       application/json:
         schema:

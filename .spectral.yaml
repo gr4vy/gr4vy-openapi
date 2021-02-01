@@ -2,6 +2,7 @@ functionsDir: ./spectral/
 
 functions:
   - full-stop
+  - response-description-returns
 
 formats: []
 
@@ -25,3 +26,10 @@ rules:
     severity: error
     then:
       function: full-stop
+
+  response-description-returns:
+    description: Response descriptions should start with `Returns`.
+    given: $..paths[*][*].responses[*].description
+    severity: error
+    then:
+      function: response-description-returns

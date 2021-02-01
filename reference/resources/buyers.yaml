@@ -1,7 +1,7 @@
 ---
 title: Buyers
 type: object
-description: A list of buyers
+description: A list of buyers.
 
 x-tags:
   - Buyers
@@ -9,7 +9,7 @@ x-tags:
 properties:
   items:
     type: array
-    description: A list of buyers
+    description: A list of buyers.
     items:
       $ref: "../openapi.yaml#/components/schemas/Buyer"
 

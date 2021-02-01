@@ -1,7 +1,7 @@
 ---
 operationId: list-buyers
 summary: List buyers
-description: Returns a list of cards
+description: Returns a list of buyers.
 tags:
   - Buyers
 
@@ -12,7 +12,7 @@ parameters:
 
 responses:
   "200":
-    description: Returns a list of buyers
+    description: Returns a list of buyers.
     content:
       application/json:
         schema:

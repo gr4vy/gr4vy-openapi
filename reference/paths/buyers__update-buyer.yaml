@@ -20,7 +20,7 @@ requestBody:
 responses:
   "200":
     description: |-
-      An updated buyer record.
+      Returns the updated buyer record.
     content:
       application/json:
         schema:

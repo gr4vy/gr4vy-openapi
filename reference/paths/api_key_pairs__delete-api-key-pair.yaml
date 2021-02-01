@@ -1,14 +1,14 @@
 ---
 operationId: delete-api-key-pair
 summary: Delete an API key-pair
-description: Deletes an API key-pair
+description: Deletes an API key-pair.
 tags:
   - API Key Pairs
 x-internal: true
 
 responses:
   "204":
-    description: No Content
+    description: Returns an empty response.
 
   "401":
     description: Returns an error if no valid authentication was provided.

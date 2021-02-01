@@ -1,13 +1,13 @@
 ---
 operationId: get-payment-method
 summary: Get stored payment method
-description: Gets the details for a stored payment method
+description: Gets the details for a stored payment method.
 tags:
   - Payment Methods
 
 responses:
   "200":
-    description: Returns a payment method
+    description: Returns a payment method.
     content:
       application/json:
         schema:

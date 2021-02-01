@@ -2,11 +2,12 @@
 operationId: delete-payment-service
 summary: Delete active payment service
 description: Deletes a specific active payment service.
-tags: ["Payment Services"]
+tags:
+  - Payment Services
 
 responses:
   "204":
-    description: No Content
+    description: Returns an empty response.
 
   "401":
     description: Returns an error if no valid authentication was provided.

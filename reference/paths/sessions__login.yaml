@@ -18,7 +18,7 @@ requestBody:
 responses:
   "200":
     description: |-
-      Returns a session object
+      Returns a session object.
     content:
       application/json:
         schema:

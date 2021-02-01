@@ -16,7 +16,7 @@ required:
 properties:
   method:
     type: string
-    description: "`card`"
+    description: "`card`."
     example: card
     enum:
       - card

@@ -1,8 +1,10 @@
 ---
 operationId: get-transaction
 summary: Get transaction
-description: "Get information about a transaction"
-tags: ["Transactions"]
+description: Get information about a transaction.
+tags:
+  - Transactions
+
 responses:
   "200":
     description: Returns a transaction resource.
