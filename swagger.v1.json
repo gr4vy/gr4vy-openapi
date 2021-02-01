@@ -47,7 +47,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of active key pairs",
+            "description": "Returns a list of active key pairs.",
             "schema": {
               "$ref": "#/definitions/APIKeyPairs"
             }
@@ -62,7 +62,7 @@
         "tags": [
           "API Key Pairs"
         ],
-        "description": "Returns a list of active API key-pairs",
+        "description": "Returns a list of active API key-pairs.",
         "operationId": "list-api-key-pairs",
         "summary": "List API key-pairs",
         "x-internal": true
@@ -74,7 +74,7 @@
         "parameters": [],
         "responses": {
           "201": {
-            "description": "A newly created key pair",
+            "description": "Returns a newly created key pair.",
             "schema": {
               "$ref": "#/definitions/APIKeyPair"
             }
@@ -89,7 +89,7 @@
         "tags": [
           "API Key Pairs"
         ],
-        "description": "Creates a new API key-pair",
+        "description": "Creates a new API key-pair.",
         "operationId": "create-api-key-pair",
         "summary": "Create an API key-pair",
         "x-internal": true
@@ -112,7 +112,7 @@
         "parameters": [],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Returns an empty response."
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -130,7 +130,7 @@
         "tags": [
           "API Key Pairs"
         ],
-        "description": "Deletes an API key-pair",
+        "description": "Deletes an API key-pair.",
         "operationId": "delete-api-key-pair",
         "summary": "Delete an API key-pair",
         "x-internal": true
@@ -153,7 +153,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted",
+            "description": "Returns a status object.",
             "schema": {
               "$ref": "#/definitions/Status"
             }
@@ -172,7 +172,7 @@
         "tags": [
           "Async APIs"
         ],
-        "description": "Stores and tokenizes a new payment method",
+        "description": "Stores and tokenizes a new payment method.",
         "operationId": "async-store-payment-method",
         "summary": "Store a new payment method"
       }
@@ -196,7 +196,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted",
+            "description": "Returns a status object.",
             "schema": {
               "$ref": "#/definitions/Status"
             }
@@ -249,7 +249,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted",
+            "description": "Returns a status object.",
             "schema": {
               "$ref": "#/definitions/Statuses"
             }
@@ -292,7 +292,7 @@
         "parameters": [],
         "responses": {
           "202": {
-            "description": "Accepted",
+            "description": "Returns a status object.",
             "schema": {
               "$ref": "#/definitions/Status"
             }
@@ -346,7 +346,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted",
+            "description": "Returns a status object.",
             "schema": {
               "$ref": "#/definitions/Status"
             }
@@ -380,7 +380,7 @@
         "parameters": [],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Returns an empty response."
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -415,7 +415,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns a session object",
+            "description": "Returns a session object.",
             "schema": {
               "$ref": "#/definitions/Session"
             }
@@ -447,7 +447,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Returns a session object",
+            "description": "Returns a session object.",
             "schema": {
               "$ref": "#/definitions/Session"
             }
@@ -504,7 +504,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns a list of buyers",
+            "description": "Returns a list of buyers.",
             "schema": {
               "$ref": "#/definitions/Buyers"
             }
@@ -519,7 +519,7 @@
         "tags": [
           "Buyers"
         ],
-        "description": "Returns a list of cards",
+        "description": "Returns a list of buyers.",
         "operationId": "list-buyers",
         "summary": "List buyers"
       },
@@ -541,7 +541,7 @@
         ],
         "responses": {
           "201": {
-            "description": "This API returns asynchronously, returning status object with the ID of the pending `Card` resource.",
+            "description": "Returns the buyer that was added.",
             "schema": {
               "$ref": "#/definitions/Buyer"
             }
@@ -589,7 +589,7 @@
         "parameters": [],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Returns an empty response."
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -639,7 +639,7 @@
         "tags": [
           "Buyers"
         ],
-        "description": "Gets the information about a buyer",
+        "description": "Gets the information about a buyer.",
         "operationId": "get-buyer",
         "summary": "Get buyer"
       },
@@ -661,7 +661,7 @@
         ],
         "responses": {
           "200": {
-            "description": "An updated buyer record.",
+            "description": "Returns the updated buyer record.",
             "schema": {
               "$ref": "#/definitions/Buyer"
             }
@@ -699,7 +699,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "A list of card rules",
+            "description": "Returns a list of card rules.",
             "schema": {
               "$ref": "#/definitions/CardRules"
             }
@@ -714,7 +714,7 @@
         "tags": [
           "Card Rules"
         ],
-        "description": "Returns a list of rules for card transactions",
+        "description": "Returns a list of rules for card transactions.",
         "operationId": "list-cards-rules",
         "summary": "List card rules",
         "x-internal": true
@@ -737,7 +737,7 @@
         ],
         "responses": {
           "201": {
-            "description": "A newly created rule",
+            "description": "Returns the newly created rule.",
             "schema": {
               "$ref": "#/definitions/CardRule"
             }
@@ -780,7 +780,7 @@
         "parameters": [],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Returns an empty response."
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -789,7 +789,7 @@
             }
           },
           "403": {
-            "description": "Returns an error if the workflow could not be deleted",
+            "description": "Returns an error if the rule could not be deleted.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -804,7 +804,7 @@
         "tags": [
           "Card Rules"
         ],
-        "description": "Deletes a specific card rule",
+        "description": "Deletes a specific card rule.",
         "operationId": "delete-card-rule",
         "summary": "Delete card rule",
         "x-internal": true
@@ -816,7 +816,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "A card rule",
+            "description": "Returns a card rule.",
             "schema": {
               "$ref": "#/definitions/CardRule"
             }
@@ -860,7 +860,7 @@
         ],
         "responses": {
           "200": {
-            "description": "An updated card rule",
+            "description": "Returns the updated card rule.",
             "schema": {
               "$ref": "#/definitions/CardRule"
             }
@@ -920,7 +920,7 @@
         "tags": [
           "Merchants"
         ],
-        "description": "Gets the information about the current merchant account",
+        "description": "Gets the information about the current merchant account.",
         "operationId": "get-current-merchant",
         "summary": "Get current merchant details",
         "x-internal": true
@@ -975,7 +975,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Returns a list of payment methods.",
             "schema": {
               "$ref": "#/definitions/PaymentMethods"
             }
@@ -990,7 +990,7 @@
         "tags": [
           "Payment Methods"
         ],
-        "description": "Returns a list of stored, tokenized payment methods",
+        "description": "Returns a list of stored, tokenized payment methods.",
         "operationId": "list-payment-methods",
         "summary": "List stored payment methods"
       },
@@ -1010,7 +1010,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "Returns the created payment method.",
             "schema": {}
           },
           "400": {
@@ -1027,7 +1027,7 @@
         "tags": [
           "Payment Methods"
         ],
-        "description": "Stores and tokenizes a new payment method",
+        "description": "Stores and tokenizes a new payment method.",
         "operationId": "store-payment-method",
         "summary": "Store a new payment method"
       }
@@ -1078,7 +1078,7 @@
     "/payment-methods/{payment_method_id}": {
       "parameters": [
         {
-          "description": "The ID of the payment method",
+          "description": "The ID of the payment method.",
           "format": "uuid",
           "in": "path",
           "name": "payment_method_id",
@@ -1093,7 +1093,7 @@
         "parameters": [],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Returns an empty response."
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -1111,7 +1111,7 @@
         "tags": [
           "Payment Methods"
         ],
-        "description": "Removes a stored payment method",
+        "description": "Removes a stored payment method.",
         "operationId": "delete-payment-method",
         "summary": "Delete a payment method"
       },
@@ -1122,7 +1122,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Returns a payment method",
+            "description": "Returns a payment method.",
             "schema": {}
           },
           "401": {
@@ -1141,7 +1141,7 @@
         "tags": [
           "Payment Methods"
         ],
-        "description": "Gets the details for a stored payment method",
+        "description": "Gets the details for a stored payment method.",
         "operationId": "get-payment-method",
         "summary": "Get stored payment method"
       }
@@ -1149,7 +1149,7 @@
     "/payment-methods/{payment_method_id}/approve": {
       "parameters": [
         {
-          "description": "The ID of the payment method",
+          "description": "The ID of the payment method.",
           "format": "uuid",
           "in": "path",
           "name": "payment_method_id",
@@ -1167,7 +1167,7 @@
             "description": "Redirects the browser back to the `redirect_url` specified\nwhen the payment method was first created. It appends the payment method's\nID and status.",
             "headers": {
               "location": {
-                "description": "The URL to redirect the browser to. This is the `redirect_url`\nspecified when the payment method was first created with some\nadditional query parameters appended.\n\n* `payment_method_id` - The ID of the payment method\n* `payment_method_status` - The current value of the\n  `status`  field of the payment method",
+                "description": "The URL to redirect the browser to. This is the `redirect_url`\nspecified when the payment method was first created with some\nadditional query parameters appended.\n\n* `payment_method_id` - The ID of the payment method.\n* `payment_method_status` - The current value of the\n  `status`  field of the payment method.",
                 "format": "url",
                 "type": "string"
               }
@@ -1193,7 +1193,7 @@
     "/payment-methods/{payment_method_id}/events": {
       "parameters": [
         {
-          "description": "The ID of the payment method",
+          "description": "The ID of the payment method.",
           "format": "uuid",
           "in": "path",
           "name": "payment_method_id",
@@ -1325,7 +1325,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Returns a list of payment service definitions.",
             "schema": {
               "$ref": "#/definitions/PaymentServiceDefinitions"
             }
@@ -1349,7 +1349,7 @@
     "/payment-service-definitions/{payment_service_definition_id}": {
       "parameters": [
         {
-          "description": "The unique ID of the payment service definition",
+          "description": "The unique ID of the payment service definition.",
           "in": "path",
           "name": "payment_service_definition_id",
           "required": true,
@@ -1363,7 +1363,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Returns a payment service definition.",
             "schema": {
               "$ref": "#/definitions/PaymentServiceDefinition"
             }
@@ -1426,7 +1426,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Returns a list of payment services.",
             "schema": {
               "$ref": "#/definitions/PaymentServices"
             }
@@ -1463,7 +1463,7 @@
         ],
         "responses": {
           "201": {
-            "description": "A created response",
+            "description": "Returns the created payment service.",
             "schema": {
               "$ref": "#/definitions/PaymentService"
             }
@@ -1490,7 +1490,7 @@
     "/payment-services/{payment_service_id}": {
       "parameters": [
         {
-          "description": "The ID of the payment service",
+          "description": "The ID of the payment service.",
           "in": "path",
           "name": "payment_service_id",
           "required": true,
@@ -1504,7 +1504,7 @@
         "parameters": [],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Returns an empty response."
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -1533,7 +1533,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Returns a payment service.",
             "schema": {
               "$ref": "#/definitions/PaymentService"
             }
@@ -1576,7 +1576,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The updated payment service",
+            "description": "Returns the updated payment service.",
             "schema": {
               "$ref": "#/definitions/PaymentService"
             }
@@ -1721,7 +1721,7 @@
         ],
         "responses": {
           "201": {
-            "description": "A successful transaction",
+            "description": "Returns the created transaction.",
             "schema": {
               "$ref": "#/definitions/Transaction"
             }
@@ -1824,7 +1824,7 @@
         "tags": [
           "Transactions"
         ],
-        "description": "Get information about a transaction",
+        "description": "Get information about a transaction.",
         "operationId": "get-transaction",
         "summary": "Get transaction"
       }
@@ -1849,7 +1849,7 @@
             "description": "Redirects the browser back to the `redirect_url` specified\nwhen the transaction was first created. It appends the transaction's\nID and status.",
             "headers": {
               "location": {
-                "description": "The URL to redirect the browser to. This is the `redirect_url`\nspecified when the transaction was first created with some\nadditional query parameters appended.\n\n* `transaction_id` - The ID of the transaction\n* `transaction_status` - The current value of the\n  `status`  field of the transaction",
+                "description": "The URL to redirect the browser to. This is the `redirect_url`\nspecified when the transaction was first created with some\nadditional query parameters appended.\n\n* `transaction_id` - The ID of the transaction\n* `transaction_status` - The current value of the\n  `status`  field of the transaction.",
                 "format": "url",
                 "type": "string"
               }
@@ -1889,7 +1889,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "A transaction",
+            "description": "Returns the authorized transaction.",
             "schema": {
               "$ref": "#/definitions/Transaction"
             }
@@ -1945,7 +1945,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A transaction",
+            "description": "Returns the captured transaction.",
             "schema": {
               "$ref": "#/definitions/Transaction"
             }
@@ -2008,7 +2008,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Returns a list of transaction events.",
             "schema": {
               "$ref": "#/definitions/TransactionEvents"
             }
@@ -2049,7 +2049,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "The cancelled transaction.",
+            "description": "Returns cancelled transaction.",
             "schema": {
               "$ref": "#/definitions/Transaction"
             }
@@ -2081,7 +2081,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "Returns the currently authenticated user",
+            "description": "Returns the currently authenticated user.",
             "schema": {
               "$ref": "#/definitions/User"
             }
@@ -2096,7 +2096,7 @@
         "tags": [
           "Users"
         ],
-        "description": "Get current user information",
+        "description": "Get current user information.",
         "operationId": "get-current-user",
         "summary": "Get current",
         "x-internal": true
@@ -2105,10 +2105,10 @@
   },
   "definitions": {
     "APIKeyPair": {
-      "description": "Details about an API key pair",
+      "description": "Details about an API key pair.",
       "properties": {
         "created_at": {
-          "description": "The date and time when this key pair was created",
+          "description": "The date and time when this key pair was created.",
           "example": "2012-12-12T10:53:43-08:00",
           "format": "date-time",
           "type": "string"
@@ -2131,7 +2131,7 @@
           "x-nullable": true
         },
         "type": {
-          "description": "`api-key-pair`",
+          "description": "`api-key-pair`.",
           "enum": [
             "api-key-pair"
           ],
@@ -2139,7 +2139,7 @@
           "type": "string"
         },
         "updated_at": {
-          "description": "The date and time when this key pair was last updated",
+          "description": "The date and time when this key pair was last updated.",
           "example": "2012-12-12T10:53:43-08:00",
           "format": "date-time",
           "type": "string"
@@ -2153,7 +2153,7 @@
       ]
     },
     "APIKeyPairs": {
-      "description": "A list of the currently active API key pairs",
+      "description": "A list of the currently active API key pairs.",
       "properties": {
         "items": {
           "items": {
@@ -2219,13 +2219,13 @@
           "x-nullable": true
         },
         "id": {
-          "description": "The unique Gr4vy ID for this buyer",
+          "description": "The unique Gr4vy ID for this buyer.",
           "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
           "format": "uuid",
           "type": "string"
         },
         "type": {
-          "description": "The type of this resource. Is always `buyer`",
+          "description": "The type of this resource. Is always `buyer`.",
           "enum": [
             "buyer"
           ],
@@ -2281,10 +2281,10 @@
       ]
     },
     "Buyers": {
-      "description": "A list of buyers",
+      "description": "A list of buyers.",
       "properties": {
         "items": {
-          "description": "A list of buyers",
+          "description": "A list of buyers.",
           "items": {
             "$ref": "#/definitions/Buyer"
           },
@@ -2323,7 +2323,7 @@
       ]
     },
     "Card": {
-      "description": "A stored card",
+      "description": "A stored card.",
       "properties": {
         "buyer": {
           "allOf": [
@@ -2360,7 +2360,7 @@
           "type": "string"
         },
         "method": {
-          "description": "`card`",
+          "description": "`card`.",
           "enum": [
             "card"
           ],
@@ -2385,7 +2385,7 @@
           "x-nullable": true
         },
         "type": {
-          "description": "`payment-method`",
+          "description": "`payment-method`.",
           "enum": [
             "payment-method"
           ],
@@ -2406,13 +2406,13 @@
       ]
     },
     "Card--Token": {
-      "description": "A mini format version of the card",
+      "description": "A mini format version of the card.",
       "properties": {
         "details": {
           "$ref": "#/definitions/CardDetails"
         },
         "method": {
-          "description": "`card`",
+          "description": "`card`.",
           "enum": [
             "card"
           ],
@@ -2426,7 +2426,7 @@
           "x-nullable": true
         },
         "type": {
-          "description": "`payment-method`",
+          "description": "`payment-method`.",
           "enum": [
             "payment-method"
           ],
@@ -2441,7 +2441,7 @@
       ]
     },
     "CardDetails": {
-      "description": "Additional details about a stored card",
+      "description": "Additional details about a stored card.",
       "properties": {
         "expiration_date": {
           "description": "The expiration date for a card.",
@@ -2508,7 +2508,7 @@
           "x-nullable": true
         },
         "method": {
-          "description": "`card`",
+          "description": "`card`.",
           "enum": [
             "card"
           ],
@@ -2559,13 +2559,13 @@
           "type": "array"
         },
         "created_at": {
-          "description": "The date and time when this rule was created",
+          "description": "The date and time when this rule was created.",
           "example": "2012-12-12T10:53:43-08:00",
           "format": "date-time",
           "type": "string"
         },
         "id": {
-          "description": "The ID of the rule",
+          "description": "The ID of the rule.",
           "example": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
           "format": "uuid",
           "type": "string"
@@ -2600,7 +2600,7 @@
           "type": "number"
         },
         "type": {
-          "description": "`card-rule`",
+          "description": "`card-rule`.",
           "enum": [
             "card-rule"
           ],
@@ -2618,7 +2618,7 @@
           "type": "string"
         },
         "updated_at": {
-          "description": "The date and time when this rule was last updated",
+          "description": "The date and time when this rule was last updated.",
           "example": "2012-12-12T10:53:43-08:00",
           "format": "date-time",
           "type": "string"
@@ -2644,7 +2644,7 @@
           "type": "string"
         },
         "match": {
-          "description": "`boolean`",
+          "description": "`boolean`.",
           "enum": [
             "boolean"
           ],
@@ -2746,7 +2746,7 @@
           "type": "string"
         },
         "match": {
-          "description": "`number`",
+          "description": "`number`.",
           "enum": [
             "number"
           ],
@@ -2800,7 +2800,7 @@
           "type": "string"
         },
         "match": {
-          "description": "`text`",
+          "description": "`text`.",
           "enum": [
             "text"
           ],
@@ -2907,10 +2907,10 @@
       ]
     },
     "CardRules": {
-      "description": "A list of card rules",
+      "description": "A list of card rules.",
       "properties": {
         "items": {
-          "description": "A list of card rules",
+          "description": "A list of card rules.",
           "items": {
             "$ref": "#/definitions/CardRule"
           },
@@ -2946,7 +2946,7 @@
         },
         "status": {
           "default": 0,
-          "description": "The HTTP status code of this error",
+          "description": "The HTTP status code of this error.",
           "example": 499,
           "exclusiveMaximum": true,
           "format": "int32",
@@ -2972,10 +2972,10 @@
       ]
     },
     "Error400BadRequest": {
-      "description": "Bad Request (HTTP 400)",
+      "description": "Bad Request (HTTP 400).",
       "properties": {
         "code": {
-          "description": "`bad_request`",
+          "description": "`bad_request`.",
           "enum": [
             "bad_request"
           ],
@@ -2995,7 +2995,7 @@
           "type": "string"
         },
         "status": {
-          "description": "`400`",
+          "description": "`400`.",
           "enum": [
             400
           ],
@@ -3003,7 +3003,7 @@
           "type": "integer"
         },
         "type": {
-          "description": "`error`",
+          "description": "`error`.",
           "enum": [
             "error"
           ],
@@ -3018,10 +3018,10 @@
       ]
     },
     "Error400IncorrectJson": {
-      "description": "Incorrect JSON (HTTP 400)",
+      "description": "Incorrect JSON (HTTP 400).",
       "properties": {
         "code": {
-          "description": "`incorrect_json`",
+          "description": "`incorrect_json`.",
           "enum": [
             "incorrect_json"
           ],
@@ -3042,7 +3042,7 @@
           "type": "string"
         },
         "status": {
-          "description": "`400`",
+          "description": "`400`.",
           "enum": [
             400
           ],
@@ -3050,7 +3050,7 @@
           "type": "integer"
         },
         "type": {
-          "description": "`error`",
+          "description": "`error`.",
           "enum": [
             "error"
           ],
@@ -3065,10 +3065,10 @@
       ]
     },
     "Error401Unauthorized": {
-      "description": "Unauthorized Error (HTTP 401)",
+      "description": "Unauthorized Error (HTTP 401).",
       "properties": {
         "code": {
-          "description": "`unauthorized`",
+          "description": "`unauthorized`.",
           "enum": [
             "unauthorized"
           ],
@@ -3084,7 +3084,7 @@
           "type": "array"
         },
         "message": {
-          "description": "No valid API authentication found",
+          "description": "No valid API authentication found.",
           "enum": [
             "No valid API authentication found"
           ],
@@ -3092,7 +3092,7 @@
           "type": "string"
         },
         "status": {
-          "description": "`401`",
+          "description": "`401`.",
           "enum": [
             401
           ],
@@ -3100,7 +3100,7 @@
           "type": "integer"
         },
         "type": {
-          "description": "`error`",
+          "description": "`error`.",
           "enum": [
             "error"
           ],
@@ -3115,10 +3115,10 @@
       ]
     },
     "Error404NotFound": {
-      "description": "Not Found Error (HTTP 404)",
+      "description": "Not Found Error (HTTP 404).",
       "properties": {
         "code": {
-          "description": "`not_found`",
+          "description": "`not_found`.",
           "enum": [
             "not_found"
           ],
@@ -3134,7 +3134,7 @@
           "type": "array"
         },
         "message": {
-          "description": "The resource could not be found",
+          "description": "The resource could not be found.",
           "enum": [
             "The resource could not be found"
           ],
@@ -3142,7 +3142,7 @@
           "type": "string"
         },
         "status": {
-          "description": "`404`",
+          "description": "`404`.",
           "enum": [
             404
           ],
@@ -3150,7 +3150,7 @@
           "type": "integer"
         },
         "type": {
-          "description": "`error`",
+          "description": "`error`.",
           "enum": [
             "error"
           ],
@@ -3165,10 +3165,10 @@
       ]
     },
     "Error404PendingCreation": {
-      "description": "Pending Creation Error (HTTP 404)",
+      "description": "Pending Creation Error (HTTP 404).",
       "properties": {
         "code": {
-          "description": "`pending_creation`",
+          "description": "`pending_creation`.",
           "enum": [
             "pending_creation"
           ],
@@ -3184,7 +3184,7 @@
           "type": "array"
         },
         "message": {
-          "description": " The resource is still pending",
+          "description": "The resource is still pending.",
           "enum": [
             "The resource is still pending"
           ],
@@ -3192,7 +3192,7 @@
           "type": "string"
         },
         "status": {
-          "description": "`404`",
+          "description": "`404`.",
           "enum": [
             404
           ],
@@ -3200,7 +3200,7 @@
           "type": "integer"
         },
         "type": {
-          "description": "`error`",
+          "description": "`error`.",
           "enum": [
             "error"
           ],
@@ -3215,10 +3215,10 @@
       ]
     },
     "Error409DuplicateRecord": {
-      "description": "Duplicate Record Error (HTTP 409)",
+      "description": "Duplicate Record Error (HTTP 409).",
       "properties": {
         "code": {
-          "description": "`duplicate_record`",
+          "description": "`duplicate_record`.",
           "enum": [
             "duplicate_record"
           ],
@@ -3239,7 +3239,7 @@
           "type": "string"
         },
         "status": {
-          "description": "`409`",
+          "description": "`409`.",
           "enum": [
             409
           ],
@@ -3247,7 +3247,7 @@
           "type": "integer"
         },
         "type": {
-          "description": "`error`",
+          "description": "`error`.",
           "enum": [
             "error"
           ],
@@ -3298,7 +3298,7 @@
       ]
     },
     "Merchant": {
-      "description": "A merchant in a cluster",
+      "description": "A merchant in a cluster.",
       "properties": {
         "display_name": {
           "description": "The name of this merchant as it will be displayed in the admin UI.",
@@ -3311,7 +3311,7 @@
           "type": "string"
         },
         "type": {
-          "description": "`merchant`",
+          "description": "`merchant`.",
           "enum": [
             "merchant"
           ],
@@ -3327,7 +3327,7 @@
       ]
     },
     "PayPal": {
-      "description": "A stored PayPal account",
+      "description": "A stored PayPal account.",
       "properties": {
         "buyer": {
           "allOf": [
@@ -3364,7 +3364,7 @@
           "type": "string"
         },
         "method": {
-          "description": "`paypal`",
+          "description": "`paypal`.",
           "enum": [
             "paypal"
           ],
@@ -3393,7 +3393,7 @@
           "x-nullable": true
         },
         "type": {
-          "description": "`payment-method`",
+          "description": "`payment-method`.",
           "enum": [
             "payment-method"
           ],
@@ -3414,13 +3414,13 @@
       ]
     },
     "PayPal--Token": {
-      "description": "A stored PayPal account in a mini format",
+      "description": "A stored PayPal account in a mini format.",
       "properties": {
         "details": {
           "$ref": "#/definitions/PayPalDetails"
         },
         "method": {
-          "description": "`paypal`",
+          "description": "`paypal`.",
           "enum": [
             "paypal"
           ],
@@ -3434,7 +3434,7 @@
           "x-nullable": true
         },
         "type": {
-          "description": "`payment-method`",
+          "description": "`payment-method`.",
           "enum": [
             "payment-method"
           ],
@@ -3449,7 +3449,7 @@
       ]
     },
     "PayPalDetails": {
-      "description": "Additional details about a stored PayPal account",
+      "description": "Additional details about a stored PayPal account.",
       "properties": {
         "approval_url": {
           "description": "The optional URL that the buyer needs to be redirected to to further authorize their PayPal payments.",
@@ -3492,7 +3492,7 @@
           "x-nullable": true
         },
         "method": {
-          "description": "`paypal`",
+          "description": "`paypal`.",
           "enum": [
             "paypal"
           ],
@@ -3534,17 +3534,17 @@
           "description": "An optional related resource that triggered this event.",
           "properties": {
             "display_name": {
-              "description": "The user's name for the resource",
+              "description": "The user's name for the resource.",
               "example": "Stripe (Card)",
               "type": "string"
             },
             "id": {
-              "description": "The ID of the resource\n",
+              "description": "The ID of the resource.\n",
               "example": "stripe-card-c4a988a2-cae6-4854-9aa0-a8365da0816d",
               "type": "string"
             },
             "type": {
-              "description": "The type of the resource",
+              "description": "The type of the resource.",
               "example": "payment-service",
               "type": "string"
             }
@@ -3558,7 +3558,7 @@
           "type": "string"
         },
         "type": {
-          "description": "`payment-method.event`",
+          "description": "`payment-method.event`.",
           "example": "payment-method.event",
           "type": "string"
         }
@@ -3570,10 +3570,10 @@
       ]
     },
     "PaymentMethodEvents": {
-      "description": "A list of events for a payment method",
+      "description": "A list of events for a payment method.",
       "properties": {
         "items": {
-          "description": "A list of payment method events",
+          "description": "A list of payment method events.",
           "items": {
             "$ref": "#/definitions/PaymentMethodEvent"
           },
@@ -3612,10 +3612,10 @@
       ]
     },
     "PaymentMethods": {
-      "description": "A list of stored payment methods",
+      "description": "A list of stored payment methods.",
       "properties": {
         "items": {
-          "description": "A list of stored payment methods",
+          "description": "A list of stored payment methods.",
           "items": {},
           "type": "array"
         },
@@ -3652,10 +3652,10 @@
       ]
     },
     "PaymentOption": {
-      "description": "An available payment option for a locale",
+      "description": "An available payment option for a locale.",
       "properties": {
         "method": {
-          "description": "The type of payment method that is available",
+          "description": "The type of payment method that is available.",
           "enum": [
             "card",
             "paypal"
@@ -3664,7 +3664,7 @@
           "type": "string"
         },
         "type": {
-          "description": "`payment-option`",
+          "description": "`payment-option`.",
           "enum": [
             "payment-option"
           ],
@@ -3679,7 +3679,7 @@
       ]
     },
     "PaymentOptions": {
-      "description": "A list of payment options",
+      "description": "A list of payment options.",
       "properties": {
         "items": {
           "items": {
@@ -3695,10 +3695,10 @@
       ]
     },
     "PaymentService": {
-      "description": "An active, configured payment service",
+      "description": "An active, configured payment service.",
       "properties": {
         "accepted_countries": {
-          "description": "A list of countries for which this service is enabled, in ISO two-letter code format.",
+          "description": "A list of countries for which this service is enabled, in ISO two-letter\ncode format.",
           "example": [
             "DE"
           ],
@@ -3711,7 +3711,7 @@
           "type": "array"
         },
         "accepted_currencies": {
-          "description": "A list of currencies for which this service is enabled, in ISO 4217 three-letter code format.",
+          "description": "A list of currencies for which this service is enabled, in ISO 4217\nthree-letter code format.",
           "example": [
             "EUR"
           ],
@@ -3724,14 +3724,14 @@
           "type": "array"
         },
         "display_name": {
-          "description": "The custom name set for this service",
+          "description": "The custom name set for this service.",
           "example": "Stripe (Main)",
           "maxLength": 50,
           "minLength": 1,
           "type": "string"
         },
         "id": {
-          "description": "The ID of this payment service instance",
+          "description": "The ID of this payment service instance.",
           "example": "stripe-card-faaad066-30b4-4997-a438-242b0752d7e1",
           "maxLength": 200,
           "minLength": 1,
@@ -3813,7 +3813,7 @@
           }
         }
       ],
-      "description": "Request body for activating a payment service",
+      "description": "Request body for activating a payment service.",
       "title": "Payment Service (Create)",
       "type": "object",
       "x-tags": [
@@ -3824,32 +3824,32 @@
       "description": "An available payment service that can be configured for this cluster.",
       "properties": {
         "display_name": {
-          "description": "The display name of this service",
+          "description": "The display name of this service.",
           "example": "Stripe",
           "type": "string"
         },
         "fields": {
-          "description": "A list of fields that need to be submitted when activating the payment service.",
+          "description": "A list of fields that need to be submitted when activating the payment. service.",
           "items": {
-            "description": "A single field that needs to be submitted for a payment service when it is created. ",
+            "description": "A single field that needs to be submitted for a payment service when it\nis created.",
             "properties": {
               "display_name": {
-                "description": "The name to display for a field in the cluster UI",
+                "description": "The name to display for a field in the cluster UI.",
                 "example": "Private API key",
                 "type": "string"
               },
               "help_url": {
-                "description": "A URL that provides more details about this field",
+                "description": "A URL that provides more details about this field.",
                 "example": "https://stripe.com/docs/private_api_key",
                 "type": "string"
               },
               "key": {
-                "description": "The key of a field that needs to be submitted",
+                "description": "The key of a field that needs to be submitted.",
                 "example": "private_api_key",
                 "type": "string"
               },
               "required": {
-                "description": "Defines if this field is required when the service is created",
+                "description": "Defines if this field is required when the service is created.",
                 "example": true,
                 "type": "boolean"
               }
@@ -3860,7 +3860,7 @@
           "type": "array"
         },
         "help_url": {
-          "description": "A URL that provides more details about this payment service",
+          "description": "A URL that provides more details about this payment service.",
           "example": "https://stripe.com/docs",
           "type": "string"
         },
@@ -3870,13 +3870,13 @@
           "type": "string"
         },
         "logo_url": {
-          "description": "The logo for this provider",
+          "description": "The logo for this provider.",
           "example": "https://cdn.stripe.com/logo.png",
           "format": "uri",
           "type": "string"
         },
         "method": {
-          "description": "The ID of the payment method that this services handles",
+          "description": "The ID of the payment method that this services handles.",
           "enum": [
             "card",
             "paypal"
@@ -3885,7 +3885,7 @@
           "type": "string"
         },
         "supported_countries": {
-          "description": "A list of two-letter ISO country codes that this service supports",
+          "description": "A list of two-letter ISO country codes that this service supports.",
           "example": [
             "US",
             "GB",
@@ -3898,7 +3898,7 @@
           "type": "array"
         },
         "supported_currencies": {
-          "description": "A list of three-letter ISO currency codes that this service supports",
+          "description": "A list of three-letter ISO currency codes that this service supports.",
           "example": [
             "USD",
             "GBP",
@@ -3914,7 +3914,7 @@
         },
         "type": {
           "default": "payment-service-definition",
-          "description": "`payment-service-definition`",
+          "description": "`payment-service-definition`.",
           "example": "payment-service-definition",
           "type": "string"
         }
@@ -3969,7 +3969,7 @@
       ]
     },
     "PaymentServiceUpdateRequest": {
-      "description": "Request body for updating an active payment service",
+      "description": "Request body for updating an active payment service.",
       "properties": {
         "accepted_countries": {
           "description": "A list of countries that this payment service needs to support in ISO two-letter code format.",
@@ -4054,7 +4054,7 @@
       ]
     },
     "PaymentServices": {
-      "description": "A list of active, configured payment services",
+      "description": "A list of active, configured payment services.",
       "properties": {
         "items": {
           "items": {
@@ -4114,7 +4114,7 @@
           "type": "string"
         },
         "token_type": {
-          "description": "`bearer`",
+          "description": "`bearer`.",
           "enum": [
             "bearer"
           ],
@@ -4122,7 +4122,7 @@
           "type": "string"
         },
         "type": {
-          "description": "`auth.session`",
+          "description": "`auth.session`.",
           "enum": [
             "auth.session"
           ],
@@ -4163,7 +4163,7 @@
       ]
     },
     "Status": {
-      "description": "In many cases the Gr4vy API returns asynchronously, kicking off a job to create an authorization or a transaction, and returning a `Status` object with the ID of the pending object. The ID of this resource can be used to query an objects status, or additionally the client can use Pub/Sub to subscribe to the creation of the pending object.",
+      "description": "In many cases the Gr4vy API returns asynchronously, kicking off a job to\ncreate an authorization or a transaction, and returning a `Status` object with\nthe ID of the pending object. The ID of this resource can be used to query an\nobjects status, or additionally the client can use Pub/Sub to subscribe to the\ncreation of the pending object.",
       "properties": {
         "external_identifier": {
           "description": "An external identifier that can be used to match the record against your own records.",
@@ -4210,10 +4210,10 @@
       ]
     },
     "Statuses": {
-      "description": "A list of status resources",
+      "description": "A list of status resources.",
       "properties": {
         "items": {
-          "description": "A list of authorizations",
+          "description": "A list of authorizations.",
           "items": {
             "$ref": "#/definitions/Status"
           },
@@ -4230,7 +4230,7 @@
       "description": "Details for a previously tokenized payment method.",
       "properties": {
         "method": {
-          "description": "`token`",
+          "description": "`token`.",
           "enum": [
             "token"
           ],
@@ -4281,7 +4281,7 @@
           "x-nullable": true
         },
         "id": {
-          "description": "The unique identifier for this transaction",
+          "description": "The unique identifier for this transaction.",
           "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
           "format": "uuid",
           "type": "string"
@@ -4293,7 +4293,7 @@
           "type": "string"
         },
         "status": {
-          "description": "The status of the transaction being processed. This is different from the `status` field in that it represents the status of the transaction at the payment processor, not the status of the transaction created in Gr4vy.",
+          "description": "The status of the transaction being processed. This is different from the\n`status` field in that it represents the status of the transaction at the\npayment processor, not the status of the transaction created in Gr4vy.",
           "enum": [
             "processing",
             "processing_failed",
@@ -4315,7 +4315,7 @@
           "type": "string"
         },
         "type": {
-          "description": "The type of this resource. Is always `transaction`",
+          "description": "The type of this resource. Is always `transaction`.",
           "enum": [
             "transaction"
           ],
@@ -4323,7 +4323,7 @@
           "type": "string"
         },
         "updated_at": {
-          "description": "Defines when the transaction was last updated ",
+          "description": "Defines when the transaction was last updated.",
           "format": "date-time",
           "type": "string"
         }
@@ -4335,7 +4335,7 @@
       ]
     },
     "TransactionCaptureRequest": {
-      "description": "A request to capture a transaction",
+      "description": "A request to capture a transaction.",
       "properties": {
         "amount": {
           "description": "The (partial) amount to capture.\n\nWhen left blank, this will capture the entire amount.",
@@ -4366,7 +4366,7 @@
       ]
     },
     "TransactionCreateRequest": {
-      "description": "A request to create a transaction",
+      "description": "A request to create a transaction.",
       "properties": {
         "amount": {
           "description": "The monetary amount to create an authorization for, in the smallest\ncurrency unit for the given currency, for example `1299` cents to create\nan authorization for `$12.99`.\n\nFor BitCoin, this value will be a decimal point number, for example\n`0.0039`.",
@@ -4445,17 +4445,17 @@
           "description": "An optional related resource that triggered this event.",
           "properties": {
             "display_name": {
-              "description": "The user's name for the resource",
+              "description": "The user's name for the resource.",
               "example": "Stripe (Card)",
               "type": "string"
             },
             "id": {
-              "description": "The ID of the resource\n",
+              "description": "The ID of the resource.\n",
               "example": "stripe-card-c4a988a2-cae6-4854-9aa0-a8365da0816d",
               "type": "string"
             },
             "type": {
-              "description": "The type of the resource",
+              "description": "The type of the resource.",
               "example": "payment-service",
               "type": "string"
             }
@@ -4463,7 +4463,7 @@
           "type": "object"
         },
         "type": {
-          "description": "`transaction.event`",
+          "description": "`transaction.event`.",
           "example": "transaction.event",
           "type": "string"
         }
@@ -4475,10 +4475,10 @@
       ]
     },
     "TransactionEvents": {
-      "description": "A list of events for a transaction",
+      "description": "A list of events for a transaction.",
       "properties": {
         "items": {
-          "description": "A list of transaction events",
+          "description": "A list of transaction events.",
           "items": {
             "$ref": "#/definitions/TransactionEvent"
           },
@@ -4517,10 +4517,10 @@
       ]
     },
     "Transactions": {
-      "description": "A list of transactions",
+      "description": "A list of transactions.",
       "properties": {
         "items": {
-          "description": "A list of transactions",
+          "description": "A list of transactions.",
           "items": {
             "$ref": "#/definitions/Transaction"
           },
@@ -4579,7 +4579,7 @@
           "type": "string"
         },
         "transaction_id": {
-          "description": "The ID of the transaction to capture",
+          "description": "The ID of the transaction to capture.",
           "type": "string"
         }
       },
@@ -4597,22 +4597,22 @@
     "User": {
       "properties": {
         "email_adress": {
-          "description": "The email address for this user",
+          "description": "The email address for this user.",
           "example": "john@example.com",
           "type": "string"
         },
         "id": {
-          "description": "The unique Gr4vy ID for this user",
+          "description": "The unique Gr4vy ID for this user.",
           "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
           "type": "string"
         },
         "name": {
-          "description": "The full name of this user",
+          "description": "The full name of this user.",
           "example": "John Gravy",
           "type": "string"
         },
         "type": {
-          "description": "`user`",
+          "description": "`user`.",
           "enum": [
             "user"
           ],
@@ -4665,11 +4665,11 @@
       "x-internal": true
     },
     {
-      "description": "In Gr4vy, a payment method represents a way in which a payment can be processed,\nfor example a card payment, a PayPal payment, or a Bitcoin payment.\n\n## Features\n\nThe payment method API can be used to:\n\n* Determine the available payment methods in a cluster\n* Determine the available payment method for a buyer in a specific currency and country\n* Store (also known as tokenize) a payment method for a buyer\n* Fetch all previously tokenized payment methods for a buyer",
+      "description": "In Gr4vy, a payment method represents a way in which a payment can be processed,\nfor example a card payment, a PayPal payment, or a Bitcoin payment.\n\n## Features\n\nThe payment method API can be used to:\n\n* Determine the available payment methods in a cluster.\n* Determine the available payment method for a buyer in a specific currency and country.\n* Store (also known as tokenize) a payment method for a buyer.\n* Fetch all previously tokenized payment methods for a buyer.",
       "name": "Payment Methods"
     },
     {
-      "description": "In Gr4vy, a payment option represents a list of methods (card, PayPal,\netc) that are available for a given locale.\n\n## Features\n\nThe payment options API can be used to:\n\n* Determine what types of payments can be processed in a specific locale\n* Display a list options to a buyer to choose from",
+      "description": "In Gr4vy, a payment option represents a list of methods (card, PayPal,\netc) that are available for a given locale.\n\n## Features\n\nThe payment options API can be used to:\n\n* Determine what types of payments can be processed in a specific locale.\n* Display a list options to a buyer to choose from.",
       "name": "Payment Options"
     },
     {
@@ -4678,7 +4678,7 @@
       "x-internal": true
     },
     {
-      "description": "In Gr4vy, a payment service represents a configured payment provider\n(Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,\netc)\n\n## Features\n\nThe payment services API can be used to:\n\n* Provide Gr4vy with the payment credentials for a payment provider\n* Set a display name for a payment provider",
+      "description": "In Gr4vy, a payment service represents a configured payment provider\n(Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,\netc)\n\n## Features\n\nThe payment services API can be used to:\n\n* Provide Gr4vy with the payment credentials for a payment provider.\n* Set a display name for a payment provider.",
       "name": "Payment Services"
     },
     {
@@ -4687,7 +4687,7 @@
       "x-internal": true
     },
     {
-      "description": "In Gr4vy, a transaction represents a payment in any state, either before it is\nauthorized, once it is captured, or after it has been refunded.\n\n## Features\n\nThe transactions API can be used to:\n\n- Authorize, capture, and store cards\n- Authorize, capture, and store alternative payment methods like PayPal\n- Refund, void, and otherwise cancel existing transactions",
+      "description": "In Gr4vy, a transaction represents a payment in any state, either before it is\nauthorized, once it is captured, or after it has been refunded.\n\n## Features\n\nThe transactions API can be used to:\n\n- Authorize, capture, and store cards.\n- Authorize, capture, and store alternative payment methods like PayPal.\n- Refund, void, and otherwise cancel existing transactions.",
       "name": "Transactions"
     },
     {
