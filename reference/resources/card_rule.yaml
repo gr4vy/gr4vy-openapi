@@ -14,14 +14,14 @@ properties:
   type:
     type: string
     example: card-rule
-    description: "`card-rule`"
+    description: "`card-rule`."
     enum:
       - card-rule
 
   id:
     type: string
     example: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
-    description: The ID of the rule
+    description: The ID of the rule.
     format: uuid
 
   active:
@@ -103,10 +103,10 @@ properties:
     type: string
     format: date-time
     example: "2012-12-12T10:53:43-08:00"
-    description: The date and time when this rule was created
+    description: The date and time when this rule was created.
 
   updated_at:
     type: string
     format: date-time
     example: "2012-12-12T10:53:43-08:00"
-    description: The date and time when this rule was last updated
+    description: The date and time when this rule was last updated.

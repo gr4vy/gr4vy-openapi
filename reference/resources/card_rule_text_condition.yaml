@@ -17,7 +17,7 @@ required:
 properties:
   match:
     type: string
-    description: "`text`"
+    description: "`text`."
     example: text
     enum:
       - text

@@ -1,6 +1,6 @@
 ---
 title: PayPal account details
-description: Additional details about a stored PayPal account
+description: Additional details about a stored PayPal account.
 type: object
 x-tags:
   - Payment Methods

@@ -1,7 +1,7 @@
 ---
 title: A payment service
 type: object
-description: An active, configured payment service
+description: An active, configured payment service.
 
 x-tags:
   - Payment Services
@@ -9,7 +9,7 @@ x-tags:
 properties:
   id:
     type: string
-    description: The ID of this payment service instance
+    description: The ID of this payment service instance.
     example: stripe-card-faaad066-30b4-4997-a438-242b0752d7e1
     minLength: 1
     maxLength: 200
@@ -39,7 +39,7 @@ properties:
 
   display_name:
     type: string
-    description: The custom name set for this service
+    description: The custom name set for this service.
     example: Stripe (Main)
     minLength: 1
     maxLength: 50
@@ -57,9 +57,9 @@ properties:
 
   accepted_currencies:
     type: array
-    description:
-      "A list of currencies for which this service is enabled, in ISO 4217
-      three-letter code format."
+    description: |-
+      A list of currencies for which this service is enabled, in ISO 4217
+      three-letter code format.
     minItems: 1
     items:
       type: string
@@ -70,9 +70,9 @@ properties:
 
   accepted_countries:
     type: array
-    description:
-      "A list of countries for which this service is enabled, in ISO two-letter
-      code format."
+    description: |-
+      A list of countries for which this service is enabled, in ISO two-letter
+      code format.
     minItems: 1
     items:
       type: string
@@ -83,7 +83,7 @@ properties:
 
   use_test_environment:
     type: boolean
-    description:
+    description: |-
       Defines if this service should use the test credentials and/or endpoint.
 
   position:

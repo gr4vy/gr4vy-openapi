@@ -1,7 +1,7 @@
 ---
 title: Bad Request
 type: object
-description: Bad Request (HTTP 400)
+description: Bad Request (HTTP 400).
 
 x-tags:
   - Errors
@@ -9,21 +9,21 @@ x-tags:
 properties:
   type:
     type: string
-    description: "`error`"
+    description: "`error`."
     enum:
       - error
     example: error
 
   code:
     type: string
-    description: "`bad_request`"
+    description: "`bad_request`."
     example: bad_request
     enum:
       - bad_request
 
   status:
     type: integer
-    description: "`400`"
+    description: "`400`."
     example: 400
     enum:
       - 400

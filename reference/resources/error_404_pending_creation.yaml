@@ -1,7 +1,7 @@
 ---
 title: Pending Creation Error
 type: object
-description: Pending Creation Error (HTTP 404)
+description: Pending Creation Error (HTTP 404).
 
 x-tags:
   - Errors
@@ -9,14 +9,14 @@ x-tags:
 properties:
   type:
     type: string
-    description: "`error`"
+    description: "`error`."
     enum:
       - error
     example: error
 
   code:
     type: string
-    description: "`pending_creation`"
+    description: "`pending_creation`."
     example: pending_creation
     enum:
       - pending_creation
@@ -30,7 +30,7 @@ properties:
 
   message:
     type: string
-    description: " The resource is still pending"
+    description: The resource is still pending.
     example: The resource is still pending
     enum:
       - The resource is still pending

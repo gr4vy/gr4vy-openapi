@@ -1,3 +1,8 @@
+functionsDir: ./spectral/
+
+functions:
+  - full-stop
+
 formats: []
 
 extends: [[spectral:oas, all]]
@@ -13,3 +18,10 @@ rules:
     then:
       field: example
       function: truthy
+
+  description-requires-full-stop:
+    description: Description should end in full stop.
+    given: $..description
+    severity: error
+    then:
+      function: full-stop

@@ -1,6 +1,6 @@
 ---
 title: Payment method events
-description: A list of events for a payment method
+description: A list of events for a payment method.
 type: object
 
 x-tags:
@@ -9,7 +9,7 @@ x-tags:
 properties:
   items:
     type: array
-    description: A list of payment method events
+    description: A list of payment method events.
     items:
       $ref: "../openapi.yaml#/components/schemas/PaymentMethodEvent"
 

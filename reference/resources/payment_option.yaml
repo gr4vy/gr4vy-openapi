@@ -1,7 +1,7 @@
 ---
 title: Payment option
 type: object
-description: An available payment option for a locale
+description: An available payment option for a locale.
 
 x-tags:
   - Payment Option
@@ -9,14 +9,14 @@ x-tags:
 properties:
   type:
     type: string
-    description: "`payment-option`"
+    description: "`payment-option`."
     example: payment-option
     enum:
       - payment-option
 
   method:
     type: string
-    description: The type of payment method that is available
+    description: The type of payment method that is available.
     example: card
     enum:
       - card

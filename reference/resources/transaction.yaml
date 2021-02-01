@@ -8,7 +8,7 @@ x-tags:
 properties:
   type:
     type: string
-    description: The type of this resource. Is always `transaction`
+    description: The type of this resource. Is always `transaction`.
     example: transaction
     enum:
       - transaction
@@ -16,15 +16,15 @@ properties:
   id:
     type: string
     example: fe26475d-ec3e-4884-9553-f7356683f7f9
-    description: The unique identifier for this transaction
+    description: The unique identifier for this transaction.
     format: uuid
 
   status:
     type: string
-    description:
-      "The status of the transaction being processed. This is different from the
+    description: |-
+      The status of the transaction being processed. This is different from the
       `status` field in that it represents the status of the transaction at the
-      payment processor, not the status of the transaction created in Gr4vy."
+      payment processor, not the status of the transaction created in Gr4vy.
     example: processing
     enum:
       - processing
@@ -78,7 +78,8 @@ properties:
   updated_at:
     type: string
     format: date-time
-    description: "Defines when the transaction was last updated "
+    description: |-
+      Defines when the transaction was last updated.
 
   payment_service_id:
     type: string

@@ -16,7 +16,7 @@ required:
 properties:
   match:
     type: string
-    description: "`boolean`"
+    description: "`boolean`."
     example: boolean
     enum:
       - boolean

@@ -1,6 +1,6 @@
 ---
 title: Statuses
-description: A list of status resources
+description: A list of status resources.
 type: object
 
 x-tags:
@@ -9,6 +9,6 @@ x-tags:
 properties:
   items:
     type: array
-    description: A list of authorizations
+    description: A list of authorizations.
     items:
       $ref: "../openapi.yaml#/components/schemas/Status"

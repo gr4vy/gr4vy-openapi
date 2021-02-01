@@ -1,6 +1,6 @@
 ---
 title: Transactions
-description: A list of transactions
+description: A list of transactions.
 type: object
 
 x-tags:
@@ -9,7 +9,7 @@ x-tags:
 properties:
   items:
     type: array
-    description: A list of transactions
+    description: A list of transactions.
     items:
       $ref: "../openapi.yaml#/components/schemas/Transaction"
 
