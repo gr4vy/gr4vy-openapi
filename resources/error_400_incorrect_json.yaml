@@ -1,7 +1,7 @@
 ---
 title: Incorrect JSON
 type: object
-description: Incorrect JSON (HTTP 400)
+description: Incorrect JSON (HTTP 400).
 
 x-tags:
   - Errors
@@ -9,21 +9,21 @@ x-tags:
 properties:
   type:
     type: string
-    description: "`error`"
+    description: "`error`."
     enum:
       - error
     example: error
 
   code:
     type: string
-    description: "`incorrect_json`"
+    description: "`incorrect_json`."
     example: incorrect_json
     enum:
       - incorrect_json
 
   status:
     type: integer
-    description: "`400`"
+    description: "`400`."
     example: 400
     enum:
       - 400

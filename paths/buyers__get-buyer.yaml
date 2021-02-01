@@ -2,7 +2,7 @@
 operationId: get-buyer
 
 summary: Get buyer
-description: Gets the information about a buyer
+description: Gets the information about a buyer.
 tags:
   - Buyers
 

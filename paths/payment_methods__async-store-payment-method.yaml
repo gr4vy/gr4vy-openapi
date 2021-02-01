@@ -1,7 +1,7 @@
 ---
 operationId: async-store-payment-method
 summary: Store a new payment method
-description: Stores and tokenizes a new payment method
+description: Stores and tokenizes a new payment method.
 tags:
   - Async APIs
 
@@ -17,7 +17,7 @@ requestBody:
 
 responses:
   "202":
-    description: Accepted
+    description: Returns a status object.
     content:
       application/json:
         schema:

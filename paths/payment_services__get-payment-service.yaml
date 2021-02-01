@@ -2,11 +2,12 @@
 operationId: get-payment-service
 summary: Get payment service
 description: Retrieves the details of a single configured payment service.
-tags: ["Payment Services"]
+tags:
+  - Payment Services
 
 responses:
   "200":
-    description: OK
+    description: Returns a payment service.
     content:
       application/json:
         schema:

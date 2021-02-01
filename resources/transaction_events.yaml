@@ -1,7 +1,7 @@
 ---
 title: Transaction Events
 type: object
-description: A list of events for a transaction
+description: A list of events for a transaction.
 
 x-tags:
   - Transactions
@@ -9,7 +9,7 @@ x-tags:
 properties:
   items:
     type: array
-    description: A list of transaction events
+    description: A list of transaction events.
     items:
       $ref: "../openapi.yaml#/components/schemas/TransactionEvent"
 

@@ -5,4 +5,4 @@ schema:
 name: payment_service_id
 in: path
 required: true
-description: The ID of the payment service
+description: The ID of the payment service.

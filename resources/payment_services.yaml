@@ -1,7 +1,7 @@
 ---
 title: A list of active payment services
 type: object
-description: A list of active, configured payment services
+description: A list of active, configured payment services.
 
 x-tags:
   - Payment Services

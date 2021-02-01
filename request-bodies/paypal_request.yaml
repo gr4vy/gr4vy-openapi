@@ -14,7 +14,7 @@ required:
 properties:
   method:
     type: string
-    description: "`paypal`"
+    description: "`paypal`."
     example: paypal
     enum:
       - paypal

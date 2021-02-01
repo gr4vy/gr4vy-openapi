@@ -1,7 +1,7 @@
 ---
 title: Payment Service (Create)
 type: object
-description: Request body for activating a payment service
+description: Request body for activating a payment service.
 
 x-tags:
   - Request Bodies

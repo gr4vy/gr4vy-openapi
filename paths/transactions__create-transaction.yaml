@@ -71,7 +71,7 @@ requestBody:
 
 responses:
   "201":
-    description: "A successful transaction"
+    description: Returns the created transaction.
     content:
       application/json:
         schema:

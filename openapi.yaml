@@ -64,14 +64,14 @@ tags:
       The payment method API can be used to:
 
 
-      * Determine the available payment methods in a cluster
+      * Determine the available payment methods in a cluster.
 
       * Determine the available payment method for a buyer in a specific
-      currency and country
+      currency and country.
 
-      * Store (also known as tokenize) a payment method for a buyer
+      * Store (also known as tokenize) a payment method for a buyer.
 
-      * Fetch all previously tokenized payment methods for a buyer
+      * Fetch all previously tokenized payment methods for a buyer.
   - name: Payment Options
     description: |-
       In Gr4vy, a payment option represents a list of methods (card, PayPal,
@@ -81,8 +81,8 @@ tags:
 
       The payment options API can be used to:
 
-      * Determine what types of payments can be processed in a specific locale
-      * Display a list options to a buyer to choose from
+      * Determine what types of payments can be processed in a specific locale.
+      * Display a list options to a buyer to choose from.
   - name: Payment Services
     description: |-
       In Gr4vy, a payment service represents a configured payment provider
@@ -93,8 +93,8 @@ tags:
 
       The payment services API can be used to:
 
-      * Provide Gr4vy with the payment credentials for a payment provider
-      * Set a display name for a payment provider
+      * Provide Gr4vy with the payment credentials for a payment provider.
+      * Set a display name for a payment provider.
   - name: Transactions
     description: >-
       In Gr4vy, a transaction represents a payment in any state, either before
@@ -109,11 +109,11 @@ tags:
       The transactions API can be used to:
 
 
-      - Authorize, capture, and store cards
+      - Authorize, capture, and store cards.
 
-      - Authorize, capture, and store alternative payment methods like PayPal
+      - Authorize, capture, and store alternative payment methods like PayPal.
 
-      - Refund, void, and otherwise cancel existing transactions
+      - Refund, void, and otherwise cancel existing transactions.
 paths:
   /async/payment-methods:
     post:

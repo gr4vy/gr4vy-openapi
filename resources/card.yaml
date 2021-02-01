@@ -1,6 +1,6 @@
 ---
 title: Card
-description: A stored card
+description: A stored card.
 type: object
 x-tags:
   - Payment Methods
@@ -8,7 +8,7 @@ x-tags:
 properties:
   type:
     type: string
-    description: "`payment-method`"
+    description: "`payment-method`."
     example: payment-method
     enum:
       - payment-method
@@ -43,7 +43,7 @@ properties:
 
   method:
     type: string
-    description: "`card`"
+    description: "`card`."
     example: card
     enum:
       - card

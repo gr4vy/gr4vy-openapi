@@ -14,7 +14,7 @@ required:
 properties:
   method:
     type: string
-    description: "`token`"
+    description: "`token`."
     example: token
     enum:
       - token
