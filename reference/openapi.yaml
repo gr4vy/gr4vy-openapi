@@ -32,6 +32,7 @@ tags:
       In Gr4vy, an API key pair is used to sign and validate JWTs. A JWT is used
       as a bearer token to authenticate to the API.
     x-internal: true
+
   - name: Async APIs
     description: |-
       The asynchronous (async) APIs are convenience APIs that function as an
@@ -39,6 +40,7 @@ tags:
       without having to wait for the API to complete. Each of thee APIs returns
       directly without processing the request fully, allowing you to render a
       new page for the buyer while the request is processed.
+
   - name: Buyers
     description: |-
       In Gr4vy, a buyer represents your customer, the shopper who's performing
@@ -59,11 +61,13 @@ tags:
       In Gr4vy, a card rule defines how a card transaction is processed. It
       determines which payment services are used, and with what priority, based
       on the transaction amount, card type, and many more attributes.
+
   - name: Merchants
     description: |-
       In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.
       Currently only one merchant is supported per cluster.
     x-internal: true
+
   - name: Payment Methods
     description: |-
       In Gr4vy, a payment method represents a way in which a payment can be processed,
@@ -93,6 +97,7 @@ tags:
     description: |-
       Payment service definitions describe the fields required for a payment
       service to be configured.
+
   - name: Payment Services
     description: |-
       In Gr4vy, a payment service represents a configured payment provider
@@ -110,6 +115,7 @@ tags:
       The sessions APIs are used to facilitate user authentication for the Gr4vy
       cluster admin.
     x-internal: true
+
   - name: Transactions
     description: |-
       In Gr4vy, a transaction represents a payment in any state, either before it is
@@ -188,6 +194,10 @@ paths:
       $ref: "./paths/buyers__update-buyer.yaml"
     delete:
       $ref: "./paths/buyers__delete-buyer.yaml"
+
+  "/buyers/payment-methods":
+    get:
+      $ref: "./paths/payment_methods__list-buyer-payment-methods.yaml"
 
   "/merchants/main":
     get:
@@ -379,6 +389,8 @@ components:
       $ref: "./resources/merchant.yaml"
     PaymentMethods:
       $ref: "./resources/payment_methods.yaml"
+    PaymentMethods--Token:
+      $ref: "./resources/payment_methods--token.yaml"
     PaymentMethodEvent:
       $ref: "./resources/payment_method_event.yaml"
     PaymentMethodEvents:
