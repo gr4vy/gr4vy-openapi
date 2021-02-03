@@ -2205,7 +2205,7 @@
         "display_name": {
           "description": "A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.",
           "example": "John L.",
-          "maxLength": 1000,
+          "maxLength": 200,
           "minLength": 1,
           "type": "string",
           "x-nullable": true
@@ -2213,7 +2213,7 @@
         "external_identifier": {
           "description": "An external identifier that can be used to match the buyer against your own records.",
           "example": "user-789123",
-          "maxLength": 320,
+          "maxLength": 200,
           "minLength": 1,
           "type": "string",
           "x-nullable": true
@@ -2251,12 +2251,16 @@
         "display_name": {
           "description": "A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.",
           "example": "John L.",
+          "maxLength": 200,
+          "minLength": 1,
           "type": "string",
           "x-nullable": true
         },
         "external_identifier": {
           "description": "An external identifier that can be used to match the buyer against your own records. This value needs to be unique for all buyers.",
           "example": "user-789123",
+          "maxLength": 200,
+          "minLength": 1,
           "type": "string",
           "x-nullable": true
         }
