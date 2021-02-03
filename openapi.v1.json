@@ -3147,7 +3147,7 @@
             "example": "user-789123",
             "nullable": true,
             "minLength": 1,
-            "maxLength": 320
+            "maxLength": 200
           },
           "display_name": {
             "type": "string",
@@ -3155,7 +3155,7 @@
             "example": "John L.",
             "nullable": true,
             "minLength": 1,
-            "maxLength": 1000
+            "maxLength": 200
           },
           "created_at": {
             "type": "string",
@@ -3225,13 +3225,17 @@
             "type": "string",
             "description": "An external identifier that can be used to match the buyer against your own records. This value needs to be unique for all buyers.",
             "example": "user-789123",
-            "nullable": true
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 200
           },
           "display_name": {
             "type": "string",
             "description": "A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.",
             "example": "John L.",
-            "nullable": true
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 200
           }
         }
       },
