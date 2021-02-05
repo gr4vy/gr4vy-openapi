@@ -66,8 +66,8 @@ requestBody:
             currency: USD
             intent: "capture"
             payment_method:
-              method: token
-              token: "0123456789123458"
+              method: id
+              id: "46973e9d-88a7-44a6-abfe-be4ff0134ff4"
 
 responses:
   "201":
@@ -89,7 +89,6 @@ responses:
                 id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
                 method: card
                 status: stored
-                token: "0123456789123458"
                 details:
                   number: XXXX XXXX XXXX 1111
                   expiration_date: 11 / 21
@@ -131,7 +130,6 @@ responses:
                 id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
                 method: paypal
                 status: buyer_approval_pending
-                token: null
                 details:
                   email_address: null
                   approval_url: |-

@@ -32,7 +32,7 @@ properties:
     oneOf:
       - $ref: "../openapi.yaml#/components/schemas/CardRequest"
       - $ref: "../openapi.yaml#/components/schemas/PayPalRequest"
-      - $ref: "../openapi.yaml#/components/schemas/TokenRequest"
+      - $ref: "../openapi.yaml#/components/schemas/TokenizedRequest"
 
     description:
       The optional payment method details to create an authorization for. This

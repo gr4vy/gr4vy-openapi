@@ -38,16 +38,6 @@ properties:
       - stored
       - used
 
-  token:
-    type: string
-    description: |-
-      A Gr4vy token that represents this payment method, in the format of a
-      credit-card number starting with the digit 0. You can store this token
-      in your own system and use it to process a payment with this payment
-      method at a later date.
-    example: "0123456789123458"
-    nullable: true
-
   method:
     type: string
     description: "`paypal`."

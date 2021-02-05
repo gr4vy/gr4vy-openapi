@@ -12,8 +12,8 @@ properties:
     description: A list of stored payment methods.
     items:
       oneOf:
-        - $ref: "../openapi.yaml#/components/schemas/Card--Token"
-        - $ref: "../openapi.yaml#/components/schemas/PayPal--Token"
+        - $ref: "../openapi.yaml#/components/schemas/Card--Tokenized"
+        - $ref: "../openapi.yaml#/components/schemas/PayPal--Tokenized"
 
   limit:
     $ref: "../properties/limit-100.yaml"
