@@ -81,8 +81,5 @@ properties:
     description: |-
       Defines when the transaction was last updated.
 
-  payment_service_id:
-    type: string
-    example: paypal-paypal-169f5226-4644-4d1e-ac36-14999e73601f
-    description:
-      The ID of the payment service that was used for this transaction.
+  payment_service:
+    $ref: "../openapi.yaml#/components/schemas/PaymentService"
