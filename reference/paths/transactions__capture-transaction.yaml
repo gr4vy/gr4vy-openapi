@@ -17,7 +17,7 @@ requestBody:
 
 responses:
   "200":
-    description: A transaction
+    description: Returns the captured transaction.
     content:
       application/json:
         schema:

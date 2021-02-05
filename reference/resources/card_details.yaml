@@ -1,6 +1,6 @@
 ---
 title: Card details
-description: Additional details about a stored card
+description: Additional details about a stored card.
 type: object
 x-tags:
   - Payment Methods

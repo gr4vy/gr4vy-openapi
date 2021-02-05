@@ -8,7 +8,7 @@ x-internal: true
 
 responses:
   "200":
-    description: A card rule
+    description: Returns a card rule.
     content:
       application/json:
         schema:

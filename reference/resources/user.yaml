@@ -8,7 +8,7 @@ x-internal: true
 properties:
   type:
     type: string
-    description: "`user`"
+    description: "`user`."
     example: user
     enum:
       - user
@@ -16,14 +16,14 @@ properties:
   id:
     type: string
     example: fe26475d-ec3e-4884-9553-f7356683f7f9
-    description: The unique Gr4vy ID for this user
+    description: The unique Gr4vy ID for this user.
 
   name:
     type: string
-    description: The full name of this user
+    description: The full name of this user.
     example: John Gravy
 
   email_adress:
     type: string
-    description: The email address for this user
+    description: The email address for this user.
     example: john@example.com

@@ -2,12 +2,13 @@
 operationId: get-payment-service-definition
 summary: Get payment service definition
 description: Gets the definition for a payment service.
-tags: ["Payment Service Definitions"]
+tags:
+  - Payment Service Definitions
 x-internal: true
 
 responses:
   "200":
-    description: OK
+    description: Returns a payment service definition.
     content:
       application/json:
         schema:

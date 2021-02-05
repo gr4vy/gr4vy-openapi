@@ -11,7 +11,7 @@ parameters:
 
 responses:
   "200":
-    description: OK
+    description: Returns a list of transaction events.
     content:
       application/json:
         schema:

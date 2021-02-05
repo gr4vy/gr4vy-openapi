@@ -1,15 +1,14 @@
 ---
 operationId: list-cards-rules
 summary: List card rules
-description: Returns a list of rules for card transactions
+description: Returns a list of rules for card transactions.
 tags:
   - Card Rules
 x-internal: true
 
 responses:
   "200":
-    description: |-
-      Returns a list of card rules.
+    description: Returns a list of card rules.
     content:
       application/json:
         schema:

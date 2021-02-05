@@ -73,10 +73,10 @@ tags:
 
       The payment method API can be used to:
 
-      * Determine the available payment methods in a cluster
-      * Determine the available payment method for a buyer in a specific currency and country
-      * Store (also known as tokenize) a payment method for a buyer
-      * Fetch all previously tokenized payment methods for a buyer
+      * Determine the available payment methods in a cluster.
+      * Determine the available payment method for a buyer in a specific currency and country.
+      * Store (also known as tokenize) a payment method for a buyer.
+      * Fetch all previously tokenized payment methods for a buyer.
   - name: Payment Options
     description: |-
       In Gr4vy, a payment option represents a list of methods (card, PayPal,
@@ -86,8 +86,8 @@ tags:
 
       The payment options API can be used to:
 
-      * Determine what types of payments can be processed in a specific locale
-      * Display a list options to a buyer to choose from
+      * Determine what types of payments can be processed in a specific locale.
+      * Display a list options to a buyer to choose from.
   - name: Payment Service Definitions
     x-internal: true
     description: |-
@@ -103,8 +103,8 @@ tags:
 
       The payment services API can be used to:
 
-      * Provide Gr4vy with the payment credentials for a payment provider
-      * Set a display name for a payment provider
+      * Provide Gr4vy with the payment credentials for a payment provider.
+      * Set a display name for a payment provider.
   - name: Sessions
     description: |-
       The sessions APIs are used to facilitate user authentication for the Gr4vy
@@ -119,9 +119,9 @@ tags:
 
       The transactions API can be used to:
 
-      - Authorize, capture, and store cards
-      - Authorize, capture, and store alternative payment methods like PayPal
-      - Refund, void, and otherwise cancel existing transactions
+      - Authorize, capture, and store cards.
+      - Authorize, capture, and store alternative payment methods like PayPal.
+      - Refund, void, and otherwise cancel existing transactions.
   - name: Users
     description: |-
       In Gr4vy, a user represents an employee of the merchant with access to the

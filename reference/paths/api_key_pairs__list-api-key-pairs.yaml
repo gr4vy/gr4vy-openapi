@@ -1,7 +1,7 @@
 ---
 operationId: list-api-key-pairs
 summary: List API key-pairs
-description: Returns a list of active API key-pairs
+description: Returns a list of active API key-pairs.
 tags:
   - API Key Pairs
 x-internal: true
@@ -12,7 +12,7 @@ parameters:
 
 responses:
   "200":
-    description: A list of active key pairs
+    description: Returns a list of active key pairs.
     content:
       application/json:
         schema:

@@ -14,6 +14,8 @@ properties:
       own records. This value needs to be unique for all buyers.
     example: user-789123
     nullable: true
+    minLength: 1
+    maxLength: 200
 
   display_name:
     type: string
@@ -22,3 +24,5 @@ properties:
       give a buyer a human readable name.
     example: John L.
     nullable: true
+    minLength: 1
+    maxLength: 200

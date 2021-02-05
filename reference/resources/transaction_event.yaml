@@ -16,7 +16,7 @@ properties:
   type:
     type: string
     example: transaction.event
-    description: "`transaction.event`"
+    description: "`transaction.event`."
 
   created_at:
     type: string
@@ -38,14 +38,14 @@ properties:
         type: string
         example: stripe-card-c4a988a2-cae6-4854-9aa0-a8365da0816d
         description: |
-          The ID of the resource
+          The ID of the resource.
 
       type:
         type: string
         example: payment-service
-        description: The type of the resource
+        description: The type of the resource.
 
       display_name:
         type: string
         example: Stripe (Card)
-        description: The user's name for the resource
+        description: The user's name for the resource.

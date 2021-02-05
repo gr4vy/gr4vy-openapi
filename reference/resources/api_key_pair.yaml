@@ -1,7 +1,7 @@
 ---
 title: API Key Pair
 type: object
-description: Details about an API key pair
+description: Details about an API key pair.
 x-internal: true
 
 x-tags:
@@ -10,7 +10,7 @@ x-tags:
 properties:
   type:
     type: string
-    description: "`api-key-pair`"
+    description: "`api-key-pair`."
     example: api-key-pair
     enum:
       - api-key-pair
@@ -45,10 +45,10 @@ properties:
     type: string
     format: date-time
     example: "2012-12-12T10:53:43-08:00"
-    description: The date and time when this key pair was created
+    description: The date and time when this key pair was created.
 
   updated_at:
     type: string
     format: date-time
     example: "2012-12-12T10:53:43-08:00"
-    description: The date and time when this key pair was last updated
+    description: The date and time when this key pair was last updated.

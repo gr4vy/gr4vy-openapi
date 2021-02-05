@@ -32,7 +32,7 @@ responses:
 
           * `transaction_id` - The ID of the transaction
           * `transaction_status` - The current value of the
-            `status`  field of the transaction
+            `status`  field of the transaction.
 
         schema:
           type: string

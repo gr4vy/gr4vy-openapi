@@ -30,9 +30,9 @@ responses:
           specified when the payment method was first created with some
           additional query parameters appended.
 
-          * `payment_method_id` - The ID of the payment method
+          * `payment_method_id` - The ID of the payment method.
           * `payment_method_status` - The current value of the
-            `status`  field of the payment method
+            `status`  field of the payment method.
 
         schema:
           type: string

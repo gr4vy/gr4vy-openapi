@@ -10,7 +10,7 @@ tags:
 
 responses:
   "200":
-    description: The cancelled transaction.
+    description: Returns cancelled transaction.
     content:
       application/json:
         schema:

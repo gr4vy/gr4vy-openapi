@@ -1,14 +1,14 @@
 ---
 operationId: create-api-key-pair
 summary: Create an API key-pair
-description: Creates a new API key-pair
+description: Creates a new API key-pair.
 tags:
   - API Key Pairs
 x-internal: true
 
 responses:
   "201":
-    description: A newly created key pair
+    description: Returns a newly created key pair.
     content:
       application/json:
         schema:

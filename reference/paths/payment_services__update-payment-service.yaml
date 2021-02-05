@@ -14,7 +14,7 @@ requestBody:
 
 responses:
   "201":
-    description: The updated payment service
+    description: Returns the updated payment service.
     content:
       application/json:
         schema:

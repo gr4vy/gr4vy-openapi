@@ -1,7 +1,7 @@
 ---
 operationId: list-payment-methods
 summary: List stored payment methods
-description: Returns a list of stored, tokenized payment methods
+description: Returns a list of stored, tokenized payment methods.
 tags:
   - Payment Methods
 
@@ -14,7 +14,7 @@ parameters:
 
 responses:
   "200":
-    description: OK
+    description: Returns a list of payment methods.
     content:
       application/json:
         schema:

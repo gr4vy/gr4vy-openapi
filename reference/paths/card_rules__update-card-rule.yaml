@@ -14,7 +14,7 @@ requestBody:
 
 responses:
   "200":
-    description: An updated card rule
+    description: Returns the updated card rule.
     content:
       application/json:
         schema:
