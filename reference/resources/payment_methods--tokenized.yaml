@@ -1,0 +1,25 @@
+---
+title: Payment Methods (Token only)
+type: object
+description: A list of stored payment methods in token format.
+
+x-tags:
+  - Payment Methods
+
+properties:
+  items:
+    type: array
+    description: A list of stored payment methods in token format.
+    items:
+      oneOf:
+        - $ref: "../openapi.yaml#/components/schemas/Card--Tokenized"
+        - $ref: "../openapi.yaml#/components/schemas/PayPal--Tokenized"
+
+  limit:
+    $ref: "../properties/limit-100.yaml"
+
+  next_cursor:
+    $ref: "../properties/next_cursor.yaml"
+
+  previous_cursor:
+    $ref: "../properties/previous_cursor.yaml"
