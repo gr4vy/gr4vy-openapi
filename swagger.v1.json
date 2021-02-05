@@ -4291,10 +4291,8 @@
           "type": "string"
         },
         "payment_method": {},
-        "payment_service_id": {
-          "description": "The ID of the payment service that was used for this transaction.",
-          "example": "paypal-paypal-169f5226-4644-4d1e-ac36-14999e73601f",
-          "type": "string"
+        "payment_service": {
+          "$ref": "#/definitions/PaymentService"
         },
         "status": {
           "description": "The status of the transaction being processed. This is different from the\n`status` field in that it represents the status of the transaction at the\npayment processor, not the status of the transaction created in Gr4vy.",
