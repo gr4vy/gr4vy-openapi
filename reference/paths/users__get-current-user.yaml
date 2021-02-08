@@ -1,14 +1,14 @@
 ---
 operationId: get-current-user
 summary: Get current
-description: Get current user information
+description: Get current user information.
 tags:
   - Users
 x-internal: true
 
 responses:
   "200":
-    description: Returns the currently authenticated user
+    description: Returns the currently authenticated user.
     content:
       application/json:
         schema:

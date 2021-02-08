@@ -1,7 +1,7 @@
 ---
 title: A list of payment options
 type: object
-description: A list of payment options
+description: A list of payment options.
 
 x-tags:
   - Payment Options

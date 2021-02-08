@@ -7,7 +7,7 @@ x-tags:
 properties:
   type:
     type: string
-    description: The type of this resource. Is always `buyer`
+    description: The type of this resource. Is always `buyer`.
     example: buyer
     enum:
       - buyer
@@ -15,7 +15,7 @@ properties:
   id:
     type: string
     example: fe26475d-ec3e-4884-9553-f7356683f7f9
-    description: The unique Gr4vy ID for this buyer
+    description: The unique Gr4vy ID for this buyer.
     format: uuid
 
   external_identifier:
@@ -26,7 +26,7 @@ properties:
     example: user-789123
     nullable: true
     minLength: 1
-    maxLength: 320
+    maxLength: 200
 
   display_name:
     type: string
@@ -36,7 +36,7 @@ properties:
     example: John L.
     nullable: true
     minLength: 1
-    maxLength: 1000
+    maxLength: 200
 
   created_at:
     type: string

@@ -16,7 +16,7 @@ requestBody:
 
 responses:
   "202":
-    description: Accepted
+    description: Returns a status object.
     content:
       application/json:
         schema:

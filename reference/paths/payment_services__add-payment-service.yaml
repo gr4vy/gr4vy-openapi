@@ -15,7 +15,7 @@ requestBody:
 
 responses:
   "201":
-    description: A created response
+    description: Returns the created payment service.
     content:
       application/json:
         schema:

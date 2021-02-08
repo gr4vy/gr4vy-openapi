@@ -8,7 +8,7 @@ x-internal: true
 
 responses:
   "204":
-    description: No Content
+    description: Returns an empty response.
 
   "401":
     description: Returns an error if no valid authentication was provided.

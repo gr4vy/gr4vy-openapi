@@ -7,7 +7,7 @@ tags:
 
 responses:
   "200":
-    description: A transaction
+    description: Returns the authorized transaction.
     content:
       application/json:
         schema:

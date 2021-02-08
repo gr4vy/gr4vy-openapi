@@ -1,14 +1,14 @@
 ---
 operationId: delete-card-rule
 summary: Delete card rule
-description: Deletes a specific card rule
+description: Deletes a specific card rule.
 tags:
   - Card Rules
 x-internal: true
 
 responses:
   "204":
-    description: No Content
+    description: Returns an empty response.
 
   "401":
     description: Returns an error if no valid authentication was provided.
@@ -18,7 +18,7 @@ responses:
           $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
 
   "403":
-    description: Returns an error if the workflow could not be deleted
+    description: Returns an error if the rule could not be deleted.
     content:
       application/json:
         schema:
@@ -30,7 +30,7 @@ responses:
               code: forbidden
               status: 403
               message: |-
-                The resource could not be removed as it's currently active
+                The resource could not be removed as it's currently active.
               details: []
 
   "404":

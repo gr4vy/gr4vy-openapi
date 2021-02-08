@@ -10,7 +10,7 @@ properties:
   type:
     type: string
     example: auth.session
-    description: "`auth.session`"
+    description: "`auth.session`."
     enum:
       - auth.session
 
@@ -19,7 +19,7 @@ properties:
     enum:
       - bearer
     example: bearer
-    description: "`bearer`"
+    description: "`bearer`."
 
   access_token:
     type: string

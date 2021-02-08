@@ -17,7 +17,7 @@ required:
 properties:
   match:
     type: string
-    description: "`number`"
+    description: "`number`."
     example: number
     enum:
       - number

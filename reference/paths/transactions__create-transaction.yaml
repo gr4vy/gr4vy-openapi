@@ -71,7 +71,7 @@ requestBody:
 
 responses:
   "201":
-    description: "A successful transaction"
+    description: Returns the created transaction.
     content:
       application/json:
         schema:
@@ -109,8 +109,18 @@ responses:
               created_at: "2013-07-16T19:23:00.000Z"
               external_identifier: user-789123
               updated_at: "2019-08-24T14:15:22Z"
-              payment_service_id: |-
-                stripe-card-169f5226-4644-4d1e-ac36-14999e73601f
+              payment_service:
+                id: stripe-card-169f5226-4644-4d1e-ac36-14999e73601f
+                type: payment-service
+                payment_service_definition_id: stripe-card
+                method: card
+                display_name: Stripe (Main)
+                status: pending
+                accepted_currencies:
+                  - EUR
+                accepted_countries:
+                  - DE
+                use_test_environment: true
           PayPal transaction:
             value:
               type: transaction
@@ -143,8 +153,18 @@ responses:
               created_at: "2013-07-16T19:23:00.000Z"
               external_identifier: user-789123
               updated_at: "2019-08-24T14:15:22Z"
-              payment_service_id: |-
-                stripe-card-169f5226-4644-4d1e-ac36-14999e73601f
+              payment_service:
+                id: stripe-card-169f5226-4644-4d1e-ac36-14999e73601f
+                type: payment-service
+                payment_service_definition_id: stripe-card
+                method: card
+                display_name: Stripe (Main)
+                status: pending
+                accepted_currencies:
+                  - EUR
+                accepted_countries:
+                  - DE
+                use_test_environment: true
 
   "400":
     description:
