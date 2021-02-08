@@ -6,12 +6,11 @@ x-tags:
   - Payment Methods
 
 properties:
-  number:
+  suffix:
     type: string
     description: |-
-      Partial number details for a stored card, hiding all but the last few
-      numbers.
-    example: XXXX XXXX XXXX 1111
+      The last 4 digits of the card number.
+    example: "1111"
 
   scheme:
     type: string
