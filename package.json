@@ -15,6 +15,7 @@
     "start": "redoc-cli serve reference/openapi.yaml -w --options.theme.colors.primary.main=teal --options.expandResponses=all --options.hideDownloadButton=true --options.hideSingleRequestSampleTab=true  --options.expandSingleSchemaField=true --options.jsonSampleExpandLevel=4 --options.noAutoAuth=true --options.pathInMiddlePanel=true --options.requiredPropsFirst=true --options.sortPropsAlphabetically=true",
     "start:public": "redoc-cli serve reference/openapi-public.yaml -w --options.theme.colors.primary.main=teal --options.expandResponses=all --options.hideDownloadButton=true --options.hideSingleRequestSampleTab=true  --options.expandSingleSchemaField=true --options.jsonSampleExpandLevel=4 --options.noAutoAuth=true --options.pathInMiddlePanel=true --options.requiredPropsFirst=true --options.sortPropsAlphabetically=true",
     "build:openapi": "node ./scripts/build-openapi.js",
+    "build:redoc": "rm -rf redoc; mkdir redoc; redoc-cli bundle --output redoc/index.html reference/openapi.yaml",
     "prebuild:swagger": "yarn build:openapi",
     "build:swagger": "api-spec-converter --from=openapi_3 --to=swagger_2 --syntax=json build/openapi.v1.json > build/swagger.v1.json",
     "build:public-spec": "rm -rf public; cp -r reference public; node ./scripts/build-public-spec.js",
@@ -38,6 +39,6 @@
     "json-schema-spell-checker": "^2.0.1",
     "jsonpath": "^1.1.0",
     "openapi-examples-validator": "^4.2.1",
-    "redoc-cli": "^0.10.2"
+    "redoc-cli": "^0.10.3"
   }
 }
