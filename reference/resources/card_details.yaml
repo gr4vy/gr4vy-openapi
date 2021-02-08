@@ -36,4 +36,7 @@ properties:
     type: string
     description: |-
       The expiration date for a card.
-    example: "11 / 21"
+    example: "11/25"
+    pattern: ^\d{2}/\d{2}$
+    minLength: 5
+    maxLength: 5

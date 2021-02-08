@@ -42,8 +42,8 @@ properties:
 
       If the `number` of this card represents a tokenized card, then this value
       is ignored.
-    example: 11/15
-    pattern: ^\d\d/\d\d$
+    example: 11/25
+    pattern: ^\d{2}/\d{2}$
     minLength: 5
     maxLength: 5
 
