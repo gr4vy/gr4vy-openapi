@@ -4261,10 +4261,17 @@
       "description": "Captures a transaction.",
       "properties": {
         "amount": {
-          "description": "The currency amount captured by this transaction.",
+          "description": "The authorized amount for this transaction. This can be different than the\nactual captured amount and part of this amount may be refunded.",
           "example": 1299,
           "maximum": 99999999,
           "minimum": 0.000001,
+          "type": "number"
+        },
+        "captured_amount": {
+          "description": "The captured amount for this transaction. This can be a part and in some\ncases even more than the authorized amount.",
+          "example": 999,
+          "maximum": 99999999,
+          "minimum": 0,
           "type": "number"
         },
         "created_at": {
@@ -4293,6 +4300,13 @@
         "payment_method": {},
         "payment_service": {
           "$ref": "#/definitions/PaymentService"
+        },
+        "refunded_amount": {
+          "description": "The refunded amount for this transaction. This can be a part or all of the\ncaptured amount.",
+          "example": 100,
+          "maximum": 99999999,
+          "minimum": 0,
+          "type": "number"
         },
         "status": {
           "description": "The status of the transaction being processed. This is different from the\n`status` field in that it represents the status of the transaction at the\npayment processor, not the status of the transaction created in Gr4vy.",
