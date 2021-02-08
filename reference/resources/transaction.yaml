@@ -45,29 +45,9 @@ properties:
 
   amount:
     type: number
-    description: |-
-      The authorized amount for this transaction. This can be different than the
-      actual captured amount and part of this amount may be refunded.
+    description: The currency amount captured by this transaction.
     example: 1299
     minimum: 0.000001
-    maximum: 99999999
-
-  captured_amount:
-    type: number
-    description: |-
-      The captured amount for this transaction. This can be a part and in some
-      cases even more than the authorized amount.
-    example: 999
-    minimum: 0
-    maximum: 99999999
-
-  refunded_amount:
-    type: number
-    description: |-
-      The refunded amount for this transaction. This can be a part or all of the
-      captured amount.
-    example: 100
-    minimum: 0
     maximum: 99999999
 
   currency:
