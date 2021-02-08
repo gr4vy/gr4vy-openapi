@@ -2506,6 +2506,8 @@
                       "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
                       "status": "authorized",
                       "amount": 1299,
+                      "captured_amount": 0,
+                      "refunded_amount": 0,
                       "currency": "USD",
                       "payment_method": {
                         "type": "payment-method",
@@ -2556,6 +2558,8 @@
                       "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
                       "status": "buyer_approval_pending",
                       "amount": 1299,
+                      "captured_amount": 0,
+                      "refunded_amount": 0,
                       "currency": "USD",
                       "payment_method": {
                         "type": "payment-method",
@@ -5392,9 +5396,23 @@
           },
           "amount": {
             "type": "number",
-            "description": "The currency amount captured by this transaction.",
+            "description": "The authorized amount for this transaction. This can be different than the\nactual captured amount and part of this amount may be refunded.",
             "example": 1299,
             "minimum": 0.000001,
+            "maximum": 99999999
+          },
+          "captured_amount": {
+            "type": "number",
+            "description": "The captured amount for this transaction. This can be a part and in some\ncases even more than the authorized amount.",
+            "example": 999,
+            "minimum": 0,
+            "maximum": 99999999
+          },
+          "refunded_amount": {
+            "type": "number",
+            "description": "The refunded amount for this transaction. This can be a part or all of the\ncaptured amount.",
+            "example": 100,
+            "minimum": 0,
             "maximum": 99999999
           },
           "currency": {
