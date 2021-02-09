@@ -75,9 +75,14 @@ properties:
       your own records.
     nullable: true
 
-  use_test_environment:
-    type: boolean
-    description:
-      Defines if this transaction should run in the payment provider's test
-      environment. Defaults to false.
-    example: false
+  environment:
+    type: string
+    description: |-
+      Defines the environment to create this transaction in. Setting this to
+      anything other than `production` will force Gr4vy to use the payment
+      a service configured for that environment.
+    enum:
+      - development
+      - staging
+      - production
+    example: staging

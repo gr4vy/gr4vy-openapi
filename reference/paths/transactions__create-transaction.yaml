@@ -118,7 +118,7 @@ responses:
                   - EUR
                 accepted_countries:
                   - DE
-                use_test_environment: true
+                environment: "production"
           PayPal transaction:
             value:
               type: transaction
@@ -160,7 +160,7 @@ responses:
                   - EUR
                 accepted_countries:
                   - DE
-                use_test_environment: true
+                environment: "production"
 
   "400":
     description:
