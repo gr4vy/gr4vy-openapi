@@ -54,14 +54,14 @@ properties:
       The date and time when this payment method was first created in our
       system.
     format: date-time
-    example: "2013-07-16T19:23:00.000Z"
+    example: "2013-07-16T19:23:00.000+00:00"
 
   updated_at:
     type: string
     description: |-
       The date and time when this payment method was last updated in our system.
     format: date-time
-    example: "2013-07-16T19:23:00.000Z"
+    example: "2013-07-16T19:23:00.000+00:00"
 
   external_identifier:
     type: string
