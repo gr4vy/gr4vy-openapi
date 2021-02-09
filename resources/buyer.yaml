@@ -44,7 +44,7 @@ properties:
       The date and time
       when this buyer was created in our system.
     format: date-time
-    example: "2013-07-16T19:23:00.000Z"
+    example: "2013-07-16T19:23:00.000+00:00"
 
   updated_at:
     type: string
@@ -52,4 +52,4 @@ properties:
       The date and time
       when this buyer was last updated in our system.
     format: date-time
-    example: "2013-07-16T19:23:00.000Z"
+    example: "2013-07-16T19:23:00.000+00:00"
