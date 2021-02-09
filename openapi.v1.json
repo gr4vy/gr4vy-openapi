@@ -651,16 +651,16 @@
                           "id": "gg9ILy",
                           "private_key": null,
                           "passphrase": null,
-                          "created_at": "2012-12-12T10:53:43-08:00",
-                          "updated_at": "2012-12-12T10:53:43-08:00"
+                          "created_at": "2012-12-12T10:53:43+00:00",
+                          "updated_at": "2012-12-12T10:53:43+00:00"
                         },
                         {
                           "type": "api-key-pair",
                           "id": "d028ec5c-12e4-43d0-b187-c6fe79b3b5dd",
                           "private_key": null,
                           "passphrase": null,
-                          "created_at": "2012-12-12T10:53:12-08:00",
-                          "updated_at": "2012-12-12T10:53:12-08:00"
+                          "created_at": "2012-12-12T10:53:12+00:00",
+                          "updated_at": "2012-12-12T10:53:12+00:00"
                         }
                       ]
                     }
@@ -704,8 +704,8 @@
                       "id": "gg9ILy",
                       "private_key": "-----BEGIN ENCRYPTED PRIVATE KEY-----\n...\n-----END ENCRYPTED PRIVATE KEY-----",
                       "passphrase": "af2675c9aba7de1f3bccb30757d7afd8",
-                      "created_at": "2012-12-12T10:53:43-08:00",
-                      "updated_at": "2012-12-12T10:53:43-08:00"
+                      "created_at": "2012-12-12T10:53:43+00:00",
+                      "updated_at": "2012-12-12T10:53:43+00:00"
                     }
                   }
                 }
@@ -2332,7 +2332,7 @@
           {
             "schema": {
               "type": "string",
-              "example": "2012-12-12T10:53:43-08:00"
+              "example": "2012-12-12T10:53:43+00:00"
             },
             "in": "query",
             "name": "before_created_at",
@@ -2341,7 +2341,7 @@
           {
             "schema": {
               "type": "string",
-              "example": "2012-12-12T10:53:43-08:00"
+              "example": "2012-12-12T10:53:43+00:00"
             },
             "in": "query",
             "name": "after_created_at",
@@ -2350,7 +2350,7 @@
           {
             "schema": {
               "type": "string",
-              "example": "2012-12-12T10:53:43-08:00"
+              "example": "2012-12-12T10:53:43+00:00"
             },
             "in": "query",
             "name": "before_updated_at",
@@ -2359,7 +2359,7 @@
           {
             "schema": {
               "type": "string",
-              "example": "2012-12-12T10:53:43-08:00"
+              "example": "2012-12-12T10:53:43+00:00"
             },
             "in": "query",
             "name": "after_updated_at",
@@ -2518,21 +2518,21 @@
                           "expiration_date": "11 / 21",
                           "scheme": "visa"
                         },
-                        "created_at": "2013-07-16T19:23:00.000Z",
-                        "updated_at": "2013-07-16T19:23:00.000Z",
+                        "created_at": "2013-07-16T19:23:00.000+00:00",
+                        "updated_at": "2013-07-16T19:23:00.000+00:00",
                         "external_identifier": "user-789123",
                         "buyer": {
                           "type": "buyer",
                           "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
                           "external_identifier": "user-789123",
                           "display_name": "John L.",
-                          "created_at": "2013-07-16T19:23:00.000Z",
-                          "updated_at": "2013-07-16T19:23:00.000Z"
+                          "created_at": "2013-07-16T19:23:00.000+00:00",
+                          "updated_at": "2013-07-16T19:23:00.000+00:00"
                         }
                       },
-                      "created_at": "2013-07-16T19:23:00.000Z",
+                      "created_at": "2013-07-16T19:23:00.000+00:00",
                       "external_identifier": "user-789123",
-                      "updated_at": "2019-08-24T14:15:22Z",
+                      "updated_at": "2019-08-24T14:15:22+00:00",
                       "payment_service": {
                         "id": "stripe-card-169f5226-4644-4d1e-ac36-14999e73601f",
                         "type": "payment-service",
@@ -2567,21 +2567,21 @@
                           "email_address": null,
                           "approval_url": "https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve"
                         },
-                        "created_at": "2013-07-16T19:23:00.000Z",
-                        "updated_at": "2013-07-16T19:23:00.000Z",
+                        "created_at": "2013-07-16T19:23:00.000+00:00",
+                        "updated_at": "2013-07-16T19:23:00.000+00:00",
                         "external_identifier": "user-789123",
                         "buyer": {
                           "type": "buyer",
                           "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
                           "external_identifier": "user-789123",
                           "display_name": "John L.",
-                          "created_at": "2013-07-16T19:23:00.000Z",
-                          "updated_at": "2013-07-16T19:23:00.000Z"
+                          "created_at": "2013-07-16T19:23:00.000+00:00",
+                          "updated_at": "2013-07-16T19:23:00.000+00:00"
                         }
                       },
-                      "created_at": "2013-07-16T19:23:00.000Z",
+                      "created_at": "2013-07-16T19:23:00.000+00:00",
                       "external_identifier": "user-789123",
-                      "updated_at": "2019-08-24T14:15:22Z",
+                      "updated_at": "2019-08-24T14:15:22+00:00",
                       "payment_service": {
                         "id": "stripe-card-169f5226-4644-4d1e-ac36-14999e73601f",
                         "type": "payment-service",
@@ -3189,13 +3189,13 @@
             "type": "string",
             "description": "The date and time\nwhen this buyer was created in our system.",
             "format": "date-time",
-            "example": "2013-07-16T19:23:00.000Z"
+            "example": "2013-07-16T19:23:00.000+00:00"
           },
           "updated_at": {
             "type": "string",
             "description": "The date and time\nwhen this buyer was last updated in our system.",
             "format": "date-time",
-            "example": "2013-07-16T19:23:00.000Z"
+            "example": "2013-07-16T19:23:00.000+00:00"
           }
         }
       },
@@ -3331,13 +3331,13 @@
             "type": "string",
             "description": "The date and time when this payment method was first created in our\nsystem.",
             "format": "date-time",
-            "example": "2013-07-16T19:23:00.000Z"
+            "example": "2013-07-16T19:23:00.000+00:00"
           },
           "updated_at": {
             "type": "string",
             "description": "The date and time when this payment method was last updated in our system.",
             "format": "date-time",
-            "example": "2013-07-16T19:23:00.000Z"
+            "example": "2013-07-16T19:23:00.000+00:00"
           },
           "external_identifier": {
             "type": "string",
@@ -3590,13 +3590,13 @@
           "created_at": {
             "type": "string",
             "format": "date-time",
-            "example": "2012-12-12T10:53:43-08:00",
+            "example": "2012-12-12T10:53:43+00:00",
             "description": "The date and time when this rule was created."
           },
           "updated_at": {
             "type": "string",
             "format": "date-time",
-            "example": "2012-12-12T10:53:43-08:00",
+            "example": "2012-12-12T10:53:43+00:00",
             "description": "The date and time when this rule was last updated."
           }
         }
@@ -4328,13 +4328,13 @@
           "created_at": {
             "type": "string",
             "format": "date-time",
-            "example": "2012-12-12T10:53:43-08:00",
+            "example": "2012-12-12T10:53:43+00:00",
             "description": "The date and time when this key pair was created."
           },
           "updated_at": {
             "type": "string",
             "format": "date-time",
-            "example": "2012-12-12T10:53:43-08:00",
+            "example": "2012-12-12T10:53:43+00:00",
             "description": "The date and time when this key pair was last updated."
           }
         }
@@ -4482,7 +4482,7 @@
             "type": "string",
             "description": "When this event was recorded.\n",
             "format": "date-time",
-            "example": "2012-12-12T10:53:43-08:00"
+            "example": "2012-12-12T10:53:43+00:00"
           },
           "code": {
             "type": "string",
@@ -5052,13 +5052,13 @@
             "type": "string",
             "description": "The date and time when this payment method was first created in our\nsystem.",
             "format": "date-time",
-            "example": "2013-07-16T19:23:00.000Z"
+            "example": "2013-07-16T19:23:00.000+00:00"
           },
           "updated_at": {
             "type": "string",
             "description": "The date and time when this payment method was last updated in our system.",
             "format": "date-time",
-            "example": "2013-07-16T19:23:00.000Z"
+            "example": "2013-07-16T19:23:00.000+00:00"
           },
           "external_identifier": {
             "type": "string",
@@ -5416,7 +5416,7 @@
             "type": "string",
             "description": "The date and time when this transaction was created in our system.",
             "format": "date-time",
-            "example": "2013-07-16T19:23:00.000Z"
+            "example": "2013-07-16T19:23:00.000+00:00"
           },
           "external_identifier": {
             "type": "string",
@@ -5633,7 +5633,7 @@
             "type": "string",
             "description": "When this event was recorded.\n",
             "format": "date-time",
-            "example": "2012-12-12T10:53:43-08:00"
+            "example": "2012-12-12T10:53:43+00:00"
           },
           "code": {
             "type": "string",
