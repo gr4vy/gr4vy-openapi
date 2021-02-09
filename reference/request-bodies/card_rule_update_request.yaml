@@ -34,7 +34,6 @@ properties:
       oneOf:
         - $ref: "../openapi.yaml#/components/schemas/CardRuleTextCondition"
         - $ref: "../openapi.yaml#/components/schemas/CardRuleNumberCondition"
-        - $ref: "../openapi.yaml#/components/schemas/CardRuleBooleanCondition"
 
   payment_service_ids:
     type: array

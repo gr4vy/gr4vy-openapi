@@ -345,8 +345,6 @@ components:
       $ref: "./resources/card_rule.yaml"
     CardRules:
       $ref: "./resources/card_rules.yaml"
-    CardRuleBooleanCondition:
-      $ref: "./resources/card_rule_boolean_condition.yaml"
     CardRuleNumberCondition:
       $ref: "./resources/card_rule_number_condition.yaml"
     CardRuleTextCondition:
