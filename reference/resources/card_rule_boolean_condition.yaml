@@ -27,7 +27,6 @@ properties:
     example: store
     enum:
       - store
-      - live_environment
 
   value:
     type: boolean

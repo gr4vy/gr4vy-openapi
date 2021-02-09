@@ -83,8 +83,6 @@ responses:
               id: fe26475d-ec3e-4884-9553-f7356683f7f9
               status: authorized
               amount: 1299
-              captured_amount: 0
-              refunded_amount: 0
               currency: USD
               payment_method:
                 type: payment-method
@@ -120,15 +118,13 @@ responses:
                   - EUR
                 accepted_countries:
                   - DE
-                use_test_environment: true
+                environment: "production"
           PayPal transaction:
             value:
               type: transaction
               id: fe26475d-ec3e-4884-9553-f7356683f7f9
               status: buyer_approval_pending
               amount: 1299
-              captured_amount: 0
-              refunded_amount: 0
               currency: USD
               payment_method:
                 type: payment-method
@@ -164,7 +160,7 @@ responses:
                   - EUR
                 accepted_countries:
                   - DE
-                use_test_environment: true
+                environment: "production"
 
   "400":
     description:

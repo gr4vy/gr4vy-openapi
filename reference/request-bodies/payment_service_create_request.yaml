@@ -13,7 +13,6 @@ allOf:
       - payment_service_definition_id
       - fields
       - accepted_currencies
-      - live_environment
       - accepted_countries
   - properties:
       payment_service_definition_id:

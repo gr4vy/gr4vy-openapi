@@ -31,6 +31,18 @@ properties:
       Whether this rule is currently in use. Rules can be deactivated to allow
       for them to be kept around and re-activated at a later date.
 
+  environment:
+    type: string
+    example: production
+    default: production
+    enum:
+      - development
+      - staging
+      - production
+    description: |-
+      The environment to use this rule in. This rule will only be used
+      for transactions created in that environment.
+
   conditions:
     type: array
     description: |-

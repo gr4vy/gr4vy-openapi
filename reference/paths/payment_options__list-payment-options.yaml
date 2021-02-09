@@ -10,14 +10,13 @@ tags:
 parameters:
   - $ref: "../query-parameters/country.yaml"
   - $ref: "../query-parameters/currency.yaml"
-  - $ref: "../query-parameters/live_environment.yaml"
+  - $ref: "../query-parameters/environment.yaml"
 
 responses:
   "200":
     description: |-
-      Returns a list of available payment options for the given currency and
-      country code. By default this only returns payment options available in
-      the live environment.
+      Returns a list of available payment options for the given query
+      parameters.
     content:
       application/json:
         schema:
