@@ -1,6 +1,6 @@
 ---
 operationId: add-buyer
-summary: Add buyer
+summary: New buyer
 description: |
   Adds a buyer, allowing for payment methods and transactions to be associated
   to this buyer.

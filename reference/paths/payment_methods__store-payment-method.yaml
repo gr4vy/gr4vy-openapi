@@ -1,6 +1,6 @@
 ---
 operationId: store-payment-method
-summary: Store a new payment method
+summary: New payment method
 description: Stores and tokenizes a new payment method.
 tags:
   - Payment Methods
