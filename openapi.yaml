@@ -29,13 +29,11 @@ tags:
       a checkout and making a purchase.
 
 
-      ## Features
-
-
       A buyer can be used by you to:
 
 
       * Display a human readable name (`display_name`) for a buyer in the Gr4vy
+
       admin panel
 
       * Associate multiple tokenized payment methods with a single user
@@ -46,12 +44,10 @@ tags:
   - name: Payment Methods
     description: >-
       In Gr4vy, a payment method represents a way in which a payment can be
-      processed,
 
-      for example a card payment, a PayPal payment, or a Bitcoin payment.
+      processed, for example a card payment, a PayPal payment, or a Bitcoin
 
-
-      ## Features
+      payment.
 
 
       The payment method API can be used to:
@@ -60,7 +56,9 @@ tags:
       * Determine the available payment methods in a cluster.
 
       * Determine the available payment method for a buyer in a specific
-      currency and country.
+      currency
+
+      and country.
 
       * Store (also known as tokenize) a payment method for a buyer.
 
@@ -69,8 +67,6 @@ tags:
     description: |-
       In Gr4vy, a payment option represents a list of methods (card, PayPal,
       etc) that are available for a given locale.
-
-      ## Features
 
       The payment options API can be used to:
 
@@ -82,8 +78,6 @@ tags:
       (Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,
       etc)
 
-      ## Features
-
       The payment services API can be used to:
 
       * Provide Gr4vy with the payment credentials for a payment provider.
@@ -91,12 +85,9 @@ tags:
   - name: Transactions
     description: >-
       In Gr4vy, a transaction represents a payment in any state, either before
-      it is
+      it
 
-      authorized, once it is captured, or after it has been refunded.
-
-
-      ## Features
+      is authorized, once it is captured, or after it has been refunded.
 
 
       The transactions API can be used to:
@@ -134,11 +125,6 @@ paths:
       $ref: ./paths/payment_methods__get-payment-method.yaml
     delete:
       $ref: ./paths/payment_methods__delete-payment-method.yaml
-  /payment-methods/{payment_method_id}/events:
-    parameters:
-      - $ref: ./path-parameters/payment_method_id.yaml
-    get:
-      $ref: ./paths/payment_methods__list-payment-method-events.yaml
   /payment-options:
     get:
       $ref: ./paths/payment_options__list-payment-options.yaml
@@ -181,11 +167,6 @@ paths:
       - $ref: ./path-parameters/transaction_id.yaml
     post:
       $ref: ./paths/transactions__refund-transaction.yaml
-  /transactions/{transaction_id}/events:
-    parameters:
-      - $ref: ./path-parameters/transaction_id.yaml
-    get:
-      $ref: ./paths/transactions__list-transaction-events.yaml
 components:
   schemas:
     Buyer:
@@ -220,10 +201,6 @@ components:
       $ref: ./resources/error_detail.yaml
     PaymentMethods:
       $ref: ./resources/payment_methods.yaml
-    PaymentMethodEvent:
-      $ref: ./resources/payment_method_event.yaml
-    PaymentMethodEvents:
-      $ref: ./resources/payment_method_events.yaml
     PaymentService:
       $ref: ./resources/payment_service.yaml
     PaymentServices:
@@ -260,10 +237,6 @@ components:
       $ref: ./request-bodies/transaction_create_request.yaml
     TransactionCaptureRequest:
       $ref: ./request-bodies/transaction_capture_request.yaml
-    TransactionEvent:
-      $ref: ./resources/transaction_event.yaml
-    TransactionEvents:
-      $ref: ./resources/transaction_events.yaml
   securitySchemes:
     BearerAuth:
       type: http

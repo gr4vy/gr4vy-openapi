@@ -1,6 +1,6 @@
 ---
 operationId: capture-transaction
-summary: Capture authorized transaction
+summary: Capture transaction
 description: Captures a previously authorized transaction.
 tags: ["Transactions"]
 

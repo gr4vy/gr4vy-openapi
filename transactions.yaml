@@ -1,0 +1,69 @@
+---
+# yamllint disable rule:line-length
+openapi: 3.0.0
+
+info:
+  title: Gr4vy Transactions API (Beta)
+  version: "1.0"
+  contact:
+    name: Gr4vy Support
+    email: support@gr4vy.com
+    url: "https://gr4vy.com"
+  termsOfService: "https://gr4vy.com"
+  license:
+    name: MIT
+    url: https://raw.githubusercontent.com/gr4vy/gr4vy-openapi/main/LICENSE
+  description: |-
+    The G4vy transaction APIs.
+
+servers:
+  - url: "https://api.{merchant}.gr4vy.app"
+    variables:
+      merchant:
+        default: demo
+        description: |-
+          The subdomain for your cluster as specified by the
+          cluster's main merchant `short_name`.
+
+tags:
+  - $ref: "./common/tags/transactions.yaml"
+
+paths:
+  "/transactions":
+    get:
+      $ref: "./paths/transactions__list-transactions.yaml"
+    post:
+      $ref: "./paths/transactions__create-transaction.yaml"
+
+  "/transactions/{transaction_id}":
+    parameters:
+      - $ref: "./path-parameters/transaction_id.yaml"
+    get:
+      $ref: "./paths/transactions__get-transaction.yaml"
+
+  "/transactions/{transaction_id}/capture":
+    parameters:
+      - $ref: "./path-parameters/transaction_id.yaml"
+    post:
+      $ref: "./paths/transactions__capture-transaction.yaml"
+
+  "/transactions/{transaction_id}/authorize":
+    parameters:
+      - $ref: "./path-parameters/transaction_id.yaml"
+    post:
+      $ref: "./paths/transactions__authorize-transaction.yaml"
+
+  "/transactions/{transaction_id}/refund":
+    parameters:
+      - $ref: "./path-parameters/transaction_id.yaml"
+    post:
+      $ref: "./paths/transactions__refund-transaction.yaml"
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - BearerAuth: []
