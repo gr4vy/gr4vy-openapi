@@ -87,7 +87,16 @@
     cluster admin.
   x-internal: true
 
-- $ref: "./tags/transactions.yaml"
+- name: Transactions
+  description: |-
+    In Gr4vy, a transaction represents a payment in any state, either before it
+    is authorized, once it is captured, or after it has been refunded.
+
+    The transactions API can be used to:
+
+    - Authorize, capture, and store cards.
+    - Authorize, capture, and store alternative payment methods like PayPal.
+    - Refund, void, and otherwise cancel existing transactions.
 
 - name: Users
   description: |-
