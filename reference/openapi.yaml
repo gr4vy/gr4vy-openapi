@@ -27,132 +27,32 @@ servers:
           cluster's main merchant `short_name`.
 
 tags:
-  - name: API Key Pairs
-    description: |-
-      In Gr4vy, an API key pair is used to sign and validate JWTs. A JWT is used
-      as a bearer token to authenticate to the API.
-    x-internal: true
-  - name: Async APIs
-    x-internal: true
-    description: |-
-      The asynchronous (async) APIs are convenience APIs that function as an
-      alternative way to create transactions and register payment methods
-      without having to wait for the API to complete. Each of thee APIs returns
-      directly without processing the request fully, allowing you to render a
-      new page for the buyer while the request is processed.
-  - name: Buyers
-    description: |-
-      In Gr4vy, a buyer represents your customer, the shopper who's performing
-      a checkout and making a purchase.
-
-      ## Features
-
-      A buyer can be used by you to:
-
-      * Display a human readable name (`display_name`) for a buyer in the Gr4vy admin panel
-      * Associate multiple tokenized payment methods with a single user
-      * Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the
-        buyer's previously stored payment methods, allowing for faster checkout.
-
-  - name: Card Rules
-    x-internal: true
-    description: |-
-      In Gr4vy, a card rule defines how a card transaction is processed. It
-      determines which payment services are used, and with what priority, based
-      on the transaction amount, card type, and many more attributes.
-  - name: Merchants
-    description: |-
-      In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.
-      Currently only one merchant is supported per cluster.
-    x-internal: true
-  - name: Payment Methods
-    description: |-
-      In Gr4vy, a payment method represents a way in which a payment can be processed,
-      for example a card payment, a PayPal payment, or a Bitcoin payment.
-
-      ## Features
-
-      The payment method API can be used to:
-
-      * Determine the available payment methods in a cluster.
-      * Determine the available payment method for a buyer in a specific currency and country.
-      * Store (also known as tokenize) a payment method for a buyer.
-      * Fetch all previously tokenized payment methods for a buyer.
-  - name: Payment Options
-    description: |-
-      In Gr4vy, a payment option represents a list of methods (card, PayPal,
-      etc) that are available for a given locale.
-
-      ## Features
-
-      The payment options API can be used to:
-
-      * Determine what types of payments can be processed in a specific locale.
-      * Display a list options to a buyer to choose from.
-  - name: Payment Service Definitions
-    x-internal: true
-    description: |-
-      Payment service definitions describe the fields required for a payment
-      service to be configured.
-  - name: Payment Services
-    description: |-
-      In Gr4vy, a payment service represents a configured payment provider
-      (Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,
-      etc)
-
-      ## Features
-
-      The payment services API can be used to:
-
-      * Provide Gr4vy with the payment credentials for a payment provider.
-      * Set a display name for a payment provider.
-  - name: Sessions
-    description: |-
-      The sessions APIs are used to facilitate user authentication for the Gr4vy
-      cluster admin.
-    x-internal: true
-  - name: Transactions
-    description: |-
-      In Gr4vy, a transaction represents a payment in any state, either before it is
-      authorized, once it is captured, or after it has been refunded.
-
-      ## Features
-
-      The transactions API can be used to:
-
-      - Authorize, capture, and store cards.
-      - Authorize, capture, and store alternative payment methods like PayPal.
-      - Refund, void, and otherwise cancel existing transactions.
-  - name: Users
-    description: |-
-      In Gr4vy, a user represents an employee of the merchant with access to the
-      cluster admin panel.
-    x-internal: true
+  $ref: "./common/tags.yaml"
 
 paths:
   "/async/payment-methods":
     post:
-      $ref: "./paths/payment_methods__async-store-payment-method.yaml"
+      $ref: "./paths/async__store-payment-method.yaml"
 
   "/async/transactions":
     post:
-      $ref: "./paths/transactions__async-create-transaction.yaml"
+      $ref: "./paths/async__create-transaction.yaml"
 
   "/async/transactions/{transaction_id}/authorize":
     parameters:
       - $ref: "./path-parameters/transaction_id.yaml"
     post:
-      $ref: "./paths/transactions__async-authorize-transaction.yaml"
+      $ref: "./paths/async__authorize-transaction.yaml"
 
   "/async/transactions/{transaction_id}/capture":
     parameters:
       - $ref: "./path-parameters/transaction_id.yaml"
     post:
-      $ref: "./paths/transactions__async-capture-transaction.yaml"
+      $ref: "./paths/async__capture-transaction.yaml"
 
   "/async/transactions/batch-capture":
     post:
-      $ref: "./paths/transactions__async-batch-capture-transactions.yaml"
+      $ref: "./paths/async__batch-capture-transactions.yaml"
 
   "/auth/sessions":
     post:
@@ -208,11 +108,11 @@ paths:
     delete:
       $ref: "./paths/payment_methods__delete-payment-method.yaml"
 
-  "/payment-methods/{payment_method_id}/events":
-    parameters:
-      - $ref: "./path-parameters/payment_method_id.yaml"
-    get:
-      $ref: "./paths/payment_methods__list-payment-method-events.yaml"
+  # "/payment-methods/{payment_method_id}/events":
+  #   parameters:
+  #     - $ref: "./path-parameters/payment_method_id.yaml"
+  #   get:
+  #     $ref: "./paths/payment_methods__list-payment-method-events.yaml"
 
   "/payment-methods/{payment_method_id}/approve":
     parameters:
@@ -302,11 +202,11 @@ paths:
     post:
       $ref: "./paths/transactions__refund-transaction.yaml"
 
-  "/transactions/{transaction_id}/events":
-    parameters:
-      - $ref: "./path-parameters/transaction_id.yaml"
-    get:
-      $ref: "./paths/transactions__list-transaction-events.yaml"
+  # "/transactions/{transaction_id}/events":
+  #   parameters:
+  #     - $ref: "./path-parameters/transaction_id.yaml"
+  #   get:
+  #     $ref: "./paths/transactions__list-transaction-events.yaml"
 
   "/transactions/{transaction_id}/approve":
     parameters:
@@ -380,10 +280,10 @@ components:
       $ref: "./resources/merchant.yaml"
     PaymentMethods:
       $ref: "./resources/payment_methods.yaml"
-    PaymentMethodEvent:
-      $ref: "./resources/payment_method_event.yaml"
-    PaymentMethodEvents:
-      $ref: "./resources/payment_method_events.yaml"
+    # PaymentMethodEvent:
+    #   $ref: "./resources/payment_method_event.yaml"
+    # PaymentMethodEvents:
+    #   $ref: "./resources/payment_method_events.yaml"
     PaymentService:
       $ref: "./resources/payment_service.yaml"
     PaymentServices:
@@ -428,10 +328,10 @@ components:
       $ref: "./request-bodies/transaction_create_request.yaml"
     TransactionCaptureRequest:
       $ref: "./request-bodies/transaction_capture_request.yaml"
-    TransactionEvent:
-      $ref: "./resources/transaction_event.yaml"
-    TransactionEvents:
-      $ref: "./resources/transaction_events.yaml"
+    # TransactionEvent:
+    #   $ref: "./resources/transaction_event.yaml"
+    # TransactionEvents:
+    #   $ref: "./resources/transaction_events.yaml"
     User:
       $ref: "./resources/user.yaml"
 

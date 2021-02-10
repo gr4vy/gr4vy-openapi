@@ -1,25 +1,19 @@
 ---
-operationId: async-batch-capture-transactions
-summary: Batch capture authorizations
+operationId: async-capture-transaction
+summary: Capture transaction
 tags: ["Async APIs"]
 x-internal: true
 description: |-
-  The body of this API takes a list of items as a JSON object.
+  Captures a previously authorized transaction.
 
-  This API returns asynchronously, returning a list of status objects with the
-  IDs of the pending `Transaction` resources.
+  This API returns asynchronously, returning status object with the ID of the
+  pending `Transaction` resource.
 
 requestBody:
   content:
     application/json:
       schema:
-        type: object
-        properties:
-          items:
-            type: array
-            items:
-              $ref: |-
-                ../openapi.yaml#/components/schemas/TransactionsBatchCaptureRequest
+        $ref: "../openapi.yaml#/components/schemas/TransactionCaptureRequest"
 
 responses:
   "202":
@@ -27,7 +21,15 @@ responses:
     content:
       application/json:
         schema:
-          $ref: "../openapi.yaml#/components/schemas/Statuses"
+          $ref: "../openapi.yaml#/components/schemas/Status"
+        examples:
+          Pending transaction:
+            value:
+              type: status
+              status: pending
+              resource_type: transaction
+              resource_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+              external_identifier: user-789123
 
   "400":
     description: Returns an error if the request was badly formatted.
