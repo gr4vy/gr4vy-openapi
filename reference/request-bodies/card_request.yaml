@@ -73,12 +73,13 @@ properties:
     format: uuid
     example: fe26475d-ec3e-4884-9553-f7356683f7f9
     description: |-
-      The ID of the buyer to associate this payment method to. If provided, the
-      `buyer_external_identifier` is ignored.
+      The ID of the buyer to associate this payment method to. If this field is
+      provided then the `buyer_external_identifier` field needs to be unset.
 
   buyer_external_identifier:
     type: string
     description: |-
       The `external_identifier` of the buyer to associate this payment method
-      to. This field is ignored if the `buyer_id` is provided.
+      to. If this field is provided then the `buyer_id` field
+      needs to be unset.
     example: user-789123
