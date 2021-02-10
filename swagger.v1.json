@@ -174,7 +174,8 @@
         ],
         "description": "Stores and tokenizes a new payment method.",
         "operationId": "async-store-payment-method",
-        "summary": "Store a new payment method"
+        "summary": "Store a new payment method",
+        "x-internal": true
       }
     },
     "/async/transactions": {
@@ -219,7 +220,8 @@
         ],
         "description": "Attempts to create an authorization for a payment method.\n\nThis endpoint accepts a few additional fields that allow for simultaneous\ncapturing and storage of the payment method.\n\n* `payment_method.store` - Use this field to store the payment method for\nfuture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
         "operationId": "async-create-transaction",
-        "summary": "Create transaction"
+        "summary": "Create transaction",
+        "x-internal": true
       }
     },
     "/async/transactions/batch-capture": {
@@ -272,7 +274,8 @@
         ],
         "description": "The body of this API takes a list of items as a JSON object.\n\nThis API returns asynchronously, returning a list of status objects with the\nIDs of the pending `Transaction` resources.",
         "operationId": "async-batch-capture-transactions",
-        "summary": "Batch capture authorizations"
+        "summary": "Batch capture authorizations",
+        "x-internal": true
       }
     },
     "/async/transactions/{transaction_id}/authorize": {
@@ -315,7 +318,8 @@
         ],
         "description": "Authorize a previously approved transaction.\n\nThis API returns asynchronously, returning status object with the ID of the\npending `Transaction` resource.",
         "operationId": "async-authorize-transaction",
-        "summary": "Authorize approved transaction"
+        "summary": "Authorize approved transaction",
+        "x-internal": true
       }
     },
     "/async/transactions/{transaction_id}/capture": {
@@ -369,7 +373,8 @@
         ],
         "description": "Captures a previously authorized transaction.\n\nThis API returns asynchronously, returning status object with the ID of the\npending `Transaction` resource.",
         "operationId": "async-capture-transaction",
-        "summary": "Capture authorized transaction"
+        "summary": "Capture authorized transaction",
+        "x-internal": true
       }
     },
     "/auth/sessions": {
@@ -4650,7 +4655,8 @@
     },
     {
       "description": "The asynchronous (async) APIs are convenience APIs that function as an\nalternative way to create transactions and register payment methods\nwithout having to wait for the API to complete. Each of thee APIs returns\ndirectly without processing the request fully, allowing you to render a\nnew page for the buyer while the request is processed.",
-      "name": "Async APIs"
+      "name": "Async APIs",
+      "x-internal": true
     },
     {
       "description": "In Gr4vy, a buyer represents your customer, the shopper who's performing\na checkout and making a purchase.\n\n## Features\n\nA buyer can be used by you to:\n\n* Display a human readable name (`display_name`) for a buyer in the Gr4vy admin panel\n* Associate multiple tokenized payment methods with a single user\n* Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the\n  buyer's previously stored payment methods, allowing for faster checkout.",
