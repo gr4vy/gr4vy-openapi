@@ -26,63 +26,9 @@
       }
     }
   ],
-  "tags": [
-    {
-      "name": "API Key Pairs",
-      "description": "In Gr4vy, an API key pair is used to sign and validate JWTs. A JWT is used\nas a bearer token to authenticate to the API.",
-      "x-internal": true
-    },
-    {
-      "name": "Async APIs",
-      "x-internal": true,
-      "description": "The asynchronous (async) APIs are convenience APIs that function as an\nalternative way to create transactions and register payment methods\nwithout having to wait for the API to complete. Each of thee APIs returns\ndirectly without processing the request fully, allowing you to render a\nnew page for the buyer while the request is processed."
-    },
-    {
-      "name": "Buyers",
-      "description": "In Gr4vy, a buyer represents your customer, the shopper who's performing\na checkout and making a purchase.\n\n## Features\n\nA buyer can be used by you to:\n\n* Display a human readable name (`display_name`) for a buyer in the Gr4vy admin panel\n* Associate multiple tokenized payment methods with a single user\n* Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the\n  buyer's previously stored payment methods, allowing for faster checkout."
-    },
-    {
-      "name": "Card Rules",
-      "x-internal": true,
-      "description": "In Gr4vy, a card rule defines how a card transaction is processed. It\ndetermines which payment services are used, and with what priority, based\non the transaction amount, card type, and many more attributes."
-    },
-    {
-      "name": "Merchants",
-      "description": "In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.\nCurrently only one merchant is supported per cluster.",
-      "x-internal": true
-    },
-    {
-      "name": "Payment Methods",
-      "description": "In Gr4vy, a payment method represents a way in which a payment can be processed,\nfor example a card payment, a PayPal payment, or a Bitcoin payment.\n\n## Features\n\nThe payment method API can be used to:\n\n* Determine the available payment methods in a cluster.\n* Determine the available payment method for a buyer in a specific currency and country.\n* Store (also known as tokenize) a payment method for a buyer.\n* Fetch all previously tokenized payment methods for a buyer."
-    },
-    {
-      "name": "Payment Options",
-      "description": "In Gr4vy, a payment option represents a list of methods (card, PayPal,\netc) that are available for a given locale.\n\n## Features\n\nThe payment options API can be used to:\n\n* Determine what types of payments can be processed in a specific locale.\n* Display a list options to a buyer to choose from."
-    },
-    {
-      "name": "Payment Service Definitions",
-      "x-internal": true,
-      "description": "Payment service definitions describe the fields required for a payment\nservice to be configured."
-    },
-    {
-      "name": "Payment Services",
-      "description": "In Gr4vy, a payment service represents a configured payment provider\n(Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,\netc)\n\n## Features\n\nThe payment services API can be used to:\n\n* Provide Gr4vy with the payment credentials for a payment provider.\n* Set a display name for a payment provider."
-    },
-    {
-      "name": "Sessions",
-      "description": "The sessions APIs are used to facilitate user authentication for the Gr4vy\ncluster admin.",
-      "x-internal": true
-    },
-    {
-      "name": "Transactions",
-      "description": "In Gr4vy, a transaction represents a payment in any state, either before it is\nauthorized, once it is captured, or after it has been refunded.\n\n## Features\n\nThe transactions API can be used to:\n\n- Authorize, capture, and store cards.\n- Authorize, capture, and store alternative payment methods like PayPal.\n- Refund, void, and otherwise cancel existing transactions."
-    },
-    {
-      "name": "Users",
-      "description": "In Gr4vy, a user represents an employee of the merchant with access to the\ncluster admin panel.",
-      "x-internal": true
-    }
-  ],
+  "tags": {
+    "$ref": "./common/tags.yaml"
+  },
   "paths": {
     "/async/payment-methods": {
       "post": {
@@ -354,7 +300,7 @@
       ],
       "post": {
         "operationId": "async-capture-transaction",
-        "summary": "Capture authorized transaction",
+        "summary": "Capture transaction",
         "tags": [
           "Async APIs"
         ],
@@ -417,7 +363,7 @@
     "/async/transactions/batch-capture": {
       "post": {
         "operationId": "async-batch-capture-transactions",
-        "summary": "Batch capture authorizations",
+        "summary": "Batch capture transactions",
         "tags": [
           "Async APIs"
         ],
@@ -1348,86 +1294,6 @@
         "responses": {
           "204": {
             "description": "Returns an empty response."
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error404NotFound"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/payment-methods/{payment_method_id}/events": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string",
-            "example": "46973e9d-88a7-44a6-abfe-be4ff0134ff4",
-            "format": "uuid"
-          },
-          "name": "payment_method_id",
-          "in": "path",
-          "required": true,
-          "description": "The ID of the payment method."
-        }
-      ],
-      "get": {
-        "operationId": "list-payment-method-event",
-        "summary": "List payment method events",
-        "description": "Returns a list of events for a given payment method.",
-        "tags": [
-          "Payment Methods"
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "integer",
-              "default": 20,
-              "example": 1,
-              "minimum": 1,
-              "maximum": 100,
-              "format": "int32"
-            },
-            "in": "query",
-            "name": "limit",
-            "description": "Defines the maximum number of items to return for this request."
-          },
-          {
-            "schema": {
-              "type": "string",
-              "format": "",
-              "example": "ZXhhbXBsZTE"
-            },
-            "in": "query",
-            "name": "cursor",
-            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns a list of payment method events.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PaymentMethodEvents"
-                }
-              }
-            }
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -2419,7 +2285,7 @@
         }
       },
       "post": {
-        "summary": "Authorize new transaction",
+        "summary": "New transaction",
         "tags": [
           "Transactions"
         ],
@@ -2715,7 +2581,7 @@
       ],
       "post": {
         "operationId": "capture-transaction",
-        "summary": "Capture authorized transaction",
+        "summary": "Capture transaction",
         "description": "Captures a previously authorized transaction.",
         "tags": [
           "Transactions"
@@ -2900,92 +2766,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Transaction"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found or has not yet been created.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error404NotFound"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error404PendingCreation"
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/transactions/{transaction_id}/events": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string",
-            "example": "fe26475d-ec3e-4884-9553-f7356683f7f9"
-          },
-          "name": "transaction_id",
-          "in": "path",
-          "required": true,
-          "description": "The ID for the transaction to get the information for."
-        }
-      ],
-      "get": {
-        "operationId": "list-transaction-events",
-        "summary": "List transaction events",
-        "description": "Returns a list of events for a given transaction.",
-        "tags": [
-          "Transactions"
-        ],
-        "parameters": [
-          {
-            "schema": {
-              "type": "integer",
-              "default": 20,
-              "example": 1,
-              "minimum": 1,
-              "maximum": 100,
-              "format": "int32"
-            },
-            "in": "query",
-            "name": "limit",
-            "description": "Defines the maximum number of items to return for this request."
-          },
-          {
-            "schema": {
-              "type": "string",
-              "format": "",
-              "example": "ZXhhbXBsZTE"
-            },
-            "in": "query",
-            "name": "cursor",
-            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns a list of transaction events.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TransactionEvents"
                 }
               }
             }
@@ -4465,101 +4245,6 @@
           }
         }
       },
-      "PaymentMethodEvent": {
-        "title": "Payment method event",
-        "type": "object",
-        "description": "An event that happened for a payment method.",
-        "x-tags": [
-          "Payment Methods"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID for this event.",
-            "format": "uuid",
-            "example": "639c56c8-a2e1-415e-9633-aabe251605d3"
-          },
-          "type": {
-            "type": "string",
-            "example": "payment-method.event",
-            "description": "`payment-method.event`."
-          },
-          "created_at": {
-            "type": "string",
-            "description": "When this event was recorded.\n",
-            "format": "date-time",
-            "example": "2012-12-12T10:53:43+00:00"
-          },
-          "code": {
-            "type": "string",
-            "description": "The type of event, in dot-format syntax.",
-            "example": "payment-method.rejected.account_closed"
-          },
-          "external_service": {
-            "type": "object",
-            "description": "An optional related resource that triggered this event.",
-            "properties": {
-              "id": {
-                "type": "string",
-                "example": "stripe-card-c4a988a2-cae6-4854-9aa0-a8365da0816d",
-                "description": "The ID of the resource.\n"
-              },
-              "type": {
-                "type": "string",
-                "example": "payment-service",
-                "description": "The type of the resource."
-              },
-              "display_name": {
-                "type": "string",
-                "example": "Stripe (Card)",
-                "description": "The user's name for the resource."
-              }
-            }
-          }
-        }
-      },
-      "PaymentMethodEvents": {
-        "title": "Payment method events",
-        "description": "A list of events for a payment method.",
-        "type": "object",
-        "x-tags": [
-          "Payment Methods"
-        ],
-        "properties": {
-          "items": {
-            "type": "array",
-            "description": "A list of payment method events.",
-            "items": {
-              "$ref": "#/components/schemas/PaymentMethodEvent"
-            }
-          },
-          "limit": {
-            "type": "integer",
-            "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 100,
-            "example": 1,
-            "default": 20
-          },
-          "next_cursor": {
-            "type": "string",
-            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
-            "example": "ZXhhbXBsZTE",
-            "nullable": true,
-            "minLength": 1,
-            "maxLength": 1000
-          },
-          "previous_cursor": {
-            "type": "string",
-            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
-            "example": null,
-            "nullable": true,
-            "minLength": 1,
-            "maxLength": 1000
-          }
-        }
-      },
       "PaymentService": {
         "title": "A payment service",
         "type": "object",
@@ -5613,101 +5298,6 @@
             "type": "string",
             "example": "user-789123",
             "description": "An external identifier that can be used to match the transaction against your own records."
-          }
-        }
-      },
-      "TransactionEvent": {
-        "title": "Transaction Event",
-        "type": "object",
-        "description": "An event that happened for a transaction.",
-        "x-tags": [
-          "Transactions"
-        ],
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "The unique ID for this event.",
-            "format": "uuid",
-            "example": "be828248-56de-481e-a580-44b6e1d4df81"
-          },
-          "type": {
-            "type": "string",
-            "example": "transaction.event",
-            "description": "`transaction.event`."
-          },
-          "created_at": {
-            "type": "string",
-            "description": "When this event was recorded.\n",
-            "format": "date-time",
-            "example": "2012-12-12T10:53:43+00:00"
-          },
-          "code": {
-            "type": "string",
-            "description": "The type of event, in dot-format syntax.",
-            "example": "transaction.rejected.account_closed"
-          },
-          "resource": {
-            "type": "object",
-            "description": "An optional related resource that triggered this event.",
-            "properties": {
-              "id": {
-                "type": "string",
-                "example": "stripe-card-c4a988a2-cae6-4854-9aa0-a8365da0816d",
-                "description": "The ID of the resource.\n"
-              },
-              "type": {
-                "type": "string",
-                "example": "payment-service",
-                "description": "The type of the resource."
-              },
-              "display_name": {
-                "type": "string",
-                "example": "Stripe (Card)",
-                "description": "The user's name for the resource."
-              }
-            }
-          }
-        }
-      },
-      "TransactionEvents": {
-        "title": "Transaction Events",
-        "type": "object",
-        "description": "A list of events for a transaction.",
-        "x-tags": [
-          "Transactions"
-        ],
-        "properties": {
-          "items": {
-            "type": "array",
-            "description": "A list of transaction events.",
-            "items": {
-              "$ref": "#/components/schemas/TransactionEvent"
-            }
-          },
-          "limit": {
-            "type": "integer",
-            "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 100,
-            "example": 1,
-            "default": 20
-          },
-          "next_cursor": {
-            "type": "string",
-            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
-            "example": "ZXhhbXBsZTE",
-            "nullable": true,
-            "minLength": 1,
-            "maxLength": 1000
-          },
-          "previous_cursor": {
-            "type": "string",
-            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
-            "example": null,
-            "nullable": true,
-            "minLength": 1,
-            "maxLength": 1000
           }
         }
       },
