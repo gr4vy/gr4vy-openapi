@@ -83,3 +83,14 @@ properties:
 
   payment_service:
     $ref: "../openapi.yaml#/components/schemas/PaymentService"
+
+  environment:
+    type: string
+    example: production
+    default: production
+    enum:
+      - development
+      - staging
+      - production
+    description: |-
+      The environment this transaction has been created in.

@@ -335,8 +335,8 @@ components:
       $ref: "./request-bodies/buyer_update_request.yaml"
     Card:
       $ref: "./resources/card.yaml"
-    Card--Token:
-      $ref: "./resources/card--token.yaml"
+    # Card--Token:
+    #   $ref: "./resources/card--token.yaml"
     CardDetails:
       $ref: "./resources/card_details.yaml"
     CardRequest:
@@ -401,8 +401,8 @@ components:
       $ref: "./resources/payment_options.yaml"
     PayPal:
       $ref: "./resources/paypal.yaml"
-    PayPal--Token:
-      $ref: "./resources/paypal--token.yaml"
+    # PayPal--Token:
+    #   $ref: "./resources/paypal--token.yaml"
     PayPalDetails:
       $ref: "./resources/paypal_details.yaml"
     PayPalRequest:

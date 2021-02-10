@@ -88,3 +88,16 @@ properties:
   details:
     $ref: |-
       ../openapi.yaml#/components/schemas/PayPalDetails
+
+  environment:
+    type: string
+    example: production
+    default: production
+    nullable: true
+    enum:
+      - development
+      - staging
+      - production
+    description: |-
+      The environment this payment method has been stored for. This will be null
+      of the payment method was not stored.

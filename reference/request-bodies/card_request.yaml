@@ -82,3 +82,15 @@ properties:
       The `external_identifier` of the buyer to associate this payment method
       to. This field is ignored if the `buyer_id` is provided.
     example: user-789123
+
+  environment:
+    type: string
+    description: |-
+      Defines the environment to store this card for. Setting this to
+      anything other than `production` will force Gr4vy to use the payment
+      services configured for that environment.
+    enum:
+      - development
+      - staging
+      - production
+    example: staging
