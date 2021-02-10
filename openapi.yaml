@@ -22,13 +22,6 @@ servers:
           The subdomain for your cluster as specified by the
           cluster's main merchant `short_name`.
 tags:
-  - name: Async APIs
-    description: |-
-      The asynchronous (async) APIs are convenience APIs that function as an
-      alternative way to create transactions and register payment methods
-      without having to wait for the API to complete. Each of thee APIs returns
-      directly without processing the request fully, allowing you to render a
-      new page for the buyer while the request is processed.
   - name: Buyers
     description: >-
       In Gr4vy, a buyer represents your customer, the shopper who's performing
@@ -115,25 +108,6 @@ tags:
 
       - Refund, void, and otherwise cancel existing transactions.
 paths:
-  /async/payment-methods:
-    post:
-      $ref: ./paths/payment_methods__async-store-payment-method.yaml
-  /async/transactions:
-    post:
-      $ref: ./paths/transactions__async-create-transaction.yaml
-  /async/transactions/{transaction_id}/authorize:
-    parameters:
-      - $ref: ./path-parameters/transaction_id.yaml
-    post:
-      $ref: ./paths/transactions__async-authorize-transaction.yaml
-  /async/transactions/{transaction_id}/capture:
-    parameters:
-      - $ref: ./path-parameters/transaction_id.yaml
-    post:
-      $ref: ./paths/transactions__async-capture-transaction.yaml
-  /async/transactions/batch-capture:
-    post:
-      $ref: ./paths/transactions__async-batch-capture-transactions.yaml
   /buyers:
     get:
       $ref: ./paths/buyers__list-buyers.yaml
