@@ -274,7 +274,7 @@
         ],
         "description": "The body of this API takes a list of items as a JSON object.\n\nThis API returns asynchronously, returning a list of status objects with the\nIDs of the pending `Transaction` resources.",
         "operationId": "async-batch-capture-transactions",
-        "summary": "Batch capture authorizations",
+        "summary": "Batch capture transactions",
         "x-internal": true
       }
     },
@@ -373,7 +373,7 @@
         ],
         "description": "Captures a previously authorized transaction.\n\nThis API returns asynchronously, returning status object with the ID of the\npending `Transaction` resource.",
         "operationId": "async-capture-transaction",
-        "summary": "Capture authorized transaction",
+        "summary": "Capture transaction",
         "x-internal": true
       }
     },
@@ -1195,68 +1195,6 @@
         "x-internal": true
       }
     },
-    "/payment-methods/{payment_method_id}/events": {
-      "parameters": [
-        {
-          "description": "The ID of the payment method.",
-          "format": "uuid",
-          "in": "path",
-          "name": "payment_method_id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "default": 20,
-            "description": "Defines the maximum number of items to return for this request.",
-            "format": "int32",
-            "in": "query",
-            "maximum": 100,
-            "minimum": 1,
-            "name": "limit",
-            "type": "integer"
-          },
-          {
-            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list.",
-            "format": "",
-            "in": "query",
-            "name": "cursor",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns a list of payment method events.",
-            "schema": {
-              "$ref": "#/definitions/PaymentMethodEvents"
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "schema": {
-              "$ref": "#/definitions/Error401Unauthorized"
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "schema": {
-              "$ref": "#/definitions/Error404NotFound"
-            }
-          }
-        },
-        "tags": [
-          "Payment Methods"
-        ],
-        "description": "Returns a list of events for a given payment method.",
-        "operationId": "list-payment-method-event",
-        "summary": "List payment method events"
-      }
-    },
     "/payment-options": {
       "get": {
         "produces": [
@@ -1747,7 +1685,7 @@
         ],
         "description": "Attempts to create an authorization for a payment method. In some cases it is\nnot possible to create the authorization without redirecting the user for\ntheir authorization. In these cases the status is set to\n`buyer_approval_pending` and an `approval_url` is returned.\n\nAdditionally, this endpoint accepts a few additional fields that allow for\nsimultaneous capturing and storage of the payment method.\n\n* `store` - Use this field to store the payment method for\nfuture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
         "operationId": "authorize-new-transaction",
-        "summary": "Authorize new transaction"
+        "summary": "New transaction"
       }
     },
     "/transactions/approvals/{transaction_approval_token}": {
@@ -1975,66 +1913,7 @@
         ],
         "description": "Captures a previously authorized transaction.",
         "operationId": "capture-transaction",
-        "summary": "Capture authorized transaction"
-      }
-    },
-    "/transactions/{transaction_id}/events": {
-      "parameters": [
-        {
-          "description": "The ID for the transaction to get the information for.",
-          "in": "path",
-          "name": "transaction_id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "default": 20,
-            "description": "Defines the maximum number of items to return for this request.",
-            "format": "int32",
-            "in": "query",
-            "maximum": 100,
-            "minimum": 1,
-            "name": "limit",
-            "type": "integer"
-          },
-          {
-            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list.",
-            "format": "",
-            "in": "query",
-            "name": "cursor",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns a list of transaction events.",
-            "schema": {
-              "$ref": "#/definitions/TransactionEvents"
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "schema": {
-              "$ref": "#/definitions/Error401Unauthorized"
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found or has not yet been created.",
-            "schema": {}
-          }
-        },
-        "tags": [
-          "Transactions"
-        ],
-        "description": "Returns a list of events for a given transaction.",
-        "operationId": "list-transaction-events",
-        "summary": "List transaction events"
+        "summary": "Capture transaction"
       }
     },
     "/transactions/{transaction_id}/refund": {
@@ -3525,101 +3404,6 @@
         "Request Bodies"
       ]
     },
-    "PaymentMethodEvent": {
-      "description": "An event that happened for a payment method.",
-      "properties": {
-        "code": {
-          "description": "The type of event, in dot-format syntax.",
-          "example": "payment-method.rejected.account_closed",
-          "type": "string"
-        },
-        "created_at": {
-          "description": "When this event was recorded.\n",
-          "example": "2012-12-12T10:53:43+00:00",
-          "format": "date-time",
-          "type": "string"
-        },
-        "external_service": {
-          "description": "An optional related resource that triggered this event.",
-          "properties": {
-            "display_name": {
-              "description": "The user's name for the resource.",
-              "example": "Stripe (Card)",
-              "type": "string"
-            },
-            "id": {
-              "description": "The ID of the resource.\n",
-              "example": "stripe-card-c4a988a2-cae6-4854-9aa0-a8365da0816d",
-              "type": "string"
-            },
-            "type": {
-              "description": "The type of the resource.",
-              "example": "payment-service",
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "id": {
-          "description": "The unique ID for this event.",
-          "example": "639c56c8-a2e1-415e-9633-aabe251605d3",
-          "format": "uuid",
-          "type": "string"
-        },
-        "type": {
-          "description": "`payment-method.event`.",
-          "example": "payment-method.event",
-          "type": "string"
-        }
-      },
-      "title": "Payment method event",
-      "type": "object",
-      "x-tags": [
-        "Payment Methods"
-      ]
-    },
-    "PaymentMethodEvents": {
-      "description": "A list of events for a payment method.",
-      "properties": {
-        "items": {
-          "description": "A list of payment method events.",
-          "items": {
-            "$ref": "#/definitions/PaymentMethodEvent"
-          },
-          "type": "array"
-        },
-        "limit": {
-          "default": 20,
-          "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
-          "example": 1,
-          "format": "int32",
-          "maximum": 100,
-          "minimum": 1,
-          "type": "integer"
-        },
-        "next_cursor": {
-          "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
-          "example": "ZXhhbXBsZTE",
-          "maxLength": 1000,
-          "minLength": 1,
-          "type": "string",
-          "x-nullable": true
-        },
-        "previous_cursor": {
-          "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
-          "example": null,
-          "maxLength": 1000,
-          "minLength": 1,
-          "type": "string",
-          "x-nullable": true
-        }
-      },
-      "title": "Payment method events",
-      "type": "object",
-      "x-tags": [
-        "Payment Methods"
-      ]
-    },
     "PaymentMethods": {
       "description": "A list of stored payment methods.",
       "properties": {
@@ -4428,101 +4212,6 @@
         "Request Bodies"
       ]
     },
-    "TransactionEvent": {
-      "description": "An event that happened for a transaction.",
-      "properties": {
-        "code": {
-          "description": "The type of event, in dot-format syntax.",
-          "example": "transaction.rejected.account_closed",
-          "type": "string"
-        },
-        "created_at": {
-          "description": "When this event was recorded.\n",
-          "example": "2012-12-12T10:53:43+00:00",
-          "format": "date-time",
-          "type": "string"
-        },
-        "id": {
-          "description": "The unique ID for this event.",
-          "example": "be828248-56de-481e-a580-44b6e1d4df81",
-          "format": "uuid",
-          "type": "string"
-        },
-        "resource": {
-          "description": "An optional related resource that triggered this event.",
-          "properties": {
-            "display_name": {
-              "description": "The user's name for the resource.",
-              "example": "Stripe (Card)",
-              "type": "string"
-            },
-            "id": {
-              "description": "The ID of the resource.\n",
-              "example": "stripe-card-c4a988a2-cae6-4854-9aa0-a8365da0816d",
-              "type": "string"
-            },
-            "type": {
-              "description": "The type of the resource.",
-              "example": "payment-service",
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "type": {
-          "description": "`transaction.event`.",
-          "example": "transaction.event",
-          "type": "string"
-        }
-      },
-      "title": "Transaction Event",
-      "type": "object",
-      "x-tags": [
-        "Transactions"
-      ]
-    },
-    "TransactionEvents": {
-      "description": "A list of events for a transaction.",
-      "properties": {
-        "items": {
-          "description": "A list of transaction events.",
-          "items": {
-            "$ref": "#/definitions/TransactionEvent"
-          },
-          "type": "array"
-        },
-        "limit": {
-          "default": 20,
-          "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
-          "example": 1,
-          "format": "int32",
-          "maximum": 100,
-          "minimum": 1,
-          "type": "integer"
-        },
-        "next_cursor": {
-          "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
-          "example": "ZXhhbXBsZTE",
-          "maxLength": 1000,
-          "minLength": 1,
-          "type": "string",
-          "x-nullable": true
-        },
-        "previous_cursor": {
-          "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
-          "example": null,
-          "maxLength": 1000,
-          "minLength": 1,
-          "type": "string",
-          "x-nullable": true
-        }
-      },
-      "title": "Transaction Events",
-      "type": "object",
-      "x-tags": [
-        "Transactions"
-      ]
-    },
     "Transactions": {
       "description": "A list of transactions.",
       "properties": {
@@ -4647,62 +4336,8 @@
       "BearerAuth": []
     }
   ],
-  "tags": [
-    {
-      "description": "In Gr4vy, an API key pair is used to sign and validate JWTs. A JWT is used\nas a bearer token to authenticate to the API.",
-      "name": "API Key Pairs",
-      "x-internal": true
-    },
-    {
-      "description": "The asynchronous (async) APIs are convenience APIs that function as an\nalternative way to create transactions and register payment methods\nwithout having to wait for the API to complete. Each of thee APIs returns\ndirectly without processing the request fully, allowing you to render a\nnew page for the buyer while the request is processed.",
-      "name": "Async APIs",
-      "x-internal": true
-    },
-    {
-      "description": "In Gr4vy, a buyer represents your customer, the shopper who's performing\na checkout and making a purchase.\n\n## Features\n\nA buyer can be used by you to:\n\n* Display a human readable name (`display_name`) for a buyer in the Gr4vy admin panel\n* Associate multiple tokenized payment methods with a single user\n* Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the\n  buyer's previously stored payment methods, allowing for faster checkout.",
-      "name": "Buyers"
-    },
-    {
-      "description": "In Gr4vy, a card rule defines how a card transaction is processed. It\ndetermines which payment services are used, and with what priority, based\non the transaction amount, card type, and many more attributes.",
-      "name": "Card Rules",
-      "x-internal": true
-    },
-    {
-      "description": "In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.\nCurrently only one merchant is supported per cluster.",
-      "name": "Merchants",
-      "x-internal": true
-    },
-    {
-      "description": "In Gr4vy, a payment method represents a way in which a payment can be processed,\nfor example a card payment, a PayPal payment, or a Bitcoin payment.\n\n## Features\n\nThe payment method API can be used to:\n\n* Determine the available payment methods in a cluster.\n* Determine the available payment method for a buyer in a specific currency and country.\n* Store (also known as tokenize) a payment method for a buyer.\n* Fetch all previously tokenized payment methods for a buyer.",
-      "name": "Payment Methods"
-    },
-    {
-      "description": "In Gr4vy, a payment option represents a list of methods (card, PayPal,\netc) that are available for a given locale.\n\n## Features\n\nThe payment options API can be used to:\n\n* Determine what types of payments can be processed in a specific locale.\n* Display a list options to a buyer to choose from.",
-      "name": "Payment Options"
-    },
-    {
-      "description": "Payment service definitions describe the fields required for a payment\nservice to be configured.",
-      "name": "Payment Service Definitions",
-      "x-internal": true
-    },
-    {
-      "description": "In Gr4vy, a payment service represents a configured payment provider\n(Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,\netc)\n\n## Features\n\nThe payment services API can be used to:\n\n* Provide Gr4vy with the payment credentials for a payment provider.\n* Set a display name for a payment provider.",
-      "name": "Payment Services"
-    },
-    {
-      "description": "The sessions APIs are used to facilitate user authentication for the Gr4vy\ncluster admin.",
-      "name": "Sessions",
-      "x-internal": true
-    },
-    {
-      "description": "In Gr4vy, a transaction represents a payment in any state, either before it is\nauthorized, once it is captured, or after it has been refunded.\n\n## Features\n\nThe transactions API can be used to:\n\n- Authorize, capture, and store cards.\n- Authorize, capture, and store alternative payment methods like PayPal.\n- Refund, void, and otherwise cancel existing transactions.",
-      "name": "Transactions"
-    },
-    {
-      "description": "In Gr4vy, a user represents an employee of the merchant with access to the\ncluster admin panel.",
-      "name": "Users",
-      "x-internal": true
-    }
-  ],
+  "tags": {
+    "$ref": "./common/tags.yaml"
+  },
   "x-components": {}
 }
