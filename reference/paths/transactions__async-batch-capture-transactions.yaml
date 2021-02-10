@@ -2,6 +2,7 @@
 operationId: async-batch-capture-transactions
 summary: Batch capture authorizations
 tags: ["Async APIs"]
+x-internal: true
 description: |-
   The body of this API takes a list of items as a JSON object.
 

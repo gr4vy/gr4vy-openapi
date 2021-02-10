@@ -2,6 +2,7 @@
 operationId: async-capture-transaction
 summary: Capture authorized transaction
 tags: ["Async APIs"]
+x-internal: true
 description: |-
   Captures a previously authorized transaction.
 

@@ -2,6 +2,7 @@
 operationId: async-authorize-transaction
 summary: Authorize approved transaction
 tags: ["Async APIs"]
+x-internal: true
 description: |-
   Authorize a previously approved transaction.
 

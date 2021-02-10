@@ -33,6 +33,7 @@ tags:
       as a bearer token to authenticate to the API.
     x-internal: true
   - name: Async APIs
+    x-internal: true
     description: |-
       The asynchronous (async) APIs are convenience APIs that function as an
       alternative way to create transactions and register payment methods
