@@ -1,8 +1,0 @@
----
-schema:
-  type: string
-  example: stripe-card
-name: payment_service_definition_id
-in: path
-required: true
-description: The unique ID of the payment service definition.

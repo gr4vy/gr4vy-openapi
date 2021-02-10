@@ -1,8 +1,0 @@
----
-schema:
-  type: string
-  example: stripe-card-46973e9d-88a7-44a6-abfe-be4ff0134ff4
-name: payment_service_id
-in: path
-required: true
-description: The ID of the payment service.
