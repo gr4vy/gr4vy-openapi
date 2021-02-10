@@ -157,3 +157,10 @@ jobs:
           BRANCH: docs
           FOLDER: public
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: "Trigger Netlify deployment of dev docs"
+        uses: joelwmale/webhook-action@2.0.2
+        env:
+          WEBHOOK_URL: ${{ secrets.NETLIFY_WEBHOOK }}
+          data: "{}"
+
