@@ -2371,12 +2371,12 @@
       "description": "Card details to use in a transaction or to register a new payment method.",
       "properties": {
         "buyer_external_identifier": {
-          "description": "The `external_identifier` of the buyer to associate this payment method\nto. This field is ignored if the `buyer_id` is provided.",
+          "description": "The `external_identifier` of the buyer to associate this payment method\nto. If this field is provided then the `buyer_id` field\nneeds to be unset.",
           "example": "user-789123",
           "type": "string"
         },
         "buyer_id": {
-          "description": "The ID of the buyer to associate this payment method to. If provided, the\n`buyer_external_identifier` is ignored.",
+          "description": "The ID of the buyer to associate this payment method to. If this field is\nprovided then the `buyer_external_identifier` field needs to be unset.",
           "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
           "format": "uuid",
           "type": "string"
@@ -3363,12 +3363,12 @@
       "description": "PayPal request to use in a transaction or to register a new payment method.",
       "properties": {
         "buyer_external_identifier": {
-          "description": "The `external_identifier` of the buyer to associate this payment method\nto. This field is ignored if the `buyer_id` is provided.",
+          "description": "The `external_identifier` of the buyer to associate this payment method\nto. If this field is provided then the `buyer_id` field\nneeds to be unset.",
           "example": "user-789123",
           "type": "string"
         },
         "buyer_id": {
-          "description": "The ID of the buyer to associate this payment method to. If provided, the\n`buyer_external_identifier` is ignored.",
+          "description": "The ID of the buyer to associate this payment method to. If this field is\nprovided then the `buyer_external_identifier` field needs to be unset.",
           "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
           "format": "uuid",
           "type": "string"
