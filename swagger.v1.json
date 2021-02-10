@@ -573,7 +573,7 @@
         ],
         "description": "Adds a buyer, allowing for payment methods and transactions to be associated\nto this buyer.\n",
         "operationId": "add-buyer",
-        "summary": "Add buyer"
+        "summary": "New buyer"
       }
     },
     "/buyers/{buyer_id}": {
@@ -995,9 +995,9 @@
         "tags": [
           "Payment Methods"
         ],
-        "description": "Returns a list of stored, tokenized payment methods.",
+        "description": "Returns a list of stored (tokenized) payment methods.",
         "operationId": "list-payment-methods",
-        "summary": "List stored payment methods"
+        "summary": "List payment methods"
       },
       "post": {
         "consumes": [
@@ -1034,7 +1034,7 @@
         ],
         "description": "Stores and tokenizes a new payment method.",
         "operationId": "store-payment-method",
-        "summary": "Store a new payment method"
+        "summary": "New payment method"
       }
     },
     "/payment-methods/approvals/{payment_method_approval_token}": {
@@ -1118,7 +1118,7 @@
         ],
         "description": "Removes a stored payment method.",
         "operationId": "delete-payment-method",
-        "summary": "Delete a payment method"
+        "summary": "Delete payment method"
       },
       "get": {
         "produces": [
@@ -1239,7 +1239,7 @@
         ],
         "description": "Returns a list of available payment method options for a currency\nand country.",
         "operationId": "list-payment-options",
-        "summary": "List available payment options for a locale"
+        "summary": "List payment options"
       }
     },
     "/payment-service-definitions": {
@@ -1427,7 +1427,7 @@
         ],
         "description": "Adds a new payment service by providing a custom name and a value for each of the required fields.",
         "operationId": "add-payment-service",
-        "summary": "Add payment service"
+        "summary": "New payment service"
       }
     },
     "/payment-services/{payment_service_id}": {
@@ -1467,7 +1467,7 @@
         ],
         "description": "Deletes a specific active payment service.",
         "operationId": "delete-payment-service",
-        "summary": "Delete active payment service"
+        "summary": "Delete payment service"
       },
       "get": {
         "produces": [
