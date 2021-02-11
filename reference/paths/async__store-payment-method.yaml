@@ -2,6 +2,7 @@
 operationId: async-store-payment-method
 summary: Store a new payment method
 description: Stores and tokenizes a new payment method.
+x-internal: true
 tags:
   - Async APIs
 

@@ -1,12 +1,19 @@
 ---
-operationId: async-authorize-transaction
-summary: Authorize approved transaction
+operationId: async-capture-transaction
+summary: Capture transaction
 tags: ["Async APIs"]
+x-internal: true
 description: |-
-  Authorize a previously approved transaction.
+  Captures a previously authorized transaction.
 
   This API returns asynchronously, returning status object with the ID of the
   pending `Transaction` resource.
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: "../openapi.yaml#/components/schemas/TransactionCaptureRequest"
 
 responses:
   "202":

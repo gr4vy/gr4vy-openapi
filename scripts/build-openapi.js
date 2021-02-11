@@ -2,7 +2,10 @@ const fs = require("fs")
 const yaml = require("js-yaml")
 const jp = require("jsonpath")
 
-process.chdir(`${__dirname}/../reference/`)
+const source = process.argv[2] ?? 'reference'
+const destination = process.argv[3] ?? 'reference'
+
+process.chdir(`${__dirname}/../${source}`)
 const schema = yaml.load(fs.readFileSync(`openapi.yaml`))
 
 const OPENAPI = '../openapi.yaml'
@@ -33,5 +36,5 @@ jp.apply(schema, '$..properties[*]', dereference)
 // Flatten all local references
 jp.apply(schema, '$..["$ref"]', bundleReferences)
 
-if (!fs.existsSync('../build')) { fs.mkdirSync('../build') }
-fs.writeFileSync('../build/openapi.v1.json', JSON.stringify(schema, null, 2))
+if (!fs.existsSync(`../${destination}`)) { fs.mkdirSync(`../${destination}`) }
+fs.writeFileSync(`../${destination}/openapi.v1.json`, JSON.stringify(schema, null, 2))

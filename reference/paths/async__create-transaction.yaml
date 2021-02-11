@@ -2,6 +2,7 @@
 operationId: async-create-transaction
 summary: Create transaction
 tags: ["Async APIs"]
+x-internal: true
 description: |
   Attempts to create an authorization for a payment method.
 

@@ -1,5 +1,5 @@
 ---
-summary: Authorize new transaction
+summary: New transaction
 tags: ["Transactions"]
 operationId: authorize-new-transaction
 description: |
@@ -83,8 +83,6 @@ responses:
               id: fe26475d-ec3e-4884-9553-f7356683f7f9
               status: authorized
               amount: 1299
-              captured_amount: 0
-              refunded_amount: 0
               currency: USD
               payment_method:
                 type: payment-method
@@ -95,19 +93,19 @@ responses:
                   number: XXXX XXXX XXXX 1111
                   expiration_date: 11/25
                   scheme: visa
-                created_at: "2013-07-16T19:23:00.000Z"
-                updated_at: "2013-07-16T19:23:00.000Z"
+                created_at: "2013-07-16T19:23:00.000+00:00"
+                updated_at: "2013-07-16T19:23:00.000+00:00"
                 external_identifier: user-789123
                 buyer:
                   type: buyer
                   id: fe26475d-ec3e-4884-9553-f7356683f7f9
                   external_identifier: user-789123
                   display_name: John L.
-                  created_at: "2013-07-16T19:23:00.000Z"
-                  updated_at: "2013-07-16T19:23:00.000Z"
-              created_at: "2013-07-16T19:23:00.000Z"
+                  created_at: "2013-07-16T19:23:00.000+00:00"
+                  updated_at: "2013-07-16T19:23:00.000+00:00"
+              created_at: "2013-07-16T19:23:00.000+00:00"
               external_identifier: user-789123
-              updated_at: "2019-08-24T14:15:22Z"
+              updated_at: "2019-08-24T14:15:22+00:00"
               payment_service:
                 id: stripe-card-169f5226-4644-4d1e-ac36-14999e73601f
                 type: payment-service
@@ -126,8 +124,6 @@ responses:
               id: fe26475d-ec3e-4884-9553-f7356683f7f9
               status: buyer_approval_pending
               amount: 1299
-              captured_amount: 0
-              refunded_amount: 0
               currency: USD
               payment_method:
                 type: payment-method
@@ -138,19 +134,19 @@ responses:
                   email_address: null
                   approval_url: |-
                     https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
-                created_at: "2013-07-16T19:23:00.000Z"
-                updated_at: "2013-07-16T19:23:00.000Z"
+                created_at: "2013-07-16T19:23:00.000+00:00"
+                updated_at: "2013-07-16T19:23:00.000+00:00"
                 external_identifier: user-789123
                 buyer:
                   type: buyer
                   id: fe26475d-ec3e-4884-9553-f7356683f7f9
                   external_identifier: user-789123
                   display_name: John L.
-                  created_at: "2013-07-16T19:23:00.000Z"
-                  updated_at: "2013-07-16T19:23:00.000Z"
-              created_at: "2013-07-16T19:23:00.000Z"
+                  created_at: "2013-07-16T19:23:00.000+00:00"
+                  updated_at: "2013-07-16T19:23:00.000+00:00"
+              created_at: "2013-07-16T19:23:00.000+00:00"
               external_identifier: user-789123
-              updated_at: "2019-08-24T14:15:22Z"
+              updated_at: "2019-08-24T14:15:22+00:00"
               payment_service:
                 id: stripe-card-169f5226-4644-4d1e-ac36-14999e73601f
                 type: payment-service
