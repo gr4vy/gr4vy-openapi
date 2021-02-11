@@ -15,7 +15,7 @@
     "title": "Gr4vy API (Beta)",
     "version": "1.0"
   },
-  "host": "api.demo.app.gr4vy.com",
+  "host": "api.demo.gr4vy.app",
   "basePath": "/",
   "schemes": [
     "https"
