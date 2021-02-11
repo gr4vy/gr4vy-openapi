@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://api.{merchant}.app.gr4vy.com",
+      "url": "https://api.{merchant}.gr4vy.app",
       "variables": {
         "merchant": {
           "default": "demo",
