@@ -4166,9 +4166,6 @@
               "oneOf": [
                 {
                   "$ref": "#/components/schemas/Card--Token"
-                },
-                {
-                  "$ref": "#/components/schemas/PayPal--Token"
                 }
               ]
             }
@@ -4723,41 +4720,6 @@
               {
                 "nullable": true
               }
-            ]
-          },
-          "details": {
-            "$ref": "#/components/schemas/PayPalDetails"
-          }
-        }
-      },
-      "PayPal--Token": {
-        "title": "PayPal Account",
-        "description": "A stored PayPal account in a mini format.",
-        "type": "object",
-        "x-tags": [
-          "Payment Methods"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "`payment-method`.",
-            "example": "payment-method",
-            "enum": [
-              "payment-method"
-            ]
-          },
-          "token": {
-            "type": "string",
-            "description": "A Gr4vy token that represents this payment method, in the format of a\ncredit-card number starting with the digit 0. You can store this token\nin your own system and use it to process a payment with this payment\nmethod at a later date.",
-            "example": "0123456789123458",
-            "nullable": true
-          },
-          "method": {
-            "type": "string",
-            "description": "`paypal`.",
-            "example": "paypal",
-            "enum": [
-              "paypal"
             ]
           },
           "details": {
