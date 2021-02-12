@@ -217,17 +217,17 @@ paths:
   #   get:
   #     $ref: "./paths/payment_methods__list-payment-method-events.yaml"
 
-  "/payment-methods/{payment_method_id}/approve":
-    parameters:
-      - $ref: "./path-parameters/payment_method_id.yaml"
-    get:
-      $ref: "./paths/payment_methods__approve-payment-method.yaml"
+  # "/payment-methods/{payment_method_id}/approve":
+  #   parameters:
+  #     - $ref: "./path-parameters/payment_method_id.yaml"
+  #   get:
+  #     $ref: "./paths/payment_methods__approve-payment-method.yaml"
 
-  "/payment-methods/approvals/{payment_method_approval_token}":
-    parameters:
-      - $ref: "./path-parameters/payment_method_approval_token.yaml"
-    get:
-      $ref: "./paths/payment_methods__redirect-payment-method-approval.yaml"
+  # "/payment-methods/approvals/{payment_method_approval_token}":
+  #   parameters:
+  #     - $ref: "./path-parameters/payment_method_approval_token.yaml"
+  #   get:
+  #     $ref: "./paths/payment_methods__redirect-payment-method-approval.yaml"
 
   "/payment-options":
     get:
