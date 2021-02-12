@@ -13,7 +13,7 @@ properties:
     items:
       oneOf:
         - $ref: "../openapi.yaml#/components/schemas/Card--Token"
-        - $ref: "../openapi.yaml#/components/schemas/PayPal--Token"
+        # - $ref: "../openapi.yaml#/components/schemas/PayPal--Token"
 
   limit:
     $ref: "../properties/limit-100.yaml"

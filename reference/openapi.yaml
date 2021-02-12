@@ -405,8 +405,8 @@ components:
       $ref: "./resources/payment_options.yaml"
     PayPal:
       $ref: "./resources/paypal.yaml"
-    PayPal--Token:
-      $ref: "./resources/paypal--token.yaml"
+    # PayPal--Token:
+    #   $ref: "./resources/paypal--token.yaml"
     PayPalDetails:
       $ref: "./resources/paypal_details.yaml"
     PayPalRequest:
