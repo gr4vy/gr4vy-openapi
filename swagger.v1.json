@@ -1037,49 +1037,6 @@
         "summary": "New payment method"
       }
     },
-    "/payment-methods/approvals/{payment_method_approval_token}": {
-      "parameters": [
-        {
-          "description": "The token used to redirect the buyer for approval of the payment method setup.\nThis token does not represent anything to the consumer and no value should be\nderived from it except for internal use.",
-          "in": "path",
-          "name": "payment_method_approval_token",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "302": {
-            "description": "Redirect the buyer to approve this payment method.",
-            "headers": {
-              "location": {
-                "description": "The URL to redirect the browser to. This is the approval URL for an\nalternative payment method like PayPal.",
-                "format": "url",
-                "type": "string"
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "schema": {
-              "$ref": "#/definitions/Error404NotFound"
-            }
-          }
-        },
-        "security": [],
-        "tags": [
-          "Payment Methods"
-        ],
-        "description": "Redirect a buyer to an alternative payment provider to approve their payment\nmethod. This is mainly used with providers like PayPal and Klarna to redirect\na buyer to their sites.",
-        "operationId": "redirect-payment-method-approval",
-        "summary": "Approve payment method",
-        "x-internal": true
-      }
-    },
     "/payment-methods/{payment_method_id}": {
       "parameters": [
         {
@@ -1149,50 +1106,6 @@
         "description": "Gets the details for a stored payment method.",
         "operationId": "get-payment-method",
         "summary": "Get stored payment method"
-      }
-    },
-    "/payment-methods/{payment_method_id}/approve": {
-      "parameters": [
-        {
-          "description": "The ID of the payment method.",
-          "format": "uuid",
-          "in": "path",
-          "name": "payment_method_id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "302": {
-            "description": "Redirects the browser back to the `redirect_url` specified\nwhen the payment method was first created. It appends the payment method's\nID and status.",
-            "headers": {
-              "location": {
-                "description": "The URL to redirect the browser to. This is the `redirect_url`\nspecified when the payment method was first created with some\nadditional query parameters appended.\n\n* `payment_method_id` - The ID of the payment method.\n* `payment_method_status` - The current value of the\n  `status`  field of the payment method.",
-                "format": "url",
-                "type": "string"
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "schema": {
-              "$ref": "#/definitions/Error404NotFound"
-            }
-          }
-        },
-        "security": [],
-        "tags": [
-          "Payment Methods"
-        ],
-        "description": "Internal API used as a redirect endpoint for payment methods that require\nbuyer authorization.\n\nFor example, when a buyer tries to add a PayPal payment method, the buyer\nneeds to be sent to PayPal, after which they are sent back to this endpoint\nupon completion.\n\nThis API applies any required updates for the payment method based on its\nquery parameters and then redirects the browser back to the `redirect_url`\nspecified when the payment method was first created.",
-        "operationId": "approve-payment-method",
-        "summary": "Buyer approval callback",
-        "x-internal": true
       }
     },
     "/payment-options": {
