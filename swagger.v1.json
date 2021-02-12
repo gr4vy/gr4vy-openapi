@@ -3214,41 +3214,6 @@
         "Payment Methods"
       ]
     },
-    "PayPal--Token": {
-      "description": "A stored PayPal account in a mini format.",
-      "properties": {
-        "details": {
-          "$ref": "#/definitions/PayPalDetails"
-        },
-        "method": {
-          "description": "`paypal`.",
-          "enum": [
-            "paypal"
-          ],
-          "example": "paypal",
-          "type": "string"
-        },
-        "token": {
-          "description": "A Gr4vy token that represents this payment method, in the format of a\ncredit-card number starting with the digit 0. You can store this token\nin your own system and use it to process a payment with this payment\nmethod at a later date.",
-          "example": "0123456789123458",
-          "type": "string",
-          "x-nullable": true
-        },
-        "type": {
-          "description": "`payment-method`.",
-          "enum": [
-            "payment-method"
-          ],
-          "example": "payment-method",
-          "type": "string"
-        }
-      },
-      "title": "PayPal Account",
-      "type": "object",
-      "x-tags": [
-        "Payment Methods"
-      ]
-    },
     "PayPalDetails": {
       "description": "Additional details about a stored PayPal account.",
       "properties": {
