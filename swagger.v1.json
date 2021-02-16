@@ -2432,44 +2432,6 @@
         "Card Rules"
       ]
     },
-    "CardRuleBooleanCondition": {
-      "description": "Part of a rule that matches boolean fields. It defines the condition under\nwhich this rule applies.",
-      "properties": {
-        "key": {
-          "description": "The transaction field to filter by.",
-          "enum": [
-            "store",
-            "use_test_environment"
-          ],
-          "example": "store",
-          "type": "string"
-        },
-        "match": {
-          "description": "`boolean`.",
-          "enum": [
-            "boolean"
-          ],
-          "example": "boolean",
-          "type": "string"
-        },
-        "value": {
-          "description": "The values to compare the `key` to.",
-          "example": true,
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "match",
-        "key",
-        "value"
-      ],
-      "title": "Card rule (Boolean condition)",
-      "type": "object",
-      "x-internal": true,
-      "x-tags": [
-        "Card Rules"
-      ]
-    },
     "CardRuleCreateRequest": {
       "description": "Creates a new rule for a card transactions.",
       "properties": {
