@@ -3282,9 +3282,6 @@
                 },
                 {
                   "$ref": "#/components/schemas/CardRuleNumberCondition"
-                },
-                {
-                  "$ref": "#/components/schemas/CardRuleBooleanCondition"
                 }
               ]
             }
@@ -3357,44 +3354,6 @@
             "items": {
               "$ref": "#/components/schemas/CardRule"
             }
-          }
-        }
-      },
-      "CardRuleBooleanCondition": {
-        "title": "Card rule (Boolean condition)",
-        "type": "object",
-        "description": "Part of a rule that matches boolean fields. It defines the condition under\nwhich this rule applies.",
-        "x-internal": true,
-        "x-tags": [
-          "Card Rules"
-        ],
-        "required": [
-          "match",
-          "key",
-          "value"
-        ],
-        "properties": {
-          "match": {
-            "type": "string",
-            "description": "`boolean`.",
-            "example": "boolean",
-            "enum": [
-              "boolean"
-            ]
-          },
-          "key": {
-            "type": "string",
-            "description": "The transaction field to filter by.",
-            "example": "store",
-            "enum": [
-              "store",
-              "use_test_environment"
-            ]
-          },
-          "value": {
-            "type": "boolean",
-            "description": "The values to compare the `key` to.",
-            "example": true
           }
         }
       },
@@ -3543,9 +3502,6 @@
                 },
                 {
                   "$ref": "#/components/schemas/CardRuleNumberCondition"
-                },
-                {
-                  "$ref": "#/components/schemas/CardRuleBooleanCondition"
                 }
               ]
             }
@@ -3616,9 +3572,6 @@
                 },
                 {
                   "$ref": "#/components/schemas/CardRuleNumberCondition"
-                },
-                {
-                  "$ref": "#/components/schemas/CardRuleBooleanCondition"
                 }
               ]
             }
