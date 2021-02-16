@@ -4286,6 +4286,18 @@
             "type": "number",
             "example": 1,
             "description": "The numeric rank of a payment service. Payment services with a lower\nposition value are processed first."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2012-12-12T10:53:43+00:00",
+            "description": "The date and time when this service was created."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2012-12-12T10:53:43+00:00",
+            "description": "The date and time when this service was last updated."
           }
         }
       },
