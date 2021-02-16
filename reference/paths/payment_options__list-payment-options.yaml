@@ -1,6 +1,6 @@
 ---
 operationId: list-payment-options
-summary: List available payment options for a locale
+summary: List payment options
 description: |-
   Returns a list of available payment method options for a currency
   and country.

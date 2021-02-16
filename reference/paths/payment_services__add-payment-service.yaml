@@ -1,5 +1,5 @@
 ---
-summary: Add payment service
+summary: New payment service
 operationId: add-payment-service
 description:
   Adds a new payment service by providing a custom name and a value for each of

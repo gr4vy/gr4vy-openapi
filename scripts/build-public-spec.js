@@ -1,7 +1,7 @@
 const fs = require("fs")
 const yaml = require("js-yaml")
 
-process.chdir(`${__dirname}/../public/`)
+process.chdir(`${__dirname}/../public-tmp/`)
 
 // filter all internal endpoints
 const filterEndpoints = (endpoints) => {
