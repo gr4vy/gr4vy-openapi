@@ -3394,6 +3394,12 @@
           "minItems": 1,
           "type": "array"
         },
+        "created_at": {
+          "description": "The date and time when this service was created.",
+          "example": "2012-12-12T10:53:43+00:00",
+          "format": "date-time",
+          "type": "string"
+        },
         "display_name": {
           "description": "The custom name set for this service.",
           "example": "Stripe (Main)",
@@ -3444,6 +3450,12 @@
             "payment-service"
           ],
           "example": "payment-service",
+          "type": "string"
+        },
+        "updated_at": {
+          "description": "The date and time when this service was last updated.",
+          "example": "2012-12-12T10:53:43+00:00",
+          "format": "date-time",
           "type": "string"
         },
         "use_test_environment": {
