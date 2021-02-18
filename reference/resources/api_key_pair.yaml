@@ -17,29 +17,21 @@ properties:
 
   id:
     type: string
+    format: uuid
     description: A unique ID for this key-pair.
-    example: gg9ILy
+    example: 86473d2b-e385-4d5a-85e3-36964c5ed41c
 
   private_key:
     type: string
     nullable: true
     description: |-
-      The encrypted private key for the key-pair. This is only returned after
+      The private key for the key-pair. This is only returned after
       the key is initially requested. For subsequent API calls this value is
       `null`.
     example: |-
-      -----BEGIN ENCRYPTED PRIVATE KEY-----
+      -----BEGIN PRIVATE KEY-----
       ...
-      -----END ENCRYPTED PRIVATE KEY-----
-
-  passphrase:
-    type: string
-    nullable: true
-    description: |-
-      The passphrase used to decrypt the private key. This is only returned
-      after the key is initially requested. For subsequent API calls this value
-      is `null`.
-    example: af2675c9aba7de1f3bccb30757d7afd8
+      -----END PRIVATE KEY-----
 
   created_at:
     type: string
