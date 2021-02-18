@@ -654,9 +654,8 @@
                       "items": [
                         {
                           "type": "api-key-pair",
-                          "id": "gg9ILy",
+                          "id": "86473d2b-e385-4d5a-85e3-36964c5ed41c",
                           "private_key": null,
-                          "passphrase": null,
                           "created_at": "2012-12-12T10:53:43+00:00",
                           "updated_at": "2012-12-12T10:53:43+00:00"
                         },
@@ -664,7 +663,6 @@
                           "type": "api-key-pair",
                           "id": "d028ec5c-12e4-43d0-b187-c6fe79b3b5dd",
                           "private_key": null,
-                          "passphrase": null,
                           "created_at": "2012-12-12T10:53:12+00:00",
                           "updated_at": "2012-12-12T10:53:12+00:00"
                         }
@@ -707,9 +705,8 @@
                   "A newly created API key pair": {
                     "value": {
                       "type": "api-key-pair",
-                      "id": "gg9ILy",
-                      "private_key": "-----BEGIN ENCRYPTED PRIVATE KEY-----\n...\n-----END ENCRYPTED PRIVATE KEY-----",
-                      "passphrase": "af2675c9aba7de1f3bccb30757d7afd8",
+                      "id": "86473d2b-e385-4d5a-85e3-36964c5ed41c",
+                      "private_key": "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
                       "created_at": "2012-12-12T10:53:43+00:00",
                       "updated_at": "2012-12-12T10:53:43+00:00"
                     }
@@ -4004,20 +4001,15 @@
           },
           "id": {
             "type": "string",
+            "format": "uuid",
             "description": "A unique ID for this key-pair.",
-            "example": "gg9ILy"
+            "example": "86473d2b-e385-4d5a-85e3-36964c5ed41c"
           },
           "private_key": {
             "type": "string",
             "nullable": true,
-            "description": "The encrypted private key for the key-pair. This is only returned after\nthe key is initially requested. For subsequent API calls this value is\n`null`.",
-            "example": "-----BEGIN ENCRYPTED PRIVATE KEY-----\n...\n-----END ENCRYPTED PRIVATE KEY-----"
-          },
-          "passphrase": {
-            "type": "string",
-            "nullable": true,
-            "description": "The passphrase used to decrypt the private key. This is only returned\nafter the key is initially requested. For subsequent API calls this value\nis `null`.",
-            "example": "af2675c9aba7de1f3bccb30757d7afd8"
+            "description": "The private key for the key-pair. This is only returned after\nthe key is initially requested. For subsequent API calls this value is\n`null`.",
+            "example": "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
           },
           "created_at": {
             "type": "string",
