@@ -29,8 +29,10 @@ servers:
 tags:
   - name: API Key Pairs
     description: |-
-      In Gr4vy, an API key pair is used to sign and validate JWTs. A JWT is used
-      as a bearer token to authenticate to the API.
+      In Gr4vy, an API key pair is used to sign and validate JSON Web Tokens (JWT).
+      JWTs are used as a HTTP `bearer` token to authenticate to the API. For more
+      information please visit our [in-depth authentication](/guides/authentication)
+      guide.
     x-internal: true
 
   - name: Async APIs
