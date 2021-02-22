@@ -450,11 +450,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/CardRequest"
-                  }
-                ]
+                "$ref": "#/components/schemas/CardRequest"
               }
             }
           }
@@ -465,11 +461,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Card"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/Card"
                 }
               }
             }
@@ -2478,30 +2470,26 @@
         "x-tags": [
           "Request Bodies"
         ],
+        "required": [
+          "display_name",
+          "payment_service_definition_id",
+          "fields",
+          "accepted_currencies",
+          "use_test_environment",
+          "accepted_countries"
+        ],
+        "properties": {
+          "payment_service_definition_id": {
+            "type": "string",
+            "description": "The ID of the payment service to use.",
+            "example": "stripe-card",
+            "minLength": 1,
+            "maxLength": 50
+          }
+        },
         "allOf": [
           {
             "$ref": "#/components/schemas/PaymentServiceUpdateRequest"
-          },
-          {
-            "required": [
-              "display_name",
-              "payment_service_definition_id",
-              "fields",
-              "accepted_currencies",
-              "use_test_environment",
-              "accepted_countries"
-            ]
-          },
-          {
-            "properties": {
-              "payment_service_definition_id": {
-                "type": "string",
-                "description": "The ID of the payment service to use.",
-                "example": "stripe-card",
-                "minLength": 1,
-                "maxLength": 50
-              }
-            }
           }
         ]
       },
