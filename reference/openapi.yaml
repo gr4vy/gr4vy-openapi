@@ -359,8 +359,8 @@ components:
       $ref: "./request-bodies/card_rule_create_request.yaml"
     CardRuleUpdateRequest:
       $ref: "./request-bodies/card_rule_update_request.yaml"
-    Error:
-      $ref: "./resources/error.yaml"
+    ErrorGeneric:
+      $ref: "./resources/error_generic.yaml"
     Error400BadRequest:
       $ref: "./resources/error_400_bad_request.yaml"
     Error400IncorrectJson:
@@ -381,6 +381,8 @@ components:
       $ref: "./resources/api_key_pairs.yaml"
     Merchant:
       $ref: "./resources/merchant.yaml"
+    PaymentMethod:
+      $ref: "./resources/payment_method.yaml"
     PaymentMethods:
       $ref: "./resources/payment_methods.yaml"
     # PaymentMethodEvent:
@@ -431,6 +433,8 @@ components:
       $ref: "./request-bodies/transaction_create_request.yaml"
     TransactionCaptureRequest:
       $ref: "./request-bodies/transaction_capture_request.yaml"
+    TransactionPaymentMethodRequest:
+      $ref: "./request-bodies/transaction_payment_method_request.yaml"
     # TransactionEvent:
     #   $ref: "./resources/transaction_event.yaml"
     # TransactionEvents:

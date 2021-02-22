@@ -19,6 +19,7 @@
     "prebuild:swagger": "yarn build:openapi",
     "build:swagger": "api-spec-converter --from=openapi_3 --to=swagger_2 --syntax=json build/openapi.v1.json > build/swagger.v1.json",
     "build:public-spec": "rm -rf public-tmp public; cp -r reference public-tmp; node ./scripts/build-public-spec.js;  node ./scripts/build-openapi.js public-tmp public",
+    "build:sdk-spec": "rm -rf sdks; mkdir sdks; yarn build:public-spec; node ./scripts/build-sdk-spec.js",
     "test": "yarn lint"
   },
   "repository": {

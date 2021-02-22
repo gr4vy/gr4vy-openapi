@@ -29,6 +29,7 @@ properties:
     description: A supported ISO-4217 currency code.
 
   payment_method:
+    x-model-name: TransactionPaymentMethodRequest
     oneOf:
       - $ref: "../openapi.yaml#/components/schemas/CardRequest"
       - $ref: "../openapi.yaml#/components/schemas/PayPalRequest"
