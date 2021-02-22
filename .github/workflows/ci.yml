@@ -191,7 +191,7 @@ jobs:
 
       - name: Strip all private APIs
         run: |
-          yarn build:sdks-spec
+          yarn build:sdk-spec
 
       - name: Push compiled content
         uses: s0/git-publish-subdir-action@develop
