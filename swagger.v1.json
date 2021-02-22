@@ -148,7 +148,9 @@
           {
             "in": "body",
             "name": "body",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/CardRequest"
+            }
           }
         ],
         "responses": {
@@ -1010,13 +1012,17 @@
           {
             "in": "body",
             "name": "body",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/CardRequest"
+            }
           }
         ],
         "responses": {
           "201": {
             "description": "Returns the created payment method.",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/Card"
+            }
           },
           "400": {
             "description": "Returns an error if the request was badly formatted or missing required fields.",
@@ -3422,30 +3428,26 @@
       "allOf": [
         {
           "$ref": "#/definitions/PaymentServiceUpdateRequest"
-        },
-        {
-          "required": [
-            "display_name",
-            "payment_service_definition_id",
-            "fields",
-            "accepted_currencies",
-            "use_test_environment",
-            "accepted_countries"
-          ]
-        },
-        {
-          "properties": {
-            "payment_service_definition_id": {
-              "description": "The ID of the payment service to use.",
-              "example": "stripe-card",
-              "maxLength": 50,
-              "minLength": 1,
-              "type": "string"
-            }
-          }
         }
       ],
       "description": "Request body for activating a payment service.",
+      "properties": {
+        "payment_service_definition_id": {
+          "description": "The ID of the payment service to use.",
+          "example": "stripe-card",
+          "maxLength": 50,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "display_name",
+        "payment_service_definition_id",
+        "fields",
+        "accepted_currencies",
+        "use_test_environment",
+        "accepted_countries"
+      ],
       "title": "Payment Service (Create)",
       "type": "object",
       "x-tags": [
