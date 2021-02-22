@@ -164,3 +164,39 @@ jobs:
           WEBHOOK_URL: ${{ secrets.NETLIFY_WEBHOOK }}
           data: "{}"
 
+  sdks:
+    if: github.ref == 'refs/heads/sdks'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    needs:
+      - lint
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Node dependencies
+        run: |
+          yarn install
+
+      - name: Strip all private APIs
+        run: |
+          yarn build:sdks-spec
+
+      - name: Push compiled content
+        uses: s0/git-publish-subdir-action@develop
+        env:
+          REPO: self
+          BRANCH: docs
+          FOLDER: sdks
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
