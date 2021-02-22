@@ -129,6 +129,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "x-model-name": "ErrorGeneric",
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Error400BadRequest"
@@ -505,6 +506,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "x-model-name": "ErrorGeneric",
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Error400BadRequest"
@@ -553,6 +555,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "x-model-name": "ErrorGeneric",
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Error400BadRequest"
@@ -877,6 +880,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "x-model-name": "ErrorGeneric",
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Error400BadRequest"
@@ -963,6 +967,16 @@
                 }
               }
             }
+          },
+          "default": {
+            "description": "Returns a generic error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorGeneric"
+                }
+              }
+            }
           }
         }
       },
@@ -1006,6 +1020,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "x-model-name": "ErrorGeneric",
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Error400BadRequest"
@@ -1237,6 +1252,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "x-model-name": "ErrorGeneric",
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Error400BadRequest"
@@ -1289,6 +1305,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "x-model-name": "PaymentMethod",
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Card"
@@ -1539,6 +1556,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "x-model-name": "ErrorGeneric",
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Error400BadRequest"
@@ -1649,6 +1667,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "x-model-name": "ErrorGeneric",
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Error400BadRequest"
@@ -1895,6 +1914,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "x-model-name": "ErrorGeneric",
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Error400BadRequest"
@@ -2008,6 +2028,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "x-model-name": "ErrorGeneric",
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Error400BadRequest"
@@ -2069,7 +2090,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ErrorGeneric"
                 },
                 "examples": {
                   "Workflow is active": {
@@ -2420,6 +2441,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "x-model-name": "ErrorGeneric",
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Error400BadRequest"
@@ -2491,6 +2513,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "x-model-name": "ErrorGeneric",
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Error404NotFound"
@@ -2559,6 +2582,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "x-model-name": "ErrorGeneric",
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Error400BadRequest"
@@ -2586,6 +2610,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "x-model-name": "ErrorGeneric",
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Error404NotFound"
@@ -2637,6 +2662,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "x-model-name": "ErrorGeneric",
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Error400BadRequest"
@@ -2664,6 +2690,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "x-model-name": "ErrorGeneric",
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Error404NotFound"
@@ -2725,6 +2752,7 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "x-model-name": "ErrorGeneric",
                   "oneOf": [
                     {
                       "$ref": "#/components/schemas/Error404NotFound"
@@ -3257,6 +3285,7 @@
             "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
             "minItems": 1,
             "items": {
+              "x-model-name": "CardRule",
               "oneOf": [
                 {
                   "$ref": "#/components/schemas/CardRuleTextCondition"
@@ -3477,6 +3506,7 @@
             "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
             "minItems": 1,
             "items": {
+              "x-model-name": "CardRule",
               "oneOf": [
                 {
                   "$ref": "#/components/schemas/CardRuleTextCondition"
@@ -3547,6 +3577,7 @@
             "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
             "minItems": 1,
             "items": {
+              "x-model-name": "CardRule",
               "oneOf": [
                 {
                   "$ref": "#/components/schemas/CardRuleTextCondition"
@@ -3593,11 +3624,10 @@
           }
         }
       },
-      "Error": {
-        "title": "Error",
+      "ErrorGeneric": {
+        "title": "Generic Error",
         "type": "object",
         "description": "A generic client error.",
-        "x-internal": true,
         "x-tags": [
           "Errors"
         ],
@@ -4080,6 +4110,129 @@
           }
         }
       },
+      "PaymentMethod": {
+        "title": "Payment method",
+        "description": "A generic payment method.",
+        "type": "object",
+        "x-tags": [
+          "Payment Methods"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`payment-method`.",
+            "example": "payment-method",
+            "enum": [
+              "payment-method"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the payment method.",
+            "format": "uuid",
+            "example": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5"
+          },
+          "status": {
+            "type": "string",
+            "description": "The state of the payment method.",
+            "example": "stored",
+            "enum": [
+              "processing",
+              "processing_failed",
+              "buyer_approval_pending",
+              "buyer_approval_declined",
+              "buyer_approval_timedout",
+              "buyer_approved",
+              "stored",
+              "used"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "description": "The type of this payment method.",
+            "example": "card",
+            "enum": [
+              "card",
+              "paypal"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "description": "The date and time when this payment method was first created in our\nsystem.",
+            "format": "date-time",
+            "example": "2013-07-16T19:23:00.000+00:00"
+          },
+          "updated_at": {
+            "type": "string",
+            "description": "The date and time when this payment method was last updated in our system.",
+            "format": "date-time",
+            "example": "2013-07-16T19:23:00.000+00:00"
+          },
+          "external_identifier": {
+            "type": "string",
+            "description": "An external identifier that can be used to match the payment method\nagainst your own records.",
+            "example": "user-789123",
+            "nullable": true
+          },
+          "buyer": {
+            "description": "The optional buyer for which this payment method has been stored.",
+            "nullable": true,
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Buyer"
+              }
+            ]
+          },
+          "details": {
+            "description": "Additional details about a payment method.",
+            "type": "object",
+            "properties": {
+              "number": {
+                "type": "string",
+                "description": "Partial number details for a stored card, hiding all but the last few\nnumbers.",
+                "example": "XXXX XXXX XXXX 1111"
+              },
+              "scheme": {
+                "type": "string",
+                "example": "visa",
+                "enum": [
+                  "visa",
+                  "mastercard",
+                  "american-express",
+                  "diners-club",
+                  "discover",
+                  "jcb",
+                  "unionpay",
+                  "maestro",
+                  "elo",
+                  "mir",
+                  "hiper",
+                  "hipercard"
+                ],
+                "description": "The type of the card."
+              },
+              "expiration_date": {
+                "type": "string",
+                "description": "The expiration date for a card.",
+                "example": "11 / 21"
+              },
+              "email_address": {
+                "type": "string",
+                "example": "john@example.com",
+                "description": "The email address associated to the payment method.",
+                "nullable": true
+              },
+              "approval_url": {
+                "type": "string",
+                "format": "uri",
+                "example": "https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve",
+                "description": "The optional URL that the buyer needs to be redirected to to further authorize the payment method.",
+                "nullable": true
+              }
+            }
+          }
+        }
+      },
       "PaymentMethods": {
         "title": "Payment Methods",
         "type": "object",
@@ -4092,11 +4245,7 @@
             "type": "array",
             "description": "A list of stored payment methods.",
             "items": {
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/Card--Token"
-                }
-              ]
+              "$ref": "#/components/schemas/Card--Token"
             }
           },
           "limit": {
@@ -4944,6 +5093,7 @@
             "description": "The currency code for this transaction."
           },
           "payment_method": {
+            "x-model-name": "PaymentMethod",
             "oneOf": [
               {
                 "$ref": "#/components/schemas/Card"
@@ -5077,6 +5227,7 @@
             "description": "A supported ISO-4217 currency code."
           },
           "payment_method": {
+            "x-model-name": "TransactionPaymentMethodRequest",
             "oneOf": [
               {
                 "$ref": "#/components/schemas/CardRequest"
@@ -5148,6 +5299,81 @@
             "type": "string",
             "example": "user-789123",
             "description": "An external identifier that can be used to match the transaction against your own records."
+          }
+        }
+      },
+      "TransactionPaymentMethodRequest": {
+        "title": "Transaction payment method request",
+        "type": "object",
+        "description": "Payment method details to use in a transaction or to register\na new payment method.",
+        "x-tags": [
+          "Request Bodies"
+        ],
+        "required": [
+          "method"
+        ],
+        "properties": {
+          "method": {
+            "type": "string",
+            "description": "The method to use for this request.",
+            "example": "card",
+            "enum": [
+              "card",
+              "paypal",
+              "token"
+            ]
+          },
+          "number": {
+            "type": "string",
+            "minLength": 14,
+            "maxLength": 16,
+            "example": "4111111111111111",
+            "pattern": "^[0-9]{14,16}$",
+            "description": "The 15-16 digit number for this credit card as it can be found on the\nfront of the card.\n\nIf a card has been stored with us previously, this number will represent\nthe unique tokenized card ID provided via our API."
+          },
+          "expiration_date": {
+            "type": "string",
+            "description": "The expiration date of the card, formatted `MM/YY`. If a card has been\npreviously stored with us this value is optional.\n\nIf the `number` of this card represents a tokenized card, then this value\nis ignored.",
+            "example": "11/15",
+            "pattern": "^\\d\\d/\\d\\d$",
+            "minLength": 5,
+            "maxLength": 5
+          },
+          "security_code": {
+            "type": "string",
+            "description": "The 3 or 4 digit security code often found on the card. This often\nreferred to as the CVV or CVD.\n\nIf the `number` of this card represents a tokenized card, then this value\nis ignored.",
+            "pattern": "^\\d{3,4}$",
+            "minLength": 3,
+            "maxLength": 4,
+            "example": "123"
+          },
+          "external_identifier": {
+            "type": "string",
+            "description": "An external identifier that can be used to match the card against your own records.",
+            "example": "user-789123",
+            "nullable": true
+          },
+          "buyer_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+            "description": "The ID of the buyer to associate this payment method to. If this field is\nprovided then the `buyer_external_identifier` field needs to be unset."
+          },
+          "buyer_external_identifier": {
+            "type": "string",
+            "description": "The `external_identifier` of the buyer to associate this payment method\nto. If this field is provided then the `buyer_id` field\nneeds to be unset.",
+            "example": "user-789123"
+          },
+          "redirect_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The redirect URL to redirect a buyer to after they have authorized their\ntransaction or payment method. This only applies to payment methods that\nrequire buyer approval.",
+            "example": "https://example.com/callback"
+          },
+          "token": {
+            "type": "string",
+            "description": "A Gr4vy token that represents a previously tokenized payment method.\nThis token can represent any type of payment method.",
+            "example": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5"
           }
         }
       },
