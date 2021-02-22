@@ -2125,14 +2125,10 @@
           "allOf": [
             {
               "$ref": "#/definitions/Buyer"
-            },
-            {
-              "description": "The optional buyer for which this payment method has been stored."
-            },
-            {
-              "x-nullable": true
             }
-          ]
+          ],
+          "description": "The optional buyer for which this payment method has been stored.",
+          "x-nullable": true
         },
         "created_at": {
           "description": "The date and time when this payment method was first created in our\nsystem.",
@@ -3064,7 +3060,7 @@
           "type": "string"
         },
         "short_name": {
-          "description": "The unique short-name of the merchant, as used in their Gr4vy URLs. For\nexample, a short-name of `nike` would result in the Gr4vy cluster's API\nbeing hosted on `https://api.nike.app.gr4vy.com`.",
+          "description": "The unique short-name of the merchant, as used in their Gr4vy URLs. For\nexample, a short-name of `nike` would result in the Gr4vy cluster's API\nbeing hosted on `https://api.nike.gr4vy.app`.",
           "example": "acme",
           "type": "string"
         },
@@ -3091,14 +3087,10 @@
           "allOf": [
             {
               "$ref": "#/definitions/Buyer"
-            },
-            {
-              "description": "The optional buyer for which this payment method has been stored."
-            },
-            {
-              "x-nullable": true
             }
-          ]
+          ],
+          "description": "The optional buyer for which this payment method has been stored.",
+          "x-nullable": true
         },
         "created_at": {
           "description": "The date and time when this payment method was first created in our\nsystem.",
@@ -4185,7 +4177,7 @@
   ],
   "tags": [
     {
-      "description": "In Gr4vy, an API key pair is used to sign and validate JWTs. A JWT is used\nas a bearer token to authenticate to the API.",
+      "description": "In Gr4vy, an API key pair is used to sign and validate JSON Web Tokens (JWT).\nJWTs are used as a HTTP `bearer` token to authenticate to the API. For more\ninformation please visit our [in-depth authentication](/guides/authentication)\nguide.",
       "name": "API Key Pairs",
       "x-internal": true
     },
