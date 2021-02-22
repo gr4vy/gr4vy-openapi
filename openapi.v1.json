@@ -154,7 +154,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorGeneric"
+                  "x-model-name": "ErrorGeneric",
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error400BadRequest"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error400IncorrectJson"
+                    }
+                  ]
                 }
               }
             }
@@ -286,7 +294,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorGeneric"
+                  "x-model-name": "ErrorGeneric",
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error400BadRequest"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error400IncorrectJson"
+                    }
+                  ]
                 }
               }
             }
@@ -467,7 +483,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorGeneric"
+                  "x-model-name": "ErrorGeneric",
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error400BadRequest"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error400IncorrectJson"
+                    }
+                  ]
                 }
               }
             }
@@ -512,7 +536,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PaymentMethod"
+                  "x-model-name": "PaymentMethod",
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Card"
+                    },
+                    {
+                      "$ref": "#/components/schemas/PayPal"
+                    }
+                  ]
                 }
               }
             }
@@ -755,7 +787,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorGeneric"
+                  "x-model-name": "ErrorGeneric",
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error400BadRequest"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error400IncorrectJson"
+                    }
+                  ]
                 }
               }
             }
@@ -858,7 +898,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorGeneric"
+                  "x-model-name": "ErrorGeneric",
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error400BadRequest"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error400IncorrectJson"
+                    }
+                  ]
                 }
               }
             }
@@ -1241,7 +1289,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorGeneric"
+                  "x-model-name": "ErrorGeneric",
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error400BadRequest"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error400IncorrectJson"
+                    }
+                  ]
                 }
               }
             }
@@ -1305,7 +1361,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorGeneric"
+                  "x-model-name": "ErrorGeneric",
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error404NotFound"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error404PendingCreation"
+                    }
+                  ]
                 }
               }
             }
@@ -1366,7 +1430,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorGeneric"
+                  "x-model-name": "ErrorGeneric",
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error400BadRequest"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error400IncorrectJson"
+                    }
+                  ]
                 }
               }
             }
@@ -1386,7 +1458,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorGeneric"
+                  "x-model-name": "ErrorGeneric",
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error404NotFound"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error404PendingCreation"
+                    }
+                  ]
                 }
               }
             }
@@ -1430,7 +1510,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorGeneric"
+                  "x-model-name": "ErrorGeneric",
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error400BadRequest"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error400IncorrectJson"
+                    }
+                  ]
                 }
               }
             }
@@ -1450,7 +1538,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorGeneric"
+                  "x-model-name": "ErrorGeneric",
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error404NotFound"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error404PendingCreation"
+                    }
+                  ]
                 }
               }
             }
@@ -1504,7 +1600,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorGeneric"
+                  "x-model-name": "ErrorGeneric",
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error404NotFound"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error404PendingCreation"
+                    }
+                  ]
                 }
               }
             }
@@ -2351,6 +2455,7 @@
               },
               "approval_url": {
                 "type": "string",
+                "format": "uri",
                 "example": "https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve",
                 "description": "The optional URL that the buyer needs to be redirected to to further authorize the payment method.",
                 "nullable": true
@@ -2803,6 +2908,7 @@
           },
           "approval_url": {
             "type": "string",
+            "format": "uri",
             "example": "https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve",
             "description": "The optional URL that the buyer needs to be redirected to to further authorize their PayPal payments.",
             "nullable": true
@@ -2831,6 +2937,7 @@
           },
           "redirect_url": {
             "type": "string",
+            "format": "uri",
             "description": "The redirect URL to redirect a buyer to after they have authorized their\nPayPal transaction.",
             "example": "https://example.com/callback"
           },
@@ -3001,7 +3108,15 @@
             "description": "The currency code for this transaction."
           },
           "payment_method": {
-            "$ref": "#/components/schemas/PaymentMethod"
+            "x-model-name": "PaymentMethod",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Card"
+              },
+              {
+                "$ref": "#/components/schemas/PayPal"
+              }
+            ]
           },
           "created_at": {
             "type": "string",
@@ -3127,7 +3242,19 @@
             "description": "A supported ISO-4217 currency code."
           },
           "payment_method": {
-            "$ref": "#/components/schemas/TransactionPaymentMethodRequest"
+            "x-model-name": "TransactionPaymentMethodRequest",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CardRequest"
+              },
+              {
+                "$ref": "#/components/schemas/PayPalRequest"
+              },
+              {
+                "$ref": "#/components/schemas/TokenRequest"
+              }
+            ],
+            "description": "The optional payment method details to create an authorization for. This field is required for processing a card."
           },
           "store": {
             "type": "boolean",
@@ -3254,6 +3381,7 @@
           },
           "redirect_url": {
             "type": "string",
+            "format": "uri",
             "description": "The redirect URL to redirect a buyer to after they have authorized their\ntransaction or payment method. This only applies to payment methods that\nrequire buyer approval.",
             "example": "https://example.com/callback"
           },
