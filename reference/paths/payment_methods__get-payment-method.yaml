@@ -11,6 +11,7 @@ responses:
     content:
       application/json:
         schema:
+          x-model-name: PaymentMethod
           oneOf:
             - $ref: "../openapi.yaml#/components/schemas/Card"
             - $ref: "../openapi.yaml#/components/schemas/PayPal"
