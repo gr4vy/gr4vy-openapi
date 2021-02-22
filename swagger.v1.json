@@ -162,7 +162,9 @@
           },
           "400": {
             "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "schema": {}
+            "schema": {
+              "x-model-name": "ErrorGeneric"
+            }
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -429,7 +431,9 @@
           },
           "400": {
             "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "schema": {}
+            "schema": {
+              "x-model-name": "ErrorGeneric"
+            }
           },
           "401": {
             "description": "Returns an error if the credentials provided were not valid.",
@@ -461,7 +465,9 @@
           },
           "400": {
             "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "schema": {}
+            "schema": {
+              "x-model-name": "ErrorGeneric"
+            }
           },
           "401": {
             "description": "Returns an error if the refresh token provided was not valid.",
@@ -555,7 +561,9 @@
           },
           "400": {
             "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "schema": {}
+            "schema": {
+              "x-model-name": "ErrorGeneric"
+            }
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -641,6 +649,12 @@
             "schema": {
               "$ref": "#/definitions/Error404NotFound"
             }
+          },
+          "default": {
+            "description": "Returns a generic error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorGeneric"
+            }
           }
         },
         "tags": [
@@ -675,7 +689,9 @@
           },
           "400": {
             "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "schema": {}
+            "schema": {
+              "x-model-name": "ErrorGeneric"
+            }
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -751,7 +767,9 @@
           },
           "400": {
             "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "schema": {}
+            "schema": {
+              "x-model-name": "ErrorGeneric"
+            }
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -798,7 +816,7 @@
           "403": {
             "description": "Returns an error if the rule could not be deleted.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "#/definitions/ErrorGeneric"
             }
           },
           "404": {
@@ -874,7 +892,9 @@
           },
           "400": {
             "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "schema": {}
+            "schema": {
+              "x-model-name": "ErrorGeneric"
+            }
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -1026,7 +1046,9 @@
           },
           "400": {
             "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "schema": {}
+            "schema": {
+              "x-model-name": "ErrorGeneric"
+            }
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -1091,7 +1113,9 @@
         "responses": {
           "200": {
             "description": "Returns a payment method.",
-            "schema": {}
+            "schema": {
+              "x-model-name": "PaymentMethod"
+            }
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -1332,7 +1356,9 @@
           },
           "400": {
             "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "schema": {}
+            "schema": {
+              "x-model-name": "ErrorGeneric"
+            }
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -1445,7 +1471,9 @@
           },
           "400": {
             "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "schema": {}
+            "schema": {
+              "x-model-name": "ErrorGeneric"
+            }
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -1590,7 +1618,9 @@
           },
           "400": {
             "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "schema": {}
+            "schema": {
+              "x-model-name": "ErrorGeneric"
+            }
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -1680,7 +1710,9 @@
           },
           "404": {
             "description": "Returns an error if the resource can not be found or has not yet been created.",
-            "schema": {}
+            "schema": {
+              "x-model-name": "ErrorGeneric"
+            }
           }
         },
         "tags": [
@@ -1758,7 +1790,9 @@
           },
           "400": {
             "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "schema": {}
+            "schema": {
+              "x-model-name": "ErrorGeneric"
+            }
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -1768,7 +1802,9 @@
           },
           "404": {
             "description": "Returns an error if the resource can not be found or has not yet been created.",
-            "schema": {}
+            "schema": {
+              "x-model-name": "ErrorGeneric"
+            }
           }
         },
         "tags": [
@@ -1814,7 +1850,9 @@
           },
           "400": {
             "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "schema": {}
+            "schema": {
+              "x-model-name": "ErrorGeneric"
+            }
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -1824,7 +1862,9 @@
           },
           "404": {
             "description": "Returns an error if the resource can not be found or has not yet been created.",
-            "schema": {}
+            "schema": {
+              "x-model-name": "ErrorGeneric"
+            }
           }
         },
         "tags": [
@@ -1865,7 +1905,9 @@
           },
           "404": {
             "description": "Returns an error if the resource can not be found or has not yet been created.",
-            "schema": {}
+            "schema": {
+              "x-model-name": "ErrorGeneric"
+            }
           }
         },
         "tags": [
@@ -2352,7 +2394,9 @@
         },
         "conditions": {
           "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
-          "items": {},
+          "items": {
+            "x-model-name": "CardRule"
+          },
           "minItems": 1,
           "type": "array"
         },
@@ -2439,7 +2483,9 @@
         },
         "conditions": {
           "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
-          "items": {},
+          "items": {
+            "x-model-name": "CardRule"
+          },
           "minItems": 1,
           "type": "array"
         },
@@ -2615,7 +2661,9 @@
         },
         "conditions": {
           "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
-          "items": {},
+          "items": {
+            "x-model-name": "CardRule"
+          },
           "minItems": 1,
           "type": "array"
         },
@@ -2682,53 +2730,6 @@
       "x-internal": true,
       "x-tags": [
         "Card Rules"
-      ]
-    },
-    "Error": {
-      "description": "A generic client error.",
-      "properties": {
-        "code": {
-          "description": "A custom code to further describe the type of error being returned. This code provides further specification within the HTTP `status` code and can be used by a program to define logic based on the error.",
-          "example": "incorrect_json",
-          "type": "string"
-        },
-        "details": {
-          "description": "A list of detail objects that further clarify the reason for the error.\nNot every error supports more detail.",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          },
-          "type": "array"
-        },
-        "message": {
-          "description": "A human readable message that describes the error. The content of this field should not be used to determine any business logic. ",
-          "example": "The request body was not valid JSON.",
-          "type": "string"
-        },
-        "status": {
-          "default": 0,
-          "description": "The HTTP status code of this error.",
-          "example": 499,
-          "exclusiveMaximum": true,
-          "format": "int32",
-          "maximum": 600,
-          "minimum": 200,
-          "type": "integer"
-        },
-        "type": {
-          "default": "error",
-          "description": "The type of this object. This is always `error`.",
-          "enum": [
-            "error"
-          ],
-          "example": "error",
-          "type": "string"
-        }
-      },
-      "title": "Error",
-      "type": "object",
-      "x-internal": true,
-      "x-tags": [
-        "Errors"
       ]
     },
     "Error400BadRequest": {
@@ -3057,6 +3058,52 @@
         "Errors"
       ]
     },
+    "ErrorGeneric": {
+      "description": "A generic client error.",
+      "properties": {
+        "code": {
+          "description": "A custom code to further describe the type of error being returned. This code provides further specification within the HTTP `status` code and can be used by a program to define logic based on the error.",
+          "example": "incorrect_json",
+          "type": "string"
+        },
+        "details": {
+          "description": "A list of detail objects that further clarify the reason for the error.\nNot every error supports more detail.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "type": "array"
+        },
+        "message": {
+          "description": "A human readable message that describes the error. The content of this field should not be used to determine any business logic. ",
+          "example": "The request body was not valid JSON.",
+          "type": "string"
+        },
+        "status": {
+          "default": 0,
+          "description": "The HTTP status code of this error.",
+          "example": 499,
+          "exclusiveMaximum": true,
+          "format": "int32",
+          "maximum": 600,
+          "minimum": 200,
+          "type": "integer"
+        },
+        "type": {
+          "default": "error",
+          "description": "The type of this object. This is always `error`.",
+          "enum": [
+            "error"
+          ],
+          "example": "error",
+          "type": "string"
+        }
+      },
+      "title": "Generic Error",
+      "type": "object",
+      "x-tags": [
+        "Errors"
+      ]
+    },
     "Merchant": {
       "description": "A merchant in a cluster.",
       "properties": {
@@ -3237,12 +3284,137 @@
         "Request Bodies"
       ]
     },
+    "PaymentMethod": {
+      "description": "A generic payment method.",
+      "properties": {
+        "buyer": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/Buyer"
+            }
+          ],
+          "description": "The optional buyer for which this payment method has been stored.",
+          "x-nullable": true
+        },
+        "created_at": {
+          "description": "The date and time when this payment method was first created in our\nsystem.",
+          "example": "2013-07-16T19:23:00.000+00:00",
+          "format": "date-time",
+          "type": "string"
+        },
+        "details": {
+          "description": "Additional details about a payment method.",
+          "properties": {
+            "approval_url": {
+              "description": "The optional URL that the buyer needs to be redirected to to further authorize the payment method.",
+              "example": "https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve",
+              "format": "uri",
+              "type": "string",
+              "x-nullable": true
+            },
+            "email_address": {
+              "description": "The email address associated to the payment method.",
+              "example": "john@example.com",
+              "type": "string",
+              "x-nullable": true
+            },
+            "expiration_date": {
+              "description": "The expiration date for a card.",
+              "example": "11 / 21",
+              "type": "string"
+            },
+            "number": {
+              "description": "Partial number details for a stored card, hiding all but the last few\nnumbers.",
+              "example": "XXXX XXXX XXXX 1111",
+              "type": "string"
+            },
+            "scheme": {
+              "description": "The type of the card.",
+              "enum": [
+                "visa",
+                "mastercard",
+                "american-express",
+                "diners-club",
+                "discover",
+                "jcb",
+                "unionpay",
+                "maestro",
+                "elo",
+                "mir",
+                "hiper",
+                "hipercard"
+              ],
+              "example": "visa",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "external_identifier": {
+          "description": "An external identifier that can be used to match the payment method\nagainst your own records.",
+          "example": "user-789123",
+          "type": "string",
+          "x-nullable": true
+        },
+        "id": {
+          "description": "The unique ID of the payment method.",
+          "example": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
+          "format": "uuid",
+          "type": "string"
+        },
+        "method": {
+          "description": "The type of this payment method.",
+          "enum": [
+            "card",
+            "paypal"
+          ],
+          "example": "card",
+          "type": "string"
+        },
+        "status": {
+          "description": "The state of the payment method.",
+          "enum": [
+            "processing",
+            "processing_failed",
+            "buyer_approval_pending",
+            "buyer_approval_declined",
+            "buyer_approval_timedout",
+            "buyer_approved",
+            "stored",
+            "used"
+          ],
+          "example": "stored",
+          "type": "string"
+        },
+        "type": {
+          "description": "`payment-method`.",
+          "enum": [
+            "payment-method"
+          ],
+          "example": "payment-method",
+          "type": "string"
+        },
+        "updated_at": {
+          "description": "The date and time when this payment method was last updated in our system.",
+          "example": "2013-07-16T19:23:00.000+00:00",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "title": "Payment method",
+      "type": "object",
+      "x-tags": [
+        "Payment Methods"
+      ]
+    },
     "PaymentMethods": {
       "description": "A list of stored payment methods.",
       "properties": {
         "items": {
           "description": "A list of stored payment methods.",
-          "items": {},
+          "items": {
+            "$ref": "#/definitions/Card--Token"
+          },
           "type": "array"
         },
         "limit": {
@@ -3920,7 +4092,9 @@
           "format": "uuid",
           "type": "string"
         },
-        "payment_method": {},
+        "payment_method": {
+          "x-model-name": "PaymentMethod"
+        },
         "payment_service": {
           "$ref": "#/definitions/PaymentService"
         },
@@ -4028,7 +4202,8 @@
           "type": "string"
         },
         "payment_method": {
-          "description": "The optional payment method details to create an authorization for. This field is required for processing a card."
+          "description": "The optional payment method details to create an authorization for. This field is required for processing a card.",
+          "x-model-name": "TransactionPaymentMethodRequest"
         },
         "store": {
           "default": false,
@@ -4048,6 +4223,81 @@
         "payment_method"
       ],
       "title": "Transaction (Create)",
+      "type": "object",
+      "x-tags": [
+        "Request Bodies"
+      ]
+    },
+    "TransactionPaymentMethodRequest": {
+      "description": "Payment method details to use in a transaction or to register\na new payment method.",
+      "properties": {
+        "buyer_external_identifier": {
+          "description": "The `external_identifier` of the buyer to associate this payment method\nto. If this field is provided then the `buyer_id` field\nneeds to be unset.",
+          "example": "user-789123",
+          "type": "string"
+        },
+        "buyer_id": {
+          "description": "The ID of the buyer to associate this payment method to. If this field is\nprovided then the `buyer_external_identifier` field needs to be unset.",
+          "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+          "format": "uuid",
+          "type": "string"
+        },
+        "expiration_date": {
+          "description": "The expiration date of the card, formatted `MM/YY`. If a card has been\npreviously stored with us this value is optional.\n\nIf the `number` of this card represents a tokenized card, then this value\nis ignored.",
+          "example": "11/15",
+          "maxLength": 5,
+          "minLength": 5,
+          "pattern": "^\\d\\d/\\d\\d$",
+          "type": "string"
+        },
+        "external_identifier": {
+          "description": "An external identifier that can be used to match the card against your own records.",
+          "example": "user-789123",
+          "type": "string",
+          "x-nullable": true
+        },
+        "method": {
+          "description": "The method to use for this request.",
+          "enum": [
+            "card",
+            "paypal",
+            "token"
+          ],
+          "example": "card",
+          "type": "string"
+        },
+        "number": {
+          "description": "The 15-16 digit number for this credit card as it can be found on the\nfront of the card.\n\nIf a card has been stored with us previously, this number will represent\nthe unique tokenized card ID provided via our API.",
+          "example": "4111111111111111",
+          "maxLength": 16,
+          "minLength": 14,
+          "pattern": "^[0-9]{14,16}$",
+          "type": "string"
+        },
+        "redirect_url": {
+          "description": "The redirect URL to redirect a buyer to after they have authorized their\ntransaction or payment method. This only applies to payment methods that\nrequire buyer approval.",
+          "example": "https://example.com/callback",
+          "format": "uri",
+          "type": "string"
+        },
+        "security_code": {
+          "description": "The 3 or 4 digit security code often found on the card. This often\nreferred to as the CVV or CVD.\n\nIf the `number` of this card represents a tokenized card, then this value\nis ignored.",
+          "example": "123",
+          "maxLength": 4,
+          "minLength": 3,
+          "pattern": "^\\d{3,4}$",
+          "type": "string"
+        },
+        "token": {
+          "description": "A Gr4vy token that represents a previously tokenized payment method.\nThis token can represent any type of payment method.",
+          "example": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
+          "type": "string"
+        }
+      },
+      "required": [
+        "method"
+      ],
+      "title": "Transaction payment method request",
       "type": "object",
       "x-tags": [
         "Request Bodies"
