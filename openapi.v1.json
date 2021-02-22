@@ -29,7 +29,7 @@
   "tags": [
     {
       "name": "API Key Pairs",
-      "description": "In Gr4vy, an API key pair is used to sign and validate JWTs. A JWT is used\nas a bearer token to authenticate to the API.",
+      "description": "In Gr4vy, an API key pair is used to sign and validate JSON Web Tokens (JWT).\nJWTs are used as a HTTP `bearer` token to authenticate to the API. For more\ninformation please visit our [in-depth authentication](/guides/authentication)\nguide.",
       "x-internal": true
     },
     {
@@ -3084,15 +3084,11 @@
             "nullable": true
           },
           "buyer": {
+            "description": "The optional buyer for which this payment method has been stored.",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Buyer"
-              },
-              {
-                "description": "The optional buyer for which this payment method has been stored."
-              },
-              {
-                "nullable": true
               }
             ]
           },
@@ -4086,7 +4082,7 @@
           },
           "short_name": {
             "type": "string",
-            "description": "The unique short-name of the merchant, as used in their Gr4vy URLs. For\nexample, a short-name of `nike` would result in the Gr4vy cluster's API\nbeing hosted on `https://api.nike.app.gr4vy.com`.",
+            "description": "The unique short-name of the merchant, as used in their Gr4vy URLs. For\nexample, a short-name of `nike` would result in the Gr4vy cluster's API\nbeing hosted on `https://api.nike.gr4vy.app`.",
             "example": "acme"
           },
           "display_name": {
@@ -4667,15 +4663,11 @@
             "nullable": true
           },
           "buyer": {
+            "description": "The optional buyer for which this payment method has been stored.",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Buyer"
-              },
-              {
-                "description": "The optional buyer for which this payment method has been stored."
-              },
-              {
-                "nullable": true
               }
             ]
           },
