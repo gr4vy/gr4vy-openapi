@@ -23,4 +23,4 @@ properties:
     maxLength: 50
 
 allOf:
-  - $ref: "../openapi.yaml#/components/schemas/PaymentServiceUpdateRequest"
+  - $ref: "../openapi.yaml#/components/schemas/PaymentServiceUpdate"

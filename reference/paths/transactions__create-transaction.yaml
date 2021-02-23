@@ -20,7 +20,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: "../openapi.yaml#/components/schemas/TransactionCreateRequest"
+        $ref: "../openapi.yaml#/components/schemas/TransactionRequest"
       examples:
         Authorize a new card:
           value:

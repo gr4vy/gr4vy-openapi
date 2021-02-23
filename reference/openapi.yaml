@@ -335,9 +335,9 @@ components:
       $ref: "./resources/buyer.yaml"
     Buyers:
       $ref: "./resources/buyers.yaml"
-    BuyerCreateRequest:
+    BuyerRequest:
       $ref: "./request-bodies/buyer_create_request.yaml"
-    BuyerUpdateRequest:
+    BuyerUpdate:
       $ref: "./request-bodies/buyer_update_request.yaml"
     Card:
       $ref: "./resources/card.yaml"
@@ -355,9 +355,9 @@ components:
       $ref: "./resources/card_rule_number_condition.yaml"
     CardRuleTextCondition:
       $ref: "./resources/card_rule_text_condition.yaml"
-    CardRuleCreateRequest:
+    CardRuleRequest:
       $ref: "./request-bodies/card_rule_create_request.yaml"
-    CardRuleUpdateRequest:
+    CardRuleUpdate:
       $ref: "./request-bodies/card_rule_update_request.yaml"
     ErrorGeneric:
       $ref: "./resources/error_generic.yaml"
@@ -393,9 +393,9 @@ components:
       $ref: "./resources/payment_service.yaml"
     PaymentServices:
       $ref: "./resources/payment_services.yaml"
-    PaymentServiceCreateRequest:
+    PaymentServiceRequest:
       $ref: "./request-bodies/payment_service_create_request.yaml"
-    PaymentServiceUpdateRequest:
+    PaymentServiceUpdate:
       $ref: "./request-bodies/payment_service_update_request.yaml"
     PaymentServiceDefinition:
       $ref: "./resources/payment_service_definition.yaml"
@@ -415,7 +415,7 @@ components:
       $ref: "./request-bodies/paypal_request.yaml"
     Session:
       $ref: "./resources/session.yaml"
-    SessionCreateRequest:
+    SessionRequest:
       $ref: "./request-bodies/session_create_request.yaml"
     Status:
       $ref: "./resources/status.yaml"
@@ -429,7 +429,7 @@ components:
       $ref: "./resources/transactions.yaml"
     TransactionsBatchCaptureRequest:
       $ref: "./request-bodies/transactions_batch_capture_request.yaml"
-    TransactionCreateRequest:
+    TransactionRequest:
       $ref: "./request-bodies/transaction_create_request.yaml"
     TransactionCaptureRequest:
       $ref: "./request-bodies/transaction_capture_request.yaml"

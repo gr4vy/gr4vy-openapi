@@ -10,7 +10,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: "../openapi.yaml#/components/schemas/PaymentServiceUpdateRequest"
+        $ref: "../openapi.yaml#/components/schemas/PaymentServiceUpdate"
 
 responses:
   "201":

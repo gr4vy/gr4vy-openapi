@@ -10,7 +10,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: "../openapi.yaml#/components/schemas/CardRuleUpdateRequest"
+        $ref: "../openapi.yaml#/components/schemas/CardRuleUpdate"
 
 responses:
   "200":
