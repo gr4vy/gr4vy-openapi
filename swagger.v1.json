@@ -195,7 +195,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/TransactionCreateRequest"
+              "$ref": "#/definitions/TransactionRequest"
             }
           }
         ],
@@ -418,7 +418,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/SessionCreateRequest"
+              "$ref": "#/definitions/SessionRequest"
             }
           }
         ],
@@ -548,7 +548,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/BuyerCreateRequest"
+              "$ref": "#/definitions/BuyerRequest"
             }
           }
         ],
@@ -676,7 +676,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/BuyerUpdateRequest"
+              "$ref": "#/definitions/BuyerUpdate"
             }
           }
         ],
@@ -754,7 +754,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/CardRuleCreateRequest"
+              "$ref": "#/definitions/CardRuleRequest"
             }
           }
         ],
@@ -879,7 +879,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/CardRuleUpdateRequest"
+              "$ref": "#/definitions/CardRuleUpdate"
             }
           }
         ],
@@ -1343,7 +1343,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/PaymentServiceCreateRequest"
+              "$ref": "#/definitions/PaymentServiceRequest"
             }
           }
         ],
@@ -1458,7 +1458,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/PaymentServiceUpdateRequest"
+              "$ref": "#/definitions/PaymentServiceUpdate"
             }
           }
         ],
@@ -1605,7 +1605,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/TransactionCreateRequest"
+              "$ref": "#/definitions/TransactionRequest"
             }
           }
         ],
@@ -2085,7 +2085,7 @@
         "Buyers"
       ]
     },
-    "BuyerCreateRequest": {
+    "BuyerRequest": {
       "description": "A request to create a buyer.",
       "properties": {
         "display_name": {
@@ -2111,10 +2111,10 @@
         "Buyers"
       ]
     },
-    "BuyerUpdateRequest": {
+    "BuyerUpdate": {
       "allOf": [
         {
-          "$ref": "#/definitions/BuyerCreateRequest"
+          "$ref": "#/definitions/BuyerRequest"
         }
       ],
       "description": "A request to update a buyer.",
@@ -2473,7 +2473,60 @@
         "Card Rules"
       ]
     },
-    "CardRuleCreateRequest": {
+    "CardRuleNumberCondition": {
+      "description": "Part of a rule that matches numeric fields. It defines the condition under\nwhich this rule applies.",
+      "properties": {
+        "key": {
+          "description": "The transaction field to filter by.",
+          "enum": [
+            "amount"
+          ],
+          "example": "amount",
+          "type": "string"
+        },
+        "match": {
+          "description": "`number`.",
+          "enum": [
+            "number"
+          ],
+          "example": "number",
+          "type": "string"
+        },
+        "operator": {
+          "description": "The comparison to make to `value` property.",
+          "enum": [
+            "==",
+            "!=",
+            "<=",
+            ">=",
+            ">",
+            "<"
+          ],
+          "example": ">=",
+          "type": "string"
+        },
+        "value": {
+          "description": "The values to compare the `key` to.",
+          "example": 200,
+          "maximum": 99999,
+          "minimum": 0,
+          "type": "number"
+        }
+      },
+      "required": [
+        "match",
+        "key",
+        "operator",
+        "value"
+      ],
+      "title": "Card rule (Number condition)",
+      "type": "object",
+      "x-internal": true,
+      "x-tags": [
+        "Card Workflows"
+      ]
+    },
+    "CardRuleRequest": {
       "description": "Creates a new rule for a card transactions.",
       "properties": {
         "active": {
@@ -2540,59 +2593,6 @@
         "Card Rules"
       ]
     },
-    "CardRuleNumberCondition": {
-      "description": "Part of a rule that matches numeric fields. It defines the condition under\nwhich this rule applies.",
-      "properties": {
-        "key": {
-          "description": "The transaction field to filter by.",
-          "enum": [
-            "amount"
-          ],
-          "example": "amount",
-          "type": "string"
-        },
-        "match": {
-          "description": "`number`.",
-          "enum": [
-            "number"
-          ],
-          "example": "number",
-          "type": "string"
-        },
-        "operator": {
-          "description": "The comparison to make to `value` property.",
-          "enum": [
-            "==",
-            "!=",
-            "<=",
-            ">=",
-            ">",
-            "<"
-          ],
-          "example": ">=",
-          "type": "string"
-        },
-        "value": {
-          "description": "The values to compare the `key` to.",
-          "example": 200,
-          "maximum": 99999,
-          "minimum": 0,
-          "type": "number"
-        }
-      },
-      "required": [
-        "match",
-        "key",
-        "operator",
-        "value"
-      ],
-      "title": "Card rule (Number condition)",
-      "type": "object",
-      "x-internal": true,
-      "x-tags": [
-        "Card Workflows"
-      ]
-    },
     "CardRuleTextCondition": {
       "description": "Part of a rule that matches text fields. It defines the condition under\nwhich this rule applies.",
       "properties": {
@@ -2651,7 +2651,7 @@
         "Card Rules"
       ]
     },
-    "CardRuleUpdateRequest": {
+    "CardRuleUpdate": {
       "description": "Updates a rule for a card transactions.",
       "properties": {
         "active": {
@@ -3596,36 +3596,6 @@
         "Payment Services"
       ]
     },
-    "PaymentServiceCreateRequest": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/PaymentServiceUpdateRequest"
-        }
-      ],
-      "description": "Request body for activating a payment service.",
-      "properties": {
-        "payment_service_definition_id": {
-          "description": "The ID of the payment service to use.",
-          "example": "stripe-card",
-          "maxLength": 50,
-          "minLength": 1,
-          "type": "string"
-        }
-      },
-      "required": [
-        "display_name",
-        "payment_service_definition_id",
-        "fields",
-        "accepted_currencies",
-        "use_test_environment",
-        "accepted_countries"
-      ],
-      "title": "Payment Service (Create)",
-      "type": "object",
-      "x-tags": [
-        "Request Bodies"
-      ]
-    },
     "PaymentServiceDefinition": {
       "description": "An available payment service that can be configured for this cluster.",
       "properties": {
@@ -3774,7 +3744,37 @@
         "Discovery"
       ]
     },
-    "PaymentServiceUpdateRequest": {
+    "PaymentServiceRequest": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/PaymentServiceUpdate"
+        }
+      ],
+      "description": "Request body for activating a payment service.",
+      "properties": {
+        "payment_service_definition_id": {
+          "description": "The ID of the payment service to use.",
+          "example": "stripe-card",
+          "maxLength": 50,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "display_name",
+        "payment_service_definition_id",
+        "fields",
+        "accepted_currencies",
+        "use_test_environment",
+        "accepted_countries"
+      ],
+      "title": "Payment Service (Create)",
+      "type": "object",
+      "x-tags": [
+        "Request Bodies"
+      ]
+    },
+    "PaymentServiceUpdate": {
       "description": "Request body for updating an active payment service.",
       "properties": {
         "accepted_countries": {
@@ -3943,7 +3943,7 @@
         "Authentication"
       ]
     },
-    "SessionCreateRequest": {
+    "SessionRequest": {
       "description": "A request to create a session using an email address and password.",
       "properties": {
         "email_address": {
@@ -4171,63 +4171,6 @@
         "Request Bodies"
       ]
     },
-    "TransactionCreateRequest": {
-      "description": "A request to create a transaction.",
-      "properties": {
-        "amount": {
-          "description": "The monetary amount to create an authorization for, in the smallest\ncurrency unit for the given currency, for example `1299` cents to create\nan authorization for `$12.99`.\n\nFor BitCoin, this value will be a decimal point number, for example\n`0.0039`.",
-          "example": 1299,
-          "type": "number"
-        },
-        "currency": {
-          "description": "A supported ISO-4217 currency code.",
-          "example": "USD",
-          "type": "string"
-        },
-        "external_identifier": {
-          "description": "An external identifier that can be used to match the transaction against your own records.",
-          "example": "user-789123",
-          "type": "string",
-          "x-nullable": true
-        },
-        "intent": {
-          "default": "authorize",
-          "description": "Defines the intent of this API call. This determines the desired initial\nstate of the transaction.\n\n* `approve` - Captures approval for the transaction from the user but does\nnot authorize it. This is only available to payment methods that require\nexplicit approval, like PayPal.\n* `authorize` - (Default) Optionally approves and then authorizes a\ntransaction but does not capture the funds.\n* `capture` - Optionally approves and then authorizes and captures the\nfunds of the transaction.",
-          "enum": [
-            "approve",
-            "authorize",
-            "capture"
-          ],
-          "example": "capture",
-          "type": "string"
-        },
-        "payment_method": {
-          "description": "The optional payment method details to create an authorization for. This field is required for processing a card.",
-          "x-model-name": "TransactionPaymentMethodRequest"
-        },
-        "store": {
-          "default": false,
-          "description": "Whether or not to also try and store the payment method with us so that\nit can be used again for future use. This is only supported for payment\nmethods that support this feature.",
-          "example": true,
-          "type": "boolean"
-        },
-        "use_test_environment": {
-          "description": "Defines if this transaction should run in the payment provider's test environment. Defaults to false.",
-          "example": false,
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "amount",
-        "currency",
-        "payment_method"
-      ],
-      "title": "Transaction (Create)",
-      "type": "object",
-      "x-tags": [
-        "Request Bodies"
-      ]
-    },
     "TransactionPaymentMethodRequest": {
       "description": "Payment method details to use in a transaction or to register\na new payment method.",
       "properties": {
@@ -4298,6 +4241,63 @@
         "method"
       ],
       "title": "Transaction payment method request",
+      "type": "object",
+      "x-tags": [
+        "Request Bodies"
+      ]
+    },
+    "TransactionRequest": {
+      "description": "A request to create a transaction.",
+      "properties": {
+        "amount": {
+          "description": "The monetary amount to create an authorization for, in the smallest\ncurrency unit for the given currency, for example `1299` cents to create\nan authorization for `$12.99`.\n\nFor BitCoin, this value will be a decimal point number, for example\n`0.0039`.",
+          "example": 1299,
+          "type": "number"
+        },
+        "currency": {
+          "description": "A supported ISO-4217 currency code.",
+          "example": "USD",
+          "type": "string"
+        },
+        "external_identifier": {
+          "description": "An external identifier that can be used to match the transaction against your own records.",
+          "example": "user-789123",
+          "type": "string",
+          "x-nullable": true
+        },
+        "intent": {
+          "default": "authorize",
+          "description": "Defines the intent of this API call. This determines the desired initial\nstate of the transaction.\n\n* `approve` - Captures approval for the transaction from the user but does\nnot authorize it. This is only available to payment methods that require\nexplicit approval, like PayPal.\n* `authorize` - (Default) Optionally approves and then authorizes a\ntransaction but does not capture the funds.\n* `capture` - Optionally approves and then authorizes and captures the\nfunds of the transaction.",
+          "enum": [
+            "approve",
+            "authorize",
+            "capture"
+          ],
+          "example": "capture",
+          "type": "string"
+        },
+        "payment_method": {
+          "description": "The optional payment method details to create an authorization for. This field is required for processing a card.",
+          "x-model-name": "TransactionPaymentMethodRequest"
+        },
+        "store": {
+          "default": false,
+          "description": "Whether or not to also try and store the payment method with us so that\nit can be used again for future use. This is only supported for payment\nmethods that support this feature.",
+          "example": true,
+          "type": "boolean"
+        },
+        "use_test_environment": {
+          "description": "Defines if this transaction should run in the payment provider's test environment. Defaults to false.",
+          "example": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "amount",
+        "currency",
+        "payment_method"
+      ],
+      "title": "Transaction (Create)",
       "type": "object",
       "x-tags": [
         "Request Bodies"
