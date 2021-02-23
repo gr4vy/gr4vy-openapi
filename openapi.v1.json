@@ -125,7 +125,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BuyerCreateRequest"
+                "$ref": "#/components/schemas/BuyerRequest"
               },
               "examples": {
                 "Create a buyer": {
@@ -257,7 +257,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BuyerUpdateRequest"
+                "$ref": "#/components/schemas/BuyerUpdate"
               },
               "examples": {
                 "Update a buyer": {
@@ -715,7 +715,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PaymentServiceCreateRequest"
+                "$ref": "#/components/schemas/PaymentServiceRequest"
               }
             }
           }
@@ -837,7 +837,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PaymentServiceUpdateRequest"
+                "$ref": "#/components/schemas/PaymentServiceUpdate"
               }
             }
           }
@@ -1056,7 +1056,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TransactionCreateRequest"
+                "$ref": "#/components/schemas/TransactionRequest"
               },
               "examples": {
                 "Authorize a new card": {
@@ -1608,7 +1608,7 @@
           }
         }
       },
-      "BuyerCreateRequest": {
+      "BuyerRequest": {
         "title": "Buyer (Create)",
         "type": "object",
         "description": "A request to create a buyer.",
@@ -1634,7 +1634,7 @@
           }
         }
       },
-      "BuyerUpdateRequest": {
+      "BuyerUpdate": {
         "title": "Buyer (Update)",
         "type": "object",
         "description": "A request to update a buyer.",
@@ -1643,7 +1643,7 @@
         ],
         "allOf": [
           {
-            "$ref": "#/components/schemas/BuyerCreateRequest"
+            "$ref": "#/components/schemas/BuyerRequest"
           }
         ]
       },
@@ -2546,7 +2546,7 @@
           }
         }
       },
-      "PaymentServiceCreateRequest": {
+      "PaymentServiceRequest": {
         "title": "Payment Service (Create)",
         "type": "object",
         "description": "Request body for activating a payment service.",
@@ -2572,11 +2572,11 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/PaymentServiceUpdateRequest"
+            "$ref": "#/components/schemas/PaymentServiceUpdate"
           }
         ]
       },
-      "PaymentServiceUpdateRequest": {
+      "PaymentServiceUpdate": {
         "title": "Payment Service (Update)",
         "type": "object",
         "description": "Request body for updating an active payment service.",
@@ -3103,7 +3103,7 @@
           }
         }
       },
-      "TransactionCreateRequest": {
+      "TransactionRequest": {
         "title": "Transaction (Create)",
         "type": "object",
         "description": "A request to create a transaction.",
