@@ -653,14 +653,14 @@
                       "items": [
                         {
                           "type": "api-key-pair",
-                          "id": "86473d2b-e385-4d5a-85e3-36964c5ed41c",
+                          "id": "SopiN5XU0IWy8Xe9mwx1ICQbKh4-ydCDPx3LIyArkVI",
                           "private_key": null,
                           "created_at": "2012-12-12T10:53:43+00:00",
                           "updated_at": "2012-12-12T10:53:43+00:00"
                         },
                         {
                           "type": "api-key-pair",
-                          "id": "d028ec5c-12e4-43d0-b187-c6fe79b3b5dd",
+                          "id": "Wy8Xe9mwx1ICQbKh4SopiN5XU0I-yArkVIydCDPx3LI",
                           "private_key": null,
                           "created_at": "2012-12-12T10:53:12+00:00",
                           "updated_at": "2012-12-12T10:53:12+00:00"
@@ -704,7 +704,7 @@
                   "A newly created API key pair": {
                     "value": {
                       "type": "api-key-pair",
-                      "id": "86473d2b-e385-4d5a-85e3-36964c5ed41c",
+                      "id": "SopiN5XU0IWy8Xe9mwx1ICQbKh4-ydCDPx3LIyArkVI",
                       "private_key": "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
                       "created_at": "2012-12-12T10:53:43+00:00",
                       "updated_at": "2012-12-12T10:53:43+00:00"
@@ -4015,9 +4015,11 @@
           },
           "id": {
             "type": "string",
-            "format": "uuid",
-            "description": "A unique ID for this key-pair.",
-            "example": "86473d2b-e385-4d5a-85e3-36964c5ed41c"
+            "maxLength": 43,
+            "minLength": 43,
+            "pattern": "^[A-Za-z0-9-_]+$",
+            "description": "A unique ID for this key-pair. This ID is the thumbprint of the key.",
+            "example": "SopiN5XU0IWy8Xe9mwx1ICQbKh4-ydCDPx3LIyArkVI"
           },
           "private_key": {
             "type": "string",
