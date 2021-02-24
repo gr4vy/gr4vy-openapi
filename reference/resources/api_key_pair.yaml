@@ -17,9 +17,12 @@ properties:
 
   id:
     type: string
-    format: uuid
-    description: A unique ID for this key-pair.
-    example: 86473d2b-e385-4d5a-85e3-36964c5ed41c
+    maxLength: 43
+    minLength: 43
+    pattern: ^[A-Za-z0-9-_]+$
+    description: |-
+      A unique ID for this key-pair. This ID is the thumbprint of the key.
+    example: SopiN5XU0IWy8Xe9mwx1ICQbKh4-ydCDPx3LIyArkVI
 
   private_key:
     type: string

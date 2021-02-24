@@ -17,7 +17,7 @@ responses:
           A newly created API key pair:
             value:
               type: api-key-pair
-              id: 86473d2b-e385-4d5a-85e3-36964c5ed41c
+              id: SopiN5XU0IWy8Xe9mwx1ICQbKh4-ydCDPx3LIyArkVI
               private_key: |-
                 -----BEGIN PRIVATE KEY-----
                 ...
