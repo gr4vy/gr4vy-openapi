@@ -492,9 +492,9 @@
         ],
         "parameters": [
           {
-            "description": "Filters the results to only the items for which the `external_identifier`\nmatches this value.",
+            "description": "Filters the results to only the buyers for which the `display_name` or\n`external_identifier` matches this value. This field allows for a partial\nmatch, matching any buyer for which either of the fields partially or\ncompletely matches.",
             "in": "query",
-            "name": "external_identifier",
+            "name": "search",
             "type": "string"
           },
           {
@@ -584,6 +584,65 @@
         "description": "Adds a buyer, allowing for payment methods and transactions to be associated\nto this buyer.\n",
         "operationId": "add-buyer",
         "summary": "New buyer"
+      }
+    },
+    "/buyers/payment-methods": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Filters the results to only the items for which the `buyer` has an\n`id` that matches this value.",
+            "in": "query",
+            "name": "buyer_id",
+            "type": "string"
+          },
+          {
+            "description": "Filters the results to only the items for which the `buyer` has an\n`external_identifier` that matches this value.",
+            "in": "query",
+            "name": "buyer_external_identifier",
+            "type": "string"
+          },
+          {
+            "description": "Filters the results to only the items which support this country code. A\ncountry is formatted as 2-letter ISO country code.",
+            "in": "query",
+            "name": "country",
+            "type": "string"
+          },
+          {
+            "description": "Filters the results to only the items which support this currency code. A\ncurrency is formatted as 3-letter ISO currency code.",
+            "in": "query",
+            "name": "currency",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of available payment methods for a buyer, filtered by the\nthe given currency and country code.",
+            "schema": {
+              "$ref": "#/definitions/PaymentMethods--Tokenized"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "schema": {
+              "$ref": "#/definitions/Error404NotFound"
+            }
+          }
+        },
+        "tags": [
+          "Payment Methods"
+        ],
+        "description": "Returns a list of stored (tokenized) payment methods for a buyer in\na short tokenized format.",
+        "operationId": "list-buyer-payment-methods",
+        "summary": "List stored payment methods for a buyer"
       }
     },
     "/buyers/{buyer_id}": {
@@ -959,17 +1018,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "default": "full",
-            "description": "Determines the format of the payment method returned. Currently we have 2\navailable formats:\n\n* `full` - Returns the default full format of a resource.\n* `token` - Returns only the payment method's token and details. This is used\n   by Gr4vy Embed to render available payment options.",
-            "enum": [
-              "full",
-              "token"
-            ],
-            "in": "query",
-            "name": "format",
-            "type": "string"
-          },
           {
             "description": "Filters the results to only the items for which the `buyer` has an\n`id` that matches this value.",
             "in": "query",
@@ -1503,7 +1551,7 @@
         ],
         "parameters": [
           {
-            "description": "Filters the results to only the items for which the `id` or\n`external_identifier` matches this value.",
+            "description": "Filters the transactions to only the items for which the `id` or\n`external_identifier` matches this value. This field allows for a partial\nmatch, matching any transaction for which either of the fields partially or\ncompletely matches.",
             "in": "query",
             "name": "search",
             "type": "string"
@@ -2220,12 +2268,6 @@
           "example": "stored",
           "type": "string"
         },
-        "token": {
-          "description": "A Gr4vy token that represents this payment method, in the format of a\ncredit-card number starting with the digit 0. You can store this token\nin your own system and use it to process a payment with this payment\nmethod at a later date.",
-          "example": "0123456789123458",
-          "type": "string",
-          "x-nullable": true
-        },
         "type": {
           "description": "`payment-method`.",
           "enum": [
@@ -2247,11 +2289,17 @@
         "Payment Methods"
       ]
     },
-    "Card--Token": {
+    "Card--Tokenized": {
       "description": "A mini format version of the card.",
       "properties": {
         "details": {
           "$ref": "#/definitions/CardDetails"
+        },
+        "id": {
+          "description": "The unique ID of the payment method.",
+          "example": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
+          "format": "uuid",
+          "type": "string"
         },
         "method": {
           "description": "`card`.",
@@ -2260,12 +2308,6 @@
           ],
           "example": "card",
           "type": "string"
-        },
-        "token": {
-          "description": "A Gr4vy token that represents this payment method, in the format of a\ncredit-card number starting with the digit 0. You can store this token\nin your own system and use it to process a payment with this payment\nmethod at a later date.",
-          "example": "0123456789123458",
-          "type": "string",
-          "x-nullable": true
         },
         "type": {
           "description": "`payment-method`.",
@@ -2276,7 +2318,7 @@
           "type": "string"
         }
       },
-      "title": "Card (Token)",
+      "title": "Card (Tokenized)",
       "type": "object",
       "x-tags": [
         "Payment Methods"
@@ -2287,12 +2329,10 @@
       "properties": {
         "expiration_date": {
           "description": "The expiration date for a card.",
-          "example": "11 / 21",
-          "type": "string"
-        },
-        "number": {
-          "description": "Partial number details for a stored card, hiding all but the last few\nnumbers.",
-          "example": "XXXX XXXX XXXX 1111",
+          "example": "11/25",
+          "maxLength": 5,
+          "minLength": 5,
+          "pattern": "^\\d{2}/\\d{2}$",
           "type": "string"
         },
         "scheme": {
@@ -2312,6 +2352,11 @@
             "hipercard"
           ],
           "example": "visa",
+          "type": "string"
+        },
+        "suffix": {
+          "description": "The last 4 digits of the card number.",
+          "example": "1111",
           "type": "string"
         }
       },
@@ -2336,11 +2381,11 @@
           "type": "string"
         },
         "expiration_date": {
-          "description": "The expiration date of the card, formatted `MM/YY`. If a card has been\npreviously stored with us this value is optional.\n\nIf the `number` of this card represents a tokenized card, then this value\nis ignored.",
-          "example": "11/15",
+          "description": "The expiration date of the card, formatted `MM/YY`.",
+          "example": "11/25",
           "maxLength": 5,
           "minLength": 5,
-          "pattern": "^\\d\\d/\\d\\d$",
+          "pattern": "^\\d{2}/\\d{2}$",
           "type": "string"
         },
         "external_identifier": {
@@ -2358,7 +2403,7 @@
           "type": "string"
         },
         "number": {
-          "description": "The 15-16 digit number for this credit card as it can be found on the\nfront of the card.\n\nIf a card has been stored with us previously, this number will represent\nthe unique tokenized card ID provided via our API.",
+          "description": "The 15-16 digit number for this card as it can be found on the\nfront of the card.",
           "example": "4111111111111111",
           "maxLength": 16,
           "minLength": 14,
@@ -2366,7 +2411,7 @@
           "type": "string"
         },
         "security_code": {
-          "description": "The 3 or 4 digit security code often found on the card. This often\nreferred to as the CVV or CVD.\n\nIf the `number` of this card represents a tokenized card, then this value\nis ignored.",
+          "description": "The 3 or 4 digit security code often found on the card. This often\nreferred to as the CVV or CVD.",
           "example": "123",
           "maxLength": 4,
           "minLength": 3,
@@ -3191,12 +3236,6 @@
           "example": "buyer_approval_pending",
           "type": "string"
         },
-        "token": {
-          "description": "A Gr4vy token that represents this payment method, in the format of a\ncredit-card number starting with the digit 0. You can store this token\nin your own system and use it to process a payment with this payment\nmethod at a later date.",
-          "example": "0123456789123458",
-          "type": "string",
-          "x-nullable": true
-        },
         "type": {
           "description": "`payment-method`.",
           "enum": [
@@ -3415,7 +3454,7 @@
         "items": {
           "description": "A list of stored payment methods.",
           "items": {
-            "$ref": "#/definitions/Card--Token"
+            "$ref": "#/definitions/Card"
           },
           "type": "array"
         },
@@ -3448,7 +3487,49 @@
       "title": "Payment Methods",
       "type": "object",
       "x-tags": [
-        "PaymentMethods"
+        "Payment Methods"
+      ]
+    },
+    "PaymentMethods--Tokenized": {
+      "description": "A list of stored payment methods in token format.",
+      "properties": {
+        "items": {
+          "description": "A list of stored payment methods in token format.",
+          "items": {
+            "$ref": "#/definitions/Card--Tokenized"
+          },
+          "type": "array"
+        },
+        "limit": {
+          "default": 20,
+          "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
+          "example": 1,
+          "format": "int32",
+          "maximum": 100,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "next_cursor": {
+          "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+          "example": "ZXhhbXBsZTE",
+          "maxLength": 1000,
+          "minLength": 1,
+          "type": "string",
+          "x-nullable": true
+        },
+        "previous_cursor": {
+          "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+          "example": null,
+          "maxLength": 1000,
+          "minLength": 1,
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "title": "Payment Methods (Token only)",
+      "type": "object",
+      "x-tags": [
+        "Payment Methods"
       ]
     },
     "PaymentOption": {
@@ -4034,35 +4115,35 @@
         "Statuses"
       ]
     },
-    "TokenRequest": {
+    "TokenizedRequest": {
       "description": "Details for a previously tokenized payment method.",
       "properties": {
-        "method": {
-          "description": "`token`.",
-          "enum": [
-            "token"
-          ],
-          "example": "token",
+        "id": {
+          "description": "A ID that represents a previously tokenized payment method.\nThis token can represent any type of payment method.",
+          "example": "46973e9d-88a7-44a6-abfe-be4ff0134ff4",
           "type": "string"
         },
-        "token": {
-          "description": "A Gr4vy token that represents a previously tokenized payment method, in\nthe format of a card number starting with the digit 0. This token can\nrepresent any type of payment method.",
-          "example": "0123456789123458",
+        "method": {
+          "description": "`id`.",
+          "enum": [
+            "id"
+          ],
+          "example": "id",
           "type": "string"
         }
       },
       "required": [
         "method",
-        "token"
+        "id"
       ],
-      "title": "Token",
+      "title": "Tokenized payment method request",
       "type": "object",
       "x-tags": [
         "Request Bodies"
       ]
     },
     "Transaction": {
-      "description": "Captures a transaction.",
+      "description": "A transaction record.",
       "properties": {
         "amount": {
           "description": "The currency amount captured by this transaction.",
