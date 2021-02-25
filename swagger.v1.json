@@ -448,7 +448,7 @@
         ],
         "description": "Authenticate a user using an email address and password.\n",
         "operationId": "login",
-        "summary": "Create a user session (Logout)",
+        "summary": "Create a user session (Login)",
         "x-internal": true
       },
       "put": {
