@@ -29,8 +29,10 @@ servers:
 tags:
   - name: API Key Pairs
     description: |-
-      In Gr4vy, an API key pair is used to sign and validate JWTs. A JWT is used
-      as a bearer token to authenticate to the API.
+      In Gr4vy, an API key pair is used to sign and validate JSON Web Tokens (JWT).
+      JWTs are used as a HTTP `bearer` token to authenticate to the API. For more
+      information please visit our [in-depth authentication](/guides/authentication)
+      guide.
     x-internal: true
 
   - name: Async APIs
@@ -221,17 +223,17 @@ paths:
   #   get:
   #     $ref: "./paths/payment_methods__list-payment-method-events.yaml"
 
-  "/payment-methods/{payment_method_id}/approve":
-    parameters:
-      - $ref: "./path-parameters/payment_method_id.yaml"
-    get:
-      $ref: "./paths/payment_methods__approve-payment-method.yaml"
+  # "/payment-methods/{payment_method_id}/approve":
+  #   parameters:
+  #     - $ref: "./path-parameters/payment_method_id.yaml"
+  #   get:
+  #     $ref: "./paths/payment_methods__approve-payment-method.yaml"
 
-  "/payment-methods/approvals/{payment_method_approval_token}":
-    parameters:
-      - $ref: "./path-parameters/payment_method_approval_token.yaml"
-    get:
-      $ref: "./paths/payment_methods__redirect-payment-method-approval.yaml"
+  # "/payment-methods/approvals/{payment_method_approval_token}":
+  #   parameters:
+  #     - $ref: "./path-parameters/payment_method_approval_token.yaml"
+  #   get:
+  #     $ref: "./paths/payment_methods__redirect-payment-method-approval.yaml"
 
   "/payment-options":
     get:
@@ -337,9 +339,9 @@ components:
       $ref: "./resources/buyer.yaml"
     Buyers:
       $ref: "./resources/buyers.yaml"
-    BuyerCreateRequest:
+    BuyerRequest:
       $ref: "./request-bodies/buyer_create_request.yaml"
-    BuyerUpdateRequest:
+    BuyerUpdate:
       $ref: "./request-bodies/buyer_update_request.yaml"
     Card:
       $ref: "./resources/card.yaml"
@@ -353,18 +355,16 @@ components:
       $ref: "./resources/card_rule.yaml"
     CardRules:
       $ref: "./resources/card_rules.yaml"
-    CardRuleBooleanCondition:
-      $ref: "./resources/card_rule_boolean_condition.yaml"
     CardRuleNumberCondition:
       $ref: "./resources/card_rule_number_condition.yaml"
     CardRuleTextCondition:
       $ref: "./resources/card_rule_text_condition.yaml"
-    CardRuleCreateRequest:
+    CardRuleRequest:
       $ref: "./request-bodies/card_rule_create_request.yaml"
-    CardRuleUpdateRequest:
+    CardRuleUpdate:
       $ref: "./request-bodies/card_rule_update_request.yaml"
-    Error:
-      $ref: "./resources/error.yaml"
+    ErrorGeneric:
+      $ref: "./resources/error_generic.yaml"
     Error400BadRequest:
       $ref: "./resources/error_400_bad_request.yaml"
     Error400IncorrectJson:
@@ -385,6 +385,8 @@ components:
       $ref: "./resources/api_key_pairs.yaml"
     Merchant:
       $ref: "./resources/merchant.yaml"
+    PaymentMethod:
+      $ref: "./resources/payment_method.yaml"
     PaymentMethods:
       $ref: "./resources/payment_methods.yaml"
     PaymentMethods--Tokenized:
@@ -397,9 +399,9 @@ components:
       $ref: "./resources/payment_service.yaml"
     PaymentServices:
       $ref: "./resources/payment_services.yaml"
-    PaymentServiceCreateRequest:
+    PaymentServiceRequest:
       $ref: "./request-bodies/payment_service_create_request.yaml"
-    PaymentServiceUpdateRequest:
+    PaymentServiceUpdate:
       $ref: "./request-bodies/payment_service_update_request.yaml"
     PaymentServiceDefinition:
       $ref: "./resources/payment_service_definition.yaml"
@@ -411,15 +413,15 @@ components:
       $ref: "./resources/payment_options.yaml"
     PayPal:
       $ref: "./resources/paypal.yaml"
-    PayPal--Tokenized:
-      $ref: "./resources/paypal--tokenized.yaml"
+    # PayPal--Tokenized:
+    #   $ref: "./resources/paypal--tokenized.yaml"
     PayPalDetails:
       $ref: "./resources/paypal_details.yaml"
     PayPalRequest:
       $ref: "./request-bodies/paypal_request.yaml"
     Session:
       $ref: "./resources/session.yaml"
-    SessionCreateRequest:
+    SessionRequest:
       $ref: "./request-bodies/session_create_request.yaml"
     Status:
       $ref: "./resources/status.yaml"
@@ -433,10 +435,12 @@ components:
       $ref: "./resources/transactions.yaml"
     TransactionsBatchCaptureRequest:
       $ref: "./request-bodies/transactions_batch_capture_request.yaml"
-    TransactionCreateRequest:
+    TransactionRequest:
       $ref: "./request-bodies/transaction_create_request.yaml"
     TransactionCaptureRequest:
       $ref: "./request-bodies/transaction_capture_request.yaml"
+    TransactionPaymentMethodRequest:
+      $ref: "./request-bodies/transaction_payment_method_request.yaml"
     # TransactionEvent:
     #   $ref: "./resources/transaction_event.yaml"
     # TransactionEvents:

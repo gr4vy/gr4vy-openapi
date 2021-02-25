@@ -1,6 +1,6 @@
 ---
 operationId: login
-summary: Create a user session (Logout)
+summary: Create a user session (Login)
 description: |
   Authenticate a user using an email address and password.
 tags:
@@ -13,7 +13,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: "../openapi.yaml#/components/schemas/SessionCreateRequest"
+        $ref: "../openapi.yaml#/components/schemas/SessionRequest"
 
 responses:
   "200":
@@ -31,6 +31,7 @@ responses:
     content:
       application/json:
         schema:
+          x-model-name: ErrorGeneric
           oneOf:
             - $ref: |-
                 ../openapi.yaml#/components/schemas/Error400BadRequest

@@ -7,4 +7,4 @@ x-tags:
   - Buyers
 
 allOf:
-  - $ref: "../openapi.yaml#/components/schemas/BuyerCreateRequest"
+  - $ref: "../openapi.yaml#/components/schemas/BuyerRequest"

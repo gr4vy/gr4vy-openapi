@@ -6,19 +6,21 @@ description: Request body for activating a payment service.
 x-tags:
   - Request Bodies
 
+required:
+  - display_name
+  - payment_service_definition_id
+  - fields
+  - accepted_currencies
+  - use_test_environment
+  - accepted_countries
+
+properties:
+  payment_service_definition_id:
+    type: string
+    description: The ID of the payment service to use.
+    example: stripe-card
+    minLength: 1
+    maxLength: 50
+
 allOf:
-  - $ref: "../openapi.yaml#/components/schemas/PaymentServiceUpdateRequest"
-  - required:
-      - display_name
-      - payment_service_definition_id
-      - fields
-      - accepted_currencies
-      - use_test_environment
-      - accepted_countries
-  - properties:
-      payment_service_definition_id:
-        type: string
-        description: The ID of the payment service to use.
-        example: stripe-card
-        minLength: 1
-        maxLength: 50
+  - $ref: "../openapi.yaml#/components/schemas/PaymentServiceUpdate"

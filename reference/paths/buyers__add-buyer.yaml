@@ -11,7 +11,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: "../openapi.yaml#/components/schemas/BuyerCreateRequest"
+        $ref: "../openapi.yaml#/components/schemas/BuyerRequest"
       examples:
         Create a buyer:
           value:
@@ -33,6 +33,7 @@ responses:
     content:
       application/json:
         schema:
+          x-model-name: ErrorGeneric
           oneOf:
             - $ref: |-
                 ../openapi.yaml#/components/schemas/Error400BadRequest

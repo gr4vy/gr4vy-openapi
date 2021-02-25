@@ -20,7 +20,7 @@ properties:
     description: |-
       The unique short-name of the merchant, as used in their Gr4vy URLs. For
       example, a short-name of `nike` would result in the Gr4vy cluster's API
-      being hosted on `https://api.nike.app.gr4vy.com`.
+      being hosted on `https://api.nike.gr4vy.app`.
     example: acme
 
   display_name:

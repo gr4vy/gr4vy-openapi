@@ -2,7 +2,7 @@
 operationId: list-buyer-payment-methods
 summary: List stored payment methods for a buyer
 description: |-
-  Returns a list of stored, tokenized payment methods for a buyer in
+  Returns a list of stored (tokenized) payment methods for a buyer in
   a short tokenized format.
 tags:
   - Payment Methods

@@ -31,10 +31,10 @@ properties:
       needs to match for this rule to go into effect.
     minItems: 1
     items:
+      x-model-name: CardRule
       oneOf:
         - $ref: "../openapi.yaml#/components/schemas/CardRuleTextCondition"
         - $ref: "../openapi.yaml#/components/schemas/CardRuleNumberCondition"
-        - $ref: "../openapi.yaml#/components/schemas/CardRuleBooleanCondition"
 
   payment_service_ids:
     type: array

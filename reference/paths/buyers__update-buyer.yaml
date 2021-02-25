@@ -10,7 +10,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: "../openapi.yaml#/components/schemas/BuyerUpdateRequest"
+        $ref: "../openapi.yaml#/components/schemas/BuyerUpdate"
       examples:
         Update a buyer:
           value:
@@ -33,6 +33,7 @@ responses:
     content:
       application/json:
         schema:
+          x-model-name: ErrorGeneric
           oneOf:
             - $ref: |-
                 ../openapi.yaml#/components/schemas/Error400BadRequest

@@ -56,6 +56,7 @@ properties:
     description: The currency code for this transaction.
 
   payment_method:
+    x-model-name: PaymentMethod
     oneOf:
       - $ref: "../openapi.yaml#/components/schemas/Card"
       - $ref: "../openapi.yaml#/components/schemas/PayPal"

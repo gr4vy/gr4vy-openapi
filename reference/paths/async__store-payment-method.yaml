@@ -10,11 +10,7 @@ requestBody:
   content:
     application/json:
       schema:
-        oneOf:
-          - $ref: |-
-              ../openapi.yaml#/components/schemas/CardRequest
-          # - $ref: |-
-          #     ../openapi.yaml#/components/schemas/PayPalRequest
+        $ref: ../openapi.yaml#/components/schemas/CardRequest
 
 responses:
   "202":
@@ -39,6 +35,7 @@ responses:
     content:
       application/json:
         schema:
+          x-model-name: ErrorGeneric
           oneOf:
             - $ref: |-
                 ../openapi.yaml#/components/schemas/Error400BadRequest

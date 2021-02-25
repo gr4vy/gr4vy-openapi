@@ -20,7 +20,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: "../openapi.yaml#/components/schemas/TransactionCreateRequest"
+        $ref: "../openapi.yaml#/components/schemas/TransactionRequest"
       examples:
         Authorize a new card:
           value:
@@ -167,6 +167,7 @@ responses:
     content:
       application/json:
         schema:
+          x-model-name: ErrorGeneric
           oneOf:
             - $ref: |-
                 ../openapi.yaml#/components/schemas/Error400BadRequest
