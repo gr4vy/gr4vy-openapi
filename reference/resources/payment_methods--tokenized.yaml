@@ -1,7 +1,7 @@
 ---
-title: Payment Methods
+title: Payment Methods (Token only)
 type: object
-description: A list of stored payment methods.
+description: A list of stored payment methods in token format.
 
 x-tags:
   - Payment Methods
@@ -9,9 +9,9 @@ x-tags:
 properties:
   items:
     type: array
-    description: A list of stored payment methods.
+    description: A list of stored payment methods in token format.
     items:
-      $ref: "../openapi.yaml#/components/schemas/Card"
+      $ref: "../openapi.yaml#/components/schemas/Card--Tokenized"
 
   limit:
     $ref: "../properties/limit-100.yaml"

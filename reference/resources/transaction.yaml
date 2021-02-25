@@ -1,7 +1,7 @@
 ---
 title: Transaction
 type: object
-description: Captures a transaction.
+description: A transaction record.
 x-tags:
   - Transactions
 

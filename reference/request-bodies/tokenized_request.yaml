@@ -1,0 +1,27 @@
+---
+title: Tokenized payment method request
+type: object
+description: |-
+  Details for a previously tokenized payment method.
+
+x-tags:
+  - Request Bodies
+
+required:
+  - method
+  - id
+
+properties:
+  method:
+    type: string
+    description: "`id`."
+    example: id
+    enum:
+      - id
+
+  id:
+    type: string
+    description: |-
+      A ID that represents a previously tokenized payment method.
+      This token can represent any type of payment method.
+    example: "46973e9d-88a7-44a6-abfe-be4ff0134ff4"
