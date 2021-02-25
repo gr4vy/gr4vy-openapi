@@ -72,11 +72,11 @@ properties:
     nullable: true
 
   buyer:
+    description: |-
+      The optional buyer for which this payment method has been stored.
+    nullable: true
     allOf:
       - $ref: "../openapi.yaml#/components/schemas/Buyer"
-      - description: |-
-          The optional buyer for which this payment method has been stored.
-      - nullable: true
 
   details:
     $ref: |-

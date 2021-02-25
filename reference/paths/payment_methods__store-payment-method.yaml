@@ -9,11 +9,7 @@ requestBody:
   content:
     application/json:
       schema:
-        oneOf:
-          - $ref: |-
-              ../openapi.yaml#/components/schemas/CardRequest
-          # - $ref: |-
-          #     ../openapi.yaml#/components/schemas/PayPalRequest
+        $ref: ../openapi.yaml#/components/schemas/CardRequest
 
 responses:
   "201":
@@ -21,10 +17,7 @@ responses:
     content:
       application/json:
         schema:
-          oneOf:
-            - $ref: "../openapi.yaml#/components/schemas/Card"
-            # Disabled for now until we will support PayPal tokenization
-            # - $ref: "../openapi.yaml#/components/schemas/PayPal"
+          $ref: "../openapi.yaml#/components/schemas/Card"
 
   "400":
     description:
@@ -33,6 +26,7 @@ responses:
     content:
       application/json:
         schema:
+          x-model-name: ErrorGeneric
           oneOf:
             - $ref: |-
                 ../openapi.yaml#/components/schemas/Error400BadRequest

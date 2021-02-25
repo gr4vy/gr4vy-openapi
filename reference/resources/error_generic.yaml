@@ -1,8 +1,7 @@
 ---
-title: Error
+title: Generic Error
 type: object
 description: A generic client error.
-x-internal: true
 
 x-tags:
   - Errors

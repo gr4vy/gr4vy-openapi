@@ -10,7 +10,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: "../openapi.yaml#/components/schemas/CardRuleUpdateRequest"
+        $ref: "../openapi.yaml#/components/schemas/CardRuleUpdate"
 
 responses:
   "200":
@@ -27,6 +27,7 @@ responses:
     content:
       application/json:
         schema:
+          x-model-name: ErrorGeneric
           oneOf:
             - $ref: |-
                 ../openapi.yaml#/components/schemas/Error400BadRequest
