@@ -5,5 +5,7 @@ schema:
 in: query
 name: search
 description: |-
-  Filters the results to only the items for which the `id` or
-  `external_identifier` matches this value.
+  Filters the transactions to only the items for which the `id` or
+  `external_identifier` matches this value. This field allows for a partial
+  match, matching any transaction for which either of the fields partially or
+  completely matches.

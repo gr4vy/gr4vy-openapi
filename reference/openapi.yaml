@@ -195,6 +195,10 @@ paths:
     delete:
       $ref: "./paths/buyers__delete-buyer.yaml"
 
+  "/buyers/payment-methods":
+    get:
+      $ref: "./paths/payment_methods__list-buyer-payment-methods.yaml"
+
   "/merchants/main":
     get:
       $ref: "./paths/merchants__get-current-merchant.yaml"
@@ -341,8 +345,8 @@ components:
       $ref: "./request-bodies/buyer_update_request.yaml"
     Card:
       $ref: "./resources/card.yaml"
-    Card--Token:
-      $ref: "./resources/card--token.yaml"
+    Card--Tokenized:
+      $ref: "./resources/card--tokenized.yaml"
     CardDetails:
       $ref: "./resources/card_details.yaml"
     CardRequest:
@@ -385,6 +389,8 @@ components:
       $ref: "./resources/payment_method.yaml"
     PaymentMethods:
       $ref: "./resources/payment_methods.yaml"
+    PaymentMethods--Tokenized:
+      $ref: "./resources/payment_methods--tokenized.yaml"
     # PaymentMethodEvent:
     #   $ref: "./resources/payment_method_event.yaml"
     # PaymentMethodEvents:
@@ -407,8 +413,8 @@ components:
       $ref: "./resources/payment_options.yaml"
     PayPal:
       $ref: "./resources/paypal.yaml"
-    # PayPal--Token:
-    #   $ref: "./resources/paypal--token.yaml"
+    # PayPal--Tokenized:
+    #   $ref: "./resources/paypal--tokenized.yaml"
     PayPalDetails:
       $ref: "./resources/paypal_details.yaml"
     PayPalRequest:
@@ -421,8 +427,8 @@ components:
       $ref: "./resources/status.yaml"
     Statuses:
       $ref: "./resources/statuses.yaml"
-    TokenRequest:
-      $ref: "./request-bodies/token_request.yaml"
+    TokenizedRequest:
+      $ref: "./request-bodies/tokenized_request.yaml"
     Transaction:
       $ref: "./resources/transaction.yaml"
     Transactions:

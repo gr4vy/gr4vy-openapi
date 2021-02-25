@@ -1,5 +1,5 @@
 ---
-title: PayPal Account
+title: PayPal Account (Tokenized)
 description: A stored PayPal account in a mini format.
 type: object
 x-tags:
@@ -13,15 +13,12 @@ properties:
     enum:
       - payment-method
 
-  token:
+  id:
     type: string
     description: |-
-      A Gr4vy token that represents this payment method, in the format of a
-      credit-card number starting with the digit 0. You can store this token
-      in your own system and use it to process a payment with this payment
-      method at a later date.
-    example: "0123456789123458"
-    nullable: true
+      The unique ID of the payment method.
+    format: uuid
+    example: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
 
   method:
     type: string

@@ -1,0 +1,38 @@
+---
+operationId: list-buyer-payment-methods
+summary: List stored payment methods for a buyer
+description: |-
+  Returns a list of stored (tokenized) payment methods for a buyer in
+  a short tokenized format.
+tags:
+  - Payment Methods
+
+parameters:
+  - $ref: "../query-parameters/buyer_id.yaml"
+  - $ref: "../query-parameters/buyer_external_identifier.yaml"
+  - $ref: "../query-parameters/country.yaml"
+  - $ref: "../query-parameters/currency.yaml"
+
+responses:
+  "200":
+    description: |-
+      Returns a list of available payment methods for a buyer, filtered by the
+      the given currency and country code.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/PaymentMethods--Tokenized"
+
+  "404":
+    description: Returns an error if the resource can not be found.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error404NotFound"
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
