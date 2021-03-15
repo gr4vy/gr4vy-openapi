@@ -12,3 +12,12 @@ properties:
     description: A list of card rules.
     items:
       $ref: "../openapi.yaml#/components/schemas/CardRule"
+
+  limit:
+    $ref: "../properties/limit-100.yaml"
+
+  next_cursor:
+    $ref: "../properties/next_cursor.yaml"
+
+  previous_cursor:
+    $ref: "../properties/previous_cursor.yaml"
