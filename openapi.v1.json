@@ -1924,6 +1924,31 @@
           "Card Rules"
         ],
         "x-internal": true,
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "example": 1,
+              "minimum": 1,
+              "maximum": 100,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Defines the maximum number of items to return for this request."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "ZXhhbXBsZTE"
+            },
+            "in": "query",
+            "name": "cursor",
+            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
+          }
+        ],
         "responses": {
           "200": {
             "description": "Returns a list of card rules.",
@@ -3425,6 +3450,31 @@
             "items": {
               "$ref": "#/components/schemas/CardRule"
             }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "example": 1,
+            "default": 20
+          },
+          "next_cursor": {
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": "ZXhhbXBsZTE",
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "previous_cursor": {
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": null,
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           }
         }
       },
