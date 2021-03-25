@@ -59,6 +59,14 @@ properties:
           example: true
           description: |-
             Defines if this field is required when the service is created.
+        format:
+          type: string
+          example: text
+          description: Defines the type of input that needs to be rendered for this field.
+          enum:
+            - text
+            - multiline
+            - number
 
   supported_currencies:
     type: array
