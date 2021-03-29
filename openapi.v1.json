@@ -1133,6 +1133,20 @@
             "in": "query",
             "name": "currency",
             "description": "Filters the results to only the items which support this currency code. A\ncurrency is formatted as 3-letter ISO currency code."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "staging",
+              "enum": [
+                "development",
+                "staging",
+                "production"
+              ]
+            },
+            "in": "query",
+            "name": "environment",
+            "description": "Filters the results to only the items available in this environment."
           }
         ],
         "responses": {
@@ -1221,6 +1235,20 @@
           "Payment Methods"
         ],
         "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "staging",
+              "enum": [
+                "development",
+                "staging",
+                "production"
+              ]
+            },
+            "in": "query",
+            "name": "environment",
+            "description": "Filters the results to only the items available in this environment."
+          },
           {
             "schema": {
               "type": "string",
@@ -1466,11 +1494,25 @@
             "in": "query",
             "name": "currency",
             "description": "Filters the results to only the items which support this currency code. A\ncurrency is formatted as 3-letter ISO currency code."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "staging",
+              "enum": [
+                "development",
+                "staging",
+                "production"
+              ]
+            },
+            "in": "query",
+            "name": "environment",
+            "description": "Filters the results to only the items available in this environment."
           }
         ],
         "responses": {
           "200": {
-            "description": "Returns a list of available payment options for the given currency and\ncountry code.",
+            "description": "Returns a list of available payment options for the given query\nparameters.",
             "content": {
               "application/json": {
                 "schema": {
@@ -1610,7 +1652,7 @@
                       "accepted_countries": [
                         "DE"
                       ],
-                      "use_test_environment": true
+                      "environment": "production"
                     }
                   }
                 }
@@ -2469,7 +2511,7 @@
                         "accepted_countries": [
                           "DE"
                         ],
-                        "use_test_environment": true
+                        "environment": "production"
                       }
                     }
                   },
@@ -2517,7 +2559,7 @@
                         "accepted_countries": [
                           "DE"
                         ],
-                        "use_test_environment": true
+                        "environment": "production"
                       }
                     }
                   }
@@ -3193,6 +3235,18 @@
           },
           "details": {
             "$ref": "#/components/schemas/CardDetails"
+          },
+          "environment": {
+            "type": "string",
+            "example": "production",
+            "default": "production",
+            "nullable": true,
+            "enum": [
+              "development",
+              "staging",
+              "production"
+            ],
+            "description": "The environment this payment method has been stored for. This will be null\nof the payment method was not stored."
           }
         }
       },
@@ -3335,6 +3389,16 @@
             "type": "string",
             "description": "The `external_identifier` of the buyer to associate this payment method\nto. If this field is provided then the `buyer_id` field\nneeds to be unset.",
             "example": "user-789123"
+          },
+          "environment": {
+            "type": "string",
+            "description": "Defines the environment to store this card for. Setting this to\nanything other than `production` will force Gr4vy to use the payment\nservices configured for that environment.",
+            "enum": [
+              "development",
+              "staging",
+              "production"
+            ],
+            "example": "staging"
           }
         }
       },
@@ -3365,6 +3429,17 @@
             "type": "boolean",
             "example": true,
             "description": "Whether this rule is currently in use. Rules can be deactivated to allow\nfor them to be kept around and re-activated at a later date."
+          },
+          "environment": {
+            "type": "string",
+            "example": "production",
+            "default": "production",
+            "enum": [
+              "development",
+              "staging",
+              "production"
+            ],
+            "description": "The environment to use this rule in. This rule will only be used\nfor transactions created in that environment."
           },
           "conditions": {
             "type": "array",
@@ -3607,6 +3682,17 @@
             "example": true,
             "description": "Whether this rule is currently in use. Rules can be deactivated to allow\nfor them to be kept around and re-activated at a later date."
           },
+          "environment": {
+            "type": "string",
+            "example": "production",
+            "default": "production",
+            "enum": [
+              "development",
+              "staging",
+              "production"
+            ],
+            "description": "The environment to use this rule in. This rule will only be used\nfor transactions created in that environment."
+          },
           "position": {
             "type": "number",
             "example": 1,
@@ -3677,6 +3763,17 @@
             "type": "boolean",
             "example": true,
             "description": "Whether this rule is currently in use. Rules can be deactivated to allow\nfor them to be kept around and re-activated at a later date."
+          },
+          "environment": {
+            "type": "string",
+            "example": "production",
+            "default": "production",
+            "enum": [
+              "development",
+              "staging",
+              "production"
+            ],
+            "description": "The environment to use this rule in. This rule will only be used\nfor transactions created in that environment."
           },
           "position": {
             "type": "number",
@@ -4511,9 +4608,41 @@
               "DE"
             ]
           },
-          "use_test_environment": {
+          "credentials_mode": {
+            "type": "string",
+            "example": "live",
+            "enum": [
+              "sandbox",
+              "live"
+            ],
+            "default": "live",
+            "description": "Defines if the credentials are intended for the service's live API or\nsandbox/test API."
+          },
+          "active": {
             "type": "boolean",
-            "description": "Defines if this service should use the test credentials and/or endpoint."
+            "example": true,
+            "default": true,
+            "description": "Defines if this service is currently active or not."
+          },
+          "environments": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 3,
+            "items": {
+              "type": "string",
+              "enum": [
+                "development",
+                "staging",
+                "production"
+              ]
+            },
+            "example": [
+              "production"
+            ],
+            "default": [
+              "production"
+            ],
+            "description": "Determines the Gr4vy environments in which this service should be\navailable. This can be used in combination with the `environment`\nparameters in the payment method and transaction APIs to route\ntransactions through this service."
           },
           "position": {
             "type": "number",
@@ -4587,7 +4716,6 @@
           "payment_service_definition_id",
           "fields",
           "accepted_currencies",
-          "use_test_environment",
           "accepted_countries"
         ],
         "properties": {
@@ -4678,10 +4806,41 @@
               "GBP"
             ]
           },
-          "use_test_environment": {
+          "credentials_mode": {
+            "type": "string",
+            "example": "live",
+            "enum": [
+              "sandbox",
+              "live"
+            ],
+            "default": "live",
+            "description": "Defines if the credentials are intended for the service's live API or\nsandbox/test API."
+          },
+          "active": {
             "type": "boolean",
-            "description": "Defines if this payment service uses the service's test/sandbox environment.",
-            "example": false
+            "example": true,
+            "default": true,
+            "description": "Defines if this service is currently active or not."
+          },
+          "environments": {
+            "type": "array",
+            "minItems": 0,
+            "maxItems": 3,
+            "items": {
+              "type": "string",
+              "enum": [
+                "development",
+                "staging",
+                "production"
+              ]
+            },
+            "example": [
+              "production"
+            ],
+            "default": [
+              "production"
+            ],
+            "description": "Determines the Gr4vy environments in which this service should be\navailable. This can be used in combination with the `environment`\nparameters in the payment method and transaction APIs to route\ntransactions through this service."
           },
           "position": {
             "type": "number",
@@ -4742,23 +4901,23 @@
                   "example": "Private API key",
                   "description": "The name to display for a field in the cluster UI."
                 },
-                "help_url": {
-                  "type": "string",
-                  "example": "https://stripe.com/docs/private_api_key",
-                  "description": "A URL that provides more details about this field."
-                },
                 "required": {
                   "type": "boolean",
                   "example": true,
                   "description": "Defines if this field is required when the service is created."
+                },
+                "format": {
+                  "type": "string",
+                  "example": "text",
+                  "description": "Defines the type of input that needs to be rendered for this field.",
+                  "enum": [
+                    "text",
+                    "multiline",
+                    "number"
+                  ]
                 }
               }
             }
-          },
-          "help_url": {
-            "type": "string",
-            "example": "https://stripe.com/docs",
-            "description": "A URL that provides more details about this payment service."
           },
           "supported_currencies": {
             "type": "array",
@@ -4787,12 +4946,6 @@
               "GB",
               "DE"
             ]
-          },
-          "logo_url": {
-            "type": "string",
-            "example": "https://cdn.stripe.com/logo.png",
-            "description": "The logo for this provider.",
-            "format": "uri"
           }
         }
       },
@@ -4955,6 +5108,18 @@
           },
           "details": {
             "$ref": "#/components/schemas/PayPalDetails"
+          },
+          "environment": {
+            "type": "string",
+            "example": "production",
+            "default": "production",
+            "nullable": true,
+            "enum": [
+              "development",
+              "staging",
+              "production"
+            ],
+            "description": "The environment this payment method has been stored for. This will be null\nof the payment method was not stored."
           }
         }
       },
@@ -5271,6 +5436,17 @@
           },
           "payment_service": {
             "$ref": "#/components/schemas/PaymentService"
+          },
+          "environment": {
+            "type": "string",
+            "example": "production",
+            "default": "production",
+            "enum": [
+              "development",
+              "staging",
+              "production"
+            ],
+            "description": "The environment this transaction has been created in."
           }
         }
       },
@@ -5413,10 +5589,15 @@
             "description": "An external identifier that can be used to match the transaction against your own records.",
             "nullable": true
           },
-          "use_test_environment": {
-            "type": "boolean",
-            "description": "Defines if this transaction should run in the payment provider's test environment. Defaults to false.",
-            "example": false
+          "environment": {
+            "type": "string",
+            "description": "Defines the environment to create this transaction in. Setting this to\nanything other than `production` will force Gr4vy to use the payment\na service configured for that environment.",
+            "enum": [
+              "development",
+              "staging",
+              "production"
+            ],
+            "example": "staging"
           }
         }
       },
