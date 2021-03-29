@@ -1,0 +1,12 @@
+---
+schema:
+  type: string
+  example: staging
+  enum:
+    - development
+    - staging
+    - production
+in: query
+name: environment
+description: |-
+  Filters the results to only the items available in this environment.

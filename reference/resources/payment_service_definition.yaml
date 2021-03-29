@@ -54,20 +54,19 @@ properties:
           type: string
           example: Private API key
           description: The name to display for a field in the cluster UI.
-        help_url:
-          type: string
-          example: https://stripe.com/docs/private_api_key
-          description: A URL that provides more details about this field.
         required:
           type: boolean
           example: true
           description: |-
             Defines if this field is required when the service is created.
-
-  help_url:
-    type: string
-    example: https://stripe.com/docs
-    description: A URL that provides more details about this payment service.
+        format:
+          type: string
+          example: text
+          description: Defines the type of input that needs to be rendered for this field.
+          enum:
+            - text
+            - multiline
+            - number
 
   supported_currencies:
     type: array
@@ -94,9 +93,3 @@ properties:
       - US
       - GB
       - DE
-
-  logo_url:
-    type: string
-    example: https://cdn.stripe.com/logo.png
-    description: The logo for this provider.
-    format: uri

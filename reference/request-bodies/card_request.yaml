@@ -73,3 +73,15 @@ properties:
       to. If this field is provided then the `buyer_id` field
       needs to be unset.
     example: user-789123
+
+  environment:
+    type: string
+    description: |-
+      Defines the environment to store this card for. Setting this to
+      anything other than `production` will force Gr4vy to use the payment
+      services configured for that environment.
+    enum:
+      - development
+      - staging
+      - production
+    example: staging

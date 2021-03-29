@@ -72,12 +72,43 @@ properties:
       - USD
       - GBP
 
-  use_test_environment:
+  credentials_mode:
+    type: string
+    example: live
+    enum:
+      - sandbox
+      - live
+    default: live
+    description: |-
+      Defines if the credentials are intended for the service's live API or
+      sandbox/test API.
+
+  active:
     type: boolean
-    description:
-      Defines if this payment service uses the service's test/sandbox
-      environment.
-    example: false
+    example: true
+    default: true
+    description: |-
+      Defines if this service is currently active or not.
+
+  environments:
+    type: array
+    minItems: 0
+    maxItems: 3
+    items:
+      type: string
+      enum:
+        - development
+        - staging
+        - production
+    example:
+      - production
+    default:
+      - production
+    description: |-
+      Determines the Gr4vy environments in which this service should be
+      available. This can be used in combination with the `environment`
+      parameters in the payment method and transaction APIs to route
+      transactions through this service.
 
   position:
     type: number
