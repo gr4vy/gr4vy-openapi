@@ -9,7 +9,7 @@ x-internal: true
 parameters:
   - $ref: "../query-parameters/limit-100.yaml"
   - $ref: "../query-parameters/cursor.yaml"
-  
+
 responses:
   "200":
     description: Returns a list of card rules.

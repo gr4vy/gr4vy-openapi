@@ -62,7 +62,8 @@ properties:
         format:
           type: string
           example: text
-          description: Defines the type of input that needs to be rendered for this field.
+          description: |-
+            Defines the type of input that needs to be rendered for this field.
           enum:
             - text
             - multiline
