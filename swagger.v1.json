@@ -617,6 +617,7 @@
             "type": "string"
           },
           {
+            "default": "production",
             "description": "Filters the results to only the items available in this environment.",
             "enum": [
               "development",
@@ -805,6 +806,18 @@
             "format": "",
             "in": "query",
             "name": "cursor",
+            "type": "string"
+          },
+          {
+            "default": "production",
+            "description": "Filters the results to only the items available in this environment.",
+            "enum": [
+              "development",
+              "staging",
+              "production"
+            ],
+            "in": "query",
+            "name": "environment",
             "type": "string"
           }
         ],
@@ -1048,6 +1061,7 @@
         ],
         "parameters": [
           {
+            "default": "production",
             "description": "Filters the results to only the items available in this environment.",
             "enum": [
               "development",
@@ -1245,6 +1259,7 @@
             "type": "string"
           },
           {
+            "default": "production",
             "description": "Filters the results to only the items available in this environment.",
             "enum": [
               "development",
@@ -1406,6 +1421,18 @@
             ],
             "in": "query",
             "name": "method",
+            "type": "string"
+          },
+          {
+            "default": "production",
+            "description": "Filters the results to only the items available in this environment.",
+            "enum": [
+              "development",
+              "staging",
+              "production"
+            ],
+            "in": "query",
+            "name": "environment",
             "type": "string"
           }
         ],
