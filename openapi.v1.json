@@ -1142,7 +1142,8 @@
                 "development",
                 "staging",
                 "production"
-              ]
+              ],
+              "default": "production"
             },
             "in": "query",
             "name": "environment",
@@ -1243,7 +1244,8 @@
                 "development",
                 "staging",
                 "production"
-              ]
+              ],
+              "default": "production"
             },
             "in": "query",
             "name": "environment",
@@ -1503,7 +1505,8 @@
                 "development",
                 "staging",
                 "production"
-              ]
+              ],
+              "default": "production"
             },
             "in": "query",
             "name": "environment",
@@ -1588,6 +1591,21 @@
             "in": "query",
             "name": "method",
             "description": "Filters the results to only the items for which the `method` has been set to\nthis value."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "staging",
+              "enum": [
+                "development",
+                "staging",
+                "production"
+              ],
+              "default": "production"
+            },
+            "in": "query",
+            "name": "environment",
+            "description": "Filters the results to only the items available in this environment."
           }
         ],
         "responses": {
@@ -1989,6 +2007,21 @@
             "in": "query",
             "name": "cursor",
             "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "staging",
+              "enum": [
+                "development",
+                "staging",
+                "production"
+              ],
+              "default": "production"
+            },
+            "in": "query",
+            "name": "environment",
+            "description": "Filters the results to only the items available in this environment."
           }
         ],
         "responses": {
