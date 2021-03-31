@@ -400,7 +400,8 @@
                 "development",
                 "staging",
                 "production"
-              ]
+              ],
+              "default": "production"
             },
             "in": "query",
             "name": "environment",
@@ -458,7 +459,8 @@
                 "development",
                 "staging",
                 "production"
-              ]
+              ],
+              "default": "production"
             },
             "in": "query",
             "name": "environment",
@@ -702,7 +704,8 @@
                 "development",
                 "staging",
                 "production"
-              ]
+              ],
+              "default": "production"
             },
             "in": "query",
             "name": "environment",
@@ -787,6 +790,21 @@
             "in": "query",
             "name": "method",
             "description": "Filters the results to only the items for which the `method` has been set to\nthis value."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "staging",
+              "enum": [
+                "development",
+                "staging",
+                "production"
+              ],
+              "default": "production"
+            },
+            "in": "query",
+            "name": "environment",
+            "description": "Filters the results to only the items available in this environment."
           }
         ],
         "responses": {
