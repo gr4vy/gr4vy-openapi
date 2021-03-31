@@ -6,6 +6,7 @@ schema:
     - development
     - staging
     - production
+  default: production
 in: query
 name: environment
 description: |-
