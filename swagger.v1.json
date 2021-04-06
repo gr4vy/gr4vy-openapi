@@ -15,7 +15,7 @@
     "title": "Gr4vy API (Beta)",
     "version": "1.0"
   },
-  "host": "api.demo.gr4vy.app",
+  "host": "api.plantly.gr4vy.app",
   "basePath": "/",
   "schemes": [
     "https"
@@ -1446,7 +1446,7 @@
         "tags": [
           "Payment Services"
         ],
-        "description": "Lists the currently configured and activated payment services for a for a cluster.",
+        "description": "Lists the currently configured and activated payment services.",
         "operationId": "list-payment-services",
         "summary": "List payment services"
       },
@@ -3297,16 +3297,16 @@
       ]
     },
     "Merchant": {
-      "description": "A merchant in a cluster.",
+      "description": "A merchant.",
       "properties": {
         "display_name": {
           "description": "The name of this merchant as it will be displayed in the admin UI.",
-          "example": "Example Inc",
+          "example": "Plantly Inc",
           "type": "string"
         },
-        "short_name": {
-          "description": "The unique short-name of the merchant, as used in their Gr4vy URLs. For\nexample, a short-name of `nike` would result in the Gr4vy cluster's API\nbeing hosted on `https://api.nike.gr4vy.app`.",
-          "example": "acme",
+        "id": {
+          "description": "The unique short-name of the merchant.",
+          "example": "plantly",
           "type": "string"
         },
         "type": {
@@ -3811,7 +3811,7 @@
           "type": "array"
         },
         "id": {
-          "description": "The ID of this payment service instance.",
+          "description": "The ID of this payment service.",
           "example": "stripe-card-faaad066-30b4-4997-a438-242b0752d7e1",
           "maxLength": 200,
           "minLength": 1,
@@ -3869,7 +3869,7 @@
       ]
     },
     "PaymentServiceDefinition": {
-      "description": "An available payment service that can be configured for this cluster.",
+      "description": "An available payment service that can be configured.",
       "properties": {
         "display_name": {
           "description": "The display name of this service.",
@@ -3882,7 +3882,7 @@
             "description": "A single field that needs to be submitted for a payment service when it\nis created.",
             "properties": {
               "display_name": {
-                "description": "The name to display for a field in the cluster UI.",
+                "description": "The name to display for a field in the dashboard.",
                 "example": "Private API key",
                 "type": "string"
               },
@@ -4757,12 +4757,12 @@
       "name": "Card Rules"
     },
     {
-      "description": "In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.\nCurrently only one merchant is supported per cluster.",
+      "description": "In Gr4vy, a merchant represents the customer that controls the instance.",
       "name": "Merchants",
       "x-internal": true
     },
     {
-      "description": "In Gr4vy, a payment method represents a way in which a payment can be\nprocessed, for example a card payment, a PayPal payment, or a Bitcoin\npayment.\n\nThe payment method API can be used to:\n\n* Determine the available payment methods in a cluster.\n* Determine the available payment method for a buyer in a specific currency\nand country.\n* Store (also known as tokenize) a payment method for a buyer.\n* Fetch all previously tokenized payment methods for a buyer.",
+      "description": "In Gr4vy, a payment method represents a way in which a payment can be\nprocessed, for example a card payment, a PayPal payment, or a Bitcoin\npayment.\n\nThe payment method API can be used to:\n\n* List all the available payment methods\n* Filter the available payment method for a buyer in a specific currency\nand country.\n* Store (also known as tokenize) a payment method for a buyer.\n* Fetch all previously tokenized payment methods for a buyer.",
       "name": "Payment Methods"
     },
     {
@@ -4778,7 +4778,7 @@
       "name": "Payment Services"
     },
     {
-      "description": "The sessions APIs are used to facilitate user authentication for the Gr4vy\ncluster admin.",
+      "description": "The sessions APIs are used to facilitate user authentication for the Gr4vy\ndashboard.",
       "name": "Sessions",
       "x-internal": true
     },
@@ -4787,7 +4787,7 @@
       "name": "Transactions"
     },
     {
-      "description": "In Gr4vy, a user represents an employee of the merchant with access to the\ncluster admin panel.",
+      "description": "In Gr4vy, a user represents an employee of the merchant with access to the\ndashboard.",
       "name": "Users",
       "x-internal": true
     }
