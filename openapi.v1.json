@@ -43,7 +43,6 @@
     },
     {
       "name": "Card Rules",
-      "x-internal": true,
       "description": "In Gr4vy, a card rule defines how a card transaction is processed. It\ndetermines which payment services are used, and with what priority, based\non the transaction amount, card type, and many more attributes."
     },
     {
@@ -61,7 +60,6 @@
     },
     {
       "name": "Payment Service Definitions",
-      "x-internal": true,
       "description": "Payment service definitions describe the fields required for a payment\nservice to be configured."
     },
     {
@@ -1870,7 +1868,6 @@
         "tags": [
           "Payment Service Definitions"
         ],
-        "x-internal": true,
         "parameters": [
           {
             "schema": {
@@ -1940,7 +1937,6 @@
         "tags": [
           "Payment Service Definitions"
         ],
-        "x-internal": true,
         "responses": {
           "200": {
             "description": "Returns a payment service definition.",
@@ -1983,7 +1979,6 @@
         "tags": [
           "Card Rules"
         ],
-        "x-internal": true,
         "parameters": [
           {
             "schema": {
@@ -2054,7 +2049,6 @@
         "tags": [
           "Card Rules"
         ],
-        "x-internal": true,
         "requestBody": {
           "content": {
             "application/json": {
@@ -2127,7 +2121,6 @@
         "tags": [
           "Card Rules"
         ],
-        "x-internal": true,
         "responses": {
           "200": {
             "description": "Returns a card rule.",
@@ -2168,7 +2161,6 @@
         "tags": [
           "Card Rules"
         ],
-        "x-internal": true,
         "requestBody": {
           "content": {
             "application/json": {
@@ -2236,7 +2228,6 @@
         "tags": [
           "Card Rules"
         ],
-        "x-internal": true,
         "responses": {
           "204": {
             "description": "Returns an empty response."
@@ -3439,7 +3430,6 @@
         "title": "Card Rule",
         "type": "object",
         "description": "A card rule that defines a custom payment provider to use for a card\ntransaction. Multiple rules can exists at any time and they are processed by\npriority.",
-        "x-internal": true,
         "x-tags": [
           "Card Rules"
         ],
@@ -3547,7 +3537,6 @@
         "title": "Card Rules",
         "type": "object",
         "description": "A list of card rules.",
-        "x-internal": true,
         "x-tags": [
           "Card Rules"
         ],
@@ -3590,7 +3579,6 @@
         "title": "Card rule (Number condition)",
         "type": "object",
         "description": "Part of a rule that matches numeric fields. It defines the condition under\nwhich this rule applies.",
-        "x-internal": true,
         "x-tags": [
           "Card Workflows"
         ],
@@ -3643,7 +3631,6 @@
         "title": "Card rule (Text)",
         "type": "object",
         "description": "Part of a rule that matches text fields. It defines the condition under\nwhich this rule applies.",
-        "x-internal": true,
         "x-tags": [
           "Card Rules"
         ],
@@ -3701,7 +3688,6 @@
         "title": "Card Rule (Create)",
         "type": "object",
         "description": "Creates a new rule for a card transactions.",
-        "x-internal": true,
         "x-tags": [
           "Card Rules"
         ],
@@ -3787,7 +3773,6 @@
         "title": "Card Rule (Update)",
         "type": "object",
         "description": "Updates a rule for a card transactions.",
-        "x-internal": true,
         "x-tags": [
           "Card Rules"
         ],
@@ -4886,7 +4871,6 @@
         "title": "Payment Service Definition",
         "type": "object",
         "description": "An available payment service that can be configured for this cluster.",
-        "x-internal": true,
         "x-tags": [
           "Discovery"
         ],
@@ -4986,7 +4970,6 @@
         "title": "Payment service definitions",
         "type": "object",
         "description": "A list of available payment services definitions.",
-        "x-internal": true,
         "x-tags": [
           "Discovery"
         ],
