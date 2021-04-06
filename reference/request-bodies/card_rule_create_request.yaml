@@ -4,7 +4,6 @@ title: Card Rule (Create)
 type: object
 description: |-
   Creates a new rule for a card transactions.
-x-internal: true
 x-tags:
   - Card Rules
 

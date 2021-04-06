@@ -3,7 +3,6 @@ operationId: list-payment-service-definitions
 summary: List payment service definitions
 description: Returns a list of all available payment service definitions.
 tags: ["Payment Service Definitions"]
-x-internal: true
 
 parameters:
   - $ref: "../query-parameters/limit-100.yaml"

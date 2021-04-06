@@ -58,7 +58,6 @@ tags:
         buyer's previously stored payment methods, allowing for faster checkout.
 
   - name: Card Rules
-    x-internal: true
     description: |-
       In Gr4vy, a card rule defines how a card transaction is processed. It
       determines which payment services are used, and with what priority, based
@@ -95,7 +94,6 @@ tags:
       * Display a list options to a buyer to choose from.
 
   - name: Payment Service Definitions
-    x-internal: true
     description: |-
       Payment service definitions describe the fields required for a payment
       service to be configured.

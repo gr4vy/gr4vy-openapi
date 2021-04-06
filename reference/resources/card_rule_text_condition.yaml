@@ -4,7 +4,6 @@ type: object
 description: |-
   Part of a rule that matches text fields. It defines the condition under
   which this rule applies.
-x-internal: true
 x-tags:
   - Card Rules
 

@@ -3,7 +3,6 @@ title: Payment Service Definition
 type: object
 description: |-
   An available payment service that can be configured for this cluster.
-x-internal: true
 x-tags:
   - Discovery
 

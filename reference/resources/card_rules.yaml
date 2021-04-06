@@ -2,7 +2,6 @@
 title: Card Rules
 type: object
 description: A list of card rules.
-x-internal: true
 x-tags:
   - Card Rules
 

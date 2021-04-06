@@ -4,7 +4,6 @@ summary: Get payment service definition
 description: Gets the definition for a payment service.
 tags:
   - Payment Service Definitions
-x-internal: true
 
 responses:
   "200":

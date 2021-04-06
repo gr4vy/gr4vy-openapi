@@ -6,7 +6,6 @@ description: |-
   A card rule that defines a custom payment provider to use for a card
   transaction. Multiple rules can exists at any time and they are processed by
   priority.
-x-internal: true
 x-tags:
   - Card Rules
 

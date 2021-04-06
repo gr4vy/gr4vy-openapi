@@ -4,7 +4,6 @@ summary: Delete card rule
 description: Deletes a specific card rule.
 tags:
   - Card Rules
-x-internal: true
 
 responses:
   "204":
