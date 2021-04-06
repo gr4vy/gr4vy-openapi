@@ -1,9 +1,7 @@
 ---
 operationId: list-payment-services
 summary: List payment services
-description:
-  Lists the currently configured and activated payment services for a for a
-  cluster.
+description: Lists the currently configured and activated payment services.
 tags:
   - Payment Services
 

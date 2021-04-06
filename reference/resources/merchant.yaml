@@ -1,7 +1,7 @@
 ---
 title: Merchant
 type: object
-description: A merchant in a cluster.
+description: A merchant.
 x-internal: true
 
 x-tags:
@@ -15,16 +15,14 @@ properties:
     enum:
       - merchant
 
-  short_name:
+  id:
     type: string
     description: |-
-      The unique short-name of the merchant, as used in their Gr4vy URLs. For
-      example, a short-name of `nike` would result in the Gr4vy cluster's API
-      being hosted on `https://api.nike.gr4vy.app`.
-    example: acme
+      The unique short-name of the merchant.
+    example: plantly
 
   display_name:
     type: string
     description: |-
       The name of this merchant as it will be displayed in the admin UI.
-    example: Example Inc
+    example: Plantly Inc

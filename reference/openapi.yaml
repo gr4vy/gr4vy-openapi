@@ -18,13 +18,12 @@ info:
     Our API is still very much a work in product and subject to change.
 
 servers:
-  - url: "https://api.{merchant}.gr4vy.app"
+  - url: "https://api.{gr4vy_id}.gr4vy.app"
     variables:
-      merchant:
-        default: demo
+      gr4vy_id:
+        default: plantly
         description: |-
-          The subdomain for your cluster as specified by the
-          cluster's main merchant `short_name`.
+          The subdomain for your Gr4vy instance.
 
 tags:
   - name: API Key Pairs
@@ -65,8 +64,7 @@ tags:
 
   - name: Merchants
     description: |-
-      In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.
-      Currently only one merchant is supported per cluster.
+      In Gr4vy, a merchant represents the customer that controls the instance.
     x-internal: true
 
   - name: Payment Methods
@@ -77,8 +75,8 @@ tags:
 
       The payment method API can be used to:
 
-      * Determine the available payment methods in a cluster.
-      * Determine the available payment method for a buyer in a specific currency
+      * List all the available payment methods
+      * Filter the available payment method for a buyer in a specific currency
       and country.
       * Store (also known as tokenize) a payment method for a buyer.
       * Fetch all previously tokenized payment methods for a buyer.
@@ -112,7 +110,7 @@ tags:
   - name: Sessions
     description: |-
       The sessions APIs are used to facilitate user authentication for the Gr4vy
-      cluster admin.
+      dashboard.
     x-internal: true
 
   - name: Transactions
@@ -129,7 +127,7 @@ tags:
   - name: Users
     description: |-
       In Gr4vy, a user represents an employee of the merchant with access to the
-      cluster admin panel.
+      dashboard.
     x-internal: true
 
 paths:

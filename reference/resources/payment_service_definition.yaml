@@ -2,7 +2,7 @@
 title: Payment Service Definition
 type: object
 description: |-
-  An available payment service that can be configured for this cluster.
+  An available payment service that can be configured.
 x-tags:
   - Discovery
 
@@ -52,7 +52,7 @@ properties:
         display_name:
           type: string
           example: Private API key
-          description: The name to display for a field in the cluster UI.
+          description: The name to display for a field in the dashboard.
         required:
           type: boolean
           example: true
