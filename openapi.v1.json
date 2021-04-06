@@ -17,11 +17,11 @@
   },
   "servers": [
     {
-      "url": "https://api.{merchant}.gr4vy.app",
+      "url": "https://api.{gr4vy_id}.gr4vy.app",
       "variables": {
-        "merchant": {
-          "default": "demo",
-          "description": "The subdomain for your cluster as specified by the\ncluster's main merchant `short_name`."
+        "gr4vy_id": {
+          "default": "plantly",
+          "description": "The subdomain for your Gr4vy instance."
         }
       }
     }
@@ -37,7 +37,7 @@
     },
     {
       "name": "Payment Methods",
-      "description": "In Gr4vy, a payment method represents a way in which a payment can be\nprocessed, for example a card payment, a PayPal payment, or a Bitcoin\npayment.\n\nThe payment method API can be used to:\n\n* Determine the available payment methods in a cluster.\n* Determine the available payment method for a buyer in a specific currency\nand country.\n* Store (also known as tokenize) a payment method for a buyer.\n* Fetch all previously tokenized payment methods for a buyer."
+      "description": "In Gr4vy, a payment method represents a way in which a payment can be\nprocessed, for example a card payment, a PayPal payment, or a Bitcoin\npayment.\n\nThe payment method API can be used to:\n\n* List all the available payment methods\n* Filter the available payment method for a buyer in a specific currency\nand country.\n* Store (also known as tokenize) a payment method for a buyer.\n* Fetch all previously tokenized payment methods for a buyer."
     },
     {
       "name": "Payment Options",
@@ -790,7 +790,7 @@
       "get": {
         "operationId": "list-payment-services",
         "summary": "List payment services",
-        "description": "Lists the currently configured and activated payment services for a for a cluster.",
+        "description": "Lists the currently configured and activated payment services.",
         "tags": [
           "Payment Services"
         ],
@@ -3549,7 +3549,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "The ID of this payment service instance.",
+            "description": "The ID of this payment service.",
             "example": "stripe-card-faaad066-30b4-4997-a438-242b0752d7e1",
             "minLength": 1,
             "maxLength": 200
@@ -3864,7 +3864,7 @@
       "PaymentServiceDefinition": {
         "title": "Payment Service Definition",
         "type": "object",
-        "description": "An available payment service that can be configured for this cluster.",
+        "description": "An available payment service that can be configured.",
         "x-tags": [
           "Discovery"
         ],
@@ -3910,7 +3910,7 @@
                 "display_name": {
                   "type": "string",
                   "example": "Private API key",
-                  "description": "The name to display for a field in the cluster UI."
+                  "description": "The name to display for a field in the dashboard."
                 },
                 "required": {
                   "type": "boolean",
