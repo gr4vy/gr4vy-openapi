@@ -32,12 +32,20 @@
       "description": "In Gr4vy, a buyer represents your customer, the shopper who's performing\na checkout and making a purchase.\n\nA buyer can be used by you to:\n\n* Display a human readable name (`display_name`) for a buyer in the Gr4vy\nadmin panel\n* Associate multiple tokenized payment methods with a single user\n* Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the\n  buyer's previously stored payment methods, allowing for faster checkout."
     },
     {
+      "name": "Card Rules",
+      "description": "In Gr4vy, a card rule defines how a card transaction is processed. It\ndetermines which payment services are used, and with what priority, based\non the transaction amount, card type, and many more attributes."
+    },
+    {
       "name": "Payment Methods",
       "description": "In Gr4vy, a payment method represents a way in which a payment can be\nprocessed, for example a card payment, a PayPal payment, or a Bitcoin\npayment.\n\nThe payment method API can be used to:\n\n* Determine the available payment methods in a cluster.\n* Determine the available payment method for a buyer in a specific currency\nand country.\n* Store (also known as tokenize) a payment method for a buyer.\n* Fetch all previously tokenized payment methods for a buyer."
     },
     {
       "name": "Payment Options",
       "description": "In Gr4vy, a payment option represents a list of methods (card, PayPal,\netc) that are available for a given locale.\n\nThe payment options API can be used to:\n\n* Determine what types of payments can be processed in a specific locale.\n* Display a list options to a buyer to choose from."
+    },
+    {
+      "name": "Payment Service Definitions",
+      "description": "Payment service definitions describe the fields required for a payment\nservice to be configured."
     },
     {
       "name": "Payment Services",
@@ -1093,6 +1101,422 @@
         }
       }
     },
+    "/payment-service-definitions": {
+      "get": {
+        "operationId": "list-payment-service-definitions",
+        "summary": "List payment service definitions",
+        "description": "Returns a list of all available payment service definitions.",
+        "tags": [
+          "Payment Service Definitions"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "example": 1,
+              "minimum": 1,
+              "maximum": 100,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Defines the maximum number of items to return for this request."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "ZXhhbXBsZTE"
+            },
+            "in": "query",
+            "name": "cursor",
+            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of payment service definitions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentServiceDefinitions"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-service-definitions/{payment_service_definition_id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "example": "stripe-card"
+          },
+          "name": "payment_service_definition_id",
+          "in": "path",
+          "required": true,
+          "description": "The unique ID of the payment service definition."
+        }
+      ],
+      "get": {
+        "operationId": "get-payment-service-definition",
+        "summary": "Get payment service definition",
+        "description": "Gets the definition for a payment service.",
+        "tags": [
+          "Payment Service Definitions"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a payment service definition.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentServiceDefinition"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/card-rules": {
+      "get": {
+        "operationId": "list-cards-rules",
+        "summary": "List card rules",
+        "description": "Returns a list of rules for card transactions.",
+        "tags": [
+          "Card Rules"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "example": 1,
+              "minimum": 1,
+              "maximum": 100,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Defines the maximum number of items to return for this request."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "ZXhhbXBsZTE"
+            },
+            "in": "query",
+            "name": "cursor",
+            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "staging",
+              "enum": [
+                "development",
+                "staging",
+                "production"
+              ],
+              "default": "production"
+            },
+            "in": "query",
+            "name": "environment",
+            "description": "Filters the results to only the items available in this environment."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of card rules.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CardRules"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "add-card-rule",
+        "summary": "Create card rule",
+        "description": "Creates a new rule that is used for card transactions.",
+        "tags": [
+          "Card Rules"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CardRuleRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Returns the newly created rule.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CardRule"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "x-model-name": "ErrorGeneric",
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error400BadRequest"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error400IncorrectJson"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/card-rules/{card_rule_id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "format": "uuid",
+            "example": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
+          },
+          "name": "card_rule_id",
+          "in": "path",
+          "required": true,
+          "description": "The unique ID for a card rule."
+        }
+      ],
+      "get": {
+        "operationId": "get-card-rule",
+        "summary": "Get card rule",
+        "description": "Returns a rule that can be used for card transactions.",
+        "tags": [
+          "Card Rules"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a card rule.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CardRule"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "update-card-rule",
+        "summary": "Update card rule",
+        "description": "Updates a rule that can be used for card transactions.",
+        "tags": [
+          "Card Rules"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CardRuleUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the updated card rule.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CardRule"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Returns an error if the request was badly formatted or missing required fields.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "x-model-name": "ErrorGeneric",
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Error400BadRequest"
+                    },
+                    {
+                      "$ref": "#/components/schemas/Error400IncorrectJson"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "delete-card-rule",
+        "summary": "Delete card rule",
+        "description": "Deletes a specific card rule.",
+        "tags": [
+          "Card Rules"
+        ],
+        "responses": {
+          "204": {
+            "description": "Returns an empty response."
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returns an error if the rule could not be deleted.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorGeneric"
+                },
+                "examples": {
+                  "Workflow is active": {
+                    "value": {
+                      "type": "error",
+                      "code": "forbidden",
+                      "status": 403,
+                      "message": "The resource could not be removed as it's currently active.",
+                      "details": []
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/transactions": {
       "get": {
         "operationId": "list-transactions",
@@ -2112,6 +2536,430 @@
           }
         }
       },
+      "CardRule": {
+        "title": "Card Rule",
+        "type": "object",
+        "description": "A card rule that defines a custom payment provider to use for a card\ntransaction. Multiple rules can exists at any time and they are processed by\npriority.",
+        "x-tags": [
+          "Card Rules"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "card-rule",
+            "description": "`card-rule`.",
+            "enum": [
+              "card-rule"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "example": "8d3fe99b-1422-42e6-bbb3-932d95ae5f79",
+            "description": "The ID of the rule.",
+            "format": "uuid"
+          },
+          "active": {
+            "type": "boolean",
+            "example": true,
+            "description": "Whether this rule is currently in use. Rules can be deactivated to allow\nfor them to be kept around and re-activated at a later date."
+          },
+          "environment": {
+            "type": "string",
+            "example": "production",
+            "default": "production",
+            "enum": [
+              "development",
+              "staging",
+              "production"
+            ],
+            "description": "The environment to use this rule in. This rule will only be used\nfor transactions created in that environment."
+          },
+          "conditions": {
+            "type": "array",
+            "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
+            "minItems": 1,
+            "items": {
+              "x-model-name": "CardRule",
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/CardRuleTextCondition"
+                },
+                {
+                  "$ref": "#/components/schemas/CardRuleNumberCondition"
+                }
+              ]
+            }
+          },
+          "payment_service_ids": {
+            "type": "array",
+            "description": "A list of IDs for the payment services to use, in order of priority.\nThe payment services all need to process cards.",
+            "example": [
+              "stripe-card-f47db210-8e30-4f74-8123-b834604f2042",
+              "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+            ],
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            }
+          },
+          "position": {
+            "type": "number",
+            "example": 1,
+            "description": "The numeric rank of a rule. Rules with a lower position value\nare processed first."
+          },
+          "unprocessable_fallback_strategy": {
+            "type": "string",
+            "example": "use_all_providers",
+            "default": "use_all_providers",
+            "enum": [
+              "use_all_providers",
+              "decline"
+            ],
+            "description": "Defines what strategy to use when all of the payment services defined in\nthis rule declined or otherwise were not able to process the card.\n\n* `use_all_providers` - Try all payment services enabled for this currency in\norder of priority, even if they are not listed in this rule. This is the\ndefault behaviour for a rule.\n* `decline` - Decline the transaction."
+          },
+          "invalid_rule_fallback_strategy": {
+            "type": "string",
+            "example": "use_all_providers",
+            "default": "use_all_providers",
+            "enum": [
+              "use_all_providers",
+              "skip",
+              "decline"
+            ],
+            "description": "Defines what strategy to use when this rule is not valid. This can happen\nwhen the rule has triggered for a certain transaction but none of the\nlisted payment services are eligible to process that transaction currency.\n\n* `use_all_providers` - Try all payment services enabled for this currency in\norder of priority, even if they are not listed in this rule. This is the\ndefault behaviour for a rule.\n* `skip` - Skip this rule and instead move on to the next highest priority\nrule.\n* `decline` - Decline the transaction."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2012-12-12T10:53:43+00:00",
+            "description": "The date and time when this rule was created."
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2012-12-12T10:53:43+00:00",
+            "description": "The date and time when this rule was last updated."
+          }
+        }
+      },
+      "CardRules": {
+        "title": "Card Rules",
+        "type": "object",
+        "description": "A list of card rules.",
+        "x-tags": [
+          "Card Rules"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "A list of card rules.",
+            "items": {
+              "$ref": "#/components/schemas/CardRule"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "example": 1,
+            "default": 20
+          },
+          "next_cursor": {
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": "ZXhhbXBsZTE",
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "previous_cursor": {
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": null,
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        }
+      },
+      "CardRuleNumberCondition": {
+        "title": "Card rule (Number condition)",
+        "type": "object",
+        "description": "Part of a rule that matches numeric fields. It defines the condition under\nwhich this rule applies.",
+        "x-tags": [
+          "Card Workflows"
+        ],
+        "required": [
+          "match",
+          "key",
+          "operator",
+          "value"
+        ],
+        "properties": {
+          "match": {
+            "type": "string",
+            "description": "`number`.",
+            "example": "number",
+            "enum": [
+              "number"
+            ]
+          },
+          "key": {
+            "type": "string",
+            "description": "The transaction field to filter by.",
+            "example": "amount",
+            "enum": [
+              "amount"
+            ]
+          },
+          "operator": {
+            "type": "string",
+            "description": "The comparison to make to `value` property.",
+            "example": ">=",
+            "enum": [
+              "==",
+              "!=",
+              "<=",
+              ">=",
+              ">",
+              "<"
+            ]
+          },
+          "value": {
+            "type": "number",
+            "description": "The values to compare the `key` to.",
+            "example": 200,
+            "minimum": 0,
+            "maximum": 99999
+          }
+        }
+      },
+      "CardRuleTextCondition": {
+        "title": "Card rule (Text)",
+        "type": "object",
+        "description": "Part of a rule that matches text fields. It defines the condition under\nwhich this rule applies.",
+        "x-tags": [
+          "Card Rules"
+        ],
+        "required": [
+          "match",
+          "key",
+          "operator",
+          "values"
+        ],
+        "properties": {
+          "match": {
+            "type": "string",
+            "description": "`text`.",
+            "example": "text",
+            "enum": [
+              "text"
+            ]
+          },
+          "key": {
+            "type": "string",
+            "description": "The transaction field to filter by.",
+            "example": "currency",
+            "enum": [
+              "currency",
+              "card_type"
+            ]
+          },
+          "operator": {
+            "type": "string",
+            "description": "The comparison to make to `value` property.",
+            "example": "IN",
+            "enum": [
+              "IN",
+              "NOT IN"
+            ]
+          },
+          "values": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 100,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 50
+            },
+            "description": "The values to compare the `key` to.",
+            "example": [
+              "USD",
+              "EUR"
+            ]
+          }
+        }
+      },
+      "CardRuleRequest": {
+        "title": "Card Rule (Create)",
+        "type": "object",
+        "description": "Creates a new rule for a card transactions.",
+        "x-tags": [
+          "Card Rules"
+        ],
+        "required": [
+          "conditions",
+          "payment_service_ids"
+        ],
+        "properties": {
+          "active": {
+            "type": "boolean",
+            "example": true,
+            "description": "Whether this rule is currently in use. Rules can be deactivated to allow\nfor them to be kept around and re-activated at a later date."
+          },
+          "environment": {
+            "type": "string",
+            "example": "production",
+            "default": "production",
+            "enum": [
+              "development",
+              "staging",
+              "production"
+            ],
+            "description": "The environment to use this rule in. This rule will only be used\nfor transactions created in that environment."
+          },
+          "position": {
+            "type": "number",
+            "example": 1,
+            "description": "The numeric rank of a rule. Rules with a lower position value\nare processed first. When a rule is inserted at a position, any rules with\nthe the same value or higher are down a position accordingly. When left\nout, the rule is inserted at the end of the list."
+          },
+          "conditions": {
+            "type": "array",
+            "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
+            "minItems": 1,
+            "items": {
+              "x-model-name": "CardRule",
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/CardRuleTextCondition"
+                },
+                {
+                  "$ref": "#/components/schemas/CardRuleNumberCondition"
+                }
+              ]
+            }
+          },
+          "payment_service_ids": {
+            "type": "array",
+            "description": "A list of IDs for the payment services to use, in order of priority.\nThe payment services all need to process cards.",
+            "example": [
+              "stripe-card-f47db210-8e30-4f74-8123-b834604f2042",
+              "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+            ],
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            }
+          },
+          "unprocessable_fallback_strategy": {
+            "type": "string",
+            "example": "use_all_providers",
+            "default": "use_all_providers",
+            "enum": [
+              "use_all_providers",
+              "decline"
+            ],
+            "description": "Defines what strategy to use when all of the payment services defined in\nthis rule declined or otherwise were not able to process the card.\n\n* `use_all_providers` - Try all payment services enabled for this currency in\norder of priority, even if they are not listed in this rule. This is the\ndefault behaviour for a rule.\n* `decline` - Decline the transaction."
+          },
+          "invalid_rule_fallback_strategy": {
+            "type": "string",
+            "example": "use_all_providers",
+            "default": "use_all_providers",
+            "enum": [
+              "use_all_providers",
+              "skip",
+              "decline"
+            ],
+            "description": "Defines what strategy to use when this rule is not valid. This can happen\nwhen the rule has triggered for a certain transaction but none of the\nlisted payment services are eligible to process that transaction currency.\n\n* `use_all_providers` - Try all payment services enabled for this currency in\norder of priority, even if they are not listed in this rule. This is the\ndefault behaviour for a rule.\n* `skip` - Skip this rule and instead move on to the next highest priority\nrule.\n* `decline` - Decline the transaction."
+          }
+        }
+      },
+      "CardRuleUpdate": {
+        "title": "Card Rule (Update)",
+        "type": "object",
+        "description": "Updates a rule for a card transactions.",
+        "x-tags": [
+          "Card Rules"
+        ],
+        "properties": {
+          "active": {
+            "type": "boolean",
+            "example": true,
+            "description": "Whether this rule is currently in use. Rules can be deactivated to allow\nfor them to be kept around and re-activated at a later date."
+          },
+          "environment": {
+            "type": "string",
+            "example": "production",
+            "default": "production",
+            "enum": [
+              "development",
+              "staging",
+              "production"
+            ],
+            "description": "The environment to use this rule in. This rule will only be used\nfor transactions created in that environment."
+          },
+          "position": {
+            "type": "number",
+            "example": 1,
+            "description": "The numeric rank of a rule. Rules with a lower position value\nare processed first. When a rule is inserted at a position, any rules with\nthe the same value or higher are down a position accordingly."
+          },
+          "conditions": {
+            "type": "array",
+            "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
+            "minItems": 1,
+            "items": {
+              "x-model-name": "CardRule",
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/CardRuleTextCondition"
+                },
+                {
+                  "$ref": "#/components/schemas/CardRuleNumberCondition"
+                }
+              ]
+            }
+          },
+          "payment_service_ids": {
+            "type": "array",
+            "description": "A list of IDs for the payment services to use, in order of priority.\nThe payment services all need to process cards.",
+            "example": [
+              "stripe-card-f47db210-8e30-4f74-8123-b834604f2042",
+              "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+            ],
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            }
+          },
+          "unprocessable_fallback_strategy": {
+            "type": "string",
+            "example": "use_all_providers",
+            "default": "use_all_providers",
+            "enum": [
+              "use_all_providers",
+              "decline"
+            ],
+            "description": "Defines what strategy to use when all of the payment services defined in\nthis rule declined or otherwise were not able to process the card.\n\n* `use_all_providers` - Try all payment services enabled for this currency in\norder of priority, even if they are not listed in this rule. This is the\ndefault behaviour for a rule.\n* `decline` - Decline the transaction."
+          },
+          "invalid_rule_fallback_strategy": {
+            "type": "string",
+            "example": "use_all_providers",
+            "default": "use_all_providers",
+            "enum": [
+              "use_all_providers",
+              "skip",
+              "decline"
+            ],
+            "description": "Defines what strategy to use when this rule is not valid. This can happen\nwhen the rule has triggered for a certain transaction but none of the\nlisted payment services are eligible to process that transaction currency.\n\n* `use_all_providers` - Try all payment services enabled for this currency in\norder of priority, even if they are not listed in this rule. This is the\ndefault behaviour for a rule.\n* `skip` - Skip this rule and instead move on to the next highest priority\nrule.\n* `decline` - Decline the transaction."
+          }
+        }
+      },
       "ErrorGeneric": {
         "title": "Generic Error",
         "type": "object",
@@ -3010,6 +3858,146 @@
             "type": "number",
             "example": 1,
             "description": "The numeric rank of a payment service. Payment services with a lower\nposition value are processed first. When a payment services is inserted at\na position, any payment services with the the same value or higher are\nshifted down a position accordingly. When left out, the payment service is\ninserted at the end of the list."
+          }
+        }
+      },
+      "PaymentServiceDefinition": {
+        "title": "Payment Service Definition",
+        "type": "object",
+        "description": "An available payment service that can be configured for this cluster.",
+        "x-tags": [
+          "Discovery"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of the payment service. This is the underlying provider followed by a dash followed by the payment method ID.",
+            "example": "stripe-card"
+          },
+          "type": {
+            "type": "string",
+            "description": "`payment-service-definition`.",
+            "default": "payment-service-definition",
+            "example": "payment-service-definition"
+          },
+          "display_name": {
+            "type": "string",
+            "description": "The display name of this service.",
+            "example": "Stripe"
+          },
+          "method": {
+            "type": "string",
+            "description": "The ID of the payment method that this services handles.",
+            "example": "card",
+            "enum": [
+              "card",
+              "paypal"
+            ]
+          },
+          "fields": {
+            "type": "array",
+            "description": "A list of fields that need to be submitted when activating the payment. service.",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "description": "A single field that needs to be submitted for a payment service when it\nis created.",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "example": "private_api_key",
+                  "description": "The key of a field that needs to be submitted."
+                },
+                "display_name": {
+                  "type": "string",
+                  "example": "Private API key",
+                  "description": "The name to display for a field in the cluster UI."
+                },
+                "required": {
+                  "type": "boolean",
+                  "example": true,
+                  "description": "Defines if this field is required when the service is created."
+                },
+                "format": {
+                  "type": "string",
+                  "example": "text",
+                  "description": "Defines the type of input that needs to be rendered for this field.",
+                  "enum": [
+                    "text",
+                    "multiline",
+                    "number"
+                  ]
+                }
+              }
+            }
+          },
+          "supported_currencies": {
+            "type": "array",
+            "description": "A list of three-letter ISO currency codes that this service supports.",
+            "items": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 3
+            },
+            "minItems": 1,
+            "example": [
+              "USD",
+              "GBP",
+              "EUR"
+            ]
+          },
+          "supported_countries": {
+            "type": "array",
+            "description": "A list of two-letter ISO country codes that this service supports.",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "example": [
+              "US",
+              "GB",
+              "DE"
+            ]
+          }
+        }
+      },
+      "PaymentServiceDefinitions": {
+        "title": "Payment service definitions",
+        "type": "object",
+        "description": "A list of available payment services definitions.",
+        "x-tags": [
+          "Discovery"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentServiceDefinition"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "example": 1,
+            "default": 20
+          },
+          "next_cursor": {
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": "ZXhhbXBsZTE",
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "previous_cursor": {
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": null,
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
           }
         }
       },
