@@ -840,8 +840,7 @@
         ],
         "description": "Returns a list of rules for card transactions.",
         "operationId": "list-cards-rules",
-        "summary": "List card rules",
-        "x-internal": true
+        "summary": "List card rules"
       },
       "post": {
         "consumes": [
@@ -884,8 +883,7 @@
         ],
         "description": "Creates a new rule that is used for card transactions.",
         "operationId": "add-card-rule",
-        "summary": "Create card rule",
-        "x-internal": true
+        "summary": "Create card rule"
       }
     },
     "/card-rules/{card_rule_id}": {
@@ -932,8 +930,7 @@
         ],
         "description": "Deletes a specific card rule.",
         "operationId": "delete-card-rule",
-        "summary": "Delete card rule",
-        "x-internal": true
+        "summary": "Delete card rule"
       },
       "get": {
         "produces": [
@@ -965,8 +962,7 @@
         ],
         "description": "Returns a rule that can be used for card transactions.",
         "operationId": "get-card-rule",
-        "summary": "Get card rule",
-        "x-internal": true
+        "summary": "Get card rule"
       },
       "put": {
         "consumes": [
@@ -1015,8 +1011,7 @@
         ],
         "description": "Updates a rule that can be used for card transactions.",
         "operationId": "update-card-rule",
-        "summary": "Update card rule",
-        "x-internal": true
+        "summary": "Update card rule"
       }
     },
     "/merchants/main": {
@@ -1342,8 +1337,7 @@
         ],
         "description": "Returns a list of all available payment service definitions.",
         "operationId": "list-payment-service-definitions",
-        "summary": "List payment service definitions",
-        "x-internal": true
+        "summary": "List payment service definitions"
       }
     },
     "/payment-service-definitions/{payment_service_definition_id}": {
@@ -1386,8 +1380,7 @@
         ],
         "description": "Gets the definition for a payment service.",
         "operationId": "get-payment-service-definition",
-        "summary": "Get payment service definition",
-        "x-internal": true
+        "summary": "Get payment service definition"
       }
     },
     "/payment-services": {
@@ -2626,7 +2619,6 @@
       },
       "title": "Card Rule",
       "type": "object",
-      "x-internal": true,
       "x-tags": [
         "Card Rules"
       ]
@@ -2679,7 +2671,6 @@
       ],
       "title": "Card rule (Number condition)",
       "type": "object",
-      "x-internal": true,
       "x-tags": [
         "Card Workflows"
       ]
@@ -2757,7 +2748,6 @@
       ],
       "title": "Card Rule (Create)",
       "type": "object",
-      "x-internal": true,
       "x-tags": [
         "Card Rules"
       ]
@@ -2815,7 +2805,6 @@
       ],
       "title": "Card rule (Text)",
       "type": "object",
-      "x-internal": true,
       "x-tags": [
         "Card Rules"
       ]
@@ -2889,7 +2878,6 @@
       },
       "title": "Card Rule (Update)",
       "type": "object",
-      "x-internal": true,
       "x-tags": [
         "Card Rules"
       ]
@@ -2932,7 +2920,6 @@
       },
       "title": "Card Rules",
       "type": "object",
-      "x-internal": true,
       "x-tags": [
         "Card Rules"
       ]
@@ -3976,7 +3963,6 @@
       },
       "title": "Payment Service Definition",
       "type": "object",
-      "x-internal": true,
       "x-tags": [
         "Discovery"
       ]
@@ -4018,7 +4004,6 @@
       },
       "title": "Payment service definitions",
       "type": "object",
-      "x-internal": true,
       "x-tags": [
         "Discovery"
       ]
@@ -4769,8 +4754,7 @@
     },
     {
       "description": "In Gr4vy, a card rule defines how a card transaction is processed. It\ndetermines which payment services are used, and with what priority, based\non the transaction amount, card type, and many more attributes.",
-      "name": "Card Rules",
-      "x-internal": true
+      "name": "Card Rules"
     },
     {
       "description": "In Gr4vy, a merchant represents the entity that owns the Gr4vy cluster.\nCurrently only one merchant is supported per cluster.",
@@ -4787,8 +4771,7 @@
     },
     {
       "description": "Payment service definitions describe the fields required for a payment\nservice to be configured.",
-      "name": "Payment Service Definitions",
-      "x-internal": true
+      "name": "Payment Service Definitions"
     },
     {
       "description": "In Gr4vy, a payment service represents a configured payment provider\n(Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,\netc)\n\nThe payment services API can be used to:\n\n* Provide Gr4vy with the payment credentials for a payment provider.\n* Set a display name for a payment provider.",
