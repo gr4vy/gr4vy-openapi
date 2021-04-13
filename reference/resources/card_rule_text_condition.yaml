@@ -27,7 +27,7 @@ properties:
     example: currency
     enum:
       - currency
-      - card_type
+      - card_scheme
 
   operator:
     type: string
@@ -50,3 +50,5 @@ properties:
     example:
       - USD
       - EUR
+      - amex
+      - visa
