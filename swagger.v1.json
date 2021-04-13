@@ -2759,7 +2759,7 @@
           "description": "The transaction field to filter by.",
           "enum": [
             "currency",
-            "card_scheme"
+            "scheme"
           ],
           "example": "currency",
           "type": "string"
