@@ -2637,7 +2637,7 @@
             "example": "currency",
             "enum": [
               "currency",
-              "card_type"
+              "card_scheme"
             ]
           },
           "operator": {
@@ -2661,7 +2661,9 @@
             "description": "The values to compare the `key` to.",
             "example": [
               "USD",
-              "EUR"
+              "EUR",
+              "amex",
+              "visa"
             ]
           }
         }
