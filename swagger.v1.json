@@ -2759,7 +2759,7 @@
           "description": "The transaction field to filter by.",
           "enum": [
             "currency",
-            "card_type"
+            "card_scheme"
           ],
           "example": "currency",
           "type": "string"
@@ -2785,7 +2785,9 @@
           "description": "The values to compare the `key` to.",
           "example": [
             "USD",
-            "EUR"
+            "EUR",
+            "amex",
+            "visa"
           ],
           "items": {
             "maxLength": 50,
