@@ -2765,7 +2765,7 @@
             "example": "currency",
             "enum": [
               "currency",
-              "card_scheme"
+              "scheme"
             ]
           },
           "operator": {
