@@ -1,5 +1,5 @@
 {
-  "name": "gr4vy-api",
+  "name": "gr4vy-openapi",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -26,8 +26,8 @@
     "type": "git",
     "url": "git+https://github.com/gr4vy/gr4vy-openapi.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Gr4vy <code@gr4vy.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/gr4vy/gr4vy-openapi/issues"
   },
