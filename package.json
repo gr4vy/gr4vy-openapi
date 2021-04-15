@@ -33,13 +33,13 @@
   },
   "homepage": "https://github.com/gr4vy/gr4vy-openapi#readme",
   "dependencies": {
-    "@stoplight/spectral": "^5.9.0",
+    "@stoplight/spectral": "^5.9.1",
     "api-spec-converter": "^2.12.0",
-    "js-yaml": "^4.0.0",
+    "js-yaml": "^4.1.0",
     "json-schema-sensitivity-checker": "^1.0.6",
-    "json-schema-spell-checker": "^2.1.0",
-    "jsonpath": "^1.1.0",
+    "json-schema-spell-checker": "^2.1.1",
+    "jsonpath": "^1.1.1",
     "openapi-examples-validator": "^4.3.3",
-    "redoc-cli": "^0.10.3"
+    "redoc-cli": "^0.11.4"
   }
 }
