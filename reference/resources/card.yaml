@@ -68,9 +68,52 @@ properties:
     allOf:
       - $ref: "../openapi.yaml#/components/schemas/Buyer"
 
-  details:
-    $ref: |-
-      ../openapi.yaml#/components/schemas/CardDetails
+  label:
+    type: string
+    description: |-
+      A label for the card. For a `card` payment method this is the last 4
+      digits on the card.
+    example: "1111"
+
+  scheme:
+    type: string
+    example: visa
+    enum:
+      - visa
+      - mastercard
+      - american-express
+      - diners-club
+      - discover
+      - jcb
+      - unionpay
+      - maestro
+      - elo
+      - mir
+      - hiper
+      - hipercard
+    description: |-
+      The type of the card.
+    nullable: true
+
+  expiration_date:
+    type: string
+    description: |-
+      The expiration date for the card.
+    example: "11/25"
+    pattern: ^\d{2}/\d{2}$
+    minLength: 5
+    maxLength: 5
+    nullable: true
+
+  approval_url:
+    type: string
+    format: uri
+    example: |-
+      https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+    description:
+      The optional URL that the buyer needs to be redirected to to further
+      authorize their payment.
+    nullable: true
 
   environment:
     type: string

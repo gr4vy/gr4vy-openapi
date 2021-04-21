@@ -75,9 +75,40 @@ properties:
     allOf:
       - $ref: "../openapi.yaml#/components/schemas/Buyer"
 
-  details:
-    $ref: |-
-      ../openapi.yaml#/components/schemas/PayPalDetails
+  label:
+    type: string
+    description: |-
+      A label for the PayPal account. For a `paypal` payment method this is the
+      user's email address.
+    example: "john@example.com"
+
+  scheme:
+    type: string
+    example: null
+    nullable: true
+    description: |-
+      An optional scheme. Not used for PayPal payment methods.
+
+  expiration_date:
+    type: string
+    description: |-
+      The expiration date for the payment method. Not used for PayPal payment
+      methods.
+    example: null
+    pattern: ^\d{2}/\d{2}$
+    minLength: 5
+    maxLength: 5
+    nullable: true
+
+  approval_url:
+    type: string
+    format: uri
+    example: |-
+      https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+    description:
+      The optional URL that the buyer needs to be redirected to to further
+      authorize their payment.
+    nullable: true
 
   environment:
     type: string
