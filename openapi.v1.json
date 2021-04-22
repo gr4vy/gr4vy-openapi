@@ -2459,7 +2459,7 @@
             "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
             "minItems": 1,
             "items": {
-              "$ref": "#/components/schemas/CardRule"
+              "$ref": "#/components/schemas/CardRuleCondition"
             }
           },
           "payment_service_ids": {
@@ -2554,6 +2554,61 @@
             "nullable": true,
             "minLength": 1,
             "maxLength": 1000
+          }
+        }
+      },
+      "CardRuleCondition": {
+        "title": "Card rule (Generic condition)",
+        "type": "object",
+        "description": "Generic card rule condition.",
+        "x-tags": [
+          "Card Workflows"
+        ],
+        "required": [
+          "match",
+          "key",
+          "operator",
+          "value"
+        ],
+        "properties": {
+          "match": {
+            "type": "string",
+            "description": "The type of match made for this rule.",
+            "example": "number",
+            "enum": [
+              "number",
+              "text"
+            ]
+          },
+          "key": {
+            "type": "string",
+            "description": "The transaction field to filter by.",
+            "example": "amount",
+            "enum": [
+              "amount",
+              "currency",
+              "scheme"
+            ]
+          },
+          "operator": {
+            "type": "string",
+            "description": "The comparison to make to `value` property.",
+            "example": ">=",
+            "enum": [
+              "==",
+              "!=",
+              "<=",
+              ">=",
+              ">",
+              "<",
+              "IN",
+              "NOT IN"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "description": "The values to compare the `key` to.",
+            "example": "200"
           }
         }
       },
