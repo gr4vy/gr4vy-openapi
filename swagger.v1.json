@@ -2535,7 +2535,7 @@
         "conditions": {
           "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
           "items": {
-            "x-model-name": "CardRule"
+            "x-model-name": "CardRuleCondition"
           },
           "minItems": 1,
           "type": "array"
@@ -2621,6 +2621,61 @@
       "type": "object",
       "x-tags": [
         "Card Rules"
+      ]
+    },
+    "CardRuleCondition": {
+      "description": "Generic card rule condition.",
+      "properties": {
+        "key": {
+          "description": "The transaction field to filter by.",
+          "enum": [
+            "amount",
+            "currency",
+            "scheme"
+          ],
+          "example": "amount",
+          "type": "string"
+        },
+        "match": {
+          "description": "The type of match made for this rule.",
+          "enum": [
+            "number",
+            "text"
+          ],
+          "example": "number",
+          "type": "string"
+        },
+        "operator": {
+          "description": "The comparison to make to `value` property.",
+          "enum": [
+            "==",
+            "!=",
+            "<=",
+            ">=",
+            ">",
+            "<",
+            "IN",
+            "NOT IN"
+          ],
+          "example": ">=",
+          "type": "string"
+        },
+        "value": {
+          "description": "The values to compare the `key` to.",
+          "example": "200",
+          "type": "string"
+        }
+      },
+      "required": [
+        "match",
+        "key",
+        "operator",
+        "value"
+      ],
+      "title": "Card rule (Generic condition)",
+      "type": "object",
+      "x-tags": [
+        "Card Workflows"
       ]
     },
     "CardRuleNumberCondition": {
