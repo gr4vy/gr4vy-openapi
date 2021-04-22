@@ -32,13 +32,6 @@ properties:
     type: string
     description: The comparison to make to `value` property.
     example: ">="
-    enum:
-      - "=="
-      - "!="
-      - "<="
-      - ">="
-      - ">"
-      - "<"
 
   value:
     type: number
