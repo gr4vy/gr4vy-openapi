@@ -13,13 +13,13 @@ required:
   - accepted_currencies
   - accepted_countries
 
-properties:
-  payment_service_definition_id:
-    type: string
-    description: The ID of the payment service to use.
-    example: stripe-card
-    minLength: 1
-    maxLength: 50
-
 allOf:
   - $ref: "../openapi.yaml#/components/schemas/PaymentServiceUpdate"
+  - type: object
+    properties:
+      payment_service_definition_id:
+        type: string
+        description: The ID of the payment service to use.
+        example: stripe-card
+        minLength: 1
+        maxLength: 50
