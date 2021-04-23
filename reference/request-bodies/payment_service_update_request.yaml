@@ -19,7 +19,7 @@ properties:
     type: array
     description:
       "A list of fields, each containing a key-value pair for each field defined
-      by the definition for this payment service e.g. for stripe-card 
+      by the definition for this payment service e.g. for stripe-card
       `secret_key` is required and so must be sent with in this field."
     items:
       type: object
