@@ -19,8 +19,8 @@ properties:
     type: array
     description:
       "A list of fields, each containing a key-value pair for each field defined
-      by the definition for this payment service e.g. for stripe-card 'secret_key' 
-      is required and so must be sent with key: secret_key and value: <your_secret>."
+      by the definition for this payment service e.g. for stripe-card 
+      `secret_key` is required and so must be sent with in this field."
     items:
       type: object
       description:
