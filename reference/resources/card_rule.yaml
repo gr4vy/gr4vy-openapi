@@ -61,7 +61,7 @@ properties:
       The payment services all need to process cards.
     example:
       - f47db210-8e30-4f74-8123-b834604f2042
-      - card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96
+      - 0bb93ab0-86ef-4ad5-addf-b69913128d96
     items:
       type: string
       minLength: 1
