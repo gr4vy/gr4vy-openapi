@@ -4793,18 +4793,21 @@
           "accepted_currencies",
           "accepted_countries"
         ],
-        "properties": {
-          "payment_service_definition_id": {
-            "type": "string",
-            "description": "The ID of the payment service to use.",
-            "example": "stripe-card",
-            "minLength": 1,
-            "maxLength": 50
-          }
-        },
         "allOf": [
           {
             "$ref": "#/components/schemas/PaymentServiceUpdate"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "payment_service_definition_id": {
+                "type": "string",
+                "description": "The ID of the payment service to use.",
+                "example": "stripe-card",
+                "minLength": 1,
+                "maxLength": 50
+              }
+            }
           }
         ]
       },
@@ -4825,7 +4828,7 @@
           },
           "fields": {
             "type": "array",
-            "description": "A list of fields, each containing a key-value pair for each field defined by the definition for this payment service.",
+            "description": "A list of fields, each containing a key-value pair for each field defined by the definition for this payment service e.g. for stripe-card `secret_key` is required and so must be sent with in this field.",
             "items": {
               "type": "object",
               "description": "A field containing a key-value pair for a required field defined by the service for this payment service.",
