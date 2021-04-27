@@ -1656,7 +1656,7 @@
                 "examples": {
                   "Stripe": {
                     "value": {
-                      "id": "stripe-card-faaad066-30b4-4997-a438-242b0752d7e1",
+                      "id": "faaad066-30b4-4997-a438-242b0752d7e1",
                       "type": "payment-service",
                       "payment_service_definition_id": "stripe",
                       "method": "card",
@@ -1711,7 +1711,7 @@
         {
           "schema": {
             "type": "string",
-            "example": "stripe-card-46973e9d-88a7-44a6-abfe-be4ff0134ff4"
+            "example": "46973e9d-88a7-44a6-abfe-be4ff0134ff4"
           },
           "name": "payment_service_id",
           "in": "path",
@@ -2523,7 +2523,7 @@
                       "external_identifier": "user-789123",
                       "updated_at": "2019-08-24T14:15:22+00:00",
                       "payment_service": {
-                        "id": "stripe-card-169f5226-4644-4d1e-ac36-14999e73601f",
+                        "id": "169f5226-4644-4d1e-ac36-14999e73601f",
                         "type": "payment-service",
                         "payment_service_definition_id": "stripe-card",
                         "method": "card",
@@ -2571,7 +2571,7 @@
                       "external_identifier": "user-789123",
                       "updated_at": "2019-08-24T14:15:22+00:00",
                       "payment_service": {
-                        "id": "stripe-card-169f5226-4644-4d1e-ac36-14999e73601f",
+                        "id": "169f5226-4644-4d1e-ac36-14999e73601f",
                         "type": "payment-service",
                         "payment_service_definition_id": "stripe-card",
                         "method": "card",
@@ -3484,8 +3484,8 @@
             "type": "array",
             "description": "A list of IDs for the payment services to use, in order of priority.\nThe payment services all need to process cards.",
             "example": [
-              "stripe-card-f47db210-8e30-4f74-8123-b834604f2042",
-              "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+              "f47db210-8e30-4f74-8123-b834604f2042",
+              "0bb93ab0-86ef-4ad5-addf-b69913128d96"
             ],
             "items": {
               "type": "string",
@@ -3794,8 +3794,8 @@
             "type": "array",
             "description": "A list of IDs for the payment services to use, in order of priority.\nThe payment services all need to process cards.",
             "example": [
-              "stripe-card-f47db210-8e30-4f74-8123-b834604f2042",
-              "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+              "f47db210-8e30-4f74-8123-b834604f2042",
+              "0bb93ab0-86ef-4ad5-addf-b69913128d96"
             ],
             "items": {
               "type": "string",
@@ -3875,8 +3875,8 @@
             "type": "array",
             "description": "A list of IDs for the payment services to use, in order of priority.\nThe payment services all need to process cards.",
             "example": [
-              "stripe-card-f47db210-8e30-4f74-8123-b834604f2042",
-              "card-braintree-0bb93ab0-86ef-4ad5-addf-b69913128d96"
+              "f47db210-8e30-4f74-8123-b834604f2042",
+              "0bb93ab0-86ef-4ad5-addf-b69913128d96"
             ],
             "items": {
               "type": "string",
@@ -4612,8 +4612,9 @@
         "properties": {
           "id": {
             "type": "string",
+            "format": "uuid",
             "description": "The ID of this payment service.",
-            "example": "stripe-card-faaad066-30b4-4997-a438-242b0752d7e1",
+            "example": "faaad066-30b4-4997-a438-242b0752d7e1",
             "minLength": 1,
             "maxLength": 200
           },
