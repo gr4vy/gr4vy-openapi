@@ -9,8 +9,9 @@ x-tags:
 properties:
   id:
     type: string
+    format: uuid
     description: The ID of this payment service.
-    example: stripe-card-faaad066-30b4-4997-a438-242b0752d7e1
+    example: faaad066-30b4-4997-a438-242b0752d7e1
     minLength: 1
     maxLength: 200
 

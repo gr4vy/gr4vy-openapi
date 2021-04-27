@@ -23,7 +23,7 @@ responses:
         examples:
           Stripe:
             value:
-              id: stripe-card-faaad066-30b4-4997-a438-242b0752d7e1
+              id: faaad066-30b4-4997-a438-242b0752d7e1
               type: payment-service
               payment_service_definition_id: stripe
               method: card
