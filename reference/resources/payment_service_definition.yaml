@@ -63,6 +63,10 @@ properties:
           example: text
           description: |-
             Defines the type of input that needs to be rendered for this field.
+          enum:
+            - text
+            - multiline
+            - number
 
   supported_currencies:
     type: array
