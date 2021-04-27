@@ -4069,18 +4069,21 @@
       "allOf": [
         {
           "$ref": "#/definitions/PaymentServiceUpdate"
+        },
+        {
+          "properties": {
+            "payment_service_definition_id": {
+              "description": "The ID of the payment service to use.",
+              "example": "stripe-card",
+              "maxLength": 50,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "type": "object"
         }
       ],
       "description": "Request body for activating a payment service.",
-      "properties": {
-        "payment_service_definition_id": {
-          "description": "The ID of the payment service to use.",
-          "example": "stripe-card",
-          "maxLength": 50,
-          "minLength": 1,
-          "type": "string"
-        }
-      },
       "required": [
         "display_name",
         "payment_service_definition_id",
@@ -4171,7 +4174,7 @@
           "type": "array"
         },
         "fields": {
-          "description": "A list of fields, each containing a key-value pair for each field defined by the definition for this payment service.",
+          "description": "A list of fields, each containing a key-value pair for each field defined by the definition for this payment service e.g. for stripe-card `secret_key` is required and so must be sent with in this field.",
           "items": {
             "description": "A field containing a key-value pair for a required field defined by the service for this payment service.",
             "properties": {
