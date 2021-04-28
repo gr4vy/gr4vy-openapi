@@ -341,10 +341,6 @@ components:
       $ref: "./request-bodies/buyer_create_request.yaml"
     BuyerUpdate:
       $ref: "./request-bodies/buyer_update_request.yaml"
-    Card:
-      $ref: "./resources/card.yaml"
-    Card--Tokenized:
-      $ref: "./resources/card--tokenized.yaml"
     CardRequest:
       $ref: "./request-bodies/card_request.yaml"
     CardRule:
@@ -385,16 +381,14 @@ components:
       $ref: "./resources/merchant.yaml"
     PaymentMethod:
       $ref: "./resources/payment_method.yaml"
+    PaymentMethod--Tokenized:
+      $ref: "./resources/payment_method--tokenized.yaml"
     PaymentMethods:
       $ref: "./resources/payment_methods.yaml"
     PaymentMethod--Snapshot:
       $ref: "./resources/payment_method--snapshot.yaml"
     PaymentMethods--Tokenized:
       $ref: "./resources/payment_methods--tokenized.yaml"
-    # PaymentMethodEvent:
-    #   $ref: "./resources/payment_method_event.yaml"
-    # PaymentMethodEvents:
-    #   $ref: "./resources/payment_method_events.yaml"
     PaymentService:
       $ref: "./resources/payment_service.yaml"
     PaymentService--Snapshot:
@@ -413,10 +407,6 @@ components:
       $ref: "./resources/payment_option.yaml"
     PaymentOptions:
       $ref: "./resources/payment_options.yaml"
-    # PayPal:
-    #   $ref: "./resources/paypal.yaml"
-    # PayPal--Tokenized:
-    #   $ref: "./resources/paypal--tokenized.yaml"
     PayPalRequest:
       $ref: "./request-bodies/paypal_request.yaml"
     Session:

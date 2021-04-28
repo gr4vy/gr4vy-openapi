@@ -11,7 +11,7 @@ properties:
     type: array
     description: A list of stored payment methods.
     items:
-      $ref: "../openapi.yaml#/components/schemas/Card"
+      $ref: "../openapi.yaml#/components/schemas/PaymentMethod"
 
   limit:
     $ref: "../properties/limit-100.yaml"

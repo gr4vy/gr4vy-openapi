@@ -1,6 +1,6 @@
 ---
-title: Card (Tokenized)
-description: A mini format version of the card.
+title: Payment Method (Tokenized)
+description: A mini format version of a payment method.
 type: object
 x-tags:
   - Payment Methods
@@ -22,16 +22,17 @@ properties:
 
   method:
     type: string
-    description: "`card`."
+    description: The type of this payment method.
     example: card
     enum:
       - card
+      - paypal
 
   label:
     type: string
     description: |-
-      A label for the card. For a `card` payment method this is the last 4
-      digits on the card.
+      A label for the payment method. For a `card` payment method this is the
+      last 4 digits on the card. For others it would be the email address.
     example: "1111"
 
   scheme:
@@ -51,13 +52,13 @@ properties:
       - hiper
       - hipercard
     description: |-
-      The type of the card.
+      The type of the card, if the payment method is a card.
     nullable: true
 
   expiration_date:
     type: string
     description: |-
-      The expiration date for the card.
+      The expiration date for the payment method.
     example: "11/25"
     pattern: ^\d{2}/\d{2}$
     minLength: 5
