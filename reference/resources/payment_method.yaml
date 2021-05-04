@@ -42,6 +42,7 @@ properties:
     enum:
       - card
       - paypal
+      - klarna
 
   created_at:
     type: string

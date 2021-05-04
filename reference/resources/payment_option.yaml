@@ -21,3 +21,4 @@ properties:
     enum:
       - card
       - paypal
+      - klarna
