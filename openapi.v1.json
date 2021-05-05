@@ -2606,9 +2606,7 @@
             ]
           },
           "value": {
-            "type": "string",
-            "description": "The values to compare the `key` to.",
-            "example": "200"
+            "$ref": "#/components/schemas/undefined"
           }
         }
       },
@@ -2761,7 +2759,7 @@
             "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
             "minItems": 1,
             "items": {
-              "$ref": "#/components/schemas/CardRule"
+              "$ref": "#/components/schemas/CardRuleCondition"
             }
           },
           "payment_service_ids": {
@@ -2834,7 +2832,7 @@
             "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
             "minItems": 1,
             "items": {
-              "$ref": "#/components/schemas/CardRule"
+              "$ref": "#/components/schemas/CardRuleCondition"
             }
           },
           "payment_service_ids": {
