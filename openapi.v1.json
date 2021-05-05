@@ -2734,9 +2734,32 @@
             ]
           },
           "value": {
-            "type": "string",
-            "description": "The values to compare the `key` to.",
-            "example": "200"
+            "oneOf": [
+              {
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 100,
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 50
+                },
+                "description": "The values to compare the `key` to.",
+                "example": [
+                  "USD",
+                  "EUR",
+                  "amex",
+                  "visa"
+                ]
+              },
+              {
+                "type": "number",
+                "description": "The values to compare the `key` to.",
+                "example": 200,
+                "minimum": 0,
+                "maximum": 99999
+              }
+            ]
           }
         }
       },
@@ -2889,7 +2912,7 @@
             "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
             "minItems": 1,
             "items": {
-              "x-model-name": "CardRule",
+              "x-model-name": "CardRuleCondition",
               "oneOf": [
                 {
                   "$ref": "#/components/schemas/CardRuleTextCondition"
@@ -2970,7 +2993,7 @@
             "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
             "minItems": 1,
             "items": {
-              "x-model-name": "CardRule",
+              "x-model-name": "CardRuleCondition",
               "oneOf": [
                 {
                   "$ref": "#/components/schemas/CardRuleTextCondition"
