@@ -10,7 +10,6 @@ module.exports = (original, _, __, inventory) => {
   const spec = inventory.documentInventory.resolved
   const modelName = original['x-model-name']
   if (modelName && !spec.components.schemas[modelName]) {
-    console.dir(modelName)
     return [
       {
         message: `x-model-name must refer to an actual model (${modelName})`,

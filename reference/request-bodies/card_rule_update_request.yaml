@@ -42,7 +42,7 @@ properties:
       needs to match for this rule to go into effect.
     minItems: 1
     items:
-      x-model-name: CardRule
+      x-model-name: CardRuleCondition
       oneOf:
         - $ref: "../openapi.yaml#/components/schemas/CardRuleTextCondition"
         - $ref: "../openapi.yaml#/components/schemas/CardRuleNumberCondition"

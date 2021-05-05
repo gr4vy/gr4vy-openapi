@@ -45,7 +45,24 @@ properties:
       - "NOT IN"
 
   value:
-    type: string
-    description: |-
-      The values to compare the `key` to.
-    example: "200"
+    oneOf:
+      - type: array
+        minItems: 1
+        maxItems: 100
+        items:
+          type: string
+          minLength: 1
+          maxLength: 50
+        description: |-
+          The values to compare the `key` to.
+        example:
+          - USD
+          - EUR
+          - amex
+          - visa
+      - type: number
+        description: |-
+          The values to compare the `key` to.
+        example: 200
+        minimum: 0
+        maximum: 99999
