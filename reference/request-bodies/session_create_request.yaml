@@ -1,5 +1,5 @@
 ---
-title: Session (Create)
+title: Username/password session
 type: object
 description: A request to create a session using an email address and password.
 x-internal: true
