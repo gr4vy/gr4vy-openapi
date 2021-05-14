@@ -369,6 +369,8 @@ components:
       $ref: "./resources/error_400_incorrect_json.yaml"
     Error401Unauthorized:
       $ref: "./resources/error_401_unauthorized.yaml"
+    Error403Forbidden:
+      $ref: "./resources/error_403_forbidden.yaml"
     Error404PendingCreation:
       $ref: "./resources/error_404_pending_creation.yaml"
     Error404NotFound:
