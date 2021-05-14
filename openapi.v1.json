@@ -473,7 +473,7 @@
       "post": {
         "operationId": "login",
         "summary": "Create a user session (Login)",
-        "description": "Authenticate a user using an email address and password.\n",
+        "description": "Authenticate a user.\n",
         "tags": [
           "Sessions"
         ],
@@ -483,7 +483,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SessionRequest"
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/SessionRequest"
+                  },
+                  {
+                    "$ref": "#/components/schemas/SessionRequestToken"
+                  }
+                ]
               }
             }
           }
@@ -523,6 +530,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Returns an error if the access to the requested resource is forbidden.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error403Forbidden"
                 }
               }
             }
@@ -4218,6 +4235,56 @@
           }
         }
       },
+      "Error403Forbidden": {
+        "title": "Forbidden Error",
+        "type": "object",
+        "description": "Forbidden Error (HTTP 403).",
+        "x-tags": [
+          "Errors"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`error`.",
+            "enum": [
+              "error"
+            ],
+            "example": "error"
+          },
+          "code": {
+            "type": "string",
+            "description": "`forbidden`.",
+            "example": "forbidden",
+            "enum": [
+              "forbidden"
+            ]
+          },
+          "status": {
+            "type": "integer",
+            "description": "`403`.",
+            "example": 403,
+            "enum": [
+              403
+            ]
+          },
+          "message": {
+            "type": "string",
+            "description": "Invalid credentials.",
+            "example": "Invalid credentials",
+            "enum": [
+              "Invalid credentials"
+            ]
+          },
+          "details": {
+            "type": "array",
+            "description": "A list of detail objects that further clarify the reason for the error.\nNot every error supports more detail.",
+            "example": [],
+            "items": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            }
+          }
+        }
+      },
       "Error404PendingCreation": {
         "title": "Pending Creation Error",
         "type": "object",
@@ -5434,7 +5501,7 @@
         }
       },
       "SessionRequest": {
-        "title": "Session (Create)",
+        "title": "Username/password session",
         "type": "object",
         "description": "A request to create a session using an email address and password.",
         "x-internal": true,
@@ -5455,6 +5522,25 @@
             "type": "string",
             "description": "The password the user to log in as.",
             "example": "this-is-n0t-a-secure-passw0rd"
+          }
+        }
+      },
+      "SessionRequestToken": {
+        "title": "Token session",
+        "type": "object",
+        "description": "A request to create a session using an ID token.",
+        "x-internal": true,
+        "x-tags": [
+          "Authentication"
+        ],
+        "required": [
+          "token"
+        ],
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "The Google ID token.",
+            "example": "XYZ123"
           }
         }
       },
