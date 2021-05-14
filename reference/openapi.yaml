@@ -421,6 +421,8 @@ components:
       $ref: "./resources/session.yaml"
     SessionRequest:
       $ref: "./request-bodies/session_create_request.yaml"
+    SessionRequestToken:
+      $ref: "./request-bodies/session_create_request_token.yaml"
     Status:
       $ref: "./resources/status.yaml"
     Statuses:
