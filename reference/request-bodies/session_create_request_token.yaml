@@ -1,5 +1,5 @@
 ---
-title: Session (Create)
+title: Token session
 type: object
 description: A request to create a session using an ID token.
 x-internal: true
