@@ -417,9 +417,7 @@
           {
             "in": "body",
             "name": "body",
-            "schema": {
-              "$ref": "#/definitions/SessionRequest"
-            }
+            "schema": {}
           }
         ],
         "responses": {
@@ -440,13 +438,19 @@
             "schema": {
               "$ref": "#/definitions/Error401Unauthorized"
             }
+          },
+          "403": {
+            "description": "Returns an error if the access to the requested resource is forbidden.",
+            "schema": {
+              "$ref": "#/definitions/Error403Forbidden"
+            }
           }
         },
         "security": [],
         "tags": [
           "Sessions"
         ],
-        "description": "Authenticate a user using an email address and password.\n",
+        "description": "Authenticate a user.\n",
         "operationId": "login",
         "summary": "Create a user session (Login)",
         "x-internal": true
@@ -3207,6 +3211,56 @@
         "Errors"
       ]
     },
+    "Error403Forbidden": {
+      "description": "Forbidden Error (HTTP 403).",
+      "properties": {
+        "code": {
+          "description": "`forbidden`.",
+          "enum": [
+            "forbidden"
+          ],
+          "example": "forbidden",
+          "type": "string"
+        },
+        "details": {
+          "description": "A list of detail objects that further clarify the reason for the error.\nNot every error supports more detail.",
+          "example": [],
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "type": "array"
+        },
+        "message": {
+          "description": "Invalid credentials.",
+          "enum": [
+            "Invalid credentials"
+          ],
+          "example": "Invalid credentials",
+          "type": "string"
+        },
+        "status": {
+          "description": "`403`.",
+          "enum": [
+            403
+          ],
+          "example": 403,
+          "type": "integer"
+        },
+        "type": {
+          "description": "`error`.",
+          "enum": [
+            "error"
+          ],
+          "example": "error",
+          "type": "string"
+        }
+      },
+      "title": "Forbidden Error",
+      "type": "object",
+      "x-tags": [
+        "Errors"
+      ]
+    },
     "Error404NotFound": {
       "description": "Not Found Error (HTTP 404).",
       "properties": {
@@ -4399,7 +4453,26 @@
         "email_address",
         "password"
       ],
-      "title": "Session (Create)",
+      "title": "Username/password session",
+      "type": "object",
+      "x-internal": true,
+      "x-tags": [
+        "Authentication"
+      ]
+    },
+    "SessionRequestToken": {
+      "description": "A request to create a session using an ID token.",
+      "properties": {
+        "token": {
+          "description": "The Google ID token.",
+          "example": "XYZ123",
+          "type": "string"
+        }
+      },
+      "required": [
+        "token"
+      ],
+      "title": "Token session",
       "type": "object",
       "x-internal": true,
       "x-tags": [
