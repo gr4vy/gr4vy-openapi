@@ -35,9 +35,9 @@ rules:
     then:
       function: response-description-returns
 
-  oneof-model-name:
-    description: A oneOf item needs a valid model name
-    given: $..*[?(@.oneOf)]
-    severity: error
-    then:
-      function: oneof-model-name
+  # oneof-model-name:
+  #   description: A oneOf item needs a valid model name
+  #   given: $..*[?(@.oneOf)]
+  #   severity: error
+  #   then:
+  #     function: oneof-model-name

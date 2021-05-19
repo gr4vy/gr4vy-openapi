@@ -109,7 +109,7 @@ responses:
               external_identifier: user-789123
               updated_at: "2019-08-24T14:15:22+00:00"
               payment_service:
-                id: stripe-card-169f5226-4644-4d1e-ac36-14999e73601f
+                id: 169f5226-4644-4d1e-ac36-14999e73601f
                 type: payment-service
                 payment_service_definition_id: stripe-card
                 method: card
@@ -152,7 +152,7 @@ responses:
               external_identifier: user-789123
               updated_at: "2019-08-24T14:15:22+00:00"
               payment_service:
-                id: stripe-card-169f5226-4644-4d1e-ac36-14999e73601f
+                id: 169f5226-4644-4d1e-ac36-14999e73601f
                 type: payment-service
                 payment_service_definition_id: stripe-card
                 method: card

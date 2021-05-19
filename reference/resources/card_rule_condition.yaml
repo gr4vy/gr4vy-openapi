@@ -1,0 +1,68 @@
+---
+title: Card rule (Generic condition)
+type: object
+description: |-
+  Generic card rule condition.
+x-tags:
+  - Card Workflows
+
+required:
+  - match
+  - key
+  - operator
+  - value
+
+properties:
+  match:
+    type: string
+    description: The type of match made for this rule.
+    example: number
+    enum:
+      - number
+      - text
+
+  key:
+    type: string
+    description: The transaction field to filter by.
+    example: amount
+    enum:
+      - amount
+      - currency
+      - scheme
+
+  operator:
+    type: string
+    description: The comparison to make to `value` property.
+    example: ">="
+    enum:
+      - "=="
+      - "!="
+      - "<="
+      - ">="
+      - ">"
+      - "<"
+      - "IN"
+      - "NOT IN"
+
+  value:
+    oneOf:
+      - type: array
+        minItems: 1
+        maxItems: 100
+        items:
+          type: string
+          minLength: 1
+          maxLength: 50
+        description: |-
+          The values to compare the `key` to.
+        example:
+          - USD
+          - EUR
+          - amex
+          - visa
+      - type: number
+        description: |-
+          The values to compare the `key` to.
+        example: 200
+        minimum: 0
+        maximum: 99999

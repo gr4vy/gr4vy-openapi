@@ -219,17 +219,17 @@ paths:
   #   get:
   #     $ref: "./paths/payment_methods__list-payment-method-events.yaml"
 
-  # "/payment-methods/{payment_method_id}/approve":
-  #   parameters:
-  #     - $ref: "./path-parameters/payment_method_id.yaml"
-  #   get:
-  #     $ref: "./paths/payment_methods__approve-payment-method.yaml"
+  "/payment-methods/{payment_method_id}/approve":
+    parameters:
+      - $ref: "./path-parameters/payment_method_id.yaml"
+    get:
+      $ref: "./paths/payment_methods__approve-payment-method.yaml"
 
-  # "/payment-methods/approvals/{payment_method_approval_token}":
-  #   parameters:
-  #     - $ref: "./path-parameters/payment_method_approval_token.yaml"
-  #   get:
-  #     $ref: "./paths/payment_methods__redirect-payment-method-approval.yaml"
+  "/payment-methods/approvals/{payment_method_approval_token}":
+    parameters:
+      - $ref: "./path-parameters/payment_method_approval_token.yaml"
+    get:
+      $ref: "./paths/payment_methods__redirect-payment-method-approval.yaml"
 
   "/payment-options":
     get:
@@ -351,6 +351,8 @@ components:
       $ref: "./resources/card_rule.yaml"
     CardRules:
       $ref: "./resources/card_rules.yaml"
+    CardRuleCondition:
+      $ref: "./resources/card_rule_condition.yaml"
     CardRuleNumberCondition:
       $ref: "./resources/card_rule_number_condition.yaml"
     CardRuleTextCondition:
@@ -367,6 +369,8 @@ components:
       $ref: "./resources/error_400_incorrect_json.yaml"
     Error401Unauthorized:
       $ref: "./resources/error_401_unauthorized.yaml"
+    Error403Forbidden:
+      $ref: "./resources/error_403_forbidden.yaml"
     Error404PendingCreation:
       $ref: "./resources/error_404_pending_creation.yaml"
     Error404NotFound:
@@ -419,6 +423,8 @@ components:
       $ref: "./resources/session.yaml"
     SessionRequest:
       $ref: "./request-bodies/session_create_request.yaml"
+    SessionRequestToken:
+      $ref: "./request-bodies/session_create_request_token.yaml"
     Status:
       $ref: "./resources/status.yaml"
     Statuses:

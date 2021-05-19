@@ -36,7 +36,7 @@ properties:
     properties:
       id:
         type: string
-        example: stripe-card-c4a988a2-cae6-4854-9aa0-a8365da0816d
+        example: c4a988a2-cae6-4854-9aa0-a8365da0816d
         description: |
           The ID of the resource.
 
