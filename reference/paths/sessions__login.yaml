@@ -2,7 +2,7 @@
 operationId: login
 summary: Create a user session (Login)
 description: |
-  Authenticate a user using an email address and password.
+  Authenticate a user.
 tags:
   - Sessions
 x-internal: true
@@ -13,7 +13,9 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: "../openapi.yaml#/components/schemas/SessionRequest"
+        oneOf:
+          - $ref: "../openapi.yaml#/components/schemas/SessionRequest"
+          - $ref: "../openapi.yaml#/components/schemas/SessionRequestToken"
 
 responses:
   "200":
@@ -44,3 +46,11 @@ responses:
       application/json:
         schema:
           $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
+
+  "403":
+    description:
+      Returns an error if the access to the requested resource is forbidden.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error403Forbidden"

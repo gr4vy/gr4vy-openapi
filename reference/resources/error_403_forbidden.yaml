@@ -1,0 +1,45 @@
+---
+title: Forbidden Error
+type: object
+description: Forbidden Error (HTTP 403).
+
+x-tags:
+  - Errors
+
+properties:
+  type:
+    type: string
+    description: "`error`."
+    enum:
+      - error
+    example: error
+
+  code:
+    type: string
+    description: "`forbidden`."
+    example: forbidden
+    enum:
+      - forbidden
+
+  status:
+    type: integer
+    description: "`403`."
+    example: 403
+    enum:
+      - 403
+
+  message:
+    type: string
+    description: Invalid credentials.
+    example: Invalid credentials
+    enum:
+      - Invalid credentials
+
+  details:
+    type: array
+    description: |-
+      A list of detail objects that further clarify the reason for the error.
+      Not every error supports more detail.
+    example: []
+    items:
+      $ref: "../openapi.yaml#/components/schemas/ErrorDetail"
