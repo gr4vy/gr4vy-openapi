@@ -9,6 +9,8 @@ tags:
 parameters:
   - $ref: "../query-parameters/transaction-search.yaml"
   - $ref: "../query-parameters/transaction_status.yaml"
+  - $ref: "../query-parameters/buyer_id.yaml"
+  - $ref: "../query-parameters/buyer_external_identifier.yaml"
   - $ref: "../query-parameters/before_created_at.yaml"
   - $ref: "../query-parameters/after_created_at.yaml"
   - $ref: "../query-parameters/before_updated_at.yaml"
