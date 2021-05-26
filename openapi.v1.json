@@ -2438,6 +2438,24 @@
           {
             "schema": {
               "type": "string",
+              "example": "8724fd24-5489-4a5d-90fd-0604df7d3b83"
+            },
+            "in": "query",
+            "name": "buyer_id",
+            "description": "Filters the results to only the items for which the `buyer` has an\n`id` that matches this value."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "user-12345"
+            },
+            "in": "query",
+            "name": "buyer_external_identifier",
+            "description": "Filters the results to only the items for which the `buyer` has an\n`external_identifier` that matches this value."
+          },
+          {
+            "schema": {
+              "type": "string",
               "example": "2012-12-12T10:53:43+00:00"
             },
             "in": "query",
