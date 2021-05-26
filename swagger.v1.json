@@ -1741,6 +1741,18 @@
             "type": "string"
           },
           {
+            "description": "Filters the results to only the items for which the `buyer` has an\n`id` that matches this value.",
+            "in": "query",
+            "name": "buyer_id",
+            "type": "string"
+          },
+          {
+            "description": "Filters the results to only the items for which the `buyer` has an\n`external_identifier` that matches this value.",
+            "in": "query",
+            "name": "buyer_external_identifier",
+            "type": "string"
+          },
+          {
             "description": "Filters the results to only transactions created before this ISO date-time string.",
             "in": "query",
             "name": "before_created_at",
