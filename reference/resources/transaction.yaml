@@ -29,19 +29,25 @@ properties:
     enum:
       - processing
       - processing_failed
-      - captured
+      - capture_succeeded
       - capture_pending
       - capture_declined
-      - authorized
+      - capture_failed
+      - authorization_succeeded
       - authorization_pending
       - authorization_declined
+      - authorization_failed
       - authorization_expired
       - authorization_voided
-      - refunded
+      - refund_succeeded
+      - refund_pending
+      - refund_declined
+      - refund_failed
+      - buyer_approval_succeeded
       - buyer_approval_pending
       - buyer_approval_declined
+      - buyer_approval_failed
       - buyer_approval_timedout
-      - buyer_approved
 
   amount:
     type: number
