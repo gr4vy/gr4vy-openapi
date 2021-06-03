@@ -1,7 +1,7 @@
 ---
 schema:
   type: string
-  example: captured
+  example: capture_succeeded
   enum:
     - processing
     - processing_failed
