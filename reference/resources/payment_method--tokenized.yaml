@@ -1,0 +1,66 @@
+---
+title: Payment Method (Tokenized)
+description: A mini format version of a payment method.
+type: object
+x-tags:
+  - Payment Methods
+
+properties:
+  type:
+    type: string
+    description: "`payment-method`."
+    example: payment-method
+    enum:
+      - payment-method
+
+  id:
+    type: string
+    description: |-
+      The unique ID of the payment method.
+    format: uuid
+    example: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+
+  method:
+    type: string
+    description: The type of this payment method.
+    example: card
+    enum:
+      - card
+      - paypal
+
+  label:
+    type: string
+    description: |-
+      A label for the payment method. For a `card` payment method this is the
+      last 4 digits on the card. For others it would be the email address.
+    example: "1111"
+
+  scheme:
+    type: string
+    example: visa
+    enum:
+      - visa
+      - mastercard
+      - american-express
+      - diners-club
+      - discover
+      - jcb
+      - unionpay
+      - maestro
+      - elo
+      - mir
+      - hiper
+      - hipercard
+    description: |-
+      The type of the card, if the payment method is a card.
+    nullable: true
+
+  expiration_date:
+    type: string
+    description: |-
+      The expiration date for the payment method.
+    example: "11/25"
+    pattern: ^\d{2}/\d{2}$
+    minLength: 5
+    maxLength: 5
+    nullable: true

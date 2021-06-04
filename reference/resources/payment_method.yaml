@@ -24,6 +24,22 @@ properties:
     type: string
     description: |-
       The state of the payment method.
+
+      - `processing` - The payment method is still being stored.
+      - `processing_failed` - Storing the payment method failed.
+      - `buyer_approval_pending` - Storing the payment method requires
+        the buyer to provide approval. Follow the `approval_url` for next steps.
+      - `buyer_approval_declined` - The buyer declined to approve the payment
+        method. This can happen after the buyer has been redirect to the
+        `approval_url`.
+      - `buyer_approval_timedout` - The buyer did  not approve the payment
+        method in time. This can happen after the buyer has been redirect to the
+        `approval_url`.
+      - `stored` - The payment method is approved and stored with all relevant
+        payment services.
+      - `partially_stored` - The payment method is approved and stored with only some of
+        the relevant payment services.
+      - `used` - The payment method was used for a transaction once and not stored.
     example: stored
     enum:
       - processing
@@ -31,8 +47,8 @@ properties:
       - buyer_approval_pending
       - buyer_approval_declined
       - buyer_approval_timedout
-      - buyer_approved
       - stored
+      - partially_stored
       - used
 
   method:
@@ -73,54 +89,51 @@ properties:
     allOf:
       - $ref: "../openapi.yaml#/components/schemas/Buyer"
 
-  details:
-    description: Additional details about a payment method.
-    type: object
-    properties:
-      number:
-        type: string
-        description: |-
-          Partial number details for a stored card, hiding all but the last few
-          numbers.
-        example: XXXX XXXX XXXX 1111
+  label:
+    type: string
+    description: |-
+      A label for the card or the account. For a `paypal` payment method this
+      is the user's email address. For a card it is the last 4 digits of the
+      card.
+    example: "john@example.com"
+    nullable: true
 
-      scheme:
-        type: string
-        example: visa
-        enum:
-          - visa
-          - mastercard
-          - american-express
-          - diners-club
-          - discover
-          - jcb
-          - unionpay
-          - maestro
-          - elo
-          - mir
-          - hiper
-          - hipercard
-        description: |-
-          The type of the card.
+  scheme:
+    type: string
+    example: null
+    nullable: true
+    description: |-
+      The scheme of the card. Only applies to card payments.
 
-      expiration_date:
-        type: string
-        description: |-
-          The expiration date for a card.
-        example: "11 / 21"
+  expiration_date:
+    type: string
+    description: |-
+      The expiration date for the payment method.
+    example: null
+    pattern: ^\d{2}/\d{2}$
+    minLength: 5
+    maxLength: 5
+    nullable: true
 
-      email_address:
-        type: string
-        example: john@example.com
-        description: The email address associated to the payment method.
-        nullable: true
+  approval_url:
+    type: string
+    format: uri
+    example: |-
+      https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+    description:
+      The optional URL that the buyer needs to be redirected to to further
+      authorize their payment.
+    nullable: true
 
-      approval_url:
-        type: string
-        format: uri
-        example: |-
-          https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
-        description:
-          The optional URL that the buyer needs to be redirected to to further
-          authorize the payment method.
-        nullable: true
+  environment:
+    type: string
+    example: production
+    default: production
+    nullable: true
+    enum:
+      - development
+      - staging
+      - production
+    description: |-
+      The environment this payment method has been stored for. This will be null
+      of the payment method was not stored.

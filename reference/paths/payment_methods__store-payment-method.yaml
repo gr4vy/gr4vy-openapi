@@ -17,7 +17,7 @@ responses:
     content:
       application/json:
         schema:
-          $ref: "../openapi.yaml#/components/schemas/Card"
+          $ref: "../openapi.yaml#/components/schemas/PaymentMethod"
 
   "400":
     description:

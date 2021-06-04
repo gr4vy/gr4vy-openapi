@@ -29,19 +29,25 @@ properties:
     enum:
       - processing
       - processing_failed
-      - captured
+      - capture_succeeded
       - capture_pending
       - capture_declined
-      - authorized
+      - capture_failed
+      - authorization_succeeded
       - authorization_pending
       - authorization_declined
+      - authorization_failed
       - authorization_expired
       - authorization_voided
-      - refunded
+      - refund_succeeded
+      - refund_pending
+      - refund_declined
+      - refund_failed
+      - buyer_approval_succeeded
       - buyer_approval_pending
       - buyer_approval_declined
+      - buyer_approval_failed
       - buyer_approval_timedout
-      - buyer_approved
 
   amount:
     type: number
@@ -76,10 +82,17 @@ properties:
     description: The currency code for this transaction.
 
   payment_method:
-    x-model-name: PaymentMethod
-    oneOf:
-      - $ref: "../openapi.yaml#/components/schemas/Card"
-      - $ref: "../openapi.yaml#/components/schemas/PayPal"
+    description: |-
+      The payment method used for this transaction.
+    allOf:
+      - $ref: "../openapi.yaml#/components/schemas/PaymentMethod--Snapshot"
+
+  buyer:
+    description: |-
+      The buyer used for this transaction.
+    nullable: true
+    allOf:
+      - $ref: "../openapi.yaml#/components/schemas/Buyer--Snapshot"
 
   created_at:
     type: string
@@ -103,7 +116,10 @@ properties:
       Defines when the transaction was last updated.
 
   payment_service:
-    $ref: "../openapi.yaml#/components/schemas/PaymentService"
+    description: |-
+      The payment service used for this transaction.
+    allOf:
+      - $ref: "../openapi.yaml#/components/schemas/PaymentService--Snapshot"
 
   environment:
     type: string

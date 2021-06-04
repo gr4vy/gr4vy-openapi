@@ -11,7 +11,7 @@ properties:
     type: array
     description: A list of stored payment methods in token format.
     items:
-      $ref: "../openapi.yaml#/components/schemas/Card--Tokenized"
+      $ref: "../openapi.yaml#/components/schemas/PaymentMethod--Tokenized"
 
   limit:
     $ref: "../properties/limit-100.yaml"

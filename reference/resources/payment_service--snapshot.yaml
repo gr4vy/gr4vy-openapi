@@ -1,0 +1,38 @@
+---
+title: A payment service
+type: object
+description: An active, configured payment service.
+
+x-tags:
+  - Payment Services
+
+properties:
+  id:
+    type: string
+    description: The ID of this payment service.
+    example: stripe-card-faaad066-30b4-4997-a438-242b0752d7e1
+    minLength: 1
+    maxLength: 200
+
+  type:
+    type: string
+    description: The type of this resource.
+    example: payment-service
+    enum:
+      - payment-service
+
+  payment_service_definition_id:
+    type: string
+    description: |
+      The ID of the payment service definition used to create this service.
+    example: stripe-card
+    minLength: 1
+    maxLength: 50
+
+  method:
+    type: string
+    description: Defines the ID of the payment method that this service handles.
+    example: card
+    enum:
+      - card
+      - paypal
