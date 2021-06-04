@@ -2115,10 +2115,21 @@
         }
       ],
       "post": {
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/TransactionRefundRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Returns cancelled transaction.",
@@ -2144,7 +2155,7 @@
         ],
         "description": "Refunds or voids transaction. If this transaction was already captured, it\nwill issue a refund. If the transaction was not yet captured the authorization\nwill instead be voided.",
         "operationId": "refund-transaction",
-        "summary": "Refund or void transaction"
+        "summary": "Refund or void transactions"
       }
     },
     "/users/me": {
@@ -3541,7 +3552,7 @@
           "x-nullable": true
         },
         "status": {
-          "description": "The state of the payment method.\n\n- `processing` - The payment method is still being stored.\n- `processing_failed` - Storing the payment method failed.\n- `buyer_approval_pending` - Storing the payment method requires\n  the buyer to provide approval. Follow the `approval_url` for next steps.\n- `buyer_approval_declined` - The buyer declined to approve the payment\n  method. This can happen after the buyer has been redirect to the\n  `approval_url`.\n- `buyer_approval_timedout` - The buyer did  not approve the payment\n  method in time. This can happen after the buyer has been redirect to the\n  `approval_url`.\n- `stored` - The payment method is approved and stored with all relevant\n  payment services.\n- `partially_stored` - The payment method is approved and stored with only some of\n  the relevant payment services.\n- `used` - The payment method was used for a transaction once and not stored.",
+          "description": "The state of the payment method.\n\n- `processing` - The payment method is still being stored.\n- `processing_failed` - Storing the payment method did not succeed.\n- `buyer_approval_pending` - Storing the payment method requires\n  the buyer to provide approval. Follow the `approval_url` for next steps.\n- `buyer_approval_declined` - The buyer declined to approve the payment\n  method. This can happen after the buyer has been redirect to the\n  `approval_url`.\n- `buyer_approval_timedout` - The buyer did  not approve the payment\n  method in time. This can happen after the buyer has been redirect to the\n  `approval_url`.\n- `stored` - The payment method is approved and stored with all relevant\n  payment services.\n- `partially_stored` - The payment method is approved and stored with only\n  some of the relevant payment services.\n- `used` - The payment method was used for a transaction once and\n  not stored.",
           "enum": [
             "processing",
             "processing_failed",
@@ -4541,7 +4552,7 @@
       "description": "A transaction record.",
       "properties": {
         "amount": {
-          "description": "The currency amount captured by this transaction.",
+          "description": "The authorized amount for this transaction. This can be different than the\nactual captured amount and part of this amount may be refunded.",
           "example": 1299,
           "maximum": 99999999,
           "minimum": 0.000001,
@@ -4555,6 +4566,13 @@
           ],
           "description": "The buyer used for this transaction.",
           "x-nullable": true
+        },
+        "captured_amount": {
+          "description": "The captured amount for this transaction. This can be a part and in some\ncases even more than the authorized amount.",
+          "example": 999,
+          "maximum": 99999999,
+          "minimum": 0,
+          "type": "number"
         },
         "created_at": {
           "description": "The date and time when this transaction was created in our system.",
@@ -4605,6 +4623,13 @@
             }
           ],
           "description": "The payment service used for this transaction."
+        },
+        "refunded_amount": {
+          "description": "The refunded amount for this transaction. This can be a part or all of the\ncaptured amount.",
+          "example": 100,
+          "maximum": 99999999,
+          "minimum": 0,
+          "type": "number"
         },
         "status": {
           "description": "The status of the transaction being processed. This is different from the\n`status` field in that it represents the status of the transaction at the\npayment processor, not the status of the transaction created in Gr4vy.",
@@ -4658,27 +4683,13 @@
       "description": "A request to capture a transaction.",
       "properties": {
         "amount": {
-          "description": "The (partial) amount to capture.\n\nWhen left blank, this will capture the entire amount.",
+          "description": "The (partial) amount to capture.\n\nWhen omitted blank, this will capture the entire amount.",
           "example": 1299,
           "maximum": 99999999,
           "minimum": 0.000001,
           "type": "number"
-        },
-        "currency": {
-          "description": "A supported ISO-4217 currency code.\n",
-          "example": "USD",
-          "type": "string"
-        },
-        "external_identifier": {
-          "description": "An external identifier that can be used to match the transaction against your own records.",
-          "example": "user-789123",
-          "type": "string"
         }
       },
-      "required": [
-        "amount",
-        "currency"
-      ],
       "title": "Capture a transaction",
       "type": "object",
       "x-tags": [
@@ -4755,6 +4766,23 @@
         "method"
       ],
       "title": "Transaction payment method request",
+      "type": "object",
+      "x-tags": [
+        "Request Bodies"
+      ]
+    },
+    "TransactionRefundRequest": {
+      "description": "A request to refund a transaction.",
+      "properties": {
+        "amount": {
+          "description": "The (partial) amount to refund.\n\nWhen omitted blank, this will refund the entire amount.",
+          "example": 1299,
+          "maximum": 99999999,
+          "minimum": 0.000001,
+          "type": "number"
+        }
+      },
+      "title": "Refund a transaction",
       "type": "object",
       "x-tags": [
         "Request Bodies"
