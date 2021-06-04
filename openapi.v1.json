@@ -1538,21 +1538,28 @@
           {
             "schema": {
               "type": "string",
-              "example": "captured",
+              "example": "capture_succeeded",
               "enum": [
                 "processing",
                 "processing_failed",
-                "captured",
+                "capture_succeeded",
                 "capture_pending",
                 "capture_declined",
-                "authorized",
+                "capture_failed",
+                "authorization_succeeded",
                 "authorization_pending",
                 "authorization_declined",
+                "authorization_failed",
                 "authorization_expired",
                 "authorization_voided",
-                "refunded",
+                "refund_succeeded",
+                "refund_pending",
+                "refund_declined",
+                "refund_failed",
+                "buyer_approval_succeeded",
                 "buyer_approval_pending",
                 "buyer_approval_declined",
+                "buyer_approval_failed",
                 "buyer_approval_timedout"
               ]
             },
@@ -1753,7 +1760,7 @@
                     "value": {
                       "type": "transaction",
                       "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-                      "status": "authorized",
+                      "status": "authorization_succeeded",
                       "amount": 1299,
                       "currency": "USD",
                       "payment_method": {
@@ -4488,19 +4495,25 @@
             "enum": [
               "processing",
               "processing_failed",
-              "captured",
+              "capture_succeeded",
               "capture_pending",
               "capture_declined",
-              "authorized",
+              "capture_failed",
+              "authorization_succeeded",
               "authorization_pending",
               "authorization_declined",
+              "authorization_failed",
               "authorization_expired",
               "authorization_voided",
-              "refunded",
+              "refund_succeeded",
+              "refund_pending",
+              "refund_declined",
+              "refund_failed",
+              "buyer_approval_succeeded",
               "buyer_approval_pending",
               "buyer_approval_declined",
-              "buyer_approval_timedout",
-              "buyer_approved"
+              "buyer_approval_failed",
+              "buyer_approval_timedout"
             ]
           },
           "amount": {
