@@ -4183,6 +4183,15 @@
             "nullable": true,
             "description": "An icon to display for the payment option.",
             "example": "https://cdn.gr4vy.app/card.svg"
+          },
+          "mode": {
+            "type": "string",
+            "description": "The mode of how the payment option should be displayed.",
+            "example": "card",
+            "enum": [
+              "card",
+              "redirect"
+            ]
           }
         }
       },
