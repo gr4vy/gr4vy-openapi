@@ -81,7 +81,7 @@ responses:
             value:
               type: transaction
               id: fe26475d-ec3e-4884-9553-f7356683f7f9
-              status: authorized
+              status: authorization_succeeded
               amount: 1299
               currency: USD
               payment_method:
