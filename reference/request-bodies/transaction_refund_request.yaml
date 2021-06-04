@@ -1,0 +1,18 @@
+---
+title: Refund a transaction
+type: object
+description: A request to refund a transaction.
+
+x-tags:
+  - Request Bodies
+
+properties:
+  amount:
+    type: number
+    description: |-
+      The (partial) amount to refund.
+
+      When omitted blank, this will refund the entire amount.
+    minimum: 0.000001
+    maximum: 99999999
+    example: 1299

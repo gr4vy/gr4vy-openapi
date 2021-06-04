@@ -1,12 +1,20 @@
 ---
 operationId: refund-transaction
-summary: Refund or void transaction
+
+summary: Refund or void transactions
+
 description: |-
   Refunds or voids transaction. If this transaction was already captured, it
   will issue a refund. If the transaction was not yet captured the authorization
   will instead be voided.
 tags:
   - Transactions
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: "../openapi.yaml#/components/schemas/TransactionRefundRequest"
 
 responses:
   "200":

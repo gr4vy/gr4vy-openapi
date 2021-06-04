@@ -433,6 +433,8 @@ components:
       $ref: "./request-bodies/transaction_create_request.yaml"
     TransactionCaptureRequest:
       $ref: "./request-bodies/transaction_capture_request.yaml"
+    TransactionRefundRequest:
+      $ref: "./request-bodies/transaction_refund_request.yaml"
     TransactionPaymentMethodRequest:
       $ref: "./request-bodies/transaction_payment_method_request.yaml"
     # TransactionEvent:

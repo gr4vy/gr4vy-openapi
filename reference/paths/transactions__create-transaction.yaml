@@ -76,7 +76,6 @@ responses:
       application/json:
         schema:
           $ref: "../openapi.yaml#/components/schemas/Transaction"
-
   "400":
     description:
       Returns an error if the request was badly formatted or missing required

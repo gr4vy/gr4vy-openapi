@@ -26,7 +26,7 @@ properties:
       The state of the payment method.
 
       - `processing` - The payment method is still being stored.
-      - `processing_failed` - Storing the payment method failed.
+      - `processing_failed` - Storing the payment method did not succeed.
       - `buyer_approval_pending` - Storing the payment method requires
         the buyer to provide approval. Follow the `approval_url` for next steps.
       - `buyer_approval_declined` - The buyer declined to approve the payment
@@ -37,9 +37,10 @@ properties:
         `approval_url`.
       - `stored` - The payment method is approved and stored with all relevant
         payment services.
-      - `partially_stored` - The payment method is approved and stored with only some of
-        the relevant payment services.
-      - `used` - The payment method was used for a transaction once and not stored.
+      - `partially_stored` - The payment method is approved and stored with only
+        some of the relevant payment services.
+      - `used` - The payment method was used for a transaction once and
+        not stored.
     example: stored
     enum:
       - processing
