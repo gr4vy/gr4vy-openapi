@@ -3913,6 +3913,15 @@
           "example": "card",
           "type": "string"
         },
+        "mode": {
+          "description": "The mode of how the payment option should be displayed.",
+          "enum": [
+            "card",
+            "redirect"
+          ],
+          "example": "card",
+          "type": "string"
+        },
         "type": {
           "description": "`payment-option`.",
           "enum": [
