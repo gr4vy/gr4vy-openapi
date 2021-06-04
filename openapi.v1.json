@@ -1353,7 +1353,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Card"
+                  "$ref": "#/components/schemas/PaymentMethod"
                 }
               }
             }
@@ -1416,15 +1416,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "x-model-name": "PaymentMethod",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Card"
-                    },
-                    {
-                      "$ref": "#/components/schemas/PayPal"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/PaymentMethod"
                 }
               }
             }
@@ -2629,105 +2621,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Transaction"
-                },
-                "examples": {
-                  "Card transaction": {
-                    "value": {
-                      "type": "transaction",
-                      "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-                      "status": "authorization_succeeded",
-                      "amount": 1299,
-                      "currency": "USD",
-                      "payment_method": {
-                        "type": "payment-method",
-                        "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
-                        "method": "card",
-                        "status": "stored",
-                        "details": {
-                          "number": "XXXX XXXX XXXX 1111",
-                          "expiration_date": "11/25",
-                          "scheme": "visa"
-                        },
-                        "created_at": "2013-07-16T19:23:00.000+00:00",
-                        "updated_at": "2013-07-16T19:23:00.000+00:00",
-                        "external_identifier": "user-789123",
-                        "buyer": {
-                          "type": "buyer",
-                          "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-                          "external_identifier": "user-789123",
-                          "display_name": "John L.",
-                          "created_at": "2013-07-16T19:23:00.000+00:00",
-                          "updated_at": "2013-07-16T19:23:00.000+00:00"
-                        }
-                      },
-                      "created_at": "2013-07-16T19:23:00.000+00:00",
-                      "external_identifier": "user-789123",
-                      "updated_at": "2019-08-24T14:15:22+00:00",
-                      "payment_service": {
-                        "id": "169f5226-4644-4d1e-ac36-14999e73601f",
-                        "type": "payment-service",
-                        "payment_service_definition_id": "stripe-card",
-                        "method": "card",
-                        "display_name": "Stripe (Main)",
-                        "status": "pending",
-                        "accepted_currencies": [
-                          "EUR"
-                        ],
-                        "accepted_countries": [
-                          "DE"
-                        ],
-                        "environment": "production"
-                      }
-                    }
-                  },
-                  "PayPal transaction": {
-                    "value": {
-                      "type": "transaction",
-                      "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-                      "status": "buyer_approval_pending",
-                      "amount": 1299,
-                      "currency": "USD",
-                      "payment_method": {
-                        "type": "payment-method",
-                        "id": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
-                        "method": "paypal",
-                        "status": "buyer_approval_pending",
-                        "details": {
-                          "email_address": null,
-                          "approval_url": "https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve"
-                        },
-                        "created_at": "2013-07-16T19:23:00.000+00:00",
-                        "updated_at": "2013-07-16T19:23:00.000+00:00",
-                        "external_identifier": "user-789123",
-                        "buyer": {
-                          "type": "buyer",
-                          "id": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-                          "external_identifier": "user-789123",
-                          "display_name": "John L.",
-                          "created_at": "2013-07-16T19:23:00.000+00:00",
-                          "updated_at": "2013-07-16T19:23:00.000+00:00"
-                        }
-                      },
-                      "created_at": "2013-07-16T19:23:00.000+00:00",
-                      "external_identifier": "user-789123",
-                      "updated_at": "2019-08-24T14:15:22+00:00",
-                      "payment_service": {
-                        "id": "169f5226-4644-4d1e-ac36-14999e73601f",
-                        "type": "payment-service",
-                        "payment_service_definition_id": "stripe-card",
-                        "method": "card",
-                        "display_name": "Stripe (Main)",
-                        "status": "pending",
-                        "accepted_currencies": [
-                          "EUR"
-                        ],
-                        "accepted_countries": [
-                          "DE"
-                        ],
-                        "environment": "production"
-                      }
-                    }
-                  }
                 }
               }
             }
@@ -3291,6 +3184,46 @@
           }
         }
       },
+      "Buyer--Snapshot": {
+        "title": "Buyer (Snapshot)",
+        "type": "object",
+        "description": "Snapshot of a buyer, as used when embedded inside other\nresources.",
+        "x-tags": [
+          "Buyers"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of this resource. Is always `buyer`.",
+            "example": "buyer",
+            "enum": [
+              "buyer"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+            "description": "The unique Gr4vy ID for this buyer.",
+            "format": "uuid"
+          },
+          "external_identifier": {
+            "type": "string",
+            "description": "An external identifier that can be used to match the buyer against your own records.",
+            "example": "user-789123",
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "display_name": {
+            "type": "string",
+            "description": "A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.",
+            "example": "John L.",
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 200
+          }
+        }
+      },
       "BuyerRequest": {
         "title": "Buyer (Create)",
         "type": "object",
@@ -3329,168 +3262,6 @@
             "$ref": "#/components/schemas/BuyerRequest"
           }
         ]
-      },
-      "Card": {
-        "title": "Card",
-        "description": "A stored card.",
-        "type": "object",
-        "x-tags": [
-          "Payment Methods"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "`payment-method`.",
-            "example": "payment-method",
-            "enum": [
-              "payment-method"
-            ]
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the payment method.",
-            "format": "uuid",
-            "example": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5"
-          },
-          "status": {
-            "type": "string",
-            "description": "The state of the card tokenization.",
-            "example": "stored",
-            "enum": [
-              "processing",
-              "processing_failed",
-              "stored",
-              "used"
-            ]
-          },
-          "method": {
-            "type": "string",
-            "description": "`card`.",
-            "example": "card",
-            "enum": [
-              "card"
-            ]
-          },
-          "created_at": {
-            "type": "string",
-            "description": "The date and time when this payment method was first created in our\nsystem.",
-            "format": "date-time",
-            "example": "2013-07-16T19:23:00.000+00:00"
-          },
-          "updated_at": {
-            "type": "string",
-            "description": "The date and time when this payment method was last updated in our system.",
-            "format": "date-time",
-            "example": "2013-07-16T19:23:00.000+00:00"
-          },
-          "external_identifier": {
-            "type": "string",
-            "description": "An external identifier that can be used to match the payment method\nagainst your own records.",
-            "example": "user-789123",
-            "nullable": true
-          },
-          "buyer": {
-            "description": "The optional buyer for which this payment method has been stored.",
-            "nullable": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Buyer"
-              }
-            ]
-          },
-          "details": {
-            "$ref": "#/components/schemas/CardDetails"
-          },
-          "environment": {
-            "type": "string",
-            "example": "production",
-            "default": "production",
-            "nullable": true,
-            "enum": [
-              "development",
-              "staging",
-              "production"
-            ],
-            "description": "The environment this payment method has been stored for. This will be null\nof the payment method was not stored."
-          }
-        }
-      },
-      "Card--Tokenized": {
-        "title": "Card (Tokenized)",
-        "description": "A mini format version of the card.",
-        "type": "object",
-        "x-tags": [
-          "Payment Methods"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "`payment-method`.",
-            "example": "payment-method",
-            "enum": [
-              "payment-method"
-            ]
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the payment method.",
-            "format": "uuid",
-            "example": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5"
-          },
-          "method": {
-            "type": "string",
-            "description": "`card`.",
-            "example": "card",
-            "enum": [
-              "card"
-            ]
-          },
-          "details": {
-            "$ref": "#/components/schemas/CardDetails"
-          }
-        }
-      },
-      "CardDetails": {
-        "title": "Card details",
-        "description": "Additional details about a stored card.",
-        "type": "object",
-        "x-tags": [
-          "Payment Methods"
-        ],
-        "properties": {
-          "suffix": {
-            "type": "string",
-            "description": "The last 4 digits of the card number.",
-            "example": "1111"
-          },
-          "scheme": {
-            "type": "string",
-            "example": "visa",
-            "enum": [
-              "visa",
-              "mastercard",
-              "american-express",
-              "diners-club",
-              "discover",
-              "jcb",
-              "unionpay",
-              "maestro",
-              "elo",
-              "mir",
-              "hiper",
-              "hipercard"
-            ],
-            "description": "The type of the card."
-          },
-          "expiration_date": {
-            "type": "string",
-            "description": "The expiration date for a card.",
-            "example": "11/25",
-            "pattern": "^\\d{2}/\\d{2}$",
-            "minLength": 5,
-            "maxLength": 5
-          }
-        }
       },
       "CardRequest": {
         "title": "Card",
@@ -4633,7 +4404,7 @@
           },
           "status": {
             "type": "string",
-            "description": "The state of the payment method.",
+            "description": "The state of the payment method.\n\n- `processing` - The payment method is still being stored.\n- `processing_failed` - Storing the payment method failed.\n- `buyer_approval_pending` - Storing the payment method requires\n  the buyer to provide approval. Follow the `approval_url` for next steps.\n- `buyer_approval_declined` - The buyer declined to approve the payment\n  method. This can happen after the buyer has been redirect to the\n  `approval_url`.\n- `buyer_approval_timedout` - The buyer did  not approve the payment\n  method in time. This can happen after the buyer has been redirect to the\n  `approval_url`.\n- `stored` - The payment method is approved and stored with all relevant\n  payment services.\n- `partially_stored` - The payment method is approved and stored with only some of\n  the relevant payment services.\n- `used` - The payment method was used for a transaction once and not stored.",
             "example": "stored",
             "enum": [
               "processing",
@@ -4641,8 +4412,8 @@
               "buyer_approval_pending",
               "buyer_approval_declined",
               "buyer_approval_timedout",
-              "buyer_approved",
               "stored",
+              "partially_stored",
               "used"
             ]
           },
@@ -4682,53 +4453,112 @@
               }
             ]
           },
-          "details": {
-            "description": "Additional details about a payment method.",
-            "type": "object",
-            "properties": {
-              "number": {
-                "type": "string",
-                "description": "Partial number details for a stored card, hiding all but the last few\nnumbers.",
-                "example": "XXXX XXXX XXXX 1111"
-              },
-              "scheme": {
-                "type": "string",
-                "example": "visa",
-                "enum": [
-                  "visa",
-                  "mastercard",
-                  "american-express",
-                  "diners-club",
-                  "discover",
-                  "jcb",
-                  "unionpay",
-                  "maestro",
-                  "elo",
-                  "mir",
-                  "hiper",
-                  "hipercard"
-                ],
-                "description": "The type of the card."
-              },
-              "expiration_date": {
-                "type": "string",
-                "description": "The expiration date for a card.",
-                "example": "11 / 21"
-              },
-              "email_address": {
-                "type": "string",
-                "example": "john@example.com",
-                "description": "The email address associated to the payment method.",
-                "nullable": true
-              },
-              "approval_url": {
-                "type": "string",
-                "format": "uri",
-                "example": "https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve",
-                "description": "The optional URL that the buyer needs to be redirected to to further authorize the payment method.",
-                "nullable": true
-              }
-            }
+          "label": {
+            "type": "string",
+            "description": "A label for the card or the account. For a `paypal` payment method this\nis the user's email address. For a card it is the last 4 digits of the\ncard.",
+            "example": "john@example.com",
+            "nullable": true
+          },
+          "scheme": {
+            "type": "string",
+            "example": null,
+            "nullable": true,
+            "description": "The scheme of the card. Only applies to card payments."
+          },
+          "expiration_date": {
+            "type": "string",
+            "description": "The expiration date for the payment method.",
+            "example": null,
+            "pattern": "^\\d{2}/\\d{2}$",
+            "minLength": 5,
+            "maxLength": 5,
+            "nullable": true
+          },
+          "approval_url": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve",
+            "description": "The optional URL that the buyer needs to be redirected to to further authorize their payment.",
+            "nullable": true
+          },
+          "environment": {
+            "type": "string",
+            "example": "production",
+            "default": "production",
+            "nullable": true,
+            "enum": [
+              "development",
+              "staging",
+              "production"
+            ],
+            "description": "The environment this payment method has been stored for. This will be null\nof the payment method was not stored."
+          }
+        }
+      },
+      "PaymentMethod--Tokenized": {
+        "title": "Payment Method (Tokenized)",
+        "description": "A mini format version of a payment method.",
+        "type": "object",
+        "x-tags": [
+          "Payment Methods"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`payment-method`.",
+            "example": "payment-method",
+            "enum": [
+              "payment-method"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the payment method.",
+            "format": "uuid",
+            "example": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5"
+          },
+          "method": {
+            "type": "string",
+            "description": "The type of this payment method.",
+            "example": "card",
+            "enum": [
+              "card",
+              "paypal"
+            ]
+          },
+          "label": {
+            "type": "string",
+            "description": "A label for the payment method. For a `card` payment method this is the\nlast 4 digits on the card. For others it would be the email address.",
+            "example": "1111"
+          },
+          "scheme": {
+            "type": "string",
+            "example": "visa",
+            "enum": [
+              "visa",
+              "mastercard",
+              "american-express",
+              "diners-club",
+              "discover",
+              "jcb",
+              "unionpay",
+              "maestro",
+              "elo",
+              "mir",
+              "hiper",
+              "hipercard"
+            ],
+            "description": "The type of the card, if the payment method is a card.",
+            "nullable": true
+          },
+          "expiration_date": {
+            "type": "string",
+            "description": "The expiration date for the payment method.",
+            "example": "11/25",
+            "pattern": "^\\d{2}/\\d{2}$",
+            "minLength": 5,
+            "maxLength": 5,
+            "nullable": true
           }
         }
       },
@@ -4744,7 +4574,7 @@
             "type": "array",
             "description": "A list of stored payment methods.",
             "items": {
-              "$ref": "#/components/schemas/Card"
+              "$ref": "#/components/schemas/PaymentMethod"
             }
           },
           "limit": {
@@ -4774,6 +4604,73 @@
           }
         }
       },
+      "PaymentMethod--Snapshot": {
+        "title": "Payment method (Snapshot)",
+        "description": "Snapshot of a payment method, as used when embedded inside other\nresources.",
+        "type": "object",
+        "x-tags": [
+          "Payment Methods"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`payment-method`.",
+            "example": "payment-method",
+            "enum": [
+              "payment-method"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "The unique ID of the payment method.",
+            "format": "uuid",
+            "example": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5",
+            "nullable": true
+          },
+          "method": {
+            "type": "string",
+            "description": "The type of this payment method.",
+            "example": "card",
+            "enum": [
+              "card",
+              "paypal"
+            ]
+          },
+          "external_identifier": {
+            "type": "string",
+            "description": "An external identifier that can be used to match the payment method\nagainst your own records.",
+            "example": "user-789123",
+            "nullable": true
+          },
+          "label": {
+            "type": "string",
+            "description": "A label for the payment method. This can be the last 4 digits for a card,\nor the email address for an alternative payment method.",
+            "example": "1111"
+          },
+          "scheme": {
+            "type": "string",
+            "example": "visa",
+            "description": "An additional label used to differentiate different sub-types of a payment\nmethod. Most notably this can include the type of card used in a\ntransaction.",
+            "nullable": true
+          },
+          "expiration_date": {
+            "type": "string",
+            "description": "The expiration date for this payment method. This is mostly used by cards\nwhere the card might have an expiration date.",
+            "example": "11/25",
+            "pattern": "^\\d{2}/\\d{2}$",
+            "minLength": 5,
+            "maxLength": 5,
+            "nullable": true
+          },
+          "approval_url": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve",
+            "description": "The optional URL that the buyer needs to be redirected to to further authorize their payment.",
+            "nullable": true
+          }
+        }
+      },
       "PaymentMethods--Tokenized": {
         "title": "Payment Methods (Token only)",
         "type": "object",
@@ -4786,7 +4683,7 @@
             "type": "array",
             "description": "A list of stored payment methods in token format.",
             "items": {
-              "$ref": "#/components/schemas/Card--Tokenized"
+              "$ref": "#/components/schemas/PaymentMethod--Tokenized"
             }
           },
           "limit": {
@@ -4950,6 +4847,47 @@
             "format": "date-time",
             "example": "2012-12-12T10:53:43+00:00",
             "description": "The date and time when this service was last updated."
+          }
+        }
+      },
+      "PaymentService--Snapshot": {
+        "title": "A payment service",
+        "type": "object",
+        "description": "An active, configured payment service.",
+        "x-tags": [
+          "Payment Services"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The ID of this payment service.",
+            "example": "stripe-card-faaad066-30b4-4997-a438-242b0752d7e1",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of this resource.",
+            "example": "payment-service",
+            "enum": [
+              "payment-service"
+            ]
+          },
+          "payment_service_definition_id": {
+            "type": "string",
+            "description": "The ID of the payment service definition used to create this service.\n",
+            "example": "stripe-card",
+            "minLength": 1,
+            "maxLength": 50
+          },
+          "method": {
+            "type": "string",
+            "description": "Defines the ID of the payment method that this service handles.",
+            "example": "card",
+            "enum": [
+              "card",
+              "paypal"
+            ]
           }
         }
       },
@@ -5340,118 +5278,6 @@
           }
         }
       },
-      "PayPal": {
-        "title": "PayPal Account",
-        "description": "A stored PayPal account.",
-        "type": "object",
-        "x-tags": [
-          "Payment Methods"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "`payment-method`.",
-            "example": "payment-method",
-            "enum": [
-              "payment-method"
-            ]
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique ID of the payment method.",
-            "format": "uuid",
-            "example": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5"
-          },
-          "status": {
-            "type": "string",
-            "description": "The state of the account tokenization. After the first call this will\nbe set to `buyer_approval_pending` and the response will include\nan `approval_url`. The buyer needs to be redirected to this URL\nto authorize the future payments.",
-            "example": "buyer_approval_pending",
-            "enum": [
-              "processing",
-              "processing_failed",
-              "buyer_approval_pending",
-              "buyer_approval_declined",
-              "buyer_approval_timedout",
-              "buyer_approved",
-              "stored",
-              "used"
-            ]
-          },
-          "method": {
-            "type": "string",
-            "description": "`paypal`.",
-            "example": "paypal",
-            "enum": [
-              "paypal"
-            ]
-          },
-          "created_at": {
-            "type": "string",
-            "description": "The date and time when this payment method was first created in our\nsystem.",
-            "format": "date-time",
-            "example": "2013-07-16T19:23:00.000+00:00"
-          },
-          "updated_at": {
-            "type": "string",
-            "description": "The date and time when this payment method was last updated in our system.",
-            "format": "date-time",
-            "example": "2013-07-16T19:23:00.000+00:00"
-          },
-          "external_identifier": {
-            "type": "string",
-            "description": "An external identifier that can be used to match the payment method\nagainst your own records.",
-            "example": "user-789123",
-            "nullable": true
-          },
-          "buyer": {
-            "description": "The optional buyer for which this payment method has been stored.",
-            "nullable": true,
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Buyer"
-              }
-            ]
-          },
-          "details": {
-            "$ref": "#/components/schemas/PayPalDetails"
-          },
-          "environment": {
-            "type": "string",
-            "example": "production",
-            "default": "production",
-            "nullable": true,
-            "enum": [
-              "development",
-              "staging",
-              "production"
-            ],
-            "description": "The environment this payment method has been stored for. This will be null\nof the payment method was not stored."
-          }
-        }
-      },
-      "PayPalDetails": {
-        "title": "PayPal account details",
-        "description": "Additional details about a stored PayPal account.",
-        "type": "object",
-        "x-tags": [
-          "Payment Methods"
-        ],
-        "properties": {
-          "email_address": {
-            "type": "string",
-            "example": "john@example.com",
-            "description": "The email address associated to the PayPal account.",
-            "nullable": true
-          },
-          "approval_url": {
-            "type": "string",
-            "format": "uri",
-            "example": "https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve",
-            "description": "The optional URL that the buyer needs to be redirected to to further authorize their PayPal payments.",
-            "nullable": true
-          }
-        }
-      },
       "PayPalRequest": {
         "title": "PayPal Account",
         "type": "object",
@@ -5738,13 +5564,19 @@
             "description": "The currency code for this transaction."
           },
           "payment_method": {
-            "x-model-name": "PaymentMethod",
-            "oneOf": [
+            "description": "The payment method used for this transaction.",
+            "allOf": [
               {
-                "$ref": "#/components/schemas/Card"
-              },
+                "$ref": "#/components/schemas/PaymentMethod--Snapshot"
+              }
+            ]
+          },
+          "buyer": {
+            "description": "The buyer used for this transaction.",
+            "nullable": true,
+            "allOf": [
               {
-                "$ref": "#/components/schemas/PayPal"
+                "$ref": "#/components/schemas/Buyer--Snapshot"
               }
             ]
           },
@@ -5766,7 +5598,12 @@
             "description": "Defines when the transaction was last updated."
           },
           "payment_service": {
-            "$ref": "#/components/schemas/PaymentService"
+            "description": "The payment service used for this transaction.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaymentService--Snapshot"
+              }
+            ]
           },
           "environment": {
             "type": "string",
