@@ -1,0 +1,77 @@
+---
+title: Payment method (Snapshot)
+description: |-
+  Snapshot of a payment method, as used when embedded inside other
+  resources.
+type: object
+x-tags:
+  - Payment Methods
+
+properties:
+  type:
+    type: string
+    description: "`payment-method`."
+    example: payment-method
+    enum:
+      - payment-method
+
+  id:
+    type: string
+    description: |-
+      The unique ID of the payment method.
+    format: uuid
+    example: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+    nullable: true
+
+  method:
+    type: string
+    description: The type of this payment method.
+    example: card
+    enum:
+      - card
+      - paypal
+
+  external_identifier:
+    type: string
+    description: |-
+      An external identifier that can be used to match the payment method
+      against your own records.
+    example: user-789123
+    nullable: true
+
+  label:
+    type: string
+    description: |-
+      A label for the payment method. This can be the last 4 digits for a card,
+      or the email address for an alternative payment method.
+    example: "1111"
+
+  scheme:
+    type: string
+    example: visa
+    description: |-
+      An additional label used to differentiate different sub-types of a payment
+      method. Most notably this can include the type of card used in a
+      transaction.
+    nullable: true
+
+  expiration_date:
+    type: string
+    description: |-
+      The expiration date for this payment method. This is mostly used by cards
+      where the card might have an expiration date.
+    example: "11/25"
+    pattern: ^\d{2}/\d{2}$
+    minLength: 5
+    maxLength: 5
+    nullable: true
+
+  approval_url:
+    type: string
+    format: uri
+    example: |-
+      https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+    description:
+      The optional URL that the buyer needs to be redirected to to further
+      authorize their payment.
+    nullable: true

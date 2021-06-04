@@ -11,10 +11,7 @@ responses:
     content:
       application/json:
         schema:
-          x-model-name: PaymentMethod
-          oneOf:
-            - $ref: "../openapi.yaml#/components/schemas/Card"
-            - $ref: "../openapi.yaml#/components/schemas/PayPal"
+          $ref: "../openapi.yaml#/components/schemas/PaymentMethod"
 
   "401":
     description: Returns an error if no valid authentication was provided.

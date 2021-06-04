@@ -62,10 +62,17 @@ properties:
     description: The currency code for this transaction.
 
   payment_method:
-    x-model-name: PaymentMethod
-    oneOf:
-      - $ref: "../openapi.yaml#/components/schemas/Card"
-      - $ref: "../openapi.yaml#/components/schemas/PayPal"
+    description: |-
+      The payment method used for this transaction.
+    allOf:
+      - $ref: "../openapi.yaml#/components/schemas/PaymentMethod--Snapshot"
+
+  buyer:
+    description: |-
+      The buyer used for this transaction.
+    nullable: true
+    allOf:
+      - $ref: "../openapi.yaml#/components/schemas/Buyer--Snapshot"
 
   created_at:
     type: string
@@ -89,7 +96,10 @@ properties:
       Defines when the transaction was last updated.
 
   payment_service:
-    $ref: "../openapi.yaml#/components/schemas/PaymentService"
+    description: |-
+      The payment service used for this transaction.
+    allOf:
+      - $ref: "../openapi.yaml#/components/schemas/PaymentService--Snapshot"
 
   environment:
     type: string
