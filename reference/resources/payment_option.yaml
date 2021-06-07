@@ -39,6 +39,7 @@ properties:
   label:
     type: string
     description: |-
-      The label to show for the the payment option in the requested
-      locale.
+      A label that describes this payment option. This label is returned in the language 
+      defined by the `locale` query parameter. The label can be used to display a list
+      of payment options to the buyer in their language.
     example: Pay by Card
