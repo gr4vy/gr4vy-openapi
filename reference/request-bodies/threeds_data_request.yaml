@@ -1,8 +1,8 @@
 ---
-title: ThreeDSecure Data
+title: 3D Secure Data
 type: object
 description: |-
-  ThreeDSecure MPI data to use in a transaction.
+  3D Secure MPI data to use in a transaction.
 
 x-tags:
   - Request Bodies
@@ -25,46 +25,46 @@ properties:
   eci:
     type: string
     description: |-
-      The electronic commercie indidator for the 3DS transaction
+      The electronic commerce indicator for the 3DS transaction.
     example: "05"
 
   cavv:
     type: string
     description: |-
-      The cardholder authentication value or AAV
+      The cardholder authentication value or AAV.
     example: "3q2+78r+ur7erb7vyv66vv8="
 
   cavv_algorithm:
     type: string
     description: |-
-      The CAVV Algorithm used. 3DS version 1 only
+      The CAVV Algorithm used. 3DS version 1 only.
     example: ""
     nullable: true
 
   xid:
     type: string
     description:
-      The transaction identifier. 3DS version 1 only
+      The transaction identifier. 3DS version 1 only.
     example: ""
     nullable: true
 
   directory_trans_id:
     type: string
     description: |-
-      The transaction identifier. 3DS verison 2 only
+      The transaction identifier. 3DS version 2 only.
     example: "c4e59ceb-a382-4d6a-bc87-385d591fa09d"
     nullable: true
 
   directory_response:
     type: string
     description: |-
-      For 3DS version 1, the enrollment response.
-      For 3DS version 2, the transStatus from the ARes
+      For 3DS version 1, the enrolment response.
+      For 3DS version 2, the transaction status from the `ARes`.
     example: "C"
 
   authentication_response:
     type: string
     description: |-
       For 3DS version 1, the authentication response.
-      For 3DS version 2, the transStatus from the challenge result (not required for frictionless)
+      For 3DS version 2, the transaction status from the challenge result (not required for frictionless).
     example: "Y"

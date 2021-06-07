@@ -11,9 +11,6 @@ requestBody:
       schema:
         $ref: "../openapi.yaml#/components/schemas/TransactionApproveRequest"
       examples:
-        Fingerprint step complete:
-          value:
-            
         Challenge step complete:
           value:
             threeds_transaction_status: "N"
