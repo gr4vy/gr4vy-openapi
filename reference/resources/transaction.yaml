@@ -136,6 +136,6 @@ properties:
   threeds_included:
     type: boolean
     description: |-
-      Whether to 3DS flow was included in the transaction.
+      Whether the 3DS flow was included in the transaction.
     example: false
     nullable: true
