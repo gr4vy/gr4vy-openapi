@@ -295,12 +295,6 @@ paths:
     post:
       $ref: "./paths/transactions__capture-transaction.yaml"
 
-  "/transactions/{transaction_id}/authorize":
-    parameters:
-      - $ref: "./path-parameters/transaction_id.yaml"
-    post:
-      $ref: "./paths/transactions__authorize-transaction.yaml"
-
   "/transactions/{transaction_id}/refund":
     parameters:
       - $ref: "./path-parameters/transaction_id.yaml"
@@ -318,6 +312,8 @@ paths:
       - $ref: "./path-parameters/transaction_id.yaml"
     get:
       $ref: "./paths/transactions__approve-transaction.yaml"
+    post:
+      $ref: "./paths/transactions__post-approve-transaction.yaml"
 
   "/transactions/approvals/{transaction_approval_token}":
     parameters:
@@ -431,8 +427,8 @@ components:
       $ref: "./request-bodies/transactions_batch_capture_request.yaml"
     TransactionRequest:
       $ref: "./request-bodies/transaction_create_request.yaml"
-    TransactionAuthorizeRequest:
-      $ref: "./request-bodies/transaction_authorize_request.yaml"
+    TransactionApproveRequest:
+      $ref: "./request-bodies/transaction_approve_request.yaml"
     TransactionCaptureRequest:
       $ref: "./request-bodies/transaction_capture_request.yaml"
     TransactionRefundRequest:
@@ -445,10 +441,6 @@ components:
     #   $ref: "./resources/transaction_events.yaml"
     ThreeDSDataRequest:
       $ref: "./request-bodies/threeds_data_request.yaml"
-    ThreeDSMpiRequest:
-      $ref: "./request-bodies/threeds_mpi_request.yaml"
-    ThreeDSMpiResponse:
-      $ref: "./resources/threeds_mpi_response.yaml"
     User:
       $ref: "./resources/user.yaml"
 

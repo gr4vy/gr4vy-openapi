@@ -48,7 +48,7 @@ properties:
       - buyer_approval_declined
       - buyer_approval_failed
       - buyer_approval_timedout
-      - buyer_challenge
+      - buyer_challenge_required
 
   amount:
     type: number
@@ -133,7 +133,9 @@ properties:
     description: |-
       The environment this transaction has been created in.
 
-  mpi_response:
-    $ref: "../openapi.yaml#/components/schemas/ThreeDSMpiResponse"
-    description:
-      ThreeDSecure MPI response data.
+  threeds_included:
+    type: boolean
+    description: |-
+      Whether to 3DS flow was included in the transaction.
+    example: false
+    nullable: true
