@@ -18,8 +18,8 @@ properties:
   version:
     type: string
     description: |-
-      The version of 3D Secure used. 
-      Possible values are: 1.0, 2.0, 2.1, 2.2. 
+      The version of 3D Secure used.
+      Possible values are: 1.0, 2.0, 2.1, 2.2.
     example: "2.1"
 
   eci:
@@ -66,5 +66,6 @@ properties:
     type: string
     description: |-
       For 3DS version 1, the authentication response.
-      For 3DS version 2, the transaction status from the challenge result (not required for frictionless).
+      For 3DS version 2, the transaction status from the 
+      challenge result (not required for frictionless).
     example: "Y"

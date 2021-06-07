@@ -11,4 +11,3 @@ properties:
     type: string
     description: "Used in the final step of the 3D Secure challenge flow."
     example: "N"
-
