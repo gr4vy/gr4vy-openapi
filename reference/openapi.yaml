@@ -441,6 +441,10 @@ components:
     #   $ref: "./resources/transaction_event.yaml"
     # TransactionEvents:
     #   $ref: "./resources/transaction_events.yaml"
+    ThreeDSDataRequest:
+      $ref: "./request-bodies/threeds_data_request.yaml"
+    ThreeDSMpiRequest:
+      $ref: "./request-bodies/threeds_mpi_request.yaml"
     User:
       $ref: "./resources/user.yaml"
 

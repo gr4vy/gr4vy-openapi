@@ -39,6 +39,20 @@ properties:
       The optional payment method details to create an authorization for. This
       field is required for processing a card.
 
+  threeds_data:
+    x-model-name: TransactionThreeDSecureDataRequest
+    $ref: "../openapi.yaml#/components/schemas/ThreeDSDataRequest"
+
+    description:
+      The optional 3D Secure data for the transaction.
+
+  mpi_request:
+    x-model-name: TransactionThreeDSecureMpiRequest
+    $ref: "../openapi.yaml#/components/schemas/ThreeDSMpiRequest"
+
+    description:
+      The optional 3D Secure mpi request data for the transaction.
+
   store:
     type: boolean
     description: |-

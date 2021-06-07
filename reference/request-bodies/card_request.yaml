@@ -50,6 +50,13 @@ properties:
     maxLength: 4
     example: "123"
 
+  redirect_url:
+    type: string
+    format: uri
+    description: |-
+      The redirect URL to redirect a buyer after a 3D Secure Flow.
+    example: https://example.com/callback
+
   external_identifier:
     type: string
     description:
