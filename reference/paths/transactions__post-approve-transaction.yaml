@@ -13,9 +13,10 @@ requestBody:
       examples:
         Fingerprint step complete:
           value:
-            mpi_request:
-              include_flow: true
-              fingerprint_complete: true
+            
+        Challenge step complete:
+          value:
+            threeds_transaction_status: "N"
 responses:
   "200":
     description: Returns the authorized transaction.

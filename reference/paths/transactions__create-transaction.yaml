@@ -78,17 +78,7 @@ requestBody:
               expiration_date: 11/25
               security_code: "123"
               redirect_url: "https://example.com/callback"
-            mpi_request:
-              include_flow: true
-              acquirer_bin: "123456"
-              acquirer_merchant_id: "123456"
-              acquirer_password: "123456"
-              mcc: "1234"
-              merchant_name: ""
-              merchant_country: ""
-              merchant_url: ""
-              requestor_id: ""
-              requestor_name: ""
+            request_3d_secure: true
         Authorize a new card with external 3DS Data:
           value:
             amount: 1299
