@@ -7,4 +7,5 @@ schema:
 in: query
 name: locale
 description: |-
-  An ISO 639-1 Language Code and optional ISO 3166 Country Code to translate messages.
+  An ISO 639-1 Language Code and optional ISO 3166 Country Code to translate
+  messages.
