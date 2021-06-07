@@ -17,6 +17,19 @@ properties:
       Whether to include 3DS flow for transaction.
     example: true
 
+  fingerprint_complete:
+    type: boolean
+    description: |-
+      Whether the Buyer has been redirected to the issuer
+      for browser fingerprinting.
+    example: false
+
+  transaction_status:
+    type: string
+    description: |-
+      Used in the final step of the 3D Secure challenge flow.
+    example: "N"
+
   acquirer_bin:
     type: string
     description: |-
