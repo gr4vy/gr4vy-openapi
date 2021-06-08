@@ -3637,7 +3637,7 @@
           "match",
           "key",
           "operator",
-          "values"
+          "value"
         ],
         "properties": {
           "match": {
@@ -3666,7 +3666,7 @@
               "NOT IN"
             ]
           },
-          "values": {
+          "value": {
             "type": "array",
             "minItems": 1,
             "maxItems": 100,
