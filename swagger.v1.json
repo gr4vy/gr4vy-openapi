@@ -2831,7 +2831,7 @@
           "example": "IN",
           "type": "string"
         },
-        "values": {
+        "value": {
           "description": "The values to compare the `key` to.",
           "example": [
             "USD",
@@ -2853,7 +2853,7 @@
         "match",
         "key",
         "operator",
-        "values"
+        "value"
       ],
       "title": "Card rule (Text)",
       "type": "object",
