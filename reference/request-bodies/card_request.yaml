@@ -54,7 +54,7 @@ properties:
     type: string
     format: uri
     description: |-
-      The redirect URL to redirect a buyer after a 3D Secure Flow.
+      The redirect URL to redirect a buyer after a 3D Secure flow has been completed.
     example: https://example.com/callback
 
   external_identifier:

@@ -1,5 +1,5 @@
 ---
-title: Approve a transaction
+title: Complete a 3D Secure transaction
 type: object
 description: A request to capture a transaction.
 
@@ -7,7 +7,7 @@ x-tags:
   - Request Bodies
 
 properties:
-  threeds_transaction_status:
+  3d_secure_transaction_status:
     type: string
     description: "Used in the final step of the 3D Secure challenge flow."
     example: "N"

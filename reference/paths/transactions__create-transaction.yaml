@@ -88,7 +88,7 @@ requestBody:
               number: "4111111111111111"
               expiration_date: 11/25
               security_code: "123"
-            threeds_data:
+            3d_secure_data:
               version: "2.1.0"
               eci: "05"
               cavv: "3q2+78r+ur7erb7vyv66vv8="

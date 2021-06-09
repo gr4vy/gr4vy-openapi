@@ -39,7 +39,7 @@ properties:
       The optional payment method details to create an authorization for. This
       field is required for processing a card.
 
-  threeds_data:
+  3d_secure_data:
     x-model-name: TransactionThreeDSecureDataRequest
     $ref: "../openapi.yaml#/components/schemas/ThreeDSDataRequest"
 

@@ -9,11 +9,11 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: "../openapi.yaml#/components/schemas/TransactionApproveRequest"
+        $ref: "../openapi.yaml#/components/schemas/TransactionThreeDSRequest"
       examples:
         Challenge step complete:
           value:
-            threeds_transaction_status: "N"
+            3d_secure_transaction_status: "N"
 responses:
   "200":
     description: Returns the authorized transaction.

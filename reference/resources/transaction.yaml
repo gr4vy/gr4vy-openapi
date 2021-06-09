@@ -151,6 +151,6 @@ properties:
     type: string
     description: |-
       The Encoded `CReq` for non-frictionless 3D Secure Challenge Flow.
-    example: "https://example.acs"
+    example: "3q2+78r+ur7erb7vyv66vv8="
     nullable: true
     
