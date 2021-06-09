@@ -9,7 +9,7 @@ requestBody:
   content:
     application/json:
       schema:
-        $ref: "../openapi.yaml#/components/schemas/TransactionThreeDSRequest"
+        $ref: "../openapi.yaml#/components/schemas/TransactionApproveRequest"
       examples:
         Challenge step complete:
           value:
