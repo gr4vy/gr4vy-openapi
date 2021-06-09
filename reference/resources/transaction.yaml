@@ -139,3 +139,18 @@ properties:
       Whether the 3DS flow was included in the transaction.
     example: false
     nullable: true
+
+  threeds_acs_url:
+    type: string
+    description: |-
+      The ACS URL for non-frictionless 3D Secure Challenge Flow.
+    example: "https://example.acs"
+    nullable: true
+
+  threeds_encoded_creq:
+    type: string
+    description: |-
+      The Encoded `CReq` for non-frictionless 3D Secure Challenge Flow.
+    example: "https://example.acs"
+    nullable: true
+    
