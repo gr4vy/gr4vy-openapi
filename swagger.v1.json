@@ -1355,6 +1355,14 @@
             "in": "query",
             "name": "environment",
             "type": "string"
+          },
+          {
+            "default": "en-US",
+            "description": "An ISO 639-1 Language Code and optional ISO 3166 Country Code. This locale determines\nthe language for the labels returned for every payment option.",
+            "in": "query",
+            "name": "locale",
+            "pattern": "^[a-z]{2}(?:-[A-Z]{2})?$",
+            "type": "string"
           }
         ],
         "responses": {
@@ -3813,6 +3821,11 @@
           "example": "https://cdn.gr4vy.app/card.svg",
           "type": "string",
           "x-nullable": true
+        },
+        "label": {
+          "description": "A label that describes this payment option. This label is returned in the language \ndefined by the `locale` query parameter. The label can be used to display a list\nof payment options to the buyer in their language.",
+          "example": "Pay by Card",
+          "type": "string"
         },
         "method": {
           "description": "The type of payment method that is available.",
