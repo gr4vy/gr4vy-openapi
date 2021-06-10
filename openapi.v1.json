@@ -1617,6 +1617,17 @@
             "in": "query",
             "name": "environment",
             "description": "Filters the results to only the items available in this environment."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "en-US",
+              "pattern": "^[a-z]{2}(?:-[A-Z]{2})?$",
+              "default": "en-US"
+            },
+            "in": "query",
+            "name": "locale",
+            "description": "An ISO 639-1 Language Code and optional ISO 3166 Country Code. This locale determines\nthe language for the labels returned for every payment option."
           }
         ],
         "responses": {
@@ -5268,6 +5279,11 @@
               "card",
               "redirect"
             ]
+          },
+          "label": {
+            "type": "string",
+            "description": "A label that describes this payment option. This label is returned in the language \ndefined by the `locale` query parameter. The label can be used to display a list\nof payment options to the buyer in their language.",
+            "example": "Pay by Card"
           }
         }
       },
