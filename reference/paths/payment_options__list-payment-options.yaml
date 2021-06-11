@@ -11,6 +11,7 @@ parameters:
   - $ref: "../query-parameters/country.yaml"
   - $ref: "../query-parameters/currency.yaml"
   - $ref: "../query-parameters/environment.yaml"
+  - $ref: "../query-parameters/locale.yaml"
 
 responses:
   "200":

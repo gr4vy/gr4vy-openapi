@@ -1,0 +1,11 @@
+---
+schema:
+  type: string
+  example: en-US
+  pattern: ^[a-z]{2}(?:-[A-Z]{2})?$
+  default: en-US
+in: query
+name: locale
+description: |-
+  An ISO 639-1 Language Code and optional ISO 3166 Country Code. This locale determines
+  the language for the labels returned for every payment option.
