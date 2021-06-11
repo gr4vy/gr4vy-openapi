@@ -1,8 +1,8 @@
 ---
-title: External `3-D` Secure data
+title: External 3-D Secure data
 type: object
 description: |-
-  Data from an external `3-D` Secure MPI that can be used to successfully create the transaction.
+  Data from an external 3-D Secure MPI that can be used to successfully create the transaction.
 
 x-tags:
   - Request Bodies
@@ -18,7 +18,7 @@ properties:
   version:
     type: string
     description: |-
-      The version of `3-D` Secure used.
+      The version of 3-D Secure used.
       Possible values are: 1.0, 2.0, 2.1, 2.2.
     example: "2.1"
 
