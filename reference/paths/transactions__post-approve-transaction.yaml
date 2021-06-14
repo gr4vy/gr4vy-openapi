@@ -13,7 +13,7 @@ requestBody:
       examples:
         Challenge step complete:
           value:
-            3d_secure_transaction_status: "N"
+            three_d_secure_transaction_status: "N"
 responses:
   "200":
     description: Returns the authorized transaction.

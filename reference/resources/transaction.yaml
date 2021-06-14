@@ -133,21 +133,21 @@ properties:
     description: |-
       The environment this transaction has been created in.
 
-  threeds_included:
+  three_d_secure_included:
     type: boolean
     description: |-
       Whether the 3DS flow was included in the transaction.
     example: false
     nullable: true
 
-  threeds_acs_url:
+  three_d_secure_acs_url:
     type: string
     description: |-
       The ACS URL for non-frictionless 3D Secure Challenge Flow.
     example: "https://example.acs"
     nullable: true
 
-  threeds_encoded_creq:
+  three_d_secure_encoded_creq:
     type: string
     description: |-
       The Encoded `CReq` for non-frictionless 3D Secure Challenge Flow.

@@ -78,7 +78,7 @@ requestBody:
               expiration_date: 11/25
               security_code: "123"
               redirect_url: "https://example.com/callback"
-            request_3d_secure: true
+            request_three_d_secure: true
         Authorize a new card with external 3DS Data:
           value:
             amount: 1299
@@ -88,7 +88,7 @@ requestBody:
               number: "4111111111111111"
               expiration_date: 11/25
               security_code: "123"
-            3d_secure_data:
+            three_d_secure_data:
               version: "2.1.0"
               eci: "05"
               cavv: "3q2+78r+ur7erb7vyv66vv8="
