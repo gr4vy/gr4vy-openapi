@@ -1,0 +1,33 @@
+---
+operationId: add-user
+summary: New user
+description: Adds a new user.
+tags:
+  - Users
+x-internal: true
+
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: "../openapi.yaml#/components/schemas/UserRequest"
+      examples:
+        Create a user:
+          value:
+            display_name: John L.
+            email_address: john@example.com
+
+responses:
+  "200":
+    description: Returns new user.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/User"
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"

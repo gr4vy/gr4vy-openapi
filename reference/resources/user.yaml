@@ -27,3 +27,21 @@ properties:
     type: string
     description: The email address for this user.
     example: john@example.com
+
+  has_valid_password:
+    type: boolean
+    description: The user has set a valid password.
+    example: true
+
+  reset_token:
+    type: string
+    description: The token required when setting a password.
+    example: abc
+    nullable: true
+
+  reset_token_expires_at:
+    type: string
+    description: The expiration date for the reset token.
+    format: date-time
+    example: "2013-07-16T19:23:00.000+00:00"
+    nullable: true

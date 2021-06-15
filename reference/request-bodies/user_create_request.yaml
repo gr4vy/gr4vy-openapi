@@ -1,0 +1,28 @@
+---
+title: User (Create)
+type: object
+description: A request to create a user.
+
+x-tags:
+  - Users
+
+properties:
+  display_name:
+    type: string
+    description:
+      An external identifier that can be used to match the buyer against your
+      own records. This value needs to be unique for all buyers.
+    example: John L.
+    nullable: false
+    minLength: 1
+    maxLength: 1000
+
+  email_address:
+    type: string
+    description:
+      A unique name for this buyer which is used in the Gr4vy admin panel to
+      give a buyer a human readable name.
+    example: john@example.com
+    nullable: false
+    minLength: 1
+    maxLength: 200

@@ -7,5 +7,5 @@ schema:
 in: query
 name: locale
 description: |-
-  An ISO 639-1 Language Code and optional ISO 3166 Country Code. This locale determines
-  the language for the labels returned for every payment option.
+  An ISO 639-1 Language Code and optional ISO 3166 Country Code. This locale
+  determines the language for the labels returned for every payment option.
