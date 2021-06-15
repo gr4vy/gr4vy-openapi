@@ -1358,7 +1358,7 @@
           },
           {
             "default": "en-US",
-            "description": "An ISO 639-1 Language Code and optional ISO 3166 Country Code. This locale determines\nthe language for the labels returned for every payment option.",
+            "description": "An ISO 639-1 Language Code and optional ISO 3166 Country Code. This locale\ndetermines the language for the labels returned for every payment option.",
             "in": "query",
             "name": "locale",
             "pattern": "^[a-z]{2}(?:-[A-Z]{2})?$",
@@ -2166,6 +2166,91 @@
         "summary": "Refund or void transactions"
       }
     },
+    "/users": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "default": 20,
+            "description": "Defines the maximum number of items to return for this request.",
+            "format": "int32",
+            "in": "query",
+            "maximum": 100,
+            "minimum": 1,
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list.",
+            "format": "",
+            "in": "query",
+            "name": "cursor",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of users.",
+            "schema": {
+              "$ref": "#/definitions/Users"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "description": "Returns a list of users.",
+        "operationId": "list-users",
+        "summary": "List users",
+        "x-internal": true
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/UserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns new user.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "description": "Adds a new user.",
+        "operationId": "add-user",
+        "summary": "New user",
+        "x-internal": true
+      }
+    },
     "/users/me": {
       "get": {
         "produces": [
@@ -2192,6 +2277,166 @@
         "description": "Get current user information.",
         "operationId": "get-current-user",
         "summary": "Get current",
+        "x-internal": true
+      }
+    },
+    "/users/reset-password": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ResetPasswordRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the user object.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "204": {
+            "description": "Returns an empty response."
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          },
+          "409": {
+            "description": "Returns an error if duplicate resource has been found.",
+            "schema": {
+              "$ref": "#/definitions/Error409DuplicateRecord"
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "description": "Generates a new reset token for a given user.",
+        "operationId": "reset-user-password",
+        "summary": "Reset user password",
+        "x-internal": true
+      }
+    },
+    "/users/set-password": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SetPasswordRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Returns an empty response."
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "description": "Sets a user password to allow authentication with the dashboard.",
+        "operationId": "set-user-password",
+        "summary": "Set user password",
+        "x-internal": true
+      }
+    },
+    "/users/{user_id}": {
+      "parameters": [
+        {
+          "description": "The unique ID for a user.",
+          "format": "uuid",
+          "in": "path",
+          "name": "user_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Returns an empty response."
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "schema": {
+              "$ref": "#/definitions/Error404NotFound"
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "description": "Deletes a user record. Any associated sessions will also be deleted.",
+        "operationId": "delete-user",
+        "summary": "Delete user"
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Returns the user.",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "schema": {
+              "$ref": "#/definitions/Error401Unauthorized"
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "schema": {
+              "$ref": "#/definitions/Error404NotFound"
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "description": "Gets the information about a user.",
+        "operationId": "get-user",
+        "summary": "Get user",
         "x-internal": true
       }
     }
@@ -3823,7 +4068,7 @@
           "x-nullable": true
         },
         "label": {
-          "description": "A label that describes this payment option. This label is returned in the language \ndefined by the `locale` query parameter. The label can be used to display a list\nof payment options to the buyer in their language.",
+          "description": "A label that describes this payment option. This label is returned in the\nlanguage defined by the `locale` query parameter. The label can be used\nto display a list of payment options to the buyer in their language.",
           "example": "Pay by Card",
           "type": "string"
         },
@@ -4383,6 +4628,21 @@
         "Payment Services"
       ]
     },
+    "ResetPasswordRequest": {
+      "description": "A request to reset a password for a user.",
+      "properties": {
+        "email_address": {
+          "description": "The email address of the user account to reset.",
+          "example": "john@example.com",
+          "type": "string"
+        }
+      },
+      "title": "Reset Password (Create)",
+      "type": "object",
+      "x-tags": [
+        "Users"
+      ]
+    },
     "Session": {
       "description": "A user session.",
       "properties": {
@@ -4468,6 +4728,29 @@
       "x-internal": true,
       "x-tags": [
         "Authentication"
+      ]
+    },
+    "SetPasswordRequest": {
+      "description": "A request to set a password for a user.",
+      "properties": {
+        "password": {
+          "description": "The password the user to log in with.",
+          "example": "this-is-n0t-a-secure-passw0rd",
+          "type": "string"
+        },
+        "reset_token": {
+          "description": "Unique reset token valid for 7 days.",
+          "example": "nXyWSHq2r5q_8F1_NXtppEStY7KbBHqwU9T8pdmOQa_LYJxpxxXcjOXL58xpHLy5gh1k6s0Myl3ygA6SnsxIjLXBKO3x1EZX3igq",
+          "maxLength": 100,
+          "minLength": 100,
+          "nullable": false,
+          "type": "string"
+        }
+      },
+      "title": "Set Password (Create)",
+      "type": "object",
+      "x-tags": [
+        "Users"
       ]
     },
     "Status": {
@@ -4948,6 +5231,11 @@
           "example": "john@example.com",
           "type": "string"
         },
+        "has_valid_password": {
+          "description": "The user has set a valid password.",
+          "example": true,
+          "type": "boolean"
+        },
         "id": {
           "description": "The unique Gr4vy ID for this user.",
           "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
@@ -4958,6 +5246,19 @@
           "example": "John Gravy",
           "type": "string"
         },
+        "reset_token": {
+          "description": "The token required when setting a password.",
+          "example": "abc",
+          "type": "string",
+          "x-nullable": true
+        },
+        "reset_token_expires_at": {
+          "description": "The expiration date for the reset token.",
+          "example": "2013-07-16T19:23:00.000+00:00",
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
         "type": {
           "description": "`user`.",
           "enum": [
@@ -4965,6 +5266,74 @@
           ],
           "example": "user",
           "type": "string"
+        }
+      },
+      "title": "User",
+      "type": "object",
+      "x-internal": true,
+      "x-tags": [
+        "Users"
+      ]
+    },
+    "UserRequest": {
+      "description": "A request to create a user.",
+      "properties": {
+        "display_name": {
+          "description": "An external identifier that can be used to match the buyer against your own records. This value needs to be unique for all buyers.",
+          "example": "John L.",
+          "maxLength": 1000,
+          "minLength": 1,
+          "nullable": false,
+          "type": "string"
+        },
+        "email_address": {
+          "description": "A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.",
+          "example": "john@example.com",
+          "maxLength": 200,
+          "minLength": 1,
+          "nullable": false,
+          "type": "string"
+        }
+      },
+      "title": "User (Create)",
+      "type": "object",
+      "x-tags": [
+        "Users"
+      ]
+    },
+    "Users": {
+      "properties": {
+        "items": {
+          "description": "A list of users.",
+          "items": {
+            "$ref": "#/definitions/User"
+          },
+          "type": "array"
+        },
+        "limit": {
+          "default": 20,
+          "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
+          "example": 1,
+          "format": "int32",
+          "maximum": 100,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "next_cursor": {
+          "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+          "example": "ZXhhbXBsZTE",
+          "maxLength": 1000,
+          "minLength": 1,
+          "type": "string",
+          "x-nullable": true
+        },
+        "previous_cursor": {
+          "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+          "example": null,
+          "maxLength": 1000,
+          "minLength": 1,
+          "type": "string",
+          "x-nullable": true
         }
       },
       "title": "User",
