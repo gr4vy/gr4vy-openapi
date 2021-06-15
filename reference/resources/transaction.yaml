@@ -48,6 +48,7 @@ properties:
       - buyer_approval_declined
       - buyer_approval_failed
       - buyer_approval_timedout
+      - buyer_challenge_required
 
   amount:
     type: number
@@ -131,3 +132,25 @@ properties:
       - production
     description: |-
       The environment this transaction has been created in.
+
+  three_d_secure_included:
+    type: boolean
+    description: |-
+      Whether the 3DS flow was included in the transaction.
+    example: false
+    nullable: true
+
+  three_d_secure_acs_url:
+    type: string
+    description: |-
+      The ACS URL for non-frictionless 3D Secure Challenge Flow.
+    example: "https://example.acs"
+    nullable: true
+
+  three_d_secure_encoded_creq:
+    type: string
+    description: |-
+      The Encoded `CReq` for non-frictionless 3D Secure Challenge Flow.
+    example: "3q2+78r+ur7erb7vyv66vv8="
+    nullable: true
+    

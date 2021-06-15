@@ -1,10 +1,19 @@
 ---
-operationId: authorize-transaction
-summary: Authorize approved transaction
-description: Authorize a previously approved transaction.
+operationId: approve-transaction-request
+summary: Request approve transaction
+description: |-
+  Request the next step in a 3D Secure flow.
 tags:
   - Transactions
-
+requestBody:
+  content:
+    application/json:
+      schema:
+        $ref: "../openapi.yaml#/components/schemas/TransactionApproveRequest"
+      examples:
+        Challenge step complete:
+          value:
+            three_d_secure_transaction_status: "N"
 responses:
   "200":
     description: Returns the authorized transaction.
