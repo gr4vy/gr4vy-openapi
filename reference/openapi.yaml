@@ -329,6 +329,28 @@ paths:
     get:
       $ref: "./paths/users__get-current-user.yaml"
 
+  "/users/{user_id}":
+    parameters:
+      - $ref: "./path-parameters/user_id.yaml"
+    get:
+      $ref: "./paths/users__get-user.yaml"
+    delete:
+      $ref: "./paths/users__delete-user.yaml"
+
+  "/users":
+    get:
+      $ref: "./paths/users__list-users.yaml"
+    post:
+      $ref: "./paths/users__add-user.yaml"
+
+  "/users/set-password":
+    post:
+      $ref: "./paths/users__create-password.yaml"
+
+  "/users/reset-password":
+    post:
+      $ref: "./paths/users__reset-password.yaml"
+
 components:
   schemas:
     Buyer:
@@ -443,6 +465,14 @@ components:
     #   $ref: "./resources/transaction_events.yaml"
     User:
       $ref: "./resources/user.yaml"
+    Users:
+      $ref: "./resources/users.yaml"
+    UserRequest:
+      $ref: "./request-bodies/user_create_request.yaml"
+    SetPasswordRequest:
+      $ref: "./request-bodies/set_password_request.yaml"
+    ResetPasswordRequest:
+      $ref: "./request-bodies/reset_password_request.yaml"
 
   securitySchemes:
     BearerAuth:

@@ -1,0 +1,29 @@
+---
+operationId: get-user
+summary: Get user
+description: Gets the information about a user.
+tags:
+  - Users
+x-internal: true
+
+responses:
+  "200":
+    description: Returns the user.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/User"
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
+
+  "404":
+    description: Returns an error if the resource can not be found.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error404NotFound"

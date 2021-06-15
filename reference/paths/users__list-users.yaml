@@ -1,0 +1,26 @@
+---
+operationId: list-users
+summary: List users
+description: Returns a list of users.
+tags:
+  - Users
+x-internal: true
+
+parameters:
+  - $ref: "../query-parameters/limit-100.yaml"
+  - $ref: "../query-parameters/cursor.yaml"
+
+responses:
+  "200":
+    description: Returns a list of users.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Users"
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
