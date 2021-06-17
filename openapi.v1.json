@@ -803,7 +803,8 @@
               "example": "card",
               "enum": [
                 "card",
-                "paypal"
+                "paypal",
+                "banked"
               ]
             },
             "in": "query",
@@ -3208,7 +3209,8 @@
             "example": "card",
             "enum": [
               "card",
-              "paypal"
+              "paypal",
+              "banked"
             ]
           },
           "created_at": {
@@ -3307,7 +3309,8 @@
             "example": "card",
             "enum": [
               "card",
-              "paypal"
+              "paypal",
+              "banked"
             ]
           },
           "label": {
@@ -3417,7 +3420,8 @@
             "example": "card",
             "enum": [
               "card",
-              "paypal"
+              "paypal",
+              "banked"
             ]
           },
           "external_identifier": {
@@ -3533,7 +3537,8 @@
             "example": "card",
             "enum": [
               "card",
-              "paypal"
+              "paypal",
+              "banked"
             ]
           },
           "display_name": {
@@ -3669,7 +3674,8 @@
             "example": "card",
             "enum": [
               "card",
-              "paypal"
+              "paypal",
+              "banked"
             ]
           }
         }
@@ -3893,7 +3899,8 @@
             "example": "card",
             "enum": [
               "card",
-              "paypal"
+              "paypal",
+              "banked"
             ]
           },
           "fields": {
@@ -4025,7 +4032,8 @@
             "example": "card",
             "enum": [
               "card",
-              "paypal"
+              "paypal",
+              "banked"
             ]
           },
           "icon_url": {
@@ -4523,6 +4531,7 @@
             "enum": [
               "card",
               "paypal",
+              "banked",
               "token"
             ]
           },
