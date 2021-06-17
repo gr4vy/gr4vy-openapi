@@ -1,8 +1,9 @@
 ---
-title: PayPal Account
+title: Redirect Request
 type: object
 description: |-
-  PayPal request to use in a transaction or to register a new payment method.
+  Request to use a redirect flow in a transaction or to register
+  a new payment method.
 
 x-tags:
   - Request Bodies
@@ -14,17 +15,20 @@ required:
 properties:
   method:
     type: string
-    description: "`paypal`."
+    description: |-
+      The method to use, this can be any of the methods that
+      support redirect requests.
     example: paypal
     enum:
       - paypal
+      - banked
 
   redirect_url:
     type: string
     format: uri
     description: |-
       The redirect URL to redirect a buyer to after they have authorized their
-      PayPal transaction.
+      transaction.
     example: https://example.com/callback
 
   external_identifier:

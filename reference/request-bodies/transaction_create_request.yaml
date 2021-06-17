@@ -32,7 +32,7 @@ properties:
     x-model-name: TransactionPaymentMethodRequest
     oneOf:
       - $ref: "../openapi.yaml#/components/schemas/CardRequest"
-      - $ref: "../openapi.yaml#/components/schemas/PayPalRequest"
+      - $ref: "../openapi.yaml#/components/schemas/RedirectRequest"
       - $ref: "../openapi.yaml#/components/schemas/TokenizedRequest"
 
     description:

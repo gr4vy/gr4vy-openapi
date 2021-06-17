@@ -431,8 +431,8 @@ components:
       $ref: "./resources/payment_option.yaml"
     PaymentOptions:
       $ref: "./resources/payment_options.yaml"
-    PayPalRequest:
-      $ref: "./request-bodies/paypal_request.yaml"
+    RedirectRequest:
+      $ref: "./request-bodies/redirect_request.yaml"
     Session:
       $ref: "./resources/session.yaml"
     SessionRequest:
