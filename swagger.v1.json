@@ -1509,7 +1509,8 @@
             "description": "Filters the results to only the items for which the `method` has been set to\nthis value.",
             "enum": [
               "card",
-              "paypal"
+              "paypal",
+              "banked"
             ],
             "in": "query",
             "name": "method",
@@ -3793,7 +3794,8 @@
           "description": "The type of this payment method.",
           "enum": [
             "card",
-            "paypal"
+            "paypal",
+            "banked"
           ],
           "example": "card",
           "type": "string"
@@ -3881,7 +3883,8 @@
           "description": "The type of this payment method.",
           "enum": [
             "card",
-            "paypal"
+            "paypal",
+            "banked"
           ],
           "example": "card",
           "type": "string"
@@ -3934,7 +3937,8 @@
           "description": "The type of this payment method.",
           "enum": [
             "card",
-            "paypal"
+            "paypal",
+            "banked"
           ],
           "example": "card",
           "type": "string"
@@ -4076,7 +4080,8 @@
           "description": "The type of payment method that is available.",
           "enum": [
             "card",
-            "paypal"
+            "paypal",
+            "banked"
           ],
           "example": "card",
           "type": "string"
@@ -4211,7 +4216,8 @@
           "description": "Defines the ID of the payment method that this service handles.",
           "enum": [
             "card",
-            "paypal"
+            "paypal",
+            "banked"
           ],
           "example": "card",
           "type": "string"
@@ -4272,7 +4278,8 @@
           "description": "Defines the ID of the payment method that this service handles.",
           "enum": [
             "card",
-            "paypal"
+            "paypal",
+            "banked"
           ],
           "example": "card",
           "type": "string"
@@ -4352,7 +4359,8 @@
           "description": "The ID of the payment method that this services handles.",
           "enum": [
             "card",
-            "paypal"
+            "paypal",
+            "banked"
           ],
           "example": "card",
           "type": "string"
@@ -5025,6 +5033,7 @@
           "enum": [
             "card",
             "paypal",
+            "banked",
             "token"
           ],
           "example": "card",
