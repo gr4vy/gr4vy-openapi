@@ -32,6 +32,7 @@ properties:
     enum:
       - card
       - paypal
+      - banked
 
   fields:
     type: array

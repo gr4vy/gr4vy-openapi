@@ -30,6 +30,7 @@ properties:
     enum:
       - card
       - paypal
+      - banked
 
   external_identifier:
     type: string

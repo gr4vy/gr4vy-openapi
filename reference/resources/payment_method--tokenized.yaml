@@ -27,6 +27,7 @@ properties:
     enum:
       - card
       - paypal
+      - banked
 
   label:
     type: string

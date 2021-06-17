@@ -37,6 +37,7 @@ properties:
     enum:
       - card
       - paypal
+      - banked
 
   display_name:
     type: string

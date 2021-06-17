@@ -59,6 +59,7 @@ properties:
     enum:
       - card
       - paypal
+      - banked
 
   created_at:
     type: string

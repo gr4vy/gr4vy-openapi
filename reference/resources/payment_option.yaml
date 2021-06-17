@@ -21,6 +21,7 @@ properties:
     enum:
       - card
       - paypal
+      - banked
 
   icon_url:
     type: string

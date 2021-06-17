@@ -5,6 +5,7 @@ schema:
   enum:
     - card
     - paypal
+    - banked
 in: query
 name: method
 description: |-
