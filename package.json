@@ -39,7 +39,7 @@
     "json-schema-sensitivity-checker": "^1.0.9",
     "json-schema-spell-checker": "^2.1.1",
     "jsonpath": "^1.1.1",
-    "openapi-examples-validator": "^4.3.3",
-    "redoc-cli": "^0.11.4"
+    "openapi-examples-validator": "^4.4.0",
+    "redoc-cli": "^0.12.1"
   }
 }
