@@ -4074,10 +4074,10 @@
           }
         }
       },
-      "PayPalRequest": {
-        "title": "PayPal Account",
+      "RedirectRequest": {
+        "title": "Redirect Request",
         "type": "object",
-        "description": "PayPal request to use in a transaction or to register a new payment method.",
+        "description": "Request to use a redirect flow in a transaction or to register\na new payment method.",
         "x-tags": [
           "Request Bodies"
         ],
@@ -4088,15 +4088,16 @@
         "properties": {
           "method": {
             "type": "string",
-            "description": "`paypal`.",
+            "description": "The method to use, this can be any of the methods that\nsupport redirect requests.",
             "example": "paypal",
             "enum": [
-              "paypal"
+              "paypal",
+              "banked"
             ]
           },
           "redirect_url": {
             "type": "string",
-            "description": "The redirect URL to redirect a buyer to after they have authorized their\nPayPal transaction.",
+            "description": "The redirect URL to redirect a buyer to after they have authorized their\ntransaction.",
             "example": "https://example.com/callback"
           },
           "external_identifier": {
