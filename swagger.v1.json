@@ -3681,51 +3681,6 @@
         "Merchants"
       ]
     },
-    "PayPalRequest": {
-      "description": "PayPal request to use in a transaction or to register a new payment method.",
-      "properties": {
-        "buyer_external_identifier": {
-          "description": "The `external_identifier` of the buyer to associate this payment method\nto. If this field is provided then the `buyer_id` field\nneeds to be unset.",
-          "example": "user-789123",
-          "type": "string"
-        },
-        "buyer_id": {
-          "description": "The ID of the buyer to associate this payment method to. If this field is\nprovided then the `buyer_external_identifier` field needs to be unset.",
-          "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-          "format": "uuid",
-          "type": "string"
-        },
-        "external_identifier": {
-          "description": "An external identifier that can be used to match the account against your own records.",
-          "example": "user-789123",
-          "type": "string",
-          "x-nullable": true
-        },
-        "method": {
-          "description": "`paypal`.",
-          "enum": [
-            "paypal"
-          ],
-          "example": "paypal",
-          "type": "string"
-        },
-        "redirect_url": {
-          "description": "The redirect URL to redirect a buyer to after they have authorized their\nPayPal transaction.",
-          "example": "https://example.com/callback",
-          "format": "uri",
-          "type": "string"
-        }
-      },
-      "required": [
-        "method",
-        "redirect_url"
-      ],
-      "title": "PayPal Account",
-      "type": "object",
-      "x-tags": [
-        "Request Bodies"
-      ]
-    },
     "PaymentMethod": {
       "description": "A generic payment method.",
       "properties": {
@@ -4634,6 +4589,52 @@
       "type": "object",
       "x-tags": [
         "Payment Services"
+      ]
+    },
+    "RedirectRequest": {
+      "description": "Request to use a redirect flow in a transaction or to register\na new payment method.",
+      "properties": {
+        "buyer_external_identifier": {
+          "description": "The `external_identifier` of the buyer to associate this payment method\nto. If this field is provided then the `buyer_id` field\nneeds to be unset.",
+          "example": "user-789123",
+          "type": "string"
+        },
+        "buyer_id": {
+          "description": "The ID of the buyer to associate this payment method to. If this field is\nprovided then the `buyer_external_identifier` field needs to be unset.",
+          "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
+          "format": "uuid",
+          "type": "string"
+        },
+        "external_identifier": {
+          "description": "An external identifier that can be used to match the account against your own records.",
+          "example": "user-789123",
+          "type": "string",
+          "x-nullable": true
+        },
+        "method": {
+          "description": "The method to use, this can be any of the methods that\nsupport redirect requests.",
+          "enum": [
+            "paypal",
+            "banked"
+          ],
+          "example": "paypal",
+          "type": "string"
+        },
+        "redirect_url": {
+          "description": "The redirect URL to redirect a buyer to after they have authorized their\ntransaction.",
+          "example": "https://example.com/callback",
+          "format": "uri",
+          "type": "string"
+        }
+      },
+      "required": [
+        "method",
+        "redirect_url"
+      ],
+      "title": "Redirect Request",
+      "type": "object",
+      "x-tags": [
+        "Request Bodies"
       ]
     },
     "ResetPasswordRequest": {
