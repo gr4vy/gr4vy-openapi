@@ -827,7 +827,8 @@
               "example": "card",
               "enum": [
                 "card",
-                "paypal"
+                "paypal",
+                "banked"
               ]
             },
             "in": "query",
@@ -3369,7 +3370,8 @@
             "example": "card",
             "enum": [
               "card",
-              "paypal"
+              "paypal",
+              "banked"
             ]
           },
           "created_at": {
@@ -3469,7 +3471,8 @@
             "example": "card",
             "enum": [
               "card",
-              "paypal"
+              "paypal",
+              "banked"
             ]
           },
           "label": {
@@ -3579,7 +3582,8 @@
             "example": "card",
             "enum": [
               "card",
-              "paypal"
+              "paypal",
+              "banked"
             ]
           },
           "external_identifier": {
@@ -3696,7 +3700,8 @@
             "example": "card",
             "enum": [
               "card",
-              "paypal"
+              "paypal",
+              "banked"
             ]
           },
           "display_name": {
@@ -3832,7 +3837,8 @@
             "example": "card",
             "enum": [
               "card",
-              "paypal"
+              "paypal",
+              "banked"
             ]
           }
         }
@@ -4056,7 +4062,8 @@
             "example": "card",
             "enum": [
               "card",
-              "paypal"
+              "paypal",
+              "banked"
             ]
           },
           "fields": {
@@ -4188,7 +4195,8 @@
             "example": "card",
             "enum": [
               "card",
-              "paypal"
+              "paypal",
+              "banked"
             ]
           },
           "icon_url": {
@@ -4229,10 +4237,10 @@
           }
         }
       },
-      "PayPalRequest": {
-        "title": "PayPal Account",
+      "RedirectRequest": {
+        "title": "Redirect Request",
         "type": "object",
-        "description": "PayPal request to use in a transaction or to register a new payment method.",
+        "description": "Request to use a redirect flow in a transaction or to register\na new payment method.",
         "x-tags": [
           "Request Bodies"
         ],
@@ -4243,16 +4251,17 @@
         "properties": {
           "method": {
             "type": "string",
-            "description": "`paypal`.",
+            "description": "The method to use, this can be any of the methods that\nsupport redirect requests.",
             "example": "paypal",
             "enum": [
-              "paypal"
+              "paypal",
+              "banked"
             ]
           },
           "redirect_url": {
             "type": "string",
             "format": "uri",
-            "description": "The redirect URL to redirect a buyer to after they have authorized their\nPayPal transaction.",
+            "description": "The redirect URL to redirect a buyer to after they have authorized their\ntransaction.",
             "example": "https://example.com/callback"
           },
           "external_identifier": {
@@ -4604,7 +4613,7 @@
                 "$ref": "#/components/schemas/CardRequest"
               },
               {
-                "$ref": "#/components/schemas/PayPalRequest"
+                "$ref": "#/components/schemas/RedirectRequest"
               },
               {
                 "$ref": "#/components/schemas/TokenizedRequest"
@@ -4699,6 +4708,7 @@
             "enum": [
               "card",
               "paypal",
+              "banked",
               "token"
             ]
           },
