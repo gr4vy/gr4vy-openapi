@@ -4,6 +4,7 @@ summary: Update card rule
 description: Updates a rule that can be used for card transactions.
 tags:
   - Card Rules
+x-internal: true
 
 requestBody:
   content:

@@ -4,6 +4,7 @@ summary: Get card rule
 description: Returns a rule that can be used for card transactions.
 tags:
   - Card Rules
+x-internal: true
 
 responses:
   "200":
