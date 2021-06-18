@@ -844,7 +844,8 @@
         ],
         "description": "Returns a list of rules for card transactions.",
         "operationId": "list-cards-rules",
-        "summary": "List card rules"
+        "summary": "List card rules",
+        "x-internal": true
       },
       "post": {
         "consumes": [
@@ -887,7 +888,8 @@
         ],
         "description": "Creates a new rule that is used for card transactions.",
         "operationId": "add-card-rule",
-        "summary": "Create card rule"
+        "summary": "Create card rule",
+        "x-internal": true
       }
     },
     "/card-rules/{card_rule_id}": {
@@ -934,7 +936,8 @@
         ],
         "description": "Deletes a specific card rule.",
         "operationId": "delete-card-rule",
-        "summary": "Delete card rule"
+        "summary": "Delete card rule",
+        "x-internal": true
       },
       "get": {
         "produces": [
@@ -966,7 +969,8 @@
         ],
         "description": "Returns a rule that can be used for card transactions.",
         "operationId": "get-card-rule",
-        "summary": "Get card rule"
+        "summary": "Get card rule",
+        "x-internal": true
       },
       "put": {
         "consumes": [
@@ -1015,41 +1019,7 @@
         ],
         "description": "Updates a rule that can be used for card transactions.",
         "operationId": "update-card-rule",
-        "summary": "Update card rule"
-      }
-    },
-    "/merchants/main": {
-      "get": {
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Returns the information about the merchant.",
-            "schema": {
-              "$ref": "#/definitions/Merchant"
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "schema": {
-              "$ref": "#/definitions/Error401Unauthorized"
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "schema": {
-              "$ref": "#/definitions/Error404NotFound"
-            }
-          }
-        },
-        "tags": [
-          "Merchants"
-        ],
-        "description": "Gets the information about the current merchant account.",
-        "operationId": "get-current-merchant",
-        "summary": "Get current merchant details",
+        "summary": "Update card rule",
         "x-internal": true
       }
     },
@@ -2002,55 +1972,6 @@
         "operationId": "approve-transaction",
         "summary": "Buyer approval callback",
         "x-internal": true
-      }
-    },
-    "/transactions/{transaction_id}/authorize": {
-      "parameters": [
-        {
-          "description": "The ID for the transaction to get the information for.",
-          "in": "path",
-          "name": "transaction_id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "post": {
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "Returns the authorized transaction.",
-            "schema": {
-              "$ref": "#/definitions/Transaction"
-            }
-          },
-          "400": {
-            "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "schema": {
-              "x-model-name": "ErrorGeneric"
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "schema": {
-              "$ref": "#/definitions/Error401Unauthorized"
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found or has not yet been created.",
-            "schema": {
-              "x-model-name": "ErrorGeneric"
-            }
-          }
-        },
-        "tags": [
-          "Transactions"
-        ],
-        "description": "Authorize a previously approved transaction.",
-        "operationId": "authorize-transaction",
-        "summary": "Authorize approved transaction"
       }
     },
     "/transactions/{transaction_id}/capture": {
@@ -3650,35 +3571,6 @@
       "type": "object",
       "x-tags": [
         "Errors"
-      ]
-    },
-    "Merchant": {
-      "description": "A merchant.",
-      "properties": {
-        "display_name": {
-          "description": "The name of this merchant as it will be displayed in the admin UI.",
-          "example": "Plantly Inc",
-          "type": "string"
-        },
-        "id": {
-          "description": "The unique short-name of the merchant.",
-          "example": "plantly",
-          "type": "string"
-        },
-        "type": {
-          "description": "`merchant`.",
-          "enum": [
-            "merchant"
-          ],
-          "example": "merchant",
-          "type": "string"
-        }
-      },
-      "title": "Merchant",
-      "type": "object",
-      "x-internal": true,
-      "x-tags": [
-        "Merchants"
       ]
     },
     "PaymentMethod": {
@@ -5384,11 +5276,6 @@
     {
       "description": "In Gr4vy, a card rule defines how a card transaction is processed. It\ndetermines which payment services are used, and with what priority, based\non the transaction amount, card type, and many more attributes.",
       "name": "Card Rules"
-    },
-    {
-      "description": "In Gr4vy, a merchant represents the customer that controls the instance.",
-      "name": "Merchants",
-      "x-internal": true
     },
     {
       "description": "In Gr4vy, a payment method represents a way in which a payment can be\nprocessed, for example a card payment, a PayPal payment, or a Bitcoin\npayment.\n\nThe payment method API can be used to:\n\n* List all the available payment methods\n* Filter the available payment method for a buyer in a specific currency\nand country.\n* Store (also known as tokenize) a payment method for a buyer.\n* Fetch all previously tokenized payment methods for a buyer.",
