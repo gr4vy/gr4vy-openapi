@@ -4,6 +4,7 @@ summary: List payment method events
 description: Returns a list of events for a given payment method.
 tags:
   - Payment Methods
+x-internal: true
 
 parameters:
   - $ref: "../query-parameters/limit-100.yaml"
