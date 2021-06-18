@@ -4,6 +4,7 @@ summary: Create card rule
 description: Creates a new rule that is used for card transactions.
 tags:
   - Card Rules
+x-internal: true
 
 requestBody:
   content:

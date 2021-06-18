@@ -4,6 +4,7 @@ summary: Authorize approved transaction
 description: Authorize a previously approved transaction.
 tags:
   - Transactions
+x-internal: true
 
 responses:
   "200":

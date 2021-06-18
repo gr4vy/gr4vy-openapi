@@ -62,10 +62,10 @@ tags:
       determines which payment services are used, and with what priority, based
       on the transaction amount, card type, and many more attributes.
 
-  - name: Merchants
-    description: |-
-      In Gr4vy, a merchant represents the customer that controls the instance.
-    x-internal: true
+  # - name: Merchants
+  #   description: |-
+  #     In Gr4vy, a merchant represents the customer that controls the instance.
+  #   x-internal: true
 
   - name: Payment Methods
     description: |-
@@ -195,9 +195,9 @@ paths:
     get:
       $ref: "./paths/payment_methods__list-buyer-payment-methods.yaml"
 
-  "/merchants/main":
-    get:
-      $ref: "./paths/merchants__get-current-merchant.yaml"
+  # "/merchants/main":
+  #   get:
+  #     $ref: "./paths/merchants__get-current-merchant.yaml"
 
   "/payment-methods":
     get:
@@ -295,11 +295,11 @@ paths:
     post:
       $ref: "./paths/transactions__capture-transaction.yaml"
 
-  "/transactions/{transaction_id}/authorize":
-    parameters:
-      - $ref: "./path-parameters/transaction_id.yaml"
-    post:
-      $ref: "./paths/transactions__authorize-transaction.yaml"
+  # "/transactions/{transaction_id}/authorize":
+  #   parameters:
+  #     - $ref: "./path-parameters/transaction_id.yaml"
+  #   post:
+  #     $ref: "./paths/transactions__authorize-transaction.yaml"
 
   "/transactions/{transaction_id}/refund":
     parameters:
@@ -401,8 +401,8 @@ components:
       $ref: "./resources/api_key_pair.yaml"
     APIKeyPairs:
       $ref: "./resources/api_key_pairs.yaml"
-    Merchant:
-      $ref: "./resources/merchant.yaml"
+    # Merchant:
+    #   $ref: "./resources/merchant.yaml"
     PaymentMethod:
       $ref: "./resources/payment_method.yaml"
     PaymentMethod--Tokenized:

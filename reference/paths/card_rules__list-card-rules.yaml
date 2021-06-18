@@ -4,6 +4,7 @@ summary: List card rules
 description: Returns a list of rules for card transactions.
 tags:
   - Card Rules
+x-internal: true
 
 parameters:
   - $ref: "../query-parameters/limit-100.yaml"
