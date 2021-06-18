@@ -46,11 +46,6 @@
       "description": "In Gr4vy, a card rule defines how a card transaction is processed. It\ndetermines which payment services are used, and with what priority, based\non the transaction amount, card type, and many more attributes."
     },
     {
-      "name": "Merchants",
-      "description": "In Gr4vy, a merchant represents the customer that controls the instance.",
-      "x-internal": true
-    },
-    {
       "name": "Payment Methods",
       "description": "In Gr4vy, a payment method represents a way in which a payment can be\nprocessed, for example a card payment, a PayPal payment, or a Bitcoin\npayment.\n\nThe payment method API can be used to:\n\n* List all the available payment methods\n* Filter the available payment method for a buyer in a specific currency\nand country.\n* Store (also known as tokenize) a payment method for a buyer.\n* Fetch all previously tokenized payment methods for a buyer."
     },
@@ -1199,49 +1194,6 @@
         }
       }
     },
-    "/merchants/main": {
-      "get": {
-        "operationId": "get-current-merchant",
-        "summary": "Get current merchant details",
-        "description": "Gets the information about the current merchant account.",
-        "tags": [
-          "Merchants"
-        ],
-        "x-internal": true,
-        "responses": {
-          "200": {
-            "description": "Returns the information about the merchant.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Merchant"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error404NotFound"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/payment-methods": {
       "get": {
         "operationId": "list-payment-methods",
@@ -2099,6 +2051,7 @@
         "tags": [
           "Card Rules"
         ],
+        "x-internal": true,
         "parameters": [
           {
             "schema": {
@@ -2169,6 +2122,7 @@
         "tags": [
           "Card Rules"
         ],
+        "x-internal": true,
         "requestBody": {
           "content": {
             "application/json": {
@@ -2241,6 +2195,7 @@
         "tags": [
           "Card Rules"
         ],
+        "x-internal": true,
         "responses": {
           "200": {
             "description": "Returns a card rule.",
@@ -2281,6 +2236,7 @@
         "tags": [
           "Card Rules"
         ],
+        "x-internal": true,
         "requestBody": {
           "content": {
             "application/json": {
@@ -2348,6 +2304,7 @@
         "tags": [
           "Card Rules"
         ],
+        "x-internal": true,
         "responses": {
           "204": {
             "description": "Returns an empty response."
@@ -2770,86 +2727,6 @@
         "responses": {
           "200": {
             "description": "Returns the captured transaction.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Transaction"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error400BadRequest"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error400IncorrectJson"
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found or has not yet been created.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error404NotFound"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error404PendingCreation"
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/transactions/{transaction_id}/authorize": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string",
-            "example": "fe26475d-ec3e-4884-9553-f7356683f7f9"
-          },
-          "name": "transaction_id",
-          "in": "path",
-          "required": true,
-          "description": "The ID for the transaction to get the information for."
-        }
-      ],
-      "post": {
-        "operationId": "authorize-transaction",
-        "summary": "Authorize approved transaction",
-        "description": "Authorize a previously approved transaction.",
-        "tags": [
-          "Transactions"
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the authorized transaction.",
             "content": {
               "application/json": {
                 "schema": {
@@ -4669,35 +4546,6 @@
             "nullable": true,
             "minLength": 1,
             "maxLength": 1000
-          }
-        }
-      },
-      "Merchant": {
-        "title": "Merchant",
-        "type": "object",
-        "description": "A merchant.",
-        "x-internal": true,
-        "x-tags": [
-          "Merchants"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "`merchant`.",
-            "example": "merchant",
-            "enum": [
-              "merchant"
-            ]
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique short-name of the merchant.",
-            "example": "plantly"
-          },
-          "display_name": {
-            "type": "string",
-            "description": "The name of this merchant as it will be displayed in the admin UI.",
-            "example": "Plantly Inc"
           }
         }
       },
