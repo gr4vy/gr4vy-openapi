@@ -36,6 +36,10 @@
       "description": "In Gr4vy, a payment method represents a way in which a payment can be\nprocessed, for example a card payment, a PayPal payment, or a Bitcoin\npayment.\n\nThe payment method API can be used to:\n\n* List all the available payment methods\n* Filter the available payment method for a buyer in a specific currency\nand country.\n* Store (also known as tokenize) a payment method for a buyer.\n* Fetch all previously tokenized payment methods for a buyer."
     },
     {
+      "name": "Payment Method Tokens",
+      "description": "In Gr4vy, a payment method token represents the token created by a payment\nservice for a payment method.\n\nThe payment method token API can be used to:\n\n* List all the available tokens for a payment method\n* Use these tokens to make direct API calls to that payment service,\nwithout the need to go through Gr4vy."
+    },
+    {
       "name": "Payment Options",
       "description": "In Gr4vy, a payment option represents a list of methods (card, PayPal,\netc) that are available for a given locale.\n\nThe payment options API can be used to:\n\n* Determine what types of payments can be processed in a specific locale.\n* Display a list options to a buyer to choose from."
     },
@@ -673,6 +677,86 @@
         "responses": {
           "204": {
             "description": "Returns an empty response."
+          },
+          "401": {
+            "description": "Returns an error if no valid authentication was provided.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Returns an error if the resource can not be found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404NotFound"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-methods/{payment_method_id}/tokens": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "example": "46973e9d-88a7-44a6-abfe-be4ff0134ff4",
+            "format": "uuid"
+          },
+          "name": "payment_method_id",
+          "in": "path",
+          "required": true,
+          "description": "The ID of the payment method."
+        }
+      ],
+      "get": {
+        "operationId": "list-payment-method-tokens",
+        "summary": "List payment method tokens",
+        "description": "Returns a list of PSP tokens for a given payment method.",
+        "tags": [
+          "Payment Method Tokens"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "example": 1,
+              "minimum": 1,
+              "maximum": 100,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Defines the maximum number of items to return for this request."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "ZXhhbXBsZTE"
+            },
+            "in": "query",
+            "name": "cursor",
+            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of payment method tokens.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentMethodTokens"
+                }
+              }
+            }
           },
           "401": {
             "description": "Returns an error if no valid authentication was provided.",
@@ -3245,6 +3329,79 @@
             "description": "A list of stored payment methods in token format.",
             "items": {
               "$ref": "#/components/schemas/PaymentMethod--Tokenized"
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
+            "format": "int32",
+            "minimum": 1,
+            "maximum": 100,
+            "example": 1,
+            "default": 20
+          },
+          "next_cursor": {
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": "ZXhhbXBsZTE",
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "previous_cursor": {
+            "type": "string",
+            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
+            "example": null,
+            "nullable": true,
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        }
+      },
+      "PaymentMethodToken": {
+        "title": "Payment method token",
+        "description": "A token for a payment method.",
+        "type": "object",
+        "x-tags": [
+          "Payment Method Tokens"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "`payment-method-token`.",
+            "example": "payment-method-token",
+            "enum": [
+              "payment-method-token"
+            ]
+          },
+          "token": {
+            "type": "string",
+            "description": "The token for the payment service which can be used directly with the\npayment service without the need to go through Gr4vy for the transaction.",
+            "example": "cus_4QEiU0VT5E3Whi"
+          },
+          "payment_service": {
+            "description": "The payment service used for this transaction.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PaymentService--Snapshot"
+              }
+            ]
+          }
+        }
+      },
+      "PaymentMethodTokens": {
+        "title": "Payment Method Tokens",
+        "type": "object",
+        "description": "A list of tokens for a payment method.",
+        "x-tags": [
+          "Payment Method Tokens"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "A list of stored tokens for payment methods.",
+            "items": {
+              "$ref": "#/components/schemas/PaymentMethodToken"
             }
           },
           "limit": {
