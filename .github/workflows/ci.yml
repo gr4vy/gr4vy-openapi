@@ -84,7 +84,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   openapi-next:
-    if: github.ref == 'refs/heads/development'
+    if: github.ref == 'refs/heads/next'
     runs-on: ubuntu-latest
     timeout-minutes: 3
 
