@@ -84,43 +84,6 @@ jobs:
           FOLDER: build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  openapi-next:
-    if: github.ref == 'refs/heads/next'
-    runs-on: ubuntu-latest
-    timeout-minutes: 3
-
-    needs:
-      - lint
-
-    strategy:
-      matrix:
-        node-version: [14.x]
-
-    steps:
-      - name: Check out the repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Install Node dependencies
-        run: |
-          yarn install
-
-      - name: Bundle OpenAPI 3.0 spec
-        run: |
-          yarn build:openapi
-
-      - name: Push compiled content
-        uses: s0/git-publish-subdir-action@develop
-        env:
-          REPO: self
-          BRANCH: openapi-3.0-next
-          FOLDER: build
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   swagger:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
@@ -160,7 +123,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   docs:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/next'
     runs-on: ubuntu-latest
     timeout-minutes: 3
 
