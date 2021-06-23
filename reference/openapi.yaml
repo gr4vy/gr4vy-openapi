@@ -3,8 +3,8 @@
 openapi: 3.0.0
 
 info:
-  title: Gr4vy API (Beta)
-  version: "1.0"
+  title: Gr4vy API
+  version: "1.0.0"
   contact:
     name: Gr4vy Support
     email: code@gr4vy.com
