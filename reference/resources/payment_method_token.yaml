@@ -1,6 +1,6 @@
 ---
 title: Payment method token
-description: A token for a payment method
+description: A token for a payment method.
 type: object
 x-tags:
   - Payment Method Tokens
