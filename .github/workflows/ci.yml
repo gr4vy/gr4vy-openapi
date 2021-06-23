@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - main
-      - next
+      - development
   pull_request:
     branches:
       - main
@@ -123,7 +123,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   docs:
-    if: github.ref == 'refs/heads/next'
+    if: github.ref == 'refs/heads/development'
     runs-on: ubuntu-latest
     timeout-minutes: 3
 
