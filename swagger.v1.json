@@ -13,7 +13,7 @@
     },
     "termsOfService": "https://gr4vy.com",
     "title": "Gr4vy API",
-    "version": "1.0.0"
+    "version": "1.1.0-beta"
   },
   "host": "api.plantly.gr4vy.app",
   "basePath": "/",
