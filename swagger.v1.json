@@ -12,8 +12,8 @@
       "url": "https://raw.githubusercontent.com/gr4vy/gr4vy-openapi/main/LICENSE"
     },
     "termsOfService": "https://gr4vy.com",
-    "title": "Gr4vy API (Beta)",
-    "version": "1.0"
+    "title": "Gr4vy API",
+    "version": "1.0.0"
   },
   "host": "api.plantly.gr4vy.app",
   "basePath": "/",
