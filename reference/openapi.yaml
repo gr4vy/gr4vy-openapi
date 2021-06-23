@@ -61,6 +61,7 @@ tags:
       In Gr4vy, a card rule defines how a card transaction is processed. It
       determines which payment services are used, and with what priority, based
       on the transaction amount, card type, and many more attributes.
+    x-internal: true
 
   # - name: Merchants
   #   description: |-
