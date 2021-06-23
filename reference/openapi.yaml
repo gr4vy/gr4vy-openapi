@@ -82,6 +82,17 @@ tags:
       * Store (also known as tokenize) a payment method for a buyer.
       * Fetch all previously tokenized payment methods for a buyer.
 
+  - name: Payment Method Tokens
+    description: |-
+      In Gr4vy, a payment method token represents the token created by a payment
+      service for a payment method.
+
+      The payment method token API can be used to:
+
+      * List all the available tokens for a payment method
+      * Use these tokens to make direct API calls to that payment service,
+      without the need to go through Gr4vy.
+
   - name: Payment Options
     description: |-
       In Gr4vy, a payment option represents a list of methods (card, PayPal,
@@ -213,6 +224,12 @@ paths:
       $ref: "./paths/payment_methods__get-payment-method.yaml"
     delete:
       $ref: "./paths/payment_methods__delete-payment-method.yaml"
+
+  "/payment-methods/{payment_method_id}/tokens":
+    parameters:
+      - $ref: "./path-parameters/payment_method_id.yaml"
+    get:
+      $ref: "./paths/payment_method_tokens__list-payment-method-tokens.yaml"
 
   # "/payment-methods/{payment_method_id}/events":
   #   parameters:
@@ -414,6 +431,10 @@ components:
       $ref: "./resources/payment_method--snapshot.yaml"
     PaymentMethods--Tokenized:
       $ref: "./resources/payment_methods--tokenized.yaml"
+    PaymentMethodToken:
+      $ref: "./resources/payment_method_token.yaml"
+    PaymentMethodTokens:
+      $ref: "./resources/payment_method_tokens.yaml"
     PaymentService:
       $ref: "./resources/payment_service.yaml"
     PaymentService--Snapshot:

@@ -1,0 +1,27 @@
+---
+title: Payment method token
+description: A token for a payment method
+type: object
+x-tags:
+  - Payment Method Tokens
+
+properties:
+  type:
+    type: string
+    description: "`payment-method-token`."
+    example: payment-method-token
+    enum:
+      - payment-method-token
+
+  token:
+    type: string
+    description: |-
+      The token for the payment service which can be used directly with the
+      payment service without the need to go through Gr4vy for the transaction.
+    example: "cus_4QEiU0VT5E3Whi"
+
+  payment_service:
+    description: |-
+      The payment service used for this transaction.
+    allOf:
+      - $ref: "../openapi.yaml#/components/schemas/PaymentService--Snapshot"
