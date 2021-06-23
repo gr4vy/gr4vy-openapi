@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Gr4vy API",
-    "version": "1.0.0",
+    "version": "1.1.0-beta",
     "contact": {
       "name": "Gr4vy Support",
       "email": "code@gr4vy.com",
