@@ -1,0 +1,50 @@
+---
+title: Buyer details
+type: object
+x-tags:
+  - Buyers
+
+properties:
+  first_name:
+    type: string
+    description: First name of the buyer.
+    example: John
+    nullable: true
+    minLength: 1
+    maxLength: 255
+
+  last_name:
+    type: string
+    description: Last name of the buyer.
+    example: Lunn
+    nullable: true
+    minLength: 1
+    maxLength: 255
+
+  email:
+    type: string
+    description: Email associated with the buyer.
+    example: john@gr4vy.com
+    nullable: true
+    minLength: 1
+    maxLength: 320
+
+  phone_number:
+    type: string
+    description: Phone number associated with the buyer.
+    example: "+13115552368"
+    nullable: true
+    minLength: 1
+    maxLength: 50
+
+  address:
+    description: Address associated with the billing details.
+    nullable: true
+    allOf:
+      - $ref: "../openapi.yaml#/components/schemas/Address"
+
+  tax_id:
+    description: Tax identification number associated with the billing details.
+    nullable: true
+    allOf:
+      - $ref: "../openapi.yaml#/components/schemas/TaxID"

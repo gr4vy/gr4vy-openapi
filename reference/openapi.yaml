@@ -354,6 +354,12 @@ paths:
 
 components:
   schemas:
+    Address:
+      $ref: "./resources/address.yaml"
+    TaxID:
+      $ref: "./resources/tax_id.yaml"
+    BillingDetails:
+      $ref: "./resources/billing_details.yaml"
     Buyer:
       $ref: "./resources/buyer.yaml"
     Buyers:
