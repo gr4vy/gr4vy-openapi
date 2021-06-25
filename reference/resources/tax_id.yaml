@@ -1,0 +1,58 @@
+---
+title: Tax ID
+type: object
+x-tags:
+  - Buyers
+
+required:
+  - kind
+  - value
+
+properties:
+  kind:
+    type: string
+    description: The kind of tax identification reference.
+    example: gb.vat
+    enum:
+      - ae.trn
+      - au.abn
+      - br.cnpj
+      - br.cpf
+      - ca.bn
+      - ca.gst_hst
+      - ca.pst_bc
+      - ca.pst_mb
+      - ca.pst_sk
+      - ca.qst
+      - ch.vat
+      - cl.tin
+      - es.cif
+      - eu.vat
+      - gb.vat
+      - hk.br
+      - id.npwp
+      - in.gst
+      - jp.cn
+      - jp.rn
+      - kr.brn
+      - li.uid
+      - mx.rfc
+      - my.frp
+      - my.itn
+      - my.sst
+      - no.vat
+      - nz.gst
+      - ru.inn
+      - ru.kpp
+      - sa.vat
+      - sg.gst
+      - sg.uen
+      - th.vat
+      - tw.vat
+      - us.ein
+      - za.vat
+
+  value:
+    type: string
+    example: "GB 867935561"
+    description: Tax identification reference itself.
