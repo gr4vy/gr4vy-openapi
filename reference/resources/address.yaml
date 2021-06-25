@@ -1,0 +1,77 @@
+---
+title: Address
+type: object
+x-tags:
+  - Buyers
+
+required:
+  - line1
+  - city
+  - state
+  - postal_code
+  - country
+
+properties:
+  organization:
+    type: string
+    description: Organization.
+    nullable: true
+    minLength: 1
+    maxLength: 255
+    example: Gr4vy
+
+  house_number_or_name:
+    type: string
+    description: House number.
+    nullable: true
+    minLength: 1
+    maxLength: 255
+    example: "1"
+
+  line1:
+    type: string
+    description: Address Line 1.
+    nullable: false
+    minLength: 1
+    maxLength: 255
+    example: Buckingham Palace
+
+  line2:
+    type: string
+    description: Address Line 2.
+    nullable: true
+    minLength: 1
+    maxLength: 255
+    example: Spur Road
+
+  city:
+    type: string
+    description: City.
+    nullable: false
+    minLength: 1
+    maxLength: 100
+    example: Westminster
+
+  state:
+    type: string
+    description: State or province.
+    nullable: false
+    minLength: 1
+    maxLength: 255
+    example: London
+
+  postal_code:
+    type: string
+    description: Post/Zip Code.
+    nullable: false
+    minLength: 1
+    maxLength: 50
+    example: SW1A 1AA
+
+  country:
+    type: string
+    description: ISO country code.
+    nullable: false
+    minLength: 2
+    maxLength: 2
+    example: GB

@@ -1,0 +1,19 @@
+---
+title: Address (Update)
+type: object
+
+x-tags:
+  - Buyers
+
+required:
+  - organization
+  - house_number_or_name
+  - line1
+  - line2
+  - city
+  - state
+  - postal_code
+  - country
+
+allOf:
+  - $ref: "../openapi.yaml#/components/schemas/Address"
