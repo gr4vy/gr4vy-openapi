@@ -430,6 +430,29 @@
             "in": "query",
             "name": "environment",
             "description": "Filters the results to only the items available in this environment."
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "example": 1,
+              "minimum": 1,
+              "maximum": 100,
+              "format": "int32"
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "Defines the maximum number of items to return for this request."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "",
+              "example": "ZXhhbXBsZTE"
+            },
+            "in": "query",
+            "name": "cursor",
+            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
           }
         ],
         "responses": {
