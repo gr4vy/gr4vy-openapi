@@ -296,12 +296,6 @@ paths:
     post:
       $ref: "./paths/transactions__capture-transaction.yaml"
 
-  # "/transactions/{transaction_id}/authorize":
-  #   parameters:
-  #     - $ref: "./path-parameters/transaction_id.yaml"
-  #   post:
-  #     $ref: "./paths/transactions__authorize-transaction.yaml"
-
   "/transactions/{transaction_id}/refund":
     parameters:
       - $ref: "./path-parameters/transaction_id.yaml"
