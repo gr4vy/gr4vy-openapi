@@ -1544,6 +1544,39 @@
                       "id": "46973e9d-88a7-44a6-abfe-be4ff0134ff4"
                     }
                   }
+                },
+                "Authorize and request 3DS flow": {
+                  "value": {
+                    "amount": 1299,
+                    "currency": "USD",
+                    "payment_method": {
+                      "method": "card",
+                      "number": "4111111111111111",
+                      "expiration_date": "11/25",
+                      "security_code": "123",
+                      "redirect_url": "https://example.com/callback"
+                    }
+                  }
+                },
+                "Authorize a new card with external 3DS Data": {
+                  "value": {
+                    "amount": 1299,
+                    "currency": "USD",
+                    "payment_method": {
+                      "method": "card",
+                      "number": "4111111111111111",
+                      "expiration_date": "11/25",
+                      "security_code": "123"
+                    },
+                    "3d_secure_data": {
+                      "version": "2.1.0",
+                      "eci": "05",
+                      "cavv": "3q2+78r+ur7erb7vyv66vv8=",
+                      "directory_trans_id": "c4e59ceb-a382-4d6a-bc87-385d591fa09d",
+                      "directory_response": "C",
+                      "authentication_response": "Y"
+                    }
+                  }
                 }
               }
             }
