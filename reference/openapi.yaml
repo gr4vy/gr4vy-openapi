@@ -132,30 +132,6 @@ tags:
     x-internal: true
 
 paths:
-  "/async/payment-methods":
-    post:
-      $ref: "./paths/async__store-payment-method.yaml"
-
-  "/async/transactions":
-    post:
-      $ref: "./paths/async__create-transaction.yaml"
-
-  "/async/transactions/{transaction_id}/authorize":
-    parameters:
-      - $ref: "./path-parameters/transaction_id.yaml"
-    post:
-      $ref: "./paths/async__authorize-transaction.yaml"
-
-  "/async/transactions/{transaction_id}/capture":
-    parameters:
-      - $ref: "./path-parameters/transaction_id.yaml"
-    post:
-      $ref: "./paths/async__capture-transaction.yaml"
-
-  "/async/transactions/batch-capture":
-    post:
-      $ref: "./paths/async__batch-capture-transactions.yaml"
-
   "/auth/sessions":
     post:
       $ref: "./paths/sessions__login.yaml"
@@ -307,6 +283,10 @@ paths:
   #     - $ref: "./path-parameters/transaction_id.yaml"
   #   get:
   #     $ref: "./paths/transactions__list-transaction-events.yaml"
+
+  # "/transactions/{transaction_id}/three-d-secure":
+  #   get:
+  #     $ref: "./paths/transactions__three-d-secure-transaction.yaml"
 
   "/transactions/{transaction_id}/approve":
     parameters:
