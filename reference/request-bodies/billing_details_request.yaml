@@ -1,5 +1,5 @@
 ---
-title: Billing Details request
+title: Billing details request
 type: object
 description: |-
   Billing details to use associated to a buyer.
@@ -92,7 +92,7 @@ properties:
     example: "10 Oxford Street"
     nullable: true
 
-  line1:
+  line2:
     type: string
     minLength: 1
     maxLength: 255

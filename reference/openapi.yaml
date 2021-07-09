@@ -355,7 +355,7 @@ paths:
 components:
   schemas:
     BillingDetailsRequest:
-    $ref: "./request-bodies/billing_details_request.yaml"
+      $ref: "./request-bodies/billing_details_request.yaml"
     Buyer:
       $ref: "./resources/buyer.yaml"
     Buyers:
