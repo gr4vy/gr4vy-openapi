@@ -28,6 +28,6 @@ properties:
     maxLength: 200
 
   billing_details:
-      x-model-name: BillingDetailsRequest
-      description:
-        The optional billing details to create a buyer.
+    x-model-name: BillingDetailsRequest
+    description:
+      The optional billing details to create a buyer.
