@@ -1,0 +1,161 @@
+---
+title: Billing Details request
+type: object
+description: |-
+  Billing details to use associated to a buyer.
+
+x-tags:
+  - Request Bodies
+
+required:
+  - method
+
+properties:
+  first_name:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: First name to use for this request.
+    example: "John"
+    nullable: true
+
+  last_name:
+    type: string
+    minLength: 1
+    maxLength: 255
+    example: "Lunn"
+    description: Last name to use for this request.
+    nullable: true
+
+  email:
+    type: string
+    minLength: 1
+    maxLength: 320
+    description: Email to use for this request.
+    example: john@example.com
+    nullable: true
+
+  phone_number:
+    type: string
+    pattern: '^\+[1-9]\d{1,14}$'
+    minLength: 1
+    maxLength: 50
+    description: Phone number to use for this request.
+    example: "1234567890"
+    nullable: true
+
+  city:
+    type: string
+    minLength: 1
+    maxLength: 100
+    description: City to use for this request.
+    example: London
+    nullable: true
+
+  country:
+    type: string
+    minLength: 1
+    maxLength: 2
+    description: Country to use for this request.
+    example: "GB"    
+    nullable: true
+
+  postal_code:
+    type: string
+    minLenght: 1
+    maxLength: 50
+    description: Postal code to use for this request.
+    example: "789123"
+    nullable: true
+
+  state:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: The City to use for this request.
+    example: "Greater London"
+    nullable: true
+
+  house_number_or_name:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: The house number or name to use for this request.
+    example: "10"
+    nullable: true
+
+  line1:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: The first line of the address to use for this request.
+    example: "10 Oxford Street"
+    nullable: true
+
+  line1:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: The second line of the address to use for this request.
+    example: "New Oxford Court"
+    nullable: true
+
+  organization:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: The second line of the address to use for this request.
+    example: "Gr4vy"
+    nullable: true
+
+  tax_id:
+    type: string
+    minLength: 1
+    maxLength: 50
+    description: The tax id to use for this request.
+    example: "12345678931"
+    nullable: true
+
+  tax_id_kind:
+    type: string
+    description: The tax id kind to use for this request.
+    example: gb.vat
+    enum:
+      - ae.trn
+      - au.abn
+      - br.cnpj
+      - br.cpf
+      - ca.bn
+      - ca.gst_hst
+      - ca.pst_bc
+      - ca.pst_mb
+      - ca.pst_sk
+      - ca.qst
+      - ch.vat
+      - cl.tin
+      - es.cif
+      - eu.vat
+      - gb.vat
+      - hk.br
+      - id.npwp
+      - in.gst
+      - jp.cn
+      - jp.rn
+      - kr.brn
+      - li.uid
+      - mx.rfc
+      - my.frp
+      - my.itn
+      - my.sst
+      - no.vat
+      - nz.gst
+      - ru.inn
+      - ru.kpp
+      - sa.vat
+      - sg.gst
+      - sg.uen
+      - th.vat
+      - tw.vat
+      - us.ein
+      - za.vat
+    nullable: true
