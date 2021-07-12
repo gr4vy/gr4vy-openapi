@@ -1,0 +1,28 @@
+---
+operationId: list-payment-method-tokens
+summary: List payment method tokens
+description: Returns a list of PSP tokens for a given payment method.
+tags:
+  - Payment Method Tokens
+
+responses:
+  "200":
+    description: Returns a list of payment method tokens.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/PaymentMethodTokens"
+
+  "401":
+    description: Returns an error if no valid authentication was provided.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error401Unauthorized"
+
+  "404":
+    description: Returns an error if the resource can not be found.
+    content:
+      application/json:
+        schema:
+          $ref: "../openapi.yaml#/components/schemas/Error404NotFound"
