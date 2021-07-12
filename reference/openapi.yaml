@@ -68,6 +68,17 @@ tags:
   #     In Gr4vy, a merchant represents the customer that controls the instance.
   #   x-internal: true
 
+  - name: Payment Method Tokens
+    description: |-
+      In Gr4vy, a payment method token represents the token created by a payment
+      service for a payment method.
+
+      The payment method token API can be used to:
+
+      * List all the available tokens for a payment method
+      * Use these tokens to make direct API calls to that payment service,
+      without the need to go through Gr4vy.
+
   - name: Payment Methods
     description: |-
       In Gr4vy, a payment method represents a way in which a payment can be
@@ -81,17 +92,6 @@ tags:
       and country.
       * Store (also known as tokenize) a payment method for a buyer.
       * Fetch all previously tokenized payment methods for a buyer.
-
-  - name: Payment Method Tokens
-    description: |-
-      In Gr4vy, a payment method token represents the token created by a payment
-      service for a payment method.
-
-      The payment method token API can be used to:
-
-      * List all the available tokens for a payment method
-      * Use these tokens to make direct API calls to that payment service,
-      without the need to go through Gr4vy.
 
   - name: Payment Options
     description: |-
