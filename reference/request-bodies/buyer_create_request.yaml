@@ -28,6 +28,7 @@ properties:
     maxLength: 200
 
   billing_details:
-    x-model-name: BillingDetailsRequest
-    description:
-      The optional billing details to create a buyer.
+    description: The optional billing details to create a buyer.
+    nullable: true
+    allOf:
+      - $ref: "../openapi.yaml#/components/schemas/BillingDetails"

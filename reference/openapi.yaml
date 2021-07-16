@@ -354,8 +354,12 @@ paths:
 
 components:
   schemas:
-    BillingDetailsRequest:
-      $ref: "./request-bodies/billing_details_request.yaml"
+    Address:
+      $ref: "./resources/address.yaml"
+    BillingDetails:
+      $ref: "./resources/billing_details.yaml"
+    BillingDetailsUpdateRequest:
+      $ref: "./request-bodies/billing_details_update_request.yaml"
     Buyer:
       $ref: "./resources/buyer.yaml"
     Buyers:
@@ -446,6 +450,8 @@ components:
       $ref: "./resources/status.yaml"
     Statuses:
       $ref: "./resources/statuses.yaml"
+    TaxId:
+      $ref: "./resources/tax_id.yaml"
     TokenizedRequest:
       $ref: "./request-bodies/tokenized_request.yaml"
     Transaction:

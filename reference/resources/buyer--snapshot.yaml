@@ -40,3 +40,10 @@ properties:
     nullable: true
     minLength: 1
     maxLength: 200
+
+  billing_details:
+    description:
+      Billing details, including address and tax id, associated with the buyer.
+    nullable: true
+    allOf:
+      - $ref: "../openapi.yaml#/components/schemas/BillingDetails"
