@@ -1,5 +1,5 @@
 ---
-title: Billing details request
+title: Address
 type: object
 description: |-
   Billing details to use associated to a buyer.
