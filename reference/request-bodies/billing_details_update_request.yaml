@@ -13,4 +13,4 @@ properties:
     description: Address associated with the billing details.
     nullable: true
     allOf:
-      - $ref: "../openapi.yaml#/components/schemas/Address"
+      - $ref: "../openapi.yaml#/components/schemas/AddressUpdate"
