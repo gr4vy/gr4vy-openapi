@@ -19,39 +19,39 @@ properties:
     type: string
     minLength: 1
     maxLength: 100
-    description: City to use for this request.
+    description: City to use for this address.
     example: London
-    nullable: true
+    nullable: false
 
   country:
     type: string
     minLength: 1
     maxLength: 2
-    description: Country to use for this request.
+    description: Country to use for this address.
     example: "GB"
-    nullable: true
+    nullable: false
 
   postal_code:
     type: string
     minLength: 1
     maxLength: 50
-    description: Postal code to use for this request.
+    description: Postal code to use for this address.
     example: "789123"
-    nullable: true
+    nullable: false
 
   state:
     type: string
     minLength: 1
     maxLength: 255
-    description: The City to use for this request.
+    description: The City to use for this address.
     example: "Greater London"
-    nullable: true
+    nullable: false
 
   house_number_or_name:
     type: string
     minLength: 1
     maxLength: 255
-    description: The house number or name to use for this request.
+    description: The house number or name to use for this address.
     example: "10"
     nullable: true
 
@@ -59,15 +59,15 @@ properties:
     type: string
     minLength: 1
     maxLength: 255
-    description: The first line of the address to use for this request.
+    description: The first line of the address to use for this address.
     example: "10 Oxford Street"
-    nullable: true
+    nullable: false
 
   line2:
     type: string
     minLength: 1
     maxLength: 255
-    description: The second line of the address to use for this request.
+    description: The second line of the address to use for this address.
     example: "New Oxford Court"
     nullable: true
 
@@ -75,6 +75,6 @@ properties:
     type: string
     minLength: 1
     maxLength: 255
-    description: The second line of the address to use for this request.
+    description: The second line of the address to use for this address.
     example: "Gr4vy"
     nullable: true
