@@ -2,7 +2,7 @@
 title: Address
 type: object
 description: |-
-  Billing details to use associated to a buyer.
+  Billing details address to associate to a buyer.
 
 x-tags:
   - Buyers
