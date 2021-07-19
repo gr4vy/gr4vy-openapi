@@ -37,7 +37,7 @@ properties:
     pattern: '^\+[1-9]\d{1,14}$'
     minLength: 1
     maxLength: 50
-    description: Phone number to use for this request.
+    description: Phone number to use for this request following E.164 international standard.
     example: "+1234567890"
     nullable: true
 

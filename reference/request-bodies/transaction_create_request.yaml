@@ -88,9 +88,3 @@ properties:
       - production
     example: staging
 
-  buyer_external_identifier:
-    type: string
-    description: |-
-      Buyers external identifier to associate the buyer's details to the
-      transaction.
-    example: "123456"
