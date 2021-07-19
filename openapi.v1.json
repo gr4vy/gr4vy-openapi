@@ -1881,8 +1881,9 @@
   "components": {
     "schemas": {
       "Address": {
-        "title": "Address",
+        "title": "Billing details request",
         "type": "object",
+        "description": "Billing details to use associated to a buyer.",
         "x-tags": [
           "Buyers"
         ],
@@ -1894,132 +1895,112 @@
           "country"
         ],
         "properties": {
-          "organization": {
-            "type": "string",
-            "description": "Organization.",
-            "nullable": true,
-            "minLength": 1,
-            "maxLength": 255,
-            "example": "Gr4vy"
-          },
-          "house_number_or_name": {
-            "type": "string",
-            "description": "House number.",
-            "nullable": true,
-            "minLength": 1,
-            "maxLength": 255,
-            "example": "1"
-          },
-          "line1": {
-            "type": "string",
-            "description": "Address Line 1.",
-            "nullable": false,
-            "minLength": 1,
-            "maxLength": 255,
-            "example": "Buckingham Palace"
-          },
-          "line2": {
-            "type": "string",
-            "description": "Address Line 2.",
-            "nullable": true,
-            "minLength": 1,
-            "maxLength": 255,
-            "example": "Spur Road"
-          },
           "city": {
             "type": "string",
-            "description": "City.",
-            "nullable": false,
             "minLength": 1,
             "maxLength": 100,
-            "example": "Westminster"
-          },
-          "state": {
-            "type": "string",
-            "description": "State or province.",
-            "nullable": false,
-            "minLength": 1,
-            "maxLength": 255,
-            "example": "London"
-          },
-          "postal_code": {
-            "type": "string",
-            "description": "Post/Zip Code.",
-            "nullable": false,
-            "minLength": 1,
-            "maxLength": 50,
-            "example": "SW1A 1AA"
+            "description": "City to use for this request.",
+            "example": "London",
+            "nullable": true
           },
           "country": {
             "type": "string",
-            "description": "ISO country code.",
-            "nullable": false,
-            "minLength": 2,
+            "minLength": 1,
             "maxLength": 2,
-            "example": "GB"
+            "description": "Country to use for this request.",
+            "example": "GB",
+            "nullable": true
+          },
+          "postal_code": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "description": "Postal code to use for this request.",
+            "example": "789123",
+            "nullable": true
+          },
+          "state": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "The City to use for this request.",
+            "example": "Greater London",
+            "nullable": true
+          },
+          "house_number_or_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "The house number or name to use for this request.",
+            "example": "10",
+            "nullable": true
+          },
+          "line1": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "The first line of the address to use for this request.",
+            "example": "10 Oxford Street",
+            "nullable": true
+          },
+          "line2": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "The second line of the address to use for this request.",
+            "example": "New Oxford Court",
+            "nullable": true
+          },
+          "organization": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "The second line of the address to use for this request.",
+            "example": "Gr4vy",
+            "nullable": true
           }
         }
       },
-      "AddressUpdate": {
-        "title": "Address (Update)",
-        "type": "object",
-        "x-tags": [
-          "Buyers"
-        ],
-        "required": [
-          "organization",
-          "house_number_or_name",
-          "line1",
-          "line2",
-          "city",
-          "state",
-          "postal_code",
-          "country"
-        ],
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Address"
-          }
-        ]
-      },
       "BillingDetails": {
-        "title": "Buyer details",
+        "title": "Billing details request",
         "type": "object",
+        "description": "Billing details to use associated to a buyer.",
         "x-tags": [
           "Buyers"
         ],
         "properties": {
           "first_name": {
             "type": "string",
-            "description": "First name of the buyer.",
-            "example": "John",
-            "nullable": true,
             "minLength": 1,
-            "maxLength": 255
+            "maxLength": 255,
+            "description": "First name to use for this request.",
+            "example": "John",
+            "nullable": true
           },
           "last_name": {
             "type": "string",
-            "description": "Last name of the buyer.",
-            "example": "Lunn",
-            "nullable": true,
             "minLength": 1,
-            "maxLength": 255
+            "maxLength": 255,
+            "example": "Lunn",
+            "description": "Last name to use for this request.",
+            "nullable": true
           },
           "email": {
             "type": "string",
-            "description": "Email associated with the buyer.",
-            "example": "john@gr4vy.com",
-            "nullable": true,
             "minLength": 1,
-            "maxLength": 320
+            "maxLength": 320,
+            "description": "Email to use for this request.",
+            "example": "john@example.com",
+            "nullable": true
           },
           "phone_number": {
             "type": "string",
-            "description": "Phone number associated with the buyer.",
-            "example": "+13115552368",
-            "nullable": true,
+            "pattern": "^\\+[1-9]\\d{1,14}$",
             "minLength": 1,
-            "maxLength": 50
+            "maxLength": 50,
+            "description": "Phone number to use for this request.",
+            "example": "+1234567890",
+            "nullable": true
           },
           "address": {
             "description": "Address associated with the billing details.",
@@ -2031,18 +2012,18 @@
             ]
           },
           "tax_id": {
-            "description": "Tax identification number associated with the billing details.",
+            "description": "Tax information associated with the billing details.",
             "nullable": true,
             "allOf": [
               {
-                "$ref": "#/components/schemas/TaxID"
+                "$ref": "#/components/schemas/TaxId"
               }
             ]
           }
         }
       },
-      "BillingDetailsUpdate": {
-        "title": "Billing Details (Update)",
+      "BillingDetailsUpdateRequest": {
+        "title": "Billing Details Update Request",
         "type": "object",
         "x-tags": [
           "Buyers"
@@ -2058,7 +2039,7 @@
             "nullable": true,
             "allOf": [
               {
-                "$ref": "#/components/schemas/AddressUpdate"
+                "$ref": "#/components/schemas/Address"
               }
             ]
           }
@@ -2205,7 +2186,7 @@
             "maxLength": 200
           },
           "billing_details": {
-            "description": "Billing details associated with the buyer.",
+            "description": "Billing details, including address and tax id, associated with the buyer.",
             "nullable": true,
             "allOf": [
               {
@@ -2240,7 +2221,7 @@
             "maxLength": 200
           },
           "billing_details": {
-            "description": "Billing details associated with the buyer.",
+            "description": "The optional billing details to create a buyer.",
             "nullable": true,
             "allOf": [
               {
@@ -2264,11 +2245,11 @@
         ],
         "properties": {
           "billing_details": {
-            "description": "Billing details associated with the buyer.",
+            "description": "The optional billing details to create a buyer.",
             "nullable": true,
             "allOf": [
               {
-                "$ref": "#/components/schemas/BillingDetailsUpdate"
+                "$ref": "#/components/schemas/BillingDetailsUpdateRequest"
               }
             ]
           }
@@ -4348,9 +4329,10 @@
           }
         }
       },
-      "TaxID": {
+      "TaxId": {
         "title": "Tax ID",
         "type": "object",
+        "description": "Tax ID to use associated to a buyer.",
         "x-tags": [
           "Buyers"
         ],
@@ -4359,9 +4341,16 @@
           "value"
         ],
         "properties": {
-          "kind": {
+          "tax_id": {
             "type": "string",
-            "description": "The kind of tax identification reference.",
+            "minLength": 1,
+            "maxLength": 50,
+            "description": "The tax id to use for this request.",
+            "example": "12345678931"
+          },
+          "tax_id_kind": {
+            "type": "string",
+            "description": "The tax id kind to use for this request.",
             "example": "gb.vat",
             "enum": [
               "ae.trn",
@@ -4402,11 +4391,6 @@
               "us.ein",
               "za.vat"
             ]
-          },
-          "value": {
-            "type": "string",
-            "example": "GB 867935561",
-            "description": "Tax identification reference itself."
           }
         }
       },
@@ -4716,6 +4700,11 @@
               "production"
             ],
             "example": "staging"
+          },
+          "buyer_external_identifier": {
+            "type": "string",
+            "description": "Buyers external identifier to associate the buyer's details to the\ntransaction.",
+            "example": "123456"
           }
         }
       },
