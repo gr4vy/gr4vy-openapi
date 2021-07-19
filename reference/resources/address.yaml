@@ -1,6 +1,9 @@
 ---
-title: Address
+title: Billing details request
 type: object
+description: |-
+  Billing details to use associated to a buyer.
+
 x-tags:
   - Buyers
 
@@ -12,66 +15,66 @@ required:
   - country
 
 properties:
-  organization:
-    type: string
-    description: Organization.
-    nullable: true
-    minLength: 1
-    maxLength: 255
-    example: Gr4vy
-
-  house_number_or_name:
-    type: string
-    description: House number.
-    nullable: true
-    minLength: 1
-    maxLength: 255
-    example: "1"
-
-  line1:
-    type: string
-    description: Address Line 1.
-    nullable: false
-    minLength: 1
-    maxLength: 255
-    example: Buckingham Palace
-
-  line2:
-    type: string
-    description: Address Line 2.
-    nullable: true
-    minLength: 1
-    maxLength: 255
-    example: Spur Road
-
   city:
     type: string
-    description: City.
-    nullable: false
     minLength: 1
     maxLength: 100
-    example: Westminster
-
-  state:
-    type: string
-    description: State or province.
-    nullable: false
-    minLength: 1
-    maxLength: 255
+    description: City to use for this request.
     example: London
-
-  postal_code:
-    type: string
-    description: Post/Zip Code.
-    nullable: false
-    minLength: 1
-    maxLength: 50
-    example: SW1A 1AA
+    nullable: true
 
   country:
     type: string
-    description: ISO country code.
-    nullable: false
-    minLength: 2
+    minLength: 1
     maxLength: 2
-    example: GB
+    description: Country to use for this request.
+    example: "GB"
+    nullable: true
+
+  postal_code:
+    type: string
+    minLength: 1
+    maxLength: 50
+    description: Postal code to use for this request.
+    example: "789123"
+    nullable: true
+
+  state:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: The City to use for this request.
+    example: "Greater London"
+    nullable: true
+
+  house_number_or_name:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: The house number or name to use for this request.
+    example: "10"
+    nullable: true
+
+  line1:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: The first line of the address to use for this request.
+    example: "10 Oxford Street"
+    nullable: true
+
+  line2:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: The second line of the address to use for this request.
+    example: "New Oxford Court"
+    nullable: true
+
+  organization:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: The second line of the address to use for this request.
+    example: "Gr4vy"
+    nullable: true

@@ -11,7 +11,7 @@ allOf:
 
 properties:
   billing_details:
-    description: Billing details associated with the buyer.
+    description: The optional billing details to create a buyer.
     nullable: true
     allOf:
-      - $ref: "../openapi.yaml#/components/schemas/BillingDetailsUpdate"
+      - $ref: "../openapi.yaml#/components/schemas/BillingDetailsUpdateRequest"

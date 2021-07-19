@@ -1,6 +1,9 @@
 ---
 title: Tax ID
 type: object
+description: |-
+  Tax ID to use associated to a buyer.
+
 x-tags:
   - Buyers
 
@@ -9,9 +12,16 @@ required:
   - value
 
 properties:
-  kind:
+  tax_id:
     type: string
-    description: The kind of tax identification reference.
+    minLength: 1
+    maxLength: 50
+    description: The tax id to use for this request.
+    example: "12345678931"
+
+  tax_id_kind:
+    type: string
+    description: The tax id kind to use for this request.
     example: gb.vat
     enum:
       - ae.trn
@@ -51,8 +61,3 @@ properties:
       - tw.vat
       - us.ein
       - za.vat
-
-  value:
-    type: string
-    example: "GB 867935561"
-    description: Tax identification reference itself.

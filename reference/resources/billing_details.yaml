@@ -1,41 +1,45 @@
 ---
-title: Buyer details
+title: Billing details request
 type: object
+description: |-
+  Billing details to use associated to a buyer.
+
 x-tags:
   - Buyers
 
 properties:
   first_name:
     type: string
-    description: First name of the buyer.
-    example: John
-    nullable: true
     minLength: 1
     maxLength: 255
+    description: First name to use for this request.
+    example: John
+    nullable: true
 
   last_name:
     type: string
-    description: Last name of the buyer.
-    example: Lunn
-    nullable: true
     minLength: 1
     maxLength: 255
+    example: Lunn
+    description: Last name to use for this request.
+    nullable: true
 
   email:
     type: string
-    description: Email associated with the buyer.
-    example: john@gr4vy.com
-    nullable: true
     minLength: 1
     maxLength: 320
+    description: Email to use for this request.
+    example: john@example.com
+    nullable: true
 
   phone_number:
     type: string
-    description: Phone number associated with the buyer.
-    example: "+13115552368"
-    nullable: true
+    pattern: '^\+[1-9]\d{1,14}$'
     minLength: 1
     maxLength: 50
+    description: Phone number to use for this request.
+    example: "+1234567890"
+    nullable: true
 
   address:
     description: Address associated with the billing details.
@@ -44,7 +48,7 @@ properties:
       - $ref: "../openapi.yaml#/components/schemas/Address"
 
   tax_id:
-    description: Tax identification number associated with the billing details.
+    description: Tax information associated with the billing details.
     nullable: true
     allOf:
-      - $ref: "../openapi.yaml#/components/schemas/TaxID"
+      - $ref: "../openapi.yaml#/components/schemas/TaxId"
