@@ -2,7 +2,7 @@
 title: Address
 type: object
 description: |-
-  Billing details address to associate to a buyer.
+  Billing details associated to a buyer.
 
 x-tags:
   - Buyers
@@ -19,7 +19,7 @@ properties:
     type: string
     minLength: 1
     maxLength: 100
-    description: City to use for this address.
+    description: The city for the billing address.
     example: London
     nullable: false
 
@@ -27,7 +27,7 @@ properties:
     type: string
     minLength: 1
     maxLength: 2
-    description: Country to use for this address.
+    description: The country for the billing address.
     example: "GB"
     nullable: false
 
@@ -35,7 +35,7 @@ properties:
     type: string
     minLength: 1
     maxLength: 50
-    description: Postal code to use for this address.
+    description: The postal code or zip code for the billing address.
     example: "789123"
     nullable: false
 
@@ -43,7 +43,7 @@ properties:
     type: string
     minLength: 1
     maxLength: 255
-    description: The City to use for this address.
+    description: The state, county, or province for the billing address.
     example: "Greater London"
     nullable: false
 
@@ -51,7 +51,9 @@ properties:
     type: string
     minLength: 1
     maxLength: 255
-    description: The house number or name to use for this address.
+    description: |-
+      The house number or name for the billing address. Not all payment
+      services use this field but some do.
     example: "10"
     nullable: true
 
@@ -59,7 +61,7 @@ properties:
     type: string
     minLength: 1
     maxLength: 255
-    description: The first line of the address to use for this address.
+    description: The first line of the billing address.
     example: "10 Oxford Street"
     nullable: false
 
@@ -67,7 +69,7 @@ properties:
     type: string
     minLength: 1
     maxLength: 255
-    description: The second line of the address to use for this address.
+    description: The second line of the billing address.
     example: "New Oxford Court"
     nullable: true
 
@@ -75,6 +77,8 @@ properties:
     type: string
     minLength: 1
     maxLength: 255
-    description: The second line of the address to use for this address.
+    description: |-
+      The optional name of the company or organisation to add
+      to the billing address.
     example: "Gr4vy"
     nullable: true

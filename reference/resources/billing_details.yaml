@@ -12,7 +12,7 @@ properties:
     type: string
     minLength: 1
     maxLength: 255
-    description: First name to use for this request.
+    description: The first name(s) or given name for the buyer.
     example: John
     nullable: true
 
@@ -21,14 +21,14 @@ properties:
     minLength: 1
     maxLength: 255
     example: Lunn
-    description: Last name to use for this request.
+    description: The last name, or family name, of the buyer.
     nullable: true
 
   email:
     type: string
     minLength: 1
     maxLength: 320
-    description: The email address for the buyer
+    description: The email address for the buyer.
     example: john@example.com
     nullable: true
 
@@ -38,8 +38,9 @@ properties:
     minLength: 1
     maxLength: 50
     description: |-
-      The phone number to use for this request. This expect the number in the 
-      [E164 international number standard](https://www.twilio.com/docs/glossary/what-e164).
+      The phone number to use for this request. This expect the number in the
+      [E164 international number standard]
+      (https://www.twilio.com/docs/glossary/what-e164).
     example: "+1234567890"
     nullable: true
 
@@ -50,7 +51,7 @@ properties:
       - $ref: "../openapi.yaml#/components/schemas/Address"
 
   tax_id:
-    description: Tax information associated with the billing details.
+    description: The tax information associated with the billing details.
     nullable: true
     allOf:
       - $ref: "../openapi.yaml#/components/schemas/TaxId"
