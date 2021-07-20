@@ -2,7 +2,7 @@
 title: Tax ID
 type: object
 description: |-
-  Tax ID to use associated to a buyer.
+  The tax ID information associated to a buyer.
 
 x-tags:
   - Buyers
