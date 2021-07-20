@@ -43,7 +43,7 @@ properties:
 
   billing_details:
     description:
-      Billing details, including address and tax id, associated with the buyer.
+      The billing details associated with the buyer, which include the address and tax ID.
     nullable: true
     allOf:
       - $ref: "../openapi.yaml#/components/schemas/BillingDetails"
