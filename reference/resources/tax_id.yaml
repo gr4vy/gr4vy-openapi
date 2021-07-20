@@ -16,7 +16,7 @@ properties:
     type: string
     minLength: 1
     maxLength: 50
-    description: The tax id to use for this request.
+    description: The tax ID for the buyer.
     example: "12345678931"
 
   tax_id_kind:
