@@ -28,7 +28,7 @@ properties:
     type: string
     minLength: 1
     maxLength: 320
-    description: Email to use for this request.
+    description: The email address for the buyer
     example: john@example.com
     nullable: true
 
