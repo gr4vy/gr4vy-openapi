@@ -39,7 +39,7 @@ properties:
     maxLength: 200
 
   billing_details:
-    description: Billing details associated with the buyer.
+    description: The billing details associated with a buyer.
     nullable: true
     allOf:
       - $ref: "../openapi.yaml#/components/schemas/BillingDetails"
