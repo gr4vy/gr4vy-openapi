@@ -4214,6 +4214,12 @@
           "minItems": 1,
           "type": "array"
         },
+        "icon_url": {
+          "description": "An icon to display for the payment service.",
+          "example": "https://cdn.gr4vy.app/stripe.svg",
+          "type": "string",
+          "x-nullable": true
+        },
         "id": {
           "description": "The ID of the payment service. This is the underlying provider followed by a dash followed by the payment method ID.",
           "example": "stripe-card",
