@@ -19,7 +19,7 @@ properties:
     description: The tax ID for the buyer.
     example: "12345678931"
 
-  tax_id_kind:
+  kind:
     type: string
     description: The unique name for this kind of tax ID.
     example: gb.vat
