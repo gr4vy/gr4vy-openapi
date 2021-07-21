@@ -24,7 +24,7 @@ properties:
     description: The last name, or family name, of the buyer.
     nullable: true
 
-  email:
+  email_address:
     type: string
     minLength: 1
     maxLength: 320
