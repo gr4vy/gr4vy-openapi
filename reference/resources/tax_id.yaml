@@ -21,7 +21,7 @@ properties:
 
   kind:
     type: string
-    description: The unique name for this kind of tax ID.
+    description: The kind of tax ID.
     example: gb.vat
     enum:
       - ae.trn
