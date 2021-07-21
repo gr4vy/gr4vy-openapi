@@ -1,0 +1,16 @@
+---
+title: Billing Details Update Request
+type: object
+
+x-tags:
+  - Buyers
+
+allOf:
+  - $ref: "../openapi.yaml#/components/schemas/BillingDetails"
+
+properties:
+  address:
+    description: Address associated with the billing details.
+    nullable: true
+    allOf:
+      - $ref: "../openapi.yaml#/components/schemas/AddressUpdate"

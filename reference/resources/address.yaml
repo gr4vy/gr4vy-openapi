@@ -1,0 +1,84 @@
+---
+title: Address
+type: object
+description: |-
+  Billing details associated to a buyer.
+
+x-tags:
+  - Buyers
+
+required:
+  - line1
+  - city
+  - state
+  - postal_code
+  - country
+
+properties:
+  city:
+    type: string
+    minLength: 1
+    maxLength: 100
+    description: The city for the billing address.
+    example: London
+    nullable: false
+
+  country:
+    type: string
+    minLength: 1
+    maxLength: 2
+    description: The country for the billing address.
+    example: "GB"
+    nullable: false
+
+  postal_code:
+    type: string
+    minLength: 1
+    maxLength: 50
+    description: The postal code or zip code for the billing address.
+    example: "789123"
+    nullable: false
+
+  state:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: The state, county, or province for the billing address.
+    example: "Greater London"
+    nullable: false
+
+  house_number_or_name:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: |-
+      The house number or name for the billing address. Not all payment
+      services use this field but some do.
+    example: "10"
+    nullable: true
+
+  line1:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: The first line of the billing address.
+    example: "10 Oxford Street"
+    nullable: false
+
+  line2:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: The second line of the billing address.
+    example: "New Oxford Court"
+    nullable: true
+
+  organization:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: |-
+      The optional name of the company or organisation to add
+      to the billing address.
+    example: "Gr4vy"
+    nullable: true

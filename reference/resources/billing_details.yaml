@@ -1,0 +1,57 @@
+---
+title: Billing details request
+type: object
+description: |-
+  Billing details to use associated to a buyer.
+
+x-tags:
+  - Buyers
+
+properties:
+  first_name:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: The first name(s) or given name for the buyer.
+    example: John
+    nullable: true
+
+  last_name:
+    type: string
+    minLength: 1
+    maxLength: 255
+    example: Lunn
+    description: The last name, or family name, of the buyer.
+    nullable: true
+
+  email_address:
+    type: string
+    minLength: 1
+    maxLength: 320
+    description: The email address for the buyer.
+    example: john@example.com
+    nullable: true
+
+  phone_number:
+    type: string
+    pattern: '^\+[1-9]\d{1,14}$'
+    minLength: 1
+    maxLength: 50
+    description: |-
+      The phone number to use for this request. This expect the number in the
+      [E164 international number standard]
+      (https://www.twilio.com/docs/glossary/what-e164).
+    example: "+1234567890"
+    nullable: true
+
+  address:
+    description: The billing address for the buyer.
+    nullable: true
+    allOf:
+      - $ref: "../openapi.yaml#/components/schemas/Address"
+
+  tax_id:
+    description: The tax information associated with the billing details.
+    nullable: true
+    allOf:
+      - $ref: "../openapi.yaml#/components/schemas/TaxId"
