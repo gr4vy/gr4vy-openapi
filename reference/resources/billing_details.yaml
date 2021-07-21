@@ -24,7 +24,7 @@ properties:
     description: Last name to use for this request.
     nullable: true
 
-  email:
+  email_address:
     type: string
     minLength: 1
     maxLength: 320
