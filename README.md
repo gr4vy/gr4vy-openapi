@@ -6,7 +6,7 @@ currently documents the public API endpoints.
 
 # Changelog
 
-See https://github.com/gr4vy/gr4vy-openapi/commits/main/ for the full changelog.
+See [the commit history](https://github.com/gr4vy/gr4vy-openapi/commits/main/openapi.json) for the full changes to our API.
 
 ## Usage & License
 
