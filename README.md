@@ -1,7 +1,5 @@
 # Gr4vy OpenAPI 3.0 Specification
 
-![CI](https://github.com/gr4vy/gr4vy-openapi/workflows/CI/badge.svg)
-
 This repository contains the OpenAPI 3.0 Specification (OAS3) for the Gr4vy
 APIs. This specicification is automatically generated from our API and only
 currently documents the public API endpoints.
