@@ -17213,7 +17213,7 @@
           "Checkout sessions"
         ],
         "summary": "Delete checkout session",
-        "description": "Deleta a checkout session and all of its (PCI) data.",
+        "description": "Delete a checkout session and all of its (PCI) data.",
         "operationId": "delete_checkout_session",
         "security": [
           {
@@ -17390,6 +17390,164 @@
         },
         "x-speakeasy-name-override": "delete",
         "x-speakeasy-group": "checkout-sessions"
+      }
+    },
+    "/checkout/sessions/{session_id}/fields": {
+      "put": {
+        "tags": [
+          "Checkout sessions"
+        ],
+        "summary": "Update checkout session fields",
+        "description": "Update a checkout session with card data.",
+        "operationId": "update_checkout_session_fields",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckoutSessionSecureFields"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "400": {
+            "description": "The request was invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request was unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The credentials were invalid or the caller did not have permission to act on the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "The request method was not allowed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error405"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A duplicate record was found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "425": {
+            "description": "The request was too early.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error425"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests were made.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error429"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error502"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error504"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-ignore": true
       }
     },
     "/merchant-accounts": {
@@ -22581,6 +22739,175 @@
         ],
         "title": "CheckoutSession"
       },
+      "CheckoutSessionCardPaymentMethod": {
+        "properties": {
+          "method": {
+            "type": "string",
+            "const": "card",
+            "title": "Method",
+            "description": "Always `card`.",
+            "default": "card",
+            "examples": [
+              "card"
+            ]
+          },
+          "number": {
+            "type": "string",
+            "maxLength": 19,
+            "minLength": 13,
+            "pattern": "^\\d+$",
+            "title": "Number",
+            "description": "The 13-19 digit number for this card.",
+            "examples": [
+              "4111111111111111"
+            ]
+          },
+          "expiration_date": {
+            "type": "string",
+            "maxLength": 5,
+            "minLength": 5,
+            "pattern": "^\\d{2}/\\d{2}$",
+            "title": "Expiration Date",
+            "description": "The expiration date of the card, formatted `MM/YY`.",
+            "examples": [
+              "12/30"
+            ]
+          },
+          "security_code": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 4,
+                "minLength": 3,
+                "pattern": "^\\d+$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Security Code",
+            "description": "The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.",
+            "examples": [
+              "123"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "number",
+          "expiration_date"
+        ],
+        "title": "CheckoutSessionCardPaymentMethod"
+      },
+      "CheckoutSessionClickToPayPaymentMethod": {
+        "properties": {
+          "method": {
+            "type": "string",
+            "const": "click-to-pay",
+            "title": "Method",
+            "description": "Always `click-to-pay`.",
+            "default": "click-to-pay",
+            "examples": [
+              "click-to-pay"
+            ]
+          },
+          "merchant_transaction_id": {
+            "type": "string",
+            "title": "Merchant Transaction Id",
+            "description": "The merchant transaction ID as provided by the C2P SDK.",
+            "examples": [
+              "1a1e7b31-c13a-4d31-a4dd-2198aa42ce65"
+            ]
+          },
+          "src_correlation_id": {
+            "type": "string",
+            "title": "Src Correlation Id",
+            "description": "The SRC correlation ID as provided by the C2P SDK.",
+            "examples": [
+              "c878b3f1-0582-428b-8a3d-9033fc9e0048"
+            ]
+          },
+          "src_dpa_id": {
+            "type": "string",
+            "title": "Src Dpa Id",
+            "description": "The DPA ID as provided by the C2P SDK.",
+            "examples": [
+              "d2fc460b-1182-4cdc-ad47-c38baa9ad73c"
+            ]
+          },
+          "src_cx_flow_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Src Cx Flow Id",
+            "description": "The CX Flow ID as provided by the C2P SDK",
+            "examples": [
+              "4241871b-c4f7-43e7-a943-6a87f1b2feae"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "merchant_transaction_id",
+          "src_correlation_id",
+          "src_dpa_id"
+        ],
+        "title": "CheckoutSessionClickToPayPaymentMethod"
+      },
+      "CheckoutSessionIdPaymentMethod": {
+        "properties": {
+          "method": {
+            "type": "string",
+            "const": "id",
+            "title": "Method",
+            "description": "Always `id`.",
+            "default": "id",
+            "examples": [
+              "id"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id",
+            "description": "The ID of the payment method to associate to the session.",
+            "examples": [
+              "ef9496d8-53a5-4aad-8ca2-00eb68334389"
+            ]
+          },
+          "security_code": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 4,
+                "minLength": 3,
+                "pattern": "^\\d+$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Security Code",
+            "description": "The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.",
+            "examples": [
+              "123"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "title": "CheckoutSessionIdPaymentMethod"
+      },
       "CheckoutSessionPaymentMethod": {
         "properties": {
           "type": {
@@ -22829,6 +23156,31 @@
         "additionalProperties": false,
         "type": "object",
         "title": "CheckoutSessionPaymentMethodDetails"
+      },
+      "CheckoutSessionSecureFields": {
+        "properties": {
+          "payment_method": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CheckoutSessionCardPaymentMethod"
+              },
+              {
+                "$ref": "#/components/schemas/CheckoutSessionClickToPayPaymentMethod"
+              },
+              {
+                "$ref": "#/components/schemas/CheckoutSessionIdPaymentMethod"
+              }
+            ],
+            "title": "Payment Method",
+            "description": "The details of the payment method to update."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "payment_method"
+        ],
+        "title": "CheckoutSessionSecureFields"
       },
       "CheckoutSessionUpdate": {
         "properties": {
