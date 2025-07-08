@@ -26458,51 +26458,6 @@
               "John Doe"
             ]
           },
-          "outbound_webhook_url": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Outbound Webhook Url",
-            "description": "An optional endpoint URL to deliver webhook notifications to.",
-            "examples": [
-              "https://example.com/callback"
-            ]
-          },
-          "outbound_webhook_username": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Outbound Webhook Username",
-            "description": "The optional username to use when `outbound_webhook_url` is configured and requires basic authentication.",
-            "examples": [
-              "user-12345"
-            ]
-          },
-          "outbound_webhook_password": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Outbound Webhook Password",
-            "description": "The optional password to use when `outbound_webhook_url` is configured and requires basic authentication",
-            "examples": [
-              "password-12345"
-            ]
-          },
           "loon_client_key": {
             "anyOf": [
               {
@@ -27029,51 +26984,6 @@
               "id-12345"
             ]
           },
-          "outbound_webhook_url": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Outbound Webhook Url",
-            "description": "An optional endpoint URL to deliver webhook notifications to.",
-            "examples": [
-              "https://example.com/callback"
-            ]
-          },
-          "outbound_webhook_username": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Outbound Webhook Username",
-            "description": "The optional username to use when `outbound_webhook_url` is configured and requires basic authentication.",
-            "examples": [
-              "user-12345"
-            ]
-          },
-          "outbound_webhook_password": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Outbound Webhook Password",
-            "description": "The optional password to use when `outbound_webhook_url` is configured and requires basic authentication",
-            "examples": [
-              "password-12345"
-            ]
-          },
           "id": {
             "type": "string",
             "maxLength": 50,
@@ -27377,51 +27287,6 @@
             "description": "The display name for the merchant account.",
             "examples": [
               "Example"
-            ]
-          },
-          "outbound_webhook_url": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Outbound Webhook Url",
-            "description": "An optional endpoint URL to deliver webhook notifications to.",
-            "examples": [
-              "https://example.com/callback"
-            ]
-          },
-          "outbound_webhook_username": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Outbound Webhook Username",
-            "description": "The optional username to use when `outbound_webhook_url` is configured and requires basic authentication.",
-            "examples": [
-              "user-12345"
-            ]
-          },
-          "outbound_webhook_password": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Outbound Webhook Password",
-            "description": "The optional password to use when `outbound_webhook_url` is configured and requires basic authentication",
-            "examples": [
-              "password-12345"
             ]
           }
         },
