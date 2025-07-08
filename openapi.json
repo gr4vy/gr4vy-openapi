@@ -28251,7 +28251,14 @@
             ]
           },
           "payment_source": {
-            "$ref": "#/components/schemas/TransactionPaymentSource",
+            "type": "string",
+            "enum": [
+              "ecommerce",
+              "moto",
+              "recurring",
+              "installment",
+              "card_on_file"
+            ],
             "description": "The payment source for the payment link.",
             "examples": [
               "ecommerce"
@@ -28623,7 +28630,14 @@
             ]
           },
           "payment_source": {
-            "$ref": "#/components/schemas/TransactionPaymentSource",
+            "type": "string",
+            "enum": [
+              "ecommerce",
+              "moto",
+              "recurring",
+              "installment",
+              "card_on_file"
+            ],
             "description": "The payment source for the payment link.",
             "default": "ecommerce",
             "examples": [
@@ -34825,7 +34839,14 @@
             ]
           },
           "payment_source": {
-            "$ref": "#/components/schemas/TransactionPaymentSource",
+            "type": "string",
+            "enum": [
+              "ecommerce",
+              "moto",
+              "recurring",
+              "installment",
+              "card_on_file"
+            ],
             "description": "The source of the transaction.",
             "examples": [
               "ecommerce"
@@ -35496,7 +35517,14 @@
             ]
           },
           "payment_source": {
-            "$ref": "#/components/schemas/TransactionPaymentSource",
+            "type": "string",
+            "enum": [
+              "ecommerce",
+              "moto",
+              "recurring",
+              "installment",
+              "card_on_file"
+            ],
             "description": "The use-case for the the transaction.",
             "default": "ecommerce",
             "examples": [
