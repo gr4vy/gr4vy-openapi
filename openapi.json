@@ -9138,13 +9138,16 @@
             "schema": {
               "anyOf": [
                 {
-                  "type": "string"
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 {
                   "type": "null"
                 }
               ],
-              "description": "Filters for transactions that have a payment method with a scheme that matches with the provided value.",
+              "description": "Filters for transactions where the `payment_method_scheme` matches one of the provided values.",
               "examples": [
                 [
                   "visa"
@@ -9152,7 +9155,7 @@
               ],
               "title": "Payment Method Scheme"
             },
-            "description": "Filters for transactions that have a payment method with a scheme that matches with the provided value."
+            "description": "Filters for transactions where the `payment_method_scheme` matches one of the provided values."
           },
           {
             "name": "payment_method_country",
