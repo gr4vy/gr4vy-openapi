@@ -25468,7 +25468,8 @@
           "operation_canceled",
           "service_error",
           "service_network_error",
-          "unknown_error"
+          "unknown_error",
+          "max_gift_cards_reached"
         ],
         "title": "GiftCardErrorCode",
         "description": "Gift card error codes.\n\nGr4vy normalised gift card error codes. Keep the naming and style in line with\nthose in the connectors framework.\n\nIf new codes are added, append them at the end or amend public simulator\ndocumentation: https://docs.gr4vy.com/guides/features/gift-cards/simulator"
