@@ -18490,7 +18490,7 @@
         "tags": [
           "Payouts"
         ],
-        "summary": "List payouts created.",
+        "summary": "List payouts created",
         "description": "Returns a list of payouts made.",
         "operationId": "list_payouts",
         "security": [
@@ -18716,7 +18716,7 @@
         "tags": [
           "Payouts"
         ],
-        "summary": "Create a payout.",
+        "summary": "Create a payout",
         "description": "Creates a new payout.",
         "operationId": "create_payout",
         "security": [
@@ -18903,8 +18903,8 @@
         "tags": [
           "Payouts"
         ],
-        "summary": "Get a payout.",
-        "description": "Retreives a payout.",
+        "summary": "Get a payout",
+        "description": "Retrieves a payout.",
         "operationId": "get_payout",
         "security": [
           {
@@ -19356,7 +19356,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Collection_PaymentLink_"
+                  "$ref": "#/components/schemas/PaymentLinks"
                 }
               }
             }
@@ -22807,7 +22807,7 @@
         ],
         "title": "CartItem"
       },
-      "CheckoutCardConnectionOptions": {
+      "CheckoutPayoutOptions": {
         "properties": {
           "processing_channel_id": {
             "type": "string",
@@ -22832,7 +22832,7 @@
           "processing_channel_id",
           "source_id"
         ],
-        "title": "CheckoutCardConnectionOptions"
+        "title": "CheckoutPayoutOptions"
       },
       "CheckoutSession": {
         "properties": {
@@ -23865,87 +23865,6 @@
           "checkout_session_id"
         ],
         "title": "ClickToPaySessionRequest"
-      },
-      "Collection_PaymentLink_": {
-        "properties": {
-          "items": {
-            "items": {
-              "$ref": "#/components/schemas/PaymentLink"
-            },
-            "type": "array",
-            "title": "Items",
-            "description": "A list of items returned for this request."
-          },
-          "limit": {
-            "type": "integer",
-            "maximum": 100.0,
-            "minimum": 1.0,
-            "title": "Limit",
-            "description": "The number of items for this page.",
-            "default": 20,
-            "examples": [
-              20
-            ]
-          },
-          "next_cursor": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 1000,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Next Cursor",
-            "description": "The cursor pointing at the next page of items.",
-            "examples": [
-              "ZXhhbXBsZTE"
-            ]
-          },
-          "previous_cursor": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 1000,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Previous Cursor",
-            "description": "The cursor pointing at the previous page of items.",
-            "examples": [
-              "Xkjss7asS"
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "items"
-        ],
-        "title": "Collection[PaymentLink]"
-      },
-      "ConnectionOptions": {
-        "properties": {
-          "checkout-card": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/CheckoutCardConnectionOptions"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Custom options for `checkout-card` payment service."
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "title": "ConnectionOptions"
       },
       "CreateSession": {
         "properties": {
@@ -28560,11 +28479,7 @@
           "connection_options": {
             "anyOf": [
               {
-                "additionalProperties": {
-                  "additionalProperties": true,
-                  "type": "object"
-                },
-                "type": "object"
+                "$ref": "#/components/schemas/TransactionConnectionOptions"
               },
               {
                 "type": "null"
@@ -28853,6 +28768,69 @@
           "processing"
         ],
         "title": "PaymentLinkStatus"
+      },
+      "PaymentLinks": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/PaymentLink"
+            },
+            "type": "array",
+            "title": "Items",
+            "description": "A list of items returned for this request."
+          },
+          "limit": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Limit",
+            "description": "The number of items for this page.",
+            "default": 20,
+            "examples": [
+              20
+            ]
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 1000,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor",
+            "description": "The cursor pointing at the next page of items.",
+            "examples": [
+              "ZXhhbXBsZTE"
+            ]
+          },
+          "previous_cursor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 1000,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Previous Cursor",
+            "description": "The cursor pointing at the previous page of items.",
+            "examples": [
+              "Xkjss7asS"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "PaymentLinks"
       },
       "PaymentMethod": {
         "properties": {
@@ -31310,6 +31288,24 @@
         ],
         "title": "PayoutCategory"
       },
+      "PayoutConnectionOptions": {
+        "properties": {
+          "checkout-card": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CheckoutPayoutOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Custom options for `checkout-card` payment service."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "PayoutConnectionOptions"
+      },
       "PayoutCreate": {
         "properties": {
           "amount": {
@@ -31443,7 +31439,7 @@
           "connection_options": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/ConnectionOptions"
+                "$ref": "#/components/schemas/PayoutConnectionOptions"
               },
               {
                 "type": "null"
@@ -35791,11 +35787,7 @@
           "connection_options": {
             "anyOf": [
               {
-                "additionalProperties": {
-                  "additionalProperties": true,
-                  "type": "object"
-                },
-                "type": "object"
+                "$ref": "#/components/schemas/TransactionConnectionOptions"
               },
               {
                 "type": "null"
@@ -37277,11 +37269,7 @@
           "connection_options": {
             "anyOf": [
               {
-                "additionalProperties": {
-                  "additionalProperties": true,
-                  "type": "object"
-                },
-                "type": "object"
+                "$ref": "#/components/schemas/TransactionConnectionOptions"
               },
               {
                 "type": "null"
@@ -37471,6 +37459,2553 @@
           "supported_schemes"
         ],
         "title": "WalletPaymentOptionContext"
+      },
+      "AccountUpdaterOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "response_code": {
+            "anyOf": [
+              {
+                "const": "updated",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The type of response to simulate.",
+            "examples": [
+              "updated"
+            ],
+            "title": "Response Code"
+          },
+          "account_number": {
+            "anyOf": [
+              {
+                "maxLength": 18,
+                "minLength": 12,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "When the `response_code` is set to `updated`, the payment method's account number will be updated to this value.",
+            "examples": [
+              "4242424242424242"
+            ],
+            "title": "Account Number"
+          },
+          "expiration_month": {
+            "anyOf": [
+              {
+                "maxLength": 2,
+                "minLength": 2,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "When the `response_code` is set to `updated`, the payment method's expiration month will be updated to this value.",
+            "examples": [
+              "12"
+            ],
+            "title": "Expiration Month"
+          },
+          "expiration_year": {
+            "anyOf": [
+              {
+                "maxLength": 4,
+                "minLength": 4,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "When the `response_code` is set to `updated`, the payment method's expiration year will be updated to this value.",
+            "examples": [
+              "2030"
+            ],
+            "title": "Expiration Year"
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The type of error code to simulate.",
+            "examples": [
+              "error"
+            ],
+            "title": "Error Code"
+          }
+        },
+        "title": "AccountUpdaterOptions",
+        "type": "object"
+      },
+      "AdyenAutoRescueSepaScenariosEnum": {
+        "enum": [
+          "AutoRescueSuccessfulFirst",
+          "AutoRescueSuccessfulSecond",
+          "AutoRescueFailed"
+        ],
+        "title": "AdyenAutoRescueSepaScenariosEnum",
+        "type": "string"
+      },
+      "AdyenCardAutoRescueScenariosEnum": {
+        "enum": [
+          "AutoRescueSuccessfulFirst",
+          "AutoRescueSuccessfulSecond",
+          "AutoRescueFailed",
+          "AutoRescueFraud"
+        ],
+        "title": "AdyenCardAutoRescueScenariosEnum",
+        "type": "string"
+      },
+      "AdyenCardOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "autoRescue": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Set to `true` to enable Auto Rescue for a transaction. Use the `maxDaysToRescue` to specify a rescue window.",
+            "examples": [
+              true
+            ],
+            "title": "Autorescue"
+          },
+          "maxDaysToRescue": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The rescue window for a transaction, in days, when `autoRescue` is set to `true`. You can specify a value between 1 and 48. For cards, the default is one calendar month. For SEPA, the default is 42 days.",
+            "examples": [
+              20
+            ],
+            "title": "Maxdaystorescue"
+          },
+          "additionalData": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes additional data to the Adyen API when creating a transaction.",
+            "examples": [
+              {
+                "subMerchantID": "12345"
+              }
+            ],
+            "title": "Additionaldata"
+          },
+          "autoRescueScenario": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenCardAutoRescueScenariosEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The rescue scenario to simulate for a transaction, when `autoRescue` is set to `true`.",
+            "examples": [
+              "AutoRescueSuccessfulFirst"
+            ]
+          },
+          "window_origin": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The origin of the window where the payment is initiated, used for 3D Secure authentication.",
+            "examples": [
+              "https://example.com"
+            ],
+            "title": "Window Origin"
+          }
+        },
+        "title": "AdyenCardOptions",
+        "type": "object"
+      },
+      "AdyenOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "additionalData": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes additional data to the Adyen API when creating a transaction.",
+            "examples": [
+              {
+                "subMerchantID": "12345"
+              }
+            ],
+            "title": "Additionaldata"
+          }
+        },
+        "title": "AdyenOptions",
+        "type": "object"
+      },
+      "AdyenSepaOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "autoRescue": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Set to `true` to enable Auto Rescue for a transaction. Use the `maxDaysToRescue` to specify a rescue window.",
+            "examples": [
+              true
+            ],
+            "title": "Autorescue"
+          },
+          "maxDaysToRescue": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The rescue window for a transaction, in days, when `autoRescue` is set to `true`. You can specify a value between 1 and 48. For cards, the default is one calendar month. For SEPA, the default is 42 days.",
+            "examples": [
+              20
+            ],
+            "title": "Maxdaystorescue"
+          },
+          "additionalData": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes additional data to the Adyen API when creating a transaction.",
+            "examples": [
+              {
+                "subMerchantID": "12345"
+              }
+            ],
+            "title": "Additionaldata"
+          },
+          "autoRescueSepaScenario": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenAutoRescueSepaScenariosEnum"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The rescue scenario to simulate for a transaction, when `autoRescue` is set to `true`.",
+            "examples": [
+              "AutoRescueSuccessfulFirst"
+            ]
+          },
+          "ownerName": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The name on the SEPA bank account.",
+            "examples": [
+              "A. Schneider"
+            ],
+            "title": "Ownername"
+          }
+        },
+        "title": "AdyenSepaOptions",
+        "type": "object"
+      },
+      "AffirmItineraryOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The type of itinerary object.",
+            "examples": [
+              "flight"
+            ],
+            "title": "Type"
+          },
+          "sku": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The booking/itinerary number (if applicable).",
+            "examples": [
+              "ABC123"
+            ],
+            "title": "Sku"
+          },
+          "display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Readable description of the itinerary item.",
+            "examples": [
+              "MIA-DCA-2019-12-11T12:07"
+            ],
+            "title": "Display Name"
+          },
+          "venue": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The name of the venue where the event is hosted.",
+            "examples": [
+              "Petco Park"
+            ],
+            "title": "Venue"
+          },
+          "location": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The address object that can be parsed.",
+            "examples": [
+              "925 Collins Avenue, Miami Beach, FL, 33140, US"
+            ],
+            "title": "Location"
+          },
+          "date_start": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The start date of this itinerary item.",
+            "examples": [
+              "2019-12-05"
+            ],
+            "title": "Date Start"
+          },
+          "management": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The corporation.",
+            "examples": [
+              "Marriott"
+            ],
+            "title": "Management"
+          }
+        },
+        "title": "AffirmItineraryOptions",
+        "type": "object"
+      },
+      "AffirmOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "discounts": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes additional discounts to the Affirm widget.",
+            "examples": [
+              {
+                "PRESDAY10": {
+                  "discount_amount": 1000,
+                  "discount_display_name": "President's Day 10% off"
+                },
+                "RETURN5": {
+                  "discount_amount": 500,
+                  "discount_display_name": "Returning customer 5% discount"
+                }
+              }
+            ],
+            "title": "Discounts"
+          },
+          "itinerary": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AffirmItineraryOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes itinerary data to the Affirm API."
+          }
+        },
+        "title": "AffirmOptions",
+        "type": "object"
+      },
+      "BraintreeDynamicDataFieldsOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "three_ds_auth_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes the 3DS status to the Braintree API using `customFields` with the key set to the value of `three_ds_auth_status`",
+            "examples": [
+              "threeDStatus"
+            ],
+            "title": "Three Ds Auth Status"
+          },
+          "purchase_order_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes the `transaction.purchaseOrderNumber` field when creating a new transaction.",
+            "examples": [
+              "po-12345"
+            ],
+            "title": "Purchase Order Number"
+          }
+        },
+        "title": "BraintreeDynamicDataFieldsOptions",
+        "type": "object"
+      },
+      "BraintreeOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "discount_amount": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes a discount amount to be applied to the transaction when using Braintree.",
+            "examples": [
+              1000
+            ],
+            "title": "Discount Amount"
+          },
+          "custom_fields": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `customFields` to the Braintree API when creating a new payment. Custom fields allow you to customize your checkout experience by collecting specific information about your customers and their purchases.",
+            "examples": [
+              {
+                "checkout": "primary"
+              }
+            ],
+            "title": "Custom Fields"
+          },
+          "dynamic_data_fields": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BraintreeDynamicDataFieldsOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Additional dynamic fields to pass to the Braintree API"
+          }
+        },
+        "title": "BraintreeOptions",
+        "type": "object"
+      },
+      "CybersourceAntiFraudOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "merchant_defined_data": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "A list of merchant defined data to be passed to the Cybersource Decision Manager API. Each key needs to be a numeric string.",
+            "examples": [
+              {
+                "1": "data"
+              }
+            ],
+            "title": "Merchant Defined Data"
+          },
+          "meta_key_merchant_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The merchant ID to use for this transaction. This requires a meta key to be set up for use with Cybersource Decision Manager, and this overrides the connector configuration.",
+            "examples": [
+              "merchant-1234"
+            ],
+            "title": "Meta Key Merchant Id"
+          },
+          "shipping_method": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The shipping method for this transaction.",
+            "examples": [
+              "sameday"
+            ],
+            "title": "Shipping Method"
+          }
+        },
+        "title": "CybersourceAntiFraudOptions",
+        "type": "object"
+      },
+      "CybersourceOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "meta_key_merchant_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The merchant ID to use for this transaction. This requires a meta key to be set up for use with Cybersource, and this overrides the connector configuration.",
+            "examples": [
+              "merchant-1234"
+            ],
+            "title": "Meta Key Merchant Id"
+          },
+          "merchant_defined_information": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "A list of merchant defined data to be passed to the Cybersource. Each key needs to be a numeric string.",
+            "examples": [
+              {
+                "1": "data"
+              }
+            ],
+            "title": "Merchant Defined Information"
+          },
+          "ship_to_method": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The shipping method for this transaction.",
+            "examples": [
+              "sameday"
+            ],
+            "title": "Ship To Method"
+          }
+        },
+        "title": "CybersourceOptions",
+        "type": "object"
+      },
+      "DlocalOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "wallet": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DlocalWalletOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `wallet` data to the dLocal API for those connectors that need it."
+          }
+        },
+        "title": "DlocalOptions",
+        "type": "object"
+      },
+      "DlocalWalletOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `wallet.name` to the dLocal API for those connectors that need it.",
+            "examples": [
+              "John Doe"
+            ],
+            "title": "Name"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `wallet.email` to the dLocal API for those connectors that need it.",
+            "examples": [
+              "john@example.com"
+            ],
+            "title": "Email"
+          },
+          "token": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `wallet.token` to the dLocal API for those connectors that need it.",
+            "examples": [
+              "123456"
+            ],
+            "title": "Token"
+          },
+          "username": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `wallet.username` to the dLocal API for those connectors that need it.",
+            "examples": [
+              "johnd"
+            ],
+            "title": "Username"
+          },
+          "verify": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `wallet.verify` to the dLocal API for those connectors that need it.",
+            "examples": [
+              true
+            ],
+            "title": "Verify"
+          }
+        },
+        "title": "DlocalWalletOptions",
+        "type": "object"
+      },
+      "FiservInstallmentOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "numberOfInstallments": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes the `order.installmentOptions.numberOfInstallments` field to the Fiserv API.",
+            "examples": [
+              6
+            ],
+            "title": "Numberofinstallments"
+          },
+          "installmentsInterest": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes the `order.installmentOptions.installmentsInterest` field to the Fiserv API.",
+            "examples": [
+              true
+            ],
+            "title": "Installmentsinterest"
+          },
+          "installmentDelayMonths": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes the `order.installmentOptions.installmentDelayMonths` field to the Fiserv API.",
+            "examples": [
+              1
+            ],
+            "title": "Installmentdelaymonths"
+          },
+          "merchantAdviceCodeSupported": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes the `order.installmentOptions.merchantAdviceCodeSupported` field to the Fiserv API.",
+            "examples": [
+              true
+            ],
+            "title": "Merchantadvicecodesupported"
+          }
+        },
+        "title": "FiservInstallmentOptions",
+        "type": "object"
+      },
+      "FiservOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "installmentOptions": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FiservInstallmentOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes installment data to the Fiserv API. This is now also a dedicated feature on the Gr4vy API."
+          }
+        },
+        "title": "FiservOptions",
+        "type": "object"
+      },
+      "ForterAntiFraudOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "delivery_type": {
+            "anyOf": [
+              {
+                "enum": [
+                  "DIGITAL",
+                  "PHYSICAL",
+                  "HYBRID"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The delivery type",
+            "examples": [
+              "DIGITAL"
+            ],
+            "title": "Delivery Type"
+          },
+          "delivery_method": {
+            "anyOf": [
+              {
+                "maxLength": 50,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The delivery method",
+            "title": "Delivery Method"
+          },
+          "is_guest_buyer": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Defines if this payment is made using guest checkout.",
+            "examples": [
+              true
+            ],
+            "title": "Is Guest Buyer"
+          },
+          "cart_items": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ForterAntiFraudOptionsCartItem"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": [],
+            "description": "A list of cart items details to pass to the Forter API.",
+            "title": "Cart Items"
+          },
+          "total_discount": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ForterAntiFraudOptionsDiscount"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Information about the discount applied to this order."
+          }
+        },
+        "title": "ForterAntiFraudOptions",
+        "type": "object"
+      },
+      "ForterAntiFraudOptionsCartItem": {
+        "additionalProperties": false,
+        "properties": {
+          "basic_item_data": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ForterAntiFraudOptionsCartItemBasicItemData"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Basic information about the cart item."
+          },
+          "delivery_details": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ForterAntiFraudOptionsCartItemDeliveryDetails"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Details about how the item will be delivered."
+          },
+          "beneficiaries": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ForterAntiFraudOptionsCartItemBeneficiary"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": [],
+            "description": "List of beneficiaries who will receive this item.",
+            "title": "Beneficiaries"
+          }
+        },
+        "title": "ForterAntiFraudOptionsCartItem",
+        "type": "object"
+      },
+      "ForterAntiFraudOptionsCartItemBasicItemData": {
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "enum": [
+                  "TANGIBLE",
+                  "NON_TANGIBLE"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Indicates whether the item is a physical good or a service/digital item.",
+            "title": "Type"
+          }
+        },
+        "title": "ForterAntiFraudOptionsCartItemBasicItemData",
+        "type": "object"
+      },
+      "ForterAntiFraudOptionsCartItemBeneficiary": {
+        "additionalProperties": false,
+        "properties": {
+          "personal_details": {
+            "$ref": "#/components/schemas/ForterAntiFraudOptionsCartItemBeneficiaryPersonalDetails",
+            "description": "Personal details of the beneficiary."
+          },
+          "address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ForterAntiFraudOptionsCartItemBeneficiaryAddress"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Address information of the beneficiary."
+          },
+          "phone": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/ForterAntiFraudOptionsCartItemBeneficiaryPhone"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": [],
+            "description": "Phone numbers associated with the beneficiary.",
+            "title": "Phone"
+          },
+          "comments": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ForterAntiFraudOptionsCartItemBeneficiaryComments"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Comments related to the beneficiary."
+          }
+        },
+        "required": [
+          "personal_details"
+        ],
+        "title": "ForterAntiFraudOptionsCartItemBeneficiary",
+        "type": "object"
+      },
+      "ForterAntiFraudOptionsCartItemBeneficiaryAddress": {
+        "additionalProperties": false,
+        "properties": {
+          "country": {
+            "description": "The country code of the beneficiary's address.",
+            "examples": [
+              "DE",
+              "GB",
+              "US"
+            ],
+            "pattern": "^[A-Z]{2}$",
+            "title": "Country",
+            "type": "string"
+          },
+          "address1": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "First line of the beneficiary's address.",
+            "title": "Address1"
+          },
+          "address2": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Second line of the beneficiary's address.",
+            "title": "Address2"
+          },
+          "zip": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Zip or postal code of the beneficiary's address.",
+            "title": "Zip"
+          },
+          "region": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "State or region of the beneficiary's address.",
+            "title": "Region"
+          },
+          "company": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Company name associated with the beneficiary's address.",
+            "title": "Company"
+          },
+          "city": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "City of the beneficiary's address.",
+            "title": "City"
+          }
+        },
+        "required": [
+          "country"
+        ],
+        "title": "ForterAntiFraudOptionsCartItemBeneficiaryAddress",
+        "type": "object"
+      },
+      "ForterAntiFraudOptionsCartItemBeneficiaryComments": {
+        "additionalProperties": false,
+        "properties": {
+          "user_comments_to_merchant": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Comments from the user to the merchant.",
+            "title": "User Comments To Merchant"
+          },
+          "message_to_beneficiary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Message intended for the beneficiary of the item.",
+            "title": "Message To Beneficiary"
+          },
+          "merchant_comments": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Comments from the merchant about this transaction.",
+            "title": "Merchant Comments"
+          }
+        },
+        "title": "ForterAntiFraudOptionsCartItemBeneficiaryComments",
+        "type": "object"
+      },
+      "ForterAntiFraudOptionsCartItemBeneficiaryPersonalDetails": {
+        "additionalProperties": false,
+        "properties": {
+          "first_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "First name of the beneficiary.",
+            "title": "First Name"
+          },
+          "last_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Last name of the beneficiary.",
+            "title": "Last Name"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Email address of the beneficiary.",
+            "title": "Email"
+          }
+        },
+        "title": "ForterAntiFraudOptionsCartItemBeneficiaryPersonalDetails",
+        "type": "object"
+      },
+      "ForterAntiFraudOptionsCartItemBeneficiaryPhone": {
+        "additionalProperties": false,
+        "properties": {
+          "phone": {
+            "description": "The phone number of the beneficiary.",
+            "title": "Phone",
+            "type": "string"
+          }
+        },
+        "required": [
+          "phone"
+        ],
+        "title": "ForterAntiFraudOptionsCartItemBeneficiaryPhone",
+        "type": "object"
+      },
+      "ForterAntiFraudOptionsCartItemDeliveryDetails": {
+        "additionalProperties": false,
+        "properties": {
+          "delivery_type": {
+            "anyOf": [
+              {
+                "enum": [
+                  "DIGITAL",
+                  "PHYSICAL",
+                  "HYBRID"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The type of delivery for this cart item.",
+            "title": "Delivery Type"
+          },
+          "delivery_method": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The method of delivery for this cart item.",
+            "title": "Delivery Method"
+          }
+        },
+        "title": "ForterAntiFraudOptionsCartItemDeliveryDetails",
+        "type": "object"
+      },
+      "ForterAntiFraudOptionsDiscount": {
+        "additionalProperties": false,
+        "properties": {
+          "coupon_code_used": {
+            "description": "The coupon code applied to the order.",
+            "title": "Coupon Code Used",
+            "type": "string"
+          },
+          "discount_type": {
+            "description": "The type of discount applied to the order.",
+            "title": "Discount Type",
+            "type": "string"
+          },
+          "coupon_discount_amount": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ForterAntiFraudOptionsDiscountCouponDiscountAmount"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Monetary details of the discount amount."
+          },
+          "coupon_discount_percent": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The percentage discount applied via the coupon.",
+            "title": "Coupon Discount Percent"
+          }
+        },
+        "required": [
+          "coupon_code_used",
+          "discount_type"
+        ],
+        "title": "ForterAntiFraudOptionsDiscount",
+        "type": "object"
+      },
+      "ForterAntiFraudOptionsDiscountCouponDiscountAmount": {
+        "additionalProperties": false,
+        "properties": {
+          "amount_usd": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The discount amount in USD.",
+            "title": "Amount Usd"
+          },
+          "amount_local_currency": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The discount amount in local currency.",
+            "title": "Amount Local Currency"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "examples": [
+                  "EUR",
+                  "GBP",
+                  "USD"
+                ],
+                "pattern": "^[A-Z]{3}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The currency code for the discount amount.",
+            "title": "Currency"
+          }
+        },
+        "title": "ForterAntiFraudOptionsDiscountCouponDiscountAmount",
+        "type": "object"
+      },
+      "GivingBlockOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "defaultCryptocurrency": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The default cryptocurrency to present at checkout. This can be used to ensure the user is presented with the same currency in both your checkout and the Giving Block checkout.",
+            "examples": [
+              "BTC"
+            ],
+            "title": "Defaultcryptocurrency"
+          }
+        },
+        "title": "GivingBlockOptions",
+        "type": "object"
+      },
+      "LatitudeOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "promotion_reference": {
+            "anyOf": [
+              {
+                "maxLength": 128,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The `promotionReference` field passed to the purchase API.",
+            "examples": [
+              "promotion-123"
+            ],
+            "title": "Promotion Reference"
+          }
+        },
+        "title": "LatitudeOptions",
+        "type": "object"
+      },
+      "MattildaTapiOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "payment_method_expires_at": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Defines the date at which the payment will expire if not completed. Must be provided in ISO 8601 format `(YYYY-MM-DD`). If not specified, it defaults to 7 days in the future from the current date.",
+            "examples": [
+              "2030-12-01"
+            ],
+            "title": "Payment Method Expires At"
+          }
+        },
+        "title": "MattildaTapiOptions",
+        "type": "object"
+      },
+      "MockCardMerchantAdviceCodeOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "result": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The MAC to return for this request.",
+            "title": "Result"
+          },
+          "account_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "When set, the MAC is only returned if the card number matches this account number.",
+            "title": "Account Number"
+          }
+        },
+        "required": [
+          "account_number"
+        ],
+        "title": "MockCardMerchantAdviceCodeOptions",
+        "type": "object"
+      },
+      "MockCardOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "merchant_advice_code": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MockCardMerchantAdviceCodeOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Allows for mocking the merchant advice code."
+          }
+        },
+        "title": "MockCardOptions",
+        "type": "object"
+      },
+      "NuveiAirlineDataOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "seatClass": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The seat class of the booking",
+            "examples": [
+              "F"
+            ],
+            "title": "Seatclass"
+          },
+          "isCardholderTraveling": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Indicates whether the cardholder is also a passenger.",
+            "examples": [
+              true
+            ],
+            "title": "Iscardholdertraveling"
+          }
+        },
+        "title": "NuveiAirlineDataOptions",
+        "type": "object"
+      },
+      "NuveiOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "customData": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "General data about the customer provided by the merchant.",
+            "examples": [
+              "user=123,trusted=false"
+            ],
+            "title": "Customdata"
+          },
+          "airlineData": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/NuveiAirlineDataOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Provides additional airline data for Nuvei payments."
+          }
+        },
+        "title": "NuveiOptions",
+        "type": "object"
+      },
+      "OxxoOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "payment_method_expires_at": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Defines a custom expiration time (unix time) after which Oxxo payment requests are cancelled",
+            "examples": [
+              1750074293
+            ],
+            "title": "Payment Method Expires At"
+          },
+          "approval_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Approval URL that will receive a charge payment method reference.",
+            "examples": [
+              "https://example.com"
+            ],
+            "title": "Approval Url"
+          }
+        },
+        "title": "OxxoOptions",
+        "type": "object"
+      },
+      "PaypalOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "additional_data": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Additional Set Transaction Context Values (STC) to be sent to PayPal as part of the transaction.",
+            "examples": [
+              {
+                "sender_account_id": "customer-1234"
+              }
+            ],
+            "title": "Additional Data"
+          }
+        },
+        "title": "PaypalOptions",
+        "type": "object"
+      },
+      "PowertranzOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "skipThreeDSecure": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": false,
+            "description": "Indicates to PowerTranz whether to skip the 3DS authentication for this transaction.",
+            "examples": [
+              true
+            ],
+            "title": "Skipthreedsecure"
+          }
+        },
+        "title": "PowertranzOptions",
+        "type": "object"
+      },
+      "StripeConnectOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "stripe_account": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The Stripe Connect account to target using the `Stripe-Account` header.",
+            "examples": [
+              "act_123456"
+            ],
+            "title": "Stripe Account"
+          },
+          "application_fee_amount": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The fee to charge the connected account.",
+            "examples": [
+              "123"
+            ],
+            "title": "Application Fee Amount"
+          },
+          "on_behalf_of": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The Stripe Connect account to target using the `on_behalf_of` request parameter.",
+            "examples": [
+              "act_123456"
+            ],
+            "title": "On Behalf Of"
+          },
+          "transfer_data_destination": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The Stripe Connect account to target using the `transfer_data.destination` request parameter.",
+            "examples": [
+              "act_123456"
+            ],
+            "title": "Transfer Data Destination"
+          }
+        },
+        "title": "StripeConnectOptions",
+        "type": "object"
+      },
+      "StripeOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "error_on_requires_action": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes the `error_on_requires_action` option to the Stripe API. Set to true to fail the payment attempt if it transitions into requires_action. Use this parameter for simpler integrations that don't handle customer actions, such as saving cards without authentication.",
+            "examples": [
+              true
+            ],
+            "title": "Error On Requires Action"
+          },
+          "stripe_connect": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StripeConnectOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Stripe options to support Stripe Connect"
+          }
+        },
+        "title": "StripeOptions",
+        "type": "object"
+      },
+      "TravelHubCustomData": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "description": "The key of the custom data field.",
+            "examples": [
+              "user_id"
+            ],
+            "title": "Name",
+            "type": "string"
+          },
+          "value": {
+            "description": "The value of the custom data field.",
+            "examples": [
+              "user-123"
+            ],
+            "title": "Value",
+            "type": "string"
+          },
+          "type": {
+            "description": "The type of the custom data field.",
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "value",
+          "type"
+        ],
+        "title": "TravelHubCustomData",
+        "type": "object"
+      },
+      "TravelhubOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "customData": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/TravelHubCustomData"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "A list of `customData` to pass to the TravelHub API.",
+            "title": "Customdata"
+          }
+        },
+        "title": "TravelhubOptions",
+        "type": "object"
+      },
+      "TrustlyOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "refreshSplitToken": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Indicates to Gr4vy whether or not the stored Trustly agreement needs refreshing.",
+            "examples": [
+              true
+            ],
+            "title": "Refreshsplittoken"
+          }
+        },
+        "title": "TrustlyOptions",
+        "type": "object"
+      },
+      "WpayEverdaypayOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "merchant_defined_data": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "A dictionary of merchant defined data, to be passed to Wpay for anti-fraud control.",
+            "title": "Merchant Defined Data"
+          },
+          "customerId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The customer ID for the Everyday Rewards account.",
+            "title": "Customerid"
+          },
+          "rewardsAccessToken": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The access token for the Everyday Rewards account.",
+            "title": "Rewardsaccesstoken"
+          },
+          "deviceId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The ID of the device on which the payment is occuring.",
+            "title": "Deviceid"
+          },
+          "postPaymentRedirect": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Whether the transaction should redirect post-payment",
+            "examples": [
+              true
+            ],
+            "title": "Postpaymentredirect"
+          }
+        },
+        "title": "WpayEverdaypayOptions",
+        "type": "object"
+      },
+      "WpayPaytoOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "instrument": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WpayPaytoResourceOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Options to pass to the `instrument` resource in the Wpay PayTo API."
+          },
+          "payment": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WpayPaytoResourceOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Options to pass to the `payment` resource in the Wpay PayTo API."
+          },
+          "refund": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WpayPaytoResourceOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Options to pass to the `refund` resource in the Wpay PayTo API."
+          }
+        },
+        "title": "WpayPaytoOptions",
+        "type": "object"
+      },
+      "WpayPaytoResourceOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "simulation": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WpayPaytoSimulationOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Simulate responses for this resource."
+          }
+        },
+        "title": "WpayPaytoResourceOptions",
+        "type": "object"
+      },
+      "WpayPaytoSimulationOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "simulate": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The simulation being requested. Please refer to the developer guide for a list of all available simulations.",
+            "title": "Simulate"
+          },
+          "delay": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The delay in seconds before the requested simulation is executed.",
+            "examples": [
+              5
+            ],
+            "title": "Delay"
+          }
+        },
+        "title": "WpayPaytoSimulationOptions",
+        "type": "object"
+      },
+      "TransactionConnectionOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "account-updater": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AccountUpdaterOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `account-updater` connector, allowing for simulating different account updater responses."
+          },
+          "adyen-afterpay": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `adyen-afterpay` connector."
+          },
+          "adyen-alipay": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `adyen-alipay` connector."
+          },
+          "adyen-card": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenCardOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `adyen-card` connector."
+          },
+          "adyen-cashapp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `adyen-cashapp` connector."
+          },
+          "adyen-giropay": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `adyen-giropay` connector."
+          },
+          "adyen-ideal": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `adyen-ideal` connector."
+          },
+          "adyen-sepa": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenSepaOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `adyen-sepa` connector."
+          },
+          "adyen-sofort": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `adyen-sofort` connector."
+          },
+          "adyen-vipps": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `adyen-vipps` connector."
+          },
+          "affirm-affirm": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AffirmOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `affirm-affirm` connector."
+          },
+          "braintree-card": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BraintreeOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `braintree-card` connector."
+          },
+          "cybersource-anti-fraud": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CybersourceAntiFraudOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `cybersource-anti-fraud` connector."
+          },
+          "cybersource-card": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CybersourceOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `cybersource-card` connector."
+          },
+          "cybersource-ideal": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CybersourceOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `cybersource-ideal` connector."
+          },
+          "cybersource-kcp": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CybersourceOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `cybersource-kcp` connector."
+          },
+          "dlocal-nequi": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DlocalOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `dlocal-nequi` connector."
+          },
+          "fiserv-card": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/FiservOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `fiserv-card` connector."
+          },
+          "forter-anti-fraud": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ForterAntiFraudOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `forter-anti-fraud` connector."
+          },
+          "gem-gem": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LatitudeOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `gem-gem` connector."
+          },
+          "gem-gemds": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LatitudeOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `gem-gemds` connector."
+          },
+          "givingblock-givingblock": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GivingBlockOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `givingblock-givingblock` connector."
+          },
+          "latitude-latitude": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LatitudeOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `latitude-latitude` connector."
+          },
+          "latitude-latitudeds": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LatitudeOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `latitude-latitudeds` connector."
+          },
+          "mattilda-tapi": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MattildaTapiOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `mattilda-tapi` connector."
+          },
+          "mock-card": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MockCardOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `mock-card` connector."
+          },
+          "nuvei-card": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/NuveiOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `nuvei-card` connector."
+          },
+          "oxxo-oxxo": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OxxoOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `oxxo-oxxo` connector."
+          },
+          "paypal-paypal": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PaypalOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `paypal-paypal` connector."
+          },
+          "paypal-paypalpaylater": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PaypalOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `paypal-paypalpaylater` connector."
+          },
+          "powertranz-card": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PowertranzOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `powertranz-card` connector."
+          },
+          "stripe-card": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StripeOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `stripe-card` connector."
+          },
+          "travelhub-card": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TravelhubOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `travelhub-card` connector."
+          },
+          "trustly-trustly": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TrustlyOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `trustly-trustly` connector."
+          },
+          "wpay-everydaypay": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WpayEverdaypayOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `wpay-everydaypay` connector."
+          },
+          "wpay-payto": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WpayPaytoOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `wpay-payto` connector."
+          }
+        },
+        "title": "TransactionConnectionOptions",
+        "type": "object"
       }
     },
     "securitySchemes": {
