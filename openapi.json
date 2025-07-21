@@ -27720,6 +27720,7 @@
           "stitch",
           "stripedd",
           "tapi",
+          "tapifintechs",
           "thaiqr",
           "touchngo",
           "truemoney",
@@ -32136,6 +32137,7 @@
               "stitch",
               "stripedd",
               "tapi",
+              "tapifintechs",
               "thaiqr",
               "touchngo",
               "truemoney",
@@ -39870,6 +39872,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `mattilda-tapi` connector."
+          },
+          "mattilda-tapifintechs": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MattildaTapiOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `mattilda-tapifintechs` connector."
           },
           "mock-card": {
             "anyOf": [
