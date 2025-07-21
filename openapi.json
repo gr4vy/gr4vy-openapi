@@ -13074,7 +13074,7 @@
         "tags": [
           "Payment service definitions"
         ],
-        "summary": "Create a session for apayment service definition",
+        "summary": "Create a session for a payment service definition",
         "description": "Creates a session for a payment service that supports sessions.",
         "operationId": "create_payment_service_definition_session",
         "security": [
@@ -14477,7 +14477,7 @@
         "tags": [
           "Payment services"
         ],
-        "summary": "Create a session for apayment service definition",
+        "summary": "Create a session for a payment service definition",
         "description": "Creates a session for a payment service that supports sessions.",
         "operationId": "create_payment_service_session",
         "security": [
