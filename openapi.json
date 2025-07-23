@@ -10335,6 +10335,29 @@
             "description": "The ID of the transaction"
           },
           {
+            "name": "prefer",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "pattern": "resource=(transaction|transaction-capture)"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The preferred resource type in the response.",
+              "examples": [
+                "resource=transaction",
+                "resource=transaction-capture"
+              ],
+              "title": "Prefer"
+            },
+            "description": "The preferred resource type in the response."
+          },
+          {
             "name": "x-gr4vy-merchant-account-id",
             "in": "header",
             "required": false,
@@ -10361,7 +10384,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TransactionCapture"
+                "$ref": "#/components/schemas/TransactionCaptureCreate"
               }
             }
           }
@@ -10372,7 +10395,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Transaction"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/Transaction"
+                    },
+                    {
+                      "$ref": "#/components/schemas/TransactionCapture"
+                    }
+                  ],
+                  "title": "Response Capture Transaction"
                 }
               }
             }
@@ -22223,6 +22254,16 @@
           "not_provided"
         ],
         "title": "CVVResponseCode"
+      },
+      "CaptureStatus": {
+        "type": "string",
+        "enum": [
+          "succeeded",
+          "pending",
+          "declined",
+          "failed"
+        ],
+        "title": "CaptureStatus"
       },
       "CardPaymentMethodCreate": {
         "properties": {
@@ -35426,6 +35467,86 @@
       },
       "TransactionCapture": {
         "properties": {
+          "type": {
+            "type": "string",
+            "const": "transaction-capture",
+            "title": "Type",
+            "description": "Always `transaction-capture`.",
+            "default": "transaction-capture",
+            "examples": [
+              "transaction-capture"
+            ]
+          },
+          "status": {
+            "$ref": "#/components/schemas/CaptureStatus",
+            "description": "The status of the capture call.",
+            "examples": [
+              "succeeded"
+            ]
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code",
+            "description": "The standardized error code set by Gr4vy.",
+            "examples": [
+              "service_error"
+            ]
+          },
+          "raw_response_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw Response Code",
+            "description": "This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.",
+            "examples": [
+              "E104"
+            ]
+          },
+          "raw_response_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw Response Description",
+            "description": "This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.",
+            "examples": [
+              "Internal error"
+            ]
+          },
+          "transaction": {
+            "$ref": "#/components/schemas/Transaction",
+            "description": "The transaction associated to this capture."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "code",
+          "raw_response_code",
+          "raw_response_description",
+          "transaction"
+        ],
+        "title": "TransactionCapture"
+      },
+      "TransactionCaptureCreate": {
+        "properties": {
           "amount": {
             "anyOf": [
               {
@@ -35457,7 +35578,7 @@
         },
         "additionalProperties": false,
         "type": "object",
-        "title": "TransactionCapture",
+        "title": "TransactionCaptureCreate",
         "description": "Request body for capturing an authorized transaction."
       },
       "TransactionCreate": {
