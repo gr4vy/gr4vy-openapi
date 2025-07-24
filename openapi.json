@@ -39458,15 +39458,22 @@
             "type": "string"
           },
           "type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
             "description": "The type of the custom data field.",
-            "title": "Type",
-            "type": "string"
+            "title": "Type"
           }
         },
         "required": [
           "name",
-          "value",
-          "type"
+          "value"
         ],
         "title": "TravelHubCustomData",
         "type": "object"
