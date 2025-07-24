@@ -10341,8 +10341,10 @@
             "schema": {
               "anyOf": [
                 {
-                  "type": "string",
-                  "pattern": "resource=(transaction|transaction-capture)"
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 },
                 {
                   "type": "null"
@@ -11359,6 +11361,31 @@
             "description": "The ID of the transaction"
           },
           {
+            "name": "prefer",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The preferred resource type in the response.",
+              "examples": [
+                "resource=transaction",
+                "resource=transaction-void"
+              ],
+              "title": "Prefer"
+            },
+            "description": "The preferred resource type in the response."
+          },
+          {
             "name": "x-gr4vy-merchant-account-id",
             "in": "header",
             "required": false,
@@ -11386,7 +11413,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Transaction"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/Transaction"
+                    },
+                    {
+                      "$ref": "#/components/schemas/TransactionVoid"
+                    }
+                  ],
+                  "title": "Response Void Transaction"
                 }
               }
             }
@@ -37408,6 +37443,86 @@
         "type": "object",
         "title": "TransactionUpdate"
       },
+      "TransactionVoid": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "transaction-void",
+            "title": "Type",
+            "description": "Always `transaction-void`.",
+            "default": "transaction-void",
+            "examples": [
+              "transaction-void"
+            ]
+          },
+          "status": {
+            "$ref": "#/components/schemas/VoidStatus",
+            "description": "The status of the void call.",
+            "examples": [
+              "succeeded"
+            ]
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code",
+            "description": "The standardized error code set by Gr4vy.",
+            "examples": [
+              "service_error"
+            ]
+          },
+          "raw_response_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw Response Code",
+            "description": "This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.",
+            "examples": [
+              "E104"
+            ]
+          },
+          "raw_response_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw Response Description",
+            "description": "This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.",
+            "examples": [
+              "Internal error"
+            ]
+          },
+          "transaction": {
+            "$ref": "#/components/schemas/Transaction",
+            "description": "The transaction associated to this void."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "code",
+          "raw_response_code",
+          "raw_response_description",
+          "transaction"
+        ],
+        "title": "TransactionVoid"
+      },
       "TransactionsReportSpec": {
         "properties": {
           "model": {
@@ -37531,6 +37646,16 @@
           "fields"
         ],
         "title": "VerifyCredentials"
+      },
+      "VoidStatus": {
+        "type": "string",
+        "enum": [
+          "succeeded",
+          "pending",
+          "declined",
+          "failed"
+        ],
+        "title": "VoidStatus"
       },
       "VoidableField": {
         "properties": {
