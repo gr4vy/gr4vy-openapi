@@ -12770,7 +12770,8 @@
         "tags": [
           "Payment methods - Definitions"
         ],
-        "summary": "Returns a list of all available payment method definitions.",
+        "summary": "List payment method definitions",
+        "description": "Returns a list of all available payment method definitions.",
         "operationId": "list_payment_method_definitions",
         "security": [
           {
@@ -14923,7 +14924,8 @@
         "tags": [
           "Card details"
         ],
-        "summary": "Gets details about a particular card based on the BIN. Use the currency, amount, and other fields to apply any Flow rules that may put requirements on the card.",
+        "summary": "Get card details",
+        "description": "Gets details about a particular card based on the BIN. Use the currency, amount, and other fields to apply any Flow rules that may put requirements on the card.",
         "operationId": "get_card_details",
         "security": [
           {
