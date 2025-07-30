@@ -33197,6 +33197,51 @@
                 "name": "Jhon Doe"
               }
             ]
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error Code",
+            "description": "The standardized error code set by Gr4vy.",
+            "examples": [
+              "service_error"
+            ]
+          },
+          "raw_response_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw Response Code",
+            "description": "This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.",
+            "examples": [
+              "E104"
+            ]
+          },
+          "raw_response_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw Response Description",
+            "description": " This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.",
+            "examples": [
+              "Missing redirect URL"
+            ]
           }
         },
         "additionalProperties": false,
