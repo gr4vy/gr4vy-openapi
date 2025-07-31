@@ -8779,33 +8779,6 @@
             }
           },
           {
-            "name": "buyer_search",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Filters the results to only get the items for which some of the buyer data contains exactly the provided `buyer_search` values.",
-              "examples": [
-                [
-                  "John",
-                  "London"
-                ]
-              ],
-              "title": "Buyer Search"
-            },
-            "description": "Filters the results to only get the items for which some of the buyer data contains exactly the provided `buyer_search` values."
-          },
-          {
             "name": "ip_address",
             "in": "query",
             "required": false,
@@ -9529,6 +9502,33 @@
               "title": "Used 3Ds"
             },
             "description": "Filters for transactions that attempted 3DS authentication or not."
+          },
+          {
+            "name": "buyer_search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filters the results to only get the items for which some of the buyer data contains exactly the provided `buyer_search` values.",
+              "examples": [
+                [
+                  "John",
+                  "London"
+                ]
+              ],
+              "title": "Buyer Search"
+            },
+            "description": "Filters the results to only get the items for which some of the buyer data contains exactly the provided `buyer_search` values."
           },
           {
             "name": "x-gr4vy-merchant-account-id",
@@ -19958,6 +19958,33 @@
               "title": "Limit"
             },
             "description": "The maximum number of items that are returned."
+          },
+          {
+            "name": "buyer_search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filters the results to only get the items for which some of the buyer data contains exactly the provided `buyer_search` values.",
+              "examples": [
+                [
+                  "John",
+                  "London"
+                ]
+              ],
+              "title": "Buyer Search"
+            },
+            "description": "Filters the results to only get the items for which some of the buyer data contains exactly the provided `buyer_search` values."
           },
           {
             "name": "x-gr4vy-merchant-account-id",
