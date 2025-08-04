@@ -23176,6 +23176,42 @@
         ],
         "title": "AccountUpdaterJobCreate"
       },
+      "AccountsReceivablesReportSpec": {
+        "properties": {
+          "model": {
+            "type": "string",
+            "const": "accounts_receivables",
+            "title": "Model",
+            "description": "The report model type.",
+            "default": "accounts_receivables",
+            "examples": [
+              "accounts_receivables"
+            ]
+          },
+          "params": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Params",
+            "description": "The parameters for the accounts receivables report model.",
+            "examples": [
+              {
+                "filters": {
+                  "timestamp": {
+                    "end": "2024-05-31T23:59:59Z",
+                    "start": "2024-05-01T00:00:00Z"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "params"
+        ],
+        "title": "AccountsReceivablesReportSpec"
+      },
       "Address": {
         "properties": {
           "city": {
@@ -37145,6 +37181,9 @@
               },
               {
                 "$ref": "#/components/schemas/DetailedSettlementReportSpec"
+              },
+              {
+                "$ref": "#/components/schemas/AccountsReceivablesReportSpec"
               }
             ],
             "title": "Spec",
@@ -37152,6 +37191,7 @@
             "discriminator": {
               "propertyName": "model",
               "mapping": {
+                "accounts_receivables": "#/components/schemas/AccountsReceivablesReportSpec",
                 "detailed_settlement": "#/components/schemas/DetailedSettlementReportSpec",
                 "transaction_retries": "#/components/schemas/TransactionRetriesReportSpec",
                 "transactions": "#/components/schemas/TransactionsReportSpec"
