@@ -20622,13 +20622,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions whose authentication process ended with the specified outcome. This parameter also accepts the null character `\u0000` to include transactions that didn't undergo an authentication process.",
+              "description": "Filters the results to only include transactions whose authentication process ended with the specified outcome. This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that didn't undergo an authentication process.",
               "examples": [
                 "abandoned"
               ],
               "title": "Authentication Outcome"
             },
-            "description": "Filters the results to only include transactions whose authentication process ended with the specified outcome. This parameter also accepts the null character `\u0000` to include transactions that didn't undergo an authentication process."
+            "description": "Filters the results to only include transactions whose authentication process ended with the specified outcome. This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that didn't undergo an authentication process."
           },
           {
             "name": "authorized",
@@ -20670,13 +20670,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that were processed in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that were processed in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "GB"
               ],
               "title": "Country"
             },
-            "description": "Filters the results to only include transactions that were processed in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that were processed in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "currency",
@@ -20718,13 +20718,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that failed with the specified error code. The error code is a string that describes the reason for the failure.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that failed with the specified error code. The error code is a string that describes the reason for the failure.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "invalid_credentials"
               ],
               "title": "Error Code"
             },
-            "description": "Filters the results to only include transactions that failed with the specified error code. The error code is a string that describes the reason for the failure.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that failed with the specified error code. The error code is a string that describes the reason for the failure.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "instrument_type",
@@ -20742,13 +20742,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that used the specified instrument type.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that used the specified instrument type.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "network_token"
               ],
               "title": "Instrument Type"
             },
-            "description": "Filters the results to only include transactions that used the specified instrument type.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that used the specified instrument type.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "is_subsequent_payment",
@@ -20867,13 +20867,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that were processed using the specified payment method.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that were processed using the specified payment method.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "card"
               ],
               "title": "Method"
             },
-            "description": "Filters the results to only include transactions that were processed using the specified payment method.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that were processed using the specified payment method.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "payment_method_bin",
@@ -20891,13 +20891,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that used the specified payment method bin.The payment method bin is the first 6 digits of the card number.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that used the specified payment method bin.The payment method bin is the first 6 digits of the card number.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "123456"
               ],
               "title": "Payment Method Bin"
             },
-            "description": "Filters the results to only include transactions that used the specified payment method bin.The payment method bin is the first 6 digits of the card number.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that used the specified payment method bin.The payment method bin is the first 6 digits of the card number.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "payment_method_card_issuer_name",
@@ -20915,13 +20915,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that were processed with the specified card issuer name.The card issuer name is the name of the bank or financial institution that issued the card used for the transaction.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that were processed with the specified card issuer name.The card issuer name is the name of the bank or financial institution that issued the card used for the transaction.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "Barclays"
               ],
               "title": "Payment Method Card Issuer Name"
             },
-            "description": "Filters the results to only include transactions that were processed with the specified card issuer name.The card issuer name is the name of the bank or financial institution that issued the card used for the transaction.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that were processed with the specified card issuer name.The card issuer name is the name of the bank or financial institution that issued the card used for the transaction.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "payment_method_card_type",
@@ -20939,7 +20939,7 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that used the specified card type.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that used the specified card type.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "credit",
                 "debit",
@@ -20947,7 +20947,7 @@
               ],
               "title": "Payment Method Card Type"
             },
-            "description": "Filters the results to only include transactions that used the specified card type.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that used the specified card type.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "payment_method_country",
@@ -20965,13 +20965,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that were processed with a card issued in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that were processed with a card issued in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "GB"
               ],
               "title": "Payment Method Country"
             },
-            "description": "Filters the results to only include transactions that were processed with a card issued in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that were processed with a card issued in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "payment_method_scheme",
@@ -20989,13 +20989,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that were processed with the specified payment method scheme.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that were processed with the specified payment method scheme.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "visa"
               ],
               "title": "Payment Method Scheme"
             },
-            "description": "Filters the results to only include transactions that were processed with the specified payment method scheme.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that were processed with the specified payment method scheme.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "payment_service_id",
@@ -21013,13 +21013,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that were processed with the specified payment service ID.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that were processed with the specified payment service ID.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "06319aec-2c0f-4c7b-8af1-047ca037fc021"
               ],
               "title": "Payment Service Id"
             },
-            "description": "Filters the results to only include transactions that were processed with the specified payment service ID.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that were processed with the specified payment service ID.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "payment_source",
@@ -21062,13 +21062,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that received the specified raw response code from the payment service.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that received the specified raw response code from the payment service.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "COMPLETED"
               ],
               "title": "Raw Response Code"
             },
-            "description": "Filters the results to only include transactions that received the specified raw response code from the payment service.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that received the specified raw response code from the payment service.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "rule_id",
@@ -21086,13 +21086,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts the null character `\u0000` to include transactions that were not processed by any routing rule.<br/>**Note:** This query parameter is deprecated in favor of `rule_id_route_transaction`.",
+              "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any routing rule.<br/>**Note:** This query parameter is deprecated in favor of `rule_id_route_transaction`.",
               "examples": [
                 "c2fefd1b-6ed0-4038-bbc8-48ea2fb7e9f7"
               ],
               "title": "Rule Id"
             },
-            "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts the null character `\u0000` to include transactions that were not processed by any routing rule.<br/>**Note:** This query parameter is deprecated in favor of `rule_id_route_transaction`."
+            "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any routing rule.<br/>**Note:** This query parameter is deprecated in favor of `rule_id_route_transaction`."
           },
           {
             "name": "rule_id_route_transaction",
@@ -21110,13 +21110,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts the null character `\u0000` to include transactions that were not processed by any routing rule.",
+              "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any routing rule.",
               "examples": [
                 "c2fefd1b-6ed0-4038-bbc8-48ea2fb7e9f7"
               ],
               "title": "Rule Id Route Transaction"
             },
-            "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts the null character `\u0000` to include transactions that were not processed by any routing rule."
+            "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any routing rule."
           },
           {
             "name": "rule_id_skip_3ds",
@@ -21134,13 +21134,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that were processed with the specified 3DS rule. The rule ID should be in UUID format.This parameter also accepts the null character `\u0000` to include transactions that were not processed by any 3DS rule.",
+              "description": "Filters the results to only include transactions that were processed with the specified 3DS rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any 3DS rule.",
               "examples": [
                 "c2fefd1b-6ed0-4038-bbc8-48ea2fb7e9f7"
               ],
               "title": "Rule Id Skip 3Ds"
             },
-            "description": "Filters the results to only include transactions that were processed with the specified 3DS rule. The rule ID should be in UUID format.This parameter also accepts the null character `\u0000` to include transactions that were not processed by any 3DS rule."
+            "description": "Filters the results to only include transactions that were processed with the specified 3DS rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any 3DS rule."
           },
           {
             "name": "three_d_secure_auth_resp",
@@ -21158,13 +21158,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that received the specified response during 3DS authentication.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that received the specified response during 3DS authentication.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "Y"
               ],
               "title": "Three D Secure Auth Resp"
             },
-            "description": "Filters the results to only include transactions that received the specified response during 3DS authentication.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that received the specified response during 3DS authentication.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "three_d_secure_eci",
@@ -21182,13 +21182,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that received the specified ECI during 3DS authentication.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that received the specified ECI during 3DS authentication.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "05"
               ],
               "title": "Three D Secure Eci"
             },
-            "description": "Filters the results to only include transactions that received the specified ECI during 3DS authentication.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that received the specified ECI during 3DS authentication.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "three_d_secure_method",
@@ -21206,14 +21206,14 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that underwent 3DS authentication with the specified method.This parameter also accepts the null character `\u0000` to include transactions that didn't undergo 3DS authentication.",
+              "description": "Filters the results to only include transactions that underwent 3DS authentication with the specified method.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that didn't undergo 3DS authentication.",
               "examples": [
                 "challenge",
                 "frictionless"
               ],
               "title": "Three D Secure Method"
             },
-            "description": "Filters the results to only include transactions that underwent 3DS authentication with the specified method.This parameter also accepts the null character `\u0000` to include transactions that didn't undergo 3DS authentication."
+            "description": "Filters the results to only include transactions that underwent 3DS authentication with the specified method.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that didn't undergo 3DS authentication."
           },
           {
             "name": "x-gr4vy-merchant-account-id",
@@ -21451,13 +21451,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions whose authentication process ended with the specified outcome. This parameter also accepts the null character `\u0000` to include transactions that didn't undergo an authentication process.",
+              "description": "Filters the results to only include transactions whose authentication process ended with the specified outcome. This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that didn't undergo an authentication process.",
               "examples": [
                 "abandoned"
               ],
               "title": "Authentication Outcome"
             },
-            "description": "Filters the results to only include transactions whose authentication process ended with the specified outcome. This parameter also accepts the null character `\u0000` to include transactions that didn't undergo an authentication process."
+            "description": "Filters the results to only include transactions whose authentication process ended with the specified outcome. This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that didn't undergo an authentication process."
           },
           {
             "name": "authorized",
@@ -21499,13 +21499,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that were processed in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that were processed in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "GB"
               ],
               "title": "Country"
             },
-            "description": "Filters the results to only include transactions that were processed in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that were processed in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "currency",
@@ -21547,13 +21547,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that failed with the specified error code. The error code is a string that describes the reason for the failure.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that failed with the specified error code. The error code is a string that describes the reason for the failure.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "invalid_credentials"
               ],
               "title": "Error Code"
             },
-            "description": "Filters the results to only include transactions that failed with the specified error code. The error code is a string that describes the reason for the failure.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that failed with the specified error code. The error code is a string that describes the reason for the failure.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "instrument_type",
@@ -21571,13 +21571,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that used the specified instrument type.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that used the specified instrument type.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "network_token"
               ],
               "title": "Instrument Type"
             },
-            "description": "Filters the results to only include transactions that used the specified instrument type.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that used the specified instrument type.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "is_subsequent_payment",
@@ -21696,13 +21696,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that were processed using the specified payment method.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that were processed using the specified payment method.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "card"
               ],
               "title": "Method"
             },
-            "description": "Filters the results to only include transactions that were processed using the specified payment method.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that were processed using the specified payment method.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "payment_method_bin",
@@ -21720,13 +21720,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that used the specified payment method bin.The payment method bin is the first 6 digits of the card number.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that used the specified payment method bin.The payment method bin is the first 6 digits of the card number.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "123456"
               ],
               "title": "Payment Method Bin"
             },
-            "description": "Filters the results to only include transactions that used the specified payment method bin.The payment method bin is the first 6 digits of the card number.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that used the specified payment method bin.The payment method bin is the first 6 digits of the card number.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "payment_method_card_issuer_name",
@@ -21744,13 +21744,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that were processed with the specified card issuer name.The card issuer name is the name of the bank or financial institution that issued the card used for the transaction.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that were processed with the specified card issuer name.The card issuer name is the name of the bank or financial institution that issued the card used for the transaction.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "Barclays"
               ],
               "title": "Payment Method Card Issuer Name"
             },
-            "description": "Filters the results to only include transactions that were processed with the specified card issuer name.The card issuer name is the name of the bank or financial institution that issued the card used for the transaction.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that were processed with the specified card issuer name.The card issuer name is the name of the bank or financial institution that issued the card used for the transaction.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "payment_method_card_type",
@@ -21768,7 +21768,7 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that used the specified card type.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that used the specified card type.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "credit",
                 "debit",
@@ -21776,7 +21776,7 @@
               ],
               "title": "Payment Method Card Type"
             },
-            "description": "Filters the results to only include transactions that used the specified card type.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that used the specified card type.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "payment_method_country",
@@ -21794,13 +21794,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that were processed with a card issued in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that were processed with a card issued in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "GB"
               ],
               "title": "Payment Method Country"
             },
-            "description": "Filters the results to only include transactions that were processed with a card issued in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that were processed with a card issued in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "payment_method_scheme",
@@ -21818,13 +21818,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that were processed with the specified payment method scheme.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that were processed with the specified payment method scheme.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "visa"
               ],
               "title": "Payment Method Scheme"
             },
-            "description": "Filters the results to only include transactions that were processed with the specified payment method scheme.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that were processed with the specified payment method scheme.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "payment_service_id",
@@ -21842,13 +21842,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that were processed with the specified payment service ID.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that were processed with the specified payment service ID.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "06319aec-2c0f-4c7b-8af1-047ca037fc021"
               ],
               "title": "Payment Service Id"
             },
-            "description": "Filters the results to only include transactions that were processed with the specified payment service ID.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that were processed with the specified payment service ID.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "payment_source",
@@ -21891,13 +21891,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that received the specified raw response code from the payment service.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that received the specified raw response code from the payment service.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "COMPLETED"
               ],
               "title": "Raw Response Code"
             },
-            "description": "Filters the results to only include transactions that received the specified raw response code from the payment service.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that received the specified raw response code from the payment service.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "rule_id",
@@ -21915,13 +21915,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts the null character `\u0000` to include transactions that were not processed by any routing rule.<br/>**Note:** This query parameter is deprecated in favor of `rule_id_route_transaction`.",
+              "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any routing rule.<br/>**Note:** This query parameter is deprecated in favor of `rule_id_route_transaction`.",
               "examples": [
                 "c2fefd1b-6ed0-4038-bbc8-48ea2fb7e9f7"
               ],
               "title": "Rule Id"
             },
-            "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts the null character `\u0000` to include transactions that were not processed by any routing rule.<br/>**Note:** This query parameter is deprecated in favor of `rule_id_route_transaction`."
+            "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any routing rule.<br/>**Note:** This query parameter is deprecated in favor of `rule_id_route_transaction`."
           },
           {
             "name": "rule_id_route_transaction",
@@ -21939,13 +21939,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts the null character `\u0000` to include transactions that were not processed by any routing rule.",
+              "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any routing rule.",
               "examples": [
                 "c2fefd1b-6ed0-4038-bbc8-48ea2fb7e9f7"
               ],
               "title": "Rule Id Route Transaction"
             },
-            "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts the null character `\u0000` to include transactions that were not processed by any routing rule."
+            "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any routing rule."
           },
           {
             "name": "rule_id_skip_3ds",
@@ -21963,13 +21963,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that were processed with the specified 3DS rule. The rule ID should be in UUID format.This parameter also accepts the null character `\u0000` to include transactions that were not processed by any 3DS rule.",
+              "description": "Filters the results to only include transactions that were processed with the specified 3DS rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any 3DS rule.",
               "examples": [
                 "c2fefd1b-6ed0-4038-bbc8-48ea2fb7e9f7"
               ],
               "title": "Rule Id Skip 3Ds"
             },
-            "description": "Filters the results to only include transactions that were processed with the specified 3DS rule. The rule ID should be in UUID format.This parameter also accepts the null character `\u0000` to include transactions that were not processed by any 3DS rule."
+            "description": "Filters the results to only include transactions that were processed with the specified 3DS rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any 3DS rule."
           },
           {
             "name": "three_d_secure_auth_resp",
@@ -21987,13 +21987,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that received the specified response during 3DS authentication.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that received the specified response during 3DS authentication.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "Y"
               ],
               "title": "Three D Secure Auth Resp"
             },
-            "description": "Filters the results to only include transactions that received the specified response during 3DS authentication.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that received the specified response during 3DS authentication.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "three_d_secure_eci",
@@ -22011,13 +22011,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that received the specified ECI during 3DS authentication.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+              "description": "Filters the results to only include transactions that received the specified ECI during 3DS authentication.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
               "examples": [
                 "05"
               ],
               "title": "Three D Secure Eci"
             },
-            "description": "Filters the results to only include transactions that received the specified ECI during 3DS authentication.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field."
+            "description": "Filters the results to only include transactions that received the specified ECI during 3DS authentication.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
             "name": "three_d_secure_method",
@@ -22035,14 +22035,14 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only include transactions that underwent 3DS authentication with the specified method.This parameter also accepts the null character `\u0000` to include transactions that didn't undergo 3DS authentication.",
+              "description": "Filters the results to only include transactions that underwent 3DS authentication with the specified method.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that didn't undergo 3DS authentication.",
               "examples": [
                 "challenge",
                 "frictionless"
               ],
               "title": "Three D Secure Method"
             },
-            "description": "Filters the results to only include transactions that underwent 3DS authentication with the specified method.This parameter also accepts the null character `\u0000` to include transactions that didn't undergo 3DS authentication."
+            "description": "Filters the results to only include transactions that underwent 3DS authentication with the specified method.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that didn't undergo 3DS authentication."
           },
           {
             "name": "exclude_previous",
@@ -30921,7 +30921,7 @@
               }
             ],
             "title": "Authentication Outcome",
-            "description": "Filters the results to only include transactions whose authentication process ended with the specified outcome. This parameter also accepts the null character `\u0000` to include transactions that didn't undergo an authentication process.",
+            "description": "Filters the results to only include transactions whose authentication process ended with the specified outcome. This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that didn't undergo an authentication process.",
             "examples": [
               "abandoned"
             ]
@@ -30957,7 +30957,7 @@
               }
             ],
             "title": "Country",
-            "description": "Filters the results to only include transactions that were processed in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+            "description": "Filters the results to only include transactions that were processed in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
             "examples": [
               "GB"
             ]
@@ -30993,7 +30993,7 @@
               }
             ],
             "title": "Error Code",
-            "description": "Filters the results to only include transactions that failed with the specified error code. The error code is a string that describes the reason for the failure.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+            "description": "Filters the results to only include transactions that failed with the specified error code. The error code is a string that describes the reason for the failure.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
             "examples": [
               "invalid_credentials"
             ]
@@ -31011,7 +31011,7 @@
               }
             ],
             "title": "Instrument Type",
-            "description": "Filters the results to only include transactions that used the specified instrument type.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+            "description": "Filters the results to only include transactions that used the specified instrument type.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
             "examples": [
               "network_token"
             ]
@@ -31106,7 +31106,7 @@
               }
             ],
             "title": "Method",
-            "description": "Filters the results to only include transactions that were processed using the specified payment method.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+            "description": "Filters the results to only include transactions that were processed using the specified payment method.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
             "examples": [
               "card"
             ]
@@ -31124,7 +31124,7 @@
               }
             ],
             "title": "Payment Method Bin",
-            "description": "Filters the results to only include transactions that used the specified payment method bin.The payment method bin is the first 6 digits of the card number.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+            "description": "Filters the results to only include transactions that used the specified payment method bin.The payment method bin is the first 6 digits of the card number.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
             "examples": [
               "123456"
             ]
@@ -31142,7 +31142,7 @@
               }
             ],
             "title": "Payment Method Card Issuer Name",
-            "description": "Filters the results to only include transactions that were processed with the specified card issuer name.The card issuer name is the name of the bank or financial institution that issued the card used for the transaction.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+            "description": "Filters the results to only include transactions that were processed with the specified card issuer name.The card issuer name is the name of the bank or financial institution that issued the card used for the transaction.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
             "examples": [
               "Barclays"
             ]
@@ -31160,7 +31160,7 @@
               }
             ],
             "title": "Payment Method Card Type",
-            "description": "Filters the results to only include transactions that used the specified card type.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+            "description": "Filters the results to only include transactions that used the specified card type.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
             "examples": [
               "credit",
               "debit",
@@ -31180,7 +31180,7 @@
               }
             ],
             "title": "Payment Method Country",
-            "description": "Filters the results to only include transactions that were processed with a card issued in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+            "description": "Filters the results to only include transactions that were processed with a card issued in the specified country.The country code should be in the ISO 3166-1 two letter format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
             "examples": [
               "GB"
             ]
@@ -31198,7 +31198,7 @@
               }
             ],
             "title": "Payment Method Scheme",
-            "description": "Filters the results to only include transactions that were processed with the specified payment method scheme.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+            "description": "Filters the results to only include transactions that were processed with the specified payment method scheme.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
             "examples": [
               "visa"
             ]
@@ -31216,7 +31216,7 @@
               }
             ],
             "title": "Payment Service Id",
-            "description": "Filters the results to only include transactions that were processed with the specified payment service ID.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+            "description": "Filters the results to only include transactions that were processed with the specified payment service ID.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
             "examples": [
               "06319aec-2c0f-4c7b-8af1-047ca037fc021"
             ]
@@ -31253,7 +31253,7 @@
               }
             ],
             "title": "Raw Response Code",
-            "description": "Filters the results to only include transactions that received the specified raw response code from the payment service.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+            "description": "Filters the results to only include transactions that received the specified raw response code from the payment service.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
             "examples": [
               "COMPLETED"
             ]
@@ -31271,7 +31271,7 @@
               }
             ],
             "title": "Rule Id",
-            "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts the null character `\u0000` to include transactions that were not processed by any routing rule.<br/>**Note:** This query parameter is deprecated in favor of `rule_id_route_transaction`.",
+            "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any routing rule.<br/>**Note:** This query parameter is deprecated in favor of `rule_id_route_transaction`.",
             "examples": [
               "c2fefd1b-6ed0-4038-bbc8-48ea2fb7e9f7"
             ]
@@ -31289,7 +31289,7 @@
               }
             ],
             "title": "Rule Id Route Transaction",
-            "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts the null character `\u0000` to include transactions that were not processed by any routing rule.",
+            "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any routing rule.",
             "examples": [
               "c2fefd1b-6ed0-4038-bbc8-48ea2fb7e9f7"
             ]
@@ -31307,7 +31307,7 @@
               }
             ],
             "title": "Rule Id Skip 3Ds",
-            "description": "Filters the results to only include transactions that were processed with the specified 3DS rule. The rule ID should be in UUID format.This parameter also accepts the null character `\u0000` to include transactions that were not processed by any 3DS rule.",
+            "description": "Filters the results to only include transactions that were processed with the specified 3DS rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any 3DS rule.",
             "examples": [
               "c2fefd1b-6ed0-4038-bbc8-48ea2fb7e9f7"
             ]
@@ -31325,7 +31325,7 @@
               }
             ],
             "title": "Three D Secure Auth Resp",
-            "description": "Filters the results to only include transactions that received the specified response during 3DS authentication.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+            "description": "Filters the results to only include transactions that received the specified response during 3DS authentication.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
             "examples": [
               "Y"
             ]
@@ -31343,7 +31343,7 @@
               }
             ],
             "title": "Three D Secure Eci",
-            "description": "Filters the results to only include transactions that received the specified ECI during 3DS authentication.This parameter also accepts the null character `\u0000` to include transactions that have a null for this field.",
+            "description": "Filters the results to only include transactions that received the specified ECI during 3DS authentication.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field.",
             "examples": [
               "05"
             ]
@@ -31361,7 +31361,7 @@
               }
             ],
             "title": "Three D Secure Method",
-            "description": "Filters the results to only include transactions that underwent 3DS authentication with the specified method.This parameter also accepts the null character `\u0000` to include transactions that didn't undergo 3DS authentication.",
+            "description": "Filters the results to only include transactions that underwent 3DS authentication with the specified method.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that didn't undergo 3DS authentication.",
             "examples": [
               "challenge",
               "frictionless"
@@ -37490,7 +37490,8 @@
         "enum": [
           "transactions",
           "transaction_retries",
-          "detailed_settlement"
+          "detailed_settlement",
+          "accounts_receivables"
         ],
         "title": "ReportSpecModel"
       },
