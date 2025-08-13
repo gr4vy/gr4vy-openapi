@@ -45464,6 +45464,19 @@
             "default": null,
             "description": "A list of `customData` to pass to the TravelHub API.",
             "title": "Customdata"
+          },
+          "companyName": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Customer company name to pass to the TravelHub API.",
+            "title": "Companyname"
           }
         },
         "title": "TravelhubOptions",
