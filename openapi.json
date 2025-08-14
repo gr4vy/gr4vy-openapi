@@ -45510,6 +45510,7 @@
                 "type": "null"
               }
             ],
+            "default": null,
             "description": "URL scheme for an app.",
             "examples": [
               "APP://SOME_RESOURCE"
@@ -45517,9 +45518,6 @@
             "title": "Urlscheme"
           }
         },
-        "required": [
-          "urlScheme"
-        ],
         "title": "TrustlyOptions",
         "type": "object"
       },
