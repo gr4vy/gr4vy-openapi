@@ -45366,6 +45366,22 @@
               "act_123456"
             ],
             "title": "Transfer Data Destination"
+          },
+          "transfer_group": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "A string that identifies the payment as part of a group.",
+            "examples": [
+              "ORDER100"
+            ],
+            "title": "Transfer Group"
           }
         },
         "title": "StripeConnectOptions",
