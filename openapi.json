@@ -43772,6 +43772,18 @@
               "https://example.com"
             ],
             "title": "Window Origin"
+          },
+          "splits": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenSplitsOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes information of splitting payment amounts to the Adyen API."
           }
         },
         "title": "AdyenCardOptions",
@@ -43894,6 +43906,64 @@
           }
         },
         "title": "AdyenSepaOptions",
+        "type": "object"
+      },
+      "AdyenSplitsOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "authorization": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Split payment values to pass to the Adyen API on payment authorization. See [the Adyen docs](https://docs.adyen.com/platforms/online-payments/split-transactions/split-payments-at-authorization/) for details on the format and contents of the list.",
+            "title": "Authorization"
+          },
+          "capture": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Split payment values to pass to the Adyen API on payment capture. See [the Adyen docs](https://docs.adyen.com/platforms/online-payments/split-transactions/split-payments-at-capture/) for details on the format and contents of the list.",
+            "title": "Capture"
+          },
+          "refund": {
+            "anyOf": [
+              {
+                "items": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Split payment values to pass to the Adyen API on payment refund. See [the Adyen docs](https://docs.adyen.com/platforms/online-payments/split-transactions/split-refunds/) for details on the format and contents of the list.",
+            "title": "Refund"
+          }
+        },
+        "title": "AdyenSplitsOptions",
         "type": "object"
       },
       "AffirmItineraryOptions": {
