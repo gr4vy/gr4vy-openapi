@@ -40789,6 +40789,22 @@
               "2013-07-16T19:23:00.000+00:00"
             ]
           },
+          "canceled_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Canceled At",
+            "description": "The date this transaction was canceled at.",
+            "examples": [
+              "2013-07-16T19:23:00.000+00:00"
+            ]
+          },
           "approval_expires_at": {
             "anyOf": [
               {
@@ -41605,6 +41621,8 @@
               "payment-connector-response-transaction-declined",
               "payment-connector-response-transaction-capture-failed",
               "payment-connector-response-transaction-capture-declined",
+              "payment-connector-response-transaction-cancel-succeeded",
+              "payment-connector-response-transaction-cancel-failed",
               "payment-connector-response-transaction-void-succeeded",
               "payment-connector-response-transaction-void-declined",
               "payment-connector-response-transaction-void-failed",
