@@ -44169,6 +44169,26 @@
               "po-12345"
             ],
             "title": "Purchase Order Number"
+          },
+          "vault_payment_method_criteria": {
+            "anyOf": [
+              {
+                "enum": [
+                  "ALWAYS",
+                  "ON_SUCCESSFUL_TRANSACTION"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes the `vaultPaymentMethodCriteria` field when creating a new transaction.",
+            "examples": [
+              "ON_SUCCESSFUL_TRANSACTION"
+            ],
+            "title": "Vault Payment Method Criteria"
           }
         },
         "title": "BraintreeDynamicDataFieldsOptions",
