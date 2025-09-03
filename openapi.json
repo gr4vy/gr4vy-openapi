@@ -12769,6 +12769,388 @@
         "x-speakeasy-group": "transactions.settlements"
       }
     },
+    "/transactions/{transaction_id}/chargebacks": {
+      "get": {
+        "tags": [
+          "Transactions - Chargebacks"
+        ],
+        "summary": "List transaction chargebacks",
+        "description": "List all chargebacks for a specific transaction.",
+        "operationId": "list_transaction_chargebacks",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": [
+              "transactions.read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "transaction_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "The unique identifier of the transaction.",
+              "examples": [
+                "7099948d-7286-47e4-aad8-b68f7eb44591"
+              ],
+              "title": "Transaction Id"
+            },
+            "description": "The unique identifier of the transaction."
+          },
+          {
+            "name": "x-gr4vy-merchant-account-id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The ID of the merchant account to use for this request.",
+              "examples": [
+                "default"
+              ],
+              "title": "X-Gr4Vy-Merchant-Account-Id"
+            },
+            "description": "The ID of the merchant account to use for this request."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Chargebacks"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request was unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The credentials were invalid or the caller did not have permission to act on the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "The request method was not allowed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error405"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A duplicate record was found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "425": {
+            "description": "The request was too early.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error425"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests were made.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error429"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error502"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error504"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-ignore": true
+      }
+    },
+    "/transactions/{transaction_id}/chargeback-reversals": {
+      "get": {
+        "tags": [
+          "Transactions - Chargeback reversals"
+        ],
+        "summary": "List transaction chargeback reversals",
+        "description": "List all chargeback reversals for a specific transaction.",
+        "operationId": "list_transaction_chargeback_reversals",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": [
+              "transactions.read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "transaction_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "The unique identifier of the transaction.",
+              "examples": [
+                "7099948d-7286-47e4-aad8-b68f7eb44591"
+              ],
+              "title": "Transaction Id"
+            },
+            "description": "The unique identifier of the transaction."
+          },
+          {
+            "name": "x-gr4vy-merchant-account-id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The ID of the merchant account to use for this request.",
+              "examples": [
+                "default"
+              ],
+              "title": "X-Gr4Vy-Merchant-Account-Id"
+            },
+            "description": "The ID of the merchant account to use for this request."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargebackReversals"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request was unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The credentials were invalid or the caller did not have permission to act on the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "The request method was not allowed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error405"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A duplicate record was found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "425": {
+            "description": "The request was too early.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error425"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests were made.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error429"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error502"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error504"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-ignore": true
+      }
+    },
     "/payment-options": {
       "post": {
         "tags": [
@@ -27412,6 +27794,452 @@
         ],
         "title": "CartItem"
       },
+      "Chargeback": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id",
+            "description": "The unique identifier for the record.",
+            "examples": [
+              "b1e2c3d4-5678-1234-9abc-1234567890ab"
+            ]
+          },
+          "merchant_account_id": {
+            "type": "string",
+            "title": "Merchant Account Id",
+            "description": "The merchant account this record belongs to.",
+            "examples": [
+              "default"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "The date and time the record was created, in ISO 8601 format.",
+            "examples": [
+              "2024-06-01T12:00:00.000Z"
+            ]
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "The date and time the record was last updated, in ISO 8601 format.",
+            "examples": [
+              "2024-06-01T12:00:00.000Z"
+            ]
+          },
+          "posted_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Posted At",
+            "description": "The date and time the record was posted, in ISO 8601 format.",
+            "examples": [
+              "2024-06-01T12:00:00.000Z"
+            ]
+          },
+          "ingested_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Ingested At",
+            "description": "The date and time the record was ingested, in ISO 8601 format.",
+            "examples": [
+              "2024-06-01T12:00:00.000Z"
+            ]
+          },
+          "currency": {
+            "type": "string",
+            "pattern": "^[A-Z]{3}$",
+            "title": "Currency",
+            "description": "ISO 4217 currency code.",
+            "examples": [
+              "EUR",
+              "GBP",
+              "USD"
+            ]
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount",
+            "description": "The total amount in the smallest currency unit (e.g. cents).",
+            "examples": [
+              1100
+            ]
+          },
+          "exchange_rate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exchange Rate",
+            "description": "The exchange rate, if applicable.",
+            "examples": [
+              1.0
+            ]
+          },
+          "commission": {
+            "type": "integer",
+            "title": "Commission",
+            "description": "The commission amount deducted in the smallest currency unit.",
+            "examples": [
+              100
+            ]
+          },
+          "interchange": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interchange",
+            "description": "The interchange fee, if applicable, in the smallest currency unit.",
+            "examples": [
+              50
+            ]
+          },
+          "markup": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Markup",
+            "description": "The markup fee, if applicable, in the smallest currency unit.",
+            "examples": [
+              10
+            ]
+          },
+          "scheme_fee": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheme Fee",
+            "description": "The scheme fee, if applicable, in the smallest currency unit.",
+            "examples": [
+              5
+            ]
+          },
+          "payment_service_report_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Payment Service Report Id",
+            "description": "The report ID from the payment service.",
+            "examples": [
+              "a1b2c3d4-5678-1234-9abc-1234567890ab"
+            ]
+          },
+          "payment_service_report_file_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Payment Service Report File Ids",
+            "description": "List of file IDs for the payment service report.",
+            "examples": [
+              [
+                "f1e2d3c4-5678-1234-9abc-1234567890ab"
+              ]
+            ]
+          },
+          "transaction_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Transaction Id",
+            "description": "The transaction this record is associated with.",
+            "examples": [
+              "7099948d-7286-47e4-aad8-b68f7eb44591"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "const": "chargeback",
+            "title": "Type",
+            "description": "Always `chargeback`.",
+            "default": "chargeback",
+            "examples": [
+              "chargeback"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "merchant_account_id",
+          "created_at",
+          "updated_at",
+          "posted_at",
+          "ingested_at",
+          "currency",
+          "amount",
+          "commission",
+          "payment_service_report_id",
+          "payment_service_report_file_ids",
+          "transaction_id"
+        ],
+        "title": "Chargeback",
+        "description": "A chargeback record for a transaction."
+      },
+      "ChargebackReversal": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id",
+            "description": "The unique identifier for the record.",
+            "examples": [
+              "b1e2c3d4-5678-1234-9abc-1234567890ab"
+            ]
+          },
+          "merchant_account_id": {
+            "type": "string",
+            "title": "Merchant Account Id",
+            "description": "The merchant account this record belongs to.",
+            "examples": [
+              "default"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "The date and time the record was created, in ISO 8601 format.",
+            "examples": [
+              "2024-06-01T12:00:00.000Z"
+            ]
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "The date and time the record was last updated, in ISO 8601 format.",
+            "examples": [
+              "2024-06-01T12:00:00.000Z"
+            ]
+          },
+          "posted_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Posted At",
+            "description": "The date and time the record was posted, in ISO 8601 format.",
+            "examples": [
+              "2024-06-01T12:00:00.000Z"
+            ]
+          },
+          "ingested_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Ingested At",
+            "description": "The date and time the record was ingested, in ISO 8601 format.",
+            "examples": [
+              "2024-06-01T12:00:00.000Z"
+            ]
+          },
+          "currency": {
+            "type": "string",
+            "pattern": "^[A-Z]{3}$",
+            "title": "Currency",
+            "description": "ISO 4217 currency code.",
+            "examples": [
+              "EUR",
+              "GBP",
+              "USD"
+            ]
+          },
+          "amount": {
+            "type": "integer",
+            "title": "Amount",
+            "description": "The total amount in the smallest currency unit (e.g. cents).",
+            "examples": [
+              1100
+            ]
+          },
+          "exchange_rate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Exchange Rate",
+            "description": "The exchange rate, if applicable.",
+            "examples": [
+              1.0
+            ]
+          },
+          "commission": {
+            "type": "integer",
+            "title": "Commission",
+            "description": "The commission amount deducted in the smallest currency unit.",
+            "examples": [
+              100
+            ]
+          },
+          "interchange": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Interchange",
+            "description": "The interchange fee, if applicable, in the smallest currency unit.",
+            "examples": [
+              50
+            ]
+          },
+          "markup": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Markup",
+            "description": "The markup fee, if applicable, in the smallest currency unit.",
+            "examples": [
+              10
+            ]
+          },
+          "scheme_fee": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheme Fee",
+            "description": "The scheme fee, if applicable, in the smallest currency unit.",
+            "examples": [
+              5
+            ]
+          },
+          "payment_service_report_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Payment Service Report Id",
+            "description": "The report ID from the payment service.",
+            "examples": [
+              "a1b2c3d4-5678-1234-9abc-1234567890ab"
+            ]
+          },
+          "payment_service_report_file_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "title": "Payment Service Report File Ids",
+            "description": "List of file IDs for the payment service report.",
+            "examples": [
+              [
+                "f1e2d3c4-5678-1234-9abc-1234567890ab"
+              ]
+            ]
+          },
+          "transaction_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Transaction Id",
+            "description": "The transaction this record is associated with.",
+            "examples": [
+              "7099948d-7286-47e4-aad8-b68f7eb44591"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "const": "chargeback-reversal",
+            "title": "Type",
+            "description": "Always `chargeback-reversal`.",
+            "default": "chargeback-reversal",
+            "examples": [
+              "chargeback-reversal"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "merchant_account_id",
+          "created_at",
+          "updated_at",
+          "posted_at",
+          "ingested_at",
+          "currency",
+          "amount",
+          "commission",
+          "payment_service_report_id",
+          "payment_service_report_file_ids",
+          "transaction_id"
+        ],
+        "title": "ChargebackReversal",
+        "description": "A chargeback reversal record for a transaction."
+      },
+      "ChargebackReversals": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ChargebackReversal"
+            },
+            "type": "array",
+            "title": "Items",
+            "description": "The list of chargeback reversal objects."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "ChargebackReversals",
+        "description": "A list of chargeback reversal records for a transaction."
+      },
+      "Chargebacks": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Chargeback"
+            },
+            "type": "array",
+            "title": "Items",
+            "description": "The list of chargeback objects."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "Chargebacks",
+        "description": "A list of chargeback records for a transaction."
+      },
       "CheckoutPayoutOptions": {
         "properties": {
           "processing_channel_id": {
@@ -39225,21 +40053,11 @@
       },
       "Settlement": {
         "properties": {
-          "type": {
-            "type": "string",
-            "const": "settlement",
-            "title": "Type",
-            "description": "Always 'settlement'.",
-            "default": "settlement",
-            "examples": [
-              "settlement"
-            ]
-          },
           "id": {
             "type": "string",
             "format": "uuid",
             "title": "Id",
-            "description": "The unique identifier for the settlement.",
+            "description": "The unique identifier for the record.",
             "examples": [
               "b1e2c3d4-5678-1234-9abc-1234567890ab"
             ]
@@ -39247,7 +40065,7 @@
           "merchant_account_id": {
             "type": "string",
             "title": "Merchant Account Id",
-            "description": "The merchant account this settlement belongs to.",
+            "description": "The merchant account this record belongs to.",
             "examples": [
               "default"
             ]
@@ -39256,7 +40074,7 @@
             "type": "string",
             "format": "date-time",
             "title": "Created At",
-            "description": "The date and time the settlement was created, in ISO 8601 format.",
+            "description": "The date and time the record was created, in ISO 8601 format.",
             "examples": [
               "2024-06-01T12:00:00.000Z"
             ]
@@ -39265,7 +40083,7 @@
             "type": "string",
             "format": "date-time",
             "title": "Updated At",
-            "description": "The date and time the settlement was last updated, in ISO 8601 format.",
+            "description": "The date and time the record was last updated, in ISO 8601 format.",
             "examples": [
               "2024-06-01T12:00:00.000Z"
             ]
@@ -39274,7 +40092,7 @@
             "type": "string",
             "format": "date-time",
             "title": "Posted At",
-            "description": "The date and time the settlement was posted, in ISO 8601 format.",
+            "description": "The date and time the record was posted, in ISO 8601 format.",
             "examples": [
               "2024-06-01T12:00:00.000Z"
             ]
@@ -39283,7 +40101,7 @@
             "type": "string",
             "format": "date-time",
             "title": "Ingested At",
-            "description": "The date and time the settlement was ingested, in ISO 8601 format.",
+            "description": "The date and time the record was ingested, in ISO 8601 format.",
             "examples": [
               "2024-06-01T12:00:00.000Z"
             ]
@@ -39292,7 +40110,7 @@
             "type": "string",
             "pattern": "^[A-Z]{3}$",
             "title": "Currency",
-            "description": "ISO 4217 currency code for the settlement.",
+            "description": "ISO 4217 currency code.",
             "examples": [
               "EUR",
               "GBP",
@@ -39302,7 +40120,7 @@
           "amount": {
             "type": "integer",
             "title": "Amount",
-            "description": "The total settled amount in the smallest currency unit (e.g. cents).",
+            "description": "The total amount in the smallest currency unit (e.g. cents).",
             "examples": [
               1100
             ]
@@ -39317,7 +40135,7 @@
               }
             ],
             "title": "Exchange Rate",
-            "description": "The exchange rate used for settlement, if applicable.",
+            "description": "The exchange rate, if applicable.",
             "examples": [
               1.0
             ]
@@ -39402,9 +40220,19 @@
             "type": "string",
             "format": "uuid",
             "title": "Transaction Id",
-            "description": "The transaction this settlement is associated with.",
+            "description": "The transaction this record is associated with.",
             "examples": [
               "7099948d-7286-47e4-aad8-b68f7eb44591"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "const": "settlement",
+            "title": "Type",
+            "description": "Always `settlement`.",
+            "default": "settlement",
+            "examples": [
+              "settlement"
             ]
           }
         },
