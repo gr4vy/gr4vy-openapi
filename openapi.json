@@ -26269,6 +26269,7 @@
           "updated",
           "deleted",
           "voided",
+          "canceled",
           "captured"
         ],
         "title": "AuditLogAction"
