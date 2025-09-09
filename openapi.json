@@ -41590,6 +41590,14 @@
               "2013-07-16T19:23:00.000+00:00"
             ]
           },
+          "disputed": {
+            "type": "boolean",
+            "title": "Disputed",
+            "description": "Indicates whether this transaction has been disputed.",
+            "examples": [
+              true
+            ]
+          },
           "airline": {
             "anyOf": [
               {
@@ -41970,6 +41978,7 @@
           "gift_card_redemptions",
           "created_at",
           "updated_at",
+          "disputed",
           "payment_source",
           "merchant_initiated",
           "is_subsequent_payment",
@@ -43850,6 +43859,14 @@
             "examples": [
               "2013-07-16T19:23:00.000+00:00"
             ]
+          },
+          "disputed": {
+            "type": "boolean",
+            "title": "Disputed",
+            "description": "Indicates whether this transaction has been disputed.",
+            "examples": [
+              true
+            ]
           }
         },
         "additionalProperties": false,
@@ -43869,7 +43886,8 @@
           "intent",
           "gift_card_redemptions",
           "created_at",
-          "updated_at"
+          "updated_at",
+          "disputed"
         ],
         "title": "TransactionSummary",
         "description": "A transaction, summarised"
