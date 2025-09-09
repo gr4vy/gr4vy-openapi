@@ -9504,6 +9504,27 @@
             "description": "Filters for transactions that attempted 3DS authentication or not."
           },
           {
+            "name": "disputed",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filters for transactions that have been disputed.",
+              "examples": [
+                true
+              ],
+              "title": "Disputed"
+            },
+            "description": "Filters for transactions that have been disputed."
+          },
+          {
             "name": "buyer_search",
             "in": "query",
             "required": false,
