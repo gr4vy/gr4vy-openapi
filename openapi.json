@@ -27711,7 +27711,7 @@
               }
             ],
             "title": "Sku",
-            "description": "The SKU for the item.",
+            "description": "The SKU or product code for the item.",
             "examples": [
               "GPHD1078"
             ]
@@ -27804,6 +27804,108 @@
             "examples": [
               "US",
               "GB"
+            ]
+          },
+          "tax_exempt": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tax Exempt",
+            "description": "Whether the item is exempt of tax.",
+            "examples": [
+              false
+            ]
+          },
+          "unit_of_measure": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 50,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unit Of Measure",
+            "description": "The unit of measure or the unit of measure code.",
+            "examples": [
+              "feet",
+              "kg"
+            ]
+          },
+          "commodity_code": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 50,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Commodity Code",
+            "description": "Item commodity code. Generally a UNSPSC code.",
+            "examples": [
+              "43211503",
+              "84111502"
+            ]
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 255,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "Brief item description.",
+            "examples": [
+              "A brief description of an interesting item."
+            ]
+          },
+          "duty_amount": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 99999999.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duty Amount",
+            "description": "Item import or export duties represented as a monetary amount in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`",
+            "examples": [
+              1299
+            ]
+          },
+          "shipping_amount": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 99999999.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shipping Amount",
+            "description": "Freight/shipping amount represented as a monetary amount in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`",
+            "examples": [
+              1299
             ]
           }
         },
