@@ -46718,6 +46718,77 @@
         "title": "NuveiOptions",
         "type": "object"
       },
+      "NuveiPSEOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "userType": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Customer type (\"N\" for persona natural, \"J\" for persona jur\u00eddica)",
+            "examples": [
+              "N"
+            ],
+            "title": "Usertype"
+          },
+          "userFisNumber": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Customer\u2019s document type",
+            "examples": [
+              "CC"
+            ],
+            "title": "Userfisnumber"
+          },
+          "fiscalNumber": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Customer\u2019s document number",
+            "examples": [
+              "CC"
+            ],
+            "title": "Fiscalnumber"
+          },
+          "bankCode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The bank code of the selected bank",
+            "examples": [
+              "5432"
+            ],
+            "title": "Bankcode"
+          }
+        },
+        "title": "NuveiPSEOptions",
+        "type": "object"
+      },
       "OxxoOptions": {
         "additionalProperties": false,
         "properties": {
@@ -47562,6 +47633,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `nuvei-card` connector."
+          },
+          "nuvei-pse": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/NuveiPSEOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `nuvei-pse` connector."
           },
           "oxxo-oxxo": {
             "anyOf": [
