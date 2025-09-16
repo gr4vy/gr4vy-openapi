@@ -32368,6 +32368,16 @@
               "id-12345"
             ]
           },
+          "async_network_tokens_enabled": {
+            "type": "boolean",
+            "title": "Async Network Tokens Enabled",
+            "description": "When enabled network tokens will be generated asynchronously and only used on subsequent transactions to speed up transaction processing.",
+            "default": false,
+            "examples": [
+              true,
+              false
+            ]
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -32656,6 +32666,16 @@
               "id-12345"
             ]
           },
+          "async_network_tokens_enabled": {
+            "type": "boolean",
+            "title": "Async Network Tokens Enabled",
+            "description": "When enabled network tokens will be generated asynchronously and only used on subsequent transactions to speed up transaction processing.",
+            "default": false,
+            "examples": [
+              true,
+              false
+            ]
+          },
           "id": {
             "type": "string",
             "maxLength": 50,
@@ -32942,6 +32962,16 @@
             "description": "Application ID provided for Mastercard after onboarding to use Network Tokens.",
             "examples": [
               "id-12345"
+            ]
+          },
+          "async_network_tokens_enabled": {
+            "type": "boolean",
+            "title": "Async Network Tokens Enabled",
+            "description": "When enabled network tokens will be generated asynchronously and only used on subsequent transactions to speed up transaction processing.",
+            "default": false,
+            "examples": [
+              true,
+              false
             ]
           },
           "display_name": {
