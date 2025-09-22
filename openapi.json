@@ -26047,7 +26047,8 @@
           "exception",
           "reject",
           "review",
-          "skipped"
+          "skipped",
+          "pending"
         ],
         "title": "AntiFraudDecision"
       },
@@ -32098,6 +32099,16 @@
         ],
         "title": "InstrumentType"
       },
+      "IntegrationClient": {
+        "type": "string",
+        "enum": [
+          "redirect",
+          "web",
+          "android",
+          "ios"
+        ],
+        "title": "IntegrationClient"
+      },
       "MerchantAccount": {
         "properties": {
           "type": {
@@ -37414,6 +37425,28 @@
           "configuration": {
             "$ref": "#/components/schemas/PaymentServiceConfiguration",
             "description": "Additional configuration on how to present the approval UI."
+          },
+          "supported_integration_clients": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/IntegrationClient"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Supported Integration Clients",
+            "description": "List of supported integration clients",
+            "examples": [
+              [
+                "android"
+              ]
+            ],
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
           }
         },
         "additionalProperties": false,
@@ -37429,7 +37462,8 @@
           "mode",
           "supported_features",
           "required_checkout_fields",
-          "configuration"
+          "configuration",
+          "supported_integration_clients"
         ],
         "title": "PaymentServiceDefinition"
       },
@@ -42103,6 +42137,23 @@
             "examples": [
               3
             ]
+          },
+          "session_token": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Session Token",
+            "description": "Session token to fetch the session data from the client",
+            "examples": [
+              "j3CZf9Eg6nUygMAVA6PXsVWGHiccj"
+            ],
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
           }
         },
         "additionalProperties": false,
@@ -42947,6 +42998,22 @@
             "examples": [
               1299
             ]
+          },
+          "integration_client": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/IntegrationClient"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Defines the client where the session for this transaction is going to be used",
+            "examples": [
+              "android"
+            ],
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
           }
         },
         "additionalProperties": false,
