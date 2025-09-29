@@ -35868,6 +35868,22 @@
               }
             ],
             "description": "The shipping details for the payment link."
+          },
+          "connection_options": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "additionalProperties": true,
+                  "type": "object"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Connection Options",
+            "description": "The connection options for the payment link."
           }
         },
         "additionalProperties": false,
