@@ -40512,7 +40512,7 @@
             "$ref": "#/components/schemas/ReportExecutionStatus",
             "description": "The status of the report execution.",
             "examples": [
-              "completed"
+              "succeeded"
             ]
           },
           "context": {
@@ -40618,7 +40618,7 @@
             "$ref": "#/components/schemas/ReportExecutionStatus",
             "description": "The status of the report execution.",
             "examples": [
-              "completed"
+              "succeeded"
             ]
           },
           "context": {
