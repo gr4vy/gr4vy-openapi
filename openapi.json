@@ -47030,6 +47030,185 @@
         "title": "DlocalOptions",
         "type": "object"
       },
+      "DlocalUPIOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "wallet": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DlocalUPIWalletOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `wallet` data to the dLocal API for those connectors that need it."
+          }
+        },
+        "title": "DlocalUPIOptions",
+        "type": "object"
+      },
+      "DlocalUPIRecurringInfoOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "subscription_frequency_unit": {
+            "description": "Indicates the frequency unit for the subscription. Allowed values are: `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, `SEMI_ANNUAL`, and `ANNUAL`.",
+            "enum": [
+              "DAILY",
+              "WEEKLY",
+              "MONTHLY",
+              "QUARTERLY",
+              "SEMI_ANNUAL",
+              "ANNUAL"
+            ],
+            "examples": [
+              "MONTHLY"
+            ],
+            "title": "Subscription Frequency Unit",
+            "type": "string"
+          },
+          "subscription_frequency": {
+            "description": "Indicates the frequency for the subscription.",
+            "examples": [
+              1
+            ],
+            "title": "Subscription Frequency",
+            "type": "integer"
+          },
+          "subscription_start_at": {
+            "description": "Indicates the start date for the subscription in format `YYYYMMDD`.",
+            "examples": [
+              "20231201"
+            ],
+            "title": "Subscription Start At",
+            "type": "string"
+          },
+          "subscription_end_at": {
+            "description": "Indicates the end date for the subscription in format `YYYYMMDD`.",
+            "examples": [
+              "20241201"
+            ],
+            "title": "Subscription End At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "subscription_frequency_unit",
+          "subscription_frequency",
+          "subscription_start_at",
+          "subscription_end_at"
+        ],
+        "title": "DlocalUPIRecurringInfoOptions",
+        "type": "object"
+      },
+      "DlocalUPIWalletOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `wallet.name` to the dLocal API for those connectors that need it.",
+            "examples": [
+              "John Doe"
+            ],
+            "title": "Name"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `wallet.email` to the dLocal API for those connectors that need it.",
+            "examples": [
+              "john@example.com"
+            ],
+            "title": "Email"
+          },
+          "token": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `wallet.token` to the dLocal API for those connectors that need it.",
+            "examples": [
+              "123456"
+            ],
+            "title": "Token"
+          },
+          "username": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `wallet.username` to the dLocal API for those connectors that need it.",
+            "examples": [
+              "johnd"
+            ],
+            "title": "Username"
+          },
+          "verify": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `wallet.verify` to the dLocal API for those connectors that need it.",
+            "examples": [
+              true
+            ],
+            "title": "Verify"
+          },
+          "recurring_info": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DlocalUPIRecurringInfoOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `wallet.recurring_info` to the dLocal API for those connectors that need it.",
+            "examples": [
+              {
+                "subscription_end_at": "20241201",
+                "subscription_frequency": 1,
+                "subscription_frequency_unit": "MONTHLY",
+                "subscription_start_at": "20231201"
+              }
+            ]
+          }
+        },
+        "title": "DlocalUPIWalletOptions",
+        "type": "object"
+      },
       "DlocalWalletOptions": {
         "additionalProperties": false,
         "properties": {
@@ -48743,6 +48922,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `dlocal-nequi` connector."
+          },
+          "dlocal-upi": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DlocalUPIOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `dlocal-upi` connector."
           },
           "fiserv-card": {
             "anyOf": [
