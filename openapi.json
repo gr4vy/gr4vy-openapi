@@ -46898,6 +46898,8 @@
             "anyOf": [
               {
                 "additionalProperties": {
+                  "maxLength": 5000,
+                  "minLength": 1,
                   "type": "string"
                 },
                 "type": "object"
