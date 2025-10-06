@@ -46929,7 +46929,7 @@
               {
                 "additionalProperties": {
                   "maxLength": 5000,
-                  "minLength": 1,
+                  "minLength": 0,
                   "type": "string"
                 },
                 "type": "object"
