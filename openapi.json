@@ -17358,6 +17358,18 @@
             "description": "The ID of the merchant account to use for this request."
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportExecutionUrlGenerate",
+                "default": {
+                  "expires_in": 5
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "Successful Response",
@@ -41005,6 +41017,24 @@
           "expires_at"
         ],
         "title": "ReportExecutionUrl"
+      },
+      "ReportExecutionUrlGenerate": {
+        "properties": {
+          "expires_in": {
+            "type": "integer",
+            "maximum": 10080.0,
+            "minimum": 1.0,
+            "title": "Expires In",
+            "description": "The URL expiration time, in minutes.",
+            "default": 5,
+            "examples": [
+              5
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ReportExecutionUrlGenerate"
       },
       "ReportExecutions": {
         "properties": {
