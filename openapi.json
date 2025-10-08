@@ -43360,6 +43360,114 @@
             ],
             "x-gr4vy-docs-ignore": true,
             "x-speakeasy-ignore": true
+          },
+          "tax_amount": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 99999999.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tax Amount",
+            "description": "The sales tax amount for this transaction, represented as a monetary amount in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`",
+            "examples": [
+              1299
+            ]
+          },
+          "merchant_tax_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Merchant Tax Id",
+            "description": "Merchant tax ID (for example, EIN or VAT number)."
+          },
+          "customer_reference_number": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Customer Reference Number",
+            "description": "Customer code or reference."
+          },
+          "amount_includes_tax": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount Includes Tax",
+            "description": "Whether the tax is included in the amount.",
+            "examples": [
+              false
+            ]
+          },
+          "supplier_order_number": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Supplier Order Number",
+            "description": "The merchant's unique identifier for the sales order or invoice."
+          },
+          "duty_amount": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 99999999.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duty Amount",
+            "description": "Total charges for import/export duties.",
+            "examples": [
+              1299
+            ]
+          },
+          "shipping_amount": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 99999999.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Shipping Amount",
+            "description": "Total shipping amount.",
+            "examples": [
+              1299
+            ]
           }
         },
         "additionalProperties": false,
