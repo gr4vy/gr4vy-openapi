@@ -47194,17 +47194,19 @@
         "additionalProperties": false,
         "properties": {
           "subscription_frequency_unit": {
-            "description": "Indicates the frequency unit for the subscription. Allowed values are: `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, `SEMI_ANNUAL`, and `ANNUAL`.",
+            "description": "Indicates the frequency unit for the subscription. Allowed values are: `DAY`, `WEEK`, `MONTH`, `BI_MONTHLY`, `QUARTER`, `SEMI_ANNUALLY`, `YEAR`, `ONDEMAND`.",
             "enum": [
-              "DAILY",
-              "WEEKLY",
-              "MONTHLY",
-              "QUARTERLY",
-              "SEMI_ANNUAL",
-              "ANNUAL"
+              "MONTH",
+              "WEEK",
+              "BI_MONTHLY",
+              "ONDEMAND",
+              "QUARTER",
+              "YEAR",
+              "SEMI_ANNUALLY",
+              "DAY"
             ],
             "examples": [
-              "MONTHLY"
+              "MONTH"
             ],
             "title": "Subscription Frequency Unit",
             "type": "string"
@@ -47341,7 +47343,7 @@
               {
                 "subscription_end_at": "20241201",
                 "subscription_frequency": 1,
-                "subscription_frequency_unit": "MONTHLY",
+                "subscription_frequency_unit": "MONTH",
                 "subscription_start_at": "20231201"
               }
             ]
