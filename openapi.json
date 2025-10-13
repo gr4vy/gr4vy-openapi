@@ -34401,6 +34401,7 @@
           "arcuspaynetwork",
           "bacs",
           "bancontact",
+          "bank",
           "banked",
           "bcp",
           "becs",
@@ -34466,6 +34467,7 @@
           "payvalida",
           "picpay",
           "pix",
+          "plaid",
           "pse",
           "rabbitlinepay",
           "razorpay",
@@ -35452,7 +35454,8 @@
           "googlepay",
           "checkout-session",
           "click-to-pay",
-          "gift-card"
+          "gift-card",
+          "bank"
         ],
         "title": "Mode"
       },
@@ -36329,13 +36332,8 @@
             "anyOf": [
               {
                 "type": "string",
-                "enum": [
-                  "en",
-                  "en-GB",
-                  "pt",
-                  "pt-BR",
-                  "es"
-                ]
+                "maxLength": 50,
+                "minLength": 1
               },
               {
                 "type": "null"
