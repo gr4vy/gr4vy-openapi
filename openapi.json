@@ -22392,30 +22392,6 @@
             "description": "Filters the results to only include transactions that received the specified raw response code from the payment service.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
           },
           {
-            "name": "rule_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any routing rule.<br/>**Note:** This query parameter is deprecated in favor of `rule_id_route_transaction`.",
-              "examples": [
-                "c2fefd1b-6ed0-4038-bbc8-48ea2fb7e9f7"
-              ],
-              "title": "Rule Id"
-            },
-            "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any routing rule.<br/>**Note:** This query parameter is deprecated in favor of `rule_id_route_transaction`."
-          },
-          {
             "name": "rule_id_route_transaction",
             "in": "query",
             "required": false,
@@ -23219,30 +23195,6 @@
               "title": "Raw Response Code"
             },
             "description": "Filters the results to only include transactions that received the specified raw response code from the payment service.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that have a null for this field."
-          },
-          {
-            "name": "rule_id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any routing rule.<br/>**Note:** This query parameter is deprecated in favor of `rule_id_route_transaction`.",
-              "examples": [
-                "c2fefd1b-6ed0-4038-bbc8-48ea2fb7e9f7"
-              ],
-              "title": "Rule Id"
-            },
-            "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any routing rule.<br/>**Note:** This query parameter is deprecated in favor of `rule_id_route_transaction`."
           },
           {
             "name": "rule_id_route_transaction",
@@ -34861,24 +34813,6 @@
               "COMPLETED"
             ]
           },
-          "rule_id": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Rule Id",
-            "description": "Filters the results to only include transactions that were processed with the specified routing rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any routing rule.<br/>**Note:** This query parameter is deprecated in favor of `rule_id_route_transaction`.",
-            "examples": [
-              "c2fefd1b-6ed0-4038-bbc8-48ea2fb7e9f7"
-            ]
-          },
           "rule_id_route_transaction": {
             "anyOf": [
               {
@@ -35008,7 +34942,6 @@
           "payment_service",
           "payment_source",
           "raw_response_code",
-          "rule",
           "rule_route_transaction",
           "rule_skip_3ds",
           "three_d_secure_auth_resp",
