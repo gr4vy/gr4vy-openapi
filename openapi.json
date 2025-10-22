@@ -49626,6 +49626,14 @@
       "description": "Manage transaction."
     },
     {
+      "name": "Transactions - Chargebacks",
+      "description": "Read transaction chargeback data."
+    },
+    {
+      "name": "Transactions - Chargeback reversals",
+      "description": "Read transaction chargeback reversal data."
+    },
+    {
       "name": "Transactions - Settlements",
       "description": "Read transaction settlement data."
     },
