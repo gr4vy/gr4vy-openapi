@@ -38710,14 +38710,12 @@
               }
             ],
             "title": "Supported Integration Clients",
-            "description": "List of supported integration clients",
+            "description": "List of supported integration clients. Defaults to redirect for most redirect connectors.",
             "examples": [
               [
-                "android"
+                "redirect"
               ]
-            ],
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            ]
           }
         },
         "additionalProperties": false,
@@ -43438,12 +43436,10 @@
               }
             ],
             "title": "Session Token",
-            "description": "Session token to fetch the session data from the client",
+            "description": "A session token that can be used to fetch session data for direct client integrations.",
             "examples": [
               "j3CZf9Eg6nUygMAVA6PXsVWGHiccj"
-            ],
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            ]
           },
           "tax_amount": {
             "anyOf": [
@@ -44406,12 +44402,10 @@
                 "type": "null"
               }
             ],
-            "description": "Defines the client where the session for this transaction is going to be used",
+            "description": "Defines the client where the session for this transaction is going to be used. Please refer to the connections documentation for more guidance.",
             "examples": [
-              "android"
-            ],
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+              "web"
+            ]
           }
         },
         "additionalProperties": false,
