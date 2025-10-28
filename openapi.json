@@ -48496,9 +48496,167 @@
               }
             ],
             "title": "Additional Data"
+          },
+          "shipping": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PaypalShippingOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Shipping information to be passed to the PayPal API.",
+            "examples": [
+              {
+                "options": [
+                  {
+                    "amount": {
+                      "currency_code": "USD",
+                      "value": "10.00"
+                    },
+                    "id": "ship_1234",
+                    "label": "Free Shipping",
+                    "selected": true,
+                    "type": "SHIPPING"
+                  }
+                ]
+              }
+            ]
           }
         },
         "title": "PaypalOptions",
+        "type": "object"
+      },
+      "PaypalShippingOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "options": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/PaypalShippingOptionsItem"
+                },
+                "maxItems": 10,
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Shipping options that the payee or merchant offers to the payer to ship or pick up their items.",
+            "title": "Options"
+          }
+        },
+        "title": "PaypalShippingOptions",
+        "type": "object"
+      },
+      "PaypalShippingOptionsItem": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "description": "A unique ID that identifies a payer-selected shipping option.",
+            "maxLength": 127,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "description": "A description that the payer sees, which helps them choose an appropriate shipping option.",
+            "examples": [
+              "Free Shipping",
+              "USPS Priority Shipping",
+              "Exp\u00e9dition prioritaire USPS",
+              "USPS y\u014duxi\u0101n f\u0101 hu\u00f2"
+            ],
+            "maxLength": 127,
+            "minLength": 1,
+            "title": "Label",
+            "type": "string"
+          },
+          "selected": {
+            "description": "If the API request sets selected = true, it represents the shipping option that the payee or merchant expects to be pre-selected for the payer when they first view the shipping.options in the PayPal Checkout experience. Only one shipping.option can be set to selected=true.",
+            "title": "Selected",
+            "type": "boolean"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "enum": [
+                  "SHIPPING",
+                  "PICKUP",
+                  "PICKUP_IN_STORE",
+                  "PICKUP_FROM_PERSON"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "A classification for the method of purchase fulfillment.",
+            "examples": [
+              "SHIPPING",
+              "PICKUP",
+              "PICKUP_IN_STORE",
+              "PICKUP_FROM_PERSON"
+            ],
+            "title": "Type"
+          },
+          "amount": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PaypalShippingOptionsItemAmount"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The shipping cost for the selected option."
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "selected"
+        ],
+        "title": "PaypalShippingOptionsItem",
+        "type": "object"
+      },
+      "PaypalShippingOptionsItemAmount": {
+        "additionalProperties": false,
+        "properties": {
+          "currency_code": {
+            "description": "The three-character ISO currency code.",
+            "examples": [
+              "EUR",
+              "GBP",
+              "USD"
+            ],
+            "pattern": "^[A-Z]{3}$",
+            "title": "Currency Code",
+            "type": "string"
+          },
+          "value": {
+            "description": "The amount value, which might include a decimal portion.",
+            "examples": [
+              "10.00"
+            ],
+            "maxLength": 32,
+            "minLength": 1,
+            "title": "Value",
+            "type": "string"
+          }
+        },
+        "required": [
+          "currency_code",
+          "value"
+        ],
+        "title": "PaypalShippingOptionsItemAmount",
         "type": "object"
       },
       "PowertranzOptions": {
