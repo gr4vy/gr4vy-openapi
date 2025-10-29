@@ -888,6 +888,9 @@
                   },
                   {
                     "$ref": "#/components/schemas/CheckoutSessionPaymentMethodCreate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/PlaidPaymentMethodCreate"
                   }
                 ],
                 "title": "Body"
@@ -40519,6 +40522,99 @@
         "title": "PayoutSummary",
         "description": "PayoutSummary\n\nRepresents a summary of a payout."
       },
+      "PlaidPaymentMethodCreate": {
+        "properties": {
+          "method": {
+            "type": "string",
+            "const": "plaid",
+            "title": "Method",
+            "description": "Always `plaid`.",
+            "default": "plaid",
+            "examples": [
+              "plaid"
+            ]
+          },
+          "token": {
+            "type": "string",
+            "title": "Token",
+            "description": "The public token obtained after using Plaid Link.",
+            "examples": [
+              "public-sandbox-7147ceee-816c-4272-a7f4-544f5c3d4d16"
+            ]
+          },
+          "account_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Account Id",
+            "description": "The Plaid account ID corresponding to the end-user account. If not provided will be fetched from Plaid API expecting to only have one.",
+            "examples": [
+              "5BpEdV8iZNBBvN9yw8pGfLbnqo5QWbF5lgzPe"
+            ]
+          },
+          "payment_service_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Payment Service Id",
+            "description": "The ID of the Plaid payment service related to the provided public token. If not provided will be fetched from the currently active expecting to have a single one.",
+            "examples": [
+              "fffd152a-9532-4087-9a4f-de58754210f0"
+            ]
+          },
+          "buyer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer Id",
+            "description": "The ID of the buyer to attach the method to.",
+            "examples": [
+              "fe26475d-ec3e-4884-9553-f7356683f7f9"
+            ]
+          },
+          "buyer_external_identifier": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer External Identifier",
+            "description": "The merchant reference for this payment method.",
+            "examples": [
+              "payment-method-12345"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "token"
+        ],
+        "title": "PlaidPaymentMethodCreate",
+        "description": "Plaid Payment Method\n\nPlaid Payment Method to use in a transaction."
+      },
       "ProductType": {
         "type": "string",
         "enum": [
@@ -45522,6 +45618,9 @@
               },
               {
                 "$ref": "#/components/schemas/NetworkTokenPaymentMethodCreate"
+              },
+              {
+                "$ref": "#/components/schemas/PlaidPaymentMethodCreate"
               },
               {
                 "$ref": "#/components/schemas/CheckoutSessionWithUrlPaymentMethodCreate"
