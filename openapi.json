@@ -29364,6 +29364,57 @@
             ],
             "description": "The airline addendum data which describes the airline booking associated with this transaction."
           },
+          "amount": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 99999999.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount",
+            "description": "The total amount for this transaction.",
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Z]{3}$",
+                "examples": [
+                  "EUR",
+                  "GBP",
+                  "USD"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currency",
+            "description": "The currency code for this transaction.",
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
+          },
+          "payment_service_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Payment Service Id",
+            "description": "The unique identifier of an existing payment service. When provided, the created transaction will be processed by the given payment service and any routing rules will be skipped.",
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
+          },
           "type": {
             "type": "string",
             "const": "checkout-session",
@@ -30030,11 +30081,63 @@
             ],
             "description": "The airline addendum data which describes the airline booking associated with this transaction."
           },
+          "amount": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 99999999.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount",
+            "description": "The total amount for this transaction.",
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Z]{3}$",
+                "examples": [
+                  "EUR",
+                  "GBP",
+                  "USD"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currency",
+            "description": "The currency code for this transaction.",
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
+          },
+          "payment_service_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Payment Service Id",
+            "description": "The unique identifier of an existing payment service. When provided, the created transaction will be processed by the given payment service and any routing rules will be skipped.",
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
+          },
           "expires_in": {
             "type": "number",
             "maximum": 86400.0,
             "minimum": 3600.0,
             "title": "Expires In",
+            "description": "The time in seconds when this checkout session expires.",
             "default": 3600
           }
         },
@@ -33130,7 +33233,8 @@
           "redirect_token",
           "googlepay",
           "applepay",
-          "network_token"
+          "network_token",
+          "plaid"
         ],
         "title": "InstrumentType"
       },
