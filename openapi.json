@@ -50982,6 +50982,24 @@
         "title": "MockCardOptions",
         "type": "object"
       },
+      "MonatoSpeiOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "approval_url": {
+            "description": "Approval URL that will receive a charge payment method reference.",
+            "examples": [
+              "https://example.com"
+            ],
+            "title": "Approval Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "approval_url"
+        ],
+        "title": "MonatoSpeiOptions",
+        "type": "object"
+      },
       "NuveiAirlineDataOptions": {
         "additionalProperties": false,
         "properties": {
@@ -52118,6 +52136,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `mattilda-tapifintechs` connector."
+          },
+          "monato-spei": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MonatoSpeiOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `monato-spei` connector."
           },
           "mock-card": {
             "anyOf": [
