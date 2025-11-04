@@ -30139,6 +30139,70 @@
             "title": "Expires In",
             "description": "The time in seconds when this checkout session expires.",
             "default": 3600
+          },
+          "country": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Z]{2}$",
+                "examples": [
+                  "DE",
+                  "GB",
+                  "US"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country",
+            "description": "The 2-letter ISO 3166-1 alpha-2 country code for the transaction. Used to filter payment services for processing.",
+            "examples": [
+              "US"
+            ],
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
+          },
+          "is_subsequent_payment": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Subsequent Payment",
+            "description": "Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note there are some restrictions on how this flag may be used.\n\nThe flag can only be `false` (or not set) when the transaction meets one of the following criteria:\n\n* It is not `merchant_initiated`.\n* `payment_source` is set to `card_on_file`.\n\nThe flag can only be set to `true` when the transaction meets one of the following criteria:\n* It is not `merchant_initiated`.\n* `payment_source` is set to `recurring` or `installment` and `merchant_initiated` is set to `true`.\n* `payment_source` is set to `card_on_file`.",
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
+          },
+          "merchant_initiated": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Merchant Initiated",
+            "description": "Indicates whether the transaction was initiated by the merchant (true) or customer (false).",
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
+          },
+          "payment_source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TransactionPaymentSource"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The use-case for the the transaction.",
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
           }
         },
         "additionalProperties": false,
