@@ -29377,8 +29377,7 @@
             ],
             "title": "Amount",
             "description": "The total amount for this transaction.",
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            "x-gr4vy-docs-ignore": true
           },
           "currency": {
             "anyOf": [
@@ -29397,8 +29396,7 @@
             ],
             "title": "Currency",
             "description": "The currency code for this transaction.",
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            "x-gr4vy-docs-ignore": true
           },
           "payment_service_id": {
             "anyOf": [
@@ -29412,8 +29410,7 @@
             ],
             "title": "Payment Service Id",
             "description": "The unique identifier of an existing payment service. When provided, the created transaction will be processed by the given payment service and any routing rules will be skipped.",
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            "x-gr4vy-docs-ignore": true
           },
           "type": {
             "type": "string",
@@ -30094,8 +30091,7 @@
             ],
             "title": "Amount",
             "description": "The total amount for this transaction.",
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            "x-gr4vy-docs-ignore": true
           },
           "currency": {
             "anyOf": [
@@ -30114,8 +30110,7 @@
             ],
             "title": "Currency",
             "description": "The currency code for this transaction.",
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            "x-gr4vy-docs-ignore": true
           },
           "payment_service_id": {
             "anyOf": [
@@ -30129,8 +30124,7 @@
             ],
             "title": "Payment Service Id",
             "description": "The unique identifier of an existing payment service. When provided, the created transaction will be processed by the given payment service and any routing rules will be skipped.",
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            "x-gr4vy-docs-ignore": true
           },
           "expires_in": {
             "type": "number",
