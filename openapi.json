@@ -44347,6 +44347,23 @@
             "examples": [
               1299
             ]
+          },
+          "iso_response_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Iso Response Code",
+            "description": "This is the ISO8583 response code code received from the payment service.",
+            "examples": [
+              "0110"
+            ],
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
           }
         },
         "additionalProperties": false,
@@ -45217,6 +45234,23 @@
             "examples": [
               1299
             ]
+          },
+          "iso_response_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Iso Response Code",
+            "description": "This is the ISO8583 response code code received from the payment service.",
+            "examples": [
+              "0110"
+            ],
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
           }
         },
         "additionalProperties": false,
