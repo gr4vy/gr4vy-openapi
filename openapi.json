@@ -28629,6 +28629,23 @@
               "GPHD1078"
             ]
           },
+          "upc": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 50,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Upc",
+            "description": "The UPC for the item.",
+            "examples": [
+              "012345678905"
+            ]
+          },
           "product_url": {
             "anyOf": [
               {
