@@ -19135,6 +19135,9 @@
             "OAuth2PasswordBearer": [
               "merchant-accounts.read"
             ]
+          },
+          {
+            "OAuth2PasswordBearer": []
           }
         ],
         "parameters": [
@@ -19522,6 +19525,9 @@
             "OAuth2PasswordBearer": [
               "merchant-accounts.read"
             ]
+          },
+          {
+            "OAuth2PasswordBearer": []
           }
         ],
         "parameters": [
