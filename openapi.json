@@ -51363,6 +51363,19 @@
             ],
             "default": null,
             "description": "Allows for mocking the merchant advice code."
+          },
+          "skip_retry": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "When set to true, prevents retries on failed transactions.",
+            "title": "Skip Retry"
           }
         },
         "title": "MockCardOptions",
