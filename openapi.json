@@ -13155,6 +13155,204 @@
         "x-speakeasy-ignore": true
       }
     },
+    "/transactions/{transaction_id}/session": {
+      "post": {
+        "tags": [
+          "Transactions - Sessions"
+        ],
+        "summary": "Get or update session",
+        "description": "Gets and/or updates a transaction's session, where the connector supports this feature. Updates are often optional or not supported. Please refer to connector documentation.",
+        "operationId": "update_session",
+        "parameters": [
+          {
+            "name": "transaction_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "The ID of the transaction",
+              "examples": [
+                "7099948d-7286-47e4-aad8-b68f7eb44591"
+              ],
+              "title": "Transaction Id"
+            },
+            "description": "The ID of the transaction"
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Transaction session token used to retrieve session data for direct client integrations.",
+              "examples": [
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+              ],
+              "title": "Token"
+            },
+            "description": "Transaction session token used to retrieve session data for direct client integrations."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/UpdateTransactionSessionRequest"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTransactionSessionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request was unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The credentials were invalid or the caller did not have permission to act on the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "The request method was not allowed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error405"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A duplicate record was found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "425": {
+            "description": "The request was too early.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error425"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests were made.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error429"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error502"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error504"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-ignore": true
+      }
+    },
     "/payment-options": {
       "post": {
         "tags": [
@@ -48758,6 +48956,79 @@
         ],
         "title": "TransactionsReportSpec"
       },
+      "UpdateTransactionSessionRequest": {
+        "properties": {
+          "payload": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Payload",
+            "description": "Payload that may be required to update a payment provider's client session, depending on the connector.",
+            "examples": [
+              {
+                "key": "value"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "UpdateTransactionSessionRequest"
+      },
+      "UpdateTransactionSessionResponse": {
+        "properties": {
+          "session_data": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Session Data",
+            "description": "Session data required to launch a payment provider client SDK",
+            "examples": [
+              {
+                "key": "value"
+              }
+            ]
+          },
+          "default_completion_url": {
+            "type": "string",
+            "title": "Default Completion Url",
+            "description": "To be used by the merchant when the client SDK does not provide one at the end of the flow",
+            "examples": [
+              "https://www.test.gr4vy.app/transactions/1234/complete"
+            ]
+          },
+          "integration_client": {
+            "$ref": "#/components/schemas/IntegrationClient",
+            "description": "The integration clients",
+            "examples": [
+              "redirect",
+              "web",
+              "android",
+              "ios"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "session_data",
+          "default_completion_url",
+          "integration_client"
+        ],
+        "title": "UpdateTransactionSessionResponse"
+      },
       "UserStatus": {
         "type": "string",
         "enum": [
@@ -52630,6 +52901,10 @@
     {
       "name": "Transactions - Settlements",
       "description": "Read transaction settlement data."
+    },
+    {
+      "name": "Transactions - Sessions",
+      "description": "Manage transaction session data."
     },
     {
       "name": "Webhook subscriptions",
