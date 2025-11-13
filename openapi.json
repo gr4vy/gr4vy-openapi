@@ -46588,7 +46588,8 @@
               "network-token-cryptogram-provision-succeeded",
               "network-token-cryptogram-provision-failed",
               "the-giving-block-transaction-conversion-succeeded",
-              "real-time-account-update"
+              "real-time-account-update",
+              "plaid-request-event"
             ],
             "title": "Name",
             "description": "The specific event name.",
@@ -46693,7 +46694,8 @@
               "network-token-cryptogram-provision-succeeded",
               "network-token-cryptogram-provision-failed",
               "the-giving-block-transaction-conversion-succeeded",
-              "real-time-account-update"
+              "real-time-account-update",
+              "plaid-request-event"
             ],
             "title": "Name",
             "description": "The specific event name.",
