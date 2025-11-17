@@ -40988,6 +40988,23 @@
             "examples": [
               "payment-method-12345"
             ]
+          },
+          "external_identifier": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Identifier",
+            "description": "The merchant identifier for this payment method.",
+            "examples": [
+              "payment-method-12345"
+            ]
           }
         },
         "additionalProperties": false,
