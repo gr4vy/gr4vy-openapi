@@ -44509,6 +44509,20 @@
             "title": "Merchant Tax Id",
             "description": "Merchant tax ID (for example, EIN or VAT number)."
           },
+          "purchase_order_number": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Purchase Order Number",
+            "description": "Invoice number or Purchase Order number."
+          },
           "customer_reference_number": {
             "anyOf": [
               {
@@ -45395,6 +45409,20 @@
             ],
             "title": "Merchant Tax Id",
             "description": "Merchant tax ID (for example, EIN or VAT number)."
+          },
+          "purchase_order_number": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Purchase Order Number",
+            "description": "Invoice number or Purchase Order number."
           },
           "customer_reference_number": {
             "anyOf": [
@@ -46431,6 +46459,20 @@
             ],
             "title": "Merchant Tax Id",
             "description": "Merchant tax ID (for example, EIN or VAT number)."
+          },
+          "purchase_order_number": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Purchase Order Number",
+            "description": "Invoice number or Purchase Order number."
           },
           "customer_reference_number": {
             "anyOf": [
