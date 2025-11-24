@@ -51499,6 +51499,30 @@
         "title": "NuveiAirlineDataOptions",
         "type": "object"
       },
+      "NuveiIDealOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "customData": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Additional data to be sent to Nuvei.",
+            "examples": [
+              "user=123,trusted=false"
+            ],
+            "title": "Customdata"
+          }
+        },
+        "title": "NuveiIDealOptions",
+        "type": "object"
+      },
       "NuveiOptions": {
         "additionalProperties": false,
         "properties": {
@@ -52632,6 +52656,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `nuvei-card` connector."
+          },
+          "nuvei-ideal": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/NuveiIDealOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `nuvei-ideal` connector."
           },
           "nuvei-pse": {
             "anyOf": [
