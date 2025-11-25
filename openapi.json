@@ -50369,6 +50369,22 @@
               "sameday"
             ],
             "title": "Ship To Method"
+          },
+          "comments": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Brief description of the order or any comment you wish to add to the order.",
+            "examples": [
+              "This order is for a new customer"
+            ],
+            "title": "Comments"
           }
         },
         "title": "CybersourceOptions",
