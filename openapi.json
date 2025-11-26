@@ -12184,7 +12184,20 @@
           }
         },
         "x-speakeasy-name-override": "list",
-        "x-speakeasy-group": "transactions.events"
+        "x-speakeasy-group": "transactions.events",
+        "x-speakeasy-pagination": {
+          "type": "cursor",
+          "inputs": [
+            {
+              "name": "cursor",
+              "in": "parameters",
+              "type": "cursor"
+            }
+          ],
+          "outputs": {
+            "nextCursor": "$.next_cursor"
+          }
+        }
       }
     },
     "/transactions/{transaction_id}/sync": {
