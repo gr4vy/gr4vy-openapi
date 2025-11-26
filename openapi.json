@@ -9782,7 +9782,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Transaction-Output"
+                  "$ref": "#/components/schemas/Transaction"
                 }
               }
             }
@@ -9974,7 +9974,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Transaction-Output"
+                  "$ref": "#/components/schemas/Transaction"
                 }
               }
             }
@@ -10174,7 +10174,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Transaction-Output"
+                  "$ref": "#/components/schemas/Transaction"
                 }
               }
             }
@@ -10403,10 +10403,10 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "$ref": "#/components/schemas/Transaction-Output"
+                      "$ref": "#/components/schemas/Transaction"
                     },
                     {
-                      "$ref": "#/components/schemas/TransactionCapture-Output"
+                      "$ref": "#/components/schemas/TransactionCapture"
                     }
                   ],
                   "title": "Response Capture Transaction"
@@ -11419,10 +11419,10 @@
                 "schema": {
                   "anyOf": [
                     {
-                      "$ref": "#/components/schemas/Transaction-Output"
+                      "$ref": "#/components/schemas/Transaction"
                     },
                     {
-                      "$ref": "#/components/schemas/TransactionVoid-Output"
+                      "$ref": "#/components/schemas/TransactionVoid"
                     }
                   ],
                   "title": "Response Void Transaction"
@@ -12244,7 +12244,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Transaction-Output"
+                  "$ref": "#/components/schemas/Transaction"
                 }
               }
             }
@@ -27338,7 +27338,7 @@
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/AuditLogEntry-Output"
+              "$ref": "#/components/schemas/AuditLogEntry"
             },
             "type": "array",
             "title": "Items",
@@ -27397,85 +27397,7 @@
         ],
         "title": "AuditLogEntries"
       },
-      "AuditLogEntry-Input": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "audit-log",
-            "title": "Type",
-            "description": "Always `audit-log`.",
-            "default": "audit-log",
-            "examples": [
-              "audit-log"
-            ]
-          },
-          "id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Id",
-            "description": "The ID for the audit log entry.",
-            "examples": [
-              "8d3fe99b-1422-42e6-bbb3-932d95ae5f79"
-            ]
-          },
-          "merchant_account_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Merchant Account Id",
-            "description": "The ID of the merchant account this entry was created for.",
-            "examples": [
-              "default"
-            ]
-          },
-          "resource": {
-            "$ref": "#/components/schemas/AuditLogEntryResource",
-            "description": "The resource that was changed."
-          },
-          "action": {
-            "$ref": "#/components/schemas/AuditLogAction",
-            "description": "The action that was performed.",
-            "examples": [
-              "created"
-            ]
-          },
-          "user": {
-            "$ref": "#/components/schemas/AuditLogEntryUser",
-            "description": "The user who performed the action."
-          },
-          "timestamp": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Timestamp",
-            "description": "The date and time that the action was performed.",
-            "examples": [
-              "2022-01-01T00:00:00+00:00"
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "resource",
-          "action",
-          "user",
-          "timestamp"
-        ],
-        "title": "AuditLogEntry"
-      },
-      "AuditLogEntry-Output": {
+      "AuditLogEntry": {
         "properties": {
           "type": {
             "type": "string",
@@ -27719,107 +27641,7 @@
         ],
         "title": "BasicAuthentication"
       },
-      "BillingDetails-Input": {
-        "properties": {
-          "first_name": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 255,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "First Name",
-            "description": "The first name(s) or given name for the buyer.",
-            "examples": [
-              "John"
-            ]
-          },
-          "last_name": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 255,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Last Name",
-            "description": "The last name, or family name, of the buyer.",
-            "examples": [
-              "Doe"
-            ]
-          },
-          "email_address": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 320,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Email Address",
-            "description": "The email address for the buyer.",
-            "examples": [
-              "john@example.com"
-            ]
-          },
-          "phone_number": {
-            "anyOf": [
-              {
-                "type": "string",
-                "pattern": "^\\+[1-9]\\d{1,14}$",
-                "examples": [
-                  "+14155552671",
-                  "+442071838750"
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Phone Number",
-            "description": "The phone number for the buyer which should be formatted according to the E164 number standard.",
-            "examples": [
-              "+1234567890"
-            ]
-          },
-          "address": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Address"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The billing address for the buyer."
-          },
-          "tax_id": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/TaxId"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The tax ID information associated with the billing details."
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "title": "BillingDetails"
-      },
-      "BillingDetails-Output": {
+      "BillingDetails": {
         "properties": {
           "first_name": {
             "anyOf": [
@@ -28074,7 +27896,7 @@
           "billing_details": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/BillingDetails-Output"
+                "$ref": "#/components/schemas/BillingDetails"
               },
               {
                 "type": "null"
@@ -28163,7 +27985,7 @@
           "billing_details": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/BillingDetails-Input"
+                "$ref": "#/components/schemas/BillingDetails"
               },
               {
                 "type": "null"
@@ -28244,7 +28066,7 @@
           "billing_details": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/BillingDetails-Input"
+                "$ref": "#/components/schemas/BillingDetails"
               },
               {
                 "type": "null"
@@ -29566,7 +29388,7 @@
           "buyer": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/GuestBuyer-Output"
+                "$ref": "#/components/schemas/GuestBuyer"
               },
               {
                 "type": "null"
@@ -29664,7 +29486,7 @@
           "payment_method": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/CheckoutSessionPaymentMethod-Output"
+                "$ref": "#/components/schemas/CheckoutSessionPaymentMethod"
               },
               {
                 "type": "null"
@@ -29850,105 +29672,7 @@
         ],
         "title": "CheckoutSessionIdPaymentMethod"
       },
-      "CheckoutSessionPaymentMethod-Input": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "payment-method",
-            "title": "Type",
-            "description": "Always `payment-method`",
-            "default": "payment-method",
-            "examples": [
-              "payment-method"
-            ]
-          },
-          "id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Id",
-            "description": "The ID of the payment method.",
-            "examples": [
-              "ef9496d8-53a5-4aad-8ca2-00eb68334389"
-            ]
-          },
-          "details": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/CheckoutSessionPaymentMethodDetails"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Details for credit or debit card payment method."
-          },
-          "label": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Label",
-            "description": "The last 4 digits of the the card.",
-            "examples": [
-              "1234"
-            ]
-          },
-          "method": {
-            "type": "string",
-            "const": "card",
-            "title": "Method",
-            "description": "Always `card`",
-            "default": "card",
-            "examples": [
-              "card"
-            ]
-          },
-          "scheme": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/CardScheme"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The scheme of the card.",
-            "examples": [
-              "visa"
-            ]
-          },
-          "fingerprint": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Fingerprint",
-            "description": "The unique hash derived from the card number.",
-            "examples": [
-              "a50b85c200ee0795d6fd33a5c66f37a4564f554355c5b46a756aac485dd168a4"
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "title": "CheckoutSessionPaymentMethod"
-      },
-      "CheckoutSessionPaymentMethod-Output": {
+      "CheckoutSessionPaymentMethod": {
         "properties": {
           "type": {
             "type": "string",
@@ -30280,7 +30004,7 @@
           "buyer": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/GuestBuyer-Input"
+                "$ref": "#/components/schemas/GuestBuyer"
               },
               {
                 "type": "null"
@@ -33336,7 +33060,7 @@
         ],
         "title": "GooglePaySessionRequest"
       },
-      "GuestBuyer-Input": {
+      "GuestBuyer": {
         "properties": {
           "display_name": {
             "anyOf": [
@@ -33375,84 +33099,7 @@
           "billing_details": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/BillingDetails-Input"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The billing name, address, email, and other fields for this buyer."
-          },
-          "account_number": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 200,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Account Number",
-            "description": "The buyer account number"
-          },
-          "shipping_details": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ShippingDetailsCreate"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The optional shipping details for this buyer."
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "title": "GuestBuyer"
-      },
-      "GuestBuyer-Output": {
-        "properties": {
-          "display_name": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 200,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Display Name",
-            "description": "The display name for the buyer.",
-            "examples": [
-              "John Doe"
-            ]
-          },
-          "external_identifier": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 200,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "External Identifier",
-            "description": "The merchant identifier for this buyer.",
-            "examples": [
-              "buyer-12345"
-            ]
-          },
-          "billing_details": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/BillingDetails-Output"
+                "$ref": "#/components/schemas/BillingDetails"
               },
               {
                 "type": "null"
@@ -36854,7 +36501,7 @@
           "buyer": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/TransactionBuyer-Output"
+                "$ref": "#/components/schemas/TransactionBuyer"
               },
               {
                 "type": "null"
@@ -36912,7 +36559,7 @@
           "buyer": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/GuestBuyer-Input"
+                "$ref": "#/components/schemas/GuestBuyer"
               },
               {
                 "type": "null"
@@ -37889,7 +37536,7 @@
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/PaymentMethodSummary-Output"
+              "$ref": "#/components/schemas/PaymentMethodSummary"
             },
             "type": "array",
             "title": "Items",
@@ -37902,295 +37549,7 @@
         ],
         "title": "PaymentMethodSummaries"
       },
-      "PaymentMethodSummary-Input": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "payment-method",
-            "title": "Type",
-            "description": "Always `payment-method`.",
-            "default": "payment-method",
-            "examples": [
-              "payment-method"
-            ]
-          },
-          "approval_url": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Approval Url",
-            "description": "The optional URL that the buyer needs to be redirected to to further authorize their payment.",
-            "examples": [
-              "https://gr4vy.app/redirect/12345"
-            ]
-          },
-          "country": {
-            "anyOf": [
-              {
-                "type": "string",
-                "pattern": "^[A-Z]{2}$",
-                "examples": [
-                  "DE",
-                  "GB",
-                  "US"
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Country",
-            "description": "The 2-letter ISO code of the country this payment method can be used for. If this value is null the payment method may be used in multiple countries.",
-            "examples": [
-              "US"
-            ]
-          },
-          "currency": {
-            "anyOf": [
-              {
-                "type": "string",
-                "pattern": "^[A-Z]{3}$",
-                "examples": [
-                  "EUR",
-                  "GBP",
-                  "USD"
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Currency",
-            "description": "The ISO-4217 currency code that this payment method can be used for. If this value is null the payment method may be used for multiple currencies.",
-            "examples": [
-              "USD"
-            ]
-          },
-          "details": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/PaymentMethodDetailsCard"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Details for credit or debit card payment method."
-          },
-          "expiration_date": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 5,
-                "minLength": 5,
-                "pattern": "^\\d{2}/\\d{2}$"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Expiration Date",
-            "description": "The expiration date for the payment method.",
-            "examples": [
-              "12/30"
-            ]
-          },
-          "fingerprint": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Fingerprint",
-            "description": "The unique hash derived from the payment method identifier (e.g. card number).",
-            "examples": [
-              "a50b85c200ee0795d6fd33a5c66f37a4564f554355c5b46a756aac485dd168a4"
-            ]
-          },
-          "label": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 320,
-                "minLength": 0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Label",
-            "description": "A label for the card or the account. For a paypal payment method this is the user's email address. For a card it is the last 4 digits of the card.",
-            "examples": [
-              "1234"
-            ]
-          },
-          "last_replaced_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Last Replaced At",
-            "description": "The date and time when this card was last replaced by the account updater.",
-            "examples": [
-              "2013-07-16T19:23:00.000+00:00"
-            ]
-          },
-          "method": {
-            "$ref": "#/components/schemas/Method",
-            "description": "The type of this payment method.",
-            "examples": [
-              "card"
-            ]
-          },
-          "mode": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Mode"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The mode to use with this payment method.",
-            "examples": [
-              "card"
-            ]
-          },
-          "scheme": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/CardScheme"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The scheme of the card. Only applies to card payments.",
-            "examples": [
-              "visa"
-            ]
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Id",
-            "description": "The ID for the payment method.",
-            "examples": [
-              "ef9496d8-53a5-4aad-8ca2-00eb68334389"
-            ]
-          },
-          "merchant_account_id": {
-            "type": "string",
-            "title": "Merchant Account Id",
-            "description": "The ID of the merchant account this buyer belongs to.",
-            "examples": [
-              "default"
-            ]
-          },
-          "additional_schemes": {
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/CardScheme"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Additional Schemes",
-            "description": "Additional schemes of the card besides the primary scheme. Only applies to card payment methods.",
-            "examples": [
-              [
-                "eftpos-australia"
-              ]
-            ]
-          },
-          "cit_last_used_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Cit Last Used At",
-            "description": "The timestamp when this payment method was last used in a transaction for client initiated transactions.",
-            "examples": [
-              "2013-07-16T19:23:00.000+00:00"
-            ]
-          },
-          "cit_usage_count": {
-            "type": "integer",
-            "title": "Cit Usage Count",
-            "description": "The number of times this payment method has been used in transactions for client initiated transactions.",
-            "examples": [
-              50
-            ]
-          },
-          "has_replacement": {
-            "type": "boolean",
-            "title": "Has Replacement",
-            "description": "Whether this card has a pending replacement that hasn't been applied yet.",
-            "examples": [
-              false
-            ]
-          },
-          "last_used_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Last Used At",
-            "description": "The timestamp when this payment method was last used in a transaction.",
-            "examples": [
-              "2013-07-16T19:23:00.000+00:00"
-            ]
-          },
-          "usage_count": {
-            "type": "integer",
-            "title": "Usage Count",
-            "description": "The number of times this payment method has been used in transactions.",
-            "examples": [
-              100
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "method",
-          "id",
-          "merchant_account_id",
-          "cit_usage_count",
-          "has_replacement",
-          "usage_count"
-        ],
-        "title": "PaymentMethodSummary",
-        "description": "Payment Method\n\nA summary of a payment method."
-      },
-      "PaymentMethodSummary-Output": {
+      "PaymentMethodSummary": {
         "properties": {
           "type": {
             "type": "string",
@@ -38541,84 +37900,7 @@
         ],
         "title": "PaymentMethods"
       },
-      "PaymentOption-Input": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "payment-option",
-            "title": "Type",
-            "default": "payment-option"
-          },
-          "method": {
-            "type": "string",
-            "title": "Method"
-          },
-          "icon_url": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 1500,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Icon Url"
-          },
-          "mode": {
-            "$ref": "#/components/schemas/Mode"
-          },
-          "label": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 200,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Label"
-          },
-          "can_store_payment_method": {
-            "type": "boolean",
-            "title": "Can Store Payment Method"
-          },
-          "can_delay_capture": {
-            "type": "boolean",
-            "title": "Can Delay Capture"
-          },
-          "context": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/WalletPaymentOptionContext"
-              },
-              {
-                "$ref": "#/components/schemas/GooglePayPaymentOptionContext"
-              },
-              {
-                "$ref": "#/components/schemas/PaymentOptionContext"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Context"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "method",
-          "mode",
-          "can_store_payment_method",
-          "can_delay_capture"
-        ],
-        "title": "PaymentOption"
-      },
-      "PaymentOption-Output": {
+      "PaymentOption": {
         "properties": {
           "type": {
             "type": "string",
@@ -38896,7 +38178,7 @@
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/PaymentOption-Output"
+              "$ref": "#/components/schemas/PaymentOption"
             },
             "type": "array",
             "title": "Items",
@@ -40339,7 +39621,7 @@
           "buyer": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/GuestBuyer-Input"
+                "$ref": "#/components/schemas/GuestBuyer"
               },
               {
                 "type": "null"
@@ -40764,7 +40046,7 @@
           "buyer": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/TransactionBuyer-Output"
+                "$ref": "#/components/schemas/TransactionBuyer"
               },
               {
                 "type": "null"
@@ -40850,7 +40132,7 @@
             ]
           },
           "payment_method": {
-            "$ref": "#/components/schemas/TransactionPaymentMethod-Output",
+            "$ref": "#/components/schemas/TransactionPaymentMethod",
             "description": "The payment method used for this payout."
           },
           "payment_service": {
@@ -43746,7 +43028,7 @@
         "title": "TokenPaymentMethodCreate",
         "description": "Create a transaction with the ID (token) of a stored payment method (and an optional URL for approval)"
       },
-      "Transaction-Input": {
+      "Transaction": {
         "properties": {
           "type": {
             "type": "string",
@@ -43918,7 +43200,7 @@
           "payment_method": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/TransactionPaymentMethod-Input"
+                "$ref": "#/components/schemas/TransactionPaymentMethod"
               },
               {
                 "type": "null"
@@ -43992,7 +43274,7 @@
           "buyer": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/TransactionBuyer-Input"
+                "$ref": "#/components/schemas/TransactionBuyer"
               },
               {
                 "type": "null"
@@ -44237,7 +43519,7 @@
           "three_d_secure": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/TransactionThreeDSecureSummary-Input"
+                "$ref": "#/components/schemas/TransactionThreeDSecureSummary"
               },
               {
                 "type": "null"
@@ -44647,908 +43929,7 @@
         "title": "Transaction",
         "description": "A full transaction resource."
       },
-      "Transaction-Output": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "transaction",
-            "title": "Type",
-            "description": "Always `transaction`.",
-            "default": "transaction",
-            "examples": [
-              "transaction"
-            ]
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Id",
-            "description": "The ID for the transaction.",
-            "examples": [
-              "7099948d-7286-47e4-aad8-b68f7eb44591"
-            ]
-          },
-          "reconciliation_id": {
-            "type": "string",
-            "title": "Reconciliation Id",
-            "description": "The base62 encoded transaction ID. This represents a shorter version of this transaction's `id` which is sent to payment services, anti-fraud services, and other connectors. You can use this ID to reconcile a payment service's transaction against our system. This ID is sent instead of the transaction ID because not all services support 36 digit identifiers.",
-            "examples": [
-              "default"
-            ]
-          },
-          "merchant_account_id": {
-            "type": "string",
-            "title": "Merchant Account Id",
-            "description": "The ID of the merchant account this transaction belongs to.",
-            "examples": [
-              "default"
-            ]
-          },
-          "currency": {
-            "type": "string",
-            "pattern": "^[A-Z]{3}$",
-            "title": "Currency",
-            "description": "The currency code for this transaction.",
-            "examples": [
-              "EUR",
-              "GBP",
-              "USD"
-            ]
-          },
-          "amount": {
-            "type": "integer",
-            "title": "Amount",
-            "description": "The total amount for this transaction across all funding sources including gift cards.",
-            "examples": [
-              1299
-            ]
-          },
-          "status": {
-            "$ref": "#/components/schemas/TransactionStatus",
-            "description": "The status of the transaction for the `payment_method`. The status may change over time as asynchronous processing events occur.",
-            "examples": [
-              "authorization_succeeded"
-            ]
-          },
-          "authorized_amount": {
-            "type": "integer",
-            "title": "Authorized Amount",
-            "description": "The amount for this transaction that has been authorized for the `payment_method`. This can be less than the `amount` if gift cards were used.",
-            "examples": [
-              1299
-            ]
-          },
-          "captured_amount": {
-            "type": "integer",
-            "title": "Captured Amount",
-            "description": "The total amount captured for this transaction, in the smallest currency unit (for example, cents or pence). This can be the full value of the `authorized_amount` or less.",
-            "examples": [
-              1299
-            ]
-          },
-          "refunded_amount": {
-            "type": "integer",
-            "title": "Refunded Amount",
-            "description": "The total amount refunded for this transaction, in the smallest currency unit (for example, cents or pence). This can be the full value of the `captured_amount` or less.",
-            "examples": [
-              1299
-            ]
-          },
-          "settled_currency": {
-            "anyOf": [
-              {
-                "type": "string",
-                "pattern": "^[A-Z]{3}$",
-                "examples": [
-                  "EUR",
-                  "GBP",
-                  "USD"
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Settled Currency",
-            "description": "The ISO 4217 currency code of this transaction's settlement.",
-            "examples": [
-              "USD"
-            ]
-          },
-          "settled_amount": {
-            "type": "integer",
-            "title": "Settled Amount",
-            "description": "The net amount settled for this transaction, in the smallest currency unit (for example, cents or pence).",
-            "examples": [
-              1100
-            ]
-          },
-          "settled": {
-            "type": "boolean",
-            "title": "Settled",
-            "description": "Indicates whether this transaction has been settled.",
-            "examples": [
-              true
-            ]
-          },
-          "country": {
-            "anyOf": [
-              {
-                "type": "string",
-                "pattern": "^[A-Z]{2}$",
-                "examples": [
-                  "DE",
-                  "GB",
-                  "US"
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Country",
-            "description": "The 2-letter ISO 3166-1 alpha-2 country code for the transaction. Used to filter payment services for processing.",
-            "examples": [
-              "US"
-            ]
-          },
-          "external_identifier": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 200,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "External Identifier",
-            "description": "An external identifier that can be used to match the transaction against your own records.",
-            "examples": [
-              "transaction-12345"
-            ]
-          },
-          "intent": {
-            "$ref": "#/components/schemas/TransactionIntent",
-            "description": "The original `intent` used when the transaction was created.",
-            "examples": [
-              "capture"
-            ]
-          },
-          "payment_method": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/TransactionPaymentMethod-Output"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The payment method used for this transaction."
-          },
-          "method": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Method"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The method used for the transaction.",
-            "examples": [
-              "card"
-            ]
-          },
-          "instrument_type": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/InstrumentType"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The name of the instrument used to process the transaction.",
-            "examples": [
-              "pan"
-            ]
-          },
-          "error_code": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Error Code",
-            "description": "The standardized error code set by Gr4vy.",
-            "examples": [
-              "missing_redirect_url"
-            ]
-          },
-          "payment_service": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/TransactionPaymentService"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The payment service used for this transaction."
-          },
-          "pending_review": {
-            "type": "boolean",
-            "title": "Pending Review",
-            "description": "Whether a manual anti fraud review is pending with an anti fraud service.",
-            "default": false,
-            "examples": [
-              false
-            ]
-          },
-          "buyer": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/TransactionBuyer-Output"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The buyer used for this transaction."
-          },
-          "raw_response_code": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Raw Response Code",
-            "description": "This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.",
-            "examples": [
-              "E104"
-            ]
-          },
-          "raw_response_description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Raw Response Description",
-            "description": " This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.",
-            "examples": [
-              "Missing redirect URL"
-            ]
-          },
-          "shipping_details": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ShippingDetails"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The shipping details associated with the transaction."
-          },
-          "checkout_session_id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Checkout Session Id",
-            "description": "The identifier for the checkout session this transaction is associated with.",
-            "examples": [
-              "4137b1cf-39ac-42a8-bad6-1c680d5dab6b"
-            ]
-          },
-          "gift_card_redemptions": {
-            "items": {
-              "$ref": "#/components/schemas/GiftCardRedemption"
-            },
-            "type": "array",
-            "title": "Gift Card Redemptions",
-            "description": "The gift cards redeemed for this transaction."
-          },
-          "gift_card_service": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/GiftCardService"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The gift card service used for this transaction."
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Created At",
-            "description": "The date and time when the transaction was created, in ISO 8601 format.",
-            "examples": [
-              "2013-07-16T19:23:00.000+00:00"
-            ]
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Updated At",
-            "description": "The date and time when the transaction was last updated, in ISO 8601 format.",
-            "examples": [
-              "2013-07-16T19:23:00.000+00:00"
-            ]
-          },
-          "disputed": {
-            "type": "boolean",
-            "title": "Disputed",
-            "description": "Indicates whether this transaction has been disputed.",
-            "examples": [
-              true
-            ]
-          },
-          "airline": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Airline"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Contains information about an airline travel, if applicable."
-          },
-          "auth_response_code": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Auth Response Code",
-            "description": "This is the response description received from the processor.",
-            "examples": [
-              "00"
-            ]
-          },
-          "avs_response_code": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AVSResponseCode"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The response code received from the payment service for the Address Verification Check (AVS). This code is mapped to a standardized Gr4vy AVS response code.",
-            "examples": [
-              "match"
-            ]
-          },
-          "cvv_response_code": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/CVVResponseCode"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The response code received from the payment service for the Card Verification Value (CVV). This code is mapped to a standardized Gr4vy CVV response code.",
-            "examples": [
-              "match"
-            ]
-          },
-          "anti_fraud_decision": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/AntiFraudDecision"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The mapped decision received from the anti-fraud service. In case of a review decision this field is not updated once the review is resolved.",
-            "examples": [
-              "accept"
-            ]
-          },
-          "payment_source": {
-            "$ref": "#/components/schemas/TransactionPaymentSource",
-            "description": "The source of the transaction.",
-            "examples": [
-              "ecommerce"
-            ]
-          },
-          "merchant_initiated": {
-            "type": "boolean",
-            "title": "Merchant Initiated",
-            "description": "Indicates whether the transaction was initiated by the merchant or the customer.",
-            "examples": [
-              true
-            ]
-          },
-          "is_subsequent_payment": {
-            "type": "boolean",
-            "title": "Is Subsequent Payment",
-            "description": "Indicates whether the transaction represents a subsequent payment or an initial one.",
-            "examples": [
-              false
-            ]
-          },
-          "cart_items": {
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/CartItem"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Cart Items",
-            "description": "An array of cart items that represents the line items of a transaction."
-          },
-          "statement_descriptor": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/StatementDescriptor"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The statement descriptor is the text to be shown on the buyer's statements."
-          },
-          "scheme_transaction_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Scheme Transaction Id",
-            "description": "An identifier for the transaction used by the scheme itself, when available.",
-            "examples": [
-              "123456789012345"
-            ]
-          },
-          "three_d_secure": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/TransactionThreeDSecureSummary-Output"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The 3-D Secure data that was sent to the payment service for the transaction."
-          },
-          "payment_service_transaction_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Payment Service Transaction Id",
-            "description": "The payment service's unique ID for the transaction.",
-            "examples": [
-              "tx-12345"
-            ]
-          },
-          "additional_identifiers": {
-            "additionalProperties": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ]
-            },
-            "type": "object",
-            "title": "Additional Identifiers",
-            "description": "A list of additional identifiers that we may keep track of to manage this transaction. This may include the authorization ID, capture ID, and processor ID, as well as an undefined list of additional identifiers.",
-            "examples": [
-              {
-                "payment_service_authorization_id": "auth-12345",
-                "payment_service_capture_id": "capture-12345"
-              }
-            ]
-          },
-          "metadata": {
-            "anyOf": [
-              {
-                "additionalProperties": {
-                  "type": "string"
-                },
-                "type": "object"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Metadata",
-            "description": "Additional information about the transaction stored as key-value pairs.",
-            "examples": [
-              {
-                "cohort": "cohort-12345",
-                "order": "order-12345"
-              }
-            ]
-          },
-          "authorized_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Authorized At",
-            "description": "The date this transaction was authorized at.",
-            "examples": [
-              "2013-07-16T19:23:00.000+00:00"
-            ]
-          },
-          "captured_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Captured At",
-            "description": "The date this transaction was captured at.",
-            "examples": [
-              "2013-07-16T19:23:00.000+00:00"
-            ]
-          },
-          "voided_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Voided At",
-            "description": "The date this transaction was voided at.",
-            "examples": [
-              "2013-07-16T19:23:00.000+00:00"
-            ]
-          },
-          "canceled_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Canceled At",
-            "description": "The date this transaction was canceled at.",
-            "examples": [
-              "2013-07-16T19:23:00.000+00:00"
-            ]
-          },
-          "approval_expires_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Approval Expires At",
-            "description": "The date this transaction's approval URL will expire at.",
-            "examples": [
-              "2013-07-16T19:23:00.000+00:00"
-            ]
-          },
-          "buyer_approval_timedout_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Buyer Approval Timedout At",
-            "description": "The date this transaction's approval timed out at.",
-            "examples": [
-              "2013-07-16T19:23:00.000+00:00"
-            ]
-          },
-          "intent_outcome": {
-            "$ref": "#/components/schemas/TransactionIntentOutcome",
-            "description": "The outcome of the original intent of a transaction. This allows you to understand if the intent of the transaction (e.g. `capture` or `authorize`) has been achieved when dealing with multiple payment instruments.",
-            "examples": [
-              "succeeded"
-            ]
-          },
-          "multi_tender": {
-            "type": "boolean",
-            "title": "Multi Tender",
-            "description": "The outcome of the original intent of a transaction. This allows you to understand if the intent of the transaction (e.g. `capture` or `authorize`) has been achieved when dealing with multiple payment instruments.",
-            "examples": [
-              true
-            ]
-          },
-          "account_funding_transaction": {
-            "type": "boolean",
-            "title": "Account Funding Transaction",
-            "description": "Marks the transaction as an AFT. Requires the payment service to support this feature, and might `recipient` and `buyer` data",
-            "examples": [
-              true
-            ]
-          },
-          "recipient": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Recipient"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The recipient of any account to account funding. For use with AFTs."
-          },
-          "merchant_advice_code": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Merchant Advice Code",
-            "description": "An optional merchant advice code which provides insight into the type of transaction or reason why the payment failed.",
-            "examples": [
-              "02",
-              "21"
-            ]
-          },
-          "installment_count": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Installment Count",
-            "description": "The number of installments for this transaction, if applicable.",
-            "examples": [
-              3
-            ]
-          },
-          "session_token": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Session Token",
-            "description": "A session token that can be used to fetch session data for direct client integrations.",
-            "examples": [
-              "j3CZf9Eg6nUygMAVA6PXsVWGHiccj"
-            ]
-          },
-          "tax_amount": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "maximum": 99999999.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Tax Amount",
-            "description": "The sales tax amount for this transaction, represented as a monetary amount in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`",
-            "examples": [
-              1299
-            ]
-          },
-          "merchant_tax_id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 100,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Merchant Tax Id",
-            "description": "Merchant tax ID (for example, EIN or VAT number)."
-          },
-          "purchase_order_number": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 100,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Purchase Order Number",
-            "description": "Invoice number or Purchase Order number."
-          },
-          "customer_reference_number": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 100,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Customer Reference Number",
-            "description": "Customer code or reference."
-          },
-          "amount_includes_tax": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Amount Includes Tax",
-            "description": "Whether the tax is included in the amount.",
-            "examples": [
-              false
-            ]
-          },
-          "supplier_order_number": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 100,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Supplier Order Number",
-            "description": "The merchant's unique identifier for the sales order or invoice."
-          },
-          "duty_amount": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "maximum": 99999999.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Duty Amount",
-            "description": "Total charges for import/export duties.",
-            "examples": [
-              1299
-            ]
-          },
-          "shipping_amount": {
-            "anyOf": [
-              {
-                "type": "integer",
-                "maximum": 99999999.0,
-                "minimum": 0.0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Shipping Amount",
-            "description": "Total shipping amount.",
-            "examples": [
-              1299
-            ]
-          },
-          "iso_response_code": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Iso Response Code",
-            "description": "This is the ISO8583 response code code received from the payment service.",
-            "examples": [
-              "0110"
-            ],
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "id",
-          "reconciliation_id",
-          "merchant_account_id",
-          "currency",
-          "amount",
-          "status",
-          "authorized_amount",
-          "captured_amount",
-          "refunded_amount",
-          "settled_amount",
-          "settled",
-          "intent",
-          "gift_card_redemptions",
-          "created_at",
-          "updated_at",
-          "disputed",
-          "payment_source",
-          "merchant_initiated",
-          "is_subsequent_payment",
-          "intent_outcome",
-          "multi_tender",
-          "account_funding_transaction"
-        ],
-        "title": "Transaction",
-        "description": "A full transaction resource."
-      },
-      "TransactionBuyer-Input": {
+      "TransactionBuyer": {
         "properties": {
           "type": {
             "type": "string",
@@ -45613,99 +43994,7 @@
           "billing_details": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/BillingDetails-Input"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The billing name, address, email, and other fields for this buyer."
-          },
-          "account_number": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 200,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Account Number",
-            "description": "The buyer account number."
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "title": "TransactionBuyer"
-      },
-      "TransactionBuyer-Output": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "buyer",
-            "title": "Type",
-            "description": "Always `buyer`.",
-            "default": "buyer",
-            "examples": [
-              "buyer"
-            ]
-          },
-          "id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Id",
-            "description": "The ID for the buyer.",
-            "examples": [
-              "fe26475d-ec3e-4884-9553-f7356683f7f9"
-            ]
-          },
-          "display_name": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 200,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Display Name",
-            "description": "The display name for the buyer.",
-            "examples": [
-              "John Doe"
-            ]
-          },
-          "external_identifier": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 200,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "External Identifier",
-            "description": "The merchant identifier for this buyer.",
-            "examples": [
-              "buyer-12345"
-            ]
-          },
-          "billing_details": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/BillingDetails-Output"
+                "$ref": "#/components/schemas/BillingDetails"
               },
               {
                 "type": "null"
@@ -45797,7 +44086,7 @@
             ]
           },
           "transaction": {
-            "$ref": "#/components/schemas/Transaction-Output",
+            "$ref": "#/components/schemas/Transaction",
             "description": "The transaction associated to this cancel."
           }
         },
@@ -45812,7 +44101,7 @@
         ],
         "title": "TransactionCancel"
       },
-      "TransactionCapture-Input": {
+      "TransactionCapture": {
         "properties": {
           "type": {
             "type": "string",
@@ -45877,87 +44166,7 @@
             ]
           },
           "transaction": {
-            "$ref": "#/components/schemas/Transaction-Input",
-            "description": "The transaction associated to this capture."
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "status",
-          "code",
-          "raw_response_code",
-          "raw_response_description",
-          "transaction"
-        ],
-        "title": "TransactionCapture"
-      },
-      "TransactionCapture-Output": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "transaction-capture",
-            "title": "Type",
-            "description": "Always `transaction-capture`.",
-            "default": "transaction-capture",
-            "examples": [
-              "transaction-capture"
-            ]
-          },
-          "status": {
-            "$ref": "#/components/schemas/CaptureStatus",
-            "description": "The status of the capture call.",
-            "examples": [
-              "succeeded"
-            ]
-          },
-          "code": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Code",
-            "description": "The standardized error code set by Gr4vy.",
-            "examples": [
-              "service_error"
-            ]
-          },
-          "raw_response_code": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Raw Response Code",
-            "description": "This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.",
-            "examples": [
-              "E104"
-            ]
-          },
-          "raw_response_description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Raw Response Description",
-            "description": "This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.",
-            "examples": [
-              "Internal error"
-            ]
-          },
-          "transaction": {
-            "$ref": "#/components/schemas/Transaction-Output",
+            "$ref": "#/components/schemas/Transaction",
             "description": "The transaction associated to this capture."
           }
         },
@@ -46097,7 +44306,7 @@
           "buyer": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/GuestBuyer-Input"
+                "$ref": "#/components/schemas/GuestBuyer"
               },
               {
                 "type": "null"
@@ -46574,7 +44783,7 @@
         ],
         "title": "TransactionCreate"
       },
-      "TransactionEvent-Input": {
+      "TransactionEvent": {
         "properties": {
           "type": {
             "type": "string",
@@ -46666,7 +44875,7 @@
             ]
           },
           "context": {
-            "$ref": "#/components/schemas/TransactionEventContext-Input",
+            "$ref": "#/components/schemas/TransactionEventContext",
             "description": "An untyped dictionary with all the additional context for this event."
           }
         },
@@ -46680,113 +44889,7 @@
         ],
         "title": "TransactionEvent"
       },
-      "TransactionEvent-Output": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "transaction-event",
-            "title": "Type",
-            "description": "Always `transaction-event`.",
-            "default": "transaction-event",
-            "examples": [
-              "transaction-event"
-            ]
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Id",
-            "description": "The ID for the event.",
-            "examples": [
-              "f133a3b7-e67e-4d83-bcd3-3e438fedf348"
-            ]
-          },
-          "name": {
-            "type": "string",
-            "enum": [
-              "transaction-updated-status",
-              "transaction-sync-event",
-              "transaction-sync-failed-event",
-              "transaction-modified-event",
-              "transaction-api-request",
-              "transaction-api-response",
-              "bin-lookup-request",
-              "three-d-secure-success",
-              "three-d-secure-request-error",
-              "three-d-secure-preparation-request",
-              "three-d-secure-authentication-request",
-              "three-d-secure-result-request",
-              "anti-fraud-decision",
-              "anti-fraud-decision-error",
-              "anti-fraud-decision-skipped",
-              "anti-fraud-webhook",
-              "anti-fraud-transaction-status-update",
-              "anti-fraud-transaction-status-update-error",
-              "anti-fraud-decision-update",
-              "anti-fraud-decision-update-error",
-              "gift-card-redemption-succeeded",
-              "gift-card-redemption-failed",
-              "gift-card-refund-succeeded",
-              "gift-card-refund-failed",
-              "gift-card-reversal-succeeded",
-              "payment-connector-response-transaction-authorization-succeeded",
-              "payment-connector-response-transaction-capture-succeeded",
-              "payment-connector-response-transaction-authorization-failed",
-              "payment-connector-response-transaction-declined",
-              "payment-connector-response-transaction-capture-failed",
-              "payment-connector-response-transaction-capture-declined",
-              "payment-connector-response-transaction-cancel-succeeded",
-              "payment-connector-response-transaction-cancel-pending",
-              "payment-connector-response-transaction-cancel-failed",
-              "payment-connector-response-transaction-void-succeeded",
-              "payment-connector-response-transaction-void-declined",
-              "payment-connector-response-transaction-void-failed",
-              "payment-connector-external-transaction-request",
-              "payment-connector-report-transaction-settled",
-              "payment-connector-report-chargeback-posted",
-              "payment-connector-report-chargeback-reversal-posted",
-              "digital-wallet-apple-pay-token-decrypted",
-              "digital-wallet-google-pay-token-decrypted",
-              "digital-wallet-click-to-pay-token-decrypted",
-              "network-token-provision-succeeded",
-              "network-token-provision-failed",
-              "network-token-cryptogram-provision-succeeded",
-              "network-token-cryptogram-provision-failed",
-              "the-giving-block-transaction-conversion-succeeded",
-              "real-time-account-update",
-              "plaid-request-event"
-            ],
-            "title": "Name",
-            "description": "The specific event name.",
-            "examples": [
-              "transaction-api-request"
-            ]
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Created At",
-            "description": "The date this event was created at.",
-            "examples": [
-              "2013-07-16T19:23:00.000+00:00"
-            ]
-          },
-          "context": {
-            "$ref": "#/components/schemas/TransactionEventContext-Output",
-            "description": "An untyped dictionary with all the additional context for this event."
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "created_at",
-          "context"
-        ],
-        "title": "TransactionEvent"
-      },
-      "TransactionEventContext-Input": {
+      "TransactionEventContext": {
         "properties": {
           "transaction_id": {
             "title": "Transaction Id"
@@ -46803,17 +44906,11 @@
         ],
         "title": "TransactionEventContext"
       },
-      "TransactionEventContext-Output": {
-        "properties": {},
-        "additionalProperties": true,
-        "type": "object",
-        "title": "TransactionEventContext"
-      },
       "TransactionEvents": {
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/TransactionEvent-Output"
+              "$ref": "#/components/schemas/TransactionEvent"
             },
             "type": "array",
             "title": "Items",
@@ -46951,258 +45048,7 @@
         ],
         "title": "TransactionIntentOutcome"
       },
-      "TransactionPaymentMethod-Input": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "payment-method",
-            "title": "Type",
-            "description": "Always `payment-method`.",
-            "default": "payment-method",
-            "examples": [
-              "payment-method"
-            ]
-          },
-          "approval_url": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Approval Url",
-            "description": "The optional URL that the buyer needs to be redirected to to further authorize their payment.",
-            "examples": [
-              "https://gr4vy.app/redirect/12345"
-            ]
-          },
-          "country": {
-            "anyOf": [
-              {
-                "type": "string",
-                "pattern": "^[A-Z]{2}$",
-                "examples": [
-                  "DE",
-                  "GB",
-                  "US"
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Country",
-            "description": "The 2-letter ISO code of the country this payment method can be used for. If this value is null the payment method may be used in multiple countries.",
-            "examples": [
-              "US"
-            ]
-          },
-          "currency": {
-            "anyOf": [
-              {
-                "type": "string",
-                "pattern": "^[A-Z]{3}$",
-                "examples": [
-                  "EUR",
-                  "GBP",
-                  "USD"
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Currency",
-            "description": "The ISO-4217 currency code that this payment method can be used for. If this value is null the payment method may be used for multiple currencies.",
-            "examples": [
-              "USD"
-            ]
-          },
-          "details": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/PaymentMethodDetailsCard"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Details for credit or debit card payment method."
-          },
-          "expiration_date": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 5,
-                "minLength": 5,
-                "pattern": "^\\d{2}/\\d{2}$"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Expiration Date",
-            "description": "The expiration date for the payment method.",
-            "examples": [
-              "12/30"
-            ]
-          },
-          "fingerprint": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Fingerprint",
-            "description": "The unique hash derived from the payment method identifier (e.g. card number).",
-            "examples": [
-              "20eb353620155d2b5fc864cc46a73ea77cb92c725238650839da1813fa987a17"
-            ]
-          },
-          "label": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 320,
-                "minLength": 0
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Label",
-            "description": "A label for the card or the account. For a paypal payment method this is the user's email address. For a card it is the last 4 digits of the card.",
-            "examples": [
-              "1234"
-            ]
-          },
-          "last_replaced_at": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "date-time"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Last Replaced At",
-            "description": "The date and time when this card was last replaced by the account updater.",
-            "examples": [
-              "2013-07-16T19:23:00.000+00:00"
-            ]
-          },
-          "method": {
-            "$ref": "#/components/schemas/Method",
-            "description": "The type of this payment method.",
-            "examples": [
-              "card"
-            ]
-          },
-          "mode": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Mode"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The mode to use with this payment method.",
-            "examples": [
-              "card"
-            ]
-          },
-          "scheme": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/CardScheme"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The scheme of the card. Only applies to card payments.",
-            "examples": [
-              "visa"
-            ]
-          },
-          "id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Id",
-            "description": "The ID of the payment method.",
-            "examples": [
-              "852b951c-d7ea-4c98-b09e-4a1c9e97c077"
-            ]
-          },
-          "approval_target": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ApprovalTarget"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The browser target that an approval URL must be opened in. If any or null, then there is no specific requirement.",
-            "examples": [
-              "any"
-            ]
-          },
-          "external_identifier": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 200,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "External Identifier",
-            "description": "An external identifier that can be used to match the payment method against your own records.",
-            "examples": [
-              "card-12345"
-            ]
-          },
-          "payment_account_reference": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Payment Account Reference",
-            "description": "The payment account reference (PAR) returned by the card scheme. This is a unique reference to the underlying account that has been used to fund this payment method.",
-            "examples": [
-              "V0010014629724763377327521982"
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "method"
-        ],
-        "title": "TransactionPaymentMethod"
-      },
-      "TransactionPaymentMethod-Output": {
+      "TransactionPaymentMethod": {
         "properties": {
           "type": {
             "type": "string",
@@ -47698,7 +45544,7 @@
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/TransactionSummary-Output"
+              "$ref": "#/components/schemas/TransactionSummary"
             },
             "type": "array",
             "title": "Items",
@@ -47757,7 +45603,7 @@
         ],
         "title": "TransactionSummaries"
       },
-      "TransactionSummary-Input": {
+      "TransactionSummary": {
         "properties": {
           "type": {
             "type": "string",
@@ -47929,7 +45775,7 @@
           "payment_method": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/TransactionPaymentMethod-Input"
+                "$ref": "#/components/schemas/TransactionPaymentMethod"
               },
               {
                 "type": "null"
@@ -48003,7 +45849,7 @@
           "buyer": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/TransactionBuyer-Input"
+                "$ref": "#/components/schemas/TransactionBuyer"
               },
               {
                 "type": "null"
@@ -48137,464 +45983,7 @@
         "title": "TransactionSummary",
         "description": "A transaction, summarised"
       },
-      "TransactionSummary-Output": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "transaction",
-            "title": "Type",
-            "description": "Always `transaction`.",
-            "default": "transaction",
-            "examples": [
-              "transaction"
-            ]
-          },
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Id",
-            "description": "The ID for the transaction.",
-            "examples": [
-              "7099948d-7286-47e4-aad8-b68f7eb44591"
-            ]
-          },
-          "reconciliation_id": {
-            "type": "string",
-            "title": "Reconciliation Id",
-            "description": "The base62 encoded transaction ID. This represents a shorter version of this transaction's `id` which is sent to payment services, anti-fraud services, and other connectors. You can use this ID to reconcile a payment service's transaction against our system. This ID is sent instead of the transaction ID because not all services support 36 digit identifiers.",
-            "examples": [
-              "default"
-            ]
-          },
-          "merchant_account_id": {
-            "type": "string",
-            "title": "Merchant Account Id",
-            "description": "The ID of the merchant account this transaction belongs to.",
-            "examples": [
-              "default"
-            ]
-          },
-          "currency": {
-            "type": "string",
-            "pattern": "^[A-Z]{3}$",
-            "title": "Currency",
-            "description": "The currency code for this transaction.",
-            "examples": [
-              "EUR",
-              "GBP",
-              "USD"
-            ]
-          },
-          "amount": {
-            "type": "integer",
-            "title": "Amount",
-            "description": "The total amount for this transaction across all funding sources including gift cards.",
-            "examples": [
-              1299
-            ]
-          },
-          "status": {
-            "$ref": "#/components/schemas/TransactionStatus",
-            "description": "The status of the transaction for the `payment_method`. The status may change over time as asynchronous processing events occur.",
-            "examples": [
-              "authorization_succeeded"
-            ]
-          },
-          "authorized_amount": {
-            "type": "integer",
-            "title": "Authorized Amount",
-            "description": "The amount for this transaction that has been authorized for the `payment_method`. This can be less than the `amount` if gift cards were used.",
-            "examples": [
-              1299
-            ]
-          },
-          "captured_amount": {
-            "type": "integer",
-            "title": "Captured Amount",
-            "description": "The total amount captured for this transaction, in the smallest currency unit (for example, cents or pence). This can be the full value of the `authorized_amount` or less.",
-            "examples": [
-              1299
-            ]
-          },
-          "refunded_amount": {
-            "type": "integer",
-            "title": "Refunded Amount",
-            "description": "The total amount refunded for this transaction, in the smallest currency unit (for example, cents or pence). This can be the full value of the `captured_amount` or less.",
-            "examples": [
-              1299
-            ]
-          },
-          "settled_currency": {
-            "anyOf": [
-              {
-                "type": "string",
-                "pattern": "^[A-Z]{3}$",
-                "examples": [
-                  "EUR",
-                  "GBP",
-                  "USD"
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Settled Currency",
-            "description": "The ISO 4217 currency code of this transaction's settlement.",
-            "examples": [
-              "USD"
-            ]
-          },
-          "settled_amount": {
-            "type": "integer",
-            "title": "Settled Amount",
-            "description": "The net amount settled for this transaction, in the smallest currency unit (for example, cents or pence).",
-            "examples": [
-              1100
-            ]
-          },
-          "settled": {
-            "type": "boolean",
-            "title": "Settled",
-            "description": "Indicates whether this transaction has been settled.",
-            "examples": [
-              true
-            ]
-          },
-          "country": {
-            "anyOf": [
-              {
-                "type": "string",
-                "pattern": "^[A-Z]{2}$",
-                "examples": [
-                  "DE",
-                  "GB",
-                  "US"
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Country",
-            "description": "The 2-letter ISO 3166-1 alpha-2 country code for the transaction. Used to filter payment services for processing.",
-            "examples": [
-              "US"
-            ]
-          },
-          "external_identifier": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 200,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "External Identifier",
-            "description": "An external identifier that can be used to match the transaction against your own records.",
-            "examples": [
-              "transaction-12345"
-            ]
-          },
-          "intent": {
-            "$ref": "#/components/schemas/TransactionIntent",
-            "description": "The original `intent` used when the transaction was created.",
-            "examples": [
-              "capture"
-            ]
-          },
-          "payment_method": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/TransactionPaymentMethod-Output"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The payment method used for this transaction."
-          },
-          "method": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/Method"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The method used for the transaction.",
-            "examples": [
-              "card"
-            ]
-          },
-          "instrument_type": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/InstrumentType"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The name of the instrument used to process the transaction.",
-            "examples": [
-              "pan"
-            ]
-          },
-          "error_code": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Error Code",
-            "description": "The standardized error code set by Gr4vy.",
-            "examples": [
-              "missing_redirect_url"
-            ]
-          },
-          "payment_service": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/TransactionPaymentService"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The payment service used for this transaction."
-          },
-          "pending_review": {
-            "type": "boolean",
-            "title": "Pending Review",
-            "description": "Whether a manual anti fraud review is pending with an anti fraud service.",
-            "default": false,
-            "examples": [
-              false
-            ]
-          },
-          "buyer": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/TransactionBuyer-Output"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The buyer used for this transaction."
-          },
-          "raw_response_code": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Raw Response Code",
-            "description": "This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.",
-            "examples": [
-              "E104"
-            ]
-          },
-          "raw_response_description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Raw Response Description",
-            "description": " This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.",
-            "examples": [
-              "Missing redirect URL"
-            ]
-          },
-          "shipping_details": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ShippingDetails"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The shipping details associated with the transaction."
-          },
-          "checkout_session_id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Checkout Session Id",
-            "description": "The identifier for the checkout session this transaction is associated with.",
-            "examples": [
-              "4137b1cf-39ac-42a8-bad6-1c680d5dab6b"
-            ]
-          },
-          "gift_card_redemptions": {
-            "items": {
-              "$ref": "#/components/schemas/GiftCardRedemption"
-            },
-            "type": "array",
-            "title": "Gift Card Redemptions",
-            "description": "The gift cards redeemed for this transaction."
-          },
-          "gift_card_service": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/GiftCardService"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The gift card service used for this transaction."
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Created At",
-            "description": "The date and time when the transaction was created, in ISO 8601 format.",
-            "examples": [
-              "2013-07-16T19:23:00.000+00:00"
-            ]
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Updated At",
-            "description": "The date and time when the transaction was last updated, in ISO 8601 format.",
-            "examples": [
-              "2013-07-16T19:23:00.000+00:00"
-            ]
-          },
-          "disputed": {
-            "type": "boolean",
-            "title": "Disputed",
-            "description": "Indicates whether this transaction has been disputed.",
-            "examples": [
-              true
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "id",
-          "reconciliation_id",
-          "merchant_account_id",
-          "currency",
-          "amount",
-          "status",
-          "authorized_amount",
-          "captured_amount",
-          "refunded_amount",
-          "settled_amount",
-          "settled",
-          "intent",
-          "gift_card_redemptions",
-          "created_at",
-          "updated_at",
-          "disputed"
-        ],
-        "title": "TransactionSummary",
-        "description": "A transaction, summarised"
-      },
-      "TransactionThreeDSecureSummary-Input": {
-        "properties": {
-          "version": {
-            "anyOf": [
-              {
-                "type": "string",
-                "pattern": "^[12](\\.\\d+){0,2}$"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Version",
-            "description": "The version of 3DS used for this transaction.",
-            "examples": [
-              "2.2.0"
-            ]
-          },
-          "status": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ThreeDSecureStatus"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The status of the 3DS challenge for this transaction.",
-            "examples": [
-              "complete"
-            ]
-          },
-          "method": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ThreeDSecureMethod"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The method used for 3DS authentication for this transaction.",
-            "examples": [
-              "challenge"
-            ]
-          },
-          "response_data": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ThreeDSecureDataV1"
-              },
-              {
-                "$ref": "#/components/schemas/ThreeDSecureV2"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Response Data",
-            "description": "The 3DS data sent to the payment service for this transaction. This will only be populated if external 3DS data was passed in directly as part of the transaction API call, or if our 3DS server returned a status code of `Y` or `A`. In case of a failure to authenticate (status `N`, `R`, or `U`) this field will not be populated. To see full details about the 3DS calls please use our transaction events API."
-          },
-          "error_data": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ThreeDSecureError"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The error data received from our 3DS server. This will not be populated if the customer failed the authentication with a status code of `N`, `R`, or `U`.  To see full details about the 3DS calls in those situations please use our transaction events API."
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "title": "TransactionThreeDSecureSummary"
-      },
-      "TransactionThreeDSecureSummary-Output": {
+      "TransactionThreeDSecureSummary": {
         "properties": {
           "version": {
             "anyOf": [
@@ -48818,7 +46207,7 @@
         "type": "object",
         "title": "TransactionUpdate"
       },
-      "TransactionVoid-Input": {
+      "TransactionVoid": {
         "properties": {
           "type": {
             "type": "string",
@@ -48883,87 +46272,7 @@
             ]
           },
           "transaction": {
-            "$ref": "#/components/schemas/Transaction-Input",
-            "description": "The transaction associated to this void."
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "status",
-          "code",
-          "raw_response_code",
-          "raw_response_description",
-          "transaction"
-        ],
-        "title": "TransactionVoid"
-      },
-      "TransactionVoid-Output": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "transaction-void",
-            "title": "Type",
-            "description": "Always `transaction-void`.",
-            "default": "transaction-void",
-            "examples": [
-              "transaction-void"
-            ]
-          },
-          "status": {
-            "$ref": "#/components/schemas/VoidStatus",
-            "description": "The status of the void call.",
-            "examples": [
-              "succeeded"
-            ]
-          },
-          "code": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Code",
-            "description": "The standardized error code set by Gr4vy.",
-            "examples": [
-              "service_error"
-            ]
-          },
-          "raw_response_code": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Raw Response Code",
-            "description": "This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.",
-            "examples": [
-              "E104"
-            ]
-          },
-          "raw_response_description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Raw Response Description",
-            "description": "This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.",
-            "examples": [
-              "Internal error"
-            ]
-          },
-          "transaction": {
-            "$ref": "#/components/schemas/Transaction-Output",
+            "$ref": "#/components/schemas/Transaction",
             "description": "The transaction associated to this void."
           }
         },
@@ -52963,6 +50272,10 @@
     {
       "name": "Merchant accounts",
       "description": "Manage merchant accounts in an instance."
+    },
+    {
+      "name": "Merchant profiles",
+      "description": "Manage 3DS profiles for merchant accounts."
     },
     {
       "name": "Payment links",
