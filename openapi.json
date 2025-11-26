@@ -44890,20 +44890,9 @@
         "title": "TransactionEvent"
       },
       "TransactionEventContext": {
-        "properties": {
-          "transaction_id": {
-            "title": "Transaction Id"
-          },
-          "created_at": {
-            "title": "Created At"
-          }
-        },
+        "properties": {},
         "additionalProperties": true,
         "type": "object",
-        "required": [
-          "transaction_id",
-          "created_at"
-        ],
         "title": "TransactionEventContext"
       },
       "TransactionEvents": {
