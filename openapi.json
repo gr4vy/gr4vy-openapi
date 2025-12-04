@@ -36548,6 +36548,28 @@
             ],
             "title": "Connection Options",
             "description": "The connection options for the payment link."
+          },
+          "store": {
+            "type": "boolean",
+            "title": "Store",
+            "description": "Whether the payment method was stored.",
+            "default": false
+          },
+          "buyer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer Id",
+            "description": "The ID of the buyer to associate with the stored payment method.",
+            "examples": [
+              "a1b2c3d4-5678-90ab-cdef-1234567890ab"
+            ]
           }
         },
         "additionalProperties": false,
@@ -36862,6 +36884,31 @@
             "default": "ecommerce",
             "examples": [
               "ecommerce"
+            ]
+          },
+          "store": {
+            "type": "boolean",
+            "title": "Store",
+            "description": "Whether to store the payment method for future use.",
+            "default": false,
+            "examples": [
+              true
+            ]
+          },
+          "buyer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer Id",
+            "description": "The ID of the buyer to associate the payment method with. Note: When `buyer_id` is provided, the payment link should be treated as a secret as it will allow the user to manage payment methods for the associated buyer.",
+            "examples": [
+              "a1b2c3d4-5678-90ab-cdef-1234567890ab"
             ]
           }
         },
