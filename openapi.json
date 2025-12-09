@@ -27625,7 +27625,7 @@
             "description": "Type of authentication for webhook request.",
             "default": "basic",
             "examples": [
-              "kind"
+              "basic"
             ]
           },
           "username": {
@@ -27653,6 +27653,43 @@
           "username"
         ],
         "title": "BasicAuthentication"
+      },
+      "BasicAuthenticationCreate": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "const": "basic",
+            "title": "Kind",
+            "description": "Type of authentication for webhook request.",
+            "default": "basic",
+            "examples": [
+              "basic"
+            ]
+          },
+          "username": {
+            "type": "string",
+            "title": "Username",
+            "description": "The username value for basic auth.",
+            "examples": [
+              "gr4vy"
+            ]
+          },
+          "password": {
+            "type": "string",
+            "title": "Password",
+            "description": "The password value for basic auth.",
+            "examples": [
+              "super-strong-password"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "username",
+          "password"
+        ],
+        "title": "BasicAuthenticationCreate"
       },
       "BillingDetails": {
         "properties": {
@@ -30678,6 +30715,108 @@
           "email_address"
         ],
         "title": "Creator"
+      },
+      "CredentialsOAuthAuthentication": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "webhook-authentication",
+            "title": "Type",
+            "description": "Type of resource for webhook authentication.",
+            "default": "webhook-authentication",
+            "examples": [
+              "webhook-authentication"
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "const": "oauth_client_credentials",
+            "title": "Kind",
+            "description": "Type of authentication for webhook request.",
+            "default": "oauth_client_credentials",
+            "examples": [
+              "oauth_client_credentials"
+            ]
+          },
+          "client_id": {
+            "type": "string",
+            "title": "Client Id",
+            "description": "The OAuth client identifier.",
+            "examples": [
+              "1234abcd"
+            ]
+          },
+          "client_secret": {
+            "type": "string",
+            "title": "Client Secret",
+            "description": "The masked OAuth client secret.",
+            "default": "********",
+            "examples": [
+              "********"
+            ]
+          },
+          "token_url": {
+            "type": "string",
+            "title": "Token Url",
+            "description": "The OAuth access token URL.",
+            "examples": [
+              "https://www.gr4vy.com/oauth/token"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "client_id",
+          "token_url"
+        ],
+        "title": "CredentialsOAuthAuthentication"
+      },
+      "CredentialsOAuthAuthenticationCreate": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "const": "oauth_client_credentials",
+            "title": "Kind",
+            "description": "Type of authentication for webhook request.",
+            "default": "oauth_client_credentials",
+            "examples": [
+              "oauth_client_credentials"
+            ]
+          },
+          "client_id": {
+            "type": "string",
+            "title": "Client Id",
+            "description": "The OAuth client identifier.",
+            "examples": [
+              "1234abcd"
+            ]
+          },
+          "client_secret": {
+            "type": "string",
+            "title": "Client Secret",
+            "description": "The OAuth client secret.",
+            "examples": [
+              "sec_123_abc"
+            ]
+          },
+          "token_url": {
+            "type": "string",
+            "title": "Token Url",
+            "description": "The OAuth access token URL.",
+            "examples": [
+              "https://www.gr4vy.com/oauth/token"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "client_id",
+          "client_secret",
+          "token_url"
+        ],
+        "title": "CredentialsOAuthAuthenticationCreate"
       },
       "Cryptogram": {
         "properties": {
@@ -36173,6 +36312,145 @@
           "items"
         ],
         "title": "NetworkTokens"
+      },
+      "PasswordOAuthAuthentication": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "webhook-authentication",
+            "title": "Type",
+            "description": "Type of resource for webhook authentication.",
+            "default": "webhook-authentication",
+            "examples": [
+              "webhook-authentication"
+            ]
+          },
+          "kind": {
+            "type": "string",
+            "const": "oauth_password",
+            "title": "Kind",
+            "description": "Type of authentication for webhook request.",
+            "default": "oauth_password",
+            "examples": [
+              "oauth_password"
+            ]
+          },
+          "client_id": {
+            "type": "string",
+            "title": "Client Id",
+            "description": "The OAuth client identifier.",
+            "examples": [
+              "1234abcd"
+            ]
+          },
+          "client_secret": {
+            "type": "string",
+            "title": "Client Secret",
+            "description": "The masked OAuth client secret.",
+            "default": "********",
+            "examples": [
+              "********"
+            ]
+          },
+          "token_url": {
+            "type": "string",
+            "title": "Token Url",
+            "description": "The OAuth access token URL.",
+            "examples": [
+              "https://www.gr4vy.com/oauth/token"
+            ]
+          },
+          "username": {
+            "type": "string",
+            "title": "Username",
+            "description": "The username value.",
+            "examples": [
+              "gr4vy"
+            ]
+          },
+          "password": {
+            "type": "string",
+            "const": "********",
+            "title": "Password",
+            "description": "The masked password value.",
+            "default": "********",
+            "examples": [
+              "********"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "client_id",
+          "token_url",
+          "username"
+        ],
+        "title": "PasswordOAuthAuthentication"
+      },
+      "PasswordOAuthAuthenticationCreate": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "const": "oauth_password",
+            "title": "Kind",
+            "description": "Type of authentication for webhook request.",
+            "default": "oauth_password",
+            "examples": [
+              "oauth_password"
+            ]
+          },
+          "client_id": {
+            "type": "string",
+            "title": "Client Id",
+            "description": "The OAuth client identifier.",
+            "examples": [
+              "1234abcd"
+            ]
+          },
+          "client_secret": {
+            "type": "string",
+            "title": "Client Secret",
+            "description": "The OAuth client secret.",
+            "examples": [
+              "sec_123_abc"
+            ]
+          },
+          "token_url": {
+            "type": "string",
+            "title": "Token Url",
+            "description": "The OAuth access token URL.",
+            "examples": [
+              "https://www.gr4vy.com/oauth/token"
+            ]
+          },
+          "username": {
+            "type": "string",
+            "title": "Username",
+            "description": "The username value.",
+            "examples": [
+              "gr4vy"
+            ]
+          },
+          "password": {
+            "type": "string",
+            "title": "Password",
+            "description": "The password value.",
+            "examples": [
+              "super-strong-password"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "client_id",
+          "client_secret",
+          "token_url",
+          "username",
+          "password"
+        ],
+        "title": "PasswordOAuthAuthenticationCreate"
       },
       "PaymentLink": {
         "properties": {
@@ -46596,31 +46874,6 @@
         ],
         "title": "WalletPaymentOptionContext"
       },
-      "WebhookBasicAuthentication": {
-        "properties": {
-          "kind": {
-            "type": "string",
-            "const": "basic",
-            "title": "Kind"
-          },
-          "username": {
-            "type": "string",
-            "title": "Username"
-          },
-          "password": {
-            "type": "string",
-            "title": "Password"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "kind",
-          "username",
-          "password"
-        ],
-        "title": "WebhookBasicAuthentication"
-      },
       "WebhookSubscription": {
         "properties": {
           "id": {
@@ -46681,15 +46934,36 @@
                 "$ref": "#/components/schemas/BasicAuthentication"
               },
               {
+                "$ref": "#/components/schemas/CredentialsOAuthAuthentication"
+              },
+              {
+                "$ref": "#/components/schemas/PasswordOAuthAuthentication"
+              },
+              {
                 "type": "null"
               }
             ],
+            "title": "Authentication",
             "description": "Optional authentication configuration for webhook requests.",
             "examples": [
               {
                 "kind": "basic",
-                "password": "super-strong-password",
+                "password": "********",
                 "username": "gr4vy"
+              },
+              {
+                "client_id": "1234abcd",
+                "client_secret": "********",
+                "kind": "oauth_password",
+                "password": "********",
+                "token_url": "https://www.gr4vy.com/oauth/token",
+                "username": "gr4vy"
+              },
+              {
+                "client_id": "1234abcd",
+                "client_secret": "********",
+                "kind": "oauth_client_credentials",
+                "token_url": "https://www.gr4vy.com/oauth/token"
               }
             ]
           },
@@ -46769,18 +47043,51 @@
           "authentication": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/WebhookBasicAuthentication"
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/BasicAuthenticationCreate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CredentialsOAuthAuthenticationCreate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/PasswordOAuthAuthenticationCreate"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "kind",
+                  "mapping": {
+                    "basic": "#/components/schemas/BasicAuthenticationCreate",
+                    "oauth_client_credentials": "#/components/schemas/CredentialsOAuthAuthenticationCreate",
+                    "oauth_password": "#/components/schemas/PasswordOAuthAuthenticationCreate"
+                  }
+                }
               },
               {
                 "type": "null"
               }
             ],
+            "title": "Authentication",
             "description": "Optional authentication configuration for webhook requests.",
             "examples": [
               {
                 "kind": "basic",
                 "password": "super-strong-password",
                 "username": "gr4vy"
+              },
+              {
+                "client_id": "1234abcd",
+                "client_secret": "sec_123_abc",
+                "kind": "oauth_password",
+                "password": "super-strong-password",
+                "token_url": "https://www.gr4vy.com/oauth/token",
+                "username": "gr4vy"
+              },
+              {
+                "client_id": "1234abcd",
+                "client_secret": "sec_123_abc",
+                "kind": "oauth_client_credentials",
+                "token_url": "https://www.gr4vy.com/oauth/token"
               }
             ]
           }
@@ -46852,18 +47159,51 @@
           "authentication": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/WebhookBasicAuthentication"
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/BasicAuthenticationCreate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/CredentialsOAuthAuthenticationCreate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/PasswordOAuthAuthenticationCreate"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "kind",
+                  "mapping": {
+                    "basic": "#/components/schemas/BasicAuthenticationCreate",
+                    "oauth_client_credentials": "#/components/schemas/CredentialsOAuthAuthenticationCreate",
+                    "oauth_password": "#/components/schemas/PasswordOAuthAuthenticationCreate"
+                  }
+                }
               },
               {
                 "type": "null"
               }
             ],
+            "title": "Authentication",
             "description": "Optional authentication configuration for webhook requests.",
             "examples": [
               {
                 "kind": "basic",
                 "password": "super-strong-password",
                 "username": "gr4vy"
+              },
+              {
+                "client_id": "1234abcd",
+                "client_secret": "sec_123_abc",
+                "kind": "oauth_password",
+                "password": "super-strong-password",
+                "token_url": "https://www.gr4vy.com/oauth/token",
+                "username": "gr4vy"
+              },
+              {
+                "client_id": "1234abcd",
+                "client_secret": "sec_123_abc",
+                "kind": "oauth_client_credentials",
+                "token_url": "https://www.gr4vy.com/oauth/token"
               }
             ]
           }
