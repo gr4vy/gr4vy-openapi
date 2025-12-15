@@ -22290,15 +22290,44 @@
           {
             "name": "period",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
-              "$ref": "#/components/schemas/MetricsExplorerPeriod",
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/MetricsExplorerPeriod"
+                },
+                {
+                  "type": "null"
+                }
+              ],
               "description": "Filters the results to the set of data aggregated over the duration of the specified period.",
               "examples": [
                 "7-days"
-              ]
+              ],
+              "title": "Period"
             },
             "description": "Filters the results to the set of data aggregated over the duration of the specified period."
+          },
+          {
+            "name": "datetime_range",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filters the results to the set of data aggregated over the duration of the specified period.This parameter should be in the format of [ISO8601 interval](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) while the duration only format is not accepted.Start and end are either a datetime in ISO8601 format or a placeholder which is one of the following: `now`, `hour_start` and `hour_end`.",
+              "examples": [
+                "2025-01-01T00:00:00/P7D"
+              ],
+              "title": "Datetime Range"
+            },
+            "description": "Filters the results to the set of data aggregated over the duration of the specified period.This parameter should be in the format of [ISO8601 interval](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) while the duration only format is not accepted.Start and end are either a datetime in ISO8601 format or a placeholder which is one of the following: `now`, `hour_start` and `hour_end`."
           },
           {
             "name": "authentication_outcome",
@@ -23095,15 +23124,44 @@
           {
             "name": "period",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
-              "$ref": "#/components/schemas/MetricsExplorerPeriod",
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/MetricsExplorerPeriod"
+                },
+                {
+                  "type": "null"
+                }
+              ],
               "description": "Filters the results to the set of data aggregated over the duration of the specified period.",
               "examples": [
                 "7-days"
-              ]
+              ],
+              "title": "Period"
             },
             "description": "Filters the results to the set of data aggregated over the duration of the specified period."
+          },
+          {
+            "name": "datetime_range",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filters the results to the set of data aggregated over the duration of the specified period.This parameter should be in the format of [ISO8601 interval](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) while the duration only format is not accepted.Start and end are either a datetime in ISO8601 format or a placeholder which is one of the following: `now`, `hour_start` and `hour_end`.",
+              "examples": [
+                "2025-01-01T00:00:00/P7D"
+              ],
+              "title": "Datetime Range"
+            },
+            "description": "Filters the results to the set of data aggregated over the duration of the specified period.This parameter should be in the format of [ISO8601 interval](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) while the duration only format is not accepted.Start and end are either a datetime in ISO8601 format or a placeholder which is one of the following: `now`, `hour_start` and `hour_end`."
           },
           {
             "name": "authentication_outcome",
@@ -34971,10 +35029,32 @@
       "MetricsExplorerFiltersQueryParams": {
         "properties": {
           "period": {
-            "$ref": "#/components/schemas/MetricsExplorerPeriod",
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MetricsExplorerPeriod"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "description": "Filters the results to the set of data aggregated over the duration of the specified period.",
             "examples": [
               "7-days"
+            ]
+          },
+          "datetime_range": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Datetime Range",
+            "description": "Filters the results to the set of data aggregated over the duration of the specified period.This parameter should be in the format of [ISO8601 interval](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) while the duration only format is not accepted.Start and end are either a datetime in ISO8601 format or a placeholder which is one of the following: `now`, `hour_start` and `hour_end`.",
+            "examples": [
+              "2025-01-01T00:00:00/P7D"
             ]
           },
           "authentication_outcome": {
@@ -35420,9 +35500,6 @@
           }
         },
         "type": "object",
-        "required": [
-          "period"
-        ],
         "title": "MetricsExplorerFiltersQueryParams"
       },
       "MetricsExplorerMetric": {
