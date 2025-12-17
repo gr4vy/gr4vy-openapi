@@ -48035,6 +48035,26 @@
         "title": "BraintreeOptions",
         "type": "object"
       },
+      "ChaseOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "comments": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom order comment",
+            "title": "Comments"
+          }
+        },
+        "title": "ChaseOptions",
+        "type": "object"
+      },
       "CybersourceAntiFraudOptions": {
         "additionalProperties": false,
         "properties": {
@@ -50223,6 +50243,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `braintree-card` connector."
+          },
+          "chaseorbital-card": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChaseOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `chaseorbital-card` connector."
           },
           "cybersource-anti-fraud": {
             "anyOf": [
