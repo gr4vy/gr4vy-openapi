@@ -49896,22 +49896,6 @@
               true
             ],
             "title": "Refreshsplittoken"
-          },
-          "urlScheme": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": null,
-            "description": "URL scheme for an app.",
-            "examples": [
-              "APP://SOME_RESOURCE"
-            ],
-            "title": "Urlscheme"
           }
         },
         "title": "TrustlyOptions",
