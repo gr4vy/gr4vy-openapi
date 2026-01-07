@@ -11957,6 +11957,198 @@
         "x-speakeasy-group": "transactions.refunds.all"
       }
     },
+    "/transactions/{transaction_id}/actions": {
+      "get": {
+        "tags": [
+          "Transactions - Actions"
+        ],
+        "summary": "Get Flow actions for transaction",
+        "description": "Retrieve the list of Flow actions that have been triggered for a transaction.",
+        "operationId": "list_transaction_actions",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": [
+              "transactions.read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "transaction_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "The ID of the transaction",
+              "examples": [
+                "7099948d-7286-47e4-aad8-b68f7eb44591"
+              ],
+              "title": "Transaction Id"
+            },
+            "description": "The ID of the transaction"
+          },
+          {
+            "name": "x-gr4vy-merchant-account-id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The ID of the merchant account to use for this request.",
+              "examples": [
+                "default"
+              ],
+              "title": "X-Gr4Vy-Merchant-Account-Id"
+            },
+            "description": "The ID of the merchant account to use for this request."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionActions"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request was unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The credentials were invalid or the caller did not have permission to act on the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "The request method was not allowed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error405"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A duplicate record was found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "425": {
+            "description": "The request was too early.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error425"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests were made.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error429"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error502"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error504"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-name-override": "list",
+        "x-speakeasy-group": "transactions.actions"
+      }
+    },
     "/transactions/{transaction_id}/events": {
       "get": {
         "tags": [
@@ -32071,6 +32263,26 @@
         "title": "Field",
         "description": "A field used in a payment service"
       },
+      "Flow": {
+        "type": "string",
+        "enum": [
+          "checkout",
+          "card-transaction",
+          "non-card-transaction",
+          "redirect-transaction"
+        ],
+        "title": "Flow"
+      },
+      "FlowAction": {
+        "type": "string",
+        "enum": [
+          "select-payment-options",
+          "route-transaction",
+          "decline-early",
+          "skip-3ds"
+        ],
+        "title": "FlowAction"
+      },
       "GiftCard": {
         "properties": {
           "type": {
@@ -44355,6 +44567,99 @@
         "title": "Transaction",
         "description": "A full transaction resource."
       },
+      "TransactionAction": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "action",
+            "title": "Type",
+            "description": "Always `action`.",
+            "default": "action",
+            "examples": [
+              "action"
+            ]
+          },
+          "id": {
+            "$ref": "#/components/schemas/FlowAction",
+            "description": "The action that was triggered.",
+            "examples": [
+              "route-transaction"
+            ]
+          },
+          "flow": {
+            "$ref": "#/components/schemas/Flow",
+            "description": "The flow that the action belongs to.",
+            "examples": [
+              "card-transaction"
+            ]
+          },
+          "rule_id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Rule Id",
+            "description": "The ID of the rule that triggered this action.",
+            "examples": [
+              "f133a3b7-e67e-4d83-bcd3-3e438fedf348"
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "The date this action was created at.",
+            "examples": [
+              "2013-07-16T19:23:00.000+00:00"
+            ]
+          },
+          "outcome": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Outcome",
+            "description": "The outcome of the action.",
+            "examples": [
+              {
+                "result": [
+                  {
+                    "instrument": "pan",
+                    "payment_service_id": "ce26a7d7-fec0-4d47-8efa-044a32b09bc6",
+                    "transformations": []
+                  }
+                ],
+                "type": "card-routing",
+                "version": 2
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "flow",
+          "rule_id",
+          "created_at",
+          "outcome"
+        ],
+        "title": "TransactionAction"
+      },
+      "TransactionActions": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/TransactionAction"
+            },
+            "type": "array",
+            "title": "Items",
+            "description": "The list of actions triggered for a transaction."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "TransactionActions"
+      },
       "TransactionBuyer": {
         "properties": {
           "type": {
@@ -50821,6 +51126,10 @@
     {
       "name": "Transactions",
       "description": "Manage transaction."
+    },
+    {
+      "name": "Transactions - Actions",
+      "description": "Read Flow actions triggered for a transaction."
     },
     {
       "name": "Transactions - Chargebacks",
