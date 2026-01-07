@@ -20261,6 +20261,9 @@
             "OAuth2PasswordBearer": [
               "merchant-accounts.read"
             ]
+          },
+          {
+            "OAuth2PasswordBearer": []
           }
         ],
         "parameters": [
@@ -20272,7 +20275,7 @@
               "type": "string",
               "description": "The ID of the merchant account",
               "examples": [
-                "default"
+                "merchant-12345"
               ],
               "title": "Merchant Account Id"
             },
@@ -20470,7 +20473,7 @@
               "type": "string",
               "description": "The ID of the merchant account",
               "examples": [
-                "default"
+                "merchant-12345"
               ],
               "title": "Merchant Account Id"
             },
