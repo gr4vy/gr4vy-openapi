@@ -11962,8 +11962,8 @@
         "tags": [
           "Transactions - Actions"
         ],
-        "summary": "Get Flow actions for transaction",
-        "description": "Retrieve the list of Flow actions that have been triggered for a transaction.",
+        "summary": "List transaction Flow rules",
+        "description": "Retrieve the list of Flow rule actions that have been triggered for a transaction.",
         "operationId": "list_transaction_actions",
         "security": [
           {
@@ -35945,7 +35945,8 @@
         "type": "string",
         "enum": [
           "authentication",
-          "authorization"
+          "authorization",
+          "monitoring"
         ],
         "title": "MetricsExplorerSource"
       },
