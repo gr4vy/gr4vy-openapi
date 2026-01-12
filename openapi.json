@@ -43228,6 +43228,25 @@
         ],
         "title": "TaxIdKind"
       },
+      "ThreeDSecure": {
+        "properties": {
+          "amount": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount",
+            "description": "The amount to be used for 3DS authentication. Optionally set this value to authenticate a greater amount than the transaction amount."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ThreeDSecure"
+      },
       "ThreeDSecureDataV1": {
         "properties": {
           "cavv": {
@@ -45150,6 +45169,19 @@
             "title": "Three D Secure Data",
             "description": "Pass through 3-D Secure data to support external 3-D Secure authorisation. If using an external 3-D Secure provider, you should not pass a `redirect_url` in the `payment_method` object for a transaction."
           },
+          "three_d_secure": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ThreeDSecure"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Optional 3-D Secure values to use during the authentication flow.",
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
+          },
           "metadata": {
             "anyOf": [
               {
@@ -46776,6 +46808,20 @@
               }
             ],
             "description": "The error data received from our 3DS server. This will not be populated if the customer failed the authentication with a status code of `N`, `R`, or `U`.  To see full details about the 3DS calls in those situations please use our transaction events API."
+          },
+          "amount": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount",
+            "description": "The amount used for 3DS authentication.",
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
           }
         },
         "additionalProperties": false,
