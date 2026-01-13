@@ -45206,9 +45206,7 @@
                 "type": "null"
               }
             ],
-            "description": "Optional 3-D Secure values to use during the authentication flow.",
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            "description": "Optional 3-D Secure values to use during the authentication flow."
           },
           "metadata": {
             "anyOf": [
@@ -46847,9 +46845,7 @@
               }
             ],
             "title": "Amount",
-            "description": "The amount used for 3DS authentication.",
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            "description": "The amount used for 3DS authentication."
           }
         },
         "additionalProperties": false,
