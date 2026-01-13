@@ -37142,6 +37142,20 @@
             "examples": [
               "a1b2c3d4-5678-90ab-cdef-1234567890ab"
             ]
+          },
+          "installment_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 100.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Installment Count",
+            "description": "The number of installments a buyer is required to make."
           }
         },
         "additionalProperties": false,
@@ -37482,6 +37496,20 @@
             "examples": [
               "a1b2c3d4-5678-90ab-cdef-1234567890ab"
             ]
+          },
+          "installment_count": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 100.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Installment Count",
+            "description": "The number of installments a buyer is required to make."
           }
         },
         "additionalProperties": false,
