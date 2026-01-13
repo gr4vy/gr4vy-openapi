@@ -44581,9 +44581,7 @@
             "description": "This is the ISO8583 response code code received from the payment service.",
             "examples": [
               "0110"
-            ],
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            ]
           }
         },
         "additionalProperties": false,
