@@ -23281,46 +23281,18 @@
             "description": "Module for which to retrieve data"
           },
           {
-            "name": "period",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/MetricsExplorerPeriod"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Filters the results to the set of data aggregated over the duration of the specified period.",
-              "examples": [
-                "7-days"
-              ],
-              "title": "Period"
-            },
-            "description": "Filters the results to the set of data aggregated over the duration of the specified period."
-          },
-          {
             "name": "datetime_range",
             "in": "query",
-            "required": false,
+            "required": true,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Filters the results to the set of data aggregated over the duration of the specified period.This parameter should be in the format of [ISO8601 interval](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) while the duration only format is not accepted.Start and end are either a datetime in ISO8601 format or a placeholder which is one of the following: `now`, `hour_start` and `hour_end`.",
+              "type": "string",
+              "description": "Filters the results to the set of data aggregated over the duration of the specified period.This parameter should be in the format of [ISO 8601 interval](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) while the duration only format is not accepted.Start and end are either a datetime in ISO 8601 format or a placeholder which is one of the following: `now`, `hour_start` and `hour_end`.",
               "examples": [
                 "2025-01-01T00:00:00/P7D"
               ],
               "title": "Datetime Range"
             },
-            "description": "Filters the results to the set of data aggregated over the duration of the specified period.This parameter should be in the format of [ISO8601 interval](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) while the duration only format is not accepted.Start and end are either a datetime in ISO8601 format or a placeholder which is one of the following: `now`, `hour_start` and `hour_end`."
+            "description": "Filters the results to the set of data aggregated over the duration of the specified period.This parameter should be in the format of [ISO 8601 interval](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) while the duration only format is not accepted.Start and end are either a datetime in ISO 8601 format or a placeholder which is one of the following: `now`, `hour_start` and `hour_end`."
           },
           {
             "name": "authentication_outcome",
@@ -24115,46 +24087,18 @@
             "description": "The metric to be calculated"
           },
           {
-            "name": "period",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/MetricsExplorerPeriod"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Filters the results to the set of data aggregated over the duration of the specified period.",
-              "examples": [
-                "7-days"
-              ],
-              "title": "Period"
-            },
-            "description": "Filters the results to the set of data aggregated over the duration of the specified period."
-          },
-          {
             "name": "datetime_range",
             "in": "query",
-            "required": false,
+            "required": true,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Filters the results to the set of data aggregated over the duration of the specified period.This parameter should be in the format of [ISO8601 interval](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) while the duration only format is not accepted.Start and end are either a datetime in ISO8601 format or a placeholder which is one of the following: `now`, `hour_start` and `hour_end`.",
+              "type": "string",
+              "description": "Filters the results to the set of data aggregated over the duration of the specified period.This parameter should be in the format of [ISO 8601 interval](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) while the duration only format is not accepted.Start and end are either a datetime in ISO 8601 format or a placeholder which is one of the following: `now`, `hour_start` and `hour_end`.",
               "examples": [
                 "2025-01-01T00:00:00/P7D"
               ],
               "title": "Datetime Range"
             },
-            "description": "Filters the results to the set of data aggregated over the duration of the specified period.This parameter should be in the format of [ISO8601 interval](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) while the duration only format is not accepted.Start and end are either a datetime in ISO8601 format or a placeholder which is one of the following: `now`, `hour_start` and `hour_end`."
+            "description": "Filters the results to the set of data aggregated over the duration of the specified period.This parameter should be in the format of [ISO 8601 interval](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) while the duration only format is not accepted.Start and end are either a datetime in ISO 8601 format or a placeholder which is one of the following: `now`, `hour_start` and `hour_end`."
           },
           {
             "name": "authentication_outcome",
@@ -36042,31 +35986,10 @@
       },
       "MetricsExplorerFiltersQueryParams": {
         "properties": {
-          "period": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/MetricsExplorerPeriod"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "Filters the results to the set of data aggregated over the duration of the specified period.",
-            "examples": [
-              "7-days"
-            ]
-          },
           "datetime_range": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
             "title": "Datetime Range",
-            "description": "Filters the results to the set of data aggregated over the duration of the specified period.This parameter should be in the format of [ISO8601 interval](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) while the duration only format is not accepted.Start and end are either a datetime in ISO8601 format or a placeholder which is one of the following: `now`, `hour_start` and `hour_end`.",
+            "description": "Filters the results to the set of data aggregated over the duration of the specified period.This parameter should be in the format of [ISO 8601 interval](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) while the duration only format is not accepted.Start and end are either a datetime in ISO 8601 format or a placeholder which is one of the following: `now`, `hour_start` and `hour_end`.",
             "examples": [
               "2025-01-01T00:00:00/P7D"
             ]
@@ -36514,6 +36437,9 @@
           }
         },
         "type": "object",
+        "required": [
+          "datetime_range"
+        ],
         "title": "MetricsExplorerFiltersQueryParams"
       },
       "MetricsExplorerMetric": {
@@ -36554,15 +36480,6 @@
           "three_d_secure_method"
         ],
         "title": "MetricsExplorerModule"
-      },
-      "MetricsExplorerPeriod": {
-        "type": "string",
-        "enum": [
-          "1-day",
-          "7-days",
-          "30-days"
-        ],
-        "title": "MetricsExplorerPeriod"
       },
       "MetricsExplorerPreset": {
         "properties": {
@@ -36657,7 +36574,7 @@
                 "authentication_outcome": [
                   "abandoned"
                 ],
-                "period": "7-days"
+                "datetime_range": "P7D/hour_start"
               }
             ]
           }
@@ -36705,7 +36622,7 @@
                 "country": [
                   "GB"
                 ],
-                "period": "7-days"
+                "datetime_range": "P7D/hour_start"
               }
             ]
           }
@@ -36762,7 +36679,7 @@
           },
           "series": {
             "$ref": "#/components/schemas/MetricsExplorerTotalSeriesSet",
-            "description": "Contains two series of data points used to build the line chart. Eachseries contains aggregations of data created over the duration of thespecified period (e.g. `7-days`). The `previous` series containsaggregations from the period immediately preceding the `current` series.",
+            "description": "Contains two series of data points used to build the line chart. Eachseries contains aggregations of data created over the duration of thespecified period (e.g. `P7D/hour_start`). The `previous` series containsaggregations from the period immediately preceding the `current` series.",
             "examples": [
               {
                 "current": {
