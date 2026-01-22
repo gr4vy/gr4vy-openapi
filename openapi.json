@@ -50961,6 +50961,54 @@
         "title": "GivingBlockOptions",
         "type": "object"
       },
+      "GoCardlessOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "purpose_code": {
+            "anyOf": [
+              {
+                "enum": [
+                  "mortgage",
+                  "utility",
+                  "loan",
+                  "dependant_support",
+                  "gambling",
+                  "retail",
+                  "salary",
+                  "personal",
+                  "government",
+                  "pension",
+                  "tax",
+                  "other"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Specifies the high-level purpose of a mandate and/or payment using a set of pre-defined categories. Required for the PayTo scheme, optional for all others",
+            "examples": [
+              "mortgage",
+              "utility",
+              "loan",
+              "dependant_support",
+              "gambling",
+              "retail",
+              "salary",
+              "personal",
+              "government",
+              "pension",
+              "tax",
+              "other"
+            ],
+            "title": "Purpose Code"
+          }
+        },
+        "title": "GoCardlessOptions",
+        "type": "object"
+      },
       "LatitudeOptions": {
         "additionalProperties": false,
         "properties": {
@@ -52201,6 +52249,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `givingblock-givingblock` connector."
+          },
+          "gocardless-gocardless": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/GoCardlessOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `gocardless-gocardless` connector."
           },
           "latitude-latitude": {
             "anyOf": [
