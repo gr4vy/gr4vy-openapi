@@ -44546,12 +44546,18 @@
             "type": "string",
             "format": "uuid",
             "title": "Id",
-            "description": "Unique identifier for the 3DS scenario"
+            "description": "Unique identifier for the 3DS scenario",
+            "examples": [
+              "550e8400-e29b-41d4-a716-446655440000"
+            ]
           },
           "merchant_account_id": {
             "type": "string",
             "title": "Merchant Account Id",
-            "description": "ID of the associated merchant account"
+            "description": "ID of the associated merchant account",
+            "examples": [
+              "merchant-account-12345"
+            ]
           },
           "created_at": {
             "type": "string",
@@ -44632,7 +44638,10 @@
               }
             ],
             "title": "First Name",
-            "description": "First name of the buyer to match."
+            "description": "First name of the buyer to match.",
+            "examples": [
+              "John"
+            ]
           },
           "last_name": {
             "anyOf": [
@@ -44645,7 +44654,10 @@
               }
             ],
             "title": "Last Name",
-            "description": "Last name of the buyer to match."
+            "description": "Last name of the buyer to match.",
+            "examples": [
+              "Luhn"
+            ]
           },
           "email_address": {
             "anyOf": [
@@ -44658,7 +44670,10 @@
               }
             ],
             "title": "Email Address",
-            "description": "Email address of the buyer to match."
+            "description": "Email address of the buyer to match.",
+            "examples": [
+              "john@example.com"
+            ]
           },
           "amount": {
             "anyOf": [
@@ -44672,7 +44687,10 @@
               }
             ],
             "title": "Amount",
-            "description": "Amount of the transaction to match."
+            "description": "Amount of the transaction to match.",
+            "examples": [
+              100
+            ]
           },
           "external_identifier": {
             "anyOf": [
@@ -44685,7 +44703,10 @@
               }
             ],
             "title": "External Identifier",
-            "description": "External identifier to match."
+            "description": "External identifier to match.",
+            "examples": [
+              "buyer-12345"
+            ]
           },
           "card_number": {
             "anyOf": [
@@ -44698,7 +44719,10 @@
               }
             ],
             "title": "Card Number",
-            "description": "Card number to match."
+            "description": "Card number to match.",
+            "examples": [
+              "4242424242424242"
+            ]
           }
         },
         "additionalProperties": false,
