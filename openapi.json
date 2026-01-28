@@ -10783,6 +10783,27 @@
               "title": "X-Gr4Vy-Merchant-Account-Id"
             },
             "description": "The ID of the merchant account to use for this request."
+          },
+          {
+            "name": "idempotency-key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "A unique key that identifies this request. Providing this header will make this an idempotent request. We recommend using V4 UUIDs, or another random string with enough entropy to avoid collisions.",
+              "examples": [
+                "request-12345"
+              ],
+              "title": "Idempotency-Key"
+            },
+            "description": "A unique key that identifies this request. Providing this header will make this an idempotent request. We recommend using V4 UUIDs, or another random string with enough entropy to avoid collisions."
           }
         ],
         "requestBody": {
@@ -11802,6 +11823,27 @@
               "title": "X-Gr4Vy-Merchant-Account-Id"
             },
             "description": "The ID of the merchant account to use for this request."
+          },
+          {
+            "name": "idempotency-key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "A unique key that identifies this request. Providing this header will make this an idempotent request. We recommend using V4 UUIDs, or another random string with enough entropy to avoid collisions.",
+              "examples": [
+                "request-12345"
+              ],
+              "title": "Idempotency-Key"
+            },
+            "description": "A unique key that identifies this request. Providing this header will make this an idempotent request. We recommend using V4 UUIDs, or another random string with enough entropy to avoid collisions."
           }
         ],
         "requestBody": {
