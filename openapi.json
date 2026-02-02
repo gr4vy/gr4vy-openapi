@@ -19566,7 +19566,8 @@
             }
           }
         },
-        "x-speakeasy-ignore": true
+        "x-speakeasy-ignore": true,
+        "x-gr4vy-docs-ignore": true
       }
     },
     "/merchant-accounts": {
