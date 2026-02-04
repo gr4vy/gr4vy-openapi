@@ -20028,13 +20028,13 @@
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The ID of the merchant account",
+              "description": "The ID of the merchant account.",
               "examples": [
                 "merchant-12345"
               ],
               "title": "Merchant Account Id"
             },
-            "description": "The ID of the merchant account"
+            "description": "The ID of the merchant account."
           }
         ],
         "responses": {
@@ -20196,13 +20196,13 @@
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The ID of the merchant account",
+              "description": "The ID of the merchant account.",
               "examples": [
                 "merchant-12345"
               ],
               "title": "Merchant Account Id"
             },
-            "description": "The ID of the merchant account"
+            "description": "The ID of the merchant account."
           }
         ],
         "requestBody": {
@@ -20351,14 +20351,14 @@
         "x-speakeasy-group": "merchant-accounts"
       }
     },
-    "/merchant-accounts/{merchant_account_id}/three-ds-configuration": {
+    "/merchant-accounts/{merchant_account_id}/three-ds-configurations": {
       "post": {
         "tags": [
-          "Merchant profiles"
+          "Merchant accounts - 3DS configuration"
         ],
-        "summary": "Create a merchant profile",
-        "description": "Create a new merchant profile for a merchant account.",
-        "operationId": "create_merchant_profile",
+        "summary": "Create 3DS configuration for merchant",
+        "description": "Create a new 3DS configuration for a merchant account.",
+        "operationId": "create_three_ds_configuration",
         "security": [
           {
             "OAuth2PasswordBearer": [
@@ -20376,13 +20376,13 @@
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The ID of the merchant account",
+              "description": "The ID of the merchant account.",
               "examples": [
                 "merchant-12345"
               ],
               "title": "Merchant Account Id"
             },
-            "description": "The ID of the merchant account"
+            "description": "The ID of the merchant account."
           }
         ],
         "requestBody": {
@@ -20390,7 +20390,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/MerchantAccountProfileCreate"
+                "$ref": "#/components/schemas/MerchantAccountThreeDSConfigurationCreate"
               }
             }
           }
@@ -20401,7 +20401,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MerchantAccountProfile"
+                  "$ref": "#/components/schemas/MerchantAccountThreeDSConfiguration"
                 }
               }
             }
@@ -20527,15 +20527,16 @@
             }
           }
         },
-        "x-speakeasy-ignore": true
+        "x-speakeasy-name-override": "create",
+        "x-speakeasy-group": "merchant-accounts.three-ds-configuration"
       },
       "get": {
         "tags": [
-          "Merchant profiles"
+          "Merchant accounts - 3DS configuration"
         ],
-        "summary": "List all merchant profiles",
-        "description": "List all merchant profiles configured for a merchant account",
-        "operationId": "list_merchant_profiles",
+        "summary": "List 3DS configurations for merchant",
+        "description": "List all 3DS configurations for a merchant account.",
+        "operationId": "list_three_ds_configurations",
         "security": [
           {
             "OAuth2PasswordBearer": [
@@ -20553,13 +20554,13 @@
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The ID of the merchant account",
+              "description": "The ID of the merchant account.",
               "examples": [
                 "merchant-12345"
               ],
               "title": "Merchant Account Id"
             },
-            "description": "The ID of the merchant account"
+            "description": "The ID of the merchant account."
           },
           {
             "name": "currency",
@@ -20580,7 +20581,7 @@
                   "type": "null"
                 }
               ],
-              "description": "ISO 4217 currency code (3 characters) to filter merchant profiles",
+              "description": "ISO 4217 currency code (3 characters) to filter 3DS configurations.",
               "examples": [
                 "USD",
                 "EUR",
@@ -20588,7 +20589,7 @@
               ],
               "title": "Currency"
             },
-            "description": "ISO 4217 currency code (3 characters) to filter merchant profiles"
+            "description": "ISO 4217 currency code (3 characters) to filter 3DS configurations."
           }
         ],
         "responses": {
@@ -20597,7 +20598,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MerchantAccountProfiles"
+                  "$ref": "#/components/schemas/MerchantAccountThreeDSConfigurations"
                 }
               }
             }
@@ -20723,17 +20724,18 @@
             }
           }
         },
-        "x-speakeasy-ignore": true
+        "x-speakeasy-name-override": "list",
+        "x-speakeasy-group": "merchant-accounts.three-ds-configuration"
       }
     },
-    "/merchant-accounts/{merchant_account_id}/three-ds-configuration/{merchant_profile_id}": {
+    "/merchant-accounts/{merchant_account_id}/three-ds-configurations/{three_ds_configuration_id}": {
       "put": {
         "tags": [
-          "Merchant profiles"
+          "Merchant accounts - 3DS configuration"
         ],
-        "summary": "Edit a merchant profiles",
-        "description": "Update the 3DS configuration for a merchant account profile.",
-        "operationId": "edit_merchant_profile",
+        "summary": "Edit 3DS configuration",
+        "description": "Update the 3DS configuration for a merchant account.",
+        "operationId": "edit_three_ds_configuration",
         "security": [
           {
             "OAuth2PasswordBearer": [
@@ -20751,28 +20753,28 @@
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The ID of the merchant account",
+              "description": "The ID of the merchant account.",
               "examples": [
                 "merchant-12345"
               ],
               "title": "Merchant Account Id"
             },
-            "description": "The ID of the merchant account"
+            "description": "The ID of the merchant account."
           },
           {
-            "name": "merchant_profile_id",
+            "name": "three_ds_configuration_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
               "format": "uuid",
-              "description": "The ID of the merchant profile",
+              "description": "The ID of the 3DS configuration for a merchant account.",
               "examples": [
                 "1808f5e6-b49c-4db9-94fa-22371ea352f5"
               ],
-              "title": "Merchant Profile Id"
+              "title": "Three Ds Configuration Id"
             },
-            "description": "The ID of the merchant profile"
+            "description": "The ID of the 3DS configuration for a merchant account."
           }
         ],
         "requestBody": {
@@ -20780,7 +20782,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/MerchantAccountProfileUpdate"
+                "$ref": "#/components/schemas/MerchantAccountThreeDSConfigurationUpdate"
               }
             }
           }
@@ -20790,7 +20792,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/MerchantAccountThreeDSConfiguration"
+                }
               }
             }
           },
@@ -20915,15 +20919,16 @@
             }
           }
         },
-        "x-speakeasy-ignore": true
+        "x-speakeasy-name-override": "update",
+        "x-speakeasy-group": "merchant-accounts.three-ds-configuration"
       },
       "delete": {
         "tags": [
-          "Merchant profiles"
+          "Merchant accounts - 3DS configuration"
         ],
-        "summary": "Delete a merchant profile",
-        "description": "Delete a merchant profile.",
-        "operationId": "delete_merchant_profile",
+        "summary": "Delete 3DS configuration for a merchant",
+        "description": "Delete a 3DS configuration for a merchant account.",
+        "operationId": "delete_three_ds_configuration",
         "security": [
           {
             "OAuth2PasswordBearer": [
@@ -20941,28 +20946,28 @@
             "required": true,
             "schema": {
               "type": "string",
-              "description": "The ID of the merchant account",
+              "description": "The ID of the merchant account.",
               "examples": [
                 "merchant-12345"
               ],
               "title": "Merchant Account Id"
             },
-            "description": "The ID of the merchant account"
+            "description": "The ID of the merchant account."
           },
           {
-            "name": "merchant_profile_id",
+            "name": "three_ds_configuration_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
               "format": "uuid",
-              "description": "The ID of the merchant profile",
+              "description": "The ID of the 3DS configuration for a merchant account.",
               "examples": [
                 "1808f5e6-b49c-4db9-94fa-22371ea352f5"
               ],
-              "title": "Merchant Profile Id"
+              "title": "Three Ds Configuration Id"
             },
-            "description": "The ID of the merchant profile"
+            "description": "The ID of the 3DS configuration for a merchant account."
           }
         ],
         "responses": {
@@ -21090,7 +21095,8 @@
             }
           }
         },
-        "x-speakeasy-ignore": true
+        "x-speakeasy-name-override": "delete",
+        "x-speakeasy-group": "merchant-accounts.three-ds-configuration"
       }
     },
     "/three-ds-scenarios": {
@@ -35163,7 +35169,7 @@
         ],
         "title": "MerchantAccountCreate"
       },
-      "MerchantAccountProfile": {
+      "MerchantAccountThreeDSConfiguration": {
         "properties": {
           "merchant_acquirer_bin": {
             "type": "string",
@@ -35220,19 +35226,19 @@
           },
           "type": {
             "type": "string",
-            "const": "merchant-account-profile",
+            "const": "merchant-account.three-ds-configuration",
             "title": "Type",
-            "description": "Always `merchant-account-profile`.",
-            "default": "merchant-account-profile",
+            "description": "Always `merchant-account.three-ds-configuration`.",
+            "default": "merchant-account.three-ds-configuration",
             "examples": [
-              "merchant-account-profile"
+              "merchant-account.three-ds-configuration"
             ]
           },
           "id": {
             "type": "string",
             "format": "uuid",
             "title": "Id",
-            "description": "Unique identifier for the merchant profile"
+            "description": "Unique identifier for the 3DS configuration"
           },
           "merchant_account_id": {
             "type": "string",
@@ -35243,7 +35249,7 @@
             "type": "string",
             "format": "date-time",
             "title": "Created At",
-            "description": "The date and time when this merchant profile was first created in our system.",
+            "description": "The date and time when this 3DS configuration was first created in our system.",
             "examples": [
               "2013-07-16T19:23:00.000+00:00"
             ]
@@ -35252,14 +35258,14 @@
             "type": "string",
             "format": "date-time",
             "title": "Updated At",
-            "description": "The date and time when this merchant profile was last updated in our system.",
+            "description": "The date and time when this 3DS configuration was last updated in our system.",
             "examples": [
               "2013-07-16T19:23:00.000+00:00"
             ]
           },
           "scheme": {
             "$ref": "#/components/schemas/CardScheme",
-            "description": "The card scheme for this merchant profile"
+            "description": "The card scheme for this 3DS configuration"
           },
           "currency": {
             "anyOf": [
@@ -35290,7 +35296,7 @@
             },
             "type": "object",
             "title": "Metadata",
-            "description": "Additional information about the merchant profile, stored as key-value pairs."
+            "description": "Additional information about the 3DS configuration, stored as key-value pairs."
           }
         },
         "additionalProperties": false,
@@ -35310,9 +35316,9 @@
           "currency",
           "metadata"
         ],
-        "title": "MerchantAccountProfile"
+        "title": "MerchantAccountThreeDSConfiguration"
       },
-      "MerchantAccountProfileCreate": {
+      "MerchantAccountThreeDSConfigurationCreate": {
         "properties": {
           "merchant_acquirer_bin": {
             "type": "string",
@@ -35369,7 +35375,7 @@
           },
           "scheme": {
             "$ref": "#/components/schemas/CardScheme",
-            "description": "The card scheme for this merchant profile"
+            "description": "The card scheme for this 3DS configuration"
           },
           "currency": {
             "anyOf": [
@@ -35400,7 +35406,7 @@
             },
             "type": "object",
             "title": "Metadata",
-            "description": "Any additional information about the merchant profile that you would like to store as key-value pairs."
+            "description": "Any additional information about the 3DS configuration that you would like to store as key-value pairs."
           }
         },
         "additionalProperties": false,
@@ -35415,9 +35421,9 @@
           "scheme",
           "metadata"
         ],
-        "title": "MerchantAccountProfileCreate"
+        "title": "MerchantAccountThreeDSConfigurationCreate"
       },
-      "MerchantAccountProfileUpdate": {
+      "MerchantAccountThreeDSConfigurationUpdate": {
         "properties": {
           "merchant_acquirer_bin": {
             "anyOf": [
@@ -35523,7 +35529,7 @@
                 "type": "null"
               }
             ],
-            "description": "The card scheme for this merchant profile"
+            "description": "The card scheme for this 3DS configuration"
           },
           "currency": {
             "anyOf": [
@@ -35561,18 +35567,18 @@
               }
             ],
             "title": "Metadata",
-            "description": "Any additional information about the merchant profile that you would like to store as key-value pairs."
+            "description": "Any additional information about the 3DS configuration that you would like to store as key-value pairs."
           }
         },
         "additionalProperties": false,
         "type": "object",
-        "title": "MerchantAccountProfileUpdate"
+        "title": "MerchantAccountThreeDSConfigurationUpdate"
       },
-      "MerchantAccountProfiles": {
+      "MerchantAccountThreeDSConfigurations": {
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/MerchantAccountProfile"
+              "$ref": "#/components/schemas/MerchantAccountThreeDSConfiguration"
             },
             "type": "array",
             "title": "Items",
@@ -35583,7 +35589,7 @@
         "required": [
           "items"
         ],
-        "title": "MerchantAccountProfiles"
+        "title": "MerchantAccountThreeDSConfigurations"
       },
       "MerchantAccountUpdate": {
         "properties": {
@@ -52693,7 +52699,7 @@
   "tags": [
     {
       "name": "3DS scenarios",
-      "description": "Manage and cretae 3DS scenarios in sandbox."
+      "description": "Manage and create 3DS scenarios in sandbox."
     },
     {
       "name": "Account updater",
@@ -52756,7 +52762,7 @@
       "description": "Manage merchant accounts in an instance."
     },
     {
-      "name": "Merchant profiles",
+      "name": "Merchant accounts - 3DS configuration",
       "description": "Manage 3DS profiles for merchant accounts."
     },
     {
