@@ -10433,8 +10433,7 @@
                   "title": "Response 200 Capture Transaction"
                 }
               }
-            },
-            "title": "Response Capture Transaction"
+            }
           },
           "400": {
             "description": "The request was invalid.",
