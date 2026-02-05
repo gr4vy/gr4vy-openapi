@@ -37772,11 +37772,17 @@
           "value": {
             "anyOf": [
               {
+                "type": "integer"
+              },
+              {
                 "type": "number"
               },
               {
                 "type": "string",
                 "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+              },
+              {
+                "type": "null"
               }
             ],
             "title": "Value",
