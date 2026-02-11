@@ -21099,6 +21099,190 @@
       }
     },
     "/monitoring/metrics": {
+      "post": {
+        "tags": [
+          "Monitoring"
+        ],
+        "summary": "Create a monitoring metric",
+        "description": "Create a monitoring metric with spec model and params.",
+        "operationId": "create_monitoring_metric",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": [
+              "monitoring.write"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "x-gr4vy-merchant-account-id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The ID of the merchant account to use for this request.",
+              "examples": [
+                "default"
+              ],
+              "title": "X-Gr4Vy-Merchant-Account-Id"
+            },
+            "description": "The ID of the merchant account to use for this request."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MonitoringMetricCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MonitoringMetric"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request was unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The credentials were invalid or the caller did not have permission to act on the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "The request method was not allowed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error405"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A duplicate record was found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "425": {
+            "description": "The request was too early.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error425"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests were made.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error429"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error502"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error504"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-ignore": true
+      },
       "get": {
         "tags": [
           "Monitoring"
@@ -37682,6 +37866,70 @@
         ],
         "title": "ModuleResponse"
       },
+      "MonitoringAuthRateMetricSpecParams": {
+        "properties": {
+          "filters": {
+            "$ref": "#/components/schemas/MonitoringMetricFilters",
+            "description": "The filters to apply on data.",
+            "examples": [
+              {
+                "datetime_range": "PT60M/hour_start",
+                "payment_method_bin": [
+                  "123456",
+                  "411111"
+                ],
+                "payment_method_scheme": [
+                  "visa"
+                ]
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "filters"
+        ],
+        "title": "MonitoringAuthRateMetricSpecParams"
+      },
+      "MonitoringAuthRateSpec": {
+        "properties": {
+          "model": {
+            "type": "string",
+            "const": "auth_rate",
+            "title": "Model",
+            "description": "The monitoring metric model type.",
+            "default": "auth_rate",
+            "examples": [
+              "auth_rate"
+            ]
+          },
+          "params": {
+            "$ref": "#/components/schemas/MonitoringAuthRateMetricSpecParams",
+            "description": "The parameters for the auth rate monitoring metric model.",
+            "examples": [
+              {
+                "filters": {
+                  "datetime_range": "PT60M/hour_start",
+                  "payment_method_bin": [
+                    "123456",
+                    "411111"
+                  ],
+                  "payment_method_scheme": [
+                    "visa"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "params"
+        ],
+        "title": "MonitoringAuthRateSpec"
+      },
       "MonitoringMetric": {
         "properties": {
           "type": {
@@ -37896,6 +38144,59 @@
         ],
         "title": "MonitoringMetric"
       },
+      "MonitoringMetricCreate": {
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Display Name",
+            "description": "The display name for the monitoring metric.",
+            "examples": [
+              "GBP transactions in the last hour | Auth rate > 90%"
+            ]
+          },
+          "spec": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MonitoringAuthRateSpec"
+              }
+            ],
+            "title": "Spec",
+            "description": "The monitoring metric specification.",
+            "examples": [
+              {
+                "model": "auth_rate",
+                "params": {
+                  "filters": {
+                    "datetime_range": "PT60M/hour_start",
+                    "payment_method_bin": [
+                      "123456",
+                      "411111"
+                    ],
+                    "payment_method_scheme": [
+                      "visa"
+                    ]
+                  }
+                }
+              }
+            ],
+            "discriminator": {
+              "propertyName": "model",
+              "mapping": {
+                "auth_rate": "#/components/schemas/MonitoringAuthRateSpec"
+              }
+            }
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "display_name",
+          "spec"
+        ],
+        "title": "MonitoringMetricCreate"
+      },
       "MonitoringMetricCreatorType": {
         "type": "string",
         "enum": [
@@ -37903,6 +38204,128 @@
           "user"
         ],
         "title": "MonitoringMetricCreatorType"
+      },
+      "MonitoringMetricFilters": {
+        "properties": {
+          "datetime_range": {
+            "type": "string",
+            "title": "Datetime Range",
+            "description": "Filters the results to the set of data aggregated over the duration of the specified period. The duration must be between 5 to 60 minutes.This parameter should be in the format of [ISO 8601 interval](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) while the duration only format is not accepted.Start and end are either a datetime in ISO 8601 format or a placeholder which is one of the following: `now`, `hour_start` and `hour_end`.",
+            "examples": [
+              "PT60M/hour_end"
+            ]
+          },
+          "method": {
+            "anyOf": [
+              {
+                "items": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/Method"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Method",
+            "description": "Filters the results to only include transactions that were processed using the specified payment method.This parameter also accepts `null` to include transactions that have a null for this field.",
+            "examples": [
+              "card"
+            ]
+          },
+          "payment_method_bin": {
+            "anyOf": [
+              {
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "maxLength": 6,
+                      "minLength": 6,
+                      "pattern": "^\\d+$"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Payment Method Bin",
+            "description": "Filters the results to only include transactions that used the specified payment method bin.The payment method bin is the first 6 digits of the card number.This parameter also accepts `null` to include transactions that have a null for this field.",
+            "examples": [
+              "123456"
+            ]
+          },
+          "payment_method_scheme": {
+            "anyOf": [
+              {
+                "items": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/CardScheme"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Payment Method Scheme",
+            "description": "Filters the results to only include transactions that were processed with the specified payment method scheme.This parameter also accepts `null` to include transactions that have a null for this field.",
+            "examples": [
+              "visa"
+            ]
+          },
+          "payment_service_id": {
+            "anyOf": [
+              {
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Payment Service Id",
+            "description": "Filters the results to only include transactions that were processed with the specified payment service ID.This parameter also accepts `null` to include transactions that have a null for this field.",
+            "examples": [
+              "06319aec-2c0f-4c7b-8af1-047ca037fc021"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "datetime_range"
+        ],
+        "title": "MonitoringMetricFilters"
       },
       "MonitoringMetrics": {
         "properties": {
