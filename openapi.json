@@ -52775,6 +52775,30 @@
         "title": "NuveiIDealOptions",
         "type": "object"
       },
+      "NuveiKlarnaOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "customData": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Additional data to be sent to Nuvei.",
+            "examples": [
+              "user=123,trusted=false"
+            ],
+            "title": "Customdata"
+          }
+        },
+        "title": "NuveiKlarnaOptions",
+        "type": "object"
+      },
       "NuveiOptions": {
         "additionalProperties": false,
         "properties": {
@@ -53928,6 +53952,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `nuvei-ideal` connector."
+          },
+          "nuvei-klarna": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/NuveiKlarnaOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `nuvei-klarna` connector."
           },
           "nuvei-pse": {
             "anyOf": [
