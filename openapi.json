@@ -51791,6 +51791,164 @@
         "title": "DlocalOptions",
         "type": "object"
       },
+      "DlocalPIXOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "subscription": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DlocalPIXSubscriptionOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `subscription` data to the dLocal API for those connectors that need it."
+          },
+          "scheduled_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Defines scheduled payment start date. Must be provided in ISO 8601 format `(YYYY-MM-DD`). If not specified, The default is 2 days in the future.",
+            "examples": [
+              "2030-12-01"
+            ],
+            "title": "Scheduled Date"
+          }
+        },
+        "title": "DlocalPIXOptions",
+        "type": "object"
+      },
+      "DlocalPIXSubscriptionAmountOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "description": "Indicates the amount type unit for the subscription. Allowed values are: `FIXED`, `VARIABLE`.",
+            "enum": [
+              "FIXED",
+              "VARIABLE"
+            ],
+            "examples": [
+              "FIXED"
+            ],
+            "title": "Type",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Fixed subscription amount in local currency. Required only for fixed amount subscriptions depending on the payment method.",
+            "examples": [
+              "10.00"
+            ],
+            "title": "Value"
+          },
+          "min_value": {
+            "description": "Minimum payer enrollment limit, not minimum recurring charge amount.",
+            "examples": [
+              "10.00"
+            ],
+            "title": "Min Value",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "min_value"
+        ],
+        "title": "DlocalPIXSubscriptionAmountOptions",
+        "type": "object"
+      },
+      "DlocalPIXSubscriptionOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "amount": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DlocalPIXSubscriptionAmountOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `subscription.amount` to the dLocal API for those connectors that need it.",
+            "examples": [
+              {
+                "min_value": "10.00",
+                "type": "FIXED",
+                "value": "589.01"
+              }
+            ]
+          },
+          "frequency": {
+            "description": "Indicates the frequency unit for the subscription. Allowed values are: `WEEKLY`, `MONTHLY`, `QUARTERLY`, `SEMI_ANNUAL`, `ANNUAL`.",
+            "enum": [
+              "WEEKLY",
+              "MONTHLY",
+              "QUARTERLY",
+              "SEMI_ANNUAL",
+              "ANNUAL"
+            ],
+            "examples": [
+              "WEEKLY"
+            ],
+            "title": "Frequency",
+            "type": "string"
+          },
+          "start_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Defines subscription start date. Must be provided in ISO 8601 format `(YYYY-MM-DD`). If not specified, The default is the current date.",
+            "examples": [
+              "2030-12-01"
+            ],
+            "title": "Start Date"
+          },
+          "end_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Defines subscription expiration date. Must be provided in ISO 8601 format `(YYYY-MM-DD`). If not provided, the subscription will not expire.",
+            "examples": [
+              "2030-12-01"
+            ],
+            "title": "End Date"
+          }
+        },
+        "required": [
+          "frequency"
+        ],
+        "title": "DlocalPIXSubscriptionOptions",
+        "type": "object"
+      },
       "DlocalUPIOptions": {
         "additionalProperties": false,
         "properties": {
@@ -53978,6 +54136,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `dlocal-upi` connector."
+          },
+          "dlocal-pix": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DlocalPIXOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `dlocal-pix` connector."
           },
           "fiserv-card": {
             "anyOf": [
