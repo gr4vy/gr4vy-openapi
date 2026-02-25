@@ -51858,12 +51858,19 @@
             "title": "Value"
           },
           "min_value": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "description": "Minimum payer enrollment limit, not minimum recurring charge amount.",
             "examples": [
               "10.00"
             ],
-            "title": "Min Value",
-            "type": "string"
+            "title": "Min Value"
           }
         },
         "required": [
