@@ -38380,7 +38380,7 @@
             "type": "string",
             "format": "uuid",
             "title": "Id",
-            "description": "The ID for the monitoring metric.",
+            "description": "The ID of the monitoring metric.",
             "examples": [
               "aadb3ea8-5ad6-408b-8c3d-82da77c8d619"
             ]
