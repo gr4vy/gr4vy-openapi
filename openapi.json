@@ -38322,6 +38322,48 @@
         ],
         "title": "MonitoringAuthRateSpec"
       },
+      "MonitoringDebouncingIncidentPolicy": {
+        "properties": {
+          "strategy": {
+            "type": "string",
+            "const": "debouncing",
+            "title": "Strategy",
+            "default": "debouncing"
+          },
+          "params": {
+            "$ref": "#/components/schemas/MonitoringDebouncingIncidentPolicyParams"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "params"
+        ],
+        "title": "MonitoringDebouncingIncidentPolicy"
+      },
+      "MonitoringDebouncingIncidentPolicyParams": {
+        "properties": {
+          "create_after_n": {
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "title": "Create After N"
+          },
+          "close_after_n": {
+            "type": "integer",
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "title": "Close After N"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "create_after_n",
+          "close_after_n"
+        ],
+        "title": "MonitoringDebouncingIncidentPolicyParams"
+      },
       "MonitoringMetric": {
         "properties": {
           "type": {
@@ -38579,13 +38621,57 @@
                 "auth_rate": "#/components/schemas/MonitoringAuthRateSpec"
               }
             }
+          },
+          "alerting_policy": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/MonitoringThresholdAlertingPolicy"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "strategy",
+                  "mapping": {
+                    "threshold": "#/components/schemas/MonitoringThresholdAlertingPolicy"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Alerting Policy"
+          },
+          "incident_policy": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/MonitoringDebouncingIncidentPolicy"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "strategy",
+                  "mapping": {
+                    "debouncing": "#/components/schemas/MonitoringDebouncingIncidentPolicy"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Incident Policy"
           }
         },
         "additionalProperties": false,
         "type": "object",
         "required": [
           "display_name",
-          "spec"
+          "spec",
+          "alerting_policy",
+          "incident_policy"
         ],
         "title": "MonitoringMetricCreate"
       },
@@ -38730,12 +38816,56 @@
             "examples": [
               "GBP transactions in the last hour | Auth rate > 90%"
             ]
+          },
+          "alerting_policy": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/MonitoringThresholdAlertingPolicy"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "strategy",
+                  "mapping": {
+                    "threshold": "#/components/schemas/MonitoringThresholdAlertingPolicy"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Alerting Policy"
+          },
+          "incident_policy": {
+            "anyOf": [
+              {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/MonitoringDebouncingIncidentPolicy"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "strategy",
+                  "mapping": {
+                    "debouncing": "#/components/schemas/MonitoringDebouncingIncidentPolicy"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Incident Policy"
           }
         },
         "additionalProperties": false,
         "type": "object",
         "required": [
-          "display_name"
+          "display_name",
+          "alerting_policy",
+          "incident_policy"
         ],
         "title": "MonitoringMetricUpdate"
       },
@@ -38868,6 +38998,68 @@
           "healthy"
         ],
         "title": "MonitoringSample"
+      },
+      "MonitoringThresholdAlertingPolicy": {
+        "properties": {
+          "strategy": {
+            "type": "string",
+            "const": "threshold",
+            "title": "Strategy",
+            "default": "threshold"
+          },
+          "params": {
+            "$ref": "#/components/schemas/MonitoringThresholdAlertingPolicyParams"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "params"
+        ],
+        "title": "MonitoringThresholdAlertingPolicy"
+      },
+      "MonitoringThresholdAlertingPolicyParams": {
+        "properties": {
+          "alert_gt": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "string",
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Alert Gt"
+          },
+          "alert_lt": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "string",
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Alert Lt"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "MonitoringThresholdAlertingPolicyParams"
       },
       "NetworkToken": {
         "properties": {
