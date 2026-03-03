@@ -30748,13 +30748,12 @@
           "card_type": {
             "anyOf": [
               {
-                "type": "string"
+                "$ref": "#/components/schemas/CardType"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Card Type",
             "description": "The type of the card used",
             "examples": [
               "credit"
@@ -30981,13 +30980,12 @@
           "card_type": {
             "anyOf": [
               {
-                "type": "string"
+                "$ref": "#/components/schemas/CardType"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Card Type",
             "description": "The type of the card used",
             "examples": [
               "credit"
@@ -32827,13 +32825,12 @@
           "card_type": {
             "anyOf": [
               {
-                "type": "string"
+                "$ref": "#/components/schemas/CardType"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Card Type",
             "description": "The type of the card used",
             "examples": [
               "credit"
@@ -35376,13 +35373,12 @@
           "card_type": {
             "anyOf": [
               {
-                "type": "string"
+                "$ref": "#/components/schemas/CardType"
               },
               {
                 "type": "null"
               }
             ],
-            "title": "Card Type",
             "description": "The type of the card used",
             "examples": [
               "credit"
