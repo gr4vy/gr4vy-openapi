@@ -54308,6 +54308,53 @@
         "title": "PowertranzOptions",
         "type": "object"
       },
+      "RiskifiedAntiFraudOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "line_items": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/RiskifiedAntiFraudOptionsLineItem"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": [],
+            "description": "A list of line items details to override when passing to the Riskified API.",
+            "title": "Line Items"
+          }
+        },
+        "title": "RiskifiedAntiFraudOptions",
+        "type": "object"
+      },
+      "RiskifiedAntiFraudOptionsLineItem": {
+        "additionalProperties": false,
+        "properties": {
+          "delivered_to": {
+            "anyOf": [
+              {
+                "enum": [
+                  "shipping_address",
+                  "store_pickup"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Indicates whether the item will be shipped or picked up.",
+            "title": "Delivered To"
+          }
+        },
+        "title": "RiskifiedAntiFraudOptionsLineItem",
+        "type": "object"
+      },
       "StripeConnectOptions": {
         "additionalProperties": false,
         "properties": {
@@ -55187,6 +55234,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `powertranz-card` connector."
+          },
+          "riskified-anti-fraud": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RiskifiedAntiFraudOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `riskified-anti-fraud` connector."
           },
           "stripe-card": {
             "anyOf": [
