@@ -22139,7 +22139,7 @@
         ],
         "summary": "List monitoring incidents for a specific metric",
         "description": "List monitoring incidents for a specific metric.",
-        "operationId": "list_monitoring_incidents",
+        "operationId": "list_monitoring_metric_incidents",
         "security": [
           {
             "OAuth2PasswordBearer": []
@@ -22166,6 +22166,241 @@
             },
             "description": "The ID of the metric"
           },
+          {
+            "name": "timestamp_interval",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filters the incidents to those that were created within the specified interval.This parameter should be in the format of [ISO 8601 interval](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) while the duration only format is not accepted.Start and end are either a datetime in ISO 8601 format or a placeholder which is one of the following: `now`, `hour_start` and `hour_end`.",
+              "examples": [
+                "2025-01-01T00:00:00/2025-01-02T00:00:00"
+              ],
+              "title": "Timestamp Interval"
+            },
+            "description": "Filters the incidents to those that were created within the specified interval.This parameter should be in the format of [ISO 8601 interval](https://en.wikipedia.org/wiki/ISO_8601#Time_intervals) while the duration only format is not accepted.Start and end are either a datetime in ISO 8601 format or a placeholder which is one of the following: `now`, `hour_start` and `hour_end`."
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "A pointer to the page of results to return.",
+              "examples": [
+                "ZXhhbXBsZTE"
+              ],
+              "title": "Cursor"
+            },
+            "description": "A pointer to the page of results to return."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "The maximum number of items that are returned.",
+              "examples": [
+                20
+              ],
+              "default": 20,
+              "title": "Limit"
+            },
+            "description": "The maximum number of items that are returned."
+          },
+          {
+            "name": "x-gr4vy-merchant-account-id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The ID of the merchant account to use for this request.",
+              "examples": [
+                "default"
+              ],
+              "title": "X-Gr4Vy-Merchant-Account-Id"
+            },
+            "description": "The ID of the merchant account to use for this request."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MonitoringIncidents"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request was unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The credentials were invalid or the caller did not have permission to act on the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "The request method was not allowed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error405"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A duplicate record was found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "425": {
+            "description": "The request was too early.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error425"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests were made.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error429"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error502"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error504"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-ignore": true
+      }
+    },
+    "/monitoring/incidents": {
+      "get": {
+        "tags": [
+          "Monitoring"
+        ],
+        "summary": "List all monitoring incidents",
+        "description": "List all monitoring incidents.",
+        "operationId": "list_monitoring_incidents",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": [
+              "monitoring.read"
+            ]
+          }
+        ],
+        "parameters": [
           {
             "name": "timestamp_interval",
             "in": "query",
