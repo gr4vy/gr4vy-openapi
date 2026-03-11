@@ -40136,6 +40136,15 @@
               true,
               true
             ]
+          },
+          "incident_related": {
+            "type": "boolean",
+            "title": "Incident Related",
+            "description": "Indicates whether the sample is related to an incident.",
+            "examples": [
+              false,
+              true
+            ]
           }
         },
         "additionalProperties": false,
@@ -40143,7 +40152,8 @@
         "required": [
           "timestamp",
           "value",
-          "healthy"
+          "healthy",
+          "incident_related"
         ],
         "title": "MonitoringSample"
       },
