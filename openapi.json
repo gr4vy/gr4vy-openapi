@@ -891,6 +891,15 @@
                   },
                   {
                     "$ref": "#/components/schemas/PlaidPaymentMethodCreate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/ACHBankPaymentMethodCreate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/BACSBankPaymentMethodCreate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/SEPABankPaymentMethodCreate"
                   }
                 ],
                 "title": "Body"
@@ -28832,6 +28841,131 @@
   },
   "components": {
     "schemas": {
+      "ACHBankPaymentMethodCreate": {
+        "properties": {
+          "method": {
+            "type": "string",
+            "const": "bank",
+            "title": "Method",
+            "description": "Always `bank`.",
+            "default": "bank",
+            "examples": [
+              "bank"
+            ]
+          },
+          "account_holder": {
+            "$ref": "#/components/schemas/BankAccountHolder",
+            "description": "The account holder for this bank account"
+          },
+          "buyer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer Id",
+            "description": "The ID of the buyer to attach the method to.",
+            "examples": [
+              "fe26475d-ec3e-4884-9553-f7356683f7f9"
+            ]
+          },
+          "buyer_external_identifier": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer External Identifier",
+            "description": "The merchant reference for this payment method.",
+            "examples": [
+              "payment-method-12345"
+            ]
+          },
+          "external_identifier": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Identifier",
+            "description": "The merchant identifier for this payment method.",
+            "examples": [
+              "payment-method-12345"
+            ]
+          },
+          "scheme": {
+            "type": "string",
+            "const": "ach",
+            "title": "Scheme",
+            "description": "Always `ach`.",
+            "default": "ach",
+            "examples": [
+              "ach"
+            ]
+          },
+          "account_number": {
+            "type": "string",
+            "title": "Account Number",
+            "description": "The account number for this ACH bank account",
+            "examples": [
+              "123456789"
+            ]
+          },
+          "routing_number": {
+            "type": "string",
+            "title": "Routing Number",
+            "description": "The routing number for this ACH bank account",
+            "examples": [
+              "000000111"
+            ]
+          },
+          "is_tokenized": {
+            "type": "boolean",
+            "title": "Is Tokenized",
+            "description": "Whether the account number is tokenized",
+            "default": false,
+            "examples": [
+              false
+            ]
+          },
+          "account_type": {
+            "type": "string",
+            "enum": [
+              "checking",
+              "savings"
+            ],
+            "title": "Account Type",
+            "description": "Specify whether this is a `checking` or `savings` account",
+            "examples": [
+              "checking"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "account_holder",
+          "account_number",
+          "routing_number",
+          "account_type"
+        ],
+        "title": "ACHBankPaymentMethodCreate",
+        "description": "ACH Bank Payment Method\n\nBank Payment Method for ACH bank accounts."
+      },
       "AVSResponseCode": {
         "type": "string",
         "enum": [
@@ -30596,6 +30730,161 @@
           "status"
         ],
         "title": "AuditLogEntryUser"
+      },
+      "BACSBankPaymentMethodCreate": {
+        "properties": {
+          "method": {
+            "type": "string",
+            "const": "bank",
+            "title": "Method",
+            "description": "Always `bank`.",
+            "default": "bank",
+            "examples": [
+              "bank"
+            ]
+          },
+          "account_holder": {
+            "$ref": "#/components/schemas/BankAccountHolder",
+            "description": "The account holder for this bank account"
+          },
+          "buyer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer Id",
+            "description": "The ID of the buyer to attach the method to.",
+            "examples": [
+              "fe26475d-ec3e-4884-9553-f7356683f7f9"
+            ]
+          },
+          "buyer_external_identifier": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer External Identifier",
+            "description": "The merchant reference for this payment method.",
+            "examples": [
+              "payment-method-12345"
+            ]
+          },
+          "external_identifier": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Identifier",
+            "description": "The merchant identifier for this payment method.",
+            "examples": [
+              "payment-method-12345"
+            ]
+          },
+          "scheme": {
+            "type": "string",
+            "const": "bacs",
+            "title": "Scheme",
+            "description": "Always `bacs`.",
+            "default": "bacs",
+            "examples": [
+              "bacs"
+            ]
+          },
+          "account_number": {
+            "type": "string",
+            "title": "Account Number",
+            "description": "The account number for this BACS bank account",
+            "examples": [
+              "12345678"
+            ]
+          },
+          "routing_number": {
+            "type": "string",
+            "title": "Routing Number",
+            "description": "The sort code for this BACS bank account",
+            "examples": [
+              "11-22-33"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "account_holder",
+          "account_number",
+          "routing_number"
+        ],
+        "title": "BACSBankPaymentMethodCreate",
+        "description": "BACS Bank Payment Method\n\nBank Payment Method for BACS bank accounts."
+      },
+      "BankAccountHolder": {
+        "properties": {
+          "first_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "First Name",
+            "description": "The account holder's first name",
+            "examples": [
+              "John"
+            ]
+          },
+          "last_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Name",
+            "description": "The account holder's last name",
+            "examples": [
+              "Doe"
+            ]
+          },
+          "company_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Company Name",
+            "description": "The account holder's company name",
+            "examples": [
+              "Gr4vy"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "BankAccountHolder"
       },
       "BaseModel": {
         "properties": {},
@@ -46564,6 +46853,115 @@
           "address"
         ],
         "title": "RequiredFields"
+      },
+      "SEPABankPaymentMethodCreate": {
+        "properties": {
+          "method": {
+            "type": "string",
+            "const": "bank",
+            "title": "Method",
+            "description": "Always `bank`.",
+            "default": "bank",
+            "examples": [
+              "bank"
+            ]
+          },
+          "account_holder": {
+            "$ref": "#/components/schemas/BankAccountHolder",
+            "description": "The account holder for this bank account"
+          },
+          "buyer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer Id",
+            "description": "The ID of the buyer to attach the method to.",
+            "examples": [
+              "fe26475d-ec3e-4884-9553-f7356683f7f9"
+            ]
+          },
+          "buyer_external_identifier": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer External Identifier",
+            "description": "The merchant reference for this payment method.",
+            "examples": [
+              "payment-method-12345"
+            ]
+          },
+          "external_identifier": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Identifier",
+            "description": "The merchant identifier for this payment method.",
+            "examples": [
+              "payment-method-12345"
+            ]
+          },
+          "scheme": {
+            "type": "string",
+            "const": "sepa",
+            "title": "Scheme",
+            "description": "Always `sepa`.",
+            "default": "sepa",
+            "examples": [
+              "sepa"
+            ]
+          },
+          "account_number": {
+            "type": "string",
+            "title": "Account Number",
+            "description": "The IBAN for this SEPA bank account",
+            "examples": [
+              "ES1234567891234"
+            ]
+          },
+          "routing_number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Routing Number",
+            "description": "The BIC for this SEPA bank account",
+            "examples": [
+              "ABC123456"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "account_holder",
+          "account_number"
+        ],
+        "title": "SEPABankPaymentMethodCreate",
+        "description": "SEPA Bank Payment Method\n\nBank Payment Method for SEPA bank accounts."
       },
       "Settlement": {
         "properties": {
