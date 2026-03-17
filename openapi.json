@@ -48268,8 +48268,15 @@
       "ThreeDSecureScenarioOutcome": {
         "properties": {
           "version": {
-            "type": "string",
-            "pattern": "^[12](\\.\\d+){0,2}$",
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[12](\\.\\d+){0,2}$"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Version",
             "description": "The version of 3DS which will be simulated.",
             "examples": [
@@ -48306,7 +48313,6 @@
         "additionalProperties": false,
         "type": "object",
         "required": [
-          "version",
           "authentication"
         ],
         "title": "ThreeDSecureScenarioOutcome"
