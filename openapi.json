@@ -38472,6 +38472,7 @@
           "sofort",
           "spei",
           "stitch",
+          "swish",
           "stripedd",
           "stripetoken",
           "tapi",
@@ -45444,6 +45445,7 @@
               "sofort",
               "spei",
               "stitch",
+              "swish",
               "stripedd",
               "stripetoken",
               "tapi",
@@ -55932,6 +55934,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `adyen-sofort` connector."
+          },
+          "adyen-swish": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `adyen-swish` connector."
           },
           "adyen-vipps": {
             "anyOf": [
