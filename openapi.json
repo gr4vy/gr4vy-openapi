@@ -35133,6 +35133,21 @@
             "title": "Details",
             "description": "A list of details that further ellaborate on the error.",
             "default": []
+          },
+          "resource_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resource Id",
+            "description": "The ID of the conflicting resource.",
+            "examples": [
+              "cdc70639-cb9c-4222-a73f-b8ce39f7821b"
+            ]
           }
         },
         "additionalProperties": false,
