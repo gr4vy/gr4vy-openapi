@@ -55415,6 +55415,41 @@
         "title": "RiskifiedAntiFraudOptionsLineItem",
         "type": "object"
       },
+      "StripeCardOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "stripe_connect": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StripeConnectOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Stripe options to support Stripe Connect"
+          },
+          "error_on_requires_action": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes the `error_on_requires_action` option to the Stripe API. Set to true to fail the payment attempt if it transitions into requires_action. Use this parameter for simpler integrations that don't handle customer actions, such as saving cards without authentication.",
+            "examples": [
+              true
+            ],
+            "title": "Error On Requires Action"
+          }
+        },
+        "title": "StripeCardOptions",
+        "type": "object"
+      },
       "StripeConnectOptions": {
         "additionalProperties": false,
         "properties": {
@@ -55505,22 +55540,6 @@
       "StripeOptions": {
         "additionalProperties": false,
         "properties": {
-          "error_on_requires_action": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "default": null,
-            "description": "Passes the `error_on_requires_action` option to the Stripe API. Set to true to fail the payment attempt if it transitions into requires_action. Use this parameter for simpler integrations that don't handle customer actions, such as saving cards without authentication.",
-            "examples": [
-              true
-            ],
-            "title": "Error On Requires Action"
-          },
           "stripe_connect": {
             "anyOf": [
               {
@@ -56331,7 +56350,7 @@
             "default": null,
             "description": "Custom options to be passed to the `riskified-anti-fraud` connector."
           },
-          "stripe-card": {
+          "stripe-affirm": {
             "anyOf": [
               {
                 "$ref": "#/components/schemas/StripeOptions"
@@ -56341,7 +56360,31 @@
               }
             ],
             "default": null,
+            "description": "Custom options to be passed to the `stripe-affirm` connector."
+          },
+          "stripe-card": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StripeCardOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
             "description": "Custom options to be passed to the `stripe-card` connector."
+          },
+          "stripe-klarna": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StripeOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `stripe-klarna` connector."
           },
           "travelhub-card": {
             "anyOf": [
