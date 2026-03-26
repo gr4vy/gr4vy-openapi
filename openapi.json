@@ -31647,6 +31647,26 @@
               "amex"
             ]
           },
+          "additional_schemes": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/CardScheme"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Additional Schemes",
+            "description": "Additional schemes of the card besides the primary scheme.",
+            "examples": [
+              [
+                "eftpos-australia"
+              ]
+            ]
+          },
           "scheme_icon_url": {
             "anyOf": [
               {
