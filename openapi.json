@@ -50074,6 +50074,36 @@
             "description": "An array of cart items that represents the line items of this capture.",
             "x-gr4vy-docs-ignore": true,
             "x-speakeasy-ignore": true
+          },
+          "final": {
+            "type": "boolean",
+            "title": "Final",
+            "description": "Whether this is marked as the final capture for the associated transaction.",
+            "default": true,
+            "examples": [
+              true
+            ],
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
+          },
+          "external_identifier": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 300,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Identifier",
+            "description": "An external identifier that can be used to match the capture against your own records.",
+            "examples": [
+              "capture-12345"
+            ],
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
           }
         },
         "additionalProperties": false,
