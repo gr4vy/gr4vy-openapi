@@ -50696,9 +50696,7 @@
             "description": "The date and time when the buyer's approval window for this transaction expires. If not provided, this is automatically computed from the connector's default expiration time. The value cannot exceed the connector's maximum approval window.",
             "examples": [
               "2026-04-01T12:00:00+00:00"
-            ],
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            ]
           }
         },
         "additionalProperties": false,
@@ -56537,6 +56535,7 @@
               "api-logs.read": "Read API Logs",
               "apple-pay-certificates.read": "Read Apple Pay Certificates",
               "audit-logs.read": "Read Audit Logs",
+              "bin-checker.read": "Read BIN Checker",
               "buyers.read": "Read Buyers",
               "buyers.billing-details.read": "Read Billing Details",
               "card-scheme-definitions.read": "Read Card Scheme Definitions",
@@ -56566,7 +56565,6 @@
               "vault-forward-definitions.read": "Read Vault Forward Definitions",
               "webhook-subscriptions.read": "Read Webhook Subscriptions",
               "api-key-pairs.read": "Read API Key Pairs",
-              "bin-checker.read": "Read BIN Checker",
               "health-dashboard.read": "Read Health Dashboard",
               "metrics-explorer.read": "Read Metrics Explorer",
               "monitoring.read": "Read Monitoring",
@@ -56578,6 +56576,7 @@
               "api-logs.write": "Write API Logs",
               "apple-pay-certificates.write": "Write Apple Pay Certificates",
               "audit-logs.write": "Write Audit Logs",
+              "bin-checker.write": "Write BIN Checker",
               "buyers.write": "Write Buyers",
               "buyers.billing-details.write": "Write Billing Details",
               "card-scheme-definitions.write": "Write Card Scheme Definitions",
@@ -56607,7 +56606,6 @@
               "vault-forward-definitions.write": "Write Vault Forward Definitions",
               "webhook-subscriptions.write": "Write Webhook Subscriptions",
               "api-key-pairs.write": "Write API Key Pairs",
-              "bin-checker.write": "Write BIN Checker",
               "health-dashboard.write": "Write Health Dashboard",
               "metrics-explorer.write": "Write Metrics Explorer",
               "monitoring.write": "Write Monitoring",
