@@ -14844,9 +14844,9 @@
         "tags": [
           "Payment services"
         ],
-        "summary": "Update a configured payment service",
-        "description": "Updates the configuration of a payment service.",
-        "operationId": "update_payment_service",
+        "summary": "Configure a payment service",
+        "description": "Configures a new payment service for use by merchants.",
+        "operationId": "create_payment_service",
         "security": [
           {
             "OAuth2PasswordBearer": []
@@ -15221,9 +15221,9 @@
         "tags": [
           "Payment services"
         ],
-        "summary": "Configure a payment service",
-        "description": "Configures a new payment service for use by merchants.",
-        "operationId": "create_payment_service",
+        "summary": "Update a configured payment service",
+        "description": "Updates the configuration of a payment service.",
+        "operationId": "update_payment_service",
         "security": [
           {
             "OAuth2PasswordBearer": []
