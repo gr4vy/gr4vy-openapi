@@ -34267,6 +34267,21 @@
             "examples": [
               "https://www.gr4vy.com/oauth/token"
             ]
+          },
+          "scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scope",
+            "description": "The OAuth scope.",
+            "examples": [
+              "example:scope"
+            ]
           }
         },
         "additionalProperties": false,
@@ -34311,6 +34326,21 @@
             "description": "The OAuth access token URL.",
             "examples": [
               "https://www.gr4vy.com/oauth/token"
+            ]
+          },
+          "scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scope",
+            "description": "The OAuth scope.",
+            "examples": [
+              "example:scope"
             ]
           }
         },
@@ -40989,6 +41019,21 @@
               "https://www.gr4vy.com/oauth/token"
             ]
           },
+          "scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scope",
+            "description": "The OAuth scope.",
+            "examples": [
+              "example:scope"
+            ]
+          },
           "username": {
             "type": "string",
             "title": "Username",
@@ -41051,6 +41096,21 @@
             "description": "The OAuth access token URL.",
             "examples": [
               "https://www.gr4vy.com/oauth/token"
+            ]
+          },
+          "scope": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scope",
+            "description": "The OAuth scope.",
+            "examples": [
+              "example:scope"
             ]
           },
           "username": {
