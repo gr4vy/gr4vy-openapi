@@ -56385,6 +56385,18 @@
             "default": null,
             "description": "Custom options to be passed to the `mock-card` connector."
           },
+          "mockds-card": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MockCardOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `mockds-card` connector."
+          },
           "nuvei-card": {
             "anyOf": [
               {
