@@ -19470,6 +19470,172 @@
         "x-speakeasy-ignore": true
       }
     },
+    "/checkout/sessions/{session_id}/card-details": {
+      "post": {
+        "tags": [
+          "Checkout sessions"
+        ],
+        "summary": "Get checkout session card details",
+        "description": "Get the card details for a given BIN.",
+        "operationId": "get_checkout_session_card_details",
+        "parameters": [
+          {
+            "name": "session_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "title": "Session Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckoutSessionCardDetailsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Card details response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckoutSessionCardDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request was unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The credentials were invalid or the caller did not have permission to act on the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "The request method was not allowed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error405"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A duplicate record was found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "425": {
+            "description": "The request was too early.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error425"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests were made.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error429"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error502"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error504"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-ignore": true,
+        "x-gr4vy-docs-ignore": true
+      }
+    },
     "/checkout/sessions/{session_id}/acquirer": {
       "get": {
         "tags": [
@@ -33058,6 +33224,102 @@
           "expires_at"
         ],
         "title": "CheckoutSession"
+      },
+      "CheckoutSessionCardDetails": {
+        "properties": {
+          "bin": {
+            "type": "string",
+            "title": "Bin",
+            "description": "The card BIN provided in the request.",
+            "examples": [
+              "41111111"
+            ]
+          },
+          "card_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CardType"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The type of the card.",
+            "examples": [
+              "debit"
+            ]
+          },
+          "scheme": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CardScheme"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The scheme of the card.",
+            "examples": [
+              "visa"
+            ]
+          },
+          "scheme_icon_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheme Icon Url",
+            "description": "URL to the card scheme's icon.",
+            "examples": [
+              "https://api.example.gr4vy.app/assets/icons/card-schemes/mastercard.svg"
+            ]
+          },
+          "additional_schemes": {
+            "items": {
+              "$ref": "#/components/schemas/CardScheme"
+            },
+            "type": "array",
+            "title": "Additional Schemes",
+            "description": "Additional card schemes associated with the BIN.",
+            "examples": [
+              [
+                "visa-debit",
+                "electron"
+              ]
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "bin"
+        ],
+        "title": "CheckoutSessionCardDetails"
+      },
+      "CheckoutSessionCardDetailsRequest": {
+        "properties": {
+          "bin": {
+            "type": "string",
+            "maxLength": 8,
+            "minLength": 6,
+            "pattern": "^\\d+$",
+            "title": "Bin",
+            "description": "The first 6 to 8 digits of a card number.",
+            "examples": [
+              "41111111"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "bin"
+        ],
+        "title": "CheckoutSessionCardDetailsRequest"
       },
       "CheckoutSessionCardPaymentMethod": {
         "properties": {
