@@ -50529,11 +50529,12 @@
           "async_capture": {
             "type": "boolean",
             "title": "Async Capture",
-            "description": "Whether to capture the transaction asynchronously.\n\n- When `async_capture` is `false` (default), the transaction is captured in the same request.\n- When `async_capture` is `true`, the transaction is automatically captured at a later time.\n\nRedirect transactions are not affected by this flag. This flag can only be set to `true` when `intent` is set to `capture`.",
+            "description": "Whether to capture the transaction asynchronously when an authorization-capture split occurs.\n\nThis flag is only used if the transaction flow is split between authorization and capture.\nThe split itself is not controlled by this flag and depends on other conditions, including delayed capture support, direct capture support, card scheme, gift cards, and anti-fraud decision.\n\n- When `async_capture` is `false` (default) and applicable, the capture is attempted in the same request.\n- When `async_capture` is `true` and applicable, the capture is performed outside the context of this request.\n\nRedirect transactions are not affected by this flag. This flag can only be set to `true` when `intent` is set to `capture`. Please check the public documentation for full authorization-capture split behavior details.",
             "default": false,
             "examples": [
               true
-            ]
+            ],
+            "x-gr4vy-docs-ignore": true
           },
           "anti_fraud_fingerprint": {
             "anyOf": [
