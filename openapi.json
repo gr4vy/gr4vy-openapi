@@ -38765,6 +38765,7 @@
           "paymaya",
           "paypal",
           "paypalpaylater",
+          "paypay",
           "payto",
           "payvalida",
           "picpay",
@@ -45769,6 +45770,7 @@
               "paymaya",
               "paypal",
               "paypalpaylater",
+              "paypay",
               "payto",
               "payvalida",
               "picpay",
@@ -56323,6 +56325,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `adyen-ideal` connector."
+          },
+          "adyen-paypay": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `adyen-paypay` connector."
           },
           "adyen-pix": {
             "anyOf": [
