@@ -33742,7 +33742,7 @@
       "CheckoutSessionSecureFields": {
         "properties": {
           "payment_method": {
-            "anyOf": [
+            "oneOf": [
               {
                 "$ref": "#/components/schemas/CheckoutSessionCardPaymentMethod"
               },
@@ -33754,7 +33754,15 @@
               }
             ],
             "title": "Payment Method",
-            "description": "The details of the payment method to update."
+            "description": "The details of the payment method to update.",
+            "discriminator": {
+              "propertyName": "method",
+              "mapping": {
+                "card": "#/components/schemas/CheckoutSessionCardPaymentMethod",
+                "click-to-pay": "#/components/schemas/CheckoutSessionClickToPayPaymentMethod",
+                "id": "#/components/schemas/CheckoutSessionIdPaymentMethod"
+              }
+            }
           },
           "postal_code": {
             "anyOf": [
