@@ -56526,6 +56526,18 @@
             "default": null,
             "description": "Custom options to be passed to the `dlocal-pix` connector."
           },
+          "dlocal-gcash": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DlocalOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `dlocal-gcash` connector."
+          },
           "fiserv-card": {
             "anyOf": [
               {
