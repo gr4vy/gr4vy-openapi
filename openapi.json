@@ -35951,6 +35951,54 @@
             "examples": [
               "2013-07-16T19:23:00.000+00:00"
             ]
+          },
+          "last_used_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Used At",
+            "description": "The timestamp when this gift card was last used in a transaction.",
+            "examples": [
+              "2013-07-16T19:23:00.000+00:00"
+            ]
+          },
+          "usage_count": {
+            "type": "integer",
+            "title": "Usage Count",
+            "description": "The number of times this gift card has been used in transactions.",
+            "examples": [
+              100
+            ]
+          },
+          "cit_last_used_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cit Last Used At",
+            "description": "The timestamp when this gift card was last used in a transaction for client initiated transactions.",
+            "examples": [
+              "2013-07-16T19:23:00.000+00:00"
+            ]
+          },
+          "cit_usage_count": {
+            "type": "integer",
+            "title": "Cit Usage Count",
+            "description": "The number of times this gift card has been used in transactions for client initiated transactions.",
+            "examples": [
+              50
+            ]
           }
         },
         "additionalProperties": false,
@@ -35963,7 +36011,9 @@
           "sub_bin",
           "last4",
           "created_at",
-          "updated_at"
+          "updated_at",
+          "usage_count",
+          "cit_usage_count"
         ],
         "title": "GiftCard"
       },
@@ -36485,6 +36535,54 @@
             "examples": [
               "This currency is not supported by the merchant."
             ]
+          },
+          "last_used_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Used At",
+            "description": "The timestamp when this gift card was last used in a transaction.",
+            "examples": [
+              "2013-07-16T19:23:00.000+00:00"
+            ]
+          },
+          "usage_count": {
+            "type": "integer",
+            "title": "Usage Count",
+            "description": "The number of times this gift card has been used in transactions.",
+            "examples": [
+              100
+            ]
+          },
+          "cit_last_used_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cit Last Used At",
+            "description": "The timestamp when this gift card was last used in a transaction for client initiated transactions.",
+            "examples": [
+              "2013-07-16T19:23:00.000+00:00"
+            ]
+          },
+          "cit_usage_count": {
+            "type": "integer",
+            "title": "Cit Usage Count",
+            "description": "The number of times this gift card has been used in transactions for client initiated transactions.",
+            "examples": [
+              50
+            ]
           }
         },
         "additionalProperties": false,
@@ -36493,7 +36591,9 @@
           "merchant_account_id",
           "bin",
           "sub_bin",
-          "last4"
+          "last4",
+          "usage_count",
+          "cit_usage_count"
         ],
         "title": "GiftCardSummary"
       },
