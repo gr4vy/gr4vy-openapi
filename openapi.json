@@ -31898,7 +31898,7 @@
             "title": "Scheme Icon Url",
             "description": "URL to the card scheme's icon.",
             "examples": [
-              "https://api.example.gr4vy.app/assets/icons/card-scheme-definitions/mastercard.svg"
+              "https://cdn.example.gr4vy.app/assets/icons/card-schemes/mastercard.svg"
             ]
           },
           "country": {
@@ -33328,7 +33328,7 @@
             "title": "Scheme Icon Url",
             "description": "URL to the card scheme's icon.",
             "examples": [
-              "https://api.example.gr4vy.app/assets/icons/card-schemes/mastercard.svg"
+              "https://cdn.example.gr4vy.app/assets/icons/card-schemes/mastercard.svg"
             ]
           },
           "additional_schemes": {
