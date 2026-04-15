@@ -4309,6 +4309,59 @@
             }
           },
           {
+            "name": "sort_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "const": "last_used_at",
+                  "type": "string"
+                },
+                {
+                  "const": "usage_count",
+                  "type": "string"
+                },
+                {
+                  "const": "cit_last_used_at",
+                  "type": "string"
+                },
+                {
+                  "const": "cit_usage_count",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The field to sort the gift cards by.",
+              "examples": [
+                "last_used_at"
+              ],
+              "title": "Sort By"
+            },
+            "description": "The field to sort the gift cards by."
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string",
+              "description": "The direction to sort the gift cards in.",
+              "examples": [
+                "desc"
+              ],
+              "default": "desc",
+              "title": "Order By"
+            },
+            "description": "The direction to sort the gift cards in."
+          },
+          {
             "name": "x-gr4vy-merchant-account-id",
             "in": "header",
             "required": false,
