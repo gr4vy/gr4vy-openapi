@@ -42687,6 +42687,35 @@
               100
             ]
           },
+          "scheme_transaction_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheme Transaction Id",
+            "description": "The scheme transaction identifier stored against this payment method.",
+            "examples": [
+              "123456789012345"
+            ]
+          },
+          "scheme_transaction_id_scheme": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CardScheme"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The scheme associated with scheme_transaction_id. Only applies to card payments.",
+            "examples": [
+              "visa"
+            ]
+          },
           "buyer": {
             "anyOf": [
               {
@@ -42750,6 +42779,8 @@
           "cit_usage_count",
           "has_replacement",
           "usage_count",
+          "scheme_transaction_id",
+          "scheme_transaction_id_scheme",
           "status",
           "created_at",
           "updated_at"
@@ -43301,6 +43332,35 @@
             "examples": [
               100
             ]
+          },
+          "scheme_transaction_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Scheme Transaction Id",
+            "description": "The scheme transaction identifier stored against this payment method.",
+            "examples": [
+              "123456789012345"
+            ]
+          },
+          "scheme_transaction_id_scheme": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CardScheme"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The scheme associated with scheme_transaction_id. Only applies to card payments.",
+            "examples": [
+              "visa"
+            ]
           }
         },
         "additionalProperties": false,
@@ -43311,7 +43371,9 @@
           "merchant_account_id",
           "cit_usage_count",
           "has_replacement",
-          "usage_count"
+          "usage_count",
+          "scheme_transaction_id",
+          "scheme_transaction_id_scheme"
         ],
         "title": "PaymentMethodSummary",
         "description": "Payment Method\n\nA summary of a payment method."
