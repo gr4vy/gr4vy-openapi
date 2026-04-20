@@ -54707,6 +54707,45 @@
         "title": "DlocalWalletOptions",
         "type": "object"
       },
+      "EcommpayOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "booking_start_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The start date of the booking in ISO 8601 format (YYYY-MM-DD). Required for certain MCCs.",
+            "examples": [
+              "2030-12-01"
+            ],
+            "title": "Booking Start Date"
+          },
+          "booking_end_date": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The end date of the booking in ISO 8601 format (YYYY-MM-DD). Required for certain MCCs.",
+            "examples": [
+              "2030-12-10"
+            ],
+            "title": "Booking End Date"
+          }
+        },
+        "title": "EcommpayOptions",
+        "type": "object"
+      },
       "FiservInstallmentOptions": {
         "additionalProperties": false,
         "properties": {
@@ -56752,6 +56791,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `dlocal-gcash` connector."
+          },
+          "ecommpay-card": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EcommpayOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `ecommpay-card` connector."
           },
           "fiserv-card": {
             "anyOf": [
