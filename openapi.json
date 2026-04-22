@@ -35300,7 +35300,8 @@
         "enum": [
           "apple",
           "google",
-          "click-to-pay"
+          "click-to-pay",
+          "paze"
         ],
         "title": "DigitalWalletProvider"
       },
@@ -39129,6 +39130,7 @@
           "paypay",
           "payto",
           "payvalida",
+          "paze",
           "picpay",
           "pix",
           "plaid",
@@ -40095,7 +40097,8 @@
           "checkout-session",
           "click-to-pay",
           "gift-card",
-          "bank"
+          "bank",
+          "paze"
         ],
         "title": "Mode"
       },
