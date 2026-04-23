@@ -35116,6 +35116,63 @@
               "US"
             ]
           },
+          "merchant_category_code": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 4,
+                "minLength": 4
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Merchant Category Code",
+            "description": "Merchant classification for the type of goods or services it provides.",
+            "examples": [
+              "5411"
+            ]
+          },
+          "address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DigitalWalletAddress"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The merchant address associated with the digital wallet."
+          },
+          "extra_configuration": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extra Configuration",
+            "description": "Provider-specific configuration. Currently only used by Paze.",
+            "examples": [
+              {
+                "network_mid_list": [
+                  {
+                    "mid": "1234567890",
+                    "scheme": "visa"
+                  }
+                ],
+                "network_name_list": [
+                  {
+                    "expected_auth_name": "ACME",
+                    "scheme": "visa"
+                  }
+                ]
+              }
+            ]
+          },
           "domain_names": {
             "items": {
               "type": "string"
@@ -35205,6 +35262,76 @@
         ],
         "title": "DigitalWallet"
       },
+      "DigitalWalletAddress": {
+        "properties": {
+          "line1": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Line1",
+            "description": "The first line of the address.",
+            "examples": [
+              "Stafford Appartments"
+            ]
+          },
+          "line2": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 255,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Line2",
+            "description": "The second line of the address.",
+            "examples": [
+              "29th Street"
+            ]
+          },
+          "city": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "City",
+            "description": "The city for the address.",
+            "examples": [
+              "San Jose"
+            ]
+          },
+          "state_code": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}-[A-Z0-9]{1,3}$",
+            "title": "State Code",
+            "description": "The code of state, county, or province for the address in ISO 3166-2 format.",
+            "examples": [
+              "GB-LND",
+              "US-CA"
+            ]
+          },
+          "postal_code": {
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 1,
+            "title": "Postal Code",
+            "description": "The zip or postal code for the address.",
+            "examples": [
+              "94560"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "line1",
+          "city",
+          "state_code",
+          "postal_code"
+        ],
+        "title": "DigitalWalletAddress"
+      },
       "DigitalWalletCreate": {
         "properties": {
           "provider": {
@@ -35254,6 +35381,41 @@
               }
             ],
             "title": "Merchant Country Code"
+          },
+          "merchant_category_code": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 4,
+                "minLength": 4
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Merchant Category Code"
+          },
+          "address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DigitalWalletAddress"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "extra_configuration": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extra Configuration"
           },
           "domain_names": {
             "items": {
@@ -35371,6 +35533,41 @@
               }
             ],
             "title": "Merchant Country Code"
+          },
+          "merchant_category_code": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 4,
+                "minLength": 4
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Merchant Category Code"
+          },
+          "address": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DigitalWalletAddress"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "extra_configuration": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extra Configuration"
           }
         },
         "additionalProperties": false,
