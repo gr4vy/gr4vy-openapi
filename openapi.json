@@ -35136,7 +35136,7 @@
           "address": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/DigitalWalletAddress"
+                "$ref": "#/components/schemas/api__types__DigitalWalletAddress"
               },
               {
                 "type": "null"
@@ -53877,6 +53877,47 @@
           "items"
         ],
         "title": "WebhookSubscriptions"
+      },
+      "api__types__DigitalWalletAddress": {
+        "properties": {
+          "line1": {
+            "type": "string",
+            "title": "Line1"
+          },
+          "line2": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Line2"
+          },
+          "city": {
+            "type": "string",
+            "title": "City"
+          },
+          "state_code": {
+            "type": "string",
+            "title": "State Code"
+          },
+          "postal_code": {
+            "type": "string",
+            "title": "Postal Code"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "line1",
+          "line2",
+          "city",
+          "state_code",
+          "postal_code"
+        ],
+        "title": "DigitalWalletAddress"
       },
       "AccountUpdaterOptions": {
         "additionalProperties": false,
