@@ -34021,8 +34021,8 @@
             "anyOf": [
               {
                 "type": "string",
-                "maxLength": 22,
-                "minLength": 5
+                "maxLength": 50,
+                "minLength": 1
               },
               {
                 "type": "null"
