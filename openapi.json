@@ -46184,6 +46184,159 @@
         "title": "PayoutSummary",
         "description": "PayoutSummary\n\nRepresents a summary of a payout."
       },
+      "PazePaymentMethodCreate": {
+        "properties": {
+          "buyer_external_identifier": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer External Identifier",
+            "description": "The external identifier of the buyer to create a payment for.",
+            "examples": [
+              "buyer-12345"
+            ]
+          },
+          "buyer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer Id",
+            "description": "The ID of the buyer to retrieve billing details for.",
+            "examples": [
+              "fe26475d-ec3e-4884-9553-f7356683f7f9"
+            ]
+          },
+          "cardholder_name": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Cardholder Name",
+            "description": "The card holder name associated to the original card for the token.",
+            "examples": [
+              "John Luhn"
+            ]
+          },
+          "redirect_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "pattern": "^data:application/json;base64,.*$",
+                "examples": [
+                  "data:application/json;base64,eyJ0YXJnZXQiOiAib3BlbmVyIiwgImNoYW5uZWwiOiAiY2hhbm5lbCIsICJvcmlnaW5fdXJsIjogImh0dHBzOi8vZ3I0dnkuYXBwIn0="
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Redirect Url",
+            "description": "The URL to redirect a user back to after the complete 3DS in browser.",
+            "examples": [
+              "https://example.com"
+            ]
+          },
+          "card_suffix": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 4,
+                "minLength": 4
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Card Suffix",
+            "description": "The last 4 digits of the original card used to generate the token.",
+            "examples": [
+              "1234"
+            ]
+          },
+          "card_scheme": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Card Scheme",
+            "description": "The original card scheme for which the token was generated.",
+            "examples": [
+              "visa"
+            ]
+          },
+          "card_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Card Type",
+            "description": "The payment scheme of the card.",
+            "examples": [
+              "credit"
+            ]
+          },
+          "method": {
+            "type": "string",
+            "const": "paze",
+            "title": "Method",
+            "description": "Always `paze`",
+            "examples": [
+              "paze"
+            ]
+          },
+          "token": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
+              }
+            ],
+            "title": "Token",
+            "description": "The opaque token as received from the Paze complete response."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "method",
+          "token"
+        ],
+        "title": "PazePaymentMethodCreate",
+        "description": "Create a Paze transaction with a device token."
+      },
       "PlaidPaymentMethodCreate": {
         "properties": {
           "method": {
@@ -51183,6 +51336,9 @@
               },
               {
                 "$ref": "#/components/schemas/GooglePayFPANPaymentMethodCreate"
+              },
+              {
+                "$ref": "#/components/schemas/PazePaymentMethodCreate"
               },
               {
                 "$ref": "#/components/schemas/NetworkTokenPaymentMethodCreate"
