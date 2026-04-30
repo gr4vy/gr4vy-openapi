@@ -26237,6 +26237,30 @@
             "description": "Filters the results to only include transactions that were processed with the specified 3DS rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any 3DS rule."
           },
           {
+            "name": "rule_variant_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filters the results to only include transactions that were processed with the specified split routing rule outcome variant. The variant ID should be in UUID format.",
+              "examples": [
+                "9897134a-fd29-4b0f-9391-a5cf965f0859"
+              ],
+              "title": "Rule Variant Id"
+            },
+            "description": "Filters the results to only include transactions that were processed with the specified split routing rule outcome variant. The variant ID should be in UUID format."
+          },
+          {
             "name": "three_d_secure_auth_resp",
             "in": "query",
             "required": false,
@@ -27041,6 +27065,30 @@
               "title": "Rule Id Skip 3Ds"
             },
             "description": "Filters the results to only include transactions that were processed with the specified 3DS rule. The rule ID should be in UUID format.This parameter also accepts [the null character](https://en.wikipedia.org/wiki/Null_character) to include transactions that were not processed by any 3DS rule."
+          },
+          {
+            "name": "rule_variant_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filters the results to only include transactions that were processed with the specified split routing rule outcome variant. The variant ID should be in UUID format.",
+              "examples": [
+                "9897134a-fd29-4b0f-9391-a5cf965f0859"
+              ],
+              "title": "Rule Variant Id"
+            },
+            "description": "Filters the results to only include transactions that were processed with the specified split routing rule outcome variant. The variant ID should be in UUID format."
           },
           {
             "name": "three_d_secure_auth_resp",
@@ -39763,6 +39811,24 @@
               "c2fefd1b-6ed0-4038-bbc8-48ea2fb7e9f7"
             ]
           },
+          "rule_variant_id": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rule Variant Id",
+            "description": "Filters the results to only include transactions that were processed with the specified split routing rule outcome variant. The variant ID should be in UUID format.",
+            "examples": [
+              "9897134a-fd29-4b0f-9391-a5cf965f0859"
+            ]
+          },
           "three_d_secure_auth_resp": {
             "anyOf": [
               {
@@ -39858,6 +39924,7 @@
           "raw_response_code",
           "rule_route_transaction",
           "rule_skip_3ds",
+          "rule_variant_id",
           "three_d_secure_auth_resp",
           "three_d_secure_eci",
           "three_d_secure_method"
