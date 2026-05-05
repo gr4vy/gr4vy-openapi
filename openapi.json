@@ -46382,15 +46382,7 @@
             ]
           },
           "token": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "additionalProperties": true,
-                "type": "object"
-              }
-            ],
+            "type": "string",
             "title": "Token",
             "description": "The opaque token as received from the Paze complete response."
           }
