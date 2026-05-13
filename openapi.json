@@ -51473,6 +51473,37 @@
           "transaction": {
             "$ref": "#/components/schemas/Transaction",
             "description": "The transaction associated to this capture."
+          },
+          "capture_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Capture Id",
+            "description": "The ID of the capture resource created for this capture.",
+            "examples": [
+              "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5"
+            ]
+          },
+          "payment_service_capture_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Payment Service Capture Id",
+            "description": "The payment service's unique ID for the capture.",
+            "examples": [
+              "capture-12345"
+            ]
           }
         },
         "additionalProperties": false,
