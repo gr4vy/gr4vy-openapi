@@ -29802,6 +29802,39 @@
         ],
         "title": "AccountsReceivablesReportSpec"
       },
+      "AdditionalSchemeDetail": {
+        "properties": {
+          "scheme": {
+            "$ref": "#/components/schemas/CardScheme",
+            "description": "The card scheme/network.",
+            "examples": [
+              "eftpos-australia"
+            ]
+          },
+          "icon_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Icon Url",
+            "description": "URL to the card scheme's icon. Null when the scheme has no icon.",
+            "examples": [
+              "https://cdn.example.gr4vy.app/assets/icons/card-schemes/eftpos-australia.svg"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "scheme",
+          "icon_url"
+        ],
+        "title": "AdditionalSchemeDetail"
+      },
       "Address": {
         "properties": {
           "city": {
@@ -32318,6 +32351,29 @@
             "examples": [
               [
                 "eftpos-australia"
+              ]
+            ]
+          },
+          "additional_schemes_details": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/AdditionalSchemeDetail"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Additional Schemes Details",
+            "description": "Per-scheme details (name and icon URL) for each additional scheme. Mirrors `additional_schemes` \u2014 null when `additional_schemes` is null.",
+            "examples": [
+              [
+                {
+                  "icon_url": "https://cdn.example.gr4vy.app/assets/icons/card-schemes/eftpos-australia.svg",
+                  "scheme": "eftpos-australia"
+                }
               ]
             ]
           },
