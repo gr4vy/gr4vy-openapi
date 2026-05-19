@@ -51574,6 +51574,21 @@
             "examples": [
               "capture-12345"
             ]
+          },
+          "external_identifier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Identifier",
+            "description": "The external identifier for the capture.",
+            "examples": [
+              "capture-12345"
+            ]
           }
         },
         "additionalProperties": false,
