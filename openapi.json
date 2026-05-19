@@ -46630,6 +46630,18 @@
             "type": "string",
             "title": "Token",
             "description": "The opaque token as received from the Paze complete response."
+          },
+          "checkout_token": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Checkout Token",
+            "description": "The signed checkout JWS as received from the Paze checkout response."
           }
         },
         "additionalProperties": false,
