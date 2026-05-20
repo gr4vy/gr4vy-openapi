@@ -8309,7 +8309,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PazeSession"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/PazeWebSession"
+                    },
+                    {
+                      "$ref": "#/components/schemas/PazeMobileSession"
+                    }
+                  ],
+                  "title": "Response Create Paze Digital Wallet Session"
                 }
               }
             }
@@ -8435,7 +8443,8 @@
             }
           }
         },
-        "x-speakeasy-ignore": true
+        "x-speakeasy-name-override": "paze",
+        "x-speakeasy-group": "digital-wallets.sessions"
       }
     },
     "/digital-wallets/{digital_wallet_id}/domains": {
@@ -46496,6 +46505,60 @@
         "title": "PayoutSummary",
         "description": "PayoutSummary\n\nRepresents a summary of a payout."
       },
+      "PazeMobileSession": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id",
+            "description": "The Paze merchant data ID.",
+            "examples": [
+              "W8GT9RLCNME754Z7025613H3PDM2T4HF2CSAOi9w2kkP3D4S0"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The merchant display name.",
+            "examples": [
+              "ACME"
+            ]
+          },
+          "profileId": {
+            "type": "string",
+            "title": "Profileid",
+            "description": "The Paze profile ID for the given domain.",
+            "examples": [
+              "550e8400-e29b-41d4-a716-446655440000"
+            ]
+          },
+          "accessToken": {
+            "type": "string",
+            "title": "Accesstoken",
+            "description": "The Paze OAuth access token. Returned only when `source` is `mobile`.",
+            "examples": [
+              "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9..."
+            ]
+          },
+          "sessionId": {
+            "type": "string",
+            "title": "Sessionid",
+            "description": "The Paze session ID. Returned only when `source` is `mobile`.",
+            "examples": [
+              "550e8400-e29b-41d4-a716-446655440000"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "profileId",
+          "accessToken",
+          "sessionId"
+        ],
+        "title": "PazeMobileSession"
+      },
       "PazePaymentMethodCreate": {
         "properties": {
           "buyer_external_identifier": {
@@ -46653,7 +46716,42 @@
         "title": "PazePaymentMethodCreate",
         "description": "Create a Paze transaction with a device token."
       },
-      "PazeSession": {
+      "PazeSessionRequest": {
+        "properties": {
+          "source": {
+            "type": "string",
+            "enum": [
+              "web",
+              "mobile"
+            ],
+            "title": "Source",
+            "description": "The platform that the Paze session is being created for. Defaults to `web`.",
+            "default": "web",
+            "examples": [
+              "web"
+            ]
+          },
+          "domain_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Domain Name",
+            "description": "The domain on which Paze is being loaded. Required when `source` is `web`.",
+            "examples": [
+              "example.com"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "PazeSessionRequest"
+      },
+      "PazeWebSession": {
         "properties": {
           "id": {
             "type": "string",
@@ -46687,25 +46785,7 @@
           "name",
           "profileId"
         ],
-        "title": "PazeSession"
-      },
-      "PazeSessionRequest": {
-        "properties": {
-          "domain_name": {
-            "type": "string",
-            "title": "Domain Name",
-            "description": "The domain on which Paze is being loaded.",
-            "examples": [
-              "example.com"
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "domain_name"
-        ],
-        "title": "PazeSessionRequest"
+        "title": "PazeWebSession"
       },
       "PlaidPaymentMethodCreate": {
         "properties": {
