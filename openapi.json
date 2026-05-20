@@ -44148,6 +44148,22 @@
             "examples": [
               "visa"
             ]
+          },
+          "transaction_link_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transaction Link Id",
+            "description": "A transaction link identifier to associate with this payment method.",
+            "examples": [
+              "123456789012345"
+            ]
           }
         },
         "additionalProperties": false,
