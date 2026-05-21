@@ -8447,6 +8447,194 @@
         "x-speakeasy-group": "digital-wallets.sessions"
       }
     },
+    "/digital-wallets/paze/session/review": {
+      "post": {
+        "tags": [
+          "Digital wallets - Sessions"
+        ],
+        "summary": "Review a Paze session",
+        "description": "Review a Paze checkout session and retrieve the selected card, consumer, and shipping address details.",
+        "operationId": "review_paze_mobile_session",
+        "security": [
+          {
+            "OAuth2PasswordBearer": []
+          },
+          {
+            "OAuth2PasswordBearer": [
+              "digital-wallets.write",
+              "embed"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "x-gr4vy-merchant-account-id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The ID of the merchant account to use for this request.",
+              "examples": [
+                "default"
+              ],
+              "title": "X-Gr4Vy-Merchant-Account-Id"
+            },
+            "description": "The ID of the merchant account to use for this request."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PazeSessionReviewRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PazeSessionReview"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request was unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The credentials were invalid or the caller did not have permission to act on the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "The request method was not allowed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error405"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A duplicate record was found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "425": {
+            "description": "The request was too early.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error425"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests were made.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error429"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error502"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error504"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-name-override": "paze_mobile_session_review",
+        "x-speakeasy-group": "digital-wallets.sessions"
+      }
+    },
     "/digital-wallets/{digital_wallet_id}/domains": {
       "post": {
         "tags": [
@@ -46551,6 +46739,416 @@
         "title": "PayoutSummary",
         "description": "PayoutSummary\n\nRepresents a summary of a payout."
       },
+      "PazeBillingAddress": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name",
+            "description": "Name of the organization or entity at the address."
+          },
+          "line1": {
+            "type": "string",
+            "title": "Line1",
+            "description": "Line 1 of the address."
+          },
+          "line2": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Line2",
+            "description": "Line 2 of the address."
+          },
+          "line3": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Line3",
+            "description": "Line 3 of the address."
+          },
+          "city": {
+            "type": "string",
+            "title": "City",
+            "description": "City."
+          },
+          "state": {
+            "type": "string",
+            "title": "State",
+            "description": "State or region."
+          },
+          "zip": {
+            "type": "string",
+            "title": "Zip",
+            "description": "Postal code."
+          },
+          "countryCode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Countrycode",
+            "description": "ISO 3166-1 alpha-2 country code."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "line1",
+          "line2",
+          "line3",
+          "city",
+          "state",
+          "zip",
+          "countryCode"
+        ],
+        "title": "PazeBillingAddress"
+      },
+      "PazeConsumer": {
+        "properties": {
+          "firstName": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Firstname",
+            "description": "First name of the consumer.",
+            "examples": [
+              "Team"
+            ]
+          },
+          "lastName": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lastname",
+            "description": "Last name of the consumer.",
+            "examples": [
+              "Integrations"
+            ]
+          },
+          "fullName": {
+            "type": "string",
+            "title": "Fullname",
+            "description": "Full name of the consumer.",
+            "examples": [
+              "Team Integrations"
+            ]
+          },
+          "countryCode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Countrycode",
+            "description": "ISO 3166-1 alpha-2 country code.",
+            "examples": [
+              "US"
+            ]
+          },
+          "languageCode": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Languagecode",
+            "description": "ISO 639-1 language code associated with the wallet.",
+            "examples": [
+              "EN"
+            ]
+          },
+          "emailAddress": {
+            "type": "string",
+            "title": "Emailaddress",
+            "description": "Email address of the consumer.",
+            "examples": [
+              "integrations@gr4vy.com"
+            ]
+          },
+          "mobileNumber": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PazeMobileNumber"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "firstName",
+          "lastName",
+          "fullName",
+          "countryCode",
+          "languageCode",
+          "emailAddress",
+          "mobileNumber"
+        ],
+        "title": "PazeConsumer"
+      },
+      "PazeDeliveryContactDetails": {
+        "properties": {
+          "contactFullName": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contactfullname",
+            "description": "Consumer-provided name of the contact person.",
+            "examples": [
+              "Team Integrations"
+            ]
+          },
+          "contactPhoneNumber": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PazeMobileNumber"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "contactFullName",
+          "contactPhoneNumber"
+        ],
+        "title": "PazeDeliveryContactDetails"
+      },
+      "PazeDigitalCardData": {
+        "properties": {
+          "artUri": {
+            "type": "string",
+            "title": "Arturi",
+            "description": "URI hosting the card art image.",
+            "examples": [
+              "https://sandbox.assets.vims.visa.com/vims/cardart/8f64614def1a41d39ea8acae4616bf6f_imageC"
+            ]
+          },
+          "artHeight": {
+            "type": "integer",
+            "title": "Artheight",
+            "description": "Card art height in pixels.",
+            "examples": [
+              50
+            ]
+          },
+          "artWidth": {
+            "type": "integer",
+            "title": "Artwidth",
+            "description": "Card art width in pixels.",
+            "examples": [
+              80
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "artUri",
+          "artHeight",
+          "artWidth"
+        ],
+        "title": "PazeDigitalCardData"
+      },
+      "PazeMaskedCard": {
+        "properties": {
+          "panLastFour": {
+            "type": "string",
+            "title": "Panlastfour",
+            "description": "Last four digits of the PAN.",
+            "examples": [
+              "2121"
+            ]
+          },
+          "paymentAccountReference": {
+            "type": "string",
+            "title": "Paymentaccountreference",
+            "description": "Payment Account Reference (PAR). A non-financial reference assigned to each unique PAN.",
+            "examples": [
+              "V0010013023108318841413393850"
+            ]
+          },
+          "panExpirationMonth": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Panexpirationmonth",
+            "description": "2-digit PAN expiration month.",
+            "examples": [
+              "05"
+            ]
+          },
+          "panExpirationYear": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Panexpirationyear",
+            "description": "4-digit PAN expiration year.",
+            "examples": [
+              "2032"
+            ]
+          },
+          "paymentCardDescriptor": {
+            "type": "string",
+            "title": "Paymentcarddescriptor",
+            "description": "Free-form string used for card or program recognition.",
+            "examples": [
+              "Visa Hero Card"
+            ]
+          },
+          "paymentCardType": {
+            "type": "string",
+            "enum": [
+              "CREDIT",
+              "DEBIT"
+            ],
+            "title": "Paymentcardtype",
+            "description": "Card type.",
+            "examples": [
+              "CREDIT"
+            ]
+          },
+          "paymentCardBrand": {
+            "type": "string",
+            "enum": [
+              "VISA",
+              "MASTERCARD",
+              "DISCOVER"
+            ],
+            "title": "Paymentcardbrand",
+            "description": "Card brand.",
+            "examples": [
+              "VISA"
+            ]
+          },
+          "paymentCardNetwork": {
+            "type": "string",
+            "enum": [
+              "VISA",
+              "MASTERCARD",
+              "DISCOVER"
+            ],
+            "title": "Paymentcardnetwork",
+            "description": "Card network.",
+            "examples": [
+              "VISA"
+            ]
+          },
+          "digitalCardData": {
+            "$ref": "#/components/schemas/PazeDigitalCardData"
+          },
+          "billingAddress": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PazeBillingAddress"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "panLastFour",
+          "paymentAccountReference",
+          "panExpirationMonth",
+          "panExpirationYear",
+          "paymentCardDescriptor",
+          "paymentCardType",
+          "paymentCardBrand",
+          "paymentCardNetwork",
+          "digitalCardData",
+          "billingAddress"
+        ],
+        "title": "PazeMaskedCard"
+      },
+      "PazeMobileNumber": {
+        "properties": {
+          "countryCode": {
+            "type": "string",
+            "title": "Countrycode",
+            "description": "ITU country dialing code.",
+            "examples": [
+              "1"
+            ]
+          },
+          "phoneNumber": {
+            "type": "string",
+            "title": "Phonenumber",
+            "description": "Phone number without country code.",
+            "examples": [
+              "3213213211"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "countryCode",
+          "phoneNumber"
+        ],
+        "title": "PazeMobileNumber"
+      },
       "PazeMobileSession": {
         "properties": {
           "id": {
@@ -46796,6 +47394,217 @@
         "additionalProperties": false,
         "type": "object",
         "title": "PazeSessionRequest"
+      },
+      "PazeSessionReview": {
+        "properties": {
+          "consumer": {
+            "$ref": "#/components/schemas/PazeConsumer"
+          },
+          "shippingAddress": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PazeShippingAddress"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "maskedCard": {
+            "$ref": "#/components/schemas/PazeMaskedCard"
+          },
+          "links": {
+            "$ref": "#/components/schemas/PazeSessionReviewLinks"
+          },
+          "code": {
+            "type": "string",
+            "title": "Code",
+            "description": "Opaque token issued by the Paze service to be used in the next Paze interaction.",
+            "examples": [
+              "eyJhdWQiOm51bGwsImtpZCI6IjE3..."
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "consumer",
+          "shippingAddress",
+          "maskedCard",
+          "links",
+          "code"
+        ],
+        "title": "PazeSessionReview"
+      },
+      "PazeSessionReviewLinks": {
+        "properties": {
+          "CHANGE_CARD": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Change Card",
+            "description": "Follow-up link to change the selected card.",
+            "examples": [
+              "https://checkout.wallet.uat.earlywarning.io/..."
+            ]
+          },
+          "CHANGE_SHIPPING_ADDRESS": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Change Shipping Address",
+            "description": "Follow-up link to change the shipping address.",
+            "examples": [
+              "https://checkout.wallet.uat.earlywarning.io/..."
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "CHANGE_CARD",
+          "CHANGE_SHIPPING_ADDRESS"
+        ],
+        "title": "PazeSessionReviewLinks"
+      },
+      "PazeSessionReviewRequest": {
+        "properties": {
+          "sessionId": {
+            "type": "string",
+            "maxLength": 255,
+            "title": "Sessionid",
+            "description": "Session reference identifier generated by the merchant. Must match the value sent in the Paze session create call.",
+            "examples": [
+              "7c1cba03-d20e-4a3f-9d77-e5dc23a39ac2"
+            ]
+          },
+          "code": {
+            "type": "string",
+            "maxLength": 10240,
+            "title": "Code",
+            "description": "Opaque token issued by the Paze service in the response from the most recent Paze UX interaction (checkout, change card, or change shipping address).",
+            "examples": [
+              "eyJhdWQiOm51bGwsImtpZCI6IjE3..."
+            ]
+          },
+          "accessToken": {
+            "type": "string",
+            "title": "Accesstoken",
+            "description": "The Paze OAuth access token returned by the Paze mobile session create call. Used to authenticate the request to Paze.",
+            "examples": [
+              "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9..."
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "sessionId",
+          "code",
+          "accessToken"
+        ],
+        "title": "PazeSessionReviewRequest"
+      },
+      "PazeShippingAddress": {
+        "properties": {
+          "line1": {
+            "type": "string",
+            "title": "Line1",
+            "description": "Line 1 of the address.",
+            "examples": [
+              "51551 Raynor Stream"
+            ]
+          },
+          "line2": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Line2",
+            "description": "Line 2 of the address."
+          },
+          "line3": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Line3",
+            "description": "Line 3 of the address."
+          },
+          "city": {
+            "type": "string",
+            "title": "City",
+            "description": "City.",
+            "examples": [
+              "East Kory"
+            ]
+          },
+          "state": {
+            "type": "string",
+            "title": "State",
+            "description": "State or region.",
+            "examples": [
+              "ND"
+            ]
+          },
+          "zip": {
+            "type": "string",
+            "title": "Zip",
+            "description": "Postal code.",
+            "examples": [
+              "67137"
+            ]
+          },
+          "countryCode": {
+            "type": "string",
+            "title": "Countrycode",
+            "description": "ISO 3166-1 alpha-2 country code.",
+            "examples": [
+              "US"
+            ]
+          },
+          "deliveryContactDetails": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PazeDeliveryContactDetails"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "line1",
+          "line2",
+          "line3",
+          "city",
+          "state",
+          "zip",
+          "countryCode",
+          "deliveryContactDetails"
+        ],
+        "title": "PazeShippingAddress"
       },
       "PazeWebSession": {
         "properties": {
