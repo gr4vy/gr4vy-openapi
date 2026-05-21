@@ -50896,6 +50896,21 @@
               "123456789012345"
             ]
           },
+          "transaction_link_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transaction Link Id",
+            "description": "A transaction link identifier for the transaction used by the scheme itself, when available.",
+            "examples": [
+              "123456789012345"
+            ]
+          },
           "three_d_secure": {
             "anyOf": [
               {
@@ -52096,6 +52111,23 @@
             ],
             "title": "Previous Scheme Transaction Id",
             "description": "A scheme's transaction identifier to use in connecting a merchant initiated transaction to a previous customer initiated transaction. If not provided, and a qualifying customer initiated transaction has been previously made with the stored payment method, then Gr4vy will populate this value with the identifier returned for that transaction. This field is also know as the Visa Transaction Identifier, or Mastercard Trace ID.",
+            "examples": [
+              "123456789012345"
+            ]
+          },
+          "previous_transaction_link_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Previous Transaction Link Id",
+            "description": "A scheme's transaction link identifier to use in connecting a merchant initiated transaction to a previous customer initiated transaction. If not provided, and a qualifying customer initiated transaction has been previously made with the stored payment method, then Gr4vy will populate this value with the identifier returned for that transaction. This field is also know as the Mastercard Transaction Link ID (TLID).",
             "examples": [
               "123456789012345"
             ]
