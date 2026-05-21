@@ -43437,6 +43437,21 @@
               "visa"
             ]
           },
+          "transaction_link_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transaction Link Id",
+            "description": "The transaction link identifier stored against this payment method.",
+            "examples": [
+              "123456789012345"
+            ]
+          },
           "buyer": {
             "anyOf": [
               {
@@ -44081,6 +44096,21 @@
             "description": "The scheme associated with scheme_transaction_id. Only applies to card payments.",
             "examples": [
               "visa"
+            ]
+          },
+          "transaction_link_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transaction Link Id",
+            "description": "The transaction link identifier stored against this payment method.",
+            "examples": [
+              "123456789012345"
             ]
           }
         },
