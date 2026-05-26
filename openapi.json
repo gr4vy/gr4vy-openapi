@@ -35642,6 +35642,14 @@
             "examples": [
               true
             ]
+          },
+          "verifiable": {
+            "type": "boolean",
+            "title": "Verifiable",
+            "description": "Defines if this field can be verified through the verify credentials button.",
+            "examples": [
+              true
+            ]
           }
         },
         "additionalProperties": false,
@@ -35651,7 +35659,8 @@
           "display_name",
           "required",
           "format",
-          "secret"
+          "secret",
+          "verifiable"
         ],
         "title": "DefinitionField",
         "description": "A single field that needs to be submitted for a payment service when it is created."
