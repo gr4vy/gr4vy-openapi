@@ -53134,9 +53134,7 @@
               }
             ],
             "title": "Cart Items",
-            "description": "An array of cart items that represents the line items of this capture.",
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            "description": "An array of cart items that represents the line items of this capture."
           },
           "final": {
             "type": "boolean",
