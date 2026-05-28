@@ -40170,6 +40170,7 @@
           "kcp",
           "khipu",
           "klarna",
+          "konbini",
           "latitude",
           "latitudeds",
           "laybuy",
@@ -40213,6 +40214,7 @@
           "scalapay",
           "sepa",
           "servipag",
+          "seveneleven",
           "shopeepay",
           "singteldash",
           "smartpay",
@@ -49120,6 +49122,7 @@
               "kcp",
               "khipu",
               "klarna",
+              "konbini",
               "latitude",
               "latitudeds",
               "laybuy",
@@ -49160,6 +49163,7 @@
               "scalapay",
               "sepa",
               "servipag",
+              "seveneleven",
               "shopeepay",
               "singteldash",
               "smartpay",
@@ -60039,6 +60043,18 @@
             "default": null,
             "description": "Custom options to be passed to the `adyen-ideal` connector."
           },
+          "adyen-konbini": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `adyen-konbini` connector."
+          },
           "adyen-paypay": {
             "anyOf": [
               {
@@ -60074,6 +60090,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `adyen-sepa` connector."
+          },
+          "adyen-seveneleven": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `adyen-seveneleven` connector."
           },
           "adyen-sofort": {
             "anyOf": [
