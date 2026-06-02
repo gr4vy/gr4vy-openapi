@@ -59959,6 +59959,18 @@
             "default": null,
             "description": "Custom options to be passed to the `account-updater` connector, allowing for simulating different account updater responses."
           },
+          "adyen-ach": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `adyen-ach` connector."
+          },
           "adyen-afterpay": {
             "anyOf": [
               {
