@@ -46023,7 +46023,7 @@
             "anyOf": [
               {
                 "type": "string",
-                "maxLength": 300,
+                "maxLength": 10000,
                 "minLength": 1
               },
               {
