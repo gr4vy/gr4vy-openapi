@@ -40197,6 +40197,7 @@
           "oxxo",
           "p24",
           "pagoefectivo",
+          "paybybank",
           "payid",
           "paymaya",
           "paysquad",
@@ -49151,6 +49152,7 @@
               "oxxo",
               "p24",
               "pagoefectivo",
+              "paybybank",
               "payid",
               "paymaya",
               "paysquad",
@@ -60072,6 +60074,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `adyen-konbini` connector."
+          },
+          "adyen-paybybank": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `adyen-paybybank` connector."
           },
           "adyen-paypay": {
             "anyOf": [
