@@ -59895,7 +59895,7 @@
               }
             ],
             "default": null,
-            "description": "Customer\u2019s document type",
+            "description": "Customer's document type",
             "examples": [
               "CC"
             ],
@@ -59911,7 +59911,7 @@
               }
             ],
             "default": null,
-            "description": "Customer\u2019s document number",
+            "description": "Customer's document number",
             "examples": [
               "CC"
             ],
