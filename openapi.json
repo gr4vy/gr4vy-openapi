@@ -40844,6 +40844,7 @@
           "capitec",
           "card",
           "cashapp",
+          "cashappafterpay",
           "chaseorbital",
           "clearpay",
           "click-to-pay",
@@ -49806,6 +49807,7 @@
               "ach",
               "capitec",
               "cashapp",
+              "cashappafterpay",
               "clearpay",
               "custom_push",
               "custom_redirect",
@@ -60689,6 +60691,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `adyen-afterpay` connector."
+          },
+          "adyen-cashappafterpay": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AdyenOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `adyen-cashappafterpay` connector."
           },
           "adyen-alipay": {
             "anyOf": [
