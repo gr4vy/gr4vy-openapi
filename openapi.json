@@ -57621,6 +57621,74 @@
             ],
             "default": null,
             "description": "Passes information of splitting payment amounts to the Adyen API."
+          },
+          "merchantRiskIndicator": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `merchantRiskIndicator` data to Adyen.",
+            "title": "Merchantriskindicator"
+          },
+          "accountInfo": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `accountInfo` data to Adyen.",
+            "title": "Accountinfo"
+          },
+          "riskData": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `riskData.customFields` to Adyen.",
+            "title": "Riskdata"
+          },
+          "threeDSRequestorChallengeInd": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `threeDS2RequestData.threeDSRequestorChallengeInd` to Adyen.",
+            "title": "Threedsrequestorchallengeind"
+          },
+          "attemptAuthentication": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Passes `authenticationData.attemptAuthentication` to Adyen.",
+            "title": "Attemptauthentication"
           }
         },
         "title": "AdyenCardOptions",
