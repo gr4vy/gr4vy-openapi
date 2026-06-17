@@ -36559,6 +36559,7 @@
         "enum": [
           "text",
           "multiline",
+          "file",
           "number",
           "timezone",
           "boolean"
@@ -37837,7 +37838,7 @@
           },
           "value": {
             "type": "string",
-            "maxLength": 5000,
+            "maxLength": 10000,
             "minLength": 1,
             "title": "Value",
             "description": "The value of the configured field.",
@@ -56927,7 +56928,7 @@
             "anyOf": [
               {
                 "type": "string",
-                "maxLength": 5000,
+                "maxLength": 10000,
                 "minLength": 1
               },
               {
