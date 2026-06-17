@@ -60050,6 +60050,18 @@
       "PaypalOptions": {
         "additionalProperties": false,
         "properties": {
+          "order_update_callback_config": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PaypalOrderUpdateCallbackConfig"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Configuration for server-side callbacks during the PayPal checkout flow."
+          },
           "additional_data": {
             "anyOf": [
               {
@@ -60104,6 +60116,55 @@
           }
         },
         "title": "PaypalOptions",
+        "type": "object"
+      },
+      "PaypalOrderUpdateCallbackConfig": {
+        "additionalProperties": false,
+        "properties": {
+          "callback_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The URL for the webhook endpoint you provide for PayPal to send you order update events.",
+            "examples": [
+              "https://example.com/callback"
+            ],
+            "title": "Callback Url"
+          },
+          "callback_events": {
+            "anyOf": [
+              {
+                "items": {
+                  "enum": [
+                    "SHIPPING_ADDRESS",
+                    "SHIPPING_OPTIONS"
+                  ],
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The events that trigger a callback.",
+            "examples": [
+              [
+                "SHIPPING_ADDRESS",
+                "SHIPPING_OPTIONS"
+              ]
+            ],
+            "title": "Callback Events"
+          }
+        },
+        "title": "PaypalOrderUpdateCallbackConfig",
         "type": "object"
       },
       "PaypalShippingOptions": {
