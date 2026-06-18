@@ -10533,6 +10533,30 @@
             "description": "Filters for transactions that have been disputed."
           },
           {
+            "name": "reauthorized_from_transaction_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filters for transactions that were reauthorized from the transaction with the provided ID.",
+              "examples": [
+                "fe26475d-ec3e-4884-9553-f7356683f7f9"
+              ],
+              "x-speakeasy-ignore": true,
+              "x-gr4vy-docs-ignore": true,
+              "title": "Reauthorized From Transaction Id"
+            },
+            "description": "Filters for transactions that were reauthorized from the transaction with the provided ID."
+          },
+          {
             "name": "buyer_search",
             "in": "query",
             "required": false,
