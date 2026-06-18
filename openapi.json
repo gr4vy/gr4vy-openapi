@@ -53559,6 +53559,24 @@
               true
             ]
           },
+          "reauthorized_from_transaction_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reauthorized From Transaction Id",
+            "description": "The identifier of the transaction from which this transaction was reauthorized.",
+            "examples": [
+              "4137b1cf-39ac-42a8-bad6-1c680d5dab6b"
+            ],
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
+          },
           "airline": {
             "anyOf": [
               {
@@ -56368,6 +56386,24 @@
             "examples": [
               true
             ]
+          },
+          "reauthorized_from_transaction_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reauthorized From Transaction Id",
+            "description": "The identifier of the transaction from which this transaction was reauthorized.",
+            "examples": [
+              "4137b1cf-39ac-42a8-bad6-1c680d5dab6b"
+            ],
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
           }
         },
         "additionalProperties": false,
