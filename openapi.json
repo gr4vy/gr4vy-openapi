@@ -60173,6 +60173,93 @@
                 ]
               }
             ]
+          },
+          "user_action": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Customizes the PayPal Checkout button text. Use `PAY_NOW` to show a pay now button, or `CONTINUE` to show a continue button for deferred payments.",
+            "examples": [
+              "PAY_NOW",
+              "CONTINUE"
+            ],
+            "title": "User Action"
+          },
+          "shipping_preference": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Controls the shipping address display in the PayPal Checkout flow. Use `GET_FROM_FILE` to use the shipping address from the PayPal account, `NO_SHIPPING` to hide shipping address fields, or `SET_PROVIDED_ADDRESS` to use the shipping address provided in the request.",
+            "examples": [
+              "GET_FROM_FILE",
+              "NO_SHIPPING",
+              "SET_PROVIDED_ADDRESS"
+            ],
+            "title": "Shipping Preference"
+          },
+          "brand_name": {
+            "anyOf": [
+              {
+                "maxLength": 127,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The merchant brand name that appears in the PayPal Checkout flow. Maximum 127 characters.",
+            "examples": [
+              "Acme Store"
+            ],
+            "title": "Brand Name"
+          },
+          "landing_page": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The type of landing page to display on the PayPal Checkout. Use `LOGIN` to show the PayPal login page, `GUEST_CHECKOUT` to show the guest checkout page, or `NO_PREFERENCE` to let PayPal decide.",
+            "examples": [
+              "LOGIN",
+              "GUEST_CHECKOUT",
+              "NO_PREFERENCE"
+            ],
+            "title": "Landing Page"
+          },
+          "locale": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The BCP 47 locale used to localize the PayPal Checkout page. For example, `en-US` or `fr-FR`.",
+            "examples": [
+              "en-US",
+              "fr-FR"
+            ],
+            "title": "Locale"
           }
         },
         "title": "PaypalOptions",
