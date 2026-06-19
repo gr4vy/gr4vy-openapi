@@ -40921,6 +40921,7 @@
           "oney_4x",
           "oney_6x",
           "onlinebankingcz",
+          "onelink",
           "ovo",
           "oxxo",
           "p24",
@@ -49878,6 +49879,7 @@
               "oney_4x",
               "oney_6x",
               "onlinebankingcz",
+              "onelink",
               "ovo",
               "oxxo",
               "p24",
@@ -61604,6 +61606,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `stripe-klarna` connector."
+          },
+          "stripe-onelink": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StripeOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `stripe-onelink` connector."
           },
           "travelhub-card": {
             "anyOf": [
