@@ -40955,6 +40955,7 @@
           "spei",
           "stitch",
           "swish",
+          "stripe",
           "stripedd",
           "stripetoken",
           "tapi",
@@ -49911,6 +49912,7 @@
               "spei",
               "stitch",
               "swish",
+              "stripe",
               "stripedd",
               "stripetoken",
               "tapi",
@@ -61618,6 +61620,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `stripe-onelink` connector."
+          },
+          "stripe-stripe": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StripeOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `stripe-stripe` connector."
           },
           "travelhub-card": {
             "anyOf": [
