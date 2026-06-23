@@ -39586,6 +39586,36 @@
               "id-12345"
             ]
           },
+          "discover_network_tokens_requestor_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discover Network Tokens Requestor Id",
+            "description": "Requestor ID provided for Discover after onboarding to use Network Tokens.",
+            "examples": [
+              "id-12345"
+            ]
+          },
+          "discover_network_tokens_app_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discover Network Tokens App Id",
+            "description": "Application ID provided for Discover after onboarding to use Network Tokens.",
+            "examples": [
+              "id-12345"
+            ]
+          },
           "async_network_tokens_enabled": {
             "type": "boolean",
             "title": "Async Network Tokens Enabled",
@@ -39880,6 +39910,40 @@
             ],
             "title": "Mastercard Network Tokens App Id",
             "description": "Application ID provided for Mastercard after onboarding to use Network Tokens.",
+            "examples": [
+              "id-12345"
+            ]
+          },
+          "discover_network_tokens_requestor_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 300,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discover Network Tokens Requestor Id",
+            "description": "Requestor ID provided for Discover after onboarding to use Network Tokens.",
+            "examples": [
+              "id-12345"
+            ]
+          },
+          "discover_network_tokens_app_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 300,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discover Network Tokens App Id",
+            "description": "Application ID provided for Discover after onboarding to use Network Tokens.",
             "examples": [
               "id-12345"
             ]
@@ -40600,6 +40664,40 @@
             ],
             "title": "Mastercard Network Tokens App Id",
             "description": "Application ID provided for Mastercard after onboarding to use Network Tokens.",
+            "examples": [
+              "id-12345"
+            ]
+          },
+          "discover_network_tokens_requestor_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 300,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discover Network Tokens Requestor Id",
+            "description": "Requestor ID provided for Discover after onboarding to use Network Tokens.",
+            "examples": [
+              "id-12345"
+            ]
+          },
+          "discover_network_tokens_app_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 300,
+                "minLength": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discover Network Tokens App Id",
+            "description": "Application ID provided for Discover after onboarding to use Network Tokens.",
             "examples": [
               "id-12345"
             ]
