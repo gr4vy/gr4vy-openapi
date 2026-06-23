@@ -60631,6 +60631,22 @@
             "default": null,
             "description": "Stripe options to support Stripe Connect"
           },
+          "customer_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "A Stripe customer ID (`cus_xxx`) to associate with the PaymentIntent for network token transactions. When provided, Stripe Radar can access the customer's payment history, dispute rate, and account age to improve risk scoring for returning customers.",
+            "examples": [
+              "cus_UgwySgjyKWrN5o"
+            ],
+            "title": "Customer Id"
+          },
           "error_on_requires_action": {
             "anyOf": [
               {
