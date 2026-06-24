@@ -25474,6 +25474,160 @@
             "description": "The maximum number of items that are at returned."
           },
           {
+            "name": "created_at_lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filters the results to only payouts created before this ISO date-time string. The time zone must be included. Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`.",
+              "examples": [
+                "2022-01-01T12:00:00+08:00"
+              ],
+              "title": "Created At Lte"
+            },
+            "description": "Filters the results to only payouts created before this ISO date-time string. The time zone must be included. Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`."
+          },
+          {
+            "name": "created_at_gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filters the results to only payouts created after this ISO date-time string. The time zone must be included. Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`.",
+              "examples": [
+                "2022-01-01T12:00:00+08:00"
+              ],
+              "title": "Created At Gte"
+            },
+            "description": "Filters the results to only payouts created after this ISO date-time string. The time zone must be included. Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`."
+          },
+          {
+            "name": "updated_at_lte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filters the results to only payouts updated before this ISO date-time string. The time zone must be included. Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`.",
+              "examples": [
+                "2022-01-01T12:00:00+08:00"
+              ],
+              "title": "Updated At Lte"
+            },
+            "description": "Filters the results to only payouts updated before this ISO date-time string. The time zone must be included. Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`."
+          },
+          {
+            "name": "updated_at_gte",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filters the results to only payouts updated after this ISO date-time string. The time zone must be included. Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`.",
+              "examples": [
+                "2022-01-01T12:00:00+08:00"
+              ],
+              "title": "Updated At Gte"
+            },
+            "description": "Filters the results to only payouts updated after this ISO date-time string. The time zone must be included. Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`."
+          },
+          {
+            "name": "external_identifier",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filters the results to only the payouts that have an `external_identifier` that exactly matches this value.",
+              "examples": [
+                "payout-12345"
+              ],
+              "title": "External Identifier"
+            },
+            "description": "Filters the results to only the payouts that have an `external_identifier` that exactly matches this value."
+          },
+          {
+            "name": "payment_service_payout_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filters the results to only the payouts that have a `payment_service_payout_id` that exactly matches this value.",
+              "examples": [
+                "po_1234567890"
+              ],
+              "title": "Payment Service Payout Id"
+            },
+            "description": "Filters the results to only the payouts that have a `payment_service_payout_id` that exactly matches this value."
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PayoutStatus"
+                  }
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filters the results to only the payouts that have a `status` that matches with any of the provided status values.",
+              "examples": [
+                "succeeded"
+              ],
+              "title": "Status"
+            },
+            "description": "Filters the results to only the payouts that have a `status` that matches with any of the provided status values."
+          },
+          {
             "name": "x-gr4vy-merchant-account-id",
             "in": "header",
             "required": false,
