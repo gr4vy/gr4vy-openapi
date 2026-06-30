@@ -31005,6 +31005,39 @@
         "title": "ACHBankPaymentMethodCreate",
         "description": "ACH Bank Payment Method\n\nBank Payment Method for ACH bank accounts."
       },
+      "AIInsightsReportSpec": {
+        "properties": {
+          "model": {
+            "type": "string",
+            "const": "ai_insights",
+            "title": "Model",
+            "description": "The report model type.",
+            "default": "ai_insights",
+            "examples": [
+              "ai_insights"
+            ]
+          },
+          "params": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Params",
+            "description": "The parameters for the AI insights report model.",
+            "examples": [
+              {
+                "filters": {
+                  "prompt_key": "payment_performance"
+                }
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "params"
+        ],
+        "title": "AIInsightsReportSpec"
+      },
       "AVSResponseCode": {
         "type": "string",
         "enum": [
@@ -51125,6 +51158,9 @@
               },
               {
                 "$ref": "#/components/schemas/AccountsReceivablesReportSpec"
+              },
+              {
+                "$ref": "#/components/schemas/AIInsightsReportSpec"
               }
             ],
             "title": "Spec",
@@ -51133,6 +51169,7 @@
               "propertyName": "model",
               "mapping": {
                 "accounts_receivables": "#/components/schemas/AccountsReceivablesReportSpec",
+                "ai_insights": "#/components/schemas/AIInsightsReportSpec",
                 "detailed_settlement": "#/components/schemas/DetailedSettlementReportSpec",
                 "transaction_retries": "#/components/schemas/TransactionRetriesReportSpec",
                 "transactions": "#/components/schemas/TransactionsReportSpec"
@@ -51490,7 +51527,8 @@
           "transactions",
           "transaction_retries",
           "detailed_settlement",
-          "accounts_receivables"
+          "accounts_receivables",
+          "ai_insights"
         ],
         "title": "ReportSpecModel"
       },
