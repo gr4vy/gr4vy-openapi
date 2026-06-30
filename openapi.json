@@ -50801,6 +50801,44 @@
             "examples": [
               "Missing redirect URL"
             ]
+          },
+          "settled_currency": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Z]{3}$",
+                "examples": [
+                  "EUR",
+                  "GBP",
+                  "USD"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Settled Currency",
+            "description": "The ISO 4217 currency code of this refund's settlement.",
+            "examples": [
+              "USD"
+            ]
+          },
+          "settled_amount": {
+            "type": "integer",
+            "title": "Settled Amount",
+            "description": "The net amount settled for this refund, in the smallest currency unit (for example, cents or pence).",
+            "default": 0,
+            "examples": [
+              1100
+            ]
+          },
+          "settled": {
+            "type": "boolean",
+            "title": "Settled",
+            "description": "Indicates whether this refund has been settled.",
+            "examples": [
+              true
+            ]
           }
         },
         "additionalProperties": false,
@@ -50815,7 +50853,8 @@
           "reconciliation_id",
           "transaction_reconciliation_id",
           "created_at",
-          "updated_at"
+          "updated_at",
+          "settled"
         ],
         "title": "Refund"
       },
