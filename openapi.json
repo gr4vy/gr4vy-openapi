@@ -56543,6 +56543,23 @@
             "examples": [
               "capture-12345"
             ]
+          },
+          "reauthorize_if_authorization_expired": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reauthorize If Authorization Expired",
+            "description": "Whether this capture request should re-authorize the transaction if it has expired.",
+            "default": false,
+            "examples": [
+              true,
+              false
+            ]
           }
         },
         "additionalProperties": false,
