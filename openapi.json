@@ -196,6 +196,887 @@
         "x-speakeasy-group": "account-updater.jobs"
       }
     },
+    "/api-key-pairs": {
+      "get": {
+        "tags": [
+          "API key pairs"
+        ],
+        "summary": "List all API key pairs",
+        "description": "List all API key pairs.",
+        "operationId": "list_api_key_pairs",
+        "security": [
+          {
+            "OAuth2PasswordBearer": [
+              "api-key-pairs.read"
+            ]
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "A pointer to the page of results to return.",
+              "examples": [
+                "ZXhhbXBsZTE"
+              ],
+              "title": "Cursor"
+            },
+            "description": "A pointer to the page of results to return."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "The maximum number of items that are returned.",
+              "examples": [
+                20
+              ],
+              "default": 20,
+              "title": "Limit"
+            },
+            "description": "The maximum number of items that are returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection_APIKeyPair_"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request was unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The credentials were invalid or the caller did not have permission to act on the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "The request method was not allowed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error405"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A duplicate record was found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "425": {
+            "description": "The request was too early.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error425"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests were made.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error429"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error502"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error504"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-name-override": "list",
+        "x-speakeasy-group": "api-key-pairs",
+        "x-speakeasy-pagination": {
+          "type": "cursor",
+          "inputs": [
+            {
+              "name": "cursor",
+              "in": "parameters",
+              "type": "cursor"
+            }
+          ],
+          "outputs": {
+            "nextCursor": "$.next_cursor"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "API key pairs"
+        ],
+        "summary": "Create an API key pair",
+        "description": "Create a new API key pair.",
+        "operationId": "create_api_key_pair",
+        "security": [
+          {
+            "OAuth2PasswordBearer": [
+              "api-key-pairs.write"
+            ]
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/APIKeyPairCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIKeyPair"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request was unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The credentials were invalid or the caller did not have permission to act on the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "The request method was not allowed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error405"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A duplicate record was found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "425": {
+            "description": "The request was too early.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error425"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests were made.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error429"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error502"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error504"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-name-override": "create",
+        "x-speakeasy-group": "api-key-pairs"
+      }
+    },
+    "/api-key-pairs/{api_key_pair_id}": {
+      "get": {
+        "tags": [
+          "API key pairs"
+        ],
+        "summary": "Get an API key pair",
+        "description": "Fetches an API key pair by its ID.",
+        "operationId": "get_api_key_pair",
+        "security": [
+          {
+            "OAuth2PasswordBearer": [
+              "api-key-pairs.read"
+            ]
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "api_key_pair_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "The ID of the API key pair.",
+              "examples": [
+                "fe26475d-ec3e-4884-9553-f7356683f7f9"
+              ],
+              "title": "Api Key Pair Id"
+            },
+            "description": "The ID of the API key pair."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIKeyPair"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request was unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The credentials were invalid or the caller did not have permission to act on the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "The request method was not allowed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error405"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A duplicate record was found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "425": {
+            "description": "The request was too early.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error425"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests were made.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error429"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error502"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error504"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-name-override": "get",
+        "x-speakeasy-group": "api-key-pairs"
+      },
+      "put": {
+        "tags": [
+          "API key pairs"
+        ],
+        "summary": "Update an API key pair",
+        "description": "Updates an API key pair.",
+        "operationId": "update_api_key_pair",
+        "security": [
+          {
+            "OAuth2PasswordBearer": [
+              "api-key-pairs.write"
+            ]
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "api_key_pair_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "The ID of the API key pair.",
+              "examples": [
+                "fe26475d-ec3e-4884-9553-f7356683f7f9"
+              ],
+              "title": "Api Key Pair Id"
+            },
+            "description": "The ID of the API key pair."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/APIKeyPairUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIKeyPair"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request was unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The credentials were invalid or the caller did not have permission to act on the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "The request method was not allowed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error405"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A duplicate record was found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "425": {
+            "description": "The request was too early.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error425"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests were made.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error429"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error502"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error504"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-name-override": "update",
+        "x-speakeasy-group": "api-key-pairs"
+      },
+      "delete": {
+        "tags": [
+          "API key pairs"
+        ],
+        "summary": "Delete an API key pair",
+        "description": "Permanently removes an API key pair.",
+        "operationId": "delete_api_key_pair",
+        "security": [
+          {
+            "OAuth2PasswordBearer": [
+              "api-key-pairs.write"
+            ]
+          },
+          {
+            "OAuth2PasswordBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "api_key_pair_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "The ID of the API key pair.",
+              "examples": [
+                "fe26475d-ec3e-4884-9553-f7356683f7f9"
+              ],
+              "title": "Api Key Pair Id"
+            },
+            "description": "The ID of the API key pair."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "400": {
+            "description": "The request was invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request was unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The credentials were invalid or the caller did not have permission to act on the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "The request method was not allowed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error405"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A duplicate record was found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "425": {
+            "description": "The request was too early.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error425"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests were made.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error429"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error502"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error504"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-name-override": "delete",
+        "x-speakeasy-group": "api-key-pairs"
+      }
+    },
     "/buyers/payment-methods": {
       "get": {
         "tags": [
@@ -21508,7 +22389,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MerchantAccount"
+                  "$ref": "#/components/schemas/api__routers__merchant_accounts__schemas__MerchantAccount"
                 }
               }
             }
@@ -21678,7 +22559,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MerchantAccount"
+                  "$ref": "#/components/schemas/api__routers__merchant_accounts__schemas__MerchantAccount"
                 }
               }
             }
@@ -21856,7 +22737,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/MerchantAccount"
+                  "$ref": "#/components/schemas/api__routers__merchant_accounts__schemas__MerchantAccount"
                 }
               }
             }
@@ -31038,6 +31919,322 @@
         ],
         "title": "AIInsightsReportSpec"
       },
+      "APIKeyPair": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "api-key-pair",
+            "title": "Type",
+            "description": "The type of this resource.",
+            "default": "api-key-pair"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id",
+            "description": "The ID for the API key pair.",
+            "examples": [
+              "fe26475d-ec3e-4884-9553-f7356683f7f9"
+            ]
+          },
+          "thumbprint": {
+            "type": "string",
+            "title": "Thumbprint",
+            "description": "The unique thumbprint that identifies the API key pair.",
+            "examples": [
+              "6zsbrjs0Cp4M4Ebz8sfHqUKGiG9Sd0lF2sfKp5-w-nk"
+            ]
+          },
+          "display_name": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Display Name",
+            "description": "The display name for the API key pair.",
+            "examples": [
+              "Production key"
+            ]
+          },
+          "algorithm": {
+            "$ref": "#/components/schemas/CertificateAlgorithm",
+            "description": "The algorithm used to generate the API key pair.",
+            "examples": [
+              "ECDSA"
+            ]
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active",
+            "description": "Whether the API key pair is active and can be used to authenticate.",
+            "examples": [
+              true
+            ]
+          },
+          "private_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Private Key",
+            "description": "The PEM-encoded private key. Only returned once, in the response to creating the API key pair, and only when Gr4vy generated the key pair. Store it securely, as it cannot be retrieved later."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "The date and time when this API key pair was created.",
+            "examples": [
+              "2013-07-16T19:23:00.000+00:00"
+            ]
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "The date and time when this API key pair was last updated.",
+            "examples": [
+              "2013-07-16T19:23:00.000+00:00"
+            ]
+          },
+          "creator": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/api__routers__api_key_pairs__schemas__Creator"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The user or API key pair that created this API key pair."
+          },
+          "merchant_account": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/api__common_schemas__MerchantAccount"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The first merchant account associated with this API key pair, if any. Deprecated in favour of `merchant_accounts`.",
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
+          },
+          "merchant_accounts": {
+            "items": {
+              "$ref": "#/components/schemas/api__common_schemas__MerchantAccount"
+            },
+            "type": "array",
+            "title": "Merchant Accounts",
+            "description": "The merchant accounts this API key pair has access to. An empty list means it has access to all merchant accounts."
+          },
+          "roles": {
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            },
+            "type": "array",
+            "title": "Roles",
+            "description": "The roles assigned to this API key pair."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "thumbprint",
+          "display_name",
+          "algorithm",
+          "active",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "APIKeyPair"
+      },
+      "APIKeyPairCreate": {
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Display Name",
+            "description": "The display name for the API key pair.",
+            "examples": [
+              "Production key"
+            ]
+          },
+          "algorithm": {
+            "$ref": "#/components/schemas/CertificateAlgorithm",
+            "description": "The algorithm to use to generate the API key pair.",
+            "default": "ECDSA",
+            "examples": [
+              "ECDSA"
+            ]
+          },
+          "active": {
+            "type": "boolean",
+            "title": "Active",
+            "description": "Whether the API key pair should be active and usable once created.",
+            "default": true,
+            "examples": [
+              true
+            ]
+          },
+          "role_ids": {
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "type": "array",
+            "maxItems": 1,
+            "minItems": 1,
+            "title": "Role Ids",
+            "description": "The ID of the role to assign to the API key pair. Exactly one role is supported. The caller can only assign a role whose scopes are a subset of its own.",
+            "examples": [
+              [
+                "8f4b8c1a-1b2c-4d3e-9f5a-6b7c8d9e0f1a"
+              ]
+            ]
+          },
+          "merchant_account_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Merchant Account Id",
+            "description": "The ID of a single merchant account to associate with the API key pair.",
+            "examples": [
+              "merchant-12345"
+            ],
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
+          },
+          "merchant_account_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Merchant Account Ids",
+            "description": "The IDs of the merchant accounts to associate with the API key pair. An empty list grants access to all merchant accounts. The caller can only assign merchant accounts it has access to.",
+            "examples": [
+              [
+                "merchant-12345"
+              ]
+            ]
+          },
+          "public_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Public Key",
+            "description": "A PEM-encoded ECDSA P-521 (ES512) public key. Provide this to register your own key pair (bring your own key); If omitted, Gr4vy will generate the key pair and return the private key.",
+            "examples": [
+              "-----BEGIN PUBLIC KEY-----\nMIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQB...\n-----END PUBLIC KEY-----"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "display_name",
+          "role_ids"
+        ],
+        "title": "APIKeyPairCreate"
+      },
+      "APIKeyPairUpdate": {
+        "properties": {
+          "display_name": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Name",
+            "description": "The display name for the API key pair.",
+            "examples": [
+              "Production key"
+            ]
+          },
+          "active": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Active",
+            "description": "Whether the API key pair is active and can be used to authenticate.",
+            "examples": [
+              true
+            ]
+          },
+          "role_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "type": "array",
+                "maxItems": 1,
+                "minItems": 1,
+                "description": "The ID of the role to assign to the API key pair. Exactly one role is supported. The caller can only assign a role whose scopes are a subset of its own.",
+                "examples": [
+                  [
+                    "8f4b8c1a-1b2c-4d3e-9f5a-6b7c8d9e0f1a"
+                  ]
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Role Ids"
+          },
+          "merchant_account_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Merchant Account Ids",
+            "description": "The IDs of the merchant accounts to associate with the API key pair. The caller can only assign merchant accounts it has access to.",
+            "examples": [
+              [
+                "merchant-12345"
+              ]
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "APIKeyPairUpdate"
+      },
       "AVSResponseCode": {
         "type": "string",
         "enum": [
@@ -34860,6 +36057,14 @@
         ],
         "title": "CartItem"
       },
+      "CertificateAlgorithm": {
+        "type": "string",
+        "enum": [
+          "ECDSA",
+          "RSA"
+        ],
+        "title": "CertificateAlgorithm"
+      },
       "Chargeback": {
         "properties": {
           "id": {
@@ -36646,6 +37851,69 @@
         ],
         "title": "ClickToPaySessionRequest"
       },
+      "Collection_APIKeyPair_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/APIKeyPair"
+            },
+            "type": "array",
+            "title": "Items",
+            "description": "A list of items returned for this request."
+          },
+          "limit": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Limit",
+            "description": "The number of items for this page.",
+            "default": 20,
+            "examples": [
+              20
+            ]
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 1000,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor",
+            "description": "The cursor pointing at the next page of items.",
+            "examples": [
+              "ZXhhbXBsZTE"
+            ]
+          },
+          "previous_cursor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 1000,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Previous Cursor",
+            "description": "The cursor pointing at the previous page of items.",
+            "examples": [
+              "Xkjss7asS"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "Collection[APIKeyPair]"
+      },
       "CreateSession": {
         "properties": {
           "type": {
@@ -36729,31 +37997,6 @@
           "failed"
         ],
         "title": "CreateSessionStatus"
-      },
-      "Creator": {
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "title": "Id"
-          },
-          "name": {
-            "type": "string",
-            "title": "Name"
-          },
-          "email_address": {
-            "type": "string",
-            "title": "Email Address"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "id",
-          "name",
-          "email_address"
-        ],
-        "title": "Creator"
       },
       "CredentialsOAuthAuthentication": {
         "properties": {
@@ -39738,346 +40981,6 @@
         ],
         "title": "IntegrationClient"
       },
-      "MerchantAccount": {
-        "properties": {
-          "type": {
-            "type": "string",
-            "const": "merchant-account",
-            "title": "Type",
-            "description": "Always `merchant-account`.",
-            "default": "merchant-account",
-            "examples": [
-              "merchant-account"
-            ]
-          },
-          "id": {
-            "type": "string",
-            "maxLength": 50,
-            "minLength": 1,
-            "title": "Id",
-            "description": "The ID for the merchant account.",
-            "examples": [
-              "merchant-12345"
-            ]
-          },
-          "display_name": {
-            "type": "string",
-            "maxLength": 255,
-            "minLength": 1,
-            "title": "Display Name",
-            "description": "The display name for the buyer.",
-            "examples": [
-              "John Doe"
-            ]
-          },
-          "loon_client_key": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Loon Client Key",
-            "description": "Client key provided by Pagos to authenticate to the Loon API. Loon is the Account Updater service we use and if the field is not set or if it's set to null, the Account Updater service doesn't get configured. If the field is set to `null`, the other `loon_*` fields must be set to null as well.",
-            "examples": [
-              "client-key-1234"
-            ]
-          },
-          "loon_secret_key": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Loon Secret Key",
-            "description": "Secret key provided by Pagos to authenticate to the Loon API. Loon is the Account Updater service we use and if the field is not set or if it's set to null, the Account Updater service doesn't get configured. If the field is set to `null`, the other `loon_*` fields must be set to null as well.",
-            "examples": [
-              "key-12345"
-            ]
-          },
-          "loon_accepted_schemes": {
-            "anyOf": [
-              {
-                "items": {
-                  "$ref": "#/components/schemas/CardScheme"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Loon Accepted Schemes",
-            "description": "Card schemes accepted when creating jobs using this set of Loon API keys. Loon is the Account Updater service we use and if the field is not set or if it's set to null, the Account Updater service doesn't get configured. If the field is set to `null`, the other `loon_*` fields must be set to null as well.",
-            "examples": [
-              [
-                "visa"
-              ]
-            ]
-          },
-          "account_updater_request_encryption_key": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Account Updater Request Encryption Key",
-            "description": "The public key used to encrypt the request to the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
-            "examples": [
-              "key-1234"
-            ]
-          },
-          "account_updater_request_encryption_key_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Account Updater Request Encryption Key Id",
-            "description": "The ID of the key used to encrypt the request to the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
-            "examples": [
-              "key-id-1234"
-            ]
-          },
-          "account_updater_response_decryption_key": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Account Updater Response Decryption Key",
-            "description": "The key used to decrypt the response from the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
-            "examples": [
-              "key-1234"
-            ]
-          },
-          "account_updater_response_decryption_key_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Account Updater Response Decryption Key Id",
-            "description": "The ID of the key used to decrypt the request from the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
-            "examples": [
-              "key-id-1234"
-            ]
-          },
-          "account_updater_enabled": {
-            "type": "boolean",
-            "title": "Account Updater Enabled",
-            "description": "Whether the Real-Time Account Updater service is enabled for this merchant account. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `false`, the Account Updater service doesn't get called if a payment fails with expired or invalid card details. If the field is set to `true`, the service is called. Please note that for this to work the other `account_updater_* fields` must be set as well.",
-            "examples": [
-              true
-            ]
-          },
-          "over_capture_amount": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Over Capture Amount",
-            "description": "The maximum monetary amount allowed for over-capture, in the smallest currency unit, for example `1299` cents to allow for an over-capture of `$12.99`.",
-            "examples": [
-              1299
-            ]
-          },
-          "over_capture_percentage": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Over Capture Percentage",
-            "description": "The maximum percentage allowed for over-capture, for example `25` to allow for an over-capture of `25%` of the original transaction amount.",
-            "examples": [
-              25
-            ]
-          },
-          "visa_network_tokens_requestor_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Visa Network Tokens Requestor Id",
-            "description": "Requestor ID provided for Visa after onboarding to use Network Tokens.",
-            "examples": [
-              "id-12345"
-            ]
-          },
-          "visa_network_tokens_app_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Visa Network Tokens App Id",
-            "description": "Application ID provided for Visa after onboarding to use Network Tokens.",
-            "examples": [
-              "id-12345"
-            ]
-          },
-          "amex_network_tokens_requestor_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Amex Network Tokens Requestor Id",
-            "description": "Requestor ID provided for American Express after onboarding to use Network Tokens.",
-            "examples": [
-              "id-12345"
-            ]
-          },
-          "amex_network_tokens_app_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Amex Network Tokens App Id",
-            "description": "Application ID provided for American Express after onboarding to use Network Tokens.",
-            "examples": [
-              "id-12345"
-            ]
-          },
-          "mastercard_network_tokens_requestor_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Mastercard Network Tokens Requestor Id",
-            "description": "Requestor ID provided for Mastercard after onboarding to use Network Tokens.",
-            "examples": [
-              "id-12345"
-            ]
-          },
-          "mastercard_network_tokens_app_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Mastercard Network Tokens App Id",
-            "description": "Application ID provided for Mastercard after onboarding to use Network Tokens.",
-            "examples": [
-              "id-12345"
-            ]
-          },
-          "discover_network_tokens_requestor_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Discover Network Tokens Requestor Id",
-            "description": "Requestor ID provided for Discover after onboarding to use Network Tokens.",
-            "examples": [
-              "id-12345"
-            ]
-          },
-          "discover_network_tokens_app_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Discover Network Tokens App Id",
-            "description": "Application ID provided for Discover after onboarding to use Network Tokens.",
-            "examples": [
-              "id-12345"
-            ]
-          },
-          "async_network_tokens_enabled": {
-            "type": "boolean",
-            "title": "Async Network Tokens Enabled",
-            "description": "When enabled network tokens will be generated asynchronously and only used on subsequent transactions to speed up transaction processing.",
-            "default": false,
-            "examples": [
-              true,
-              false
-            ]
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Created At",
-            "description": "The date this merchant account was created at.",
-            "examples": [
-              "2013-07-16T19:23:00.000+00:00"
-            ]
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time",
-            "title": "Updated At",
-            "description": "The date this merchant account was last updated at.",
-            "examples": [
-              "2013-07-16T19:23:00.000+00:00"
-            ]
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "id",
-          "display_name",
-          "account_updater_enabled",
-          "created_at",
-          "updated_at"
-        ],
-        "title": "MerchantAccount"
-      },
       "MerchantAccountCreate": {
         "properties": {
           "account_updater_enabled": {
@@ -41160,7 +42063,7 @@
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/MerchantAccount"
+              "$ref": "#/components/schemas/api__routers__merchant_accounts__schemas__MerchantAccount"
             },
             "type": "array",
             "title": "Items",
@@ -50137,6 +51040,23 @@
         ],
         "title": "PazeWebSession"
       },
+      "PermissionSet": {
+        "properties": {
+          "allow": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Allow"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "allow"
+        ],
+        "title": "PermissionSet"
+      },
       "PlaidPaymentMethodCreate": {
         "properties": {
           "method": {
@@ -50742,7 +51662,7 @@
           "creator": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Creator"
+                "$ref": "#/components/schemas/api__common_schemas__Creator"
               },
               {
                 "type": "null"
@@ -51978,6 +52898,41 @@
           "address"
         ],
         "title": "RequiredFields"
+      },
+      "Role": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "role",
+            "title": "Type",
+            "default": "role"
+          },
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "permissions": {
+            "$ref": "#/components/schemas/PermissionSet"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "description",
+          "permissions"
+        ],
+        "title": "Role"
       },
       "SEPABankPaymentMethodCreate": {
         "properties": {
@@ -57718,7 +58673,7 @@
           "creator": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/Creator"
+                "$ref": "#/components/schemas/api__common_schemas__Creator"
               },
               {
                 "type": "null"
@@ -57998,6 +58953,488 @@
           "items"
         ],
         "title": "WebhookSubscriptions"
+      },
+      "api__common_schemas__Creator": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "email_address": {
+            "type": "string",
+            "title": "Email Address"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "email_address"
+        ],
+        "title": "Creator"
+      },
+      "api__common_schemas__MerchantAccount": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "merchant-account",
+            "title": "Type",
+            "default": "merchant-account"
+          },
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "display_name": {
+            "type": "string",
+            "title": "Display Name"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At"
+          },
+          "over_capture_amount": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Over Capture Amount"
+          },
+          "over_capture_percentage": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Over Capture Percentage"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "display_name",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "MerchantAccount"
+      },
+      "api__routers__api_key_pairs__schemas__Creator": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "title": "Id",
+            "description": "The ID of the user or API key pair that created the API key pair.",
+            "examples": [
+              "fe26475d-ec3e-4884-9553-f7356683f7f9"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "The name of the user or API key pair that created the API key pair.",
+            "examples": [
+              "John Doe"
+            ]
+          },
+          "email_address": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email Address",
+            "description": "The email address of the user that created the API key pair, when it was created by a dashboard user.",
+            "examples": [
+              "john.doe@example.com"
+            ]
+          },
+          "thumbprint": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Thumbprint",
+            "description": "The thumbprint of the API key pair that created the API key pair, when it was created by another API key.",
+            "examples": [
+              "6zsbrjs0Cp4M4Ebz8sfHqUKGiG9Sd0lF2sfKp5-w-nk"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "Creator"
+      },
+      "api__routers__merchant_accounts__schemas__MerchantAccount": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "merchant-account",
+            "title": "Type",
+            "description": "Always `merchant-account`.",
+            "default": "merchant-account",
+            "examples": [
+              "merchant-account"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "maxLength": 50,
+            "minLength": 1,
+            "title": "Id",
+            "description": "The ID for the merchant account.",
+            "examples": [
+              "merchant-12345"
+            ]
+          },
+          "display_name": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Display Name",
+            "description": "The display name for the buyer.",
+            "examples": [
+              "John Doe"
+            ]
+          },
+          "loon_client_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Loon Client Key",
+            "description": "Client key provided by Pagos to authenticate to the Loon API. Loon is the Account Updater service we use and if the field is not set or if it's set to null, the Account Updater service doesn't get configured. If the field is set to `null`, the other `loon_*` fields must be set to null as well.",
+            "examples": [
+              "client-key-1234"
+            ]
+          },
+          "loon_secret_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Loon Secret Key",
+            "description": "Secret key provided by Pagos to authenticate to the Loon API. Loon is the Account Updater service we use and if the field is not set or if it's set to null, the Account Updater service doesn't get configured. If the field is set to `null`, the other `loon_*` fields must be set to null as well.",
+            "examples": [
+              "key-12345"
+            ]
+          },
+          "loon_accepted_schemes": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/CardScheme"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Loon Accepted Schemes",
+            "description": "Card schemes accepted when creating jobs using this set of Loon API keys. Loon is the Account Updater service we use and if the field is not set or if it's set to null, the Account Updater service doesn't get configured. If the field is set to `null`, the other `loon_*` fields must be set to null as well.",
+            "examples": [
+              [
+                "visa"
+              ]
+            ]
+          },
+          "account_updater_request_encryption_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Account Updater Request Encryption Key",
+            "description": "The public key used to encrypt the request to the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
+            "examples": [
+              "key-1234"
+            ]
+          },
+          "account_updater_request_encryption_key_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Account Updater Request Encryption Key Id",
+            "description": "The ID of the key used to encrypt the request to the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
+            "examples": [
+              "key-id-1234"
+            ]
+          },
+          "account_updater_response_decryption_key": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Account Updater Response Decryption Key",
+            "description": "The key used to decrypt the response from the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
+            "examples": [
+              "key-1234"
+            ]
+          },
+          "account_updater_response_decryption_key_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Account Updater Response Decryption Key Id",
+            "description": "The ID of the key used to decrypt the request from the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
+            "examples": [
+              "key-id-1234"
+            ]
+          },
+          "account_updater_enabled": {
+            "type": "boolean",
+            "title": "Account Updater Enabled",
+            "description": "Whether the Real-Time Account Updater service is enabled for this merchant account. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `false`, the Account Updater service doesn't get called if a payment fails with expired or invalid card details. If the field is set to `true`, the service is called. Please note that for this to work the other `account_updater_* fields` must be set as well.",
+            "examples": [
+              true
+            ]
+          },
+          "over_capture_amount": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Over Capture Amount",
+            "description": "The maximum monetary amount allowed for over-capture, in the smallest currency unit, for example `1299` cents to allow for an over-capture of `$12.99`.",
+            "examples": [
+              1299
+            ]
+          },
+          "over_capture_percentage": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Over Capture Percentage",
+            "description": "The maximum percentage allowed for over-capture, for example `25` to allow for an over-capture of `25%` of the original transaction amount.",
+            "examples": [
+              25
+            ]
+          },
+          "visa_network_tokens_requestor_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Visa Network Tokens Requestor Id",
+            "description": "Requestor ID provided for Visa after onboarding to use Network Tokens.",
+            "examples": [
+              "id-12345"
+            ]
+          },
+          "visa_network_tokens_app_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Visa Network Tokens App Id",
+            "description": "Application ID provided for Visa after onboarding to use Network Tokens.",
+            "examples": [
+              "id-12345"
+            ]
+          },
+          "amex_network_tokens_requestor_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amex Network Tokens Requestor Id",
+            "description": "Requestor ID provided for American Express after onboarding to use Network Tokens.",
+            "examples": [
+              "id-12345"
+            ]
+          },
+          "amex_network_tokens_app_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amex Network Tokens App Id",
+            "description": "Application ID provided for American Express after onboarding to use Network Tokens.",
+            "examples": [
+              "id-12345"
+            ]
+          },
+          "mastercard_network_tokens_requestor_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mastercard Network Tokens Requestor Id",
+            "description": "Requestor ID provided for Mastercard after onboarding to use Network Tokens.",
+            "examples": [
+              "id-12345"
+            ]
+          },
+          "mastercard_network_tokens_app_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mastercard Network Tokens App Id",
+            "description": "Application ID provided for Mastercard after onboarding to use Network Tokens.",
+            "examples": [
+              "id-12345"
+            ]
+          },
+          "discover_network_tokens_requestor_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discover Network Tokens Requestor Id",
+            "description": "Requestor ID provided for Discover after onboarding to use Network Tokens.",
+            "examples": [
+              "id-12345"
+            ]
+          },
+          "discover_network_tokens_app_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Discover Network Tokens App Id",
+            "description": "Application ID provided for Discover after onboarding to use Network Tokens.",
+            "examples": [
+              "id-12345"
+            ]
+          },
+          "async_network_tokens_enabled": {
+            "type": "boolean",
+            "title": "Async Network Tokens Enabled",
+            "description": "When enabled network tokens will be generated asynchronously and only used on subsequent transactions to speed up transaction processing.",
+            "default": false,
+            "examples": [
+              true,
+              false
+            ]
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At",
+            "description": "The date this merchant account was created at.",
+            "examples": [
+              "2013-07-16T19:23:00.000+00:00"
+            ]
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Updated At",
+            "description": "The date this merchant account was last updated at.",
+            "examples": [
+              "2013-07-16T19:23:00.000+00:00"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "display_name",
+          "account_updater_enabled",
+          "created_at",
+          "updated_at"
+        ],
+        "title": "MerchantAccount"
       },
       "api__types__DigitalWalletAddress": {
         "properties": {
@@ -62277,6 +63714,7 @@
               "sessions.refresh": "Refresh access-token",
               "anti-fraud-service-definitions.read": "Read Anti Fraud Service Definitions",
               "anti-fraud-services.read": "Read Anti Fraud Services",
+              "api-key-pairs.read": "Read API Key Pairs",
               "api-logs.read": "Read API Logs",
               "apple-pay-certificates.read": "Read Apple Pay Certificates",
               "audit-logs.read": "Read Audit Logs",
@@ -62309,7 +63747,6 @@
               "vault-forward-configs.read": "Read Vault Forward Configurations",
               "vault-forward-definitions.read": "Read Vault Forward Definitions",
               "webhook-subscriptions.read": "Read Webhook Subscriptions",
-              "api-key-pairs.read": "Read API Key Pairs",
               "health-dashboard.read": "Read Health Dashboard",
               "metrics-explorer.read": "Read Metrics Explorer",
               "monitoring.read": "Read Monitoring",
@@ -62318,6 +63755,7 @@
               "users.read": "Read Users",
               "anti-fraud-service-definitions.write": "Write Anti Fraud Service Definitions",
               "anti-fraud-services.write": "Write Anti Fraud Services",
+              "api-key-pairs.write": "Write API Key Pairs",
               "api-logs.write": "Write API Logs",
               "apple-pay-certificates.write": "Write Apple Pay Certificates",
               "audit-logs.write": "Write Audit Logs",
@@ -62350,7 +63788,6 @@
               "vault-forward-configs.write": "Write Vault Forward Configurations",
               "vault-forward-definitions.write": "Write Vault Forward Definitions",
               "webhook-subscriptions.write": "Write Webhook Subscriptions",
-              "api-key-pairs.write": "Write API Key Pairs",
               "health-dashboard.write": "Write Health Dashboard",
               "metrics-explorer.write": "Write Metrics Explorer",
               "monitoring.write": "Write Monitoring",
@@ -62372,6 +63809,10 @@
     {
       "name": "Account updater",
       "description": "Schedule stored cards for an account update."
+    },
+    {
+      "name": "API key pairs",
+      "description": "Manage API key pairs."
     },
     {
       "name": "Audit logs",
