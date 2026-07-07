@@ -56460,6 +56460,28 @@
             "examples": [
               "capture-12345"
             ]
+          },
+          "billing_details": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/BillingDetails"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The billing details associated with the capture."
+          },
+          "shipping_details": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ShippingDetails"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The shipping details associated with the catpure."
           }
         },
         "additionalProperties": false,
