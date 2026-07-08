@@ -32011,19 +32011,6 @@
             ],
             "description": "The user or API key pair that created this API key pair."
           },
-          "merchant_account": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/MerchantAccountSummary"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The first merchant account associated with this API key pair, if any. Deprecated in favour of `merchant_accounts`.",
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
-          },
           "merchant_accounts": {
             "items": {
               "$ref": "#/components/schemas/MerchantAccountSummary"
@@ -32098,23 +32085,6 @@
                 "8f4b8c1a-1b2c-4d3e-9f5a-6b7c8d9e0f1a"
               ]
             ]
-          },
-          "merchant_account_id": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Merchant Account Id",
-            "description": "The ID of a single merchant account to associate with the API key pair.",
-            "examples": [
-              "merchant-12345"
-            ],
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
           },
           "merchant_account_ids": {
             "items": {
@@ -63787,6 +63757,7 @@
               "vault-forward-configs.read": "Read Vault Forward Configurations",
               "vault-forward-definitions.read": "Read Vault Forward Definitions",
               "webhook-subscriptions.read": "Read Webhook Subscriptions",
+              "business-contexts.read": "Read Business Contexts",
               "health-dashboard.read": "Read Health Dashboard",
               "metrics-explorer.read": "Read Metrics Explorer",
               "monitoring.read": "Read Monitoring",
@@ -63828,6 +63799,7 @@
               "vault-forward-configs.write": "Write Vault Forward Configurations",
               "vault-forward-definitions.write": "Write Vault Forward Definitions",
               "webhook-subscriptions.write": "Write Webhook Subscriptions",
+              "business-contexts.write": "Write Business Contexts",
               "health-dashboard.write": "Write Health Dashboard",
               "metrics-explorer.write": "Write Metrics Explorer",
               "monitoring.write": "Write Monitoring",
