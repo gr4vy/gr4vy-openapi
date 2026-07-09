@@ -61758,6 +61758,113 @@
         "title": "GoCardlessOptions",
         "type": "object"
       },
+      "KlarnaOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "subscription": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/KlarnaSubscriptionOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Provides subscription information to Klarna."
+          },
+          "token_only_mode": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "When set to `true`, this will authorize the transaction with Klarna for the purposes of tokenizing the payment method with the transaction details. No funds will be captured and the authorization will be automatically voided. This is useful for up-sell scenarios where you want to tokenize a Klarna payment method for future use.",
+            "examples": [
+              true
+            ],
+            "title": "Token Only Mode"
+          },
+          "authorization_token": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "An authorization token returned by the Klarna Express Checkout JS SDK after the buyer completes payment in the embedded widget. When provided, the connector skips the HPP redirect and places the Klarna order directly using this token.",
+            "examples": [
+              "..."
+            ],
+            "title": "Authorization Token"
+          }
+        },
+        "title": "KlarnaOptions",
+        "type": "object"
+      },
+      "KlarnaSubscriptionOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "description": "The name of the subscription product. The recommended format includes a subscription id and double curly brackets.",
+            "examples": [
+              "Premium Membership {{{{12394832}}}}"
+            ],
+            "title": "Name",
+            "type": "string"
+          },
+          "interval": {
+            "description": "The cadence unit for the subscription plan.",
+            "enum": [
+              "DAY",
+              "WEEK",
+              "MONTH",
+              "YEAR"
+            ],
+            "examples": [
+              "DAY",
+              "WEEK",
+              "MONTH",
+              "YEAR"
+            ],
+            "title": "Interval",
+            "type": "string"
+          },
+          "interval_count": {
+            "description": "The number corresponding to the interval unit.",
+            "examples": [
+              1,
+              2,
+              3
+            ],
+            "title": "Interval Count",
+            "type": "integer"
+          },
+          "reference": {
+            "description": "Reference to a SKU in the transaction's cart items to link subscription to.",
+            "examples": [
+              "a0366204-2365-45fd-af60-23d0a59fdea9"
+            ],
+            "title": "Reference",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "interval",
+          "interval_count",
+          "reference"
+        ],
+        "title": "KlarnaSubscriptionOptions",
+        "type": "object"
+      },
       "LatitudeOptions": {
         "additionalProperties": false,
         "properties": {
@@ -63336,6 +63443,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `ecommpay-card` connector."
+          },
+          "klarna-klarna": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/KlarnaOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `klarna-klarna` connector."
           },
           "fiserv-card": {
             "anyOf": [
