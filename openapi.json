@@ -39806,7 +39806,11 @@
           "service_error",
           "service_network_error",
           "unknown_error",
-          "max_gift_cards_reached"
+          "max_gift_cards_reached",
+          "suspected_fraud",
+          "canceled_payment_method",
+          "duplicate_transaction",
+          "unexpected_state"
         ],
         "title": "GiftCardErrorCode",
         "description": "Gift card error codes.\n\nGr4vy normalised gift card error codes. Keep the naming and style in line with\nthose in the connectors framework.\n\nIf new codes are added, append them at the end or amend public simulator\ndocumentation: https://docs.gr4vy.com/guides/features/gift-cards/simulator"
@@ -56582,14 +56586,7 @@
             ]
           },
           "reauthorize_if_authorization_expired": {
-            "anyOf": [
-              {
-                "type": "boolean"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "boolean",
             "title": "Reauthorize If Authorization Expired",
             "description": "Whether this capture request should re-authorize the transaction if it has expired.",
             "default": false,
