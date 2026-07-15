@@ -16,9 +16,6 @@
         "operationId": "create_account_updater_job",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "payment-methods.write"
             ]
@@ -209,9 +206,6 @@
             "OAuth2PasswordBearer": [
               "api-key-pairs.read"
             ]
-          },
-          {
-            "OAuth2PasswordBearer": []
           }
         ],
         "parameters": [
@@ -414,9 +408,6 @@
             "OAuth2PasswordBearer": [
               "api-key-pairs.write"
             ]
-          },
-          {
-            "OAuth2PasswordBearer": []
           }
         ],
         "requestBody": {
@@ -578,9 +569,6 @@
             "OAuth2PasswordBearer": [
               "api-key-pairs.read"
             ]
-          },
-          {
-            "OAuth2PasswordBearer": []
           }
         ],
         "parameters": [
@@ -747,9 +735,6 @@
             "OAuth2PasswordBearer": [
               "api-key-pairs.write"
             ]
-          },
-          {
-            "OAuth2PasswordBearer": []
           }
         ],
         "parameters": [
@@ -926,9 +911,6 @@
             "OAuth2PasswordBearer": [
               "api-key-pairs.write"
             ]
-          },
-          {
-            "OAuth2PasswordBearer": []
           }
         ],
         "parameters": [
@@ -1086,9 +1068,6 @@
         "description": "List all the stored payment methods for a specific buyer.",
         "operationId": "list_buyer_payment_methods",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "payment-methods.read",
@@ -1415,9 +1394,6 @@
         "operationId": "list_payment_methods",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "payment-methods.read"
             ]
@@ -1724,9 +1700,6 @@
         "operationId": "create_payment_method",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "payment-methods.write"
             ]
@@ -1934,9 +1907,6 @@
         "operationId": "get_payment_method",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "payment-methods.read"
             ]
@@ -2123,9 +2093,6 @@
         "description": "Update the details of a stored payment method.",
         "operationId": "update_payment_method",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "payment-methods.write"
@@ -2324,9 +2291,6 @@
         "operationId": "delete_payment_method",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "payment-methods.write",
               "embed"
@@ -2509,9 +2473,6 @@
         "description": "List all gateway tokens stored for a payment method.",
         "operationId": "list_payment_method_payment_service_tokens",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "payment-methods.read"
@@ -2722,9 +2683,6 @@
         "operationId": "create_payment_method_payment_service_token",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "payment-methods.write"
             ]
@@ -2924,9 +2882,6 @@
         "operationId": "delete_payment_method_payment_service_token",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "payment-methods.write"
             ]
@@ -3124,9 +3079,6 @@
         "operationId": "list_payment_method_network_tokens",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "payment-methods.read"
             ]
@@ -3313,9 +3265,6 @@
         "description": "Provision a network token for a payment method.",
         "operationId": "create_payment_method_network_token",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "payment-methods.write"
@@ -3515,9 +3464,6 @@
         "description": "Provision a cryptogram for a network token.",
         "operationId": "create_payment_method_network_token_cryptogram",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "payment-methods.read"
@@ -3733,9 +3679,6 @@
         "operationId": "suspend_payment_method_network_token",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "payment-methods.write"
             ]
@@ -3939,9 +3882,6 @@
         "description": "Resume a suspended network token for a payment method.",
         "operationId": "resume_payment_method_network_token",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "payment-methods.write"
@@ -4147,9 +4087,6 @@
         "operationId": "delete_payment_method_network_token",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "payment-methods.write"
             ]
@@ -4347,9 +4284,6 @@
         "operationId": "list_gift_card_balances",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "gift-cards.read",
               "embed"
@@ -4534,9 +4468,6 @@
         "description": "Fetch details about a gift card.",
         "operationId": "get_gift_card",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "gift-cards.read"
@@ -4725,9 +4656,6 @@
         "operationId": "delete_gift_card",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "gift-cards.write"
             ]
@@ -4909,9 +4837,6 @@
         "description": "Store a new gift card in the vault.",
         "operationId": "create_gift_card",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "gift-cards.write",
@@ -5095,9 +5020,6 @@
         "description": "Browser all gift cards.",
         "operationId": "list_gift_cards",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "gift-cards.read"
@@ -5346,9 +5268,6 @@
         "description": "List all the stored gift cards for a specific buyer.",
         "operationId": "list_buyer_gift_cards",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "gift-cards.read"
@@ -5609,9 +5528,6 @@
         "description": "List all buyers or search for a specific buyer.",
         "operationId": "list_buyers",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "buyers.read"
@@ -5878,9 +5794,6 @@
         "operationId": "add_buyer",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "buyers.write"
             ]
@@ -6064,9 +5977,6 @@
         "description": "Fetches a buyer by its ID.",
         "operationId": "get_buyer",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "buyers.read"
@@ -6254,9 +6164,6 @@
         "description": "Updates a buyer record.",
         "operationId": "update_buyer",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "buyers.write"
@@ -6455,9 +6362,6 @@
         "operationId": "delete_buyer",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "buyers.write"
             ]
@@ -6639,9 +6543,6 @@
         "description": "Associate shipping details to a buyer.",
         "operationId": "add_buyer_shipping_details",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "buyers.write"
@@ -6840,9 +6741,6 @@
         "operationId": "list_buyer_shipping_details",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "buyers.read"
             ]
@@ -7031,9 +6929,6 @@
         "description": "Get a buyer's shipping details.",
         "operationId": "get_buyer_shipping_details",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "buyers.read"
@@ -7236,9 +7131,6 @@
         "description": "Update the shipping details associated to a specific buyer.",
         "operationId": "update_buyer_shipping_details",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "buyers.write"
@@ -7452,9 +7344,6 @@
         "operationId": "delete_buyer_shipping_details",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "buyers.write"
             ]
@@ -7652,9 +7541,6 @@
         "operationId": "list_card_scheme_definitions",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "card-scheme-definitions.read"
             ]
@@ -7828,9 +7714,6 @@
         "description": "Register a digital wallet like Apple Pay, Google Pay, or Click to Pay.",
         "operationId": "configure_digital_wallet",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "digital-wallets.write"
@@ -8014,9 +7897,6 @@
         "operationId": "list_digital_wallets",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "digital-wallets.read"
             ]
@@ -8190,9 +8070,6 @@
         "description": "Fetch the details a digital wallet.",
         "operationId": "get_digital_wallet",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "digital-wallets.read"
@@ -8381,9 +8258,6 @@
         "operationId": "delete_digital_wallet",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "digital-wallets.write"
             ]
@@ -8563,9 +8437,6 @@
         "description": "Update a digital wallet.",
         "operationId": "update_digital_wallet",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "digital-wallets.write"
@@ -8766,9 +8637,6 @@
         "operationId": "create_google_pay_digital_wallet_session",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "digital-wallets.write",
               "embed"
@@ -8953,9 +8821,6 @@
         "description": "Create a session for use with Apple Pay.",
         "operationId": "create_apple_pay_digital_wallet_session",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "digital-wallets.write",
@@ -9142,9 +9007,6 @@
         "operationId": "create_paze_mobile_session",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "digital-wallets.write",
               "embed"
@@ -9329,9 +9191,6 @@
         "description": "Create a session for use with Paze.",
         "operationId": "create_paze_digital_wallet_session",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "digital-wallets.write",
@@ -9526,9 +9385,6 @@
         "operationId": "review_paze_mobile_session",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "digital-wallets.write",
               "embed"
@@ -9714,9 +9570,6 @@
         "operationId": "complete_paze_mobile_session",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "digital-wallets.write",
               "embed"
@@ -9901,9 +9754,6 @@
         "description": "Register a digital wallet domain (Apple Pay only).",
         "operationId": "register_digital_wallet_domain",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "digital-wallets.write"
@@ -10099,9 +9949,6 @@
         "description": "Remove a digital wallet domain (Apple Pay only).",
         "operationId": "unregister_digital_wallet_domain",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "digital-wallets.write"
@@ -10447,9 +10294,6 @@
         "description": "Returns a paginated list of transactions for the merchant account, sorted by most recently updated. You can filter, sort, and search transactions using query parameters.",
         "operationId": "list_transactions",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "transactions.read"
@@ -11665,9 +11509,6 @@
         "operationId": "create_transaction",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "transactions.write",
               "embed"
@@ -11874,9 +11715,6 @@
         "operationId": "get_transaction",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "transactions.read"
             ]
@@ -12063,9 +11901,6 @@
         "description": "Manually updates a transaction.",
         "operationId": "update_transaction",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "transactions.write"
@@ -12265,9 +12100,6 @@
         "description": "Captures a previously authorized transaction. You can capture the full or a partial amount, as long as it does not exceed the authorized amount (unless over-capture is enabled).",
         "operationId": "capture_transaction",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "transactions.write"
@@ -12522,9 +12354,6 @@
         "operationId": "list_transaction_refunds",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "transactions.read"
             ]
@@ -12711,9 +12540,6 @@
         "description": "Create a refund for a transaction.",
         "operationId": "create_transaction_refund",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "transactions.write"
@@ -12935,9 +12761,6 @@
         "operationId": "get_transaction_refund",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "transactions.read"
             ]
@@ -13142,9 +12965,6 @@
         "operationId": "get_refund",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "transactions.read"
             ]
@@ -13333,9 +13153,6 @@
         "description": "Voids a previously authorized transaction. If the transaction was not yet successfully authorized, or was already captured, the void will not be processed. This operation releases the hold on the buyer's funds. Captured transactions can be refunded instead.",
         "operationId": "void_transaction",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "transactions.write"
@@ -13580,9 +13397,6 @@
         "operationId": "cancel_transaction",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "transactions.write"
             ]
@@ -13771,9 +13585,6 @@
         "description": "Create a refund for all instruments on a transaction.",
         "operationId": "create_full_transaction_refund",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "transactions.write",
@@ -14003,9 +13814,6 @@
         "operationId": "list_transaction_actions",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "transactions.read"
             ]
@@ -14194,9 +14002,6 @@
         "description": "Retrieve a paginated list of events related to processing a transaction, including status changes, API requests, and webhook delivery attempts. Events are listed in chronological order, with the most recent events first.",
         "operationId": "list_transaction_events",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "transactions.read"
@@ -14438,9 +14243,6 @@
         "operationId": "sync_transaction",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "transactions.read"
             ]
@@ -14624,9 +14426,6 @@
         "description": "Retrieve a specific settlement for a transaction by its unique identifier.",
         "operationId": "get_transaction_settlement",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "transactions.read"
@@ -14832,9 +14631,6 @@
         "operationId": "list_transaction_settlements",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "transactions.read"
             ]
@@ -15023,9 +14819,6 @@
         "description": "Retrieve a specific refund settlement for a transaction by its unique identifier.",
         "operationId": "get_transaction_refund_settlement",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "transactions.read"
@@ -15231,9 +15024,6 @@
         "operationId": "list_transaction_refund_settlements",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "transactions.read"
             ]
@@ -15423,9 +15213,6 @@
         "operationId": "list_transaction_chargebacks",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "transactions.read"
             ]
@@ -15613,9 +15400,6 @@
         "description": "List all chargeback reversals for a specific transaction.",
         "operationId": "list_transaction_chargeback_reversals",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "transactions.read"
@@ -15805,9 +15589,6 @@
         "operationId": "list_transaction_captures",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "transactions.read"
             ]
@@ -15996,9 +15777,6 @@
         "description": "Retrieve a specific capture for a transaction by its unique identifier.",
         "operationId": "get_transaction_capture",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "transactions.read"
@@ -16402,9 +16180,6 @@
         "operationId": "list_payment_options",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "payment-options.read",
               "embed"
@@ -16589,9 +16364,6 @@
         "description": "Returns a list of all available payment method definitions.",
         "operationId": "list_payment_method_definitions",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "payment-method-definitions.read"
@@ -17139,9 +16911,6 @@
             "OAuth2PasswordBearer": [
               "transactions.write"
             ]
-          },
-          {
-            "OAuth2PasswordBearer": []
           }
         ],
         "parameters": [
@@ -17317,9 +17086,6 @@
         "description": "List the configured payment services.",
         "operationId": "list_payment_services",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "payment-services.read"
@@ -17587,9 +17353,6 @@
         "operationId": "create_payment_service",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "payment-services.write"
             ]
@@ -17773,9 +17536,6 @@
         "description": "Get the details of a configured payment service.",
         "operationId": "get_payment_service",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "payment-services.read"
@@ -17963,9 +17723,6 @@
         "description": "Updates the configuration of a payment service.",
         "operationId": "update_payment_service",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "payment-services.write"
@@ -18164,9 +17921,6 @@
         "operationId": "delete_payment_service",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "payment-services.write"
             ]
@@ -18349,9 +18103,6 @@
         "operationId": "verify_payment_service_credentials",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "payment-services.write"
             ]
@@ -18533,9 +18284,6 @@
         "description": "Creates a session for a payment service that supports sessions.",
         "operationId": "create_payment_service_session",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "transactions.write"
@@ -18738,9 +18486,6 @@
         "description": "Gets details about a particular card based on the BIN. Use the currency, amount, and other fields to apply any Flow rules that may put requirements on the card.",
         "operationId": "get_card_details",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "bin-checker.read",
@@ -19130,9 +18875,6 @@
         "operationId": "list_audit_logs",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "audit-logs.read"
             ]
@@ -19421,9 +19163,6 @@
         "description": "List all configured reports that can be generated.",
         "operationId": "list_reports",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "reports.read"
@@ -19717,9 +19456,6 @@
         "operationId": "add_report",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "reports.write"
             ]
@@ -19903,9 +19639,6 @@
         "description": "Fetches a report by its ID.",
         "operationId": "get_report",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "reports.read"
@@ -20093,9 +19826,6 @@
         "description": "Updates the configuration of a report.",
         "operationId": "update_report",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "reports.write"
@@ -20295,9 +20025,6 @@
         "description": "List all executions of a specific report.",
         "operationId": "list_report_executions",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "reports.read"
@@ -20539,9 +20266,6 @@
         "operationId": "create_report_execution_url",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "reports.read"
             ]
@@ -20757,9 +20481,6 @@
         "description": "List all executed reports that have been generated.",
         "operationId": "list_all_report_executions",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "reports.read"
@@ -21100,9 +20821,6 @@
         "operationId": "get_report_execution",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "reports.read"
             ]
@@ -21291,9 +21009,6 @@
         "description": "Create a new checkout session.",
         "operationId": "create_checkout_session",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "checkout-sessions.write"
@@ -21492,9 +21207,6 @@
         "operationId": "update_checkout_session",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "checkout-sessions.write"
             ]
@@ -21692,9 +21404,6 @@
         "operationId": "get_checkout_session",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "checkout-sessions.read"
             ]
@@ -21874,9 +21583,6 @@
         "description": "Delete a checkout session and all of its (PCI) data.",
         "operationId": "delete_checkout_session",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "checkout-sessions.write"
@@ -22541,9 +22247,6 @@
             "OAuth2PasswordBearer": [
               "merchant-accounts.read"
             ]
-          },
-          {
-            "OAuth2PasswordBearer": []
           }
         ],
         "parameters": [
@@ -22767,9 +22470,6 @@
             "OAuth2PasswordBearer": [
               "merchant-accounts.write"
             ]
-          },
-          {
-            "OAuth2PasswordBearer": []
           }
         ],
         "requestBody": {
@@ -22931,9 +22631,6 @@
             "OAuth2PasswordBearer": [
               "merchant-accounts.read"
             ]
-          },
-          {
-            "OAuth2PasswordBearer": []
           }
         ],
         "parameters": [
@@ -23099,9 +22796,6 @@
             "OAuth2PasswordBearer": [
               "merchant-accounts.write"
             ]
-          },
-          {
-            "OAuth2PasswordBearer": []
           }
         ],
         "parameters": [
@@ -23279,9 +22973,6 @@
             "OAuth2PasswordBearer": [
               "merchant-accounts.write"
             ]
-          },
-          {
-            "OAuth2PasswordBearer": []
           }
         ],
         "parameters": [
@@ -23457,9 +23148,6 @@
             "OAuth2PasswordBearer": [
               "merchant-accounts.read"
             ]
-          },
-          {
-            "OAuth2PasswordBearer": []
           }
         ],
         "parameters": [
@@ -23656,9 +23344,6 @@
             "OAuth2PasswordBearer": [
               "merchant-accounts.write"
             ]
-          },
-          {
-            "OAuth2PasswordBearer": []
           }
         ],
         "parameters": [
@@ -23849,9 +23534,6 @@
             "OAuth2PasswordBearer": [
               "merchant-accounts.write"
             ]
-          },
-          {
-            "OAuth2PasswordBearer": []
           }
         ],
         "parameters": [
@@ -24023,9 +23705,6 @@
         "description": "Create a monitoring metric with spec model and params.",
         "operationId": "create_monitoring_metric",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "monitoring.write"
@@ -24207,9 +23886,6 @@
         "description": "List all created monitoring metrics.",
         "operationId": "list_monitoring_metrics",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "monitoring.read"
@@ -24457,9 +24133,6 @@
         "operationId": "update_monitoring_metric",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "monitoring.write"
             ]
@@ -24655,9 +24328,6 @@
         "description": "Retrieves a monitoring metric with a subset of its samples",
         "operationId": "get_monitoring_metric",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "monitoring.read"
@@ -24866,9 +24536,6 @@
         "operationId": "delete_monitoring_metric",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "monitoring.write"
             ]
@@ -25054,9 +24721,6 @@
         "description": "List monitoring incidents for a specific metric.",
         "operationId": "list_monitoring_metric_incidents",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "monitoring.read"
@@ -25305,9 +24969,6 @@
         "operationId": "list_monitoring_incidents",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "monitoring.read"
             ]
@@ -25540,9 +25201,6 @@
         "operationId": "get_monitoring_incident",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "monitoring.read"
             ]
@@ -25728,9 +25386,6 @@
         "description": "Update a monitoring incident.",
         "operationId": "update_monitoring_incident",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "monitoring.write"
@@ -25930,9 +25585,6 @@
         "operationId": "create_three_ds_scenario",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "three-ds-scenarios.write"
             ]
@@ -26114,9 +25766,6 @@
         "description": "List all 3DS scenarios for a merchant account. Only available in sandbox environments.",
         "operationId": "get_three_ds_scenario",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "three-ds-scenarios.read"
@@ -26343,9 +25992,6 @@
         "operationId": "update_three_ds_scenario",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "three-ds-scenarios.write"
             ]
@@ -26543,9 +26189,6 @@
         "operationId": "delete_three_ds_scenario",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "three-ds-scenarios.write"
             ]
@@ -26727,9 +26370,6 @@
         "description": "Returns a list of payouts made.",
         "operationId": "list_payouts",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "payouts.read"
@@ -27108,9 +26748,6 @@
         "operationId": "create_payout",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "payouts.write"
             ]
@@ -27294,9 +26931,6 @@
         "description": "Retrieves a payout.",
         "operationId": "get_payout",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "payouts.read"
@@ -27482,9 +27116,6 @@
         "operationId": "add_payment_link",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "payment-links.write"
             ]
@@ -27667,9 +27298,6 @@
         "description": "List all created payment links.",
         "operationId": "list_payment_links",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "payment-links.read"
@@ -28136,9 +27764,6 @@
         "operationId": "expire_payment_link",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "payment-links.write"
             ]
@@ -28320,9 +27945,6 @@
         "description": "Fetch the details for a payment link.",
         "operationId": "get_payment_link",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "payment-links.read"
@@ -28512,9 +28134,6 @@
         "description": "Retrieves the data for a module. The data to be used depends on `source`.<br/>**Important:** The currency filter query parameter is **required** when the `metric` is set to `volume`.",
         "operationId": "get_metrics_explorer_module",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "metrics-explorer.read"
@@ -29356,9 +28975,6 @@
         "operationId": "get_metrics_explorer_totals",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "metrics-explorer.read"
             ]
@@ -30197,9 +29813,6 @@
         "operationId": "list_metrics_explorer_presets",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "metrics-explorer.read"
             ]
@@ -30388,9 +30001,6 @@
         "description": "Create a preset with a name, metric and a set of filters.",
         "operationId": "create_metrics_explorer_preset",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "metrics-explorer.write"
@@ -30588,9 +30198,6 @@
         "description": "Update a preset. This operation can only update the name of the preset.",
         "operationId": "update_metrics_explorer_preset",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "metrics-explorer.write"
@@ -30802,9 +30409,6 @@
         "operationId": "delete_metrics_explorer_preset",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "metrics-explorer.write"
             ]
@@ -31008,9 +30612,6 @@
         "operationId": "create_webhook_subscription",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "webhook-subscriptions.write"
             ]
@@ -31191,9 +30792,6 @@
         "description": "Retrieve a paginated list of all webhook subscriptions for your account. This endpoint returns subscription details including URLs, authentication methods, and active status. Use pagination parameters to navigate through large collections of subscriptions. Results are sorted by creation date, with the most recent subscriptions appearing first.",
         "operationId": "list_webhook_subscription",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "webhook-subscriptions.read"
@@ -31394,9 +30992,6 @@
         "operationId": "update_webhook_subscription",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "webhook-subscriptions.write"
             ]
@@ -31593,9 +31188,6 @@
         "operationId": "delete_webhook_subscription",
         "security": [
           {
-            "OAuth2PasswordBearer": []
-          },
-          {
             "OAuth2PasswordBearer": [
               "webhook-subscriptions.write"
             ]
@@ -31774,9 +31366,6 @@
         "description": "Retrieve detailed information about a specific webhook subscription. This endpoint returns the full configuration of a subscription including its URL, authentication details, active status, and signing secret information. Use this to verify your webhook subscription settings or retrieve details needed for webhook verification.",
         "operationId": "read_webhook_subscription",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "webhook-subscriptions.read"
@@ -31965,9 +31554,6 @@
         "description": "Rotate the secret used to sign webhook payloads for improved security. This creates a new secret while keeping the old one valid for a specified grace period, allowing you to update your systems without disruption. The old secret will automatically expire after the specified transition period.",
         "operationId": "rotate_webhook_subscription_secret",
         "security": [
-          {
-            "OAuth2PasswordBearer": []
-          },
           {
             "OAuth2PasswordBearer": [
               "webhook-subscriptions.write"
@@ -59520,6 +59106,13 @@
           "type": {
             "type": "string",
             "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
           }
         },
         "type": "object",
