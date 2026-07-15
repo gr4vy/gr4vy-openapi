@@ -38769,7 +38769,7 @@
           "address": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/api__types__DigitalWalletAddress"
+                "$ref": "#/components/schemas/DigitalWalletAddress"
               },
               {
                 "type": "null"
@@ -60119,47 +60119,6 @@
           "name"
         ],
         "title": "Creator"
-      },
-      "api__types__DigitalWalletAddress": {
-        "properties": {
-          "line1": {
-            "type": "string",
-            "title": "Line1"
-          },
-          "line2": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Line2"
-          },
-          "city": {
-            "type": "string",
-            "title": "City"
-          },
-          "state_code": {
-            "type": "string",
-            "title": "State Code"
-          },
-          "postal_code": {
-            "type": "string",
-            "title": "Postal Code"
-          }
-        },
-        "additionalProperties": false,
-        "type": "object",
-        "required": [
-          "line1",
-          "line2",
-          "city",
-          "state_code",
-          "postal_code"
-        ],
-        "title": "DigitalWalletAddress"
       },
       "AccountUpdaterOptions": {
         "additionalProperties": false,
