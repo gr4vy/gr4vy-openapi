@@ -57095,6 +57095,21 @@
             ],
             "description": "The airline addendum data which describes the airline booking associated with this transaction."
           },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description",
+            "description": "An optional description for the transaction. Forwarded to the payment processor where supported. Unlike `statement_descriptor`, this field has no character limit and does not appear on the buyer's bank statement.",
+            "examples": [
+              "subscription-abc-123"
+            ]
+          },
           "cart_items": {
             "anyOf": [
               {
