@@ -34504,15 +34504,8 @@
             ]
           },
           "id": {
-            "anyOf": [
-              {
-                "type": "string",
-                "format": "uuid"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
+            "format": "uuid",
             "title": "Id",
             "description": "The ID for the buyer.",
             "examples": [
@@ -34608,6 +34601,7 @@
         "additionalProperties": false,
         "type": "object",
         "required": [
+          "id",
           "merchant_account_id",
           "created_at",
           "updated_at"
