@@ -34512,6 +34512,14 @@
               "fe26475d-ec3e-4884-9553-f7356683f7f9"
             ]
           },
+          "reconciliation_id": {
+            "type": "string",
+            "title": "Reconciliation Id",
+            "description": "The base62 encoded buyer ID. This represents a shorter version of this buyer's `id` which is sent to payment services, anti-fraud services, and other connectors. You can use this ID to reconcile a payment service's buyer against our system.",
+            "examples": [
+              "7jZXl4gBUNl0CnaLEnfXbt"
+            ]
+          },
           "merchant_account_id": {
             "type": "string",
             "title": "Merchant Account Id",
@@ -34602,6 +34610,7 @@
         "type": "object",
         "required": [
           "id",
+          "reconciliation_id",
           "merchant_account_id",
           "created_at",
           "updated_at"
@@ -56432,6 +56441,21 @@
             "description": "The ID for the buyer.",
             "examples": [
               "fe26475d-ec3e-4884-9553-f7356683f7f9"
+            ]
+          },
+          "reconciliation_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reconciliation Id",
+            "description": "The base62 encoded buyer ID. This represents a shorter version of this buyer's `id` which is sent to payment services, anti-fraud services, and other connectors. You can use this ID to reconcile a payment service's buyer against our system.",
+            "examples": [
+              "7jZXl4gBUNl0CnaLEnfXbt"
             ]
           },
           "display_name": {
