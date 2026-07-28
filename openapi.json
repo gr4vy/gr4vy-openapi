@@ -41662,6 +41662,7 @@
             ],
             "title": "Loon Client Key",
             "description": "Client key provided by Pagos to authenticate to the Loon API. Loon is the Account Updater service we use and if the field is not set or if it's set to null, the Account Updater service doesn't get configured. If the field is set to `null`, the other `loon_*` fields must be set to null as well.",
+            "deprecated": true,
             "examples": [
               "client-key-1234"
             ]
@@ -41677,6 +41678,7 @@
             ],
             "title": "Loon Secret Key",
             "description": "Secret key provided by Pagos to authenticate to the Loon API. Loon is the Account Updater service we use and if the field is not set or if it's set to null, the Account Updater service doesn't get configured. If the field is set to `null`, the other `loon_*` fields must be set to null as well.",
+            "deprecated": true,
             "examples": [
               "key-12345"
             ]
@@ -41727,6 +41729,7 @@
             ],
             "title": "Account Updater Request Encryption Key",
             "description": "The public key used to encrypt the request to the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
+            "deprecated": true,
             "examples": [
               "key-1234"
             ]
@@ -41742,6 +41745,7 @@
             ],
             "title": "Account Updater Request Encryption Key Id",
             "description": "The ID of the key used to encrypt the request to the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
+            "deprecated": true,
             "examples": [
               "key-id-1234"
             ]
@@ -41757,6 +41761,7 @@
             ],
             "title": "Account Updater Response Decryption Key",
             "description": "The key used to decrypt the response from the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
+            "deprecated": true,
             "examples": [
               "key-1234"
             ]
@@ -41772,6 +41777,7 @@
             ],
             "title": "Account Updater Response Decryption Key Id",
             "description": "The ID of the key used to decrypt the request from the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
+            "deprecated": true,
             "examples": [
               "key-id-1234"
             ]
@@ -41996,6 +42002,7 @@
             ],
             "title": "Account Updater Request Encryption Key",
             "description": "The public key used to encrypt the request to the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
+            "deprecated": true,
             "examples": [
               "key-1234"
             ]
@@ -42011,6 +42018,7 @@
             ],
             "title": "Account Updater Request Encryption Key Id",
             "description": "The ID of the key used to encrypt the request to the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
+            "deprecated": true,
             "examples": [
               "key-id-1234"
             ]
@@ -42026,6 +42034,7 @@
             ],
             "title": "Account Updater Response Decryption Key",
             "description": "The key used to decrypt the response from the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
+            "deprecated": true,
             "examples": [
               "key-1234"
             ]
@@ -42041,6 +42050,7 @@
             ],
             "title": "Account Updater Response Decryption Key Id",
             "description": "The ID of the key used to decrypt the request from the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
+            "deprecated": true,
             "examples": [
               "key-id-1234"
             ]
@@ -42090,6 +42100,7 @@
             ],
             "title": "Loon Client Key",
             "description": "Client key provided by Pagos to authenticate to the Loon API. Loon is the Account Updater service we use and if the field is not set or if it's set to null, the Account Updater service doesn't get configured. If the field is set to `null`, the other `loon_*` fields must be set to null as well.",
+            "deprecated": true,
             "examples": [
               "client-key-1234"
             ]
@@ -42105,6 +42116,7 @@
             ],
             "title": "Loon Secret Key",
             "description": "Secret key provided by Pagos to authenticate to the Loon API. Loon is the Account Updater service we use and if the field is not set or if it's set to null, the Account Updater service doesn't get configured. If the field is set to `null`, the other `loon_*` fields must be set to null as well.",
+            "deprecated": true,
             "examples": [
               "key-12345"
             ]
@@ -42824,6 +42836,7 @@
             ],
             "title": "Account Updater Request Encryption Key",
             "description": "The public key used to encrypt the request to the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
+            "deprecated": true,
             "examples": [
               "key-1234"
             ]
@@ -42839,6 +42852,7 @@
             ],
             "title": "Account Updater Request Encryption Key Id",
             "description": "The ID of the key used to encrypt the request to the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
+            "deprecated": true,
             "examples": [
               "key-id-1234"
             ]
@@ -42854,6 +42868,7 @@
             ],
             "title": "Account Updater Response Decryption Key",
             "description": "The key used to decrypt the response from the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
+            "deprecated": true,
             "examples": [
               "key-1234"
             ]
@@ -42869,6 +42884,7 @@
             ],
             "title": "Account Updater Response Decryption Key Id",
             "description": "The ID of the key used to decrypt the request from the Real-Time Account Updater service. The Account Updater service is used to update card details when cards are lost, stolen or expired. If the field is not set or if it's set to `null`, the Account Updater service doesn't get called. If the field is set, the other `account_updater_*` fields must be set as well.",
+            "deprecated": true,
             "examples": [
               "key-id-1234"
             ]
@@ -42918,6 +42934,7 @@
             ],
             "title": "Loon Client Key",
             "description": "Client key provided by Pagos to authenticate to the Loon API. Loon is the Account Updater service we use and if the field is not set or if it's set to null, the Account Updater service doesn't get configured. If the field is set to `null`, the other `loon_*` fields must be set to null as well.",
+            "deprecated": true,
             "examples": [
               "client-key-1234"
             ]
@@ -42933,6 +42950,7 @@
             ],
             "title": "Loon Secret Key",
             "description": "Secret key provided by Pagos to authenticate to the Loon API. Loon is the Account Updater service we use and if the field is not set or if it's set to null, the Account Updater service doesn't get configured. If the field is set to `null`, the other `loon_*` fields must be set to null as well.",
+            "deprecated": true,
             "examples": [
               "key-12345"
             ]
@@ -58193,6 +58211,8 @@
               "gift-card-refund-succeeded",
               "gift-card-refund-failed",
               "gift-card-reversal-succeeded",
+              "reauthorization-attempted",
+              "reauthorization-created",
               "payment-connector-response-transaction-authorization-succeeded",
               "payment-connector-response-transaction-capture-succeeded",
               "payment-connector-response-transaction-authorization-failed",
