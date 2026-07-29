@@ -5265,11 +5265,14 @@
           "Gift cards"
         ],
         "summary": "Activate a gift card",
-        "description": "Activate a physical gift card through the primary gift card service.",
+        "description": "Activate a physical gift card through the primary gift card service. Set `store` to `true` to also store the activated gift card.",
         "operationId": "activate_gift_card",
         "security": [
           {
-            "OAuth2PasswordBearer": []
+            "OAuth2PasswordBearer": [
+              "gift-cards.write",
+              "embed"
+            ]
           }
         ],
         "parameters": [
@@ -5469,7 +5472,9 @@
         "operationId": "issue_gift_card",
         "security": [
           {
-            "OAuth2PasswordBearer": []
+            "OAuth2PasswordBearer": [
+              "gift-cards.write"
+            ]
           }
         ],
         "parameters": [
@@ -40172,6 +40177,48 @@
             "description": "An optional external identifier for this activation.",
             "examples": [
               "order-12345"
+            ]
+          },
+          "store": {
+            "type": "boolean",
+            "title": "Store",
+            "description": "Whether to store the activated gift card in the vault. When `true`, a `pin` is required.",
+            "default": false,
+            "examples": [
+              false
+            ]
+          },
+          "buyer_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer Id",
+            "description": "The ID of the buyer to associate this gift card to. Only allowed when `store` is `true`. If this field is provided then the `buyer_external_identifier` field needs to be unset.",
+            "examples": [
+              "fe26475d-ec3e-4884-9553-f7356683f7f9"
+            ]
+          },
+          "buyer_external_identifier": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Buyer External Identifier",
+            "description": "The `external_identifier` of the buyer to associate this gift card to. Only allowed when `store` is `true`. If this field is provided then the `buyer_id` field needs to be unset.",
+            "examples": [
+              "user-789123"
             ]
           }
         },
