@@ -11702,8 +11702,6 @@
               "examples": [
                 "fe26475d-ec3e-4884-9553-f7356683f7f9"
               ],
-              "x-speakeasy-ignore": true,
-              "x-gr4vy-docs-ignore": true,
               "title": "Reauthorized From Transaction Id"
             },
             "description": "Filters for transactions that were reauthorized from the transaction with the provided ID."
@@ -56500,9 +56498,7 @@
             "description": "The identifier of the transaction from which this transaction was reauthorized.",
             "examples": [
               "4137b1cf-39ac-42a8-bad6-1c680d5dab6b"
-            ],
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            ]
           },
           "airline": {
             "anyOf": [
@@ -59395,9 +59391,7 @@
             "description": "The identifier of the transaction from which this transaction was reauthorized.",
             "examples": [
               "4137b1cf-39ac-42a8-bad6-1c680d5dab6b"
-            ],
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            ]
           }
         },
         "additionalProperties": false,
