@@ -16375,6 +16375,226 @@
         "x-speakeasy-group": "transactions.captures"
       }
     },
+    "/transactions/{transaction_id}/authorization/increment": {
+      "post": {
+        "tags": [
+          "Transactions"
+        ],
+        "summary": "Increment transaction authorization",
+        "description": "Increment the transaction authorization amount of a given transaction_id.",
+        "operationId": "increment_transaction_authorization",
+        "security": [
+          {
+            "OAuth2PasswordBearer": [
+              "transactions.write"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "transaction_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "description": "The unique identifier of the transaction.",
+              "examples": [
+                "7099948d-7286-47e4-aad8-b68f7eb44591"
+              ],
+              "title": "Transaction Id"
+            },
+            "description": "The unique identifier of the transaction."
+          },
+          {
+            "name": "x-gr4vy-merchant-account-id",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "The ID of the merchant account to use for this request.",
+              "examples": [
+                "default"
+              ],
+              "title": "X-Gr4Vy-Merchant-Account-Id"
+            },
+            "description": "The ID of the merchant account to use for this request."
+          },
+          {
+            "name": "idempotency-key",
+            "in": "header",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "A unique key that identifies this request. Providing this header will make this an idempotent request. We recommend using V4 UUIDs, or another random string with enough entropy to avoid collisions.",
+              "examples": [
+                "request-12345"
+              ],
+              "title": "Idempotency-Key"
+            },
+            "description": "A unique key that identifies this request. Providing this header will make this an idempotent request. We recommend using V4 UUIDs, or another random string with enough entropy to avoid collisions."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionAuthorizationIncrementCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionAuthorizationIncrement"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request was unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The credentials were invalid or the caller did not have permission to act on the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "The request method was not allowed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error405"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A duplicate record was found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "425": {
+            "description": "The request was too early.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error425"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests were made.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error429"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error502"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error504"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-name-override": "increment_authorization",
+        "x-speakeasy-group": "transactions"
+      }
+    },
     "/transactions/{transaction_id}/session": {
       "post": {
         "tags": [
@@ -41655,6 +41875,14 @@
         "type": "object",
         "title": "HTTPValidationError"
       },
+      "IncrementalAuthorizationStatus": {
+        "type": "string",
+        "enum": [
+          "succeeded",
+          "failed"
+        ],
+        "title": "IncrementalAuthorizationStatus"
+      },
       "InstrumentType": {
         "type": "string",
         "enum": [
@@ -57166,6 +57394,106 @@
           "items"
         ],
         "title": "TransactionActions"
+      },
+      "TransactionAuthorizationIncrement": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "transaction-authorization-increment",
+            "title": "Type",
+            "description": "Always `transaction-authorization-increment`.",
+            "default": "transaction-authorization-increment",
+            "examples": [
+              "transaction-authorization-increment"
+            ]
+          },
+          "status": {
+            "$ref": "#/components/schemas/IncrementalAuthorizationStatus",
+            "description": "The status of the incremental authorization.",
+            "examples": [
+              "succeeded"
+            ]
+          },
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code",
+            "description": "The standardized error code set by Gr4vy.",
+            "examples": [
+              "service_error"
+            ]
+          },
+          "raw_response_code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw Response Code",
+            "description": "This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.",
+            "examples": [
+              "E104"
+            ]
+          },
+          "raw_response_description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Raw Response Description",
+            "description": "This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.",
+            "examples": [
+              "Internal error"
+            ]
+          },
+          "transaction": {
+            "$ref": "#/components/schemas/Transaction",
+            "description": "The transaction associated to this incremental authorization."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "status",
+          "code",
+          "raw_response_code",
+          "raw_response_description",
+          "transaction"
+        ],
+        "title": "TransactionAuthorizationIncrement"
+      },
+      "TransactionAuthorizationIncrementCreate": {
+        "properties": {
+          "amount": {
+            "type": "integer",
+            "maximum": 99999999.0,
+            "minimum": 0.0,
+            "title": "Amount",
+            "description": "The amount by which to increment the authorization, in the smallest currency unit of the transaction's currency. For example, `1299` cents to increment the authorization by `$12.99`.",
+            "examples": [
+              1299
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "amount"
+        ],
+        "title": "TransactionAuthorizationIncrementCreate"
       },
       "TransactionBuyer": {
         "properties": {
