@@ -61555,6 +61555,29 @@
         "title": "CybersourceOptions",
         "type": "object"
       },
+      "DlocalCardOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "three_dsecure_force": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Indicates whether to force dlocal hosted 3D Secure authentication for the card transaction.",
+            "examples": [
+              true
+            ],
+            "title": "Three Dsecure Force"
+          }
+        },
+        "title": "DlocalCardOptions",
+        "type": "object"
+      },
       "DlocalOptions": {
         "additionalProperties": false,
         "properties": {
@@ -64406,6 +64429,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `cybersource-kcp` connector."
+          },
+          "dlocal-card": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DlocalCardOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `dlocal-card` connector."
           },
           "dlocal-nequi": {
             "anyOf": [
