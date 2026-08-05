@@ -64272,6 +64272,23 @@
             "default": null,
             "description": "Overrides the default report group to pass to the Worldpay VAP API.",
             "title": "Reportgroup"
+          },
+          "orderId": {
+            "anyOf": [
+              {
+                "maxLength": 256,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Overrides the `orderId` passed to the Worldpay VAP API, which defaults to the Gr4vy transaction ID.",
+            "examples": [
+              "order-123"
+            ],
+            "title": "Orderid"
           }
         },
         "title": "WorldpayVapOptions",
