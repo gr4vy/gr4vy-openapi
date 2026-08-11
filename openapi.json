@@ -38034,6 +38034,19 @@
             "description": "The use-case for the the transaction.",
             "x-gr4vy-docs-ignore": true,
             "x-speakeasy-ignore": true
+          },
+          "intent": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TransactionIntent"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Defines the intent to apply to transactions created via this checkout session. This determines the desired initial state of the transaction.",
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
           }
         },
         "additionalProperties": false,
