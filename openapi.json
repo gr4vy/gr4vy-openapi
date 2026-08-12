@@ -54551,12 +54551,41 @@
             "type": "string",
             "title": "Name"
           },
+          "slug": {
+            "type": "string",
+            "title": "Slug",
+            "description": "The unique, human-readable identifier for the role.",
+            "examples": [
+              "administrator"
+            ]
+          },
           "description": {
             "type": "string",
             "title": "Description"
           },
           "permissions": {
             "$ref": "#/components/schemas/PermissionSet"
+          },
+          "assignable_to": {
+            "items": {
+              "$ref": "#/components/schemas/RoleAssigneeType"
+            },
+            "type": "array",
+            "title": "Assignable To",
+            "description": "The types of resource this role can be assigned to."
+          },
+          "applies_to": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Applies To",
+            "description": "The slugs of the roles this role is an add-on of. Empty when this role is not an add-on."
+          },
+          "is_standalone_assignable": {
+            "type": "boolean",
+            "title": "Is Standalone Assignable",
+            "description": "Whether this role can be assigned on its own, without being combined with another role."
           }
         },
         "additionalProperties": false,
@@ -54564,10 +54593,22 @@
         "required": [
           "id",
           "name",
+          "slug",
           "description",
-          "permissions"
+          "permissions",
+          "assignable_to",
+          "applies_to",
+          "is_standalone_assignable"
         ],
         "title": "Role"
+      },
+      "RoleAssigneeType": {
+        "type": "string",
+        "enum": [
+          "user",
+          "api-key-pair"
+        ],
+        "title": "RoleAssigneeType"
       },
       "SEPABankPaymentMethodCreate": {
         "properties": {
