@@ -22857,6 +22857,210 @@
         "x-gr4vy-docs-ignore": true
       }
     },
+    "/roles": {
+      "get": {
+        "tags": [
+          "Roles"
+        ],
+        "summary": "List all roles",
+        "description": "List all roles available in the instance.",
+        "operationId": "list_roles",
+        "security": [
+          {
+            "OAuth2PasswordBearer": [
+              "roles.read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "A pointer to the page of results to return.",
+              "examples": [
+                "ZXhhbXBsZTE"
+              ],
+              "title": "Cursor"
+            },
+            "description": "A pointer to the page of results to return."
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "description": "The maximum number of items that are returned.",
+              "examples": [
+                20
+              ],
+              "default": 20,
+              "title": "Limit"
+            },
+            "description": "The maximum number of items that are returned."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Collection_Role_"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "The request was unauthorized.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error401"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "The credentials were invalid or the caller did not have permission to act on the resource.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error403"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The resource was not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error404"
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "The request method was not allowed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error405"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "A duplicate record was found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error409"
+                }
+              }
+            }
+          },
+          "425": {
+            "description": "The request was too early.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error425"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many requests were made.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error429"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error500"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error502"
+                }
+              }
+            }
+          },
+          "504": {
+            "description": "The server encountered an error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error504"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "x-speakeasy-name-override": "list",
+        "x-speakeasy-group": "roles",
+        "x-speakeasy-pagination": {
+          "type": "cursor",
+          "inputs": [
+            {
+              "name": "cursor",
+              "in": "parameters",
+              "type": "cursor"
+            }
+          ],
+          "outputs": {
+            "nextCursor": "$.next_cursor"
+          }
+        }
+      }
+    },
     "/merchant-accounts": {
       "get": {
         "tags": [
@@ -38524,6 +38728,69 @@
         ],
         "title": "Collection[APIKeyPair]"
       },
+      "Collection_Role_": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            },
+            "type": "array",
+            "title": "Items",
+            "description": "A list of items returned for this request."
+          },
+          "limit": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Limit",
+            "description": "The number of items for this page.",
+            "default": 20,
+            "examples": [
+              20
+            ]
+          },
+          "next_cursor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 1000,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Cursor",
+            "description": "The cursor pointing at the next page of items.",
+            "examples": [
+              "ZXhhbXBsZTE"
+            ]
+          },
+          "previous_cursor": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 1000,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Previous Cursor",
+            "description": "The cursor pointing at the previous page of items.",
+            "examples": [
+              "Xkjss7asS"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "Collection[Role]"
+      },
       "CreateSession": {
         "properties": {
           "type": {
@@ -52449,7 +52716,14 @@
               "type": "string"
             },
             "type": "array",
-            "title": "Allow"
+            "title": "Allow",
+            "description": "The scopes granted by this role.",
+            "examples": [
+              [
+                "transactions.read",
+                "reports.read"
+              ]
+            ]
           }
         },
         "additionalProperties": false,
@@ -52457,7 +52731,8 @@
         "required": [
           "allow"
         ],
-        "title": "PermissionSet"
+        "title": "PermissionSet",
+        "description": "The permissions granted by a role."
       },
       "PlaidPaymentMethodCreate": {
         "properties": {
@@ -54540,16 +54815,28 @@
             "type": "string",
             "const": "role",
             "title": "Type",
-            "default": "role"
+            "description": "Always `role`.",
+            "default": "role",
+            "examples": [
+              "role"
+            ]
           },
           "id": {
             "type": "string",
             "format": "uuid",
-            "title": "Id"
+            "title": "Id",
+            "description": "The unique ID for the role.",
+            "examples": [
+              "fe26475d-ec3e-4884-9553-f7356683f7f9"
+            ]
           },
           "name": {
             "type": "string",
-            "title": "Name"
+            "title": "Name",
+            "description": "The human-readable name of the role.",
+            "examples": [
+              "Administrator"
+            ]
           },
           "slug": {
             "type": "string",
@@ -54561,10 +54848,15 @@
           },
           "description": {
             "type": "string",
-            "title": "Description"
+            "title": "Description",
+            "description": "A description of the access this role grants.",
+            "examples": [
+              "Full read and write access."
+            ]
           },
           "permissions": {
-            "$ref": "#/components/schemas/PermissionSet"
+            "$ref": "#/components/schemas/PermissionSet",
+            "description": "The permissions granted by this role."
           },
           "assignable_to": {
             "items": {
@@ -65535,6 +65827,10 @@
     {
       "name": "Reports - Executions",
       "description": "Manage executions of reports."
+    },
+    {
+      "name": "Roles",
+      "description": "List the roles that can be assigned to users and API key pairs."
     },
     {
       "name": "Transactions",
