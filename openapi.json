@@ -46171,7 +46171,11 @@
                 "type": "null"
               }
             ],
-            "title": "Alert Gt"
+            "title": "Alert Gt",
+            "description": "The value above which a sample is considered unhealthy.",
+            "examples": [
+              50
+            ]
           },
           "alert_lt": {
             "anyOf": [
@@ -46189,7 +46193,11 @@
                 "type": "null"
               }
             ],
-            "title": "Alert Lt"
+            "title": "Alert Lt",
+            "description": "The value below which a sample is considered unhealthy.",
+            "examples": [
+              50
+            ]
           }
         },
         "additionalProperties": false,
