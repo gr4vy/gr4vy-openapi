@@ -17798,6 +17798,21 @@
             "description": "Return any deleted payment service."
           },
           {
+            "name": "include_fields",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "description": "Include the non-secret credential and reporting fields for each payment service. Disable this to reduce response time if you don't need them.",
+              "examples": [
+                true
+              ],
+              "default": true,
+              "title": "Include Fields"
+            },
+            "description": "Include the non-secret credential and reporting fields for each payment service. Disable this to reduce response time if you don't need them."
+          },
+          {
             "name": "x-gr4vy-merchant-account-id",
             "in": "header",
             "required": false,
