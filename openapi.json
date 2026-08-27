@@ -32696,7 +32696,8 @@
               "savings"
             ],
             "title": "Account Type",
-            "description": "Specify whether this is a `checking` or `savings` account",
+            "description": "Specify whether this is a `checking` or `savings` account. Defaults to `checking`.",
+            "default": "checking",
             "examples": [
               "checking"
             ]
@@ -32707,8 +32708,7 @@
         "required": [
           "account_holder",
           "account_number",
-          "routing_number",
-          "account_type"
+          "routing_number"
         ],
         "title": "ACHBankPaymentMethodCreate",
         "description": "ACH Bank Payment Method\n\nBank Payment Method for ACH bank accounts."
