@@ -37576,6 +37576,27 @@
                 "electron"
               ]
             ]
+          },
+          "country": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Z]{2}$",
+                "examples": [
+                  "DE",
+                  "GB",
+                  "US"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Country",
+            "description": "The country the card was issued in.",
+            "examples": [
+              "US"
+            ]
           }
         },
         "additionalProperties": false,
