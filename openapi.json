@@ -41845,6 +41845,21 @@
             "examples": [
               "123"
             ]
+          },
+          "message_expiration": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Message Expiration",
+            "description": "Expiry of the Google Pay token the PAN was decrypted from, as milliseconds since the epoch.",
+            "examples": [
+              "1759309000000"
+            ]
           }
         },
         "additionalProperties": false,
