@@ -44075,6 +44075,7 @@
           "paymaya",
           "paysquad",
           "paypal",
+          "paypaldirectorder",
           "paypalpaylater",
           "paypay",
           "payto",
@@ -53069,6 +53070,7 @@
               "paymaya",
               "paysquad",
               "paypal",
+              "paypaldirectorder",
               "paypalpaylater",
               "paypay",
               "payto",
@@ -64003,6 +64005,24 @@
         "title": "OxxoOptions",
         "type": "object"
       },
+      "PaypalDirectOrderOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "order_id": {
+            "description": "The ID of an existing PayPal order that was already created and approved by the buyer entirely outside of Gr4vy. Gr4vy retrieves this order and authorizes (or captures) it directly, without creating an order of its own.",
+            "examples": [
+              "5O190127TN364715T"
+            ],
+            "title": "Order Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "order_id"
+        ],
+        "title": "PaypalDirectOrderOptions",
+        "type": "object"
+      },
       "PaypalOptions": {
         "additionalProperties": false,
         "properties": {
@@ -65505,6 +65525,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `paypal-paypal` connector."
+          },
+          "paypal-paypaldirectorder": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PaypalDirectOrderOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `paypal-paypaldirectorder` connector."
           },
           "paypal-paypalpaylater": {
             "anyOf": [
