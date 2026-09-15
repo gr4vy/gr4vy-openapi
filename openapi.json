@@ -58340,6 +58340,21 @@
               }
             ],
             "description": "The shipping details associated with the catpure."
+          },
+          "tracking": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/Tracking"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tracking",
+            "description": "The shipment tracking details associated with the capture."
           }
         },
         "additionalProperties": false,
