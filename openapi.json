@@ -55338,6 +55338,36 @@
         "title": "Settlements",
         "description": "A list of settlement records for a transaction."
       },
+      "ShippingCarrier": {
+        "type": "string",
+        "enum": [
+          "amazon",
+          "bpost",
+          "brt",
+          "canada_post",
+          "ceska_posta",
+          "dhl",
+          "doordash",
+          "dpd",
+          "evri",
+          "fedex",
+          "gls",
+          "inpost",
+          "jt_express",
+          "landmark_global",
+          "lasership",
+          "packeta",
+          "ppl",
+          "purolator",
+          "rr_donnelley",
+          "sda",
+          "ups",
+          "usps",
+          "veho",
+          "other"
+        ],
+        "title": "ShippingCarrier"
+      },
       "ShippingDetails": {
         "properties": {
           "first_name": {
@@ -56821,6 +56851,49 @@
         ],
         "title": "TokenPaymentMethodCreate",
         "description": "Create a transaction with the ID (token) of a stored payment method (and an optional URL for approval)"
+      },
+      "Tracking": {
+        "properties": {
+          "number": {
+            "type": "string",
+            "maxLength": 255,
+            "minLength": 1,
+            "title": "Number",
+            "description": "The tracking number for the shipment.",
+            "examples": [
+              "1Z999AA10123456784"
+            ]
+          },
+          "carrier": {
+            "$ref": "#/components/schemas/ShippingCarrier",
+            "description": "The carrier handling the shipment.",
+            "examples": [
+              "ups"
+            ]
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url",
+            "description": "The URL to track the shipment.",
+            "examples": [
+              "https://www.ups.com/track?tracknum=1Z999AA10123456784"
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "number",
+          "carrier"
+        ],
+        "title": "Tracking"
       },
       "Transaction": {
         "properties": {
@@ -58324,6 +58397,22 @@
             ],
             "title": "Cart Items",
             "description": "An array of cart items that represents the line items of this capture."
+          },
+          "tracking": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/Tracking"
+                },
+                "type": "array",
+                "maxItems": 5
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tracking",
+            "description": "An array of shipment tracking details for this capture."
           },
           "final": {
             "type": "boolean",
