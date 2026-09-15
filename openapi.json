@@ -36725,6 +36725,45 @@
               ]
             ]
           },
+          "subcategories": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "maxLength": 50,
+                  "minLength": 1
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subcategories",
+            "description": "A list of strings containing product subcategories for the item.",
+            "examples": [
+              [
+                "action-cameras"
+              ]
+            ]
+          },
+          "brand": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 255,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Brand",
+            "description": "The brand of the item.",
+            "examples": [
+              "GoPro"
+            ]
+          },
           "product_type": {
             "anyOf": [
               {
