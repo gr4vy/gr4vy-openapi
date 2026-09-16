@@ -64526,6 +64526,34 @@
         "title": "PowertranzOptions",
         "type": "object"
       },
+      "RepayBankOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "sec_code": {
+            "anyOf": [
+              {
+                "enum": [
+                  "WebDebit",
+                  "TelDebit",
+                  "PpdDebit"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The Nacha Standard Entry Class code describing how the account holder authorized an ACH debit. When omitted, `TelDebit` is used for a `moto` payment source and `WebDebit` otherwise. Ignored for business accounts, which Repay requires to use `CcdDebit`.",
+            "examples": [
+              "WebDebit"
+            ],
+            "title": "Sec Code"
+          }
+        },
+        "title": "RepayBankOptions",
+        "type": "object"
+      },
       "RiskifiedAntiFraudOptions": {
         "additionalProperties": false,
         "properties": {
@@ -65704,6 +65732,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `powertranz-card` connector."
+          },
+          "repay-bank": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RepayBankOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `repay-bank` connector."
           },
           "riskified-anti-fraud": {
             "anyOf": [
