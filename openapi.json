@@ -35913,6 +35913,21 @@
             ],
             "title": "Cart Items",
             "description": "An array of cart items that represents the line items of this capture."
+          },
+          "tracking": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/Tracking"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Tracking",
+            "description": "The shipment tracking details associated with the capture."
           }
         },
         "additionalProperties": false,
