@@ -64585,8 +64585,40 @@
               }
             ],
             "default": [],
-            "description": "A list of line items details to override when passing to the Riskified API.",
+            "description": "A list of line items details to override when passing to the Riskified API. Entries are matched by position against the cart items sent to Riskified, which excludes `discount`, `shipping_fee`, `sales_tax` and `store_credit` items.",
             "title": "Line Items"
+          },
+          "shipping_lines": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/RiskifiedAntiFraudOptionsShippingLine"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": [],
+            "description": "A list of shipping lines details to override when passing to the Riskified API. Entries are matched by position against the `shipping_fee` cart items.",
+            "title": "Shipping Lines"
+          },
+          "additional_shipping_addresses": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/RiskifiedAntiFraudOptionsShippingAddress"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": [],
+            "description": "Additional destinations for orders shipped to more than one address. The address derived from the transaction is always sent first; these are appended after it and may not use the reserved `base-shipping-address` id.",
+            "title": "Additional Shipping Addresses"
           }
         },
         "title": "RiskifiedAntiFraudOptions",
@@ -64611,9 +64643,272 @@
             "default": null,
             "description": "Indicates whether the item will be shipped or picked up.",
             "title": "Delivered To"
+          },
+          "shipping_address_id": {
+            "anyOf": [
+              {
+                "maxLength": 50,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The shipping address this item is delivered to. Must be `base-shipping-address` for the address derived from the transaction, or the `id` of an `additional_shipping_addresses` entry. Must not be provided when `additional_shipping_addresses` is empty.",
+            "title": "Shipping Address Id"
           }
         },
         "title": "RiskifiedAntiFraudOptionsLineItem",
+        "type": "object"
+      },
+      "RiskifiedAntiFraudOptionsShippingAddress": {
+        "additionalProperties": false,
+        "description": "An additional shipping address to pass to the Riskified API.\n\nField names follow Riskified's Address model rather than the Gr4vy address\nformat, since these options are passed through to their API. The `country` sent\nto Riskified is derived from `country_code`.",
+        "properties": {
+          "id": {
+            "description": "Unique identifier for this address, referenced by `line_items[].shipping_address_id` and `shipping_lines[].shipping_address_id`.",
+            "examples": [
+              "secondary-address"
+            ],
+            "maxLength": 50,
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "first_name": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "First name of the recipient at this address.",
+            "examples": [
+              "John"
+            ],
+            "title": "First Name"
+          },
+          "last_name": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Last name of the recipient at this address.",
+            "examples": [
+              "Doe"
+            ],
+            "title": "Last Name"
+          },
+          "phone": {
+            "anyOf": [
+              {
+                "examples": [
+                  "+14155552671",
+                  "+442071838750"
+                ],
+                "pattern": "^\\+[1-9]\\d{1,14}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The phone number of the recipient at this address, which should be formatted according to the E164 number standard.",
+            "examples": [
+              "+14155552671"
+            ],
+            "title": "Phone"
+          },
+          "city": {
+            "anyOf": [
+              {
+                "maxLength": 100,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The city for the address.",
+            "examples": [
+              "San Jose"
+            ],
+            "title": "City"
+          },
+          "country_code": {
+            "anyOf": [
+              {
+                "examples": [
+                  "DE",
+                  "GB",
+                  "US"
+                ],
+                "pattern": "^[A-Z]{2}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The country for the address in ISO 3166 format. The country name sent to Riskified is derived from this value.",
+            "examples": [
+              "US"
+            ],
+            "title": "Country Code"
+          },
+          "zip": {
+            "anyOf": [
+              {
+                "maxLength": 50,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The postal code or zip code for the address.",
+            "examples": [
+              "94560"
+            ],
+            "title": "Zip"
+          },
+          "province": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The state, county, or province for the address.",
+            "examples": [
+              "California"
+            ],
+            "title": "Province"
+          },
+          "province_code": {
+            "anyOf": [
+              {
+                "maxLength": 50,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The code of the state, county, or province for the address. Riskified expects the subdivision on its own, without the country prefix used by ISO 3166-2.",
+            "examples": [
+              "CA"
+            ],
+            "title": "Province Code"
+          },
+          "address1": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The first line of the address.",
+            "examples": [
+              "Stafford Apartments"
+            ],
+            "title": "Address1"
+          },
+          "address2": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The second line of the address.",
+            "examples": [
+              "29th Street"
+            ],
+            "title": "Address2"
+          },
+          "company": {
+            "anyOf": [
+              {
+                "maxLength": 255,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The optional name of the company or organisation to add to the address.",
+            "examples": [
+              "Gr4vy"
+            ],
+            "title": "Company"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "RiskifiedAntiFraudOptionsShippingAddress",
+        "type": "object"
+      },
+      "RiskifiedAntiFraudOptionsShippingLine": {
+        "additionalProperties": false,
+        "properties": {
+          "shipping_address_id": {
+            "anyOf": [
+              {
+                "maxLength": 50,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The shipping address this delivery charge applies to. Must be `base-shipping-address` for the address derived from the transaction, or the `id` of an `additional_shipping_addresses` entry. Must not be provided when `additional_shipping_addresses` is empty.",
+            "title": "Shipping Address Id"
+          }
+        },
+        "title": "RiskifiedAntiFraudOptionsShippingLine",
         "type": "object"
       },
       "StripeCardOptions": {
