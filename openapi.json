@@ -36014,7 +36014,8 @@
           "succeeded",
           "pending",
           "declined",
-          "failed"
+          "failed",
+          "canceled"
         ],
         "title": "CaptureStatus"
       },
@@ -49226,6 +49227,14 @@
               true
             ]
           },
+          "refund_ingestion_enabled": {
+            "type": "boolean",
+            "title": "Refund Ingestion Enabled",
+            "description": "Defines if this payment service has refund ingestion enabled.",
+            "examples": [
+              true
+            ]
+          },
           "three_d_secure_enabled": {
             "anyOf": [
               {
@@ -49350,6 +49359,7 @@
           "network_tokens_enabled",
           "open_loop",
           "settlement_reporting_enabled",
+          "refund_ingestion_enabled",
           "created_at",
           "updated_at"
         ],
@@ -49625,6 +49635,15 @@
             "type": "boolean",
             "title": "Settlement Reporting Enabled",
             "description": "Defines if this payment service has settlement reporting enabled.",
+            "default": false,
+            "examples": [
+              true
+            ]
+          },
+          "refund_ingestion_enabled": {
+            "type": "boolean",
+            "title": "Refund Ingestion Enabled",
+            "description": "Defines if this payment service has refund ingestion enabled.",
             "default": false,
             "examples": [
               true
@@ -50308,6 +50327,15 @@
             "type": "boolean",
             "title": "Settlement Reporting Enabled",
             "description": "Defines if this payment service has settlement reporting enabled.",
+            "default": false,
+            "examples": [
+              true
+            ]
+          },
+          "refund_ingestion_enabled": {
+            "type": "boolean",
+            "title": "Refund Ingestion Enabled",
+            "description": "Defines if this payment service has refund ingestion enabled.",
             "default": false,
             "examples": [
               true
@@ -59183,6 +59211,10 @@
               "payment-connector-response-transaction-authorization-increment-failed",
               "payment-connector-response-transaction-void-declined",
               "payment-connector-response-transaction-void-failed",
+              "payment-connector-response-transaction-capture-reversal-succeeded",
+              "payment-connector-response-transaction-capture-reversal-declined",
+              "payment-connector-response-transaction-capture-reversal-failed",
+              "payment-connector-response-transaction-capture-reversal-delayed",
               "payment-connector-external-transaction-request",
               "payment-connector-report-transaction-settled",
               "payment-connector-report-refund-settled",
