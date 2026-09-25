@@ -64943,6 +64943,48 @@
         "title": "RiskifiedAntiFraudOptionsShippingLine",
         "type": "object"
       },
+      "RyftCardOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "sub_account_id": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Ryft linked sub-account ID, sent as the `Account` header.",
+            "examples": [
+              "ac_123456789"
+            ],
+            "title": "Sub Account Id"
+          },
+          "platform_fee": {
+            "anyOf": [
+              {
+                "maximum": 2000000,
+                "minimum": 0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Platform Fee in the transaction currency's smallest unit. Sent as Ryft's `platformFee` field.",
+            "examples": [
+              205
+            ],
+            "title": "Platform Fee"
+          }
+        },
+        "title": "RyftCardOptions",
+        "type": "object"
+      },
       "StripeCardOptions": {
         "additionalProperties": false,
         "properties": {
@@ -66098,6 +66140,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `riskified-anti-fraud` connector."
+          },
+          "ryft-card": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RyftCardOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `ryft-card` connector."
           },
           "stripe-affirm": {
             "anyOf": [
