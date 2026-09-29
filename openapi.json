@@ -59136,6 +59136,23 @@
             "examples": [
               "2026-04-01T12:00:00+00:00"
             ]
+          },
+          "is_amount_estimated": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Is Amount Estimated",
+            "description": "Whether the authorization amount is expected to be modified in the future or not.",
+            "default": false,
+            "examples": [
+              true,
+              false
+            ]
           }
         },
         "additionalProperties": false,
