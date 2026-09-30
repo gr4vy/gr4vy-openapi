@@ -10906,12 +10906,16 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only the items for which the `buyer` has an `email_address` that matches this value.",
+              "description": "Deprecated. Filters the results to only the items for which the `buyer` has an `email_address` that matches this value. This filter can be slow and is not recommended for use in automated systems. Use `buyer_search`, `buyer_external_identifier` or `buyer_id` instead.",
+              "deprecated": true,
               "examples": [
                 "john@example.com"
               ],
               "title": "Buyer Email Address"
-            }
+            },
+            "description": "Deprecated. Filters the results to only the items for which the `buyer` has an `email_address` that matches this value. This filter can be slow and is not recommended for use in automated systems. Use `buyer_search`, `buyer_external_identifier` or `buyer_id` instead.",
+            "deprecated": true,
+            "x-speakeasy-deprecation-message": "This filter can be slow. Use `buyer_search`, `buyer_external_identifier` or `buyer_id` instead."
           },
           {
             "name": "ip_address",
@@ -11062,13 +11066,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters for transactions that have an `amount` that is equal to the provided `amount_eq` value.",
+              "description": "Filters for transactions that have an `amount` that is equal to the provided `amount_eq` value. For best performance, combine it with `created_at_gte` and `created_at_lte`.",
               "examples": [
                 1299
               ],
               "title": "Amount Eq"
             },
-            "description": "Filters for transactions that have an `amount` that is equal to the provided `amount_eq` value."
+            "description": "Filters for transactions that have an `amount` that is equal to the provided `amount_eq` value. For best performance, combine it with `created_at_gte` and `created_at_lte`."
           },
           {
             "name": "amount_lte",
@@ -11085,13 +11089,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters for transactions that have an `amount` that is less than or equal to the `amount_lte` value.",
+              "description": "Filters for transactions that have an `amount` that is less than or equal to the `amount_lte` value. For best performance, combine it with `created_at_gte` and `created_at_lte`.",
               "examples": [
                 1299
               ],
               "title": "Amount Lte"
             },
-            "description": "Filters for transactions that have an `amount` that is less than or equal to the `amount_lte` value."
+            "description": "Filters for transactions that have an `amount` that is less than or equal to the `amount_lte` value. For best performance, combine it with `created_at_gte` and `created_at_lte`."
           },
           {
             "name": "amount_gte",
@@ -11108,13 +11112,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters for transactions that have an `amount` that is greater than or equal to the `amount_gte` value.",
+              "description": "Filters for transactions that have an `amount` that is greater than or equal to the `amount_gte` value. For best performance, combine it with `created_at_gte` and `created_at_lte`.",
               "examples": [
                 1299
               ],
               "title": "Amount Gte"
             },
-            "description": "Filters for transactions that have an `amount` that is greater than or equal to the `amount_gte` value."
+            "description": "Filters for transactions that have an `amount` that is greater than or equal to the `amount_gte` value. For best performance, combine it with `created_at_gte` and `created_at_lte`."
           },
           {
             "name": "currency",
@@ -11138,7 +11142,7 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters for transactions that have matching `currency` values. The `currency` values provided must be formatted as 3-letter ISO currency code.",
+              "description": "Filters for transactions that have matching `currency` values. The `currency` values provided must be formatted as 3-letter ISO currency code. For best performance, combine it with `created_at_gte` and `created_at_lte`.",
               "examples": [
                 [
                   "USD"
@@ -11146,7 +11150,7 @@
               ],
               "title": "Currency"
             },
-            "description": "Filters for transactions that have matching `currency` values. The `currency` values provided must be formatted as 3-letter ISO currency code."
+            "description": "Filters for transactions that have matching `currency` values. The `currency` values provided must be formatted as 3-letter ISO currency code. For best performance, combine it with `created_at_gte` and `created_at_lte`."
           },
           {
             "name": "country",
@@ -11164,7 +11168,7 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters for transactions that have matching `country` values.",
+              "description": "Filters for transactions that have matching `country` values. For best performance, combine it with `created_at_gte` and `created_at_lte`.",
               "examples": [
                 [
                   "US"
@@ -11172,7 +11176,7 @@
               ],
               "title": "Country"
             },
-            "description": "Filters for transactions that have matching `country` values."
+            "description": "Filters for transactions that have matching `country` values. For best performance, combine it with `created_at_gte` and `created_at_lte`."
           },
           {
             "name": "payment_service_id",
@@ -11258,7 +11262,7 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters for transactions where the `payment_method_scheme` matches one of the provided values.",
+              "description": "Filters for transactions where the `payment_method_scheme` matches one of the provided values. For best performance, combine it with `created_at_gte` and `created_at_lte`.",
               "examples": [
                 [
                   "visa"
@@ -11266,7 +11270,7 @@
               ],
               "title": "Payment Method Scheme"
             },
-            "description": "Filters for transactions where the `payment_method_scheme` matches one of the provided values."
+            "description": "Filters for transactions where the `payment_method_scheme` matches one of the provided values. For best performance, combine it with `created_at_gte` and `created_at_lte`."
           },
           {
             "name": "payment_method_country",
@@ -11281,7 +11285,7 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters for transactions that have a payment method with a country that matches with the provided value.",
+              "description": "Filters for transactions that have a payment method with a country that matches with the provided value. For best performance, combine it with `created_at_gte` and `created_at_lte`.",
               "examples": [
                 [
                   "US"
@@ -11289,7 +11293,7 @@
               ],
               "title": "Payment Method Country"
             },
-            "description": "Filters for transactions that have a payment method with a country that matches with the provided value."
+            "description": "Filters for transactions that have a payment method with a country that matches with the provided value. For best performance, combine it with `created_at_gte` and `created_at_lte`."
           },
           {
             "name": "payment_method_fingerprint",
@@ -11327,13 +11331,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters for transactions that have matching `method` values.",
+              "description": "Filters for transactions that have matching `method` values. For best performance, combine it with `created_at_gte` and `created_at_lte`.",
               "examples": [
                 "card"
               ],
               "title": "Method"
             },
-            "description": "Filters for transactions that have matching `method` values."
+            "description": "Filters for transactions that have matching `method` values. For best performance, combine it with `created_at_gte` and `created_at_lte`."
           },
           {
             "name": "error_code",
@@ -11526,13 +11530,16 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters for transactions that have at least one gift card redemption where the last 4 digits of its gift card number matches exactly with the provided value.",
+              "description": "Deprecated. Filters for transactions that have at least one gift card redemption where the last 4 digits of its gift card number matches exactly with the provided value. This filter can be slow and is not recommended for use in automated systems. Use `gift_card_id` instead.",
+              "deprecated": true,
               "examples": [
                 "7890"
               ],
               "title": "Gift Card Last4"
             },
-            "description": "Filters for transactions that have at least one gift card redemption where the last 4 digits of its gift card number matches exactly with the provided value."
+            "description": "Deprecated. Filters for transactions that have at least one gift card redemption where the last 4 digits of its gift card number matches exactly with the provided value. This filter can be slow and is not recommended for use in automated systems. Use `gift_card_id` instead.",
+            "deprecated": true,
+            "x-speakeasy-deprecation-message": "This filter can be slow. Use `gift_card_id` instead."
           },
           {
             "name": "has_settlements",
@@ -11547,13 +11554,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters for transactions that have at least one associated settlement record.",
+              "description": "Filters for transactions that have at least one associated settlement record. When filtering on `false`, combine it with `created_at_gte` and `created_at_lte` for best performance.",
               "examples": [
                 true
               ],
               "title": "Has Settlements"
             },
-            "description": "Filters for transactions that have at least one associated settlement record."
+            "description": "Filters for transactions that have at least one associated settlement record. When filtering on `false`, combine it with `created_at_gte` and `created_at_lte` for best performance."
           },
           {
             "name": "payment_method_bin",
@@ -11592,13 +11599,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters the results to only the transactions that have a payment source that matches with any of the provided values.",
+              "description": "Filters the results to only the transactions that have a payment source that matches with any of the provided values. For best performance, combine it with `created_at_gte` and `created_at_lte`.",
               "examples": [
                 "recurring"
               ],
               "title": "Payment Source"
             },
-            "description": "Filters the results to only the transactions that have a payment source that matches with any of the provided values."
+            "description": "Filters the results to only the transactions that have a payment source that matches with any of the provided values. For best performance, combine it with `created_at_gte` and `created_at_lte`."
           },
           {
             "name": "is_subsequent_payment",
@@ -11613,13 +11620,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters for transactions where the `is_subsequent_payment` matches the provided value.",
+              "description": "Filters for transactions where the `is_subsequent_payment` matches the provided value. For best performance, combine it with `created_at_gte` and `created_at_lte`.",
               "examples": [
                 true
               ],
               "title": "Is Subsequent Payment"
             },
-            "description": "Filters for transactions where the `is_subsequent_payment` matches the provided value."
+            "description": "Filters for transactions where the `is_subsequent_payment` matches the provided value. For best performance, combine it with `created_at_gte` and `created_at_lte`."
           },
           {
             "name": "merchant_initiated",
@@ -11634,13 +11641,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters for transactions where the `merchant_initiated` matches the provided value.",
+              "description": "Filters for transactions where the `merchant_initiated` matches the provided value. For best performance, combine it with `created_at_gte` and `created_at_lte`.",
               "examples": [
                 true
               ],
               "title": "Merchant Initiated"
             },
-            "description": "Filters for transactions where the `merchant_initiated` matches the provided value."
+            "description": "Filters for transactions where the `merchant_initiated` matches the provided value. For best performance, combine it with `created_at_gte` and `created_at_lte`."
           },
           {
             "name": "used_3ds",
@@ -11655,13 +11662,13 @@
                   "type": "null"
                 }
               ],
-              "description": "Filters for transactions that attempted 3DS authentication or not.",
+              "description": "Filters for transactions that attempted 3DS authentication or not. For best performance, combine it with `created_at_gte` and `created_at_lte`.",
               "examples": [
                 true
               ],
               "title": "Used 3Ds"
             },
-            "description": "Filters for transactions that attempted 3DS authentication or not."
+            "description": "Filters for transactions that attempted 3DS authentication or not. For best performance, combine it with `created_at_gte` and `created_at_lte`."
           },
           {
             "name": "disputed",
