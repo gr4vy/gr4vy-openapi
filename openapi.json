@@ -42272,7 +42272,8 @@
         "type": "string",
         "enum": [
           "succeeded",
-          "failed"
+          "failed",
+          "pending"
         ],
         "title": "IncrementalAuthorizationStatus"
       },
