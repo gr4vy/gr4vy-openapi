@@ -66310,6 +66310,7 @@
         "flows": {
           "password": {
             "scopes": {
+              "checkout": "Gr4vy Checkout scope used to power client side checkout",
               "embed": "Shorthand for all gr4vy embed related scopes",
               "sessions.refresh": "Refresh access-token",
               "anti-fraud-service-definitions.read": "Read Anti Fraud Service Definitions",
