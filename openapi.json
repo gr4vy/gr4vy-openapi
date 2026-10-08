@@ -36310,6 +36310,31 @@
             "examples": [
               "123"
             ]
+          },
+          "preferred_scheme": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "bancontact",
+                  "carte-bancaire",
+                  "dankort",
+                  "mastercard",
+                  "visa",
+                  "eftpos-australia"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preferred Scheme",
+            "description": "The preferred card scheme to use when processing a co-badged card.",
+            "examples": [
+              "visa"
+            ],
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
           }
         },
         "additionalProperties": false,
@@ -36542,6 +36567,31 @@
             "examples": [
               "123"
             ]
+          },
+          "preferred_scheme": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "bancontact",
+                  "carte-bancaire",
+                  "dankort",
+                  "mastercard",
+                  "visa",
+                  "eftpos-australia"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preferred Scheme",
+            "description": "The preferred card scheme to use when processing a co-badged card.",
+            "examples": [
+              "visa"
+            ],
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
           },
           "redirect_url": {
             "anyOf": [
@@ -38447,6 +38497,31 @@
             "examples": [
               "https://example.com"
             ]
+          },
+          "preferred_scheme": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "bancontact",
+                  "carte-bancaire",
+                  "dankort",
+                  "mastercard",
+                  "visa",
+                  "eftpos-australia"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preferred Scheme",
+            "description": "The preferred card scheme to use when processing a co-badged card.",
+            "examples": [
+              "visa"
+            ],
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
           }
         },
         "additionalProperties": false,
@@ -56871,6 +56946,31 @@
             "examples": [
               "123"
             ]
+          },
+          "preferred_scheme": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "bancontact",
+                  "carte-bancaire",
+                  "dankort",
+                  "mastercard",
+                  "visa",
+                  "eftpos-australia"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preferred Scheme",
+            "description": "The preferred card scheme to use when processing a co-badged card.",
+            "examples": [
+              "visa"
+            ],
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
           },
           "redirect_url": {
             "anyOf": [
