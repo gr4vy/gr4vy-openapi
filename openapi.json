@@ -60922,7 +60922,8 @@
         "enum": [
           "active",
           "pending",
-          "deleted"
+          "deleted",
+          "reset"
         ],
         "title": "UserStatus"
       },
