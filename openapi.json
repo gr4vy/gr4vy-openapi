@@ -37603,6 +37603,19 @@
               "2013-07-16T19:23:00.000+00:00"
             ]
           },
+          "client_token": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client Token",
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
+          },
           "payment_method": {
             "anyOf": [
               {
