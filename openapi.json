@@ -32671,22 +32671,6 @@
               "ach"
             ]
           },
-          "account_number": {
-            "type": "string",
-            "title": "Account Number",
-            "description": "The account number for this ACH bank account",
-            "examples": [
-              "123456789"
-            ]
-          },
-          "routing_number": {
-            "type": "string",
-            "title": "Routing Number",
-            "description": "The routing number for this ACH bank account",
-            "examples": [
-              "000000111"
-            ]
-          },
           "is_tokenized": {
             "type": "boolean",
             "title": "Is Tokenized",
@@ -32694,6 +32678,23 @@
             "default": false,
             "examples": [
               false
+            ]
+          },
+          "account_number": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Account Number",
+            "description": "The account number for this ACH bank account, made up of at most 17 digits. Spaces and dashes are ignored. Any format is accepted when `is_tokenized` is `true`.",
+            "examples": [
+              "123456789"
+            ]
+          },
+          "routing_number": {
+            "type": "string",
+            "title": "Routing Number",
+            "description": "The routing number for this ACH bank account, made up of 9 digits. Spaces and dashes are ignored.",
+            "examples": [
+              "000000111"
             ]
           },
           "account_type": {
@@ -34932,7 +34933,7 @@
           "account_number": {
             "type": "string",
             "title": "Account Number",
-            "description": "The account number for this BACS bank account",
+            "description": "The account number for this BACS bank account, made up of 8 digits. A 6 or 7 digit number is padded with leading zeros. Spaces and dashes are ignored.",
             "examples": [
               "12345678"
             ]
@@ -34940,7 +34941,7 @@
           "routing_number": {
             "type": "string",
             "title": "Routing Number",
-            "description": "The sort code for this BACS bank account",
+            "description": "The sort code for this BACS bank account, made up of 6 digits. Spaces and dashes are ignored.",
             "examples": [
               "11-22-33"
             ]
@@ -55247,9 +55248,9 @@
           "account_number": {
             "type": "string",
             "title": "Account Number",
-            "description": "The IBAN for this SEPA bank account",
+            "description": "The IBAN for this SEPA bank account. Spaces are ignored and it is not case sensitive.",
             "examples": [
-              "ES1234567891234"
+              "NL91ABNA0417164300"
             ]
           },
           "routing_number": {
@@ -55262,9 +55263,9 @@
               }
             ],
             "title": "Routing Number",
-            "description": "The BIC for this SEPA bank account",
+            "description": "The BIC for this SEPA bank account, of 8 or 11 characters. Spaces are ignored and it is not case sensitive.",
             "examples": [
-              "ABC123456"
+              "ABNANL2A"
             ]
           }
         },
