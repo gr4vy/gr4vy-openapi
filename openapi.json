@@ -47197,6 +47197,17 @@
               ]
             ]
           },
+          "airline": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Airline"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The airline addendum data which describes the airline booking associated with this payment link."
+          },
           "metadata": {
             "anyOf": [
               {
@@ -47334,6 +47345,7 @@
           "currency",
           "intent",
           "cart_items",
+          "airline",
           "payment_source",
           "created_at",
           "updated_at",
@@ -47611,6 +47623,17 @@
             ],
             "title": "Cart Items",
             "description": "The cart items for the payment link."
+          },
+          "airline": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Airline"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The airline addendum data which describes the airline booking associated with this payment link."
           },
           "metadata": {
             "anyOf": [
