@@ -36333,9 +36333,7 @@
             "description": "The preferred card scheme to use when processing a co-badged card.",
             "examples": [
               "visa"
-            ],
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            ]
           }
         },
         "additionalProperties": false,
@@ -36591,9 +36589,7 @@
             "description": "The preferred card scheme to use when processing a co-badged card.",
             "examples": [
               "visa"
-            ],
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            ]
           },
           "redirect_url": {
             "anyOf": [
@@ -38534,9 +38530,7 @@
             "description": "The preferred card scheme to use when processing a co-badged card.",
             "examples": [
               "visa"
-            ],
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            ]
           }
         },
         "additionalProperties": false,
@@ -57028,9 +57022,7 @@
             "description": "The preferred card scheme to use when processing a co-badged card.",
             "examples": [
               "visa"
-            ],
-            "x-gr4vy-docs-ignore": true,
-            "x-speakeasy-ignore": true
+            ]
           },
           "redirect_url": {
             "anyOf": [
