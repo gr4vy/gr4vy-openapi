@@ -48920,32 +48920,18 @@
             "title": "Method"
           },
           "icon_url": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 1500,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
+            "maxLength": 1500,
+            "minLength": 1,
             "title": "Icon Url"
           },
           "mode": {
             "$ref": "#/components/schemas/Mode"
           },
           "label": {
-            "anyOf": [
-              {
-                "type": "string",
-                "maxLength": 200,
-                "minLength": 1
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
             "title": "Label"
           },
           "can_store_payment_method": {
@@ -48978,7 +48964,9 @@
         "type": "object",
         "required": [
           "method",
+          "icon_url",
           "mode",
+          "label",
           "can_store_payment_method",
           "can_delay_capture"
         ],
