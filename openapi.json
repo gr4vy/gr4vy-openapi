@@ -47160,11 +47160,12 @@
             ]
           },
           "intent": {
-            "$ref": "#/components/schemas/TransactionIntent",
-            "description": "The transaction intent for the payment link.",
+            "$ref": "#/components/schemas/PaymentLinkIntent",
+            "description": "The intent for transactions created from this payment link. `prefer_authorize` authorizes when the payment service supports delayed capture, and captures when it does not.",
             "examples": [
               "authorize",
-              "capture"
+              "capture",
+              "prefer_authorize"
             ]
           },
           "return_url": {
@@ -47598,12 +47599,13 @@
             ]
           },
           "intent": {
-            "$ref": "#/components/schemas/TransactionIntent",
-            "description": "The transaction intent for the payment link.",
+            "$ref": "#/components/schemas/PaymentLinkIntent",
+            "description": "The intent for transactions created from this payment link. `prefer_authorize` authorizes when the payment service supports delayed capture, and captures when it does not.",
             "default": "authorize",
             "examples": [
               "authorize",
-              "capture"
+              "capture",
+              "prefer_authorize"
             ]
           },
           "return_url": {
@@ -47721,6 +47723,15 @@
           "currency"
         ],
         "title": "PaymentLinkCreate"
+      },
+      "PaymentLinkIntent": {
+        "type": "string",
+        "enum": [
+          "authorize",
+          "capture",
+          "prefer_authorize"
+        ],
+        "title": "PaymentLinkIntent"
       },
       "PaymentLinkStatus": {
         "type": "string",
