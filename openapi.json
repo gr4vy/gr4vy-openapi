@@ -38410,6 +38410,24 @@
             "description": "Defines the intent to apply to transactions created via this checkout session. This determines the desired initial state of the transaction.",
             "x-gr4vy-docs-ignore": true,
             "x-speakeasy-ignore": true
+          },
+          "supported_schemes": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/CardScheme"
+                },
+                "type": "array",
+                "uniqueItems": true
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Supported Schemes",
+            "description": "The card schemes to support in transactions created via this checkout session.",
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
           }
         },
         "additionalProperties": false,
