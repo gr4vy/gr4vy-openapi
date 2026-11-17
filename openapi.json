@@ -9413,8 +9413,7 @@
         "security": [
           {
             "OAuth2PasswordBearer": [
-              "digital-wallets.write",
-              "embed"
+              "digital-wallets.write"
             ]
           }
         ],
@@ -9791,8 +9790,7 @@
         "security": [
           {
             "OAuth2PasswordBearer": [
-              "digital-wallets.write",
-              "embed"
+              "digital-wallets.write"
             ]
           }
         ],
@@ -9976,8 +9974,7 @@
         "security": [
           {
             "OAuth2PasswordBearer": [
-              "digital-wallets.write",
-              "embed"
+              "digital-wallets.write"
             ]
           }
         ],
