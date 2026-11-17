@@ -1071,7 +1071,8 @@
           {
             "OAuth2PasswordBearer": [
               "payment-methods.read",
-              "embed"
+              "embed",
+              "payment-link"
             ]
           }
         ],
@@ -9044,7 +9045,8 @@
           {
             "OAuth2PasswordBearer": [
               "digital-wallets.write",
-              "embed"
+              "embed",
+              "payment-link"
             ]
           }
         ],
@@ -9229,7 +9231,8 @@
           {
             "OAuth2PasswordBearer": [
               "digital-wallets.write",
-              "embed"
+              "embed",
+              "payment-link"
             ]
           }
         ],
@@ -11918,7 +11921,8 @@
           {
             "OAuth2PasswordBearer": [
               "transactions.write",
-              "embed"
+              "embed",
+              "payment-link"
             ]
           }
         ],
@@ -16809,7 +16813,8 @@
           {
             "OAuth2PasswordBearer": [
               "payment-options.read",
-              "embed"
+              "embed",
+              "payment-link"
             ]
           }
         ],
@@ -19131,7 +19136,8 @@
           {
             "OAuth2PasswordBearer": [
               "bin-checker.read",
-              "embed"
+              "embed",
+              "payment-link"
             ]
           }
         ],
@@ -66479,6 +66485,7 @@
           "password": {
             "scopes": {
               "checkout": "Gr4vy Checkout scope used to power client side checkout",
+              "payment-link": "Gr4vy scope used to power Payment Links",
               "embed": "Shorthand for all gr4vy embed related scopes",
               "sessions.refresh": "Refresh access-token",
               "anti-fraud-service-definitions.read": "Read Anti Fraud Service Definitions",
