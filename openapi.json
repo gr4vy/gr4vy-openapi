@@ -48027,6 +48027,29 @@
               ]
             ]
           },
+          "preferred_scheme": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "bancontact",
+                  "carte-bancaire",
+                  "dankort",
+                  "mastercard",
+                  "visa",
+                  "eftpos-australia"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preferred Scheme",
+            "description": "The preferred card scheme to use when processing a co-badged card.",
+            "examples": [
+              "visa"
+            ]
+          },
           "cit_last_used_at": {
             "anyOf": [
               {
@@ -48688,6 +48711,29 @@
               ]
             ]
           },
+          "preferred_scheme": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "bancontact",
+                  "carte-bancaire",
+                  "dankort",
+                  "mastercard",
+                  "visa",
+                  "eftpos-australia"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preferred Scheme",
+            "description": "The preferred card scheme to use when processing a co-badged card.",
+            "examples": [
+              "visa"
+            ]
+          },
           "cit_last_used_at": {
             "anyOf": [
               {
@@ -48868,6 +48914,29 @@
             "description": "A transaction link identifier to associate with this payment method.",
             "examples": [
               "123456789012345"
+            ]
+          },
+          "preferred_scheme": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "bancontact",
+                  "carte-bancaire",
+                  "dankort",
+                  "mastercard",
+                  "visa",
+                  "eftpos-australia"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Preferred Scheme",
+            "description": "The preferred card scheme to use when processing a co-badged card.",
+            "examples": [
+              "visa"
             ]
           }
         },
