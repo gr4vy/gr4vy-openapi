@@ -45174,10 +45174,21 @@
               }
             ],
             "title": "Value"
+          },
+          "failed_count": {
+            "type": "integer",
+            "title": "Failed Count",
+            "description": "The count of transactions that failed without ever being authorized (i.e. `authorization_failed`) for the period, using the same filters. For the `authorization` source, these transactions are not included in `value`.",
+            "examples": [
+              12
+            ]
           }
         },
         "additionalProperties": false,
         "type": "object",
+        "required": [
+          "failed_count"
+        ],
         "title": "MetricsExplorerTotalSummary"
       },
       "MetricsExplorerTotalSummarySet": {
