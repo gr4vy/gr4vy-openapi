@@ -64881,6 +64881,17 @@
         "title": "RepayBankOptions",
         "type": "object"
       },
+      "RiskifiedAccountType": {
+        "description": "The customer account types recommended by Riskified.",
+        "enum": [
+          "guest",
+          "registered",
+          "premium",
+          "business"
+        ],
+        "title": "RiskifiedAccountType",
+        "type": "string"
+      },
       "RiskifiedAntiFraudOptions": {
         "additionalProperties": false,
         "properties": {
@@ -64931,6 +64942,21 @@
             "default": [],
             "description": "Additional destinations for orders shipped to more than one address. The address derived from the transaction is always sent first; these are appended after it and may not use the reserved `base-shipping-address` id.",
             "title": "Additional Shipping Addresses"
+          },
+          "account_type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RiskifiedAccountType"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Overrides the customer account type sent to Riskified. When not set, the customer is sent as `registered` if the transaction has a buyer, and as `guest` otherwise. When the account type is `guest`, the customer `id` and `created_at` are not sent to Riskified, even if the transaction has a buyer.",
+            "examples": [
+              "guest"
+            ]
           }
         },
         "title": "RiskifiedAntiFraudOptions",
