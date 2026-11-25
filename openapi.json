@@ -56430,6 +56430,29 @@
             ],
             "title": "Amount",
             "description": "The amount to be used for 3DS authentication. Optionally set this value to authenticate a greater amount than the transaction amount."
+          },
+          "challenge_preferences": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "05",
+                    "10"
+                  ]
+                },
+                "type": "array",
+                "maxItems": 1,
+                "minItems": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Challenge Preferences",
+            "description": "The challenge preference to request in the 3DS authentication.",
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
           }
         },
         "additionalProperties": false,
@@ -60941,6 +60964,23 @@
             ],
             "title": "Amount",
             "description": "The amount used for 3DS authentication."
+          },
+          "challenge_preferences": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Challenge Preferences",
+            "description": "The challenge preference sent in the 3DS authentication.",
+            "x-gr4vy-docs-ignore": true,
+            "x-speakeasy-ignore": true
           }
         },
         "additionalProperties": false,
