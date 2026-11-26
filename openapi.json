@@ -62982,6 +62982,113 @@
         "title": "CybersourceAntiFraudOptions",
         "type": "object"
       },
+      "CybersourceCardOptions": {
+        "additionalProperties": false,
+        "description": "Connection options for Cybersource card payments.",
+        "properties": {
+          "sub_merchant": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SubMerchantOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The PayFac sub-merchant to send when the connection sponsors the card's scheme.",
+            "examples": [
+              {
+                "address": {
+                  "city": "Sydney",
+                  "country": "AU",
+                  "line1": "1 Example St",
+                  "postal_code": "2000",
+                  "state": "NSW"
+                },
+                "email": "ops@submerchant.com.au",
+                "id": "SM-12345",
+                "legal_name": "Registered legal name",
+                "mcc": "5812",
+                "name": "Trading name",
+                "phone": "+61200000000",
+                "website": "https://submerchant.com.au"
+              }
+            ]
+          },
+          "meta_key_merchant_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The merchant ID to use for this transaction. This requires a meta key to be set up for use with Cybersource, and this overrides the connector configuration.",
+            "examples": [
+              "merchant-1234"
+            ],
+            "title": "Meta Key Merchant Id"
+          },
+          "merchant_defined_information": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "A list of merchant defined data to be passed to the Cybersource. Each key needs to be a numeric string.",
+            "examples": [
+              {
+                "1": "data"
+              }
+            ],
+            "title": "Merchant Defined Information"
+          },
+          "ship_to_method": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The shipping method for this transaction.",
+            "examples": [
+              "sameday"
+            ],
+            "title": "Ship To Method"
+          },
+          "comments": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Brief description of the order or any comment you wish to add to the order.",
+            "examples": [
+              "This order is for a new customer"
+            ],
+            "title": "Comments"
+          }
+        },
+        "title": "CybersourceCardOptions",
+        "type": "object"
+      },
       "CybersourceOptions": {
         "additionalProperties": false,
         "properties": {
@@ -64418,6 +64525,44 @@
         "title": "LatitudeOptions",
         "type": "object"
       },
+      "MastercardCardOptions": {
+        "additionalProperties": false,
+        "description": "Connection options for Mastercard Gateway (MPGS) card payments.",
+        "properties": {
+          "sub_merchant": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SubMerchantOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The PayFac sub-merchant to send when the connection sponsors the card's scheme.",
+            "examples": [
+              {
+                "address": {
+                  "city": "Sydney",
+                  "country": "AU",
+                  "line1": "1 Example St",
+                  "postal_code": "2000",
+                  "state": "NSW"
+                },
+                "email": "ops@submerchant.com.au",
+                "id": "SM-12345",
+                "legal_name": "Registered legal name",
+                "mcc": "5812",
+                "name": "Trading name",
+                "phone": "+61200000000",
+                "website": "https://submerchant.com.au"
+              }
+            ]
+          }
+        },
+        "title": "MastercardCardOptions",
+        "type": "object"
+      },
       "MattildaTapiOptions": {
         "additionalProperties": false,
         "properties": {
@@ -65732,6 +65877,190 @@
         "title": "StripeOptions",
         "type": "object"
       },
+      "SubMerchantAddressOptions": {
+        "additionalProperties": false,
+        "description": "The address of a PayFac sub-merchant.",
+        "properties": {
+          "line1": {
+            "description": "The first line of the address.",
+            "examples": [
+              "1 Example St"
+            ],
+            "minLength": 1,
+            "title": "Line1",
+            "type": "string"
+          },
+          "city": {
+            "description": "The city.",
+            "examples": [
+              "Sydney"
+            ],
+            "minLength": 1,
+            "title": "City",
+            "type": "string"
+          },
+          "state": {
+            "description": "The state or province.",
+            "examples": [
+              "NSW"
+            ],
+            "minLength": 1,
+            "title": "State",
+            "type": "string"
+          },
+          "postal_code": {
+            "description": "The postal code.",
+            "examples": [
+              "2000"
+            ],
+            "minLength": 1,
+            "title": "Postal Code",
+            "type": "string"
+          },
+          "country": {
+            "description": "The ISO 3166-1 alpha-2 country code.",
+            "examples": [
+              "DE",
+              "GB",
+              "US"
+            ],
+            "pattern": "^[A-Z]{2}$",
+            "title": "Country",
+            "type": "string"
+          }
+        },
+        "required": [
+          "line1",
+          "city",
+          "state",
+          "postal_code",
+          "country"
+        ],
+        "title": "SubMerchantAddressOptions",
+        "type": "object"
+      },
+      "SubMerchantOptions": {
+        "additionalProperties": false,
+        "description": "A PayFac sub-merchant to send with the transaction.\n\nOnly used when the connection sponsors the card's scheme as a PayFac, and\nignored otherwise.",
+        "properties": {
+          "id": {
+            "description": "The sub-merchant's identifier.",
+            "examples": [
+              "SM-12345"
+            ],
+            "minLength": 1,
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "description": "The sub-merchant's trading name. On Amex, the connection's PayFac name and this name must not exceed 36 characters combined.",
+            "examples": [
+              "Trading name"
+            ],
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "legal_name": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The sub-merchant's registered legal name.",
+            "examples": [
+              "Registered legal name"
+            ],
+            "title": "Legal Name"
+          },
+          "mcc": {
+            "description": "The sub-merchant's 4-digit merchant category code.",
+            "examples": [
+              "5812"
+            ],
+            "pattern": "^\\d{4}$",
+            "title": "Mcc",
+            "type": "string"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The sub-merchant's email address. Sent on Cybersource, not sent on Mastercard Gateway.",
+            "examples": [
+              "ops@submerchant.com.au"
+            ],
+            "title": "Email"
+          },
+          "phone": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The sub-merchant's phone number.",
+            "examples": [
+              "+61200000000"
+            ],
+            "title": "Phone"
+          },
+          "website": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "The sub-merchant's website. Sent as the merchant descriptor URL on Cybersource, not sent on Mastercard Gateway.",
+            "examples": [
+              "https://submerchant.com.au"
+            ],
+            "title": "Website"
+          },
+          "address": {
+            "$ref": "#/components/schemas/SubMerchantAddressOptions",
+            "description": "The sub-merchant's address.",
+            "examples": [
+              {
+                "city": "Sydney",
+                "country": "AU",
+                "line1": "1 Example St",
+                "postal_code": "2000",
+                "state": "NSW"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "mcc",
+          "address"
+        ],
+        "title": "SubMerchantOptions",
+        "type": "object"
+      },
       "TravelHubCustomData": {
         "additionalProperties": false,
         "properties": {
@@ -66338,7 +66667,7 @@
           "cybersource-card": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/CybersourceOptions"
+                "$ref": "#/components/schemas/CybersourceCardOptions"
               },
               {
                 "type": "null"
@@ -66550,6 +66879,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `latitude-latitudeds` connector."
+          },
+          "mastercard-card": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MastercardCardOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `mastercard-card` connector."
           },
           "mattilda-tapi": {
             "anyOf": [
