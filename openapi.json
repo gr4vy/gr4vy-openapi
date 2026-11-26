@@ -62873,6 +62873,33 @@
         "title": "BraintreeOptions",
         "type": "object"
       },
+      "ChaseBankOptions": {
+        "additionalProperties": false,
+        "properties": {
+          "authorization_method": {
+            "anyOf": [
+              {
+                "enum": [
+                  "mail",
+                  "telephone"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "How the account holder authorized a `moto` or `recurring` ACH debit: by mail (sent to Chase as a written authorization) or by telephone. Only valid with the `moto` or `recurring` payment source. When omitted, the debit is sent as authorized over the internet.",
+            "examples": [
+              "telephone"
+            ],
+            "title": "Authorization Method"
+          }
+        },
+        "title": "ChaseBankOptions",
+        "type": "object"
+      },
       "ChaseOptions": {
         "additionalProperties": false,
         "properties": {
@@ -66271,6 +66298,18 @@
             ],
             "default": null,
             "description": "Custom options to be passed to the `braintree-card` connector."
+          },
+          "chaseorbital-bank": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ChaseBankOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Custom options to be passed to the `chaseorbital-bank` connector."
           },
           "chaseorbital-card": {
             "anyOf": [
